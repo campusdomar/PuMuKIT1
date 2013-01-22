@@ -1,0 +1,24 @@
+CORE:
+------------------------
+BaseWorkflow.php
+InterfazWorkflow.php (Sol con Base abstract)
+
+
+--------------------------------------
+MasterWorkflow.php ??????????????
+
+
+PUB_CHANNEL:
+-----------------------------------------
+WebTVWorkflow.php
+ARCAWorkflow.php
+EncoderWorkflow.php
+GoogleVideoSiteMapWorkflow.php
+iTunesUWorkflow.php
+YouTubeEDUWorkflow.php
+EmailListWorkflow.php
+
+CanalTematicoWorkflow.php (EHUtb)
+
+TwitterWorkflow.php???
+FacebookWorkflow.php???

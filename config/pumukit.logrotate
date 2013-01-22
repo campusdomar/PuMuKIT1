@@ -1,0 +1,17 @@
+# Modificar según los requisitos y el <directorio del pumukit>
+
+# Mi configuración por defecto:
+# Rotar logs semanalmente y conservarlos 2 años
+# Comprimirlos a partir del segundo log antiguo
+# No salta error cuando no exista log
+
+# Copiar este archivo con las demás tareas de logrotate o enlazar por ejemplo
+# ln -s /<directorio del pumukit>/config/cmartv.logrotate  /etc/logrotate.d/cmartv.logrotate
+
+<directorio del pumukit>/log/views.log {
+	weekly
+	rotate 105
+	missingok
+	compress
+	delaycompress
+}

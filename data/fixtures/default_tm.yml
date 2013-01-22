@@ -1,0 +1,301 @@
+Template: 
+  Template_1: 
+    name: error404
+    type: 2
+    user: 0
+  Template_2: 
+    name: header
+    type: 3
+    user: 0
+  Template_3: 
+    name: footer
+    type: 3
+    user: 0
+  Template_4: 
+    name: servicio
+    type: 3
+    user: 1
+  Template_5: 
+    name: Info
+    type: 2
+    user: 1
+  Template_6: 
+    name: FAQ
+    type: 2
+    user: 1
+  Template_7: 
+    name: Lista
+    type: 2
+    user: 1
+  Template_8: 
+    name: layout
+    type: 1
+    user: 0
+  Template_9: 
+    name: style
+    type: 1
+    user: 0
+  Template_10: 
+    name: email_HTML
+    type: 4
+    user: 0
+  Template_11: 
+    name: email_TXT
+    type: 4
+    user: 0
+TemplateI18n: 
+  TemplateI18n_1_gl: 
+    id: Template_1
+    culture: gl
+    description: error404
+    text: <h1>error404</h1>
+  TemplateI18n_1_es: 
+    id: Template_1
+    culture: es
+    description: error404
+    text: <h1>error404</h1>
+  TemplateI18n_1_en: 
+    id: Template_1
+    culture: en
+    description: error404
+    text: <h1>error404</h1>
+  TemplateI18n_2_gl: 
+    id: Template_2
+    culture: gl
+    description: Template para  header
+    text: 0
+  TemplateI18n_2_es: 
+    id: Template_2
+    culture: es
+    description: Template para  header
+    text: 0
+  TemplateI18n_2_en: 
+    id: Template_2
+    culture: en
+    description: Template para  header
+    text: 0
+  TemplateI18n_3_gl: 
+    id: Template_3
+    culture: gl
+    description: Template para  footer
+    text: 0
+  TemplateI18n_3_es: 
+    id: Template_3
+    culture: es
+    description: Template para  footer
+    text: 0
+  TemplateI18n_3_en: 
+    id: Template_3
+    culture: en
+    description: Template para  footer
+    text: 0
+  TemplateI18n_4_gl: 
+    id: Template_4
+    culture: gl
+    description: Template para  servicio
+    text: Completar en el backend
+  TemplateI18n_4_es: 
+    id: Template_4
+    culture: es
+    description: Template para  servicio
+    text: Completar en el backend
+  TemplateI18n_4_en: 
+    id: Template_4
+    culture: en
+    description: Template para  servicio
+    text: Completar en el backend
+  TemplateI18n_5_gl: 
+    id: Template_5
+    culture: gl
+    description: Template para  info
+    text: Completar en el backend
+  TemplateI18n_5_es: 
+    id: Template_5
+    culture: es
+    description: Template para  info
+    text: Completar en el backend
+  TemplateI18n_5_en: 
+    id: Template_5
+    culture: en
+    description: Template para  info
+    text: Completar en el backend
+  TemplateI18n_6_gl: 
+    id: Template_6
+    culture: gl
+    description: Template para  faq
+    text: Completar en el backend
+  TemplateI18n_6_es: 
+    id: Template_6
+    culture: es
+    description: Template para  faq
+    text: Completar en el backend
+  TemplateI18n_6_en: 
+    id: Template_6
+    culture: en
+    description: Template para  faq
+    text: Completar en el backend
+  TemplateI18n_7_gl: 
+    id: Template_7
+    culture: gl
+    description: Template para  lista
+    text: Completar en el backend
+  TemplateI18n_7_es: 
+    id: Template_7
+    culture: es
+    description: Template para  lista
+    text: Completar en el backend
+  TemplateI18n_7_en: 
+    id: Template_7
+    culture: en
+    description: Template para  lista
+    text: Completar en el backend
+  TemplateI18n_10_gl: 
+    id: Template_10
+    culture: gl
+    description: Template para email_HTML
+    text: Completar en el backend
+  TemplateI18n_10_es: 
+    id: Template_10
+    culture: es
+    description: Template para email_HTML
+    text: Completar en el backend
+  TemplateI18n_10_en: 
+    id: Template_10
+    culture: en
+    description: Template para email_HTML
+    text: Completar en el backend
+  TemplateI18n_11_gl: 
+    id: Template_11
+    culture: gl
+    description: Template para email_TXT
+    text: Completar en el backend
+  TemplateI18n_11_es: 
+    id: Template_11
+    culture: es
+    description: Template para email_TXT
+    text: Completar en el backend
+  TemplateI18n_11_en: 
+    id: Template_11
+    culture: en
+    description: Template para email_TXT
+    text: Completar en el backend
+  TemplateI18n_8_css: 
+    id: Template_8
+    culture: css
+    description: Template para  layout
+    text: |
+      /*LAYOUT CSS*/
+      body{
+      font-family: "Trebuchet MS";
+      font-size: 11px;
+      font-style: normal;
+      line-height: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      color: #333333;
+      text-decoration: none;
+      }
+      
+      
+      body #body{
+      margin-top: 10px;
+      margin-bottom: 10px;
+      }
+      
+      
+      div.widget_Slidebar, div.widget_IndexbarRight, div.widget_IndexbarLeft{
+      width: 100%;
+      margin-bottom: 1em;
+      float: left;
+      font-size: 13px;
+      text-align: center;
+      }
+      
+      div.index_widget{
+      margin: 1em 0em;
+      }
+  TemplateI18n_9_css: 
+    id: Template_9
+    culture: css
+    description: Template para  style
+    text: |
+      div#index_body h1, div#other_body h1, h1.video_title{
+      background:transparent url(/uploads/UdN/pestana_larga.png) no-repeat scroll right 4px;
+      font-size:28px;
+      font-weight:bold;
+      margin:0px 0px 22px;
+      padding-right:65px;
+      text-align: left;
+      }
+      
+      div#index_body h1 span, div#other_body h1 span, h1.video_title span{
+      font-weight: normal;
+      font-size: 11px;
+      }
+      
+      
+      div.widget_Slidebar h2, div.widget_IndexbarRight h2, div.widget_IndexbarLeft h2 {
+      background-color: rgb(1,49,106);
+      border-bottom:1px solid #999999;
+      border-top:1px solid #999999;
+      color:#FFFFFF;
+      }
+      
+      div.breadcrumb{
+      background: transparent url(/images/tv/iconos/tri.gif) no-repeat scroll 10px 0 !important;
+      padding-left: 25px;
+      font-weight: bold;
+      color: #003399 !important;
+      font-size: 133%;
+      font-family: "Arial";
+      }
+      
+      div.breadcrumb a{
+      color: #003399 !important;
+      text-decoration: none;
+      font-family: "Arial";
+      }
+      
+      
+      body{
+      background-attachment:fixed;
+      background-image:url(/uploads/UdN/fondo960.gif);
+      background-position:center center;
+      background-repeat:repeat-y;
+      }
+      
+      
+      div.breadcrumb{
+      color: #000 !important;
+      }
+
+      .thumbnail img.mm_img{
+      /*
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      */
+      box-shadow: 1px 1px 2px #666666;
+      -webkit-box-shadow: 1px 1px 2px #666666;
+      -moz-box-shadow: 1px 1px 2px #666666;
+      background: none repeat scroll 0 0 #F3F3F3;
+      margin: 4px;
+      padding: 4px;
+      height: 59px;
+      }
+
+      img.serial, img.announce{
+      width: 137px;
+      height: 103px;
+      border: none;
+      box-shadow: 1px 1px 2px #666666;
+      -webkit-box-shadow: 1px 1px 2px #666666;
+      -moz-box-shadow: 1px 1px 2px #666666;
+      background: none repeat scroll 0 0 #F3F3F3;
+      margin: 4px;
+      padding: 2px;
+      }
+
+
+

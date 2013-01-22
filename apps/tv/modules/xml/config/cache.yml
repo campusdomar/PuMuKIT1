@@ -1,0 +1,4 @@
+all:
+  enabled:     on
+  with_layout: true   # Valor por defecto
+  lifetime:    50000   # Valor por defecto

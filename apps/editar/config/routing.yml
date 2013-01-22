@@ -1,0 +1,19 @@
+# default rules
+timeline:
+  url:   /dashboard/serial_timeline.xml
+  param: { module: dashboard, action: serial }
+
+homepage:
+  url:   /
+  param: { module: index, action: index }
+
+default_symfony:
+  url:   /symfony/:action/*
+  param: { module: default }
+
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

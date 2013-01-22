@@ -1,0 +1,1577 @@
+---
+propel: 
+  notice: 
+    id: 
+    date: 
+      type: date
+      required: true
+    working: 
+      type: boolean
+      required: true
+      default: 1
+  notice_i18n: 
+    text: 
+      type: longvarchar
+
+  mat_type: 
+    id:
+    type: 
+      type: char
+      size: 3
+      required: true
+      index: unique
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+    mime_type: 
+      type: varchar
+      size: 40
+      required: true
+  mat_type_i18n: 
+    name: 
+      type: varchar
+      size: 25
+      required: true
+
+  serial_template:
+    id:
+    name: 
+      type: varchar
+      size: 25
+      required: true
+
+  serial_type: 
+    id:
+    cod:
+      type: char
+      size: 2
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+  serial_type_i18n: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+    description: 
+      type: longvarchar
+
+  broadcast_type: 
+    id: 
+    name: 
+      type: varchar
+      size: 15
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+
+  broadcast: 
+    id:
+    name: 
+      type: CHAR
+      size: 100
+      required: true
+    broadcast_type_id:
+    passwd: 
+      type: CHAR
+      size: 15
+      required: true
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+  broadcast_i18n: 
+    description: 
+      type: longvarchar
+
+  genre: 
+    id: 
+    cod:
+      type: char
+      size: 2
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+  genre_i18n: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+
+  ground: 
+    id:
+    cod: 
+      type: varchar
+      size: 25
+      required: true
+      index: unique
+    ground_type_id: 
+      type: integer
+      required: true
+      foreignTable: ground_type
+      foreignReference: id
+      onDelete: cascade
+  ground_i18n: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+
+  ground_type: 
+    id:
+    name: 
+      type: varchar
+      size: 100
+      required: true
+      index: unique
+    display: 
+      type: boolean
+      required: true
+      default: 1
+    rank: 
+      type: integer
+      required: true
+      default: 0
+  ground_type_i18n: 
+    description: 
+      type: varchar
+      size: 100
+      required: true
+
+  relation_ground:
+    one_id:
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: ground 
+      foreignReference: id
+      onDelete: cascade
+    two_id:
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: ground
+      foreignReference: id
+      onDelete: cascade
+
+  virtual_ground: 
+    id:
+    cod: 
+      type: varchar
+      size: 25
+      required: true
+    display: 
+      type: boolean
+      required: true
+      default: 1
+    rank: 
+      type: integer
+      required: true
+      default: 0
+    img: 
+      type: varchar
+      size: 100
+      required: true
+  virtual_ground_i18n: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+
+  virtual_ground_relation:
+    virtual_ground_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: virtual_ground
+      foreignReference: id
+      onDelete: cascade
+    ground_id: 
+      type: integer
+      primaryKey: true
+      foreignTable: ground
+      foreignReference: id
+      onDelete: cascade
+    enable: 
+      type: boolean
+      required: true
+      default: 1
+
+  language: 
+    id: 
+    cod:
+      type: char
+      size: 2
+      required: true
+      index: unique
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+  language_i18n:
+    name: 
+      type: varchar
+      size: 30
+      required: true
+
+  role: 
+    id: 
+    cod:
+      type: char
+      size: 5
+      required: true
+      index: unique
+    rank: 
+      type: integer
+      required: true
+      default: 0
+    xml:
+      type: char
+      size: 25
+      required: true
+    display: 
+      type: boolean
+      required: true
+      default: 1
+  role_i18n:
+    name: 
+      type: varchar
+      size: 25
+      required: true
+    text: 
+      type: varchar
+      size: 25
+      required: true
+
+  format: 
+    id: 
+    name: 
+      type: varchar
+      size: 35
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+
+  codec: 
+    id: 
+    name: 
+      type: varchar
+      size: 15
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+
+  mime_type: 
+    id: 
+    name: 
+      type: varchar
+      size: 25
+      required: true
+    type: 
+      type: varchar
+      size: 25
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+
+  resolution: 
+    id: 
+    hor: 
+      type: integer
+      required: true
+      default: 0
+    ver: 
+      type: integer
+      required: true
+      default: 0
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+
+  person: 
+    id: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+    email: 
+      type: varchar
+      size: 30
+    web: 
+      type: varchar
+      size: 150
+    phone: 
+      type: varchar
+      size: 30
+  person_i18n: 
+    honorific:
+      type: varchar
+      size: 20
+    firm: 
+      type: varchar
+      size: 100
+    post: 
+      type: varchar
+      size: 200
+    bio: 
+      type: varchar
+      size: 200
+
+  place:
+    id:
+    coorgeo:
+      type: varchar
+      size: 50
+    cod:
+      type: varchar
+      size: 10
+  place_i18n:
+    name:
+      type: varchar
+      size: 100
+      required: true
+    address:
+      type: varchar
+      size: 100
+      required: true
+
+  precinct:
+    id:
+    place_id:
+    default_sel:
+      type: boolean
+      required: true
+      default: 0
+  precinct_i18n:
+    name:
+      type: varchar
+      size: 100
+      required: true
+    equipment:
+      type: varchar
+      size: 100
+      required: true
+    comment:
+      type: varchar
+      size: 200
+      required: true
+
+  serial: 
+    id: 
+    announce: 
+      type: boolean
+      required: true
+      default: 0
+    mail: 
+      type: boolean
+      required: true
+      default: 0
+    copyright: 
+      type: varchar
+      size: 30
+      required: true
+      default: Uvigo-Tv
+    serial_type_id: 
+    serial_template_id: 
+    publicDate: 
+      type: timestamp
+      required: true
+  serial_i18n: 
+    title: 
+      type: varchar
+      size: 100
+      required: true
+    subtitle: 
+      type: varchar
+      size: 100
+      required: true
+    keyword: 
+      type: varchar
+      size: 100
+      required: true
+    description: 
+      type: longvarchar
+    header: 
+      type: longvarchar
+    footer: 
+      type: longvarchar
+    line2: 
+      type: varchar
+      size: 150
+      required: true
+
+  serial_itunes:
+    serial_id:
+      type: integer
+      required: true
+      foreignTable: serial 
+      foreignReference: id
+      onDelete: cascade
+    itunes_id:
+      type: varchar
+      size: 30
+      required: true
+    culture:
+      type: varchar(7)
+      required: true
+
+  mm: 
+    id: 
+    subserial: 
+      type: boolean
+      required: true
+      default: 0
+    announce: 
+      type: boolean
+      required: true
+      default: 0
+    mail: 
+      type: boolean
+      required: true
+      default: 0
+    serial_id:
+      type: integer
+      required: true
+      foreignTable: serial 
+      foreignReference: id
+      onDelete: cascade
+    rank: 
+      type: integer
+      required: true
+      default: 0
+    precinct_id: 
+    genre_id: 
+    broadcast_id: 
+    copyright: 
+      type: varchar
+      size: 30
+      required: true
+    status_id: 
+      type: integer
+      required: true
+      default: 0
+    recordDate: 
+      type: timestamp
+      required: true
+    publicDate: 
+      type: timestamp
+      required: true
+  mm_i18n:
+    title: 
+      type: varchar
+      size: 200
+      required: true
+    subtitle: 
+      type: varchar
+      size: 150
+      required: true
+    keyword: 
+      type: varchar
+      size: 100
+      required: true
+    description: 
+      type: longvarchar
+    subserial_title: 
+      type: varchar
+      size: 150
+      required: true
+    line2: 
+      type: varchar
+      size: 150
+      required: true
+
+  mm_template: 
+    id: 
+    subserial: 
+      type: boolean
+      required: true
+      default: 0
+    announce: 
+      type: boolean
+      required: true
+      default: 0
+    mail: 
+      type: boolean
+      required: true
+      default: 0
+    serial_id:
+      type: integer
+      required: true
+      foreignTable: serial 
+      foreignReference: id
+      onDelete: cascade
+    rank: 
+      type: integer
+      required: true
+      default: 0
+    precinct_id: 
+    genre_id: 
+    broadcast_id: 
+    copyright: 
+      type: varchar
+      size: 30
+      required: true
+    status_id: 
+      type: integer
+      required: true
+      default: 0
+    recordDate: 
+      type: timestamp
+      required: true
+    publicDate: 
+      type: timestamp
+      required: true
+  mm_template_i18n:
+    title: 
+      type: varchar
+      size: 200
+      required: true
+    subtitle: 
+      type: varchar
+      size: 150
+      required: true
+    keyword: 
+      type: varchar
+      size: 100
+      required: true
+    description: 
+      type: longvarchar
+    subserial_title: 
+      type: varchar
+      size: 150
+      required: true
+    line2: 
+      type: varchar
+      size: 150
+      required: true
+
+  file: 
+    id: 
+    mm_id:
+      type: integer
+      required: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    perfil_id:
+    language_id: 
+    url: 
+      type: varchar
+      size: 250
+      required: true
+    file: 
+      type: varchar
+      size: 250
+      required: true
+    format_id: 
+    codec_id: 
+    mime_type_id:
+    resolution_id: 
+    bitrate: 
+      type: varchar
+      size: 50
+      required: true
+    framerate: 
+      type: integer
+      required: true
+      default: 25
+    channels: 
+      type: integer
+      required: true
+      default: 1
+    audio: 
+      type: boolean
+      required: true
+      default: 0
+    rank: 
+      type: integer
+      required: true
+      default: 1
+    duration: 
+      type: integer
+      required: true
+      default: 0
+    num_view: 
+      type: integer
+      required: true
+      default: 0
+    punt_sum:
+      type: integer
+      required: true
+      default: 0
+    punt_num:
+      type: integer
+      required: true
+      default: 0
+    size:
+      type: integer
+      required: true
+      default: 0
+    resolution_hor: 
+      type: integer
+      required: true
+      default: 0
+    resolution_ver: 
+      type: integer
+      required: true
+      default: 0
+    display: 
+      type: boolean
+      required: true
+      default: 1
+  file_i18n: 
+    description: 
+      type: varchar
+      size: 200
+      required: true
+
+  link: 
+    id: 
+    mm_id:
+      type: integer
+      required: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade 
+    url: 
+      type: varchar
+      size: 250
+      required: true
+    rank: 
+      type: integer
+      required: true
+      default: 1
+  link_i18n: 
+    name: 
+      type: varchar
+      size: 200
+      required: true
+
+  mm_person:
+    mm_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    person_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: person
+      foreignReference: id
+      onDelete: cascade
+    role_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: role
+      foreignReference: id
+      default: 1
+      onDelete: set default      
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  mm_template_person:
+    mm_template_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm_template
+      foreignReference: id
+      onDelete: cascade
+    person_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: person
+      foreignReference: id
+      onDelete: cascade
+    role_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: role
+      foreignReference: id
+      default: 1
+      onDelete: set default      
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  pic:
+    id:
+    url: 
+      type: varchar
+      size: 250
+      required: true
+
+  pic_person:
+    pic_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: pic
+      foreignReference: id
+      onDelete: cascade
+    other_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: person
+      foreignReference: id
+      onDelete: cascade
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  pic_serial:
+    pic_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: pic
+      foreignReference: id
+      onDelete: cascade
+    other_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: serial
+      foreignReference: id
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  pic_mm:
+    pic_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: pic
+      foreignReference: id
+      onDelete: cascade
+    other_id: 
+      type: integer
+      required: true 
+      primaryKey: true
+      foreignTable: mm
+      foreignReference: id
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  ground_mm:
+    ground_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: ground
+      foreignReference: id
+      onDelete: cascade
+    mm_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  ground_mm_template:
+    ground_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: ground
+      foreignReference: id
+      onDelete: cascade
+    mm_template_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm_template
+      foreignReference: id
+      onDelete: cascade
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  material: 
+    id: 
+    mm_id: 
+      type: integer
+      required: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    url: 
+      type: varchar
+      size: 250
+      required: true
+    rank: 
+      type: integer
+      required: true
+      default: 1
+    mat_type_id: 
+    display: 
+      type: boolean
+      required: true
+      default: 1
+  material_i18n: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+
+  user:
+    id:
+    login:
+      type: varchar
+      size: 100
+      required: true
+    name:
+      type: varchar
+      size: 250
+      index: unique
+    passwd:
+      type: char
+      size: 8
+      required: true
+    email: 
+      type: varchar
+      size: 30
+    root:
+      type: boolean
+      required: true
+      default: 1
+    user_type_id:
+      type: integer
+      required: true
+      default: 0
+
+  log_file:
+    id:
+    file_id:
+    ip: 
+      type: varchar
+      size: 15
+      required: true
+    navigator: 
+      type: varchar
+      size: 255
+      required: true
+    referer: 
+      type: varchar
+      size: 255
+      required: true
+    created_at:
+
+  log_email:
+    id:
+    type: 
+      type: varchar
+      size: 15
+      required: true
+    object_id:
+      type: integer 
+      required: true 
+    email: 
+      type: varchar
+      size: 60
+      required: true
+    user_name:
+      type: varchar
+      size: 250
+    ip: 
+      type: varchar
+      size: 15
+      required: true
+    created_at:
+
+  log_transcoding:
+    id:
+    mm_id:
+      type: integer
+      required: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    language_id: 
+    perfil_id:
+    cpu_id:
+    url: 
+      type: varchar
+      size: 250
+      required: true
+    status_id:
+      type: integer
+      required: true
+    priority:
+      type: integer
+      required: true
+    name:
+      type: varchar
+      size: 150
+      required: true
+    timeini: 
+      type: timestamp
+      required: true
+    timestart: 
+      type: timestamp
+      required: true
+    timeend: 
+      type: timestamp
+      required: true
+    pid:
+      type: integer
+    path_ini:
+      type: varchar
+      size: 250
+      required: true
+    path_end:
+      type: varchar
+      size: 250
+      required: true
+    ext_ini:
+      type: char
+      size: 3
+      required: true
+    ext_end:
+      type: char
+      size: 3
+      required: true
+    duration: 
+      type: integer
+      required: true
+      default: 0
+    size:
+      type: integer
+      required: true
+      default: 0
+    email: 
+      type: varchar
+      size: 30    
+
+  direct:
+    id:
+    resolution_id: 
+    url:
+      type: varchar
+      size: 250
+      required: true
+    passwd: 
+      type: CHAR
+      size: 15
+      required: true
+    precinct_id:
+    mime_type_id:
+    date:
+      type: timestamp
+      required: true
+    resolution_hor: 
+      type: integer
+      required: true
+      default: 0
+    resolution_ver: 
+      type: integer
+      required: true
+      default: 0
+  direct_i18n:
+    name:
+      type: varchar
+      size: 100
+      required: true
+    description:
+      type: longvarchar
+    event:
+      type: varchar
+      size: 100
+      required: true
+
+  widget:
+    id:
+    name:
+      type: varchar
+      size: 25
+      required: true
+    widget_type_id:
+    configurable: 
+      type: boolean
+      required: true
+      default: 1
+  widget_i18n:
+    description:
+      type: varchar
+      size: 255
+      required: true
+
+  widget_type: 
+    id: 
+    type: 
+      type: varchar
+      size: 25
+
+  bar_widget:
+    id:
+    name:
+      type: varchar
+      size: 25
+      required: true
+      index: unique
+    widget_type_id:
+
+  element_widget:
+    bar_widget_id:
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: bar_widget
+      foreignReference: id
+      onDelete: cascade
+    widget_id:
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: widget
+      foreignReference: id
+      onDelete: cascade
+    rank:
+      ty pe: integer
+      required: true
+      default: 0
+
+  widget_template:
+    id:
+    widget_id:
+    name:
+      type: varchar
+      size: 25
+      index: unique
+  widget_template_i18n:  
+    text: 
+      type: longvarchar
+
+  widget_constant:
+    id:
+    widget_id:
+    name:
+      type: varchar
+      size: 25
+      index: unique
+    text:
+      type: varchar
+      size: 255
+
+  widget_module:
+    id:
+    widget_id:
+    name:
+      type: varchar
+      size: 25
+      index: unique
+    module:
+      type: varchar
+      size: 255
+
+  channel:
+    id:
+    pic: 
+      type: varchar
+      size: 250
+      required: true
+    working: 
+      type: boolean
+      required: true
+      default: 1    
+    sql: 
+      type: varchar
+      size: 250
+      required: true
+    rank: 
+      type: integer
+      required: true
+      default: 0
+  channel_i18n:
+    name:
+      type: varchar
+      size: 25
+      required: true
+    description:
+      type: varchar
+      size: 255
+      required: true
+
+  template: 
+    id: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+    type: 
+      type: char
+      size: 3
+      required: true
+    user: 
+      type: boolean
+      required: true
+      default: 1
+  template_i18n:
+    description: 
+      type: varchar
+      size: 255
+      required: true
+    text: 
+      type: longvarchar
+
+  perfil: 
+    id: 
+    name: 
+      type: varchar
+      size: 25
+      required: true
+    rank: 
+      type: integer
+      required: true
+      default: 1
+    display: 
+      type: boolean
+      required: true
+      default: 1
+    wizard: 
+      type: boolean
+      required: true
+      default: 1
+    format: 
+      type: varchar
+      size: 35
+    codec: 
+      type: varchar
+      size: 35
+    mime_type: 
+      type: varchar
+      size: 35
+    extension: 
+      type: char
+      size: 3
+      required: true
+    resolution_hor: 
+      type: integer
+      required: true
+      default: 0
+    resolution_ver: 
+      type: integer
+      required: true
+      default: 0
+    bitrate: 
+      type: varchar
+      size: 50
+      required: true
+    framerate: 
+      type: integer
+      required: true
+      default: 25
+    channels: 
+      type: integer
+      required: true
+      default: 1
+    audio: 
+      type: boolean
+      required: true
+      default: 0
+    bat: 
+      type: varchar
+      size: 250
+      required: true
+    file_cfg: 
+      type: varchar
+      size: 150
+    streamserver_id:
+    app: 
+      type: varchar
+      size: 50
+      required: true
+    rel_duration_size:
+      type: double
+      default: 1
+    rel_duration_trans:
+      type: double
+      default: 1
+    prescript: 
+      type: longvarchar
+  perfil_i18n: 
+    link: 
+      type: varchar
+      size: 100
+      required: true
+    description: 
+      type: varchar
+      size: 200
+      required: true
+
+  transcoding: 
+    id: 
+    mm_id:
+      type: integer
+      required: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    language_id: 
+    perfil_id:
+    cpu_id:
+    url: 
+      type: varchar
+      size: 250
+      required: true
+    status_id:
+      type: integer
+      required: true
+    priority:
+      type: integer
+      required: true
+    name:
+      type: varchar
+      size: 150
+      required: true
+    timeini: 
+      type: timestamp
+      required: true
+    timestart: 
+      type: timestamp
+      required: true
+    timeend: 
+      type: timestamp
+      required: true
+    pid:
+      type: integer
+    path_ini:
+      type: varchar
+      size: 250
+      required: true
+    path_end:
+      type: varchar
+      size: 250
+      required: true
+    ext_ini:
+      type: char
+      size: 3
+      required: true
+    ext_end:
+      type: char
+      size: 3
+      required: true
+    duration: 
+      type: integer
+      required: true
+      default: 0
+    size:
+      type: integer
+      required: true
+      default: 0
+    email: 
+      type: varchar
+      size: 30
+  transcoding_i18n: 
+    Description: 
+      type: varchar
+      size: 200
+      required: true    
+
+  cpu: 
+    id: 
+    ip:
+      type: char
+      size: 15
+      required: true
+    max:
+      type: integer
+      required: true
+    min:
+      type: integer
+      required: true
+    number:
+      type: integer
+      required: true
+    type:
+      type: varchar
+      size: 10
+      required: true
+    user:
+      type: varchar
+      size: 100
+      required: true
+    password:
+      type: varchar
+      size: 100
+      required: true
+  cpu_i18n: 
+    description: 
+      type: varchar
+      size: 200
+      required: true    
+
+  ticket:
+    id:
+    file_id:
+      type: integer
+      required: true
+      foreignTable: file
+      foreignReference: id
+      onDelete: cascade
+    path:
+      type: varchar
+      size: 250
+      required: true
+    url:
+      type: varchar
+      size: 250
+      required: true
+    date:
+      type: timestamp
+      required: true
+    end:
+      type: timestamp
+      required: true
+
+  event:
+    id:
+    direct_id:
+    name:
+      type: varchar
+      size: 250
+      required: true
+    place:
+      type: varchar
+      size: 250
+      required: true
+    date: 
+      type: timestamp
+      required: true
+    duration: 
+      type: integer
+      required: true
+    display: 
+      type: boolean
+      required: true
+      default: 1
+    create_serial: 
+      type: boolean
+      required: true
+      default: 1
+
+  event:
+    id:
+    direct_id:
+    name:
+      type: varchar
+      size: 250
+      required: true
+    place:
+      type: varchar
+      size: 250
+      required: true
+    date:
+      type: timestamp
+      required: true
+    duration:
+      type: integer
+      required: true
+    display:
+      type: boolean
+      required: true
+      default: 1
+    create_serial:
+      type: boolean
+      required: true
+      default: 1
+
+  event:
+    id:
+    direct_id:
+    name:
+      type: varchar
+      size: 250
+      required: true
+    place:
+      type: varchar
+      size: 250
+      required: true
+    date:
+      type: timestamp
+      required: true
+    duration:
+      type: integer
+      required: true
+    display:
+      type: boolean
+      required: true
+      default: 1
+    create_serial:
+      type: boolean
+      required: true
+      default: 1
+
+  streamserver_type:
+    id:
+    name:
+      type: char
+      size: 250
+      required: true
+
+  streamserver:
+    id:
+    streamserver_type_id:
+    ip:
+      type: char
+      size: 15
+      required: true
+    name:
+      type: char
+      size: 250
+      required: true
+    description:
+      type: varchar
+      size: 200
+      required: true
+    dir_out: 
+      type: varchar
+      size: 150
+    url_out: 
+      type: varchar
+      size: 150    
+
+  pub_channel:
+    id:
+    name:
+      type: char
+      size: 250
+      required: true
+    broadcast_type_id:
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  pub_channel_mm:
+    pub_channel_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: pub_channel
+      foreignReference: id
+      onDelete: cascade
+    mm_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    status_id: 
+      type: integer
+      required: true
+      default: 1
+
+  pub_channel_perfil:
+    pub_channel_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: pub_channel
+      foreignReference: id
+      onDelete: cascade
+    perfil_43_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: perfil
+      foreignReference: id
+      onDelete: cascade
+    perfil_169_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: perfil
+      foreignReference: id
+      onDelete: cascade
+
+  announce_channel:
+    id:
+    name:
+      type: char
+      size: 250
+      required: true
+    broadcast_type_id:
+    default_sel: 
+      type: boolean
+      required: true
+      default: 0
+    rank: 
+      type: integer
+      required: true
+      default: 0
+
+  announce_channel_mm:
+    announce_channel_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: announce_channel
+      foreignReference: id
+      onDelete: cascade
+    mm_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    status_id: 
+      type: integer
+      required: true
+      default: 1
+ 
+  announce_channel_serial:
+    announce_channel_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: announce_channel
+      foreignReference: id
+      onDelete: cascade
+    serial_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: serial
+      foreignReference: id
+      onDelete: cascade
+    status_id: 
+      type: integer
+      required: true
+      default: 1
+  

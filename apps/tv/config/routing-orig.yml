@@ -1,0 +1,100 @@
+# default rules
+arca:
+  url:   /arca.xml
+  param: { module: xml, action: arca }
+
+videositemap:
+  url:   /videositemap.xml
+  param: { module: xml, action: videositemap }
+
+oai:
+  url:   /oai.xml
+  param: { module: oai, action: index }
+
+css:
+  url:   /css/css.css
+  param: { module: utils, action: css }
+
+culture:
+  url:   /culture/:culture.html
+  param: { module: utils, action: culture }
+
+login:
+  url:   /login/*.html
+  param: { module: utils, action: login }
+
+logout:
+  url:   /logout/*.html
+  param: { module: utils, action: logout }
+
+index:
+  url:   /index.html
+  param: { module: index, action: index }
+
+index_i18n:
+  url:   /:sf_culture/index.html
+  param: { module: index, action: index }
+  requirements: { sf_culture: (?:es|gl) }
+
+news:
+  url:   /:sf_culture/news.html
+  param: { module: news, action: index }
+  requirements: { sf_culture: (?:es|gl) }
+
+announces:
+  url:   /:sf_culture/announces.html
+  param: { module: announces, action: index }
+  requirements: { sf_culture: (?:es|gl) }
+
+video:
+  url:   /:sf_culture/video/:id.html
+  param: { module: video, action: index }
+  requirements: { sf_culture: (?:es|gl), id: \d+ }
+
+serial:
+  url:   /:sf_culture/serial/:id.html
+  param: { module: serial, action: index }
+  requirements: { sf_culture: (?:es|gl), id: \d+ }
+
+library_def:
+  url:   /:sf_culture/library.html
+  param: { module: library, action: index, order: date}
+  requirements: { sf_culture: (?:es|gl)}
+
+library:
+  url:   /:sf_culture/library/:action.html
+  param: { module: library}
+  requirements: { sf_culture: (?:es|gl)}
+
+library_all:
+  url:   /:sf_culture/library/:action/*.html
+  param: { module: library}
+  requirements: { sf_culture: (?:es|gl)}
+
+library_search_all:
+  url:   /:sf_culture/library/:action/:search/*.html
+  param: { module: library}
+  requirements: { sf_culture: (?:es|gl)}
+
+directo:
+  url:   /:sf_culture/directo/:canal.html
+  param: { module: directo, action: index }
+  requirements: { sf_culture: (?:es|gl), canal: \d+ }
+
+directo_def:
+  url:   /:sf_culture/directo.html
+  param: { module: directo, action: index, canal: 1 }
+  requirements: { sf_culture: (?:es|gl)}
+
+homepage:
+  url:   /
+  param: { module: index, action: index }
+
+templates:
+  url:   /:sf_culture/:temp.html
+  param: { module: templates, action: index }
+  requirements: { sf_culture: (?:es|gl) }
+
+default:
+  url:   /:sf_culture/:module/:acton/*
+  requirements: { culture: (?:es|gl) }

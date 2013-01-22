@@ -1,0 +1,1 @@
+ps -aux | grep finalizado.php

@@ -1,0 +1,5 @@
+all:
+  stylesheets:    [/sf/calendar/calendar-system.css, /sf/calendar/skins/aqua/theme.css, admin/dateslider.css]
+
+  javascripts:    [/sf/calendar/calendar.js, /sf/calendar/lang/calendar-es.js, /sf/calendar/calendar-setup.js, date, dateslider]
+

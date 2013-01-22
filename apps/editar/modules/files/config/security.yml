@@ -1,0 +1,14 @@
+pretranscod:
+  is_secure: off    # off es el valor por defecto
+
+posttranscod:
+  is_secure: off    # off es el valor por defecto
+
+starttranscod:
+  is_secure: off    # off es el valor por defecto
+
+stoptranscod:
+  is_secure: off    # off es el valor por defecto
+
+all:
+  is_secure: on    # off es el valor por defecto

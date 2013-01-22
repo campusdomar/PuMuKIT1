@@ -1,0 +1,17 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Udn.tv
+    robots:       index, follow
+    description:  Portal web de la TV de la Universidad de las Nubes
+    keywords:     webtv, Tv, Universidad de las Nubes, pumukit
+    language:     es
+
+  stylesheets:    [main, tv/default, css, tv/960]
+ 
+  javascripts:    [prototype, scriptaculous]
+
+  has_layout:     on
+  layout:         layout

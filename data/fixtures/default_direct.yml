@@ -1,0 +1,7 @@
+DirectType:
+  WMV:
+    id: WMS
+    name: WMS
+  FLASH:
+    id: FMS
+    name: FMS

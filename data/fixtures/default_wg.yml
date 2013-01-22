@@ -1,0 +1,980 @@
+---
+WidgetType: 
+  WidgetType_1: 
+    type: lateral
+  WidgetType_2: 
+    type: banner
+  WidgetType_3: 
+    type: index
+BarWidget: 
+  BarWidget_1: 
+    name: Headerbar
+    widget_type_id: WidgetType_2
+  BarWidget_2: 
+    name: Footerbar
+    widget_type_id: WidgetType_2
+  BarWidget_3: 
+    name: IndexbarLeft
+    widget_type_id: WidgetType_1
+  BarWidget_4: 
+    name: IndexbarRight
+    widget_type_id: WidgetType_1
+  BarWidget_5: 
+    name: Slidebar
+    widget_type_id: WidgetType_1
+  BarWidget_6: 
+    name: IndexBody
+    widget_type_id: WidgetType_3
+Widget: 
+  Widget_1: 
+    name: header
+    widget_type_id: WidgetType_2
+    configurable: 1
+  Widget_2: 
+    name: subheader
+    widget_type_id: WidgetType_2
+    configurable: 0
+  Widget_3: 
+    name: footer
+    widget_type_id: WidgetType_2
+    configurable: 1
+  Widget_4: 
+    name: idioma
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_5: 
+    name: noidioma
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_6: 
+    name: menu
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_7: 
+    name: contacto
+    widget_type_id: WidgetType_1
+    configurable: 1
+  Widget_8: 
+    name: total
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_9: 
+    name: proximas
+    widget_type_id: WidgetType_1
+    configurable: 1
+  Widget_10: 
+    name: software
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_11: 
+    name: buscar
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_12: 
+    name: google
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_13: 
+    name: rss
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_14: 
+    name: masvistostotal
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_15: 
+    name: masvistosmes
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_16: 
+    name: masvistossemana
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_17: 
+    name: masvistosdia
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_18: 
+    name: masvistostotalfalso
+    widget_type_id: WidgetType_1
+    configurable: 1
+  Widget_19: 
+    name: masvistosmesfalso
+    widget_type_id: WidgetType_1
+    configurable: 1
+  Widget_20: 
+    name: listacorreo
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_21: 
+    name: infowebtv
+    widget_type_id: WidgetType_3
+    configurable: 1
+  Widget_22: 
+    name: nabbuttons
+    widget_type_id: WidgetType_3
+    configurable: 1
+  Widget_23: 
+    name: announces
+    widget_type_id: WidgetType_3
+    configurable: 0
+  Widget_24: 
+    name: lastvistos
+    widget_type_id: WidgetType_3
+    configurable: 1
+  Widget_25: 
+    name: news
+    widget_type_id: WidgetType_3
+    configurable: 1
+  Widget_26: 
+    name: timeline
+    widget_type_id: WidgetType_3
+    configurable: 0
+  Widget_27: 
+    name: auth
+    widget_type_id: WidgetType_1
+    configurable: 0
+  Widget_28: 
+    name: headerlangs
+    widget_type_id: WidgetType_2
+    configurable: 0
+  Widget_29: 
+    name: breadcrumb
+    widget_type_id: WidgetType_2
+    configurable: 0
+  Widget_30: 
+    name: nabbuttonsv2
+    widget_type_id: WidgetType_3
+    configurable: 1
+  Widget_31: 
+    name: announcesv2
+    widget_type_id: WidgetType_3
+    configurable: 0
+
+
+WidgetTemplate: 
+  WidgetTemplate_1: 
+    widget_id: Widget_1
+    name: header
+  WidgetTemplate_2: 
+    widget_id: Widget_3
+    name: footer
+  WidgetTemplate_3: 
+    widget_id: Widget_21
+    name: infowebtv
+  WidgetTemplate_4: 
+    widget_id: Widget_9
+    name: proximas
+
+WidgetTemplateI18n: 
+  WidgetTemplateI18n_1_gl: 
+    id: WidgetTemplate_1
+    culture: gl
+    text: |
+      <div style="margin-top: 0px; padding: 0px; text-align: center; height-min: 50px">
+        <a href="/index.html">
+        <img src="/uploads/UdN/cabecera_cies_2960.png" />
+        </a>
+      </div>
+  WidgetTemplateI18n_1_es: 
+    id: WidgetTemplate_1
+    culture: es
+    text: |
+      <div style="margin-top: 0px; padding: 0px; text-align: center; height-min: 50px">
+        <a href="/index.html">
+        <img src="/uploads/UdN/cabecera_cies_2960.png" />
+        </a>
+      </div>
+  WidgetTemplateI18n_1_en: 
+    id: WidgetTemplate_1
+    culture: en
+    text: >
+      <h1 class="default">Inserte aqui HTML de
+      su cabecera</h1>
+
+  WidgetTemplateI18n_2_gl: 
+    id: WidgetTemplate_2
+    culture: gl
+    text: |
+      <div style="margin-top: 10px; padding: 0px; text-align: center; color: ##333333; background-color: #D8E6F7; height-min: 50px">
+        <div style="float:left">
+          <div>Universidad de las Cies</div>
+          <div>Copyright &copy; 2011</div>
+        </div>
+        <div style="float:right">
+          <div>SIGUENOS EN:</div>
+          <div>
+            <a href="http://facebook.com"><img src="/images/tv/iconos/facebook2.png" alt="facebook" /></a>
+            <a href="http://twitter.com"><img src="/images/tv/iconos/twitter2.png" alt="twitter" /></a>
+            <a href="http://youtube.com"><img src="/images/tv/iconos/youtube2.png" alt="youtube" /></a>
+          </div>
+        </div>
+        <div>
+          <table>
+            <tbody>
+              <tr><td><img src="/uploads/UCies/mail.png" alt="correo" /></td><td>tv@correo.es</td></tr>
+              <tr><td><img src="/uploads/UCies/telefono.png" alt="telefono" /></td><td>666 66 66 66</td></tr>
+            </tbody>
+          </table>
+        </div>      
+      </div>
+  WidgetTemplateI18n_2_es: 
+    id: WidgetTemplate_2
+    culture: es
+    text: |
+      <div style="margin-top: 10px; padding: 0px; text-align: center; color: ##333333; background-color: #D8E6F7; height-min: 50px">
+        <div style="float:left;  padding: 15px;">
+          <div>&nbsp;</div>
+          <div>Universidad de las Cies</div>
+          <div>Copyright &copy; 2011</div>
+        </div>
+        <div style="float:right;  padding: 15px;">
+          <div>&nbsp;</div>
+          <div>SIGUENOS EN:</div>
+          <div>
+            <a href="http://facebook.com"><img src="/images/tv/iconos/facebook2.png" alt="facebook" /></a>
+            <a href="http://twitter.com"><img src="/images/tv/iconos/twitter2.png" alt="twitter" /></a>
+            <a href="http://youtube.com"><img src="/images/tv/iconos/youtube2.png" alt="youtube" /></a>
+          </div>
+        </div>
+        <div>
+          <div><img src="/uploads/UCies/mail.png" alt="correo" style="vertical-align: middle" />tv@correo.es</div>
+          <div><img src="/uploads/UCies/telefono.png" alt="telefono" style="vertical-align: middle" />666 66 66 66</div>
+        </div>      
+      </div>
+  WidgetTemplateI18n_2_en: 
+    id: WidgetTemplate_2
+    culture: en
+    text: |
+      <div style="margin-top: 10px; padding: 0px; text-align: center; color: ##333333; background-color: #D8E6F7; height: 50px">
+        <div style="float:left; padding: 15px;">
+          <div>&nbsp;</div>
+          <div>Universidad de las Cies</div>
+          <div>Copyright &copy; 2011</div>
+        </div>
+        <div style="float:right; padding: 15px;">
+          <div>SIGUENOS EN:</div>
+          <div>FB - YT - TW</div>
+          <div>&nbsp;</div>
+        </div>
+        <div>
+          <div><img src="/uploads/UCies/mail.png" alt="correo" style="vertical-align: middle" />tv@correo.es</div>
+          <div><img src="/uploads/UCies/telefono.png" alt="telefono" style="vertical-align: middle" />666 66 66 66</div>
+        </div>      
+      </div>
+
+  WidgetTemplateI18n_3_gl: 
+    id: WidgetTemplate_3
+    culture: gl
+    text: |
+      <h2>PuMuKIT</h2>
+      PuMuKIT (PUblicador MUltimedia en KIT) permite publicar vía Internet los contenidos audiovisuales
+      producidos en una Institución, Universidad, etc..  PuMuKIT publica los contenidos multimedia
+      almacenados en su base de datos de dos modos diferentes: Generando un portal WEB, una WEB-TV y
+      creando flujos RSS compatibles ARCA.
+  WidgetTemplateI18n_3_es: 
+    id: WidgetTemplate_3
+    culture: es
+    text: |
+      <h2>PuMuKIT</h2>
+      PuMuKIT (PUblicador MUltimedia en KIT) permite publicar vía Internet los contenidos audiovisuales
+      producidos en una Institución, Universidad, etc..  PuMuKIT publica los contenidos multimedia
+      almacenados en su base de datos de dos modos diferentes: Generando un portal WEB, una WEB-TV y
+      creando flujos RSS compatibles ARCA.
+  WidgetTemplateI18n_3_en: 
+    id: WidgetTemplate_3
+    culture: en
+    text: |
+      <h2>info portal webtv</h2>
+      PuMuKIT (PUblicador MUltimedia en KIT) permite publicar vía Internet los contenidos audiovisuales
+      producidos en una Institución, Universidad, etc..  PuMuKIT publica los contenidos multimedia
+      almacenados en su base de datos de dos modos diferentes: Generando un portal WEB, una WEB-TV y
+      creando flujos RSS compatibles ARCA.
+  WidgetTemplateI18n_4_gl: 
+    id: WidgetTemplate_4
+    culture: gl
+    text: proximas
+  WidgetTemplateI18n_4_es: 
+    id: WidgetTemplate_4
+    culture: es
+    text: proximas
+  WidgetTemplateI18n_4_en: 
+    id: WidgetTemplate_4
+    culture: en
+    text: proximas
+ElementWidget: 
+  ElementWidget_1_1: 
+    bar_widget_id: BarWidget_1
+    widget_id: Widget_1
+    rank: 1
+  ElementWidget_1_29: 
+    bar_widget_id: BarWidget_1
+    widget_id: Widget_29
+    rank: 2
+  ElementWidget_2_3: 
+    bar_widget_id: BarWidget_2
+    widget_id: Widget_3
+    rank: 1
+  ElementWidget_3_6: 
+    bar_widget_id: BarWidget_3
+    widget_id: Widget_6
+    rank: 1
+  ElementWidget_3_8: 
+    bar_widget_id: BarWidget_3
+    widget_id: Widget_8
+    rank: 2
+  ElementWidget_3_7: 
+    bar_widget_id: BarWidget_3
+    widget_id: Widget_7
+    rank: 3
+  ElementWidget_5_6: 
+    bar_widget_id: BarWidget_5
+    widget_id: Widget_6
+    rank: 1
+  ElementWidget_5_8: 
+    bar_widget_id: BarWidget_5
+    widget_id: Widget_8
+    rank: 2
+  ElementWidget_5_7: 
+    bar_widget_id: BarWidget_5
+    widget_id: Widget_7
+    rank: 3
+  ElementWidget_4_12: 
+    bar_widget_id: BarWidget_4
+    widget_id: Widget_12
+    rank: 1
+  ElementWidget_4_13: 
+    bar_widget_id: BarWidget_4
+    widget_id: Widget_13
+    rank: 2
+  ElementWidget_4_14: 
+    bar_widget_id: BarWidget_4
+    widget_id: Widget_14
+    rank: 3
+  ElementWidget_6_21: 
+    bar_widget_id: BarWidget_6
+    widget_id: Widget_21
+    rank: 1
+  ElementWidget_6_23: 
+    bar_widget_id: BarWidget_6
+    widget_id: Widget_31
+    rank: 3
+  ElementWidget_6_22: 
+    bar_widget_id: BarWidget_6
+    widget_id: Widget_30
+    rank: 2
+  ElementWidget_6_25: 
+    bar_widget_id: BarWidget_6
+    widget_id: Widget_25
+    rank: 4
+WidgetI18n: 
+  WidgetI18n_1_gl: 
+    id: Widget_1
+    culture: gl
+    description: Widget genera la cabecera de la pagina
+  WidgetI18n_2_gl: 
+    id: Widget_2
+    culture: gl
+    description: >
+      Widget que muesta informacion sobre la
+      seccion activa
+  WidgetI18n_3_gl: 
+    id: Widget_3
+    culture: gl
+    description: Widget genera el pie de la pagina
+  WidgetI18n_4_gl: 
+    id: Widget_4
+    culture: gl
+    description: >
+      Widget que permite la modificacion del
+      idioma del usuario
+  WidgetI18n_5_gl: 
+    id: Widget_5
+    culture: gl
+    description: >
+      Widget de las mismas dimensiones que
+      idioma, pero vacio. Usado para buscar
+      simetria
+  WidgetI18n_6_gl: 
+    id: Widget_6
+    culture: gl
+    description: >
+      Widget que proporciona el menu de portal
+      WebTv
+  WidgetI18n_7_gl: 
+    id: Widget_7
+    culture: gl
+    description: >
+      Widget que proporciona informacion sobre
+      el portal WebTv
+  WidgetI18n_8_gl: 
+    id: Widget_8
+    culture: gl
+    description: >
+      Widget que proporciona informacion sobre
+      el numero de series, videos y horas
+      grabadas
+  WidgetI18n_9_gl: 
+    id: Widget_9
+    culture: gl
+    description: >
+      Widget configurable a taves de info, que
+      informa de los proximos videos
+  WidgetI18n_10_gl: 
+    id: Widget_10
+    culture: gl
+    description: >
+      Widget que lista el software aconsejado
+      para reproducir los videos
+  WidgetI18n_11_gl: 
+    id: Widget_11
+    culture: gl
+    description: >
+      Widget que crea un formulario para
+      facilitar la busqueda de videos
+  WidgetI18n_12_gl: 
+    id: Widget_12
+    culture: gl
+    description: >
+      Widget que crea un formulario para
+      facilitar la busqueda de videos en
+      Google
+  WidgetI18n_13_gl: 
+    id: Widget_13
+    culture: gl
+    description: Widget para aceder al feed arca
+  WidgetI18n_14_gl: 
+    id: Widget_14
+    culture: gl
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv
+  WidgetI18n_15_gl: 
+    id: Widget_15
+    culture: gl
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv durante los ultimos 30
+      dias
+  WidgetI18n_16_gl: 
+    id: Widget_16
+    culture: gl
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv durante los ultimos 7
+      dias
+  WidgetI18n_17_gl: 
+    id: Widget_17
+    culture: gl
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv del ultimo dia
+  WidgetI18n_18_gl: 
+    id: Widget_18
+    culture: gl
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv en un acordeon, al
+      estilo apple
+  WidgetI18n_19_gl: 
+    id: Widget_19
+    culture: gl
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv, configurable por el
+      usuario
+  WidgetI18n_20_gl: 
+    id: Widget_20
+    culture: gl
+    description: >
+      Widget que proporciona acceso al
+      formulario para entrar en la lista de
+      correo
+  WidgetI18n_21_gl: 
+    id: Widget_21
+    culture: gl
+    description: >
+      Mustra informacion del portal WebTv
+      configurable a traves de info
+  WidgetI18n_22_gl: 
+    id: Widget_22
+    culture: gl
+    description: Mustra las categorias del portal Web
+  WidgetI18n_23_gl: 
+    id: Widget_23
+    culture: gl
+    description: Muestra los ultimos  anuncios del portal
+  WidgetI18n_24_gl: 
+    id: Widget_24
+    culture: gl
+    description: >
+      Muestra los ultimos videos reproducidos
+      del portal
+  WidgetI18n_25_gl: 
+    id: Widget_25
+    culture: gl
+    description: Muestra la ultimas noticias que hay
+  WidgetI18n_26_gl: 
+    id: Widget_26
+    culture: gl
+    description: >
+      Widget que proporciona una estadistica
+      temporal sobre la fecha de grabacion de
+      las series
+  WidgetI18n_27_gl: 
+    id: Widget_27
+    culture: gl
+    description: >
+      Widget que crea un formulario para
+      autentificarse
+  WidgetI18n_28_gl: 
+    id: Widget_28
+    culture: gl
+    description: >
+      Widget que genera un banner de eleccion
+      de idioma
+  WidgetI18n_29_gl: 
+    id: Widget_29
+    culture: gl
+    description: >
+      Widget que genera migas de pan
+  WidgetI18n_30_gl: 
+    id: Widget_30
+    culture: gl
+    description: >
+      Mustra las categorias del portal Web v2
+  WidgetI18n_31_gl: 
+    id: Widget_31
+    culture: gl
+    description: >
+      Muestra dos columnas con los videos mas vistos y los ultimos.
+  WidgetI18n_1_es: 
+    id: Widget_1
+    culture: es
+    description: Widget genera la cabecera de la pagina
+  WidgetI18n_2_es: 
+    id: Widget_2
+    culture: es
+    description: >
+      Widget que muesta informacion sobre la
+      seccion activa
+  WidgetI18n_3_es: 
+    id: Widget_3
+    culture: es
+    description: Widget genera el pie de la pagina
+  WidgetI18n_4_es: 
+    id: Widget_4
+    culture: es
+    description: >
+      Widget que permite la modificacion del
+      idioma del usuario
+  WidgetI18n_5_es: 
+    id: Widget_5
+    culture: es
+    description: >
+      Widget de las mismas dimensiones que
+      idioma, pero vacio. Usado para buscar
+      simetria
+  WidgetI18n_6_es: 
+    id: Widget_6
+    culture: es
+    description: >
+      Widget que proporciona el menu de portal
+      WebTv
+  WidgetI18n_7_es: 
+    id: Widget_7
+    culture: es
+    description: >
+      Widget que proporciona informacion sobre
+      el portal WebTv
+  WidgetI18n_8_es: 
+    id: Widget_8
+    culture: es
+    description: >
+      Widget que proporciona informacion sobre
+      el numero de series, videos y horas
+      grabadas
+  WidgetI18n_9_es: 
+    id: Widget_9
+    culture: es
+    description: >
+      Widget configurable a taves de info, que
+      informa de los proximos videos
+  WidgetI18n_10_es: 
+    id: Widget_10
+    culture: es
+    description: >
+      Widget que lista el software aconsejado
+      para reproducir los videos
+  WidgetI18n_11_es: 
+    id: Widget_11
+    culture: es
+    description: >
+      Widget que crea un formulario para
+      facilitar la busqueda de videos
+  WidgetI18n_12_es: 
+    id: Widget_12
+    culture: es
+    description: >
+      Widget que crea un formulario para
+      facilitar la busqueda de videos en
+      Gooese
+  WidgetI18n_13_es: 
+    id: Widget_13
+    culture: es
+    description: Widget para aceder al feed arca
+  WidgetI18n_14_es: 
+    id: Widget_14
+    culture: es
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv
+  WidgetI18n_15_es: 
+    id: Widget_15
+    culture: es
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv durante los ultimos 30
+      dias
+  WidgetI18n_16_es: 
+    id: Widget_16
+    culture: es
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv durante los ultimos 7
+      dias
+  WidgetI18n_17_es: 
+    id: Widget_17
+    culture: es
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv del ultimo dia
+  WidgetI18n_18_es: 
+    id: Widget_18
+    culture: es
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv en un acordeon, al
+      estilo apple
+  WidgetI18n_19_es: 
+    id: Widget_19
+    culture: es
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv, configurable por el
+      usuario
+  WidgetI18n_20_es: 
+    id: Widget_20
+    culture: es
+    description: >
+      Widget que proporciona acceso al
+      formulario para entrar en la lista de
+      correo
+  WidgetI18n_21_es: 
+    id: Widget_21
+    culture: es
+    description: >
+      Mustra informacion del portal WebTv
+      configurable a traves de info
+  WidgetI18n_22_es: 
+    id: Widget_22
+    culture: es
+    description: Muestra las categorias del portal Web
+  WidgetI18n_23_es: 
+    id: Widget_23
+    culture: es
+    description: Muestra los ultimos  anuncios del portal
+  WidgetI18n_24_es: 
+    id: Widget_24
+    culture: es
+    description: >
+      Muestra los ultimos videos reproducidos
+      del portal
+  WidgetI18n_25_es: 
+    id: Widget_25
+    culture: es
+    description: Muestra la ultimas noticias que hay
+  WidgetI18n_26_es: 
+    id: Widget_26
+    culture: es
+    description: >
+      Widget que proporciona una estadistica
+      temporal sobre la fecha de grabacion de
+      las series
+  WidgetI18n_27_es: 
+    id: Widget_27
+    culture: es
+    description: >
+      Widget que crea un formulario para
+      autentificarse
+  WidgetI18n_28_es: 
+    id: Widget_28
+    culture: es
+    description: >
+      Widget que genera un banner de eleccion
+      de idioma
+  WidgetI18n_29_es: 
+    id: Widget_29
+    culture: es
+    description: >
+      Widget que genera migas de pan
+  WidgetI18n_30_es: 
+    id: Widget_30
+    culture: es
+    description: >
+      Mustra las categorias del portal Web v2
+  WidgetI18n_31_es: 
+    id: Widget_31
+    culture: es
+    description: >
+      Muestra dos columnas con los videos mas vistos y los ultimos.
+  WidgetI18n_1_en: 
+    id: Widget_1
+    culture: en
+    description: Widget genera la cabecera de la pagina
+  WidgetI18n_2_en: 
+    id: Widget_2
+    culture: en
+    description: >
+      Widget que muesta informacion sobre la
+      seccion activa
+  WidgetI18n_3_en: 
+    id: Widget_3
+    culture: en
+    description: Widget genera el pie de la pagina
+  WidgetI18n_4_en: 
+    id: Widget_4
+    culture: en
+    description: >
+      Widget que permite la modificacion del
+      idioma del usuario
+  WidgetI18n_5_en: 
+    id: Widget_5
+    culture: en
+    description: >
+      Widget de las mismas dimensiones que
+      idioma, pero vacio. Usado para buscar
+      simetria
+  WidgetI18n_6_en: 
+    id: Widget_6
+    culture: en
+    description: >
+      Widget que proporciona el menu de portal
+      WebTv
+  WidgetI18n_7_en: 
+    id: Widget_7
+    culture: en
+    description: >
+      Widget que proporciona informacion sobre
+      el portal WebTv
+  WidgetI18n_8_en: 
+    id: Widget_8
+    culture: en
+    description: >
+      Widget que proporciona informacion sobre
+      el numero de series, videos y horas
+      grabadas
+  WidgetI18n_9_en: 
+    id: Widget_9
+    culture: en
+    description: >
+      Widget configurable a taves de info, que
+      informa de los proximos videos
+  WidgetI18n_10_en: 
+    id: Widget_10
+    culture: en
+    description: >
+      Widget que lista el software aconsejado
+      para reproducir los videos
+  WidgetI18n_11_en: 
+    id: Widget_11
+    culture: en
+    description: >
+      Widget que crea un formulario para
+      facilitar la busqueda de videos
+  WidgetI18n_12_en: 
+    id: Widget_12
+    culture: en
+    description: >
+      Widget que crea un formulario para
+      facilitar la busqueda de videos en
+      Google
+  WidgetI18n_13_en: 
+    id: Widget_13
+    culture: en
+    description: Widget para aceder al feed arca
+  WidgetI18n_14_en: 
+    id: Widget_14
+    culture: en
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv
+  WidgetI18n_15_en: 
+    id: Widget_15
+    culture: en
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv durante los ultimos 30
+      dias
+  WidgetI18n_16_en: 
+    id: Widget_16
+    culture: en
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv durante los ultimos 7
+      dias
+  WidgetI18n_17_en: 
+    id: Widget_17
+    culture: en
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv del ultimo dia
+  WidgetI18n_18_en: 
+    id: Widget_18
+    culture: en
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv en un acordeon, al
+      estilo apple
+  WidgetI18n_19_en: 
+    id: Widget_19
+    culture: en
+    description: >
+      Widget que lista los videos mas vistos
+      del portal WebTv, configurable por el
+      usuario
+  WidgetI18n_20_en: 
+    id: Widget_20
+    culture: en
+    description: >
+      Widget que proporciona acceso al
+      formulario para entrar en la lista de
+      correo
+  WidgetI18n_21_en: 
+    id: Widget_21
+    culture: en
+    description: >
+      Mustra informacion del portal WebTv
+      configurable a traves de info
+  WidgetI18n_22_en: 
+    id: Widget_22
+    culture: en
+    description: Mustra las categorias del portal Web
+  WidgetI18n_23_en: 
+    id: Widget_23
+    culture: en
+    description: Muestra los ultimos  anuncios del portal
+  WidgetI18n_24_en: 
+    id: Widget_24
+    culture: en
+    description: >
+      Muestra los ultimos videos reproducidos
+      del portal
+  WidgetI18n_25_en: 
+    id: Widget_25
+    culture: en
+    description: Muestra la ultimas noticias que hay
+  WidgetI18n_26_en: 
+    id: Widget_26
+    culture: en
+    description: >
+      Widget que proporciona una estadistica
+      temporal sobre la fecha de grabacion de
+      las series
+  WidgetI18n_27_en: 
+    id: Widget_27
+    culture: en
+    description: >
+      Widget que crea un formulario para
+      autentificarse
+  WidgetI18n_28_en: 
+    id: Widget_28
+    culture: en
+    description: >
+      Widget que genera un banner de eleccion
+      de idioma
+  WidgetI18n_29_en: 
+    id: Widget_29
+    culture: en
+    description: >
+      Breadcrumbs Widget
+  WidgetI18n_30_en: 
+    id: Widget_30
+    culture: en
+    description: >
+      Mustra las categorias del portal Web v2
+  WidgetI18n_31_en: 
+    id: Widget_31
+    culture: en
+    description: >
+      Muestra dos columnas con los videos mas vistos y los ultimos.
+
+
+WidgetConstant: 
+  WidgetConstant_1: 
+    widget_id: Widget_18
+    name: T1.
+    text: 1
+  WidgetConstant_2: 
+    widget_id: Widget_18
+    name: T2.
+    text: 2
+  WidgetConstant_3: 
+    widget_id: Widget_18
+    name: T3.
+    text: 3
+  WidgetConstant_4: 
+    widget_id: Widget_19
+    name: M1.
+    text: 1
+  WidgetConstant_5: 
+    widget_id: Widget_19
+    name: M2.
+    text: 2
+  WidgetConstant_6: 
+    widget_id: Widget_19
+    name: M3.
+    text: 3
+  WidgetConstant_7: 
+    widget_id: Widget_7
+    name: Correo
+    text: tv@correo.es
+  WidgetConstant_8: 
+    widget_id: Widget_7
+    name: Telefono
+    text: 666 66 66 66
+  WidgetConstant_9: 
+    widget_id: Widget_7
+    name: module mas info
+    text: Info
+  WidgetConstant_10: 
+    widget_id: Widget_22
+    name: type
+    text: 3
+
+
+WidgetModule: 
+  WidgetModule_1: 
+    widget_id: Widget_25
+    module: notices
+  WidgetModule_2: 
+    widget_id: Widget_22
+    module: virtualgrounds
+  WidgetModule_3: 
+    widget_id: Widget_30
+    module: virtualgrounds
+
+
+Notice: 
+  Notice_1: 
+    date: 2010-02-09
+    working: 0
+NoticeI18n: 
+  NoticeI18n_1_es: 
+    id: Notice_1
+    culture: es
+    text: Wellcome to PuMuKIT 1.7!!!
+  NoticeI18n_1_gl: 
+    id: Notice_1
+    culture: gl
+    text: Wellcome to PuMuKIT 1.7!!!

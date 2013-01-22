@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /editar.php
+Disallow: /editar_dev.php

@@ -1,0 +1,262 @@
+# default rules
+arca:
+  url:   /arca.xml
+  param: { module: xml, action: arca }
+
+arcados:
+  url:   /xml/arca
+  param: { module: xml, action: arca }
+
+nuevoarca:
+  url:   /nuevoarca.xml
+  param: { module: xml, action: nuevoarca }
+
+nuevoarcados:
+  url:   /xml/nuevoarca
+  param: { module: xml, action: nuevoarca }
+
+nuevorss:
+  url:  /nuevorss.xml
+  param: {module: xml, action: nuevorss }
+
+nuevorssdos:
+  url:  /xml/nuevorss
+  param: {module: xml, action: nuevorss }
+
+novedades:
+  url:  /novedades.xml
+  param: { module: xml, action: novedades }
+
+novedadesdos:
+  url:  /xml/novedades
+  param: { module: xml, action: novedades }
+
+lastnews:
+  url:  /xml/lastnews
+  param: { module: xml, action: lastnews }
+
+lastnewsdos:
+  url:  /lastnews.xml
+  param: { module: xml, action: lastnews }
+
+rssjoomla:
+  url:  /rssjoomla.xml
+  param: { module: xml, action: rssjoomla }
+
+rssjoomlados:
+  url:  /xml/rssjoomla
+  param: { module: xml, action: rssjoomla }
+
+podcast:
+  url:   /podcast/:id.xml
+  param: { module: xml, action: podcast }
+  requirements: {id: \d+ }
+
+podcasti18n:
+  url:   /podcast/:culture/:id.xml
+  param: { module: xml, action: podcast }
+  requirements: {id: \d+ }
+
+category:
+  url:   /:sf_culture/category/:id.html
+  param: { module: categories, action: index }
+  requirements: { sf_culture: (?:en|es|gl) }
+
+podcasti18nonly:
+  url:   /podcast/only/:culture/:id.xml
+  param: { module: xml, action: podcast, only: only }
+  requirements: {id: \d+ }
+
+videocast:
+  url:   /videocast/:id.xml
+  param: { module: xml, action: videocast }
+  requirements: {id: \d+ }
+
+videocasti18n:
+  url:   /videocast/:culture/:id.xml
+  param: { module: xml, action: videocast }
+  requirements: {id: \d+ }
+
+videocasti18nonly:
+  url:   /videocast/only/:culture/:id.xml
+  param: { module: xml, action: videocast, only: only }
+  requirements: {id: \d+ }
+
+videositemap:
+  url:   /videositemap.xml
+  param: { module: xml, action: videositemap }
+
+oai:
+  url:   /oai.xml
+  param: { module: oai, action: index }
+
+oai2:
+  url:   /oai/index
+  param: { module: oai, action: index }
+
+css:
+  url:   /css/css.css
+  param: { module: utils, action: css }
+
+culture:
+  url:   /culture/:culture.html
+  param: { module: utils, action: culture }
+
+login:
+  url:   /login/*.html
+  param: { module: utils, action: login }
+
+logout:
+  url:   /logout/*.html
+  param: { module: utils, action: logout }
+
+index:
+  url:   /index.html
+  param: { module: index, action: index }
+
+index_i18n:
+  url:   /:sf_culture/index.html
+  param: { module: index, action: index }
+  requirements: { sf_culture: (?:en|es|gl) }
+
+news:
+  url:   /:sf_culture/news.html
+  param: { module: news, action: index }
+  requirements: { sf_culture: (?:en|es|gl) }
+
+announces:
+  url:   /:sf_culture/announces.html
+  param: { module: announces, action: index }
+  requirements: { sf_culture: (?:en|es|gl) }
+
+pildoras:
+  url:   /:sf_culture/pildoras.html
+  param: { module: pildoras, action: index }
+  requirements: { sf_culture: (?:en|es|gl) }
+
+file0:
+  url:   /file/:file_id
+  param: { module: video, action: index }
+  requirements: { file_id: \d+ }
+
+file:
+  url:   /:sf_culture/file/:file_id.html
+  param: { module: video, action: index }
+  requirements: { sf_culture: (?:en|es|gl), file_id: \d+ }
+
+file2:
+  url:   /:sf_culture/file/:file_id
+  param: { module: video, action: index }
+  requirements: { sf_culture: (?:en|es|gl), file_id: \d+ }
+
+video0:
+  url:   /video/:id
+  param: { module: video, action: index }
+  requirements: { id: \d+ }
+
+video:
+  url:   /:sf_culture/video/:id.html
+  param: { module: video, action: index }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+video2:
+  url:   /:sf_culture/video/:id
+  param: { module: video, action: index }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+video_old:
+  url:   /video/index/id/:id
+  param: { module: video, action: index }
+  requirements: { id: \d+ }
+
+video_playlist:
+  url:   /:sf_culture/video/asx/:id.xml
+  param: { module: video, action: index, playlist: asx }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }  
+
+video_iframe:
+  url:   /:sf_culture/video/iframe/:id.html
+  param: { module: video, action: iframe }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+new_serial:
+  url:   /:sf_culture/new_serial/:id.html
+  param: { module: new_serial, action: index }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+new_serial_info:
+  url:   /:sf_culture/new_serial_info/:id.html
+  param: { module: new_serial, action: info }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+new_serial_bar:
+  url:   /:sf_culture/new_serial_bar/:id.html
+  param: { module: new_serial, action: infobar }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+serial:
+  url:   /:sf_culture/serial/:id.html
+  param: { module: serial, action: index }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+serial2:
+  url:   /:sf_culture/serial/:id
+  param: { module: serial, action: index }
+  requirements: { sf_culture: (?:en|es|gl), id: \d+ }
+
+serial_old:
+  url:   /serial/index/id/:id
+  param: { module: serial, action: index }
+  requirements: { id: \d+ }
+
+serial_old_2:
+  url:   /serial/index
+  param: { module: serial, action: index }
+
+library_def:
+  url:   /:sf_culture/library.html
+  param: { module: library, action: index, order: date}
+  requirements: { sf_culture: (?:en|es|gl)}
+
+library:
+  url:   /:sf_culture/library/:action.html
+  param: { module: library}
+  requirements: { sf_culture: (?:en|es|gl)}
+
+library_all:
+  url:   /:sf_culture/library/:action/*.html
+  param: { module: library}
+  requirements: { sf_culture: (?:en|es|gl)}
+
+library_search_all:
+  url:   /:sf_culture/library/:action/:search/*.html
+  param: { module: library}
+  requirements: { sf_culture: (?:en|es|gl)}
+
+directo:
+  url:   /:sf_culture/directo/:canal.html
+  param: { module: directo, action: index }
+  requirements: { sf_culture: (?:en|es|gl), canal: \d+ }
+
+directo_def:
+  url:   /:sf_culture/directo.html
+  param: { module: directo, action: index, canal: 1 }
+  requirements: { sf_culture: (?:en|es|gl)}
+
+homepage:
+  url:   /
+  param: { module: index, action: index }
+
+templates:
+  url:   /:sf_culture/:temp.html
+  param: { module: templates, action: index }
+  requirements: { sf_culture: (?:en|es|gl) }
+
+default:
+  url:   /:sf_culture/:module/:action/*
+  requirements: { sf_culture: (?:en|es|gl) }
+
+default_noc:
+  url:   /:module/:action/*
+
+

@@ -1,0 +1,7 @@
+previewallSuccess:
+  stylesheets:    [tv/default, css]
+
+all:
+  stylesheets:    [/sf/calendar/calendar-system.css, /sf/calendar/skins/aqua/theme.css, admin/accordion.css, admin/tree] 
+  javascripts:    [/sf/calendar/calendar.js, /sf/calendar/lang/calendar-es.js, /sf/calendar/calendar-setup.js, accordion.js, tree]
+

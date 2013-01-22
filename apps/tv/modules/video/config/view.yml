@@ -1,0 +1,5 @@
+iframe:
+  has_layout: off
+
+  stylesheets:    [-css] 
+  javascripts:    []

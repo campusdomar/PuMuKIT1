@@ -1,0 +1,78 @@
+START
+
+
+############################################
+#########   NO EXISTE FILE   ###############
+############################################
+ERROR 1
+ID:	4065
+PERFIL_ID:	12
+MM:	2967
+MM:	Sin entrelazado en la captura de camara (25p)
+SERIAL:	436
+SERIAL:	Polimedia: Prueba entrelazados
+FILE:	/mnt/vodhosting/uvigotv/polimedia/436/1333.wmv
+URL:	mms://videoserver.uvigo.es/VoDhosting/uvigotv/polimedia/436/1333.wmv
+--------------------------------------------
+
+
+ERROR 2
+ID:	4067
+PERFIL_ID:	12
+MM:	2966
+MM:	Entrelazado en la captura de camara (25i)
+SERIAL:	436
+SERIAL:	Polimedia: Prueba entrelazados
+FILE:	/mnt/vodhosting/uvigotv/polimedia/436/1332.wmv
+URL:	mms://videoserver.uvigo.es/VoDhosting/uvigotv/polimedia/436/1332.wmv
+--------------------------------------------
+
+
+ERROR 3
+ID:	14375
+PERFIL_ID:	12
+MM:	4032
+MM:	Matrícula web de alumnos de primer año
+SERIAL:	552
+SERIAL:	Sonorización de un proyecto de adobe captivate
+FILE:	/mnt/vodhosting/uvigotv/polimedia/559/11560.wmv
+URL:	mms://videoserver.uvigo.es/VoDhosting/uvigotv/polimedia/559/11560.wmv
+--------------------------------------------
+
+
+ERROR 4
+ID:	14376
+PERFIL_ID:	12
+MM:	4033
+MM:	Matrícula web de alumnos de primer año
+SERIAL:	552
+SERIAL:	Sonorización de un proyecto de adobe captivate
+FILE:	/mnt/vodhosting/uvigotv/polimedia/559/11562.wmv
+URL:	mms://videoserver.uvigo.es/VoDhosting/uvigotv/polimedia/559/11562.wmv
+--------------------------------------------
+
+
+ERROR 5
+ID:	14448
+PERFIL_ID:	12
+MM:	4062
+MM:	Como matricularse por primera vez en la Universidad de Vigo
+SERIAL:	568
+SERIAL:	Tutorial para matricularse en la Universidad de Vigo
+FILE:	/mnt/vodhosting/uvigotv/polimedia/568/11636.wmv
+URL:	mms://videoserver.uvigo.es/VoDhosting/uvigotv/polimedia/568/11636.wmv
+--------------------------------------------
+
+
+ERROR 6
+ID:	14454
+PERFIL_ID:	12
+MM:	4063
+MM:	Como matricularse por primera vez en la Universidad de Vigo
+SERIAL:	568
+SERIAL:	Tutorial para matricularse en la Universidad de Vigo
+FILE:	/mnt/vodhosting/uvigotv/polimedia/568/11641.wmv
+URL:	mms://videoserver.uvigo.es/VoDhosting/uvigotv/polimedia/568/11641.wmv
+--------------------------------------------
+
+

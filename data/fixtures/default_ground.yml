@@ -1,0 +1,1353 @@
+GroundType: 
+  GroundType_1: 
+    name: Unesco
+    display: 1
+    rank: 2
+  GroundType_2: 
+    name: Directriz
+    display: 1
+    rank: 3
+  GroundType_3: 
+    name: Lugares
+    display: 1
+    rank: 1
+GroundTypeI18n: 
+  GroundTypeI18n_1_gl: 
+    id: GroundType_1
+    culture: gl
+    description: Area de conocimento da NESCO
+  GroundTypeI18n_1_es: 
+    id: GroundType_1
+    culture: es
+    description: Area de conocimento da UNESCO
+  GroundTypeI18n_1_en: 
+    id: GroundType_1
+    culture: en
+    description: UNESCO subject areas
+  GroundTypeI18n_2_gl: 
+    id: GroundType_2
+    culture: gl
+    description: Area Directriz
+  GroundTypeI18n_2_es: 
+    id: GroundType_2
+    culture: es
+    description: Area Directriz
+  GroundTypeI18n_2_en: 
+    id: GroundType_2
+    culture: en
+    description: Directriz domain
+  GroundTypeI18n_3_es: 
+    id: GroundType_3
+    culture: es
+    description: Lugares  
+  GroundTypeI18n_3_gl: 
+    id: GroundType_3
+    culture: gl
+    description: Lugares
+
+
+Ground: 
+  Ground_1: 
+    cod: U110000
+    ground_type_id: GroundType_1
+  Ground_2: 
+    cod: U120000
+    ground_type_id: GroundType_1
+  Ground_3: 
+    cod: U210000
+    ground_type_id: GroundType_1
+  Ground_4: 
+    cod: U220000
+    ground_type_id: GroundType_1
+  Ground_5: 
+    cod: U230000
+    ground_type_id: GroundType_1
+  Ground_6: 
+    cod: U240000
+    ground_type_id: GroundType_1
+  Ground_7: 
+    cod: U250000
+    ground_type_id: GroundType_1
+  Ground_8: 
+    cod: U310000
+    ground_type_id: GroundType_1
+  Ground_9: 
+    cod: U320000
+    ground_type_id: GroundType_1
+  Ground_10: 
+    cod: U330000
+    ground_type_id: GroundType_1
+  Ground_11: 
+    cod: U510000
+    ground_type_id: GroundType_1
+  Ground_12: 
+    cod: U520000
+    ground_type_id: GroundType_1
+  Ground_13: 
+    cod: U530000
+    ground_type_id: GroundType_1
+  Ground_14: 
+    cod: U540000
+    ground_type_id: GroundType_1
+  Ground_15: 
+    cod: U550000
+    ground_type_id: GroundType_1
+  Ground_16: 
+    cod: U560000
+    ground_type_id: GroundType_1
+  Ground_17: 
+    cod: U570000
+    ground_type_id: GroundType_1
+  Ground_18: 
+    cod: U580000
+    ground_type_id: GroundType_1
+  Ground_19: 
+    cod: U590000
+    ground_type_id: GroundType_1
+  Ground_20: 
+    cod: U610000
+    ground_type_id: GroundType_1
+  Ground_21: 
+    cod: U620000
+    ground_type_id: GroundType_1
+  Ground_22: 
+    cod: U630000
+    ground_type_id: GroundType_1
+  Ground_23: 
+    cod: U710000
+    ground_type_id: GroundType_1
+  Ground_24: 
+    cod: U720000
+    ground_type_id: GroundType_1
+  Ground_25: 
+    cod: U910000
+    ground_type_id: GroundType_1
+  Ground_26: 
+    cod: U920000
+    ground_type_id: GroundType_1
+  Ground_27: 
+    cod: U930000
+    ground_type_id: GroundType_1
+  Ground_28: 
+    cod: Dsalud
+    ground_type_id: GroundType_2
+  Ground_29: 
+    cod: Dciencia
+    ground_type_id: GroundType_2
+  Ground_30: 
+    cod: Djuridicosocial
+    ground_type_id: GroundType_2
+  Ground_31: 
+    cod: Dtecnologia
+    ground_type_id: GroundType_2
+  Ground_32: 
+    cod: Dhumanistica
+    ground_type_id: GroundType_2
+  Ground_58: 
+    cod: T5-4
+    ground_type_id: GroundType_3
+  Ground_35: 
+    cod: T2-6
+    ground_type_id: GroundType_3
+  Ground_36: 
+    cod: T2-2
+    ground_type_id: GroundType_3
+  Ground_38: 
+    cod: T3-1
+    ground_type_id: GroundType_3
+  Ground_39: 
+    cod: T3-2
+    ground_type_id: GroundType_3
+  Ground_40: 
+    cod: T3-3
+    ground_type_id: GroundType_3
+  Ground_42: 
+    cod: T4-4
+    ground_type_id: GroundType_3
+  Ground_43: 
+    cod: T4-1
+    ground_type_id: GroundType_3
+  Ground_44: 
+    cod: T4-2
+    ground_type_id: GroundType_3
+  Ground_45: 
+    cod: T4-3
+    ground_type_id: GroundType_3
+  Ground_59: 
+    cod: T5-6
+    ground_type_id: GroundType_3
+  Ground_48: 
+    cod: T5-1
+    ground_type_id: GroundType_3
+  Ground_49: 
+    cod: T5-2
+    ground_type_id: GroundType_3
+  Ground_50: 
+    cod: T5-3
+    ground_type_id: GroundType_3
+  Ground_52: 
+    cod: T6-1
+    ground_type_id: GroundType_3
+  Ground_53: 
+    cod: T6-2
+    ground_type_id: GroundType_3
+  Ground_54: 
+    cod: T6-3
+    ground_type_id: GroundType_3
+  Ground_55: 
+    cod: T6-4
+    ground_type_id: GroundType_3
+  Ground_60: 
+    cod: T5-5
+    ground_type_id: GroundType_3
+  Ground_61: 
+    cod: T3-4
+    ground_type_id: GroundType_3
+  Ground_62: 
+    cod: T3-5
+    ground_type_id: GroundType_3
+  Ground_63: 
+    cod: T3-6
+    ground_type_id: GroundType_3
+  Ground_64: 
+    cod: T3-7
+    ground_type_id: GroundType_3
+  Ground_65: 
+    cod: T6-5
+    ground_type_id: GroundType_3
+  Ground_66: 
+    cod: T6-6
+    ground_type_id: GroundType_3
+  Ground_68: 
+    cod: T2-3
+    ground_type_id: GroundType_3
+  Ground_69: 
+    cod: T2-4
+    ground_type_id: GroundType_3
+  Ground_70: 
+    cod: T4-5
+    ground_type_id: GroundType_3
+  Ground_71: 
+    cod: T2-5
+    ground_type_id: GroundType_3
+GroundI18n: 
+  GroundI18n_1_gl: 
+    id: Ground_1
+    culture: gl
+    name: Lóxica
+  GroundI18n_1_es: 
+    id: Ground_1
+    culture: es
+    name: Lógica
+  GroundI18n_1_en: 
+    id: Ground_1
+    culture: en
+    name: Logic
+  GroundI18n_2_gl: 
+    id: Ground_2
+    culture: gl
+    name: Matemáticas
+  GroundI18n_2_es: 
+    id: Ground_2
+    culture: es
+    name: Matemáticas
+  GroundI18n_2_en: 
+    id: Ground_2
+    culture: en
+    name: Math
+  GroundI18n_3_gl: 
+    id: Ground_3
+    culture: gl
+    name: Astronomía e Astrofísica
+  GroundI18n_3_es: 
+    id: Ground_3
+    culture: es
+    name: Astronomía y Astrofísica
+  GroundI18n_3_en: 
+    id: Ground_3
+    culture: en
+    name: Astronomy and Astrophysics
+  GroundI18n_4_gl: 
+    id: Ground_4
+    culture: gl
+    name: Física
+  GroundI18n_4_es: 
+    id: Ground_4
+    culture: es
+    name: Física
+  GroundI18n_4_en: 
+    id: Ground_4
+    culture: en
+    name: Physics
+  GroundI18n_5_gl: 
+    id: Ground_5
+    culture: gl
+    name: Química
+  GroundI18n_5_es: 
+    id: Ground_5
+    culture: es
+    name: Química
+  GroundI18n_5_en: 
+    id: Ground_5
+    culture: en
+    name: Chemistry
+  GroundI18n_6_gl: 
+    id: Ground_6
+    culture: gl
+    name: Ciencias da Vida
+  GroundI18n_6_es: 
+    id: Ground_6
+    culture: es
+    name: Ciencias de la Vida
+  GroundI18n_6_en: 
+    id: Ground_6
+    culture: en
+    name: Life science
+  GroundI18n_7_gl: 
+    id: Ground_7
+    culture: gl
+    name: Ciencias da Terra e do Cosmos
+  GroundI18n_7_es: 
+    id: Ground_7
+    culture: es
+    name: Ciencias de la Tierra y del Cosmos
+  GroundI18n_7_en: 
+    id: Ground_7
+    culture: en
+    name: Earth and Cosmos science
+  GroundI18n_8_gl: 
+    id: Ground_8
+    culture: gl
+    name: Ciencias Agronómicas e Veterinarias
+  GroundI18n_8_es: 
+    id: Ground_8
+    culture: es
+    name: Ciencias Agronómicas y Veterinarias
+  GroundI18n_8_en: 
+    id: Ground_8
+    culture: en
+    name: Agronomist science and Veterinarian
+  GroundI18n_9_gl: 
+    id: Ground_9
+    culture: gl
+    name: Medicina e Patoloxías Humans
+  GroundI18n_9_es: 
+    id: Ground_9
+    culture: es
+    name: Medicina y Patologías Humanas
+  GroundI18n_9_en: 
+    id: Ground_9
+    culture: en
+    name: Medicine and Human Pathology
+  GroundI18n_10_gl: 
+    id: Ground_10
+    culture: gl
+    name: Ciencias da Tecnoloxía
+  GroundI18n_10_es: 
+    id: Ground_10
+    culture: es
+    name: Ciencias de la Tecnología
+  GroundI18n_10_en: 
+    id: Ground_10
+    culture: en
+    name: Technology science
+  GroundI18n_11_gl: 
+    id: Ground_11
+    culture: gl
+    name: Antropoloxía
+  GroundI18n_11_es: 
+    id: Ground_11
+    culture: es
+    name: Antropología
+  GroundI18n_11_en: 
+    id: Ground_11
+    culture: en
+    name: Anthropology
+  GroundI18n_12_gl: 
+    id: Ground_12
+    culture: gl
+    name: Demografía
+  GroundI18n_12_es: 
+    id: Ground_12
+    culture: es
+    name: Demografía
+  GroundI18n_12_en: 
+    id: Ground_12
+    culture: en
+    name: Demography
+  GroundI18n_13_gl: 
+    id: Ground_13
+    culture: gl
+    name: Ciencias Económicas
+  GroundI18n_13_es: 
+    id: Ground_13
+    culture: es
+    name: Ciencias Económicas
+  GroundI18n_13_en: 
+    id: Ground_13
+    culture: en
+    name: Economic science
+  GroundI18n_14_gl: 
+    id: Ground_14
+    culture: gl
+    name: Xeografía
+  GroundI18n_14_es: 
+    id: Ground_14
+    culture: es
+    name: Geografía
+  GroundI18n_14_en: 
+    id: Ground_14
+    culture: en
+    name: Geography
+  GroundI18n_15_gl: 
+    id: Ground_15
+    culture: gl
+    name: Historia
+  GroundI18n_15_es: 
+    id: Ground_15
+    culture: es
+    name: Historia
+  GroundI18n_15_en: 
+    id: Ground_15
+    culture: en
+    name: History
+  GroundI18n_16_gl: 
+    id: Ground_16
+    culture: gl
+    name: Ciencia Xurídicas e Dereito
+  GroundI18n_16_es: 
+    id: Ground_16
+    culture: es
+    name: Ciencia Jurídicas y Derecho
+  GroundI18n_16_en: 
+    id: Ground_16
+    culture: en
+    name: Legal science and Law
+  GroundI18n_17_gl: 
+    id: Ground_17
+    culture: gl
+    name: Lingüística
+  GroundI18n_17_es: 
+    id: Ground_17
+    culture: es
+    name: Lingüística
+  GroundI18n_17_en: 
+    id: Ground_17
+    culture: en
+    name: Linguistics
+  GroundI18n_18_gl: 
+    id: Ground_18
+    culture: gl
+    name: Pedagoxía
+  GroundI18n_18_es: 
+    id: Ground_18
+    culture: es
+    name: Pedagogía
+  GroundI18n_18_en: 
+    id: Ground_18
+    culture: en
+    name: Pedagogy
+  GroundI18n_19_gl: 
+    id: Ground_19
+    culture: gl
+    name: Ciencias Políticas
+  GroundI18n_19_es: 
+    id: Ground_19
+    culture: es
+    name: Ciencias Políticas
+  GroundI18n_19_en: 
+    id: Ground_19
+    culture: en
+    name: Political science
+  GroundI18n_20_gl: 
+    id: Ground_20
+    culture: gl
+    name: Psicoloxía
+  GroundI18n_20_es: 
+    id: Ground_20
+    culture: es
+    name: Psicología
+  GroundI18n_20_en: 
+    id: Ground_20
+    culture: en
+    name: Psychology
+  GroundI18n_21_gl: 
+    id: Ground_21
+    culture: gl
+    name: Artes e Letras
+  GroundI18n_21_es: 
+    id: Ground_21
+    culture: es
+    name: Artes e Letras
+  GroundI18n_21_en: 
+    id: Ground_21
+    culture: en
+    name: Arts and Letters
+  GroundI18n_22_gl: 
+    id: Ground_22
+    culture: gl
+    name: Socioloxía
+  GroundI18n_22_es: 
+    id: Ground_22
+    culture: es
+    name: Sociología
+  GroundI18n_22_en: 
+    id: Ground_22
+    culture: en
+    name: Sociology
+  GroundI18n_23_gl: 
+    id: Ground_23
+    culture: gl
+    name: Ética
+  GroundI18n_23_es: 
+    id: Ground_23
+    culture: es
+    name: Ética
+  GroundI18n_23_en: 
+    id: Ground_23
+    culture: en
+    name: Ethic
+  GroundI18n_24_gl: 
+    id: Ground_24
+    culture: gl
+    name: Filosofía
+  GroundI18n_24_es: 
+    id: Ground_24
+    culture: es
+    name: Filosofía
+  GroundI18n_24_en: 
+    id: Ground_24
+    culture: en
+    name: Philosophy
+  GroundI18n_25_gl: 
+    id: Ground_25
+    culture: gl
+    name: Corporativo
+  GroundI18n_25_es: 
+    id: Ground_25
+    culture: es
+    name: Corporativo
+  GroundI18n_25_en: 
+    id: Ground_25
+    culture: en
+    name: Corporative
+  GroundI18n_26_gl: 
+    id: Ground_26
+    culture: gl
+    name: Vida Universitaria
+  GroundI18n_26_es: 
+    id: Ground_26
+    culture: es
+    name: Vida Universitaria
+  GroundI18n_26_en: 
+    id: Ground_26
+    culture: en
+    name: University life
+  GroundI18n_27_gl: 
+    id: Ground_27
+    culture: gl
+    name: Noticias
+  GroundI18n_27_es: 
+    id: Ground_27
+    culture: es
+    name: Noticias
+  GroundI18n_27_en: 
+    id: Ground_27
+    culture: en
+    name: News
+  GroundI18n_28_gl: 
+    id: Ground_28
+    culture: gl
+    name: Ciencias da Saude
+  GroundI18n_28_es: 
+    id: Ground_28
+    culture: es
+    name: Ciencias de la Salud
+  GroundI18n_28_en: 
+    id: Ground_28
+    culture: en
+    name: Health Sciences
+  GroundI18n_29_gl: 
+    id: Ground_29
+    culture: gl
+    name: Ciencias Experimentais
+  GroundI18n_29_es: 
+    id: Ground_29
+    culture: es
+    name: Ciencias Experimentales
+  GroundI18n_29_en: 
+    id: Ground_29
+    culture: en
+    name: Experimental sciences
+  GroundI18n_30_gl: 
+    id: Ground_30
+    culture: gl
+    name: Ciencias Xuridico-Sociais
+  GroundI18n_30_es: 
+    id: Ground_30
+    culture: es
+    name: Ciencias Juridico-Sociales
+  GroundI18n_30_en: 
+    id: Ground_30
+    culture: en
+    name: Social and Legal sciences
+  GroundI18n_31_gl: 
+    id: Ground_31
+    culture: gl
+    name: Ciencias tecnoloxicas
+  GroundI18n_31_es: 
+    id: Ground_31
+    culture: es
+    name: Ciencias tecnologicas
+  GroundI18n_31_en: 
+    id: Ground_31
+    culture: en
+    name: Technical sciences
+  GroundI18n_32_gl: 
+    id: Ground_32
+    culture: gl
+    name: Humanidades
+  GroundI18n_32_es: 
+    id: Ground_32
+    culture: es
+    name: Humanidades
+  GroundI18n_32_en: 
+    id: Ground_32
+    culture: en
+    name: Humanities
+  GroundI18n_58_es: 
+    id: Ground_58
+    culture: es
+    name: E.T.S. de Ingeniería de Minas
+  GroundI18n_35_es: 
+    id: Ground_35
+    culture: es
+    name: >
+      Vicerrectorado de Extensión Cultural y
+      Estudiantes
+  GroundI18n_35_gl: 
+    id: Ground_35
+    culture: gl
+    name: >
+      Vicerreitoría de Extensión Cultural e
+      Estudantes
+  GroundI18n_36_es: 
+    id: Ground_36
+    culture: es
+    name: >
+      Vicerrectorado de Formación e
+      Innovación Educativa
+  GroundI18n_36_gl: 
+    id: Ground_36
+    culture: gl
+    name: >
+      Vicerreitoría de Formación e
+      Innovación Educativa
+  GroundI18n_38_es: 
+    id: Ground_38
+    culture: es
+    name: Fac. de Filoloxía e Traducción
+  GroundI18n_38_gl: 
+    id: Ground_38
+    culture: gl
+    name: Fac. de Filoloxía e Tradución
+  GroundI18n_39_es: 
+    id: Ground_39
+    culture: es
+    name: >
+      Facultad de Ciencias de la Educación y
+      del Deporte (Po)
+  GroundI18n_39_gl: 
+    id: Ground_39
+    culture: gl
+    name: >
+      Facultade de Ciencias da Educación e do
+      Deporte (Po)
+  GroundI18n_40_es: 
+    id: Ground_40
+    culture: es
+    name: Fac. de Ciencias de la Educación (Ou)
+  GroundI18n_40_gl: 
+    id: Ground_40
+    culture: gl
+    name: Fac. de Ciencias da Educación (Ou)
+  GroundI18n_42_es: 
+    id: Ground_42
+    culture: es
+    name: Fac. de Ciencias (Ourense)
+  GroundI18n_42_gl: 
+    id: Ground_42
+    culture: gl
+    name: Fac. de Ciencias (Ourense)
+  GroundI18n_43_es: 
+    id: Ground_43
+    culture: es
+    name: Fac. de Biología
+  GroundI18n_43_gl: 
+    id: Ground_43
+    culture: gl
+    name: Fac. de Bioloxía
+  GroundI18n_44_es: 
+    id: Ground_44
+    culture: es
+    name: Fac. de Química
+  GroundI18n_44_gl: 
+    id: Ground_44
+    culture: gl
+    name: Fac. de Química
+  GroundI18n_45_es: 
+    id: Ground_45
+    culture: es
+    name: Fac. de Ciencias del Mar
+  GroundI18n_45_gl: 
+    id: Ground_45
+    culture: gl
+    name: Fac. de Ciencias do Mar
+  GroundI18n_58_gl: 
+    id: Ground_58
+    culture: gl
+    name: E.T.S. de Enxeñería de Minas
+  GroundI18n_48_es: 
+    id: Ground_48
+    culture: es
+    name: >
+      E.T.S. de Ingenieros de
+      Telecomunicación
+  GroundI18n_48_gl: 
+    id: Ground_48
+    culture: gl
+    name: >
+      E.T.S. de Enxeñeiros de
+      Telecomunicación
+  GroundI18n_49_es: 
+    id: Ground_49
+    culture: es
+    name: E.T.S. de Ingenieros Industriales
+  GroundI18n_49_gl: 
+    id: Ground_49
+    culture: gl
+    name: E.T.S. de Enxeñeiros Industriais
+  GroundI18n_50_es: 
+    id: Ground_50
+    culture: es
+    name: E.S. de Ingeniería Informática
+  GroundI18n_50_gl: 
+    id: Ground_50
+    culture: gl
+    name: E.S. de Enxeñería Informática
+  GroundI18n_52_es: 
+    id: Ground_52
+    culture: es
+    name: Fac. de CC. Económicas y Empresariales
+  GroundI18n_52_gl: 
+    id: Ground_52
+    culture: gl
+    name: Fac. de CC. Económicas e Empresariais
+  GroundI18n_53_es: 
+    id: Ground_53
+    culture: es
+    name: Fac. de Ciencias Empresariales y Turismo
+  GroundI18n_53_gl: 
+    id: Ground_53
+    culture: gl
+    name: Fac. de Ciencias Empresariais e Turismo
+  GroundI18n_54_es: 
+    id: Ground_54
+    culture: es
+    name: >
+      Fac. de CC. Sociales y de la
+      Comunicación
+  GroundI18n_54_gl: 
+    id: Ground_54
+    culture: gl
+    name: Fac. de CC. Sociais e da Comunicación
+  GroundI18n_55_es: 
+    id: Ground_55
+    culture: es
+    name: Fac. de CC. Jurídicas y del Trabajo
+  GroundI18n_55_gl: 
+    id: Ground_55
+    culture: gl
+    name: Fac. de CC. Xurídicas e do Traballo
+  GroundI18n_59_gl: 
+    id: Ground_59
+    culture: gl
+    name: E.U. de Enxeñería Técnica Forestal
+  GroundI18n_59_es: 
+    id: Ground_59
+    culture: es
+    name: E.U. de Ingeniería Técnica Forestal
+  GroundI18n_60_es: 
+    id: Ground_60
+    culture: es
+    name: E.U. de Ingeniería Técnica Industrial
+  GroundI18n_60_gl: 
+    id: Ground_60
+    culture: gl
+    name: E.U. de Enxeñería Técnica Industrial
+  GroundI18n_61_es: 
+    id: Ground_61
+    culture: es
+    name: Fac. de Historia
+  GroundI18n_61_gl: 
+    id: Ground_61
+    culture: gl
+    name: Fac. de Historia
+  GroundI18n_62_es: 
+    id: Ground_62
+    culture: es
+    name: E.U. de Fisioterapia
+  GroundI18n_62_gl: 
+    id: Ground_62
+    culture: gl
+    name: E.U. de Fisioterapia
+  GroundI18n_63_es: 
+    id: Ground_63
+    culture: es
+    name: E.U. Magisterio
+  GroundI18n_63_gl: 
+    id: Ground_63
+    culture: gl
+    name: E.U. Maxisterio
+  GroundI18n_64_es: 
+    id: Ground_64
+    culture: es
+    name: Fac. de Bellas Artes
+  GroundI18n_64_gl: 
+    id: Ground_64
+    culture: gl
+    name: Fac. de Belas Artes
+  GroundI18n_65_es: 
+    id: Ground_65
+    culture: es
+    name: Fac. de Derecho
+  GroundI18n_65_gl: 
+    id: Ground_65
+    culture: gl
+    name: Fac. de Dereito
+  GroundI18n_66_es: 
+    id: Ground_66
+    culture: es
+    name: E.U. de Estudios Empresariales
+  GroundI18n_66_gl: 
+    id: Ground_66
+    culture: gl
+    name: E.U. de Estudos Empresariais
+  GroundI18n_68_es: 
+    id: Ground_68
+    culture: es
+    name: >
+      Vicerrectorado de Titulaciones y
+      Convergencia Europea
+  GroundI18n_68_gl: 
+    id: Ground_68
+    culture: gl
+    name: >
+      Vicerreitoría de Titulacións e
+      Converxencia Europea
+  GroundI18n_69_es: 
+    id: Ground_69
+    culture: es
+    name: >
+      Vicerrectorado de Relaciones
+      Institucionales
+  GroundI18n_69_gl: 
+    id: Ground_69
+    culture: gl
+    name: >
+      Vicerreitoría de Relacións
+      Institucionais
+  GroundI18n_70_es: 
+    id: Ground_70
+    culture: es
+    name: >
+      Complejo Hospitalario Universidade de
+      Vigo
+  GroundI18n_70_gl: 
+    id: Ground_70
+    culture: gl
+    name: >
+      Complexo Hospitalario Universidade de
+      Vigo
+  GroundI18n_71_es: 
+    id: Ground_71
+    culture: es
+    name: >
+      Vicerrectorado de Nuevas Tecnologías y
+      Calidad
+  GroundI18n_71_gl: 
+    id: Ground_71
+    culture: gl
+    name: >
+      Vicerreitoría de Novas Tecnoloxías e
+      Calidade
+
+
+
+RelationGround: 
+  RelationGround_1_31: 
+    one_id: Ground_1
+    two_id: Ground_31
+  RelationGround_2_31: 
+    one_id: Ground_2
+    two_id: Ground_31
+  RelationGround_3_31: 
+    one_id: Ground_3
+    two_id: Ground_31
+  RelationGround_4_29: 
+    one_id: Ground_4
+    two_id: Ground_29
+  RelationGround_5_29: 
+    one_id: Ground_5
+    two_id: Ground_29
+  RelationGround_6_28: 
+    one_id: Ground_6
+    two_id: Ground_28
+  RelationGround_7_29: 
+    one_id: Ground_7
+    two_id: Ground_29
+  RelationGround_8_29: 
+    one_id: Ground_8
+    two_id: Ground_29
+  RelationGround_9_28: 
+    one_id: Ground_9
+    two_id: Ground_28
+  RelationGround_10_31: 
+    one_id: Ground_10
+    two_id: Ground_31
+  RelationGround_11_30: 
+    one_id: Ground_11
+    two_id: Ground_30
+  RelationGround_12_30: 
+    one_id: Ground_12
+    two_id: Ground_30
+  RelationGround_13_30: 
+    one_id: Ground_13
+    two_id: Ground_30
+  RelationGround_14_30: 
+    one_id: Ground_14
+    two_id: Ground_30
+  RelationGround_15_32: 
+    one_id: Ground_15
+    two_id: Ground_32
+  RelationGround_16_30: 
+    one_id: Ground_16
+    two_id: Ground_30
+  RelationGround_17_32: 
+    one_id: Ground_17
+    two_id: Ground_32
+  RelationGround_18_32: 
+    one_id: Ground_18
+    two_id: Ground_32
+  RelationGround_19_30: 
+    one_id: Ground_19
+    two_id: Ground_30
+  RelationGround_20_28: 
+    one_id: Ground_20
+    two_id: Ground_28
+  RelationGround_21_32: 
+    one_id: Ground_21
+    two_id: Ground_32
+  RelationGround_22_30: 
+    one_id: Ground_22
+    two_id: Ground_30
+  RelationGround_23_32: 
+    one_id: Ground_23
+    two_id: Ground_32
+  RelationGround_24_32: 
+    one_id: Ground_24
+    two_id: Ground_32
+  RelationGround_28_6: 
+    one_id: Ground_28
+    two_id: Ground_6
+  RelationGround_28_9: 
+    one_id: Ground_28
+    two_id: Ground_9
+  RelationGround_28_20: 
+    one_id: Ground_28
+    two_id: Ground_20
+  RelationGround_29_4: 
+    one_id: Ground_29
+    two_id: Ground_4
+  RelationGround_29_5: 
+    one_id: Ground_29
+    two_id: Ground_5
+  RelationGround_29_7: 
+    one_id: Ground_29
+    two_id: Ground_7
+  RelationGround_29_8: 
+    one_id: Ground_29
+    two_id: Ground_8
+  RelationGround_30_11: 
+    one_id: Ground_30
+    two_id: Ground_11
+  RelationGround_30_12: 
+    one_id: Ground_30
+    two_id: Ground_12
+  RelationGround_30_13: 
+    one_id: Ground_30
+    two_id: Ground_13
+  RelationGround_30_14: 
+    one_id: Ground_30
+    two_id: Ground_14
+  RelationGround_30_16: 
+    one_id: Ground_30
+    two_id: Ground_16
+  RelationGround_30_19: 
+    one_id: Ground_30
+    two_id: Ground_19
+  RelationGround_30_22: 
+    one_id: Ground_30
+    two_id: Ground_22
+  RelationGround_31_1: 
+    one_id: Ground_31
+    two_id: Ground_1
+  RelationGround_31_2: 
+    one_id: Ground_31
+    two_id: Ground_2
+  RelationGround_31_3: 
+    one_id: Ground_31
+    two_id: Ground_3
+  RelationGround_31_10: 
+    one_id: Ground_31
+    two_id: Ground_10
+  RelationGround_32_15: 
+    one_id: Ground_32
+    two_id: Ground_15
+  RelationGround_32_17: 
+    one_id: Ground_32
+    two_id: Ground_17
+  RelationGround_32_18: 
+    one_id: Ground_32
+    two_id: Ground_18
+  RelationGround_32_21: 
+    one_id: Ground_32
+    two_id: Ground_21
+  RelationGround_32_23: 
+    one_id: Ground_32
+    two_id: Ground_23
+  RelationGround_32_24: 
+    one_id: Ground_32
+    two_id: Ground_24
+
+
+
+VirtualGround: 
+  VirtualGround_1: 
+    cod: Institucional
+    display: 1
+    rank: 1
+    img: /uploads/pic/ground/0.jpg
+    editorial1: 1
+    editorial2: 0
+    editorial3: 0
+    other: 0
+    ground_type_id: GroundType_3
+  VirtualGround_2: 
+    cod: Humanidades
+    display: 1
+    rank: 2
+    img: /uploads/pic/ground/1.jpg
+    editorial1: 0
+    editorial2: 0
+    editorial3: 0
+    other: 1
+    ground_type_id: GroundType_3
+  VirtualGround_3: 
+    cod: Ciencias
+    display: 1
+    rank: 3
+    img: /uploads/pic/ground/2.jpg
+    editorial1: 0
+    editorial2: 0
+    editorial3: 0
+    other: 1
+    ground_type_id: GroundType_3
+  VirtualGround_7: 
+    cod: Tecnología
+    display: 1
+    rank: 4
+    img: /uploads/pic/ground/3.jpg
+    editorial1: 0
+    editorial2: 0
+    editorial3: 0
+    other: 1
+    ground_type_id: GroundType_3
+  VirtualGround_8: 
+    cod: Juridico-Social
+    display: 1
+    rank: 5
+    img: /uploads/pic/ground/4.jpg
+    editorial1: 0
+    editorial2: 0
+    editorial3: 0
+    other: 1
+    ground_type_id: GroundType_3
+VirtualGroundI18n: 
+  VirtualGroundI18n_1_es: 
+    id: VirtualGround_1
+    culture: es
+    name: Institucional
+  VirtualGroundI18n_1_gl: 
+    id: VirtualGround_1
+    culture: gl
+    name: Institucional
+  VirtualGroundI18n_2_es: 
+    id: VirtualGround_2
+    culture: es
+    name: Humanidades
+  VirtualGroundI18n_2_gl: 
+    id: VirtualGround_2
+    culture: gl
+    name: Humanidades
+  VirtualGroundI18n_3_es: 
+    id: VirtualGround_3
+    culture: es
+    name: Ciencias
+  VirtualGroundI18n_3_gl: 
+    id: VirtualGround_3
+    culture: gl
+    name: Ciencias
+  VirtualGroundI18n_7_es: 
+    id: VirtualGround_7
+    culture: es
+    name: Tecnología
+  VirtualGroundI18n_7_gl: 
+    id: VirtualGround_7
+    culture: gl
+    name: Tecnología
+  VirtualGroundI18n_8_es: 
+    id: VirtualGround_8
+    culture: es
+    name: Juridico-Social
+  VirtualGroundI18n_8_gl: 
+    id: VirtualGround_8
+    culture: gl
+    name: Juridico-Social
+
+
+VirtualGroundRelation: 
+  VirtualGroundRelation_3_1: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_1
+    enable: 1
+  VirtualGroundRelation_3_2: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_2
+    enable: 1
+  VirtualGroundRelation_3_3: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_3
+    enable: 1
+  VirtualGroundRelation_3_4: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_4
+    enable: 1
+  VirtualGroundRelation_3_5: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_5
+    enable: 1
+  VirtualGroundRelation_1_26: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_26
+    enable: 1
+  VirtualGroundRelation_1_27: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_27
+    enable: 1
+  VirtualGroundRelation_3_6: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_6
+    enable: 1
+  VirtualGroundRelation_3_7: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_7
+    enable: 1
+  VirtualGroundRelation_3_8: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_8
+    enable: 1
+  VirtualGroundRelation_3_9: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_9
+    enable: 1
+  VirtualGroundRelation_7_10: 
+    virtual_ground_id: VirtualGround_7
+    ground_id: Ground_10
+    enable: 1
+  VirtualGroundRelation_3_11: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_11
+    enable: 1
+  VirtualGroundRelation_8_12: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_12
+    enable: 1
+  VirtualGroundRelation_8_13: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_13
+    enable: 1
+  VirtualGroundRelation_3_14: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_14
+    enable: 1
+  VirtualGroundRelation_2_15: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_15
+    enable: 1
+  VirtualGroundRelation_8_16: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_16
+    enable: 1
+  VirtualGroundRelation_2_17: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_17
+    enable: 1
+  VirtualGroundRelation_2_18: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_18
+    enable: 1
+  VirtualGroundRelation_8_19: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_19
+    enable: 1
+  VirtualGroundRelation_2_20: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_20
+    enable: 1
+  VirtualGroundRelation_2_21: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_21
+    enable: 1
+  VirtualGroundRelation_8_22: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_22
+    enable: 1
+  VirtualGroundRelation_2_23: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_23
+    enable: 1
+  VirtualGroundRelation_2_24: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_24
+    enable: 1
+  VirtualGroundRelation_1_25: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_25
+    enable: 1
+  VirtualGroundRelation_1_35: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_35
+    enable: 1
+  VirtualGroundRelation_1_36: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_36
+    enable: 1
+  VirtualGroundRelation_1_68: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_68
+    enable: 1
+  VirtualGroundRelation_1_69: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_69
+    enable: 1
+  VirtualGroundRelation_1_71: 
+    virtual_ground_id: VirtualGround_1
+    ground_id: Ground_71
+    enable: 1
+  VirtualGroundRelation_2_38: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_38
+    enable: 1
+  VirtualGroundRelation_2_39: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_39
+    enable: 1
+  VirtualGroundRelation_2_40: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_40
+    enable: 1
+  VirtualGroundRelation_2_61: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_61
+    enable: 1
+  VirtualGroundRelation_2_62: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_62
+    enable: 1
+  VirtualGroundRelation_2_63: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_63
+    enable: 1
+  VirtualGroundRelation_2_64: 
+    virtual_ground_id: VirtualGround_2
+    ground_id: Ground_64
+    enable: 1
+  VirtualGroundRelation_3_43: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_43
+    enable: 1
+  VirtualGroundRelation_3_44: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_44
+    enable: 1
+  VirtualGroundRelation_3_45: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_45
+    enable: 1
+  VirtualGroundRelation_3_42: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_42
+    enable: 1
+  VirtualGroundRelation_3_70: 
+    virtual_ground_id: VirtualGround_3
+    ground_id: Ground_70
+    enable: 1
+  VirtualGroundRelation_7_48: 
+    virtual_ground_id: VirtualGround_7
+    ground_id: Ground_48
+    enable: 1
+  VirtualGroundRelation_7_49: 
+    virtual_ground_id: VirtualGround_7
+    ground_id: Ground_49
+    enable: 1
+  VirtualGroundRelation_7_50: 
+    virtual_ground_id: VirtualGround_7
+    ground_id: Ground_50
+    enable: 1
+  VirtualGroundRelation_7_58: 
+    virtual_ground_id: VirtualGround_7
+    ground_id: Ground_58
+    enable: 1
+  VirtualGroundRelation_7_60: 
+    virtual_ground_id: VirtualGround_7
+    ground_id: Ground_60
+    enable: 1
+  VirtualGroundRelation_7_59: 
+    virtual_ground_id: VirtualGround_7
+    ground_id: Ground_59
+    enable: 1
+  VirtualGroundRelation_8_52: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_52
+    enable: 1
+  VirtualGroundRelation_8_53: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_53
+    enable: 1
+  VirtualGroundRelation_8_54: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_54
+    enable: 1
+  VirtualGroundRelation_8_55: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_55
+    enable: 1
+  VirtualGroundRelation_8_65: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_65
+    enable: 1
+  VirtualGroundRelation_8_66: 
+    virtual_ground_id: VirtualGround_8
+    ground_id: Ground_66
+    enable: 1

@@ -1,0 +1,158 @@
+
+          <Name>Fac. de Filología y Traducción</Name>
+          <Handle>2257652460</Handle>
+
+          <Name>Fac. de Ciencias de la Educación y del Deporte</Name>
+          <Handle>2257652467</Handle>
+
+          <Name>Fac. de Ciencias de la Educación</Name>
+          <Handle>2257439720</Handle>
+          <AllowSubscription />
+
+          <Name>Fac. de Historia</Name>
+          <Handle>2257685188</Handle>
+
+          <Name>E.U. de Fisoterapia</Name>
+          <Handle>2257734365</Handle>
+
+          <Name>E.U. Magisterio</Name>
+          <Handle>2257636116</Handle>
+
+          <Name>Fac. de Bellas Artes</Name>
+          <Handle>2257668709</Handle>
+
+          <Name>Others</Name>
+          <Handle>2257619739</Handle>
+
+
+          <Name>Fac. de Biología</Name>
+          <Handle>2257734376</Handle>
+
+          <Name>Fac. de Química</Name>
+          <Handle>2257358100</Handle>
+
+          <Name>Fac. de Ciencias del Mar</Name>
+          <Handle>2257603607</Handle>
+
+          <Name>Fac. de Ciencias</Name>
+          <Handle>2257668904</Handle>
+
+          <Name>Complejo Hospitalario Universidade de Vigo</Name>
+          <Handle>2257603616</Handle>
+
+          <Name>Others</Name>
+          <Handle>2257538171</Handle>
+
+
+
+
+          <Name>Fac. de CC. Económicas y Empresariales</Name>
+          <Handle>2193138585</Handle>
+ 
+          <Name>Fac. de Ciencias Empresariales y Tursmo</Name>
+          <Handle>2257358137</Handle>
+ 
+          <Name>Fac. de CC. Sociales y de la Comunicación</Name>
+          <Handle>2257619943</Handle>
+ 
+          <Name>Fac. de CC. Jurídicas y del Trabajo</Name>
+          <Handle>2257636343</Handle>
+ 
+          <Name>Fac. de Derecho</Name>
+          <Handle>2257358151</Handle>
+ 
+          <Name>E.U. de Estudios Empresariales</Name>
+          <Handle>2257423648</Handle>
+ 
+          <Name>Others</Name>
+          <Handle>2257538206</Handle>
+ 
+
+
+
+          <Name>E.T.S. de Ingenieros de Telecomunicaciones</Name>
+          <Handle>2257407226</Handle>
+
+          <Name>E.T.S. de Ingenieros Industriales</Name>
+          <Handle>2257472770</Handle>
+
+          <Name>E.S. de Ingeniería Informática</Name>
+          <Handle>2257390917</Handle>
+
+          <Name>E.T.S. de Ingeniería de Minas</Name>
+          <Handle>2257603683</Handle>
+
+          <Name>E.U. de Ingeniería Técnica Industrial</Name>
+          <Handle>2257440015</Handle>
+
+          <Name>E.U. de Ingeniería Técnica Forestal</Name>
+          <Handle>2257701794</Handle>
+
+          <Name>Others</Name>
+          <Handle>2257374551</Handle>
+
+
+          <Name>General</Name>
+          <Handle>2257620027</Handle>
+
+          <Name>Vicerrectorado de Formación e Innovación Educativa</Name>
+          <Handle>2257620031</Handle>
+
+          <Name>Vicerrectorado de Titulaciones y Convergencia Europea</Name>
+          <Handle>2257276258</Handle>
+
+          <Name>Vicerrectorado de Relaciones Institucionales</Name>
+          <Handle>2257571035</Handle>
+
+          <Name>Vicerrectorado de Nuevas Tecnologías y Calidad</Name>
+          <Handle>2257374600</Handle>
+
+          <Name>Vicerrectorado de Extensión Cultural y Estudiantes</Name>
+          <Handle>2257341897</Handle>
+
+          <Name>Others</Name>
+          <Handle>2257538306</Handle>
+
+
+
+--------------------------------
+
+
+
+
+
+  T3-1 Área Humanística - Fac. de Filoloxía e Traducción
+  T3-2 Área Humanística - Facultad de Ciencias de la Educación y del Deporte (Po)
+  T3-3 Área Humanística - Fac. de Ciencias da Educación (Ou)
+  T3-4 Área Humanística - Fac. de Historia
+  T3-5 Área Humanística - E.U. de Fisioterapia
+  T3-6 Área Humanística - E.U. Magisterio
+  T3-7 Área Humanística - Fac. de Belas Artes
+  T3 Área Humanística
+  T4-1 Área Científica - Fac. de Bioloxía
+  T4-2 Área Científica - Fac. de Química
+  T4-3 Área Científica - Fac. de Ciencias do Mar
+  T4-4 Área Científica - Fac. de Ciencias (Ourense)
+  T4-5 Área Científica - Complejo Hospitalario Universidade de Vigo
+  T4 Área Científica
+  T5-1 Área Tecnológica - E.T.S. de Enxeñeiros de Telecomunicación
+  T5-2 Área Tecnológica - E.T.S. de Enxeñeiros Industriais
+  T5-3 Área Tecnológica - E.S. de Enxeñería Informática
+  T5-4 Área Tecnológica - E.T.S. de Enxeñería de Minas
+  T5-5 Área Tecnológica - E.U. de Enxeñería Técnica Industrial
+  T5-6 Área Tecnológica - E.U. de Enxeñería Técnica Forestal
+  T5 Área Tecnológica
+  T6-1 Área Jurídico-Social - Fac. de CC. Económicas e Empresariais
+  T6-2 Área Jurídico-Social - Fac. de Ciencias Empresariais e Turismo
+  T6-3 Área Jurídico-Social - Fac. de CC. Sociais e da Comunicación
+  T6-4 Área Jurídico-Social - Fac. de CC. Xurídicas e do Traballo
+  T6-5 Área Jurídico-Social - Fac. de Dereito
+  T6-6 Área Jurídico-Social - E.U. de Estudios Empresariais
+  T6 Área Jurídico-Social
+  T2-1 Institucionales - Generales
+  T2-2 Institucionales - Vicerrectorado de Formación e Innovación Educativa
+  T2-3 Institucionales - Vicerreitorado de Titulaciones y Convergencia Europea
+  T2-4 Institucionales - Vicerrectorado de Relaciones Institucionales
+  T2-5 Institucionales - Vicerrectorado de Nuevas Tecnologías y Calidad
+  T2-6 Institucionales - Vicerrectorado de Extensión Cultural y Estudiantes
+  T2 Institucionales

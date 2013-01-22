@@ -1,0 +1,1212 @@
+Role: 
+  Role_1: 
+    cod: actor
+    rank: 1
+    xml: actor
+    display: 1
+  Role_2: 
+    cod: org
+    rank: 2
+    xml: organizador
+    display: 0
+  Role_3: 
+    cod: postp
+    rank: 3
+    xml: postpro
+    display: 0
+  Role_4: 
+    cod: rea
+    rank: 4
+    xml: realizador
+    display: 0
+  Role_5: 
+    cod: pub
+    rank: 5
+    xml: Publicador
+    display: 0
+  Role_6: 
+    cod: pre
+    rank: 6
+    xml: presentador
+    display: 1
+RoleI18n: 
+  RoleI18n_1_gl: 
+    id: Role_1
+    culture: gl
+    name: Actor
+    text: 
+  RoleI18n_1_es: 
+    id: Role_1
+    culture: es
+    name: Actor
+    text: 
+  RoleI18n_1_en: 
+    id: Role_1
+    culture: en
+    name: Actor
+    text: 
+  RoleI18n_2_gl: 
+    id: Role_2
+    culture: gl
+    name: Organizador
+    text: 
+  RoleI18n_2_es: 
+    id: Role_2
+    culture: es
+    name: Organizador
+    text: 
+  RoleI18n_2_en: 
+    id: Role_2
+    culture: en
+    name: Organizador
+    text: 
+  RoleI18n_3_gl: 
+    id: Role_3
+    culture: gl
+    name: Postproducion
+    text: 
+  RoleI18n_3_es: 
+    id: Role_3
+    culture: es
+    name: Postproducion
+    text: 
+  RoleI18n_3_en: 
+    id: Role_3
+    culture: en
+    name: Postproducter
+    text: 
+  RoleI18n_4_gl: 
+    id: Role_4
+    culture: gl
+    name: Realizador
+    text: 
+  RoleI18n_4_es: 
+    id: Role_4
+    culture: es
+    name: Realizador
+    text: 
+  RoleI18n_4_en: 
+    id: Role_4
+    culture: en
+    name: Realizator
+    text: 
+  RoleI18n_5_gl: 
+    id: Role_5
+    culture: gl
+    name: Publicador
+    text: 
+  RoleI18n_5_es: 
+    id: Role_5
+    culture: es
+    name: Publicador
+    text: 
+  RoleI18n_5_en: 
+    id: Role_5
+    culture: en
+    name: Publicador
+    text: 
+  RoleI18n_6_gl: 
+    id: Role_6
+    culture: gl
+    name: Presentador
+    text: Presenta:
+  RoleI18n_6_es: 
+    id: Role_6
+    culture: es
+    name: Presentador
+    text: Presenta:
+  RoleI18n_6_en: 
+    id: Role_6
+    culture: en
+    name: Presentador
+    text: Presenta:
+
+Genre:
+  1:
+    id: 1
+    cod: 1
+    default_sel: 1
+  2:
+    id: 2
+    cod: 2
+    default_sel: 0
+  3:
+    id: 3
+    cod: 3
+    default_sel: 0
+  4:
+    id: 4
+    cod: 4
+    default_sel: 0
+  5:
+    id: 5
+    cod: 5
+    default_sel: 0
+  6:
+    id: 6
+    cod: 6
+    default_sel: 0
+  7:
+    id: 7
+    cod: 7
+    default_sel: 0
+  8:
+    id: 8
+    cod: 8
+    default_sel: 0
+  9:
+    id: 9
+    cod: 9
+    default_sel: 0
+  10:
+    id: 10
+    cod: 10
+    default_sel: 0
+  11:
+    id: 11
+    cod: 11
+    default_sel: 0
+  12:
+    id: 12
+    cod: 12
+    default_sel: 0
+  13:
+    id: 13
+    cod: 13
+    default_sel: 0
+  14:
+    id: 14
+    cod: 14
+    default_sel: 0
+  15:
+    id: 15
+    cod: 15
+    default_sel: 0
+  16:
+    id: 16
+    cod: 16
+    default_sel: 0
+  17:
+    id: 17
+    cod: 117
+    default_sel: 0
+  18:
+    id: 18
+    cod: 18 
+    default_sel: 0
+  19:
+    id: 19
+    cod: 19
+    default_sel: 0
+  20:
+    id: 20
+    cod: 20
+    default_sel: 0
+  21:
+    id: 21
+    cod: 21
+    default_sel: 0
+  22:
+    id: 22
+    cod: 22
+    default_sel: 0
+
+GenreI18n:
+  1_gl:
+    id: 1
+    culture: gl
+    name: Conferencia
+  1_es:
+    id: 1
+    culture: es
+    name: Conferencia
+  1_en:
+    id: 1
+    culture: en
+    name: Conference
+  2_gl:
+    id: 2
+    culture: gl
+    name: Documental
+  2_es:
+    id: 2
+    culture: es
+    name: Documental
+  2_en:
+    id: 2
+    culture: en
+    name: Documentary
+  3_gl:
+    id: 3
+    culture: gl
+    name: Coloquio
+  3_es:
+    id: 3
+    culture: es
+    name: Coloquio
+  3_en:
+    id: 3
+    culture: en
+    name: Conversation
+  4_gl:
+    id: 4
+    culture: gl
+    name: Curso
+  4_es:
+    id: 4
+    culture: es
+    name: Curso
+  4_en:
+    id: 4
+    culture: en
+    name: Course
+  5_gl:
+    id: 5
+    culture: gl
+    name: Institucional
+  5_es:
+    id: 5
+    culture: es
+    name: Institucional
+  5_en:
+    id: 5
+    culture: en
+    name: Institutional
+  6_gl:
+    id: 6
+    culture: gl
+    name: Ficción
+  6_es:
+    id: 6
+    culture: es
+    name: Ficción
+  6_en:
+    id: 6
+    culture: en
+    name: Fiction
+  7_gl:
+    id: 7
+    culture: gl
+    name: Mesa redonda
+  7_es:
+    id: 7
+    culture: es
+    name: Mesa redonda
+  7_en:
+    id: 7
+    culture: en
+    name: Round table
+  8_gl:
+    id: 8
+    culture: gl
+    name: Exposición de traballos
+  8_es:
+    id: 8
+    culture: es
+    name: Exposición de trabajos
+  8_en:
+    id: 8
+    culture: en
+    name: Poject exposition
+  9_gl:
+    id: 9
+    culture: gl
+    name: Apertura
+  9_es:
+    id: 9
+    culture: es
+    name: Apertura
+  9_en:
+    id: 9
+    culture: en
+    name: Opening
+  10_gl:
+    id: 10
+    culture: gl
+    name: Clausura
+  10_es:
+    id: 10
+    culture: es
+    name: Clausura
+  10_en:
+    id: 10
+    culture: en
+    name: Closing
+  11_gl:
+    id: 11
+    culture: gl
+    name: Conferencia inaugural
+  11_es:
+    id: 11
+    culture: es
+    name: Conferencia inaugural
+  11_en:
+    id: 11
+    culture: en
+    name: Opening ceremony
+  12_gl:
+    id: 12
+    culture: gl
+    name: Conferencia de clausura
+  12_es:
+    id: 12
+    culture: es
+    name: Conferencia de clausura
+  12_en:
+    id: 12
+    culture: en
+    name: Closing ceremony
+  13_gl:
+    id: 13
+    culture: gl
+    name: Preguntas e respostas
+  13_es:
+    id: 13
+    culture: es
+    name: Preguntas y respuestas
+  13_en:
+    id: 13
+    culture: en
+    name: Questions and answer
+  14_gl:
+    id: 14
+    culture: gl
+    name: Conferencia(2 parte)
+  14_es:
+    id: 14
+    culture: es
+    name: Conferencia(2 parte)
+  14_en:
+    id: 14
+    culture: en
+    name: Conference(part 2)
+  15_gl:
+    id: 15
+    culture: gl
+    name: Intervención
+  15_es:
+    id: 15
+    culture: es
+    name: Intervención
+  15_en:
+    id: 15
+    culture: en
+    name: Intervention
+  16_gl:
+    id: 16
+    culture: gl
+    name: Presentación
+  16_es:
+    id: 16
+    culture: es
+    name: Presentación
+  16_en:
+    id: 16
+    culture: en
+    name: Presentation
+  17_gl:
+    id: 17
+    culture: gl
+    name: Demostración
+  17_es:
+    id: 17
+    culture: es
+    name: Demostración
+  17_en:
+    id: 17
+    culture: en
+    name: Demostration
+  18_gl:
+    id: 18
+    culture: gl
+    name: Entrevista
+  18_es:
+    id: 18
+    culture: es
+    name: Entrevista
+  18_en:
+    id: 18
+    culture: en
+    name: Interview
+  19_gl:
+    id: 19
+    culture: gl
+    name: Vídeo promocional
+  19_es:
+    id: 19
+    culture: es
+    name: Vídeo promocional
+  19_en:
+    id: 19
+    culture: en
+    name: promotion video
+  20_gl:
+    id: 20
+    culture: gl
+    name: Videoconferencia
+  20_es:
+    id: 20
+    culture: es
+    name: Videoconferencia
+  20_en:
+    id: 20
+    culture: en
+    name: Videoconference
+  21_gl:
+    id: 21
+    culture: gl
+    name: Rolda de prensa
+  21_es:
+    id: 21
+    culture: es
+    name: Rueda de prensa
+  21_en:
+    id: 21
+    culture: en
+    name: News conference
+  22_gl:
+    id: 22
+    culture: gl
+    name: Matterhorn
+  22_es:
+    id: 22
+    culture: es
+    name: Matterhorn
+  22_en:
+    id: 22
+    culture: en
+    name: Matterhorn
+
+
+
+
+MatType:
+  xxx:
+    id: xxx
+    type: xxx
+    default_sel: 0
+    mime_type: application/octet-stream
+  zip:
+    id: zip
+    type: zip
+    default_sel: 0
+    mime_type: applicaion/zip
+  tgz:
+    id: tgz
+    type: tgz
+    default_sel: 0
+    mime_type: application/x-compressed
+  tar:
+    id: tar
+    type: tar
+    default_sel: 0
+    mime_type: application/x-tar
+  swf:
+    id: swf
+    type: swf
+    default_sel: 0
+    mime_type: application/x-shockwave-flash
+  rar:
+    id: rar
+    type: rar
+    default_sel: 0
+    mime_type:  application/x-compressed
+  ppt:
+    id: ppt
+    type: ppt
+    default_sel: 0
+    mime_type: application/vnd.ms-powerpoint
+  pps:
+    id: pps
+    type: pps
+    default_sel: 0
+    mime_type: application/vnd.ms-powerpoint
+  pdf:
+    id: pdf
+    type: pdf
+    default_sel: 1
+    mime_type: application/pdf
+  mp3:
+    id: mp3
+    type: mp3
+    default_sel: 0
+    mime_type: applicaion/mp3
+  gz:
+    id: gz
+    type: gz
+    default_sel: 0
+    mime_type: x-gzip
+  doc:
+    id: doc
+    type: doc
+    default_sel: 0
+    mime_type: applicaion/msword
+MatTypeI18n:
+  xxx_gl:
+    id: xxx
+    culture: gl
+    name:
+  xxx_es:
+    id: xxx
+    culture: es
+    name:
+  xxx_en:
+    id: xxx
+    culture: en
+    name:
+  zip_gl:
+    id: zip
+    culture: gl
+    name: Archivo comprimido
+  zip_es:
+    id: zip
+    culture: es
+    name: Archivo comprimido
+  zip_en:
+    id: zip
+    culture: en
+    name: Compress file
+  tgz_gl:
+    id: tgz
+    culture: gl
+    name: Archivo comprimido
+  tgz_es:
+    id: tgz
+    culture: es
+    name: Archivo comprimido
+  tgz_en:
+    id: tgz
+    culture: en
+    name: Compress file
+  tar_gl:
+    id: tar
+    culture: gl
+    name: Archivo empaquetado
+  tar_es:
+    id: tar
+    culture: es
+    name: Archivo empaquetado
+  tar_en:
+    id: tar
+    culture: en
+    name: Backup file
+  swf_gl:
+    id: swf
+    culture: gl
+    name: Archivo Flash
+  swf_es:
+    id: swf
+    culture: es
+    name: Archivo Flash
+  swf_en:
+    id: swf
+    culture: en
+    name: Flash file
+  rar_gl:
+    id: rar
+    culture: gl
+    name: Archivo comprimido
+  rar_es:
+    id: rar
+    culture: es
+    name: Archivo comprimido
+  rar_en:
+    id: rar
+    culture: en
+    name: Compress file
+  ppt_gl:
+    id: ppt
+    culture: gl
+    name: Archivo Power Point
+  ppt_es:
+    id: ppt
+    culture: es
+    name: Archivo Power Point
+  ppt_en:
+    id: ppt
+    culture: en
+    name: Power Point file
+  pps_gl:
+    id: pps
+    culture: gl
+    name: Archivo Power Point
+  pps_es:
+    id: pps
+    culture: es
+    name: Archivo Power Point
+  pps_en:
+    id: pps
+    culture: en
+    name: Power Point file
+  pdf_gl:
+    id: pdf
+    culture: gl
+    name: Archivo PDF
+  pdf_es:
+    id: pdf
+    culture: es
+    name: Archivo PDF
+  pdf_en:
+    id: pdf
+    culture: en
+    name: PDF file
+  mp3_gl:
+    id: mp3
+    culture: gl
+    name: Archivo MP3
+  mp3_es:
+    id: mp3
+    culture: es
+    name: Archivo MP3
+  mp3_en:
+    id: mp3
+    culture: en
+    name: MP3 file
+  gz_gl:
+    id: gz
+    culture: gl
+    name: Archivo comprimido
+  gz_es:
+    id: gz
+    culture: es
+    name: Archivo comprimido
+  gz_en:
+    id: gz
+    culture: en
+    name: Compress file
+  doc_gl:
+    id: doc
+    culture: gl
+    name: Archivo Word
+  doc_es:
+    id: doc
+    culture: es
+    name: Archivo Word
+  doc_en:
+    id: doc
+    culture: en
+    name: Word file
+
+Resolution:
+  1:
+    id: 1
+    hor: 320
+    ver: 230
+    default_sel: 0
+  2:
+    id: 2
+    hor: 480
+    ver: 360
+    default_sel: 0
+  3:
+    id: 3
+    hor: 720
+    ver: 576
+    default_sel: 1
+  4:
+    id: 4
+    hor: 1280
+    ver: 768
+    default_sel: 0
+  5:
+    id: 5
+    hor: 1280
+    ver: 1024
+    default_sel: 0
+
+
+
+MimeType:
+  none:
+    id: none
+    name: none
+    type:
+    default_sel: 0
+  asx:
+    id: asx
+    name: asx
+    type: video/x-ms-asf
+    default_sel: 1
+  vlc:
+    id: vlc
+    name: vlc
+    type: application/x-vlc-plugin
+    default_sel: 0
+  quicktime:
+    id: quicktime
+    name: quicktime
+    type: video/quicktime
+    default_sel: 0
+
+
+
+Codec:
+  divx:
+    id: divx
+    name: divx
+    default_sel: 0
+  xvid:
+    id: xvid
+    name: xvid
+    default_sel: 0
+  mpeg-1:
+    id: mpeg-1
+    name: mpeg-1
+    default_sel: 0
+  mpeg-2:
+    id: mpeg-2
+    name: mpeg-2
+    default_sel: 0
+  mpeg-4:
+    id: mpeg-4
+    name: mpeg-4
+    default_sel: 0
+  wmv9:
+    id: wmv9
+    name: wmv9
+    default_sel: 1
+  wma:
+    id: wma
+    name: wma
+    default_sel: 0
+  wmvHD:
+    id: wmvHD
+    name: wmvHD
+    default_sel: 0
+
+Format:
+  wmv:
+    id: wmv
+    name: wmv
+    default_sel: 1
+  wma:
+    id: wma
+    name: wma
+    default_sel: 0
+  avi:
+    id: avi
+    name: avi
+    default_sel: 0
+  mpeg:
+    id: mpeg
+    name: mpeg
+    default_sel: 0
+  swf:
+    id: swf
+    name: swf
+    default_sel: 0
+  asf:
+    id: asf
+    name: asf
+    default_sel: 0
+
+Language:
+  ch:
+    id: ch
+    cod: CH
+    default_sel: 0
+  de:
+    id: de
+    cod: DE
+    default_sel: 0
+  en:
+    id: en
+    cod: EN
+    default_sel: 0
+  es:
+    id: es
+    cod: ES
+    default_sel: 1
+  fr:
+    id: fr
+    cod: FR
+    default_sel: 0
+  gl:
+    id: gl
+    cod: GL
+    default_sel: 0
+  it:
+    id: it
+    cod: IT
+    default_sel: 0
+  pl:
+    id: pl
+    cod: PL
+    default_sel: 0
+  pt:
+    id: pt
+    cod: PT
+    default_sel: 0
+  tr:
+    id: tr
+    cod: TR
+    default_sel: 0
+  tr:
+    id: tr
+    cod: TR
+    default_sel: 0
+  ca:
+    id: ca
+    cod: CA
+    default_sel: 0
+  eu:
+    id: eu
+    cod: EU
+    default_sel: 0
+LanguageI18n:
+  ch_gl:
+    id: ch
+    culture: gl
+    name: Chino
+  ch_es:
+    id: ch
+    culture: es
+    name: Chino
+  ch_en:
+    id: ch
+    culture: en
+    name: Chinese
+  de_gl:
+    id: de
+    culture: gl
+    name: Alemán
+  de_es:
+    id: de
+    culture: es
+    name: Alemán
+  de_en:
+    id: de
+    culture: en
+    name: German
+  en_gl:
+    id: en
+    culture: gl
+    name: Inglés
+  en_es:
+    id: en
+    culture: es
+    name: Inglés
+  en_en:
+    id: en
+    culture: en
+    name: English
+  es_gl:
+    id: es
+    culture: gl
+    name: Castelán
+  es_es:
+    id: es
+    culture: es
+    name: Castellano
+  es_en:
+    id: es
+    culture: en
+    name: Spanish
+  fr_gl:
+    id: fr
+    culture: gl
+    name: Frances
+  fr_es:
+    id: fr
+    culture: es
+    name: Frances
+  fr_en:
+    id: fr
+    culture: en
+    name: French
+  gl_gl:
+    id: gl
+    culture: gl
+    name: Galego
+  gl_es:
+    id: gl
+    culture: es
+    name: Gallego
+  gl_en:
+    id: gl
+    culture: en
+    name: Galician
+  it_gl:
+    id: it
+    culture: gl
+    name: Italiano
+  it_es:
+    id: it
+    culture: es
+    name: Italiano
+  it_en:
+    id: it
+    culture: en
+    name: Italian
+  pl_gl:
+    id: pl
+    culture: gl
+    name: Polaco
+  pl_es:
+    id: pl
+    culture: es
+    name: Polaco
+  pl_en:
+    id: pl
+    culture: en
+    name: Polish
+  pt_gl:
+    id: pt
+    culture: gl
+    name: Portugués
+  pt_es:
+    id: pt
+    culture: es
+    name: Portugués
+  pt_en:
+    id: pt
+    culture: en
+    name: Portuguese
+  tr_gl:
+    id: tr
+    culture: gl
+    name: Turco
+  tr_es:
+    id: tr
+    culture: es
+    name: Turco
+  tr_en:
+    id: tr
+    culture: en
+    name: Turkish
+  ca_ca:
+    id: ca
+    culture: gl
+    name: Català
+  ca_es:
+    id: ca
+    culture: es
+    name: Catalán
+  ca_en:
+    id: ca
+    culture: en
+    name: Catalan
+  eu_eu:
+    id: eu
+    culture: gl
+    name: Euskara
+  eu_es:
+    id: eu
+    culture: es
+    name: Euskera
+  eu_en:
+    id: eu
+    culture: en
+    name: Basque
+
+SerialType:
+  varios:
+    id: varios
+    cod: va
+    default_sel: 1
+  generico:
+    id: generico
+    cod: ge
+    default_sel: 0
+  humanistico:
+    id: humanistico
+    cod: hu
+    default_sel: 0
+  cientifico:
+    id: cientifico
+    cod: ci
+    default_sel: 0
+  tecnologico:
+    id: tecnologico
+    cod: te
+    default_sel: 0
+  juridico-social:
+    id: juridico-social
+    cod: js
+    default_sel: 0
+  salud:
+    id: salud
+    cod: sa
+    default_sel: 0
+SerialTypeI18n:
+  varios_gl:
+    id: varios
+    culture: gl
+    name: Varios
+    description:
+  varios_es:
+    id: varios
+    culture: es
+    name: Varios
+    description:
+  varios_en:
+    id: varios
+    culture: en
+    name: Other
+    description:
+  generico_gl:
+    id: generico
+    culture: gl
+    name: Xenérico
+    description:
+  generico_es:
+    id: generico
+    culture: es
+    name: Genérico
+    description:
+  generico_en:
+    id: generico
+    culture: en
+    name: Generic
+    description:
+  humanistico_gl:
+    id: humanistico
+    culture: gl
+    name: Área Humanística
+    description:
+  humanistico_es:
+    id: humanistico
+    culture: es
+    name: Área Humanística
+    description:
+  humanistico_en:
+    id: humanistico
+    culture: en
+    name: Humanities
+    description:
+  cientifico_gl:
+    id: cientifico
+    culture: gl
+    name: Área Científica
+    description:
+  cientifico_es:
+    id: cientifico
+    culture: es
+    name: Área Científica
+    description:
+  cientifico_en:
+    id: cientifico
+    culture: en
+    name: Experimental Sciences
+    description:
+  tecnologico_gl:
+    id: tecnologico
+    culture: gl
+    name: Área Tecnolóxica
+    description:
+  tecnologico_es:
+    id: tecnologico
+    culture: es
+    name: Área Tecnológica
+    description:
+  tecnologico_en:
+    id: tecnologico
+    culture: en
+    name: Technical Sciences
+    description:
+  juridico-social_gl:
+    id: juridico-social
+    culture: gl
+    name: Área Xurídico-Social
+    description:
+  juridico-social_es:
+    id: juridico-social
+    culture: es
+    name: Área Jurídico-Social
+    description:
+  juridico-social_en:
+    id:  juridico-social
+    culture: en
+    name: Social and Legal Science
+    description:
+  salud_gl:
+    id: salud
+    culture: gl
+    name: Área de Saúde
+    description:
+  salud_es:
+    id: salud
+    culture: es
+    name: Área de Salud
+    description:
+  salud_en:
+    id:  salud
+    culture: en
+    name: Health Sciences
+    description:
+
+
+SerialTemplate:
+  date:
+    id: date
+    name: date
+  date_all:
+    id: date_all
+    name: date_all
+  date_subserial:
+    id: date_subserial
+    name: date_subserial
+  subserial:
+    id: subserial
+    name: subserial
+
+
+User:
+  default:
+    id: default
+    login: prueba
+    name: prueba
+    passwd: 123456
+    email: 
+    root: 1
+
+
+
+Place:
+  other:
+    id: other
+    coorgeo: -
+    cod: other
+PlaceI18n:
+  other_gl:
+    id: other
+    culture : gl
+    name: Outros
+    address: Outros
+  other_es:
+    id: other
+    culture : es
+    name: Otros
+    address: Otros
+  other_en:
+    id: other
+    culture : en
+    name: Other
+    address: Other
+
+
+Precinct:
+  otherP:
+    id: otherP
+    place_id: other
+    default_sel: 1
+PrecinctI18n:
+  otherP_gl:
+    id: otherP
+    culture : gl
+    name: outros
+    equipment:
+    comment: Recinto por defecto
+  otherP_es:
+    id: otherP
+    culture : es
+    name: otros
+    equipment: 
+    comment: Recincto por defecto
+  otherP_en:
+    id: otherP
+    culture : en
+    name: Other
+    equipment:
+    comment: Default precinct
+

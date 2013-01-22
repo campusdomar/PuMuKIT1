@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * video actions.
+ *
+ * @package    fin
+ * @subpackage video
+ * @author     Your name here
+ * @version    SVN: $Id: actions.class.php 2692 2006-11-15 21:03:55Z fabien $
+ */
+class videoActions extends sfActions
+{
+  /**
+   * Executes index action
+   *
+   */
+  public function executeIndex()
+  {
+    $this->file = FilePeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->file);
+
+    $this->file->incNumView();
+      
+    //Actulizar log
+    LogFilePeer::act( $this->file->getId(), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], $this->getRequest()->getUri() );
+
+    switch ($this->file->getMimeTypeId()) {
+    case 2:   //ASX
+      $this->getResponse()->setHttpHeader("Content-Type",  $this->file->getMimeType()->getType());
+      $this->setLayout(false);
+      $this->setTemplate('asx');
+      break;
+    default:
+      $this->redirect($this->file->getUrl());
+      break;
+    }
+
+  }
+}

@@ -1,0 +1,535 @@
+START
+
+
+ERROR 1
+ID:	19
+MM:	19
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ISIE/Francisco Ibañez.wmv
+--------------------------------------------
+
+
+ERROR 2
+ID:	47
+MM:	47
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ISIE/Francisco Ibañez_2.wmv
+--------------------------------------------
+
+
+ERROR 3
+ID:	630
+MM:	577
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/diseño_061128_01.wmv
+--------------------------------------------
+
+
+ERROR 4
+ID:	643
+MM:	585
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/diseño_061128_02.wmv
+--------------------------------------------
+
+
+ERROR 5
+ID:	644
+MM:	588
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/diseño_061128_03.wmv
+--------------------------------------------
+
+
+ERROR 6
+ID:	650
+MM:	597
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/EUETI/diseño_061129_01.wmv
+--------------------------------------------
+
+
+ERROR 7
+ID:	793
+MM:	731
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/EntrevistaJareño.wmv
+--------------------------------------------
+
+
+ERROR 8
+ID:	804
+MM:	739
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/EntrevistaParajó.wmv
+--------------------------------------------
+
+
+ERROR 9
+ID:	820
+MM:	756
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/EntrevistaFedericoOrdoñez.wmv
+--------------------------------------------
+
+
+ERROR 10
+ID:	1159
+MM:	1069
+FILE:	
+URL:	mms://videoserver.uvigo.es//VoDprivado/RRHH/rrhh_060327-1.wmv
+--------------------------------------------
+
+
+ERROR 11
+ID:	1281
+MM:	1182
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/diseño_061128_05.wmv
+--------------------------------------------
+
+
+ERROR 12
+ID:	1505
+MM:	1373
+FILE:	
+URL:	mms://videoserver.uvigo.es//VoD/Traduccion e politica editorial/presentacion.wmv
+--------------------------------------------
+
+
+ERROR 13
+ID:	1506
+MM:	1370
+FILE:	
+URL:	mms://videoserver.uvigo.es//VoD/Traduccion e politica editorial/Benxamin.wmv
+--------------------------------------------
+
+
+ERROR 14
+ID:	1507
+MM:	1374
+FILE:	
+URL:	mms://videoserver.uvigo.es//VoD/Traduccion e politica editorial/Xesus.wmv
+--------------------------------------------
+
+
+ERROR 15
+ID:	1508
+MM:	1371
+FILE:	
+URL:	mms://videoserver.uvigo.es//VoD/Traduccion e politica editorial/Bragado.wmv
+--------------------------------------------
+
+
+ERROR 16
+ID:	1509
+MM:	1372
+FILE:	
+URL:	mms://videoserver.uvigo.es//VoD/Traduccion e politica editorial/Carlos Lema.wmv
+--------------------------------------------
+
+
+ERROR 17
+ID:	1510
+MM:	1375
+FILE:	
+URL:	mms://videoserver.uvigo.es//VoD/Traduccion e politica editorial/Debate.wmv
+--------------------------------------------
+
+
+ERROR 18
+ID:	647
+MM:	590
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/ETSEI/diseño_061128_04.wmv
+--------------------------------------------
+
+
+ERROR 19
+ID:	1575
+MM:	1444
+FILE:	
+URL:	mms://videoserver.uvigo.es/DOCENCIA/MERCEDES_Historia/Historia de la comunicacion_2.wmv
+--------------------------------------------
+
+
+ERROR 20
+ID:	1576
+MM:	1445
+FILE:	
+URL:	mms://videoserver.uvigo.es/DOCENCIA/MERCEDES_Historia/quien mato a liberty Wallace_1.wmv
+--------------------------------------------
+
+
+ERROR 21
+ID:	1574
+MM:	1443
+FILE:	
+URL:	mms://videoserver.uvigo.es/DOCENCIA/MERCEDES_Historia/Historia de la comunicacion_1.wmv
+--------------------------------------------
+
+
+ERROR 22
+ID:	2099
+MM:	1952
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoD/universiada_2013/presentacion_rector universidad de vigo.wmv
+--------------------------------------------
+
+
+ERROR 23
+ID:	2830
+MM:	2523
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/realidad_y_retos_preguntas.wmv
+--------------------------------------------
+
+
+ERROR 24
+ID:	2831
+MM:	2515
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/El_aprendizaje.wmv
+--------------------------------------------
+
+
+ERROR 25
+ID:	2832
+MM:	2524
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/El_aprendizaje_preguntas.wmv
+--------------------------------------------
+
+
+ERROR 26
+ID:	2833
+MM:	2518
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/implicaciones_en_el_trabajo.wmv
+--------------------------------------------
+
+
+ERROR 27
+ID:	2834
+MM:	2525
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/implicaciones_trabajo_preguntas.wmv
+--------------------------------------------
+
+
+ERROR 28
+ID:	2836
+MM:	2526
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/competencias_profesionales_preguntas.wmv
+--------------------------------------------
+
+
+ERROR 29
+ID:	2837
+MM:	2520
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/Mesa_redonda_luis.wmv
+--------------------------------------------
+
+
+ERROR 30
+ID:	2838
+MM:	2534
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/Mesa_redonda_victoria.wmv
+--------------------------------------------
+
+
+ERROR 31
+ID:	2839
+MM:	2535
+FILE:	
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/Mesa_redonda_richard.wmv
+--------------------------------------------
+
+
+ERROR 32
+ID:	2844
+MM:	2514
+FILE:	/mnt/vodhosting/uvigotv/080829_Encuentros_sobre_calidad_en_la_educaci_n_superior_2008_361/080714_Realidad_y_retos_de_la_evaluaci_n_del_aprendizaje_en_la_Universidad_ES(wmv)_28.wmv
+URL:	mms://videoserver.uvigo.es/vod/080714_calidad_educacion_superior/080714_Realidad_y_retos_de_la_evaluaci_n_del_aprendizaje_en_la_Universidad_ES(wmv)_28.wmv
+--------------------------------------------
+
+
+ERROR 33
+ID:	2885
+MM:	2578
+FILE:	
+URL:	mms://videoserver.uvigo.es/VoDhosting//uvigotv/080916_sin_compresion__avi_380/080915_promocinal_espanol_ES(wmv)_71.wmv
+--------------------------------------------
+
+
+ERROR 34
+ID:	2912
+MM:	2592
+FILE:	/mnt/vodhosting/uvigotv/080925_080919_Colloidal_384/080919_Colloidal_ES(master_mpeg4)_94.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 35
+ID:	2913
+MM:	2593
+FILE:	/mnt/vodhosting/uvigotv/080925_Colloidal_Molecules_384/080919_Turno_de_preguntas_ES(master_mpeg4)_98.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 36
+ID:	2973
+MM:	2628
+FILE:	/mnt/vodhosting/uvigotv/081002_080926_Acto_apertura_390/080926_entrada_comitiva_ES(master_mpeg4)_162.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 37
+ID:	2978
+MM:	2629
+FILE:	/mnt/vodhosting/uvigotv/081002_080926_Acto_apertura_390/080926_leccioninaugural_ES(master_mpeg4)_164.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 38
+ID:	2979
+MM:	2630
+FILE:	/mnt/vodhosting/uvigotv/081002_080926_Acto_apertura_390/080926_intervencion_Gago_ES(master_mpeg4)_166.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 39
+ID:	2981
+MM:	2632
+FILE:	/mnt/vodhosting/uvigotv/081002_Apertura_del_Curso_2008_09_en_la_Universidad_de_Vigo_390/080926_intervencion_Touri_o_ES(master_mpeg4)_170.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 40
+ID:	2986
+MM:	2634
+FILE:	
+URL:	mms://videoserver.uvigo.es/vodhosting/chroma_bueno_foto_fondo.wmv
+--------------------------------------------
+
+
+ERROR 41
+ID:	2987
+MM:	2635
+FILE:	Competición 2007/08
+URL:	mms://videoserver.uvigo.es/vodhosting/uvigotv/081001_080911_waf08_387/robots.wmv
+--------------------------------------------
+
+
+ERROR 42
+ID:	3021
+MM:	2643
+FILE:	/mnt/vodhosting/uvigotv/081002_Apertura_del_Curso_2008_09_en_la_Universidad_de_Vigo_390/080926_Introducci_n_ES(master_mpeg4)_198.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 43
+ID:	3049
+MM:	2655
+FILE:	/mnt/vodhosting/uvigotv/081008_Nutricion/081010_endocrino3.wmv
+URL:	mms://videoserver.uvigo.es/vodhosting/uvigotv/081008_Nutricion/081010_endocrino3.wmv
+--------------------------------------------
+
+
+ERROR 44
+ID:	3081
+MM:	2667
+FILE:	/mnt/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/alejandro_2_cut.wmv
+URL:	mms://videoserver.uvigo.es/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/alejandro_2_cut.wmv
+--------------------------------------------
+
+
+ERROR 45
+ID:	3076
+MM:	2656
+FILE:	/mnt/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/Mayte_1.wmv
+URL:	mms://videoserver.uvigo.es/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/Mayte_1.wmv
+--------------------------------------------
+
+
+ERROR 46
+ID:	3080
+MM:	2657
+FILE:	/mnt/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/alejandro_1acido_citrico_cut.wmv
+URL:	mms://videoserver.uvigo.es/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/alejandro_1acido_citrico_cut.wmv
+--------------------------------------------
+
+
+ERROR 47
+ID:	2980
+MM:	2633
+FILE:	/mnt/vodhosting/uvigotv/081002_Apertura_del_Curso_2008_09_en_la_Universidad_de_Vigo_390/080926_Cierre_del_acto_acad_mico_de_inaguraci_n_del_curso_2008_09_ES(master_mpeg4)_168.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 48
+ID:	3011
+MM:	2640
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003_Os_tres_irmaos_alleados_GL(master_mpeg4)_194.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 49
+ID:	3014
+MM:	2636
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003_Presentaci_n_del_libro__Contos_de_Ida_e_Volta_ES(master_mpeg4)_186.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 50
+ID:	3015
+MM:	2637
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003__EN(master_mpeg4)_188.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 51
+ID:	3017
+MM:	2638
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003__FR(master_mpeg4)_190.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 52
+ID:	3018
+MM:	2639
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003_El_caldo_de_piedra_ES(master_mpeg4)_192.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 53
+ID:	3079
+MM:	2656
+FILE:	/mnt/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/Mayte_2_cut.wmv
+URL:	mms://videoserver.uvigo.es/vodhosting/uvigotv/081008_Nutricion/081016_Nutricion/Mayte_2_cut.wmv
+--------------------------------------------
+
+
+############################################
+############################################
+############################################
+############################################
+ERROR 1
+ID:	2912
+MM:	2592
+FILE:	/mnt/vodhosting/uvigotv/080925_080919_Colloidal_384/080919_Colloidal_ES(master_mpeg4)_94.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 2
+ID:	2913
+MM:	2593
+FILE:	/mnt/vodhosting/uvigotv/080925_Colloidal_Molecules_384/080919_Turno_de_preguntas_ES(master_mpeg4)_98.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 3
+ID:	2973
+MM:	2628
+FILE:	/mnt/vodhosting/uvigotv/081002_080926_Acto_apertura_390/080926_entrada_comitiva_ES(master_mpeg4)_162.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 4
+ID:	2978
+MM:	2629
+FILE:	/mnt/vodhosting/uvigotv/081002_080926_Acto_apertura_390/080926_leccioninaugural_ES(master_mpeg4)_164.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 5
+ID:	2979
+MM:	2630
+FILE:	/mnt/vodhosting/uvigotv/081002_080926_Acto_apertura_390/080926_intervencion_Gago_ES(master_mpeg4)_166.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 6
+ID:	2981
+MM:	2632
+FILE:	/mnt/vodhosting/uvigotv/081002_Apertura_del_Curso_2008_09_en_la_Universidad_de_Vigo_390/080926_intervencion_Touri_o_ES(master_mpeg4)_170.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 7
+ID:	3021
+MM:	2643
+FILE:	/mnt/vodhosting/uvigotv/081002_Apertura_del_Curso_2008_09_en_la_Universidad_de_Vigo_390/080926_Introducci_n_ES(master_mpeg4)_198.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 8
+ID:	2980
+MM:	2633
+FILE:	/mnt/vodhosting/uvigotv/081002_Apertura_del_Curso_2008_09_en_la_Universidad_de_Vigo_390/080926_Cierre_del_acto_acad_mico_de_inaguraci_n_del_curso_2008_09_ES(master_mpeg4)_168.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 9
+ID:	3011
+MM:	2640
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003_Os_tres_irmaos_alleados_GL(master_mpeg4)_194.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 10
+ID:	3014
+MM:	2636
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003_Presentaci_n_del_libro__Contos_de_Ida_e_Volta_ES(master_mpeg4)_186.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 11
+ID:	3015
+MM:	2637
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003__EN(master_mpeg4)_188.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 12
+ID:	3017
+MM:	2638
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003__FR(master_mpeg4)_190.avi
+URL:	
+--------------------------------------------
+
+
+ERROR 13
+ID:	3018
+MM:	2639
+FILE:	/mnt/vodhosting/uvigotv/081006_Presentaci_n_del_libro__Contos_de_Ida_e_Volta__392/081003_El_caldo_de_piedra_ES(master_mpeg4)_192.avi
+URL:	
+--------------------------------------------
+
+

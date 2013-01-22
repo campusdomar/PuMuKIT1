@@ -1,0 +1,217 @@
+Numero de series: 177
+224	JAI 2007
+	1589	Benefits of modern PLC-Technology for industrial applications
+		6870	podcast_video	(3)Inglés
+		7746	podcast_video	(4)Castellano
+
+
+252	EGREPA 2007
+	1616	Conferencia inaugural
+		6881	podcast_video	(9)Portugués
+		7748	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1617	Obesidad, actividad física y personas mayores
+		6885	podcast_video	(3)Inglés
+		7740	podcast_video	(4)Castellano
+
+
+252	EGREPA 2007
+	1620	Deterioro funcional del sistema cardiovascular y la influencia del entrenamiento en Personas  Mayores
+		6898	podcast_video	(3)Inglés
+		7757	podcast_video	(4)Castellano
+
+
+252	EGREPA 2007
+	1618	Influencia de la actividad física sobre la calidad de vida en mayores no dependientes
+		6873	podcast_video	(4)Castellano
+		7734	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1619	Valoración del grado de dependencia y del riesgo de caídas en ancianos mediante la fuerza máxima voluntaria de los músculos de presión del antebrazo y de la mano
+		6872	podcast_video	(4)Castellano
+		7732	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1640	Evaluación de la condición física mediante la batería ECFA-INEFG tras la aplicación de un programa de ejercicio físico en mayores
+		6894	podcast_video	(4)Castellano
+		7735	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1642	Propuestas actuales en la actividad física y el envejecimiento
+		6917	podcast_video	(3)Inglés
+		7758	podcast_video	(4)Castellano
+
+
+252	EGREPA 2007
+	1643	La fibra muscular y el envejecimiento: Efecto de la involución
+		6925	podcast_video	(3)Inglés
+		7756	podcast_video	(4)Castellano
+
+
+252	EGREPA 2007
+	1641	Efectos de un programa de ejercicio físico en atención domiciliaria sobre el bienenestar subjetivo de cuidadores informales de enfermos de alzheimer
+		6895	podcast_video	(4)Castellano
+		7739	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1644	Mejoras del estado afectivo tras la realización de un programa de ejercicio físico en personas mayores en Ferrolterra (España)
+		6906	podcast_video	(4)Castellano
+		7745	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1645	Influencia de los factores sociodemográficos en la actividad física habitual de la tercera edad: un estudio piloto
+		6901	podcast_video	(4)Castellano
+		7743	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1646	Influencia de la práctica del Tai-Chi-Chuan en la condición física funcional y saludable de las personas mayores
+		6911	podcast_video	(4)Castellano
+		7749	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1654	Análisis comparativa entre dos programas de entreno(musculación versus hidroginástica) en el incremento de la aptitud física en sujetos de mediana edad de ambos sexos
+		6916	podcast_video	(9)Portugués
+		7741	podcast_video	(3)Inglés
+		7742	podcast_video	(3)Inglés
+
+
+252	EGREPA 2007
+	1655	El entrenamiento de Resistencia en las Personas Mayores
+		6932	podcast_video	(3)Inglés
+		7763	podcast_video	(4)Castellano
+
+
+283	Acto Académico de Santo Tomas de Aquino 2008
+	1838	Presentación de D. Timothy Kehoe
+		7052	podcast_video	(6)Gallego
+
+
+277	The Works of Esther Tusquets and Rosa Montero in Translation: A Case of Textual Amputation
+	1772	The Works of Esther Tusquets and Rosa Montero in Translation: A Case of Textual Amputation
+		7032	podcast_video	(3)Inglés
+		7761	podcast_video	(6)Gallego
+
+
+277	The Works of Esther Tusquets and Rosa Montero in Translation: A Case of Textual Amputation
+	1773	Turno de preguntas
+		7014	podcast_video	(3)Inglés
+		7744	podcast_video	(6)Gallego
+
+
+309	El Qujote y los Derechos Humanos
+	2027	Cervantes y el Quijote en Galicia
+		7206	podcast_video	(6)Gallego
+		8096	podcast_video	(4)Castellano
+
+
+389	Presentación del vídeo "A Universidade de Vigo entra no futuro"
+	2623	Presentación del vídeo : A Universidade de Vigo entra no futuro
+		8046	podcast_video	(6)Gallego
+
+
+389	Presentación del vídeo "A Universidade de Vigo entra no futuro"
+	2578	Conoce la Universidad de Vigo
+		7555	podcast_video	(4)Castellano
+		7755	podcast_video	(6)Gallego
+		8024	podcast_video	(3)Inglés
+		8039	podcast_video	(5)Francés
+		8055	podcast_video	(2)Alemán
+
+
+387	IX Workshop en  Agentes Físicos - WAF 2008
+	2609	Probabilistic techniques for robot navigation.
+		7803	podcast_video	(3)Inglés
+
+
+398	Diasporic Literatures in Canada
+	2649	Specters of the Elsewhere Past:
+		7634	podcast_video	(6)Gallego
+		8049	podcast_video	(3)Inglés
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2904	Inauguración
+		7869	podcast_video	(6)Gallego
+		8038	podcast_video	(14)Interpretación al castellano
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2905	Politicas de tradución de la Unesco
+		8040	podcast_video	(5)Francés
+		8051	podcast_video	(15)Interpretación al gallego
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2906	Politicas de tradución de la Generalitat
+		7693	podcast_video	(4)Castellano
+		8097	podcast_video	(15)Interpretación al gallego
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2907	Politicas de tradución de la Diputacion Foral de Vizcaya
+		8043	podcast_video	(4)Castellano
+		8050	podcast_video	(15)Interpretación al gallego
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2908	Politicas de tradución del Ministerio de Cultura
+		7892	podcast_video	(4)Castellano
+		8048	podcast_video	(15)Interpretación al gallego
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2909	Politicas de tradución de la  Xunta de Galicia
+		7650	podcast_video	(6)Gallego
+		8076	podcast_video	(14)Interpretación al castellano
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2915	Sección Autónoma de Traductores de Libros de la Asociación Cologial de Escritores de España
+		8045	podcast_video	(4)Castellano
+		8099	podcast_video	(16)Interpretación al inglés
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2917	The View from the Ground
+		7906	podcast_video	(3)Inglés
+		8052	podcast_video	(14)Interpretación al castellano
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2918	Traductors i Intérprets Associats Pro-Col·legi TRIAC
+		7911	podcast_video	(4)Castellano
+		8095	podcast_video	(16)Interpretación al inglés
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2919	Traducción y políticas editoriales en el País Vasco
+		7908	podcast_video	(4)Castellano
+		8098	podcast_video	(16)Interpretación al inglés
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2920	Asociación Española de Traductores, Correctores y Intérpretes ASETRAD
+		8037	podcast_video	(4)Castellano
+		8091	podcast_video	(16)Interpretación al inglés
+
+
+431	II Congreso Internacional de Tradución y Políticas editoriales
+	2921	Edición y Traducción en el siglo XXI
+		8036	podcast_video	(5)Francés
+		8058	podcast_video	(14)Interpretación al castellano
+
+
+499	Ponte...  en las Ondas 2009
+	3799	Actuación del grupo de concertinas de Viana do Castelo
+
+
+TOTAL 36

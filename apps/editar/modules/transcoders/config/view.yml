@@ -1,0 +1,4 @@
+all:
+  stylesheets:    [admin/accordion.css, admin/tree]
+  javascripts:    [accordion, tree]
+

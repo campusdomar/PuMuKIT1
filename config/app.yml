@@ -1,0 +1,81 @@
+# default values
+all:
+  pumukit:
+    version:    PuMuKIT v1.7
+  lang:
+    array:     [es, gl]
+    default:   es
+
+  metas:
+    title:        UCies.tv
+    description:  Portal web de la TV de la Universidad de las Cies
+    keywords:     webtv, Tv, Universidad de las Cies, uvigo, uvigotv, pumukit
+
+  info:
+    title:          "Universidad de las Cies Television"
+    description:    "Material Audiovisual ofrecido por la Universidad de las Cies"
+    link:           "http://pumukitdev.media.uvigo.es"
+    host:           "pumukitdev.media.uvigo.es"
+    copyright:      "UdN-TV"
+    mail:           "tv@udn.es"
+    logo:           "http://tv.uvigo.es/uploads/uvigo/logo_tv_60x60.gif"
+    mosca:          "http://tv.uvigo.es/uploads/uvigo/mosca_uvigotv.jpg"
+    intro:          "mms://193.146.209.50/ads/intro_tv.wmv"    
+    telefono:       "986 811 937"    
+
+  thumbnail:
+    hor:       304
+    ver:       242
+
+  videoserv:
+    browser:   1
+    host:      "mms://videoserver.uvigo.es/VoD"
+    dir:       "/prueba2"
+    url:       ["mms://videoserver.uvigo.es/vodprivado", "mms://videoserver.uvigo.es/vodhosting", "mms://videoserver.uvigo.es/vod"]
+    mount:     ["/prueba2", "/prueba2", "/prueba2"]
+
+  transcoder:
+    use:          1
+    proveedor:    uvigotv
+    inbox:        ["/tmp/inbox"]
+    path_tmp:     "/tmp"
+    path_unix:    ["/tmp"]
+    path_win:     ["//172.20.209.216"]
+    path_htdocs:  "c:\xampp\htdocs"
+
+  intro:
+    use:    0
+    url:    "http://"
+
+  mail:
+    use:       0
+    lista:     ""
+    from:      ""
+    from_text: ""
+    subject_es:   ""
+    subject_gl:   ""
+
+  itunesu:
+    use:       0
+    url:       ""
+    debug:     ""
+    acred:     ""
+    identity:  ""
+    key:       ""
+
+  cas:
+    use:         0
+    server_name: 'cas-server-name'
+    server_port: 8443 
+    server_path: 'cas-path'
+    url:         'login.cas.es'
+    port:        443
+    context:     'cas'
+    ip:          '127.0.0.1'
+
+  matterhorn:
+    use:           0
+    server:        "http://engage.matterhorn.es"
+    server_admin:  "http://admin.matterhorn.es"
+    user:          "matterhorn_system_account"
+    password:      "CHANGE_ME"

@@ -1,0 +1,8 @@
+index:
+  is_secure: off    # off es el valor por defecto
+
+login:
+  is_secure: off    # off es el valor por defecto
+
+all:
+  is_secure: on    # off es el valor por defecto

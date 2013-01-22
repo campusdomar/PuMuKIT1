@@ -1,0 +1,12 @@
+rendering: ~
+web_debug: ~
+security:  ~
+
+# generally, you will want to insert your own filters here
+cas:
+  class: casFilter
+
+cache:     ~
+common:    ~
+flash:     ~
+execution: ~

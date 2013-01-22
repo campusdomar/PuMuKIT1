@@ -1,0 +1,156 @@
+<?xml version="1.0" ?> 
+<xliff version="1.0"> 
+  <file orginal="global" source-language="es" datatype="plaintext"> 
+    <body> 
+      <trans-unit id="1"> 
+        <source>Menú</source> 
+        <target>Menú</target> 
+      </trans-unit> 
+      <trans-unit id="2"> 
+        <source>Principal</source> 
+        <target>Principal</target> 
+      </trans-unit> 
+      <trans-unit id="3"> 
+        <source>Servicio</source> 
+        <target>Servizo</target> 
+      </trans-unit> 
+      <trans-unit id="4"> 
+        <source>F.A.Q.</source> 
+        <target>F.A.Q</target> 
+      </trans-unit> 
+      <trans-unit id="5"> 
+        <source>Novedades</source> 
+        <target>Novidades</target> 
+      </trans-unit> 
+      <trans-unit id="6"> 
+        <source>Noticias</source> 
+        <target>Novas</target> 
+      </trans-unit> 
+      <trans-unit id="7"> 
+        <source>Mediateca</source> 
+        <target>Mediateca</target> 
+      </trans-unit> 
+      <trans-unit id="8"> 
+        <source>Total</source> 
+        <target>Total</target> 
+      </trans-unit> 
+      <trans-unit id="9"> 
+        <source>Series</source> 
+        <target>Series</target> 
+      </trans-unit> 
+      <trans-unit id="10"> 
+        <source>Vídeos</source> 
+        <target>Vídeos</target> 
+      </trans-unit> 
+      <trans-unit id="11"> 
+        <source>Horas</source> 
+        <target>Horas</target> 
+      </trans-unit> 
+      <trans-unit id="12"> 
+        <source>Próximas Transmisiones</source> 
+        <target>Próximas Transmisións</target> 
+      </trans-unit> 
+      <trans-unit id="13"> 
+        <source>Contacto</source> 
+        <target>Contacto</target> 
+      </trans-unit> 
+      <trans-unit id="14"> 
+        <source>Programas</source> 
+        <target>Programas</target> 
+      </trans-unit> 
+      <trans-unit id="15"> 
+        <source>Buscar</source> 
+        <target>Buscar</target> 
+      </trans-unit> 
+      <trans-unit id="16"> 
+        <source>Vídeos Más Vistos</source> 
+        <target>Vídeos Máis Vistos</target> 
+      </trans-unit> 
+      <trans-unit id="17"> 
+        <source>Más Vistos en General</source> 
+        <target>Máis Vistos en Xeral</target> 
+      </trans-unit> 
+      <trans-unit id="18"> 
+        <source>Más Vistos en</source> 
+        <target>Máis Vistos en</target> 
+      </trans-unit> 
+      <trans-unit id="19"> 
+        <source>Más Vistos de la Semana</source> 
+        <target>Máis Vistos da Semana</target> 
+      </trans-unit> 
+      <trans-unit id="20"> 
+        <source>Más Vistos de Hoy</source> 
+        <target>Más Vistos de Hoxe</target> 
+      </trans-unit> 
+      <trans-unit id="21"> 
+        <source>Más Vistos</source> 
+        <target>Máis Vistos</target> 
+      </trans-unit> 
+      <trans-unit id="22"> 
+        <source>Diapositivas</source> 
+        <target>Diapositivas</target> 
+      </trans-unit> 
+      <trans-unit id="23"> 
+        <source>Últimos Reproducidos</source> 
+        <target>Últimos Reproducidos</target> 
+      </trans-unit> 
+      <trans-unit id="24"> 
+        <source>Próxima transmisión en directo</source> 
+        <target>Próxima transmisión en directo</target> 
+      </trans-unit> 
+      <trans-unit id="25"> 
+        <source>La emisión es en diferido, excepto durante la transmisión anunciada</source> 
+        <target>A emisión é en diferido, excepto durante a transmisión anunciada</target> 
+      </trans-unit> 
+      <trans-unit id="26"> 
+        <source>Preguntas Frecuentes</source> 
+        <target>Preguntas Frecuentes</target> 
+      </trans-unit> 
+      <trans-unit id="27"> 
+        <source>Ordenar por</source> 
+        <target>Ordear por</target> 
+      </trans-unit>
+      <trans-unit id="28"> 
+        <source>Mediateca Pública</source> 
+	<target>Mediateca Pública</target> 
+      </trans-unit> 
+      <trans-unit id="29"> 
+        <source>Mediateca Privada</source> 
+	<target>Mediateca Privada</target> 
+      </trans-unit> 
+      <trans-unit id="29"> 
+        <source>Ver más</source> 
+        <target>Ver máis</target> 
+      </trans-unit> 
+      <trans-unit id="30"> 
+        <source>Su busqueda no produjo ningun resultado</source> 
+        <target>A sua procura non produxo resultados</target> 
+      </trans-unit> 
+      <trans-unit id="31"> 
+        <source>a Avisos y Novedades de UVigo-TV</source> 
+        <target>a Avisos e Novedades de UVigo-TV</target> 
+      </trans-unit> 
+      <trans-unit id="32"> 
+	      <source>En la Mediateca del Servicio aparecen los catálogos de archivos audiovisuales que están disponibles en este momento. Asimismo, estos archivos se encuentran divididos entre Videoteca Pública y Videoteca Privada (según sean de libre acceso o de acceso restringido sólo para los miembros de la comunidad universitaria). Se muestran agrupados según el criterio deseado.</source> 
+	      <target>Na Mediateca do Servizo aparecen os catálogos de arquivos audiovisuais que están dispoñibles neste momento. Asimesmo, estes arquivos atópanse divididos entre Videoteca Pública ou Videoteca Privada (segundo sexan de libre acceso ou de acceso restrinxido unicamente ós membros da comunidade universitaria). Mostranse agrupadas segun o criterio desexado.</target> 
+      </trans-unit>
+      <trans-unit id="33"> 
+        <source>Canal Pildoras</source> 
+        <target>Canle Pildoras</target> 
+      </trans-unit> 
+      <trans-unit id="34"> 
+        <source>Objetos educativos multimedia realizados con la tecnologia Polimedia</source> 
+        <target>Obxetos educativos multimedia realizados coa tecnoloxia Polimedia</target> 
+      </trans-unit> 
+      <trans-unit id="35"> 
+        <source>También te interesan:</source> 
+        <target>Tamén che interesan:</target> 
+      </trans-unit> 
+      <trans-unit id="36"> 
+        <source>Vídeos de la misma serie:</source> 
+        <target>Vídeos da mesma serie:</target> 
+      </trans-unit> 
+
+    </body> 
+  </file> 
+</xliff> 

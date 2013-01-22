@@ -1,0 +1,113 @@
+<?php
+/**
+ * MODULO INDEX ACTIONS. 
+ * Modulo de configuracion de los usuarios que tienen acceso a la aplicacion de administracion.
+ * Permite la creacion, edicion y eliminacion de los usuarios. 
+ * Compone, en el menu, el unico elemento de la seccion de configuracion.  
+ *
+ * @package    pumukit
+ * @subpackage users
+ * @author     Ruben Gonzalez Gonzalez <rubenrua ar uvigo dot es>
+ * @version    1.0
+ */
+
+class usersActions extends sfActions
+{
+
+ /**
+   * --  INDEX -- /editar.php/users
+   * Muestra el modulo de users, con su listado paginado de usuarios, el formulario de filtrado,
+   * acciones rapidas y botons de nuevo.
+   *
+   * Accion por defecto en la aplicacion. Acceso privado. Layout: layout
+   *
+   */
+  public function executeIndex()
+  {
+    sfConfig::set('config_menu','active');
+    if (!$this->getUser()->hasAttribute('page', 'tv_admin/user'))
+      $this->getUser()->setAttribute('page', 1, 'tv_admin/user');
+  }
+
+
+  /**
+   * Executes components AJAX
+   *
+   */
+  public function executeList()
+  {
+    return $this->renderComponent('users', 'list');
+  }
+
+
+  /**
+   * Executes other actions
+   *
+   */
+  public function executeCreate()
+  {
+    $this->user = new User();
+    $this->langs = sfConfig::get('app_lang_array', array('es'));
+    $this->setTemplate('edit');
+  }
+
+  public function executeEdit()
+  {
+    $this->setLayout(false); 
+    $this->user = UserPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->user);
+  }
+
+  public function executeUpdate()
+  {
+    if (!$this->getRequestParameter('id'))
+    {
+      $user = new User();
+    }
+    else
+    {
+      $user = UserPeer::retrieveByPk($this->getRequestParameter('id'));
+      $this->forward404Unless($user);
+    }
+
+    $user->setName($this->getRequestParameter('name', ' '));
+    if ((strlen($this->getRequestParameter('passwd', '')) != 0)&&($this->getRequestParameter('passwd', '______') != '______'))
+      $user->setPasswd($this->getRequestParameter('passwd', ' '));
+    $user->setLogin($this->getRequestParameter('login', ' '));
+    $user->setEmail($this->getRequestParameter('email', ' '));
+    $user->setRoot($this->getRequestParameter('root', false));
+    
+    if(eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", $user->getEmail())) {
+      $user->save();
+    }
+
+    return $this->renderComponent('users', 'list');
+  }
+
+  public function executeDelete()
+  {
+    if($this->hasRequestParameter('ids')){
+      $users = UserPeer::retrieveByPKs(json_decode($this->getRequestParameter('ids')));
+
+      foreach($users as $user){
+	$user->delete();
+      }
+
+    }elseif($this->hasRequestParameter('id')){
+      $user = UserPeer::retrieveByPk($this->getRequestParameter('id'));
+      $user->delete();
+    }
+
+    return $this->renderComponent('users', 'list');
+  }
+
+  public function executePreview()
+  {
+    if ($this->hasRequestParameter('id'))
+    {
+      $this->getUser()->setAttribute('id', $this->getRequestParameter('id'), 'tv_admin/user');
+    }
+    return $this->renderText('OK');
+  }
+
+}

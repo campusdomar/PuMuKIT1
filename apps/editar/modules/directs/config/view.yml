@@ -1,0 +1,6 @@
+all:
+  stylesheets:    [/sf/calendar/calendar-system.css, /sf/calendar/skins/aqua/theme.css, admin/sh/shadowbox.css]
+
+  javascripts:    [/sf/calendar/calendar.js, /sf/calendar/lang/calendar-es.js, /sf/calendar/calendar-setup.js, sh/shadowbox-prototype.js, sh/shadowbox.js, /js/swfobject.js]
+
+

@@ -1,0 +1,5 @@
+all:
+  stylesheets:    [tv/new_serial]
+
+  has_layout: on
+  layout: simplelayout

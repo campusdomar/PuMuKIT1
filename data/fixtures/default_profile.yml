@@ -1,0 +1,235 @@
+---
+BroadcastType:
+  pub:
+    id: pub
+    name: pub
+    default_sel: 1
+  cor:
+    id: cor
+    name: cor
+    default_sel: 0
+
+Broadcast:
+  default:
+    id: default
+    name: pub
+    broadcast_type_id: pub
+    passwd: 
+    default_sel: 1
+BroadcastI18n:
+  default_gl:
+    id: default
+    culture: gl
+    description: Público
+  default_es:
+    id: default
+    culture: es
+    description: Público
+  default_en:
+    id: default
+    culture: en
+    description: Public
+  
+
+AnnounceChannel:
+  email:
+    id: email
+    name: email
+    broadcast_type_id: pub
+    rank: 1
+  facebook:
+    id: facebook
+    name: facebook
+    broadcast_type_id: pub
+    rank: 2
+  twitter:
+    id: twitter
+    name: twitter
+    broadcast_type_id: pub
+    rank: 3 
+
+Cpu:
+  1:
+    id: 1
+    ip: 127.0.0.1
+    max: 1
+    min: 0
+    number: 1
+    type: linux
+    user: pumukit
+    password: PUMUKIT
+
+StreamserverType:
+  store:
+    id: store
+    name: Store
+  download:
+    id: download
+    name: Download
+  wmv:
+    id: wmv
+    name: Wmv
+  fms:
+    id: fms
+    name: Fms
+  red5:
+    id: red5
+    name: Red5
+
+
+Streamserver:
+  localmaster:
+    id: localmaster
+    streamserver_type_id: store
+    ip: 127.0.0.1
+    name: Localmaster
+    description: Servidor de masters local
+    dir_out: /var/www/pumukit/web/almacen/masters
+    url_out: 
+  localhost:
+    id: localhost
+    streamserver_type_id: download
+    ip: 127.0.0.1
+    name: Localhost
+    description: Servidor de descarga desde el propio servidor Web
+    dir_out: /var/www/pumukit/web/almacen/downloads
+    url_out: /almacen/downloads
+
+Perfil: 
+  perfil_1: 
+    name: master_copy
+    rank: 1
+    display: 0
+    wizard: 1
+    format: ???
+    codec: ???
+    mime_type: ???
+    extension: ???
+    resolution_hor: 0
+    resolution_ver: 0
+    bitrate: ???
+    framerate: 25
+    channels: 1
+    audio: 0
+    bat: >
+      cp "%1" "%2"
+    file_cfg: 
+    streamserver_id: localmaster
+    app: copy
+  perfil_2: 
+    name: x264-mp4
+    rank: 2
+    display: 1
+    wizard: 1
+    format: mp4
+    codec: x264
+    mime_type: video/mp4
+    extension: mp4
+    resolution_hor: 0
+    resolution_ver: 0
+    bitrate: 999Kbps
+    framerate: 25
+    channels: 1
+    audio: 0
+    bat: >
+      ffmpeg -y -strict unofficial -i "%1" -acodec libfaac -ab 128k -ac 2 -vcodec libx264 -crf 22 -threads 0 "%2"  
+    file_cfg: 
+    streamserver_id: localhost
+    app: ffmpeg
+  perfil_3: 
+    name: mp3
+    rank: 3
+    display: 1
+    wizard: 0 #revisar
+    format: mp3
+    codec: mp3
+    mime_type: audio/mp3
+    extension: mp3
+    resolution_hor: 0
+    resolution_ver: 0
+    bitrate: 128Kbps
+    framerate: 0
+    channels: 2
+    audio: 1 #sólo audio
+    bat: >
+      ffmpeg -y -i "%1" -f mp3 -acodec libmp3lame -ab 128k -ac 1 -ar 44100 "%2"
+    file_cfg: 
+    streamserver_id: localhost
+    app: ffmpeg
+PerfilI18n: 
+  perfilI18n_1_es: 
+    id: perfil_1
+    culture: es
+    link: Video
+    description: >
+      Perfil copy master
+  perfilI18n_1_gl: 
+    id: perfil_1
+    culture: gl
+    link: Video
+    description: >
+      Perfil copy master
+  perfilI18n_2_es: 
+    id: perfil_2
+    culture: es
+    link: Video
+    description: >
+      Perfil fms
+  perfilI18n_2_gl: 
+    id: perfil_2
+    culture: gl
+    link: Video
+    description: >
+      Perfil fms
+
+  perfilI18n_3_es: 
+    id: perfil_3
+    culture: es
+    link: Audio
+    description: >
+      Perfil audio mp3
+  perfilI18n_3_gl: 
+    id: perfil_3
+    culture: gl
+    link: Audio
+    description: >
+      Perfil audio mp3
+PubChannel:
+  web:
+    id: web
+    name: WebTV
+    broadcast_type_id: pub
+    rank: 1
+    enable: true
+  arca:
+    id: arca
+    name: ARCA
+    broadcast_type_id: pub
+    rank: 2
+    enable: true
+  videositemap:
+    id: videositemap
+    name: GoogleVideoSiteMap
+    broadcast_type_id: cor
+    rank: 3
+    enable: true
+  itunesu:
+    id: itunesu
+    name: iTunesU
+    broadcast_type_id: cor
+    rank: 4
+    enable: false
+  youtubeedu:
+    id: youtubeedu
+    name: YouTubeEDU
+    broadcast_type_id: cor
+    rank: 5
+    enable: false
+
+
+PubChannelPerfil:
+  web_flv:
+    pub_channel_id: web
+    perfil_43_id: perfil_2
+    perfil_169_id: perfil_2
+    perfil_audio_id: perfil_3
