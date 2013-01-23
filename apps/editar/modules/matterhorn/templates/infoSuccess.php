@@ -10,11 +10,3 @@
   <li>Roles: <?php echo $roles ?></li>
 </ul>
 
-<div style="padding: 10px 0px">
-  <div>
-    <input type="checkbox" id="anonymous" name="anonymous" <?php echo $sf_user->getAttribute('anonymous', true, 'tv_admin/matterhorn')?'checked="checked"':'' ?>
-         onchange="new Ajax.Updater('anonymous_checkbox', '<?php echo url_for('matterhorn/toggle?value=') ?>/' + (this.checked?'true':'false'))"/> 
-    <label for="anonymous" style="display:inline">Acceso an&oacute;nimo</label>
-  </div>
-  <div id="anonymous_checkbox">&nbsp;</div>
-</div>

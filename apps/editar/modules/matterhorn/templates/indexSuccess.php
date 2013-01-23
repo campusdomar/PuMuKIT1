@@ -26,8 +26,8 @@
 <script type="text/javascript"> 
 //<![CDATA[
 
-new Ajax.Updater('list_matterhorn', '<?php echo url_for('matterhorn/list') ?>');
-new Ajax.Updater('info_matterhorn', '<?php echo url_for('matterhorn/info') ?>');
+new Ajax.Updater('list_matterhorn', '<?php echo url_for('matterhorn/list') ?>', {asynchronous:true, evalScripts:true});
+new Ajax.Updater('info_matterhorn', '<?php echo url_for('matterhorn/info') ?>', {asynchronous:true, evalScripts:true});
 
 
 
@@ -38,3 +38,10 @@ function matterhorn_info(msg){
 
 //]]>
 </script>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />

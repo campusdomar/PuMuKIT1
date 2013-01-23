@@ -1,3 +1,30 @@
+<?php
+
+function app_editar_matterhorn_list($id)
+{
+  $c = new Criteria();
+  $c->add(MmMatterhornPeer::MH_ID, $id);
+  $c->addJoin(MmPeer::ID, MmMatterhornPeer::ID);
+  return MmPeer::doSelectOne($c);
+}
+
+
+function app_editar_matterhorn_image($mp)
+{
+  $img = null;
+  
+  if(isset($mp["attachments"]) and isset($mp["attachments"]["attachment"])){
+    foreach($mp["attachments"]["attachment"] as $attach){
+      if(($attach['type'] == "presenter/search+preview") && ($attach['mimetype'] == "image/jpeg")){
+	$img = $attach['url'];
+      }
+    }
+  }
+  return $img;
+}
+
+
+?>
 <table cellspacing="0" class="tv_admin_list">
   <thead>
     <tr>
@@ -26,25 +53,25 @@
       </tr>
     <?php endif?>
 
-    <?php $i = 0; foreach($media_packages as $mp): $i++?>
+  <?php $i = 0; foreach($media_packages as $mp): $i++; $mm = app_editar_matterhorn_list($mp["id"]); $img = app_editar_matterhorn_image($mp); ?>
       <tr class="tv_admin_row_<?php echo $i%2?>" >
         <td style="cursor: auto">
           <input class="profile_checkbox" type="checkbox">
         </td> 
-        <td style="cursor: auto"><img class="mini" src="<?php echo is_null($mp['img']) ? '/images/sin_foto.jpg' : $mp['img']  ?>" height="23" width="30" /></td> 
+        <td style="cursor: auto"><img class="mini" src="<?php echo is_null($img) ? '/images/sin_foto.jpg' : $img  ?>" height="23" width="30" /></td> 
         <td style="cursor: auto"><?php echo $mp["id"] ?></td> 
         <td style="cursor: auto"><?php echo $mp["title"] ?></td> 
-        <td style="cursor: auto"><?php echo $mp["serial_id"] ?></td> 
+        <td style="cursor: auto"><?php echo $mp["seriestitle"] ?></td> 
         <td style="cursor: auto"><?php echo ($mp["duration"]/1000) ?></td> 
-        <td style="cursor: auto"><?php echo date("d-m-Y", $mp["date"]) ?></td> 
+        <td style="cursor: auto"><?php echo date("d-m-Y", strtotime($mp["start"])) ?></td> 
         <td style="cursor: auto">
-          <?php if($mp['mm'] === NULL):?>
+          <?php if($mm === NULL):?>
             <a href="#" onclick="new Ajax.Updater('list_matterhorn', '<?php echo url_for('matterhorn/import?id=' . $mp['id']) ?>', {
                asynchronous:true, evalScripts:true, onSuccess:function(r,j){matterhorn_info('Importacion realizada correctamente')}}); return false;">import</a>
           <?php else:?>
-            <a href="<?php echo url_for('mms/index?serial=' . $mp['mm']->getSerialId() . '&id=' . $mp['mm']->getId()) ?>">YA IMPORTADO</a>
+            <a href="<?php echo url_for('mms/index?serial=' . $mm->getSerialId() . '&id=' . $mm->getId()) ?>">YA IMPORTADO</a>
           <?php endif?> |
-          <a target="_black" href="<?php echo $mh_server ?>/engage/ui/watch.html?id=<?php echo $mp['id']?>">play</a>
+          <a target="_black" href="<?php echo $en_server ?>/engage/ui/watch.html?id=<?php echo $mp['id']?>">play</a>
         </td>
       </tr>
     <?php endforeach ?>

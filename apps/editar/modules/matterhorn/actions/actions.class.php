@@ -13,27 +13,17 @@ class matterhornActions extends sfActions
 
   public $init_endpoint = '/welcome.html';
   public $search_endpoint = '/search/episode.json';
-  public $server;
+  public $engage_server;
+  public $admin_server;
   public $user;
   public $password;
-  public $anonymous = true;
-  public $cookie;
   
   public function preExecute()
   {
-    $this->server    = sfConfig::get('app_matterhorn_server');
-    $this->user      = sfConfig::get('app_matterhorn_user');
-    $this->password  = sfConfig::get('app_matterhorn_password');
-    
-    $this->anonymous = $this->getUser()->getAttribute('anonymous', false, 'tv_admin/matterhorn');
-    $this->cookie    = $this->getUser()->getAttribute('cookie','','tv_admin/matterhorn');
-    
-    $this->init_cookie();
-    /*
-    if(!$this->anonymous){
-      $this->init_cookie();
-    }
-    */
+    $this->engage_server  = sfConfig::get('app_matterhorn_server');
+    $this->admin_server   = sfConfig::get('app_matterhorn_server_admin');
+    $this->user           = sfConfig::get('app_matterhorn_user');
+    $this->password       = sfConfig::get('app_matterhorn_password');
   }
 
 
@@ -48,17 +38,16 @@ class matterhornActions extends sfActions
     $oc = MmMatterhornPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($oc);
 
-    $this->redirect($oc->getMasterUrl($this->cookie));
+    $this->redirect($oc->getMasterUrl()); 
   }
 
   public function executeInfo()
   {
-    if(!($info = $this->getInfo())){
+    if(!($info = MmMatterhornPeer::serverInfo())){
       return sfView::ERROR;
     }
 
-    $this->conf = $this->anonymous;
-    $this->oc_server = $this->server;
+    $this->oc_server = $this->admin_server;
     $this->username = $info['username'];
     $this->roles = implode(',', $info['roles']);
     $this->img = $info['org']['properties']['logo_small'];
@@ -68,118 +57,63 @@ class matterhornActions extends sfActions
   public function executeList()
   {
     $limit  = 8;
-    $offset = 0;
+    $startPage = 0;
     
     if ($this->hasRequestParameter('reset')){
       $this->getUser()->getAttributeHolder()->removeNamespace('tv_admin/matterhorn');
     }
 
     if ($this->hasRequestParameter('page')){
-      $offset = $this->getRequestParameter('page') - 1;
-      $this->getUser()->setAttribute('offset', $offset, 'tv_admin/matterhorn');
+      $startPage = $this->getRequestParameter('page') - 1;
+      $this->getUser()->setAttribute('startPage', $startPage, 'tv_admin/matterhorn');
     }
-    $offset = $this->getUser()->getAttribute('offset', 0, 'tv_admin/matterhorn');
+    $startPage = $this->getUser()->getAttribute('startPage', 0, 'tv_admin/matterhorn');
+
 
     if ($this->hasRequestParameter('q')){
       $q_orig = $this->getUser()->getAttribute('q', '', 'tv_admin/matterhorn');
       $q = $this->getRequestParameter('q');
       if ($q != $q_orig) {
-        $offset = 0;
+        $startPage = 0;
       }
       $this->getUser()->setAttribute('q', $q, 'tv_admin/matterhorn');
     }
     $q = $this->getUser()->getAttribute('q', '', 'tv_admin/matterhorn');
+   
 
-    $out = $this->getAll($offset * $limit, $limit, $q);
+    $media_packages = MmMatterhornPeer::getMediaPackages($limit, $startPage, $q);
 
-    if(!$out || !isset($out['search-results']['total'])){
-      return sfView::ERROR;
-    }
-
-    try{
-      $total = $out['search-results']['total'];
-    } catch (Exception $e) {
-      return sfView::ERROR;
-    }
-
-    if ($total == 0) {
-      $media_packages = array();
-    } elseif ($total == 1) {
-      $media_packages = array();
-      $media_packages[] = $this->map_mp($out['search-results']['result']);
-    } else {
-      $media_packages = array();
-      foreach($out['search-results']['result'] as $mp){
-	$media_packages[] = $this->map_mp($mp);
-      }
-    }
     
-    $this->total = $total;
-    $this->page = $offset + 1;
+
+    $this->total = MmMatterhornPeer::getNumMediaPackages($q);
+    $this->page = $startPage + 1;
     $this->total_page = ceil($this->total / $limit); 
     $this->media_packages = $media_packages;
-    $this->mh_server = sfConfig::get('app_matterhorn_server');
+    $this->mh_server = $this->admin_server;
+    $this->en_server = $this->engage_server;
   }
 
-
-  public function executeToggle()
-  {
-    $this->getUser()->setAttribute('anonymous', 
-				   $this->getRequestParameter('value', 'false') == "true", 
-				   'tv_admin/matterhorn');
-    return $this->renderText("Cambio realizado (reload)");
-  }
 
 
   public function executeImport(){
     $id = $this->getRequestParameter('id');
 
-    $aux = $this->get($id);
-    $mp = $this->map_mp_all($aux["search-results"]["result"]);
+    $aux = MmMatterhornPeer::getMediaPackage($id);
+    $mp = $this->map_mp_all($aux);
     $mm = $this->createMm($mp);
   
-    $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
-    //return $this->renderText(json_encode($mp));
+    /*
+      $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
+      return $this->renderText(json_encode($mp));
+    */
     return $this->forward('matterhorn', 'list');
-  }
-  
-
-
-  private function map_mp($mp){
-      $img = null;
-      
-      if(isset($mp["mediapackage"]["attachments"]) and isset($mp["mediapackage"]["attachments"]["attachment"])){
-	foreach($mp["mediapackage"]["attachments"]["attachment"] as $attach){
-	  if(($attach['type'] == "presenter/search+preview") && ($attach['mimetype'] == "image/jpeg")){
-	    $img = $attach['url'];
-	  }
-	}
-      }
-
-      /*MIRO SI EXISTE EN LA BBDD */
-      $c = new Criteria();
-      $c->add(MmMatterhornPeer::MH_ID, $mp['id']);
-      $c->addJoin(MmPeer::ID, MmMatterhornPeer::ID);
-      $mm = MmPeer::doSelectOne($c);
-      
-      //Antes $mp["dcCreated"]
-
-      $date = strtotime($mp["mediapackage"]["start"]);
-      
-
-      return array("id" => $mp["id"], 
-		   "title" => $mp["dcTitle"], 
-		   "duration" => $mp["mediapackage"]["duration"], 
-                   'serial_id' => isset($mp["mediapackage"]["series"])?$mp["mediapackage"]["series"]:null,
-		   "date" => $date, 
-		   "img" => $img,
-		   'mm' => $mm);
   }
 
 
   private function map_mp_all($mp){
     $img = null;
-    foreach($mp['mediapackage']['attachments']['attachment'] as $attach){
+
+    foreach($mp['attachments']['attachment'] as $attach){
       if(($attach['type'] == 'presenter/search+preview') && ($attach['mimetype'] == 'image/jpeg')){
 	$img = $attach['url'];
       }
@@ -192,94 +126,17 @@ class matterhornActions extends sfActions
     $mm = MmPeer::doSelectOne($c);
 
     //Antes $mp["dcCreated"]
-    $date = strtotime($mp["mediapackage"]["start"]);
+    $date = strtotime($mp["start"]);
 
     //FIXME ojo sino viene datos
     return array('id' => $mp['id'], 
-		 'title' => isset($mp['dcTitle'])?$mp['dcTitle']:null, 
+		 'title' => isset($mp['title'])?$mp['title']:null, 
 		 'date' => $date, 
-		 'description' => isset($mp['dcDescription'])?$mp['dcDescription']:null,
-		 'subject' => isset($mp['dcSubject'])?$mp['dcSubject']:null,
-		 'language' => isset($mp['dcLanguage'])?$mp['dcLanguage']:null,
-		 'creator' => isset($mp['dcCreator'])?$mp['dcCreator']:null,
-		 'serial_id' => isset($mp["mediapackage"]["series"])?$mp["mediapackage"]["series"]:null,
-		 "duration" => $mp["mediapackage"]["duration"], 
+		 'serial_id' => isset($mp["series"])?$mp["series"]:null,
+		 "duration" => $mp["duration"], 
 		 'img' => isset($img)?$img:null,
 		 'mm' => $mm);
-    
   }
-
-  private function getAll($offset = 0, $limit = 5, $q = null)
-  {
-    $url_q = is_null($q)?'':('&q=' . urlencode($q));
-    $sal = $this->getMatterhorn($this->server . $this->search_endpoint . '?limit=' . $limit . '&offset=' . $offset . $url_q);
-
-    if ($sal["status"] !== 200) return false;
-    
-    //FIXME capturar si falla.
-    return json_decode($sal["var"], true);
-  }
-
-  private function get($id)
-  {
-    $sal = $this->getMatterhorn($this->server . $this->search_endpoint . "?id=" . $id); 
-	
-    if ($sal["status"] !== 200) return false;
-    
-    //FIXME capturar si falla.
-    return json_decode($sal["var"], true);
-  }
-
-  private function getInfo()
-  {
-    $sal = $this->getMatterhorn($this->server . '/info/me.json');
-	
-    if ($sal["status"] !== 200) return false;
-    
-    //FIXME capturar si falla.
-    return json_decode($sal["var"], true);
-  }
-
-
-  /**
-   *
-   * Hace una peticion al core de matterhorn
-   *
-   **/
-  private function getMatterhorn($url)
-  {
-
-    
-    $sal = array();
-    $ch = curl_init($url); 
-    
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_COOKIE, $this->cookie);
-    //curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Requested-Auth: Digest"));
-    
-    $sal["var"] = curl_exec($ch); 
-    $sal["error"] = curl_error($ch);
-    $sal["status"] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-    curl_close($ch);
-
-    if ($sal["status"] !== 200){
-      $this->init_cookie();
-      $sal = $this->getMatterhorn($url);
-    }
-
-    return $sal;
-    
-  }
-
-  private function init_cookie()
-  {    
-    $cookie = MmMatterhornPeer::getCookie($this->server, $this->user, $this->password);
-    $this->cookie = $cookie;
-    $this->getUser()->setAttribute('cookie', $cookie, 'tv_admin/matterhorn');
-    return true; 
-  }
-
 
 
   /**
@@ -303,12 +160,7 @@ class matterhornActions extends sfActions
       }
 
       /*OBTENGO DATOS*/
-      $sal = $this->getMatterhorn($this->server . "/series/" . $oc_id. ".json");     
-    
-      if ($sal["status"] !== 200) return false;
-      
-      $data = json_decode($sal["var"], true);
-
+      $data = MmMatterhornPeer::series($oc_id);
     
       /*SI NO EXISTE CREO UNA NUEVA SERIE*/
       $s = new Serial();
@@ -378,10 +230,14 @@ class matterhornActions extends sfActions
     foreach($langs as $lang){
       $mm->setCulture($lang);
       $mm->setTitle($mp['title']);
-      $mm->setSubtitle($mp['subject']);
+      /*
+      if (strlen($mp['subject']) > 0){
+	$mm->setSubtitle($mp['subject']);
+      }
       if (strlen($mp['description']) > 0){
           $mm->setDescription($mp['description']);
       }
+      */
     }
 
     $mm->setStatusId(MmPeer::STATUS_BLOQ);
@@ -392,7 +248,7 @@ class matterhornActions extends sfActions
     $mmMatterhorn->setId($mm->getId());
     $mmMatterhorn->setMhId($mp['id']); 
     $mmMatterhorn->setLanguageId(4);
-    $mmMatterhorn->setPlayerUrl($this->server . '/engage/ui/watch.html?id=%id%'); 
+    $mmMatterhorn->setPlayerUrl($this->engage_server . '/engage/ui/watch.html?id=%id%'); 
     $mmMatterhorn->setDuration($mp["duration"]/1000); 
     $mmMatterhorn->save();
    
