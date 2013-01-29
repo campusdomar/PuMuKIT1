@@ -85,6 +85,9 @@ class TranscodingPeer extends BaseTranscodingPeer
    */
   public static function execNext()
   {
+    //MIRO SI EXISTEN PROCESOS BLOQ
+    //TranscodingPeer::checkBloq();
+
     //MIRO SI HAY CPU LIBRE Y PROCESO EN COLA
     $cpu_free = CpuPeer::getFree();
     $next = TranscodingPeer::getNext();
@@ -106,6 +109,43 @@ class TranscodingPeer extends BaseTranscodingPeer
   }
   
   
+  /**
+   *
+   *
+   *
+   */
+  public static function checkBloq()
+  {
+    $criteria = new Criteria();
+    $criteria->add(TranscodingPeer::STATUS_ID, TranscodingPeer::STATUS_EJECUTANDOSE);
+    $jobs = TranscodingPeer::doSelect($criteria);
+
+    foreach($jobs as $job) {
+      if((time() - $job->getTimestart(null)) > 86400) {  //Mas de 1 dia = 86400;
+	//Mail.
+	$mail = new sfMail();
+	$mail->initialize();
+	$mail->setMailer('sendmail');
+	$mail->setCharset('utf-8');
+	
+	$mail->setSender(sfConfig::get('app_info_mail'), 'Email automatico');
+	$mail->setFrom(sfConfig::get('app_info_mail'), 'Email automatico');
+	
+	$mail->addAddress($trans->getEmail());
+	
+	$mail->setSubject('Tarea Bloqueada [' . $job->getId(). ']');
+	$mail->setBody("Id:" . $job->getId() . "\n Perfil:" . $job->getPerfil()->getName() . "\n");
+	$mail->send();
+
+	//Change State.
+	$job->setStatusId(TranscodingPeer::STATUS_ERROR); 
+	$job->save();
+	TranscodingPeer::execNext();
+      }
+    }
+  }
+
+
 
 
   /**
