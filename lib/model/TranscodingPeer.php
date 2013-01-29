@@ -94,7 +94,8 @@ class TranscodingPeer extends BaseTranscodingPeer
     if (($cpu_free)&&($next)&&($cpu_free->isActive())){
       //CAMBIO ESTADO Y ASIGNP CPU  (HACER UNA TRANSACION)
       $next->setCpuId($cpu_free->getId());
-      $next->setStatusId(2);
+      $trans->setTimestart('now');
+      $next->setStatusId(TranscodingPeer::STATUS_EJECUTANDOSE);
       $next->save();
       
       //EJECUTO
