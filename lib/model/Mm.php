@@ -643,6 +643,28 @@ class Mm extends BaseMm
     return LanguagePeer::doCount($c);
   }
 
+/**
+ * Returns array of mm's materials that match the extensions given (captions)
+ *
+ * @access public
+ * @param array $extensions - caption formats to search in mat_type.type
+ * @return file
+ */
+  public function getCaptions($extensions = array ('srt')){
+    if (!is_array($extensions)) $extensions = array($extensions);
+     
+    $c = new Criteria();
+    $c->addJoin(MatTypePeer::ID, MaterialPeer::MAT_TYPE_ID);
+     
+    foreach ($extensions as $ext){
+      $c->add(MatTypePeer::TYPE, $ext);
+    }
+    $c->add(MaterialPeer::MM_ID, $this->getId());
+     
+    return MaterialPeer::doSelectOne($c); // jwplayer can handle multiple subtitles if required
+  }
+
+
   /**
    *
    */

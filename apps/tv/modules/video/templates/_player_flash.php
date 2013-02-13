@@ -9,5 +9,11 @@
   s1.addParam('allowfullscreen','true');
   s1.addParam('allowscriptaccess','always');
   s1.addParam('flashvars','repeat=list&file=<?php echo $file->getUrl()?>');
+  	<?php $captions = $mmobj->getCaptions();
+	if ($captions != null):?>
+		s1.addVariable('plugins', 'captions-2');
+		s1.addVariable('captions.back', 'false'); <?php // Con true añade un rectángulo negro a los subtítulos ?>
+		s1.addVariable('captions.file', <?php echo "'" . $captions->getUrl() . "'"?>);
+	<?php endif?>
   s1.write('preview');
 </script>

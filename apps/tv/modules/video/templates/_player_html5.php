@@ -18,6 +18,16 @@
                  'title': 'video'
                  }],
     <?php endif ?>
+    <?php $captions = $mmobj->getCaptions();
+// UNTESTED !! see _player_flash.php
+    if ($captions != null):?>
+      'plugins': [{
+        'captions-2': [{
+          'back': 'false',
+          'file': <?php echo "'" . $captions->getUrl() . "'"?>
+        }]
+      }],
+    <?php endif?>
     skin: '/images/skins/newtubedark/newtubedark.zip',
     controlbar: 'bottom',
     repeat: 'list',

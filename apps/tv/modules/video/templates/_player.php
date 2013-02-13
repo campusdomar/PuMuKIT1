@@ -5,7 +5,7 @@
     <?php echo __('Data de celebración')?>: <?php echo $mmobj->getRecordDate('d/m/Y') ?>
   </div>
 
-  <?php include_partial('player_html5', array('file' => $file))?>
+  <?php include_partial('player_html5', array('file' => $file, 'mmobj' => $mmobj))?>
 
   <div class="num_view">
     <?php echo __('Visto')?>: 
