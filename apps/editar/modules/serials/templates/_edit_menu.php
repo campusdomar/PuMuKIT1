@@ -27,7 +27,7 @@
       </li>
 
       <li class="normal">
-        <?php echo m_link_to(image_tag('admin/bbuttons/'.$serial['mm_status_min'].$serial['mm_status_max'].'_inline.gif', array('alt' => '??', 'title'=>'estado', 'id'=>'table_serials_status_' . $serial['id'])) . " Modificar difusi&oacute;n de los objetos multimedia", 'serials/changePub?serial=' . $serial['id'], array('title' => 'Cambiar difusion de los objetos multimedia'), array('width' => '925')) ?>
+        <?php echo m_link_to(image_tag('admin/bbuttons/00_inline.gif', array('alt' => '??', 'title'=>'estado', 'id'=>'table_serials_status_' . $serial['id'])) . " Modificar difusi&oacute;n de los objetos multimedia", 'serials/changePub?serial=' . $serial['id'], array('title' => 'Cambiar difusion de los objetos multimedia'), array('width' => '925')) ?>
       </li>
 
       <li class="normal">
