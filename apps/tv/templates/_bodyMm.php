@@ -81,7 +81,7 @@
   <!-- MATTERHORN -->
           <?php if($mh = MmMatterhornPeer::retrieveByPK($mm->getId())): ?>
           <div id="material" class="file matterhorn">
-            <a href="<?php echo url_for('video/index?id=' . $mm->getId())?>">Video<?php echo ($mm->getBroadcast()->getBroadcastType() == "pub")?"":" privado"?></a>
+            <a href="<?php echo url_for('video/index?id=' . $mm->getId())?>">Video-MH<?php echo ($mm->getBroadcast()->getBroadcastType() == "pub")?"":" privado"?></a>
         &nbsp;|&nbsp;&nbsp;<span class="language"><?php echo $mh->getLanguage()->getName() ?></span> 
         &nbsp;|&nbsp; <?php echo $mh->getDurationString() ?>
         &nbsp;|&nbsp; <?php echo __('Visto:') ?> <span class="numView"><?php echo $mh->getNumView()?></span><?php echo (($mh->getNumView() == 1)? __(' vez') : __(' veces'))?>
