@@ -35,7 +35,7 @@ class MmPeer extends BaseMmPeer
    */
   public static function doList(Criteria $criteria, $culture = null)
   {
-    $serials = array();
+    $mms = array();
     // Clonamos el objeto, para evitar modificar el objeto original
     $criteria = clone $criteria;
     // Eliminanos las columnas de selección en caso de que esten definidas
@@ -54,23 +54,24 @@ class MmPeer extends BaseMmPeer
     $criteria->addJoin(self::ID, PicMmPeer::OTHER_ID, Criteria::LEFT_JOIN );
     $criteria->addJoin(PicMmPeer::PIC_ID, PicPeer::ID, Criteria::LEFT_JOIN );
     $criteria->addJoin(self::ID, PubChannelMmPeer::MM_ID, Criteria::LEFT_JOIN );
-    $criteria->add(SerialI18nPeer::CULTURE, $culture );
+    $criteria->add(MmI18nPeer::CULTURE, $culture );
     $criteria->addGroupByColumn(MmPeer::ID);
     //Recuperamos los registros y generamos el arreglo de hashes
     $rs = self::doSelectRS($criteria);
     while ($rs->next())
       {
-	$serial['id']          = $rs->getInt(1);
-	$serial['status']     = $rs->getInt(2);
-	$serial['announce']    = $rs->getBoolean(3);
-	$serial['pic_url']     = ($rs->getString(4)?$rs->getString(4):'/images/sin_foto.jpg');
-	$serial['title']       = $rs->getString(5);
-	$serial['publicdate']  = date('d/m/Y', strtotime($rs->getTimestamp(6)));
-	$serial['recorddate']  = date('d/m/Y', strtotime($rs->getTimestamp(7)));
-        $serial['has_pub_channel']  = (strlen($rs->getString(8) != 0) ? '1' : '');
-	$serials[] = $serial;
+        $mm = array();
+	$mm['id']          = $rs->getInt(1);
+	$mm['status']     = $rs->getInt(2);
+	$mm['announce']    = $rs->getBoolean(3);
+	$mm['pic_url']     = ($rs->getString(4)?$rs->getString(4):'/images/sin_foto.jpg');
+	$mm['title']       = $rs->getString(5);
+	$mm['publicdate']  = date('d/m/Y', strtotime($rs->getTimestamp(6)));
+	$mm['recorddate']  = date('d/m/Y', strtotime($rs->getTimestamp(7)));
+        $mm['has_pub_channel']  = (strlen($rs->getString(8) != 0) ? '1' : '');
+	$mms[] = $mm;
       }
-    return $serials;
+    return $mms;
   }
 
   /**
