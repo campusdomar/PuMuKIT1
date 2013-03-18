@@ -44,7 +44,7 @@ if (!isset($username)) {
       var_dump("ANTES");
 
       //cambiamos path del php
-      $tempDir = '/tmp/'.sha1(time())."/";
+      $tempDir = '/tmp/'.sha1(time().rand())."/";
       @mkdir($tempDir, 0777, true);
     
       $dcurrent = getcwd();
