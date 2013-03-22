@@ -117,7 +117,7 @@ class SfPeerBuilder extends PHP5ComplexPeerBuilder
     \$c->addJoin(".$pk.", ".$i18nPk.");
     \$c->add(".$cultureColumnName.", \$culture);
 
-    ".(($this->getTable()->getColumn('rank'))?("\$c->addAscendingOrderByColumn(self::RANK);"):(""))."
+    ".(($this->getTable()->getColumn('rank'))?("if(count(\$c->getOrderByColumns()) == 0) \$c->addAscendingOrderByColumn(self::RANK);"):(""))."
 
     \$rs = ".$this->basePeerClassname."::doSelect(\$c, \$con);
     \$results = array();
@@ -207,7 +207,8 @@ class SfPeerBuilder extends PHP5ComplexPeerBuilder
       $tmp = str_replace('$criteria->setDbName(self::DATABASE_NAME);',
 			     "\$criteria->setDbName(self::DATABASE_NAME);\n\n".
 			     "        //ADD DEFAULT ORDER\n".
-			     "        \$criteria->addAscendingOrderByColumn(self::RANK);", $tmp);
+                             "        if(count(\$criteria->getOrderByColumns()) == 0)\n".
+			     "            \$criteria->addAscendingOrderByColumn(self::RANK);", $tmp);
     }
 
 
