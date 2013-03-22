@@ -74,7 +74,7 @@ class picsActions extends sfActions
       $pic_object->save();
     }elseif($this->getRequestParameter('type') == 'pic'){
       $aux = 'Pic'.ucfirst($this->que);
-      if (call_user_func(array($auxPeer, 'retrieveByPk'), $this->getRequestParameter('id'), $this->object_id) == null){
+      if (call_user_func(array($aux . 'Peer', 'retrieveByPk'), $this->getRequestParameter('id'), $this->object_id) == null){
 	$pic_object = new $aux;
 	$pic_object->setPicId($this->getRequestParameter('id'));
 	$pic_object->setOtherId($this->object_id);
