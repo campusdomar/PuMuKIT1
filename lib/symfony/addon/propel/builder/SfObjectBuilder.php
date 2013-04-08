@@ -52,6 +52,7 @@ require_once \''.$this->getFilePath($this->getStubObjectBuilder()->getPackage().
   protected function addClassBody(&$script)
   {
     parent::addClassBody($script);
+    $this->addClearAllReferences($script);
 
     if ($this->getTable()->getAttribute('isI18N'))
     {
