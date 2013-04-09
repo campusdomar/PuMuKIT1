@@ -232,6 +232,7 @@ class Transcoding extends BaseTranscoding
     if (!is_null($movie)){
       $file->setResolutionVer($movie->getFrameHeight());
       $file->setResolutionHor($movie->getFrameWidth());
+      $file->setAudio(!$movie->hasVideo());  //MASTER_COPY error in with $file->setAudio($this->getPerfil()->getAudio());
     }
     
     $file->setDuration($this->getDuration());
