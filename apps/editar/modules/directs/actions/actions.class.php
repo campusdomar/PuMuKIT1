@@ -120,9 +120,15 @@ class directsActions extends sfActions
 
 
     $calidades = $this->getRequestParameter('calidad');
-    //FIXME.
-    $ress = $this->getRequestParameter('resolutions');
- 
+    
+    $ress = ResolutionPeer::retrieveByPK($this->getRequestParameter('resolution_id', ' '));
+    
+    //Fixed. This asigns a resolution to direct
+    if ($ress != null){
+      $direct->setResolutionHor($ress->getHor());
+      $direct->setResolutionVer($ress->getVer());
+    }
+    
     $direct->setCalidades(implode("_",array_merge($calidades,$ress)));
 
 
