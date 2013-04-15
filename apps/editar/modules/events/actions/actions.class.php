@@ -223,6 +223,8 @@ class eventsActions extends sfActions
     }else{
       $this->div = '';
     }
+
+    $this->setTemplate('edit');
   }
 
 
