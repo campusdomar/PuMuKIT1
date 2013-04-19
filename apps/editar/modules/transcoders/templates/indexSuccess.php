@@ -30,7 +30,7 @@
 
 <?php echo javascript_tag("
         update_file = new Ajax.PeriodicalUpdater('list_transcoders', '/editar.php/transcoders/list', {
-          method: 'post', frequency: 8, decay: 1
+          evalScripts:true, method: 'post', frequency: 8, decay: 1
         });
 ") ?>
 

@@ -23,7 +23,7 @@
         values: $R(1,<?php echo $total ?>).toArray(),
         sliderValue: <?php echo $page ?>,
         onSlide: function(v){$("num_pag_<?php echo $name?>").innerHTML= (v);},
-        onChange: function(v){new Ajax.Updater("<?php echo $div ?>", "<?php url_for($url)?>/page/"+v, {asynchronous:true, evalScripts:true})}
+        onChange: function(v){new Ajax.Updater("<?php echo $div ?>", "<?php echo url_for($url)?>/page/"+v, {asynchronous:true, evalScripts:true})}
       } );
     
       $("handle_<?php echo $name?>").show();    <?php  //evito efecto de empezar en cero y ponerse en su posicion ?>
