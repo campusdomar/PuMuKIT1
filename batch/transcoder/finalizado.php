@@ -75,6 +75,7 @@ curl_setopt ($ch, CURLOPT_POSTFIELDS, "ruta=$linea_comandos");
 $var = curl_exec($ch); 
 $error = curl_error($ch);
 
+Propel::initialize();
 
 //analizo archivo
 try {
