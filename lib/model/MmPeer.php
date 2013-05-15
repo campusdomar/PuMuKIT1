@@ -26,6 +26,120 @@ class MmPeer extends BaseMmPeer
   const STATUS_BLOQ = 1;
   const STATUS_HIDE = 2;
 
+  static public function getForLuceneQuery($query, $limit = 100)
+  {
+    $hits = self::getLuceneIndex()->find($query);
+
+    $pks = array();
+    foreach ($hits as $hit){
+      $pks[] = $hit->pk;
+    }
+ 
+    $criteria = new Criteria();
+    $criteria->add(self::ID, $pks, Criteria::IN);
+    $criteria->setLimit($limit);
+ 
+    return self::doSelect(($criteria));
+  }
+
+/**
+ * Performs a faceted search using a lucene (text-only) query and
+ * criteria to limit the list.
+ */
+  static public function getFacetedSearch($unesco, $genre, $only, $duration, $year, $query, $limit = 10, $offset = 0)
+  {
+    $out = array();
+    $c = new Criteria();
+
+    // Add lucene text search hits
+    if ($query != '' && $query != null && $query != "\n"){   
+      $hits = self::getLuceneIndex()->find($query);
+      $pks  = array();
+      foreach ($hits as $hit){
+          $pks[] = $hit->pk;
+      }   
+      $c->add(self::ID, $pks, Criteria::IN);
+    }
+
+    // Add select conditions to criteria
+    if ($unesco != 'all' && $unesco != null && $unesco != ''){
+      $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
+      $c->addJoin(CategoryMmPeer::CATEGORY_ID, CategoryPeer::ID);
+      $c->add(CategoryPeer::COD, $unesco);
+    }
+
+    if ($genre != 'all' && $genre != null && $genre != ''){
+      $c->add(self::GENRE_ID, $genre);
+    }
+  
+    if ($only == 'audio'){
+      $c->add(self::AUDIO, 1);
+    
+    } else if ($only == 'video'){
+      $c->add(self::AUDIO, 0);
+    }
+
+    if (($duration = intval($duration)) != 0){
+      $duration_sec = 60 * abs($duration);
+      $c->add(self::DURATION, $duration_sec, ($duration < 0)?Criteria::LESS_EQUAL:Criteria::GREATER_EQUAL);
+    }
+
+    if (intval($year) != 0){
+      $first_day = $year . '-01-01';
+      $last_day  = ($year + 1) . '-01-01'; // por defecto, h:m:s = 00:00:00
+      $c1 = $c->getNewCriterion(MmPeer::RECORDDATE, $first_day, Criteria::GREATER_EQUAL);
+      $c2 = $c->getNewCriterion(MmPeer::RECORDDATE, $last_day, Criteria::LESS_EQUAL);
+      $c1->addAnd($c2);
+      $c->add($c1);
+    }
+
+    $c->setDistinct(true);
+    
+    $c_count = clone($c);
+    $out['total'] = self::doCount($c_count);
+
+    $c->setLimit($limit);
+    $c->setOffset($offset);
+    $c->addDescendingOrderByColumn(MmPeer::RECORDDATE);
+
+    $out['mms'] = self::doSelect($c);
+    
+    return $out;
+  }
+
+  static public function getLuceneIndex()
+  {
+    //    ProjectConfiguration::registerZend();
+    
+    if (file_exists($index = self::getLuceneIndexFile()))
+      {
+	return Zend_Search_Lucene::open($index);
+      }
+    else
+      {
+	return Zend_Search_Lucene::create($index);
+      }
+  }
+  
+  static public function getLuceneIndexFile()
+  {
+    return sfConfig::get('sf_data_dir').'/pumukit.index';
+  }
+
+
+  
+  public static function doDeleteAll($con = null)
+  {
+    if (file_exists($index = self::getLuceneIndexFile()))
+      {
+	sfToolkit::clearDirectory($index);
+	rmdir($index);
+      }
+    
+    return parent::doDeleteAll($con);
+  }
+
+
 
   /**
    * Optimizacion de doSect para evitar la hifratacion
