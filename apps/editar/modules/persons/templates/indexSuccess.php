@@ -29,6 +29,7 @@
       <option value="create">Crear nuevo</option>
       <option value="hono_person_sel">Separar honores de selecionados</option>
       <option value="hono_person_all">Separar honores de todos</option>
+      <option value="merge_person_sel">Unificar varias personas</option>
     </select>
     
   </div>

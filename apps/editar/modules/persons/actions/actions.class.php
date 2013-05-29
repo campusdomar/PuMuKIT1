@@ -424,6 +424,53 @@ class personsActions extends sfActions
     return $this->renderComponent('persons', 'list');
   }
 
+  /**
+   * --  MERGE -- /editar.php/merge
+   * Junta 2 o más personas en una (la que tenga más vídeos).
+   * Reasigna todo lo que haya vinculado con las absorbidas.
+   * Accion asincrona. Acceso privado. Parametros id por URL o ids JSON por POST o all por url.
+   *
+   */
+  public function executeMerge()
+  {
+
+    if (!$this->hasRequestParameter('ids')){
+      $this->msg_alert = array('info', "No ha seleccionado ninguna persona");
+  
+      return $this->renderComponent('persons', 'list');
+    } 
+
+    $person_ids = json_decode($this->getRequestParameter('ids'));
+    
+    // Programación defensiva: js.js no debería dejar pasar si hay menos de 2 $person_ids
+    if (1 > count($person_ids)){
+      $this->msg_alert = array('info', "No ha seleccionado ninguna persona");
+  
+      return $this->renderComponent('persons', 'list');
+    }
+    if (1 == count($person_ids)){
+      // $this->msg_alert = array('info', "Autofusión aún no está implementada. Se necesita al menos dos personas para una fusión satisfactoria");
+      $this->msg_alert = array('info', "Número insuficiente de personas para unificar");
+  
+      return $this->renderComponent('persons', 'list');
+    }
+
+    // $this->msg_alert = array('info', "Combinando personas"); 
+  
+    $people        = PersonPeer::retrieveByPks($person_ids);
+    $sorted_people = $this->getPeopleSortedByMmsNumberAndNameLength($people);
+    $merger        = $sorted_people[0];
+    $acquisitions  = array_slice($sorted_people, 1);
+    foreach ($acquisitions as $person){
+      if ($person->getId() != $merger->getId()){
+        $this->mergePerson1IntoPerson2($person, $merger);
+      } 
+    }
+
+    $this->msg_alert = array('info', "Unificando personas"); 
+  
+    return $this->renderComponent('persons', 'list');
+  }
 
   /**
    * --  AUTOCOMPLETE -- /editar.php/persons/autocomplete
@@ -550,6 +597,100 @@ class personsActions extends sfActions
 
     $this->getUser()->setAttribute('id', $person->getId(), 'tv_admin/person');
     return $person->getId();
+  }
+
+  private function getPeopleSortedByMmsNumberAndNameLength($people)
+  {
+    $id_mms        = array();
+    $id_namelength = array();
+    foreach ($people as $person){
+      $id_mms[$person->getId()] = $person->countMmPersons();
+      $id_namelength[$person->getId()] = strlen(trim($person->getName()));
+    }
+    array_multisort($id_mms, SORT_DESC, $id_namelength, SORT_DESC, $people);
+
+    return $people;
+  }
+
+  private function mergePerson1IntoPerson2($person1, $merger)
+  {
+    if (!$person1 || !$merger){
+      // echo "Error al fusionar personas, ids incorrectos"
+      return false;
+    }
+    $merger_id  = $merger->getId();
+    $person1_id = $person1->getId();
+    // echo "\n<br/>Asignando todo lo relacionado con " . $person1_id . " - " . $person1->getName() . " (" . $person1->countMmPersons() . ") a " . $merger->getId() . " - " . $merger->getName() . " (" . $merger->countMmPersons() . ")\n<br>";
+    
+    $mmps = $person1->getMmPersons();
+    foreach ($mmps as $mmp){
+      $resultado = $this->actualiza_mmp_nuevo_person_id($mmp, $merger_id);
+    }
+
+    $mmtps = $person1->getMmTemplatePersons();   
+    foreach ($mmtps as $mmtp){
+      $resultado = $this->actualiza_mmtp_nuevo_person_id($mmtp, $merger_id);
+    }
+
+    // No probado (de momento no se usa pic_person). Probablemente no deje actualizar y haya que crear nuevos pics.
+    // if (!$merger->getPicPersons() && ($pps = $person1->getPicPersons())){  
+    //   $pic_person = $pps[0];
+    //   $pic_person->setOtherId($merger_id);
+    //   $pic_person->save();
+    // }
+    
+    $person1->delete();
+  }
+  
+// Importante: como no funciona cambiar un valor y guardar el mismo objeto.
+// ej.: $mmtp->setPersonId(nuevo) y $mmtp->save()
+// creo uno nuevo y borro el original.
+
+   /**
+   * @param MmTemplatePerson $mmtp
+   * @param Integer $merger_id
+   * @return Boolean (existía previamente el nuevo objeto || resultado del save())
+   */
+  private function actualiza_mmtp_nuevo_person_id($mmtp, $merger_id){
+    $new_mmtp = new MmTemplatePerson();
+    $new_mmtp->setMmTemplateId($mmtp->getMmTemplateId());
+    $new_mmtp->setRoleId($mmtp->getRoleId());
+    $new_mmtp->setPersonId($merger_id);
+
+    if ($already_present = MmTemplatePersonPeer::retrieveByPk($new_mmtp->getMmTemplateId(), $new_mmtp->getPersonId(), $new_mmtp->getRoleId())){
+      $result = true;
+      $mmtp->delete();
+      // sf rompe si se intenta guardar otro mmtemplate con las mismas claves primarias.
+    } else if ($result = $new_mmtp->save()){
+      $mmtp->delete();
+    } else {
+      // Hay un error imprevisto al crear el mmtp actualizado
+    }
+
+    return $result;
+  }
+  /**
+   * @param MmPerson $mmtp
+   * @param Integer $merger_id
+   * @return Boolean (existía previamente el nuevo objeto || resultado del save())
+   */
+  private function actualiza_mmp_nuevo_person_id($mmp, $merger_id){
+    $new_mmp = new MmPerson();
+    $new_mmp->setMmId($mmp->getMmId());
+    $new_mmp->setRoleId($mmp->getRoleId());
+    $new_mmp->setPersonId($merger_id);
+
+    if ($already_present = MmPersonPeer::retrieveByPk($new_mmp->getMmId(), $new_mmp->getPersonId(), $new_mmp->getRoleId())){
+      $result = true;
+      $mmp->delete();
+      // sf rompe si se intenta guardar otro mm con las mismas claves primarias.
+    } else if ($result = $new_mmp->save()){
+      $mmp->delete();
+    } else {
+      // Hay un error imprevisto al crear el mmp actualizado
+    }
+
+    return $result;
   }
 }
 
