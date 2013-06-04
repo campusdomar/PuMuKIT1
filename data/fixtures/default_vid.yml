@@ -63,12 +63,12 @@ RoleI18n:
   RoleI18n_3_gl: 
     id: Role_3
     culture: gl
-    name: Postproducion
+    name: Postproducción
     text: 
   RoleI18n_3_es: 
     id: Role_3
     culture: es
-    name: Postproducion
+    name: Postproducción
     text: 
   RoleI18n_3_en: 
     id: Role_3
