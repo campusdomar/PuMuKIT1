@@ -26,7 +26,7 @@ Escriba el nombre de la persona que desea a&ntilde;adir. En caso de que ya exist
 <ul class="tv_admin_actions">
   <li>
     <?php echo button_to_function('Nuevo', '
-      var aux=$("name").value;
+      var aux=$("name").value.strip();
       if (aux == "nombre a buscar") aux="";
       Modalbox.show("/editar.php/persons/createrelation'.$template.'/mm/'.$mm_id.'/role/'.$role_id.'/name/" + aux, 
       {title:"Editar Nueva Novedad", width:800}); return false;', array ('class' => 'tv_admin_action_create')) 
@@ -35,9 +35,9 @@ Escriba el nombre de la persona que desea a&ntilde;adir. En caso de que ya exist
   <li>
    <?php //if(isNaN(parseInt($('name').value))) {  ?>
     <input class="tv_admin_action_create" onclick="
-      if(/^\d+ - /.test($('name').value)) { 
+      if(/^\d+ - /.test($('name').value.strip())) { 
         new Ajax.Updater('<?php echo $role_id?>_person_mms', 
-                         '/editar.php/persons/link<?php echo $template?>/preview/true/mm/<?php echo $mm_id?>/role/<?php echo $role_id?>/person/'+parseInt($('name').value), 
+                         '/editar.php/persons/link<?php echo $template?>/preview/true/mm/<?php echo $mm_id?>/role/<?php echo $role_id?>/person/'+parseInt($('name').value.strip()), 
                          {asynchronous:true, evalScripts:true}
         ); 
         Modalbox.hide();   
@@ -51,7 +51,7 @@ Escriba el nombre de la persona que desea a&ntilde;adir. En caso de que ya exist
 
 <!--
   <li>
-<?php echo button_to_function('Info', 'Modalbox.show("/editar.php/persons/createFromPerson/mm/'.$mm_id.'/role/'.$role_id.'/name/" + $("name").value, {title:"Editar Nueva Novedad", width:800}); return false;', array ('class' => 'tv_admin_action_filter')) ?>
+<?php echo button_to_function('Info', 'Modalbox.show("/editar.php/persons/createFromPerson/mm/'.$mm_id.'/role/'.$role_id.'/name/" + $("name").value.strip(), {title:"Editar Nueva Novedad", width:800}); return false;', array ('class' => 'tv_admin_action_filter')) ?>
   </li>
 -->
 
