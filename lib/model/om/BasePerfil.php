@@ -55,6 +55,13 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 
 
 	/**
+	 * The value for the master field.
+	 * @var        boolean
+	 */
+	protected $master = false;
+
+
+	/**
 	 * The value for the format field.
 	 * @var        string
 	 */
@@ -73,6 +80,13 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 	 * @var        string
 	 */
 	protected $mime_type;
+
+
+	/**
+	 * The value for the accepted_mime_type field.
+	 * @var        string
+	 */
+	protected $accepted_mime_type;
 
 
 	/**
@@ -337,6 +351,17 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 	}
 
 	/**
+	 * Get the [master] column value.
+	 * 
+	 * @return     boolean
+	 */
+	public function getMaster()
+	{
+
+		return $this->master;
+	}
+
+	/**
 	 * Get the [format] column value.
 	 * 
 	 * @return     string
@@ -367,6 +392,17 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 	{
 
 		return $this->mime_type;
+	}
+
+	/**
+	 * Get the [accepted_mime_type] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getAcceptedMimeType()
+	{
+
+		return $this->accepted_mime_type;
 	}
 
 	/**
@@ -622,6 +658,22 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 	} // setWizard()
 
 	/**
+	 * Set the value of [master] column.
+	 * 
+	 * @param      boolean $v new value
+	 * @return     void
+	 */
+	public function setMaster($v)
+	{
+
+		if ($this->master !== $v || $v === false) {
+			$this->master = $v;
+			$this->modifiedColumns[] = PerfilPeer::MASTER;
+		}
+
+	} // setMaster()
+
+	/**
 	 * Set the value of [format] column.
 	 * 
 	 * @param      string $v new value
@@ -686,6 +738,28 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 		}
 
 	} // setMimeType()
+
+	/**
+	 * Set the value of [accepted_mime_type] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     void
+	 */
+	public function setAcceptedMimeType($v)
+	{
+
+		// Since the native PHP type for this column is string,
+		// we will cast the input to a string (if it is not).
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->accepted_mime_type !== $v) {
+			$this->accepted_mime_type = $v;
+			$this->modifiedColumns[] = PerfilPeer::ACCEPTED_MIME_TYPE;
+		}
+
+	} // setAcceptedMimeType()
 
 	/**
 	 * Set the value of [extension] column.
@@ -1008,39 +1082,43 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 
 			$this->wizard = $rs->getBoolean($startcol + 4);
 
-			$this->format = $rs->getString($startcol + 5);
+			$this->master = $rs->getBoolean($startcol + 5);
 
-			$this->codec = $rs->getString($startcol + 6);
+			$this->format = $rs->getString($startcol + 6);
 
-			$this->mime_type = $rs->getString($startcol + 7);
+			$this->codec = $rs->getString($startcol + 7);
 
-			$this->extension = $rs->getString($startcol + 8);
+			$this->mime_type = $rs->getString($startcol + 8);
 
-			$this->resolution_hor = $rs->getInt($startcol + 9);
+			$this->accepted_mime_type = $rs->getString($startcol + 9);
 
-			$this->resolution_ver = $rs->getInt($startcol + 10);
+			$this->extension = $rs->getString($startcol + 10);
 
-			$this->bitrate = $rs->getString($startcol + 11);
+			$this->resolution_hor = $rs->getInt($startcol + 11);
 
-			$this->framerate = $rs->getInt($startcol + 12);
+			$this->resolution_ver = $rs->getInt($startcol + 12);
 
-			$this->channels = $rs->getInt($startcol + 13);
+			$this->bitrate = $rs->getString($startcol + 13);
 
-			$this->audio = $rs->getBoolean($startcol + 14);
+			$this->framerate = $rs->getInt($startcol + 14);
 
-			$this->bat = $rs->getString($startcol + 15);
+			$this->channels = $rs->getInt($startcol + 15);
 
-			$this->file_cfg = $rs->getString($startcol + 16);
+			$this->audio = $rs->getBoolean($startcol + 16);
 
-			$this->streamserver_id = $rs->getInt($startcol + 17);
+			$this->bat = $rs->getString($startcol + 17);
 
-			$this->app = $rs->getString($startcol + 18);
+			$this->file_cfg = $rs->getString($startcol + 18);
 
-			$this->rel_duration_size = $rs->getFloat($startcol + 19);
+			$this->streamserver_id = $rs->getInt($startcol + 19);
 
-			$this->rel_duration_trans = $rs->getFloat($startcol + 20);
+			$this->app = $rs->getString($startcol + 20);
 
-			$this->prescript = $rs->getString($startcol + 21);
+			$this->rel_duration_size = $rs->getFloat($startcol + 21);
+
+			$this->rel_duration_trans = $rs->getFloat($startcol + 22);
+
+			$this->prescript = $rs->getString($startcol + 23);
 
 			$this->resetModified();
 
@@ -1048,7 +1126,7 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 			$this->setCulture(sfContext::getInstance()->getUser()->getCulture());
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 22; // 22 = PerfilPeer::NUM_COLUMNS - PerfilPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 24; // 24 = PerfilPeer::NUM_COLUMNS - PerfilPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Perfil object", $e);
@@ -1439,54 +1517,60 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 				return $this->getWizard();
 				break;
 			case 5:
-				return $this->getFormat();
+				return $this->getMaster();
 				break;
 			case 6:
-				return $this->getCodec();
+				return $this->getFormat();
 				break;
 			case 7:
-				return $this->getMimeType();
+				return $this->getCodec();
 				break;
 			case 8:
-				return $this->getExtension();
+				return $this->getMimeType();
 				break;
 			case 9:
-				return $this->getResolutionHor();
+				return $this->getAcceptedMimeType();
 				break;
 			case 10:
-				return $this->getResolutionVer();
+				return $this->getExtension();
 				break;
 			case 11:
-				return $this->getBitrate();
+				return $this->getResolutionHor();
 				break;
 			case 12:
-				return $this->getFramerate();
+				return $this->getResolutionVer();
 				break;
 			case 13:
-				return $this->getChannels();
+				return $this->getBitrate();
 				break;
 			case 14:
-				return $this->getAudio();
+				return $this->getFramerate();
 				break;
 			case 15:
-				return $this->getBat();
+				return $this->getChannels();
 				break;
 			case 16:
-				return $this->getFileCfg();
+				return $this->getAudio();
 				break;
 			case 17:
-				return $this->getStreamserverId();
+				return $this->getBat();
 				break;
 			case 18:
-				return $this->getApp();
+				return $this->getFileCfg();
 				break;
 			case 19:
-				return $this->getRelDurationSize();
+				return $this->getStreamserverId();
 				break;
 			case 20:
-				return $this->getRelDurationTrans();
+				return $this->getApp();
 				break;
 			case 21:
+				return $this->getRelDurationSize();
+				break;
+			case 22:
+				return $this->getRelDurationTrans();
+				break;
+			case 23:
 				return $this->getPrescript();
 				break;
 			default:
@@ -1514,23 +1598,25 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 			$keys[2] => $this->getRank(),
 			$keys[3] => $this->getDisplay(),
 			$keys[4] => $this->getWizard(),
-			$keys[5] => $this->getFormat(),
-			$keys[6] => $this->getCodec(),
-			$keys[7] => $this->getMimeType(),
-			$keys[8] => $this->getExtension(),
-			$keys[9] => $this->getResolutionHor(),
-			$keys[10] => $this->getResolutionVer(),
-			$keys[11] => $this->getBitrate(),
-			$keys[12] => $this->getFramerate(),
-			$keys[13] => $this->getChannels(),
-			$keys[14] => $this->getAudio(),
-			$keys[15] => $this->getBat(),
-			$keys[16] => $this->getFileCfg(),
-			$keys[17] => $this->getStreamserverId(),
-			$keys[18] => $this->getApp(),
-			$keys[19] => $this->getRelDurationSize(),
-			$keys[20] => $this->getRelDurationTrans(),
-			$keys[21] => $this->getPrescript(),
+			$keys[5] => $this->getMaster(),
+			$keys[6] => $this->getFormat(),
+			$keys[7] => $this->getCodec(),
+			$keys[8] => $this->getMimeType(),
+			$keys[9] => $this->getAcceptedMimeType(),
+			$keys[10] => $this->getExtension(),
+			$keys[11] => $this->getResolutionHor(),
+			$keys[12] => $this->getResolutionVer(),
+			$keys[13] => $this->getBitrate(),
+			$keys[14] => $this->getFramerate(),
+			$keys[15] => $this->getChannels(),
+			$keys[16] => $this->getAudio(),
+			$keys[17] => $this->getBat(),
+			$keys[18] => $this->getFileCfg(),
+			$keys[19] => $this->getStreamserverId(),
+			$keys[20] => $this->getApp(),
+			$keys[21] => $this->getRelDurationSize(),
+			$keys[22] => $this->getRelDurationTrans(),
+			$keys[23] => $this->getPrescript(),
 		);
 		return $result;
 	}
@@ -1578,54 +1664,60 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 				$this->setWizard($value);
 				break;
 			case 5:
-				$this->setFormat($value);
+				$this->setMaster($value);
 				break;
 			case 6:
-				$this->setCodec($value);
+				$this->setFormat($value);
 				break;
 			case 7:
-				$this->setMimeType($value);
+				$this->setCodec($value);
 				break;
 			case 8:
-				$this->setExtension($value);
+				$this->setMimeType($value);
 				break;
 			case 9:
-				$this->setResolutionHor($value);
+				$this->setAcceptedMimeType($value);
 				break;
 			case 10:
-				$this->setResolutionVer($value);
+				$this->setExtension($value);
 				break;
 			case 11:
-				$this->setBitrate($value);
+				$this->setResolutionHor($value);
 				break;
 			case 12:
-				$this->setFramerate($value);
+				$this->setResolutionVer($value);
 				break;
 			case 13:
-				$this->setChannels($value);
+				$this->setBitrate($value);
 				break;
 			case 14:
-				$this->setAudio($value);
+				$this->setFramerate($value);
 				break;
 			case 15:
-				$this->setBat($value);
+				$this->setChannels($value);
 				break;
 			case 16:
-				$this->setFileCfg($value);
+				$this->setAudio($value);
 				break;
 			case 17:
-				$this->setStreamserverId($value);
+				$this->setBat($value);
 				break;
 			case 18:
-				$this->setApp($value);
+				$this->setFileCfg($value);
 				break;
 			case 19:
-				$this->setRelDurationSize($value);
+				$this->setStreamserverId($value);
 				break;
 			case 20:
-				$this->setRelDurationTrans($value);
+				$this->setApp($value);
 				break;
 			case 21:
+				$this->setRelDurationSize($value);
+				break;
+			case 22:
+				$this->setRelDurationTrans($value);
+				break;
+			case 23:
 				$this->setPrescript($value);
 				break;
 		} // switch()
@@ -1656,23 +1748,25 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setRank($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setDisplay($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setWizard($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setFormat($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCodec($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setMimeType($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setExtension($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setResolutionHor($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setResolutionVer($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setBitrate($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setFramerate($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setChannels($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setAudio($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setBat($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setFileCfg($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setStreamserverId($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setApp($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setRelDurationSize($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setRelDurationTrans($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setPrescript($arr[$keys[21]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMaster($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setFormat($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCodec($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setMimeType($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setAcceptedMimeType($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setExtension($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setResolutionHor($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setResolutionVer($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setBitrate($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setFramerate($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setChannels($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setAudio($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setBat($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setFileCfg($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setStreamserverId($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setApp($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setRelDurationSize($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setRelDurationTrans($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setPrescript($arr[$keys[23]]);
 	}
 
 	/**
@@ -1689,9 +1783,11 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(PerfilPeer::RANK)) $criteria->add(PerfilPeer::RANK, $this->rank);
 		if ($this->isColumnModified(PerfilPeer::DISPLAY)) $criteria->add(PerfilPeer::DISPLAY, $this->display);
 		if ($this->isColumnModified(PerfilPeer::WIZARD)) $criteria->add(PerfilPeer::WIZARD, $this->wizard);
+		if ($this->isColumnModified(PerfilPeer::MASTER)) $criteria->add(PerfilPeer::MASTER, $this->master);
 		if ($this->isColumnModified(PerfilPeer::FORMAT)) $criteria->add(PerfilPeer::FORMAT, $this->format);
 		if ($this->isColumnModified(PerfilPeer::CODEC)) $criteria->add(PerfilPeer::CODEC, $this->codec);
 		if ($this->isColumnModified(PerfilPeer::MIME_TYPE)) $criteria->add(PerfilPeer::MIME_TYPE, $this->mime_type);
+		if ($this->isColumnModified(PerfilPeer::ACCEPTED_MIME_TYPE)) $criteria->add(PerfilPeer::ACCEPTED_MIME_TYPE, $this->accepted_mime_type);
 		if ($this->isColumnModified(PerfilPeer::EXTENSION)) $criteria->add(PerfilPeer::EXTENSION, $this->extension);
 		if ($this->isColumnModified(PerfilPeer::RESOLUTION_HOR)) $criteria->add(PerfilPeer::RESOLUTION_HOR, $this->resolution_hor);
 		if ($this->isColumnModified(PerfilPeer::RESOLUTION_VER)) $criteria->add(PerfilPeer::RESOLUTION_VER, $this->resolution_ver);
@@ -1768,11 +1864,15 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 
 		$copyObj->setWizard($this->wizard);
 
+		$copyObj->setMaster($this->master);
+
 		$copyObj->setFormat($this->format);
 
 		$copyObj->setCodec($this->codec);
 
 		$copyObj->setMimeType($this->mime_type);
+
+		$copyObj->setAcceptedMimeType($this->accepted_mime_type);
 
 		$copyObj->setExtension($this->extension);
 
@@ -3521,6 +3621,65 @@ abstract class BasePerfil extends BaseObject  implements Persistent {
 		$this->lastPubChannelPerfilRelatedByPerfilAudioIdCriteria = $criteria;
 
 		return $this->collPubChannelPerfilsRelatedByPerfilAudioId;
+	}
+
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collFiles) {
+				foreach ((array) $this->collFiles as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collLogTranscodings) {
+				foreach ((array) $this->collLogTranscodings as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPerfilI18ns) {
+				foreach ((array) $this->collPerfilI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collTranscodings) {
+				foreach ((array) $this->collTranscodings as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPubChannelPerfilsRelatedByPerfil43Id) {
+				foreach ((array) $this->collPubChannelPerfilsRelatedByPerfil43Id as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPubChannelPerfilsRelatedByPerfil169Id) {
+				foreach ((array) $this->collPubChannelPerfilsRelatedByPerfil169Id as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPubChannelPerfilsRelatedByPerfilAudioId) {
+				foreach ((array) $this->collPubChannelPerfilsRelatedByPerfilAudioId as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collFiles = null;
+		$this->collLogTranscodings = null;
+		$this->collPerfilI18ns = null;
+		$this->collTranscodings = null;
+		$this->collPubChannelPerfilsRelatedByPerfil43Id = null;
+		$this->collPubChannelPerfilsRelatedByPerfil169Id = null;
+		$this->collPubChannelPerfilsRelatedByPerfilAudioId = null;
+		$this->aStreamserver = null;
 	}
 
   public function getCulture()

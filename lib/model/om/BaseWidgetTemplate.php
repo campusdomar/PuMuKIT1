@@ -900,6 +900,29 @@ abstract class BaseWidgetTemplate extends BaseObject  implements Persistent {
 		$l->setWidgetTemplate($this);
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collWidgetTemplateI18ns) {
+				foreach ((array) $this->collWidgetTemplateI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collWidgetTemplateI18ns = null;
+		$this->aWidget = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

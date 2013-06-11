@@ -316,7 +316,8 @@ abstract class BaseVirtualGroundPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        $criteria->addAscendingOrderByColumn(self::RANK);
+        if(count($criteria->getOrderByColumns()) == 0)
+            $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -580,7 +581,7 @@ abstract class BaseVirtualGroundPeer {
     $c->addJoin(VirtualGroundPeer::ID, VirtualGroundI18nPeer::ID);
     $c->add(VirtualGroundI18nPeer::CULTURE, $culture);
 
-    $c->addAscendingOrderByColumn(self::RANK);
+    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();

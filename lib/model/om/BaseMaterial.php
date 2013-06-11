@@ -60,6 +60,13 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 	 */
 	protected $display = true;
 
+
+	/**
+	 * The value for the size field.
+	 * @var        int
+	 */
+	protected $size = 0;
+
 	/**
 	 * @var        Mm
 	 */
@@ -166,6 +173,17 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 	{
 
 		return $this->display;
+	}
+
+	/**
+	 * Get the [size] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getSize()
+	{
+
+		return $this->size;
 	}
 
 	/**
@@ -303,6 +321,28 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 	} // setDisplay()
 
 	/**
+	 * Set the value of [size] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     void
+	 */
+	public function setSize($v)
+	{
+
+		// Since the native PHP type for this column is integer,
+		// we will cast the input value to an int (if it is not).
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->size !== $v || $v === 0) {
+			$this->size = $v;
+			$this->modifiedColumns[] = MaterialPeer::SIZE;
+		}
+
+	} // setSize()
+
+	/**
 	 * Hydrates (populates) the object variables with values from the database resultset.
 	 *
 	 * An offset (1-based "start column") is specified so that objects can be hydrated
@@ -331,13 +371,15 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 
 			$this->display = $rs->getBoolean($startcol + 5);
 
+			$this->size = $rs->getInt($startcol + 6);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 			$this->setCulture(sfContext::getInstance()->getUser()->getCulture());
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 6; // 6 = MaterialPeer::NUM_COLUMNS - MaterialPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 7; // 7 = MaterialPeer::NUM_COLUMNS - MaterialPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Material object", $e);
@@ -647,6 +689,9 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 			case 5:
 				return $this->getDisplay();
 				break;
+			case 6:
+				return $this->getSize();
+				break;
 			default:
 				return null;
 				break;
@@ -673,6 +718,7 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 			$keys[3] => $this->getRank(),
 			$keys[4] => $this->getMatTypeId(),
 			$keys[5] => $this->getDisplay(),
+			$keys[6] => $this->getSize(),
 		);
 		return $result;
 	}
@@ -722,6 +768,9 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 			case 5:
 				$this->setDisplay($value);
 				break;
+			case 6:
+				$this->setSize($value);
+				break;
 		} // switch()
 	}
 
@@ -751,6 +800,7 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setRank($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setMatTypeId($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setDisplay($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setSize($arr[$keys[6]]);
 	}
 
 	/**
@@ -768,6 +818,7 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MaterialPeer::RANK)) $criteria->add(MaterialPeer::RANK, $this->rank);
 		if ($this->isColumnModified(MaterialPeer::MAT_TYPE_ID)) $criteria->add(MaterialPeer::MAT_TYPE_ID, $this->mat_type_id);
 		if ($this->isColumnModified(MaterialPeer::DISPLAY)) $criteria->add(MaterialPeer::DISPLAY, $this->display);
+		if ($this->isColumnModified(MaterialPeer::SIZE)) $criteria->add(MaterialPeer::SIZE, $this->size);
 
 		return $criteria;
 	}
@@ -831,6 +882,8 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 		$copyObj->setMatTypeId($this->mat_type_id);
 
 		$copyObj->setDisplay($this->display);
+
+		$copyObj->setSize($this->size);
 
 
 		if ($deepCopy) {
@@ -1152,6 +1205,30 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 	{
 		$this->collMaterialI18ns[] = $l;
 		$l->setMaterial($this);
+	}
+
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collMaterialI18ns) {
+				foreach ((array) $this->collMaterialI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collMaterialI18ns = null;
+		$this->aMm = null;
+		$this->aMatType = null;
 	}
 
   public function getCulture()

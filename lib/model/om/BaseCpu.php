@@ -1677,6 +1677,40 @@ abstract class BaseCpu extends BaseObject  implements Persistent {
 		$l->setCpu($this);
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collLogTranscodings) {
+				foreach ((array) $this->collLogTranscodings as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collTranscodings) {
+				foreach ((array) $this->collTranscodings as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collCpuI18ns) {
+				foreach ((array) $this->collCpuI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collLogTranscodings = null;
+		$this->collTranscodings = null;
+		$this->collCpuI18ns = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

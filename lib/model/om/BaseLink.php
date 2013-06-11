@@ -953,6 +953,29 @@ abstract class BaseLink extends BaseObject  implements Persistent {
 		$l->setLink($this);
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collLinkI18ns) {
+				foreach ((array) $this->collLinkI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collLinkI18ns = null;
+		$this->aMm = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

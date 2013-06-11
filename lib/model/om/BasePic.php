@@ -1152,6 +1152,40 @@ abstract class BasePic extends BaseObject  implements Persistent {
 		return $this->collPicMms;
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collPicPersons) {
+				foreach ((array) $this->collPicPersons as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPicSerials) {
+				foreach ((array) $this->collPicSerials as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPicMms) {
+				foreach ((array) $this->collPicMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collPicPersons = null;
+		$this->collPicSerials = null;
+		$this->collPicMms = null;
+	}
+
 
   public function __call($method, $arguments)
   {

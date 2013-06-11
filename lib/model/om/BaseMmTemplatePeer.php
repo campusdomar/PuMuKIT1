@@ -326,7 +326,8 @@ abstract class BaseMmTemplatePeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        $criteria->addAscendingOrderByColumn(self::RANK);
+        if(count($criteria->getOrderByColumns()) == 0)
+            $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -1644,7 +1645,7 @@ abstract class BaseMmTemplatePeer {
     $c->addJoin(MmTemplatePeer::ID, MmTemplateI18nPeer::ID);
     $c->add(MmTemplateI18nPeer::CULTURE, $culture);
 
-    $c->addAscendingOrderByColumn(self::RANK);
+    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();
@@ -1927,6 +1928,14 @@ abstract class BaseMmTemplatePeer {
 			
 			$c->add(GroundMmTemplatePeer::MM_TEMPLATE_ID, $obj->getId());
 			$affectedRows += GroundMmTemplatePeer::doDelete($c, $con);
+
+			include_once 'lib/model/CategoryMmTemplate.php';
+
+			// delete related CategoryMmTemplate objects
+			$c = new Criteria();
+			
+			$c->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $obj->getId());
+			$affectedRows += CategoryMmTemplatePeer::doDelete($c, $con);
 		}
 		return $affectedRows;
 	}

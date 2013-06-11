@@ -19,7 +19,7 @@ abstract class BaseMmPeer {
 	const CLASS_DEFAULT = 'lib.model.Mm';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 19;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -73,6 +73,15 @@ abstract class BaseMmPeer {
 	/** the column name for the EDITORIAL3 field */
 	const EDITORIAL3 = 'mm.EDITORIAL3';
 
+	/** the column name for the AUDIO field */
+	const AUDIO = 'mm.AUDIO';
+
+	/** the column name for the DURATION field */
+	const DURATION = 'mm.DURATION';
+
+	/** the column name for the NUM_VIEW field */
+	const NUM_VIEW = 'mm.NUM_VIEW';
+
 	/** The PHP to DB Name Mapping */
 	private static $phpNameMap = null;
 
@@ -84,10 +93,10 @@ abstract class BaseMmPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Subserial', 'Announce', 'Mail', 'SerialId', 'Rank', 'PrecinctId', 'GenreId', 'BroadcastId', 'Copyright', 'StatusId', 'Recorddate', 'Publicdate', 'Editorial1', 'Editorial2', 'Editorial3', ),
-		BasePeer::TYPE_COLNAME => array (MmPeer::ID, MmPeer::SUBSERIAL, MmPeer::ANNOUNCE, MmPeer::MAIL, MmPeer::SERIAL_ID, MmPeer::RANK, MmPeer::PRECINCT_ID, MmPeer::GENRE_ID, MmPeer::BROADCAST_ID, MmPeer::COPYRIGHT, MmPeer::STATUS_ID, MmPeer::RECORDDATE, MmPeer::PUBLICDATE, MmPeer::EDITORIAL1, MmPeer::EDITORIAL2, MmPeer::EDITORIAL3, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'subserial', 'announce', 'mail', 'serial_id', 'rank', 'precinct_id', 'genre_id', 'broadcast_id', 'copyright', 'status_id', 'recordDate', 'publicDate', 'editorial1', 'editorial2', 'editorial3', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Subserial', 'Announce', 'Mail', 'SerialId', 'Rank', 'PrecinctId', 'GenreId', 'BroadcastId', 'Copyright', 'StatusId', 'Recorddate', 'Publicdate', 'Editorial1', 'Editorial2', 'Editorial3', 'Audio', 'Duration', 'NumView', ),
+		BasePeer::TYPE_COLNAME => array (MmPeer::ID, MmPeer::SUBSERIAL, MmPeer::ANNOUNCE, MmPeer::MAIL, MmPeer::SERIAL_ID, MmPeer::RANK, MmPeer::PRECINCT_ID, MmPeer::GENRE_ID, MmPeer::BROADCAST_ID, MmPeer::COPYRIGHT, MmPeer::STATUS_ID, MmPeer::RECORDDATE, MmPeer::PUBLICDATE, MmPeer::EDITORIAL1, MmPeer::EDITORIAL2, MmPeer::EDITORIAL3, MmPeer::AUDIO, MmPeer::DURATION, MmPeer::NUM_VIEW, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'subserial', 'announce', 'mail', 'serial_id', 'rank', 'precinct_id', 'genre_id', 'broadcast_id', 'copyright', 'status_id', 'recordDate', 'publicDate', 'editorial1', 'editorial2', 'editorial3', 'audio', 'duration', 'num_view', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	/**
@@ -97,10 +106,10 @@ abstract class BaseMmPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Subserial' => 1, 'Announce' => 2, 'Mail' => 3, 'SerialId' => 4, 'Rank' => 5, 'PrecinctId' => 6, 'GenreId' => 7, 'BroadcastId' => 8, 'Copyright' => 9, 'StatusId' => 10, 'Recorddate' => 11, 'Publicdate' => 12, 'Editorial1' => 13, 'Editorial2' => 14, 'Editorial3' => 15, ),
-		BasePeer::TYPE_COLNAME => array (MmPeer::ID => 0, MmPeer::SUBSERIAL => 1, MmPeer::ANNOUNCE => 2, MmPeer::MAIL => 3, MmPeer::SERIAL_ID => 4, MmPeer::RANK => 5, MmPeer::PRECINCT_ID => 6, MmPeer::GENRE_ID => 7, MmPeer::BROADCAST_ID => 8, MmPeer::COPYRIGHT => 9, MmPeer::STATUS_ID => 10, MmPeer::RECORDDATE => 11, MmPeer::PUBLICDATE => 12, MmPeer::EDITORIAL1 => 13, MmPeer::EDITORIAL2 => 14, MmPeer::EDITORIAL3 => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'subserial' => 1, 'announce' => 2, 'mail' => 3, 'serial_id' => 4, 'rank' => 5, 'precinct_id' => 6, 'genre_id' => 7, 'broadcast_id' => 8, 'copyright' => 9, 'status_id' => 10, 'recordDate' => 11, 'publicDate' => 12, 'editorial1' => 13, 'editorial2' => 14, 'editorial3' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Subserial' => 1, 'Announce' => 2, 'Mail' => 3, 'SerialId' => 4, 'Rank' => 5, 'PrecinctId' => 6, 'GenreId' => 7, 'BroadcastId' => 8, 'Copyright' => 9, 'StatusId' => 10, 'Recorddate' => 11, 'Publicdate' => 12, 'Editorial1' => 13, 'Editorial2' => 14, 'Editorial3' => 15, 'Audio' => 16, 'Duration' => 17, 'NumView' => 18, ),
+		BasePeer::TYPE_COLNAME => array (MmPeer::ID => 0, MmPeer::SUBSERIAL => 1, MmPeer::ANNOUNCE => 2, MmPeer::MAIL => 3, MmPeer::SERIAL_ID => 4, MmPeer::RANK => 5, MmPeer::PRECINCT_ID => 6, MmPeer::GENRE_ID => 7, MmPeer::BROADCAST_ID => 8, MmPeer::COPYRIGHT => 9, MmPeer::STATUS_ID => 10, MmPeer::RECORDDATE => 11, MmPeer::PUBLICDATE => 12, MmPeer::EDITORIAL1 => 13, MmPeer::EDITORIAL2 => 14, MmPeer::EDITORIAL3 => 15, MmPeer::AUDIO => 16, MmPeer::DURATION => 17, MmPeer::NUM_VIEW => 18, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'subserial' => 1, 'announce' => 2, 'mail' => 3, 'serial_id' => 4, 'rank' => 5, 'precinct_id' => 6, 'genre_id' => 7, 'broadcast_id' => 8, 'copyright' => 9, 'status_id' => 10, 'recordDate' => 11, 'publicDate' => 12, 'editorial1' => 13, 'editorial2' => 14, 'editorial3' => 15, 'audio' => 16, 'duration' => 17, 'num_view' => 18, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	/**
@@ -233,6 +242,12 @@ abstract class BaseMmPeer {
 
 		$criteria->addSelectColumn(MmPeer::EDITORIAL3);
 
+		$criteria->addSelectColumn(MmPeer::AUDIO);
+
+		$criteria->addSelectColumn(MmPeer::DURATION);
+
+		$criteria->addSelectColumn(MmPeer::NUM_VIEW);
+
 	}
 
 	const COUNT = 'COUNT(mm.ID)';
@@ -341,7 +356,8 @@ abstract class BaseMmPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        $criteria->addAscendingOrderByColumn(self::RANK);
+        if(count($criteria->getOrderByColumns()) == 0)
+            $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -1659,7 +1675,7 @@ abstract class BaseMmPeer {
     $c->addJoin(MmPeer::ID, MmI18nPeer::ID);
     $c->add(MmI18nPeer::CULTURE, $culture);
 
-    $c->addAscendingOrderByColumn(self::RANK);
+    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();
@@ -2014,6 +2030,22 @@ abstract class BaseMmPeer {
 			
 			$c->add(MmMatterhornPeer::ID, $obj->getId());
 			$affectedRows += MmMatterhornPeer::doDelete($c, $con);
+
+			include_once 'lib/model/CategoryMm.php';
+
+			// delete related CategoryMm objects
+			$c = new Criteria();
+			
+			$c->add(CategoryMmPeer::MM_ID, $obj->getId());
+			$affectedRows += CategoryMmPeer::doDelete($c, $con);
+
+			include_once 'lib/model/CategoryMmTimeframe.php';
+
+			// delete related CategoryMmTimeframe objects
+			$c = new Criteria();
+			
+			$c->add(CategoryMmTimeframePeer::MM_ID, $obj->getId());
+			$affectedRows += CategoryMmTimeframePeer::doDelete($c, $con);
 		}
 		return $affectedRows;
 	}

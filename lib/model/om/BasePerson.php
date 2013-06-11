@@ -1555,6 +1555,46 @@ abstract class BasePerson extends BaseObject  implements Persistent {
 		return $this->collPicPersons;
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collPersonI18ns) {
+				foreach ((array) $this->collPersonI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMmPersons) {
+				foreach ((array) $this->collMmPersons as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMmTemplatePersons) {
+				foreach ((array) $this->collMmTemplatePersons as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPicPersons) {
+				foreach ((array) $this->collPicPersons as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collPersonI18ns = null;
+		$this->collMmPersons = null;
+		$this->collMmTemplatePersons = null;
+		$this->collPicPersons = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

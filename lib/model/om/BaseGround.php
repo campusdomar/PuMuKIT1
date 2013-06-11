@@ -1742,6 +1742,59 @@ abstract class BaseGround extends BaseObject  implements Persistent {
 		return $this->collGroundMmTemplates;
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collGroundI18ns) {
+				foreach ((array) $this->collGroundI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collRelationGroundsRelatedByOneId) {
+				foreach ((array) $this->collRelationGroundsRelatedByOneId as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collRelationGroundsRelatedByTwoId) {
+				foreach ((array) $this->collRelationGroundsRelatedByTwoId as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collVirtualGroundRelations) {
+				foreach ((array) $this->collVirtualGroundRelations as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collGroundMms) {
+				foreach ((array) $this->collGroundMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collGroundMmTemplates) {
+				foreach ((array) $this->collGroundMmTemplates as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collGroundI18ns = null;
+		$this->collRelationGroundsRelatedByOneId = null;
+		$this->collRelationGroundsRelatedByTwoId = null;
+		$this->collVirtualGroundRelations = null;
+		$this->collGroundMms = null;
+		$this->collGroundMmTemplates = null;
+		$this->aGroundType = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

@@ -130,6 +130,27 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 	 */
 	protected $editorial3 = false;
 
+
+	/**
+	 * The value for the audio field.
+	 * @var        boolean
+	 */
+	protected $audio = false;
+
+
+	/**
+	 * The value for the duration field.
+	 * @var        int
+	 */
+	protected $duration = 0;
+
+
+	/**
+	 * The value for the num_view field.
+	 * @var        int
+	 */
+	protected $num_view = 0;
+
 	/**
 	 * @var        Serial
 	 */
@@ -293,6 +314,30 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 	 * @var        Criteria
 	 */
 	protected $lastMmMatterhornCriteria = null;
+
+	/**
+	 * Collection to store aggregation of collCategoryMms.
+	 * @var        array
+	 */
+	protected $collCategoryMms;
+
+	/**
+	 * The criteria used to select the current contents of collCategoryMms.
+	 * @var        Criteria
+	 */
+	protected $lastCategoryMmCriteria = null;
+
+	/**
+	 * Collection to store aggregation of collCategoryMmTimeframes.
+	 * @var        array
+	 */
+	protected $collCategoryMmTimeframes;
+
+	/**
+	 * The criteria used to select the current contents of collCategoryMmTimeframes.
+	 * @var        Criteria
+	 */
+	protected $lastCategoryMmTimeframeCriteria = null;
 
 	/**
 	 * Flag to prevent endless save loop, if this object is referenced
@@ -528,6 +573,39 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 	{
 
 		return $this->editorial3;
+	}
+
+	/**
+	 * Get the [audio] column value.
+	 * 
+	 * @return     boolean
+	 */
+	public function getAudio()
+	{
+
+		return $this->audio;
+	}
+
+	/**
+	 * Get the [duration] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getDuration()
+	{
+
+		return $this->duration;
+	}
+
+	/**
+	 * Get the [num_view] column value.
+	 * 
+	 * @return     int
+	 */
+	public function getNumView()
+	{
+
+		return $this->num_view;
 	}
 
 	/**
@@ -867,6 +945,66 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 	} // setEditorial3()
 
 	/**
+	 * Set the value of [audio] column.
+	 * 
+	 * @param      boolean $v new value
+	 * @return     void
+	 */
+	public function setAudio($v)
+	{
+
+		if ($this->audio !== $v || $v === false) {
+			$this->audio = $v;
+			$this->modifiedColumns[] = MmPeer::AUDIO;
+		}
+
+	} // setAudio()
+
+	/**
+	 * Set the value of [duration] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     void
+	 */
+	public function setDuration($v)
+	{
+
+		// Since the native PHP type for this column is integer,
+		// we will cast the input value to an int (if it is not).
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->duration !== $v || $v === 0) {
+			$this->duration = $v;
+			$this->modifiedColumns[] = MmPeer::DURATION;
+		}
+
+	} // setDuration()
+
+	/**
+	 * Set the value of [num_view] column.
+	 * 
+	 * @param      int $v new value
+	 * @return     void
+	 */
+	public function setNumView($v)
+	{
+
+		// Since the native PHP type for this column is integer,
+		// we will cast the input value to an int (if it is not).
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->num_view !== $v || $v === 0) {
+			$this->num_view = $v;
+			$this->modifiedColumns[] = MmPeer::NUM_VIEW;
+		}
+
+	} // setNumView()
+
+	/**
 	 * Hydrates (populates) the object variables with values from the database resultset.
 	 *
 	 * An offset (1-based "start column") is specified so that objects can be hydrated
@@ -915,13 +1053,19 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 
 			$this->editorial3 = $rs->getBoolean($startcol + 15);
 
+			$this->audio = $rs->getBoolean($startcol + 16);
+
+			$this->duration = $rs->getInt($startcol + 17);
+
+			$this->num_view = $rs->getInt($startcol + 18);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 			$this->setCulture(sfContext::getInstance()->getUser()->getCulture());
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 16; // 16 = MmPeer::NUM_COLUMNS - MmPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 19; // 19 = MmPeer::NUM_COLUMNS - MmPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Mm object", $e);
@@ -1187,6 +1331,22 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collCategoryMms !== null) {
+				foreach($this->collCategoryMms as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collCategoryMmTimeframes !== null) {
+				foreach($this->collCategoryMmTimeframes as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1383,6 +1543,22 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 					}
 				}
 
+				if ($this->collCategoryMms !== null) {
+					foreach($this->collCategoryMms as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCategoryMmTimeframes !== null) {
+					foreach($this->collCategoryMmTimeframes as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -1463,6 +1639,15 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 			case 15:
 				return $this->getEditorial3();
 				break;
+			case 16:
+				return $this->getAudio();
+				break;
+			case 17:
+				return $this->getDuration();
+				break;
+			case 18:
+				return $this->getNumView();
+				break;
 			default:
 				return null;
 				break;
@@ -1499,6 +1684,9 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 			$keys[13] => $this->getEditorial1(),
 			$keys[14] => $this->getEditorial2(),
 			$keys[15] => $this->getEditorial3(),
+			$keys[16] => $this->getAudio(),
+			$keys[17] => $this->getDuration(),
+			$keys[18] => $this->getNumView(),
 		);
 		return $result;
 	}
@@ -1578,6 +1766,15 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 			case 15:
 				$this->setEditorial3($value);
 				break;
+			case 16:
+				$this->setAudio($value);
+				break;
+			case 17:
+				$this->setDuration($value);
+				break;
+			case 18:
+				$this->setNumView($value);
+				break;
 		} // switch()
 	}
 
@@ -1617,6 +1814,9 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setEditorial1($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setEditorial2($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setEditorial3($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setAudio($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setDuration($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setNumView($arr[$keys[18]]);
 	}
 
 	/**
@@ -1644,6 +1844,9 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MmPeer::EDITORIAL1)) $criteria->add(MmPeer::EDITORIAL1, $this->editorial1);
 		if ($this->isColumnModified(MmPeer::EDITORIAL2)) $criteria->add(MmPeer::EDITORIAL2, $this->editorial2);
 		if ($this->isColumnModified(MmPeer::EDITORIAL3)) $criteria->add(MmPeer::EDITORIAL3, $this->editorial3);
+		if ($this->isColumnModified(MmPeer::AUDIO)) $criteria->add(MmPeer::AUDIO, $this->audio);
+		if ($this->isColumnModified(MmPeer::DURATION)) $criteria->add(MmPeer::DURATION, $this->duration);
+		if ($this->isColumnModified(MmPeer::NUM_VIEW)) $criteria->add(MmPeer::NUM_VIEW, $this->num_view);
 
 		return $criteria;
 	}
@@ -1728,6 +1931,12 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 
 		$copyObj->setEditorial3($this->editorial3);
 
+		$copyObj->setAudio($this->audio);
+
+		$copyObj->setDuration($this->duration);
+
+		$copyObj->setNumView($this->num_view);
+
 
 		if ($deepCopy) {
 			// important: temporarily setNew(false) because this affects the behavior of
@@ -1780,6 +1989,14 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 
 			foreach($this->getMmMatterhorns() as $relObj) {
 				$copyObj->addMmMatterhorn($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCategoryMms() as $relObj) {
+				$copyObj->addCategoryMm($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCategoryMmTimeframes() as $relObj) {
+				$copyObj->addCategoryMmTimeframe($relObj->copy($deepCopy));
 			}
 
 		} // if ($deepCopy)
@@ -4619,6 +4836,422 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 		$this->lastMmMatterhornCriteria = $criteria;
 
 		return $this->collMmMatterhorns;
+	}
+
+	/**
+	 * Temporary storage of collCategoryMms to save a possible db hit in
+	 * the event objects are add to the collection, but the
+	 * complete collection is never requested.
+	 * @return     void
+	 */
+	public function initCategoryMms()
+	{
+		if ($this->collCategoryMms === null) {
+			$this->collCategoryMms = array();
+		}
+	}
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Mm has previously
+	 * been saved, it will retrieve related CategoryMms from storage.
+	 * If this Mm is new, it will return
+	 * an empty collection or the current collection, the criteria
+	 * is ignored on a new object.
+	 *
+	 * @param      Connection $con
+	 * @param      Criteria $criteria
+	 * @throws     PropelException
+	 */
+	public function getCategoryMms($criteria = null, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseCategoryMmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCategoryMms === null) {
+			if ($this->isNew()) {
+			   $this->collCategoryMms = array();
+			} else {
+
+				$criteria->add(CategoryMmPeer::MM_ID, $this->getId());
+
+				CategoryMmPeer::addSelectColumns($criteria);
+				$this->collCategoryMms = CategoryMmPeer::doSelect($criteria, $con);
+			}
+		} else {
+			// criteria has no effect for a new object
+			if (!$this->isNew()) {
+				// the following code is to determine if a new query is
+				// called for.  If the criteria is the same as the last
+				// one, just return the collection.
+
+
+				$criteria->add(CategoryMmPeer::MM_ID, $this->getId());
+
+				CategoryMmPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCategoryMmCriteria) || !$this->lastCategoryMmCriteria->equals($criteria)) {
+					$this->collCategoryMms = CategoryMmPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCategoryMmCriteria = $criteria;
+		return $this->collCategoryMms;
+	}
+
+	/**
+	 * Returns the number of related CategoryMms.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      Connection $con
+	 * @throws     PropelException
+	 */
+	public function countCategoryMms($criteria = null, $distinct = false, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseCategoryMmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CategoryMmPeer::MM_ID, $this->getId());
+
+		return CategoryMmPeer::doCount($criteria, $distinct, $con);
+	}
+
+	/**
+	 * Method called to associate a CategoryMm object to this object
+	 * through the CategoryMm foreign key attribute
+	 *
+	 * @param      CategoryMm $l CategoryMm
+	 * @return     void
+	 * @throws     PropelException
+	 */
+	public function addCategoryMm(CategoryMm $l)
+	{
+		$this->collCategoryMms[] = $l;
+		$l->setMm($this);
+	}
+
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Mm is new, it will return
+	 * an empty collection; or if this Mm has previously
+	 * been saved, it will retrieve related CategoryMms from storage.
+	 *
+	 * This method is protected by default in order to keep the public
+	 * api reasonable.  You can provide public methods for those you
+	 * actually need in Mm.
+	 */
+	public function getCategoryMmsJoinCategory($criteria = null, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseCategoryMmPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCategoryMms === null) {
+			if ($this->isNew()) {
+				$this->collCategoryMms = array();
+			} else {
+
+				$criteria->add(CategoryMmPeer::MM_ID, $this->getId());
+
+				$this->collCategoryMms = CategoryMmPeer::doSelectJoinCategory($criteria, $con);
+			}
+		} else {
+			// the following code is to determine if a new query is
+			// called for.  If the criteria is the same as the last
+			// one, just return the collection.
+
+			$criteria->add(CategoryMmPeer::MM_ID, $this->getId());
+
+			if (!isset($this->lastCategoryMmCriteria) || !$this->lastCategoryMmCriteria->equals($criteria)) {
+				$this->collCategoryMms = CategoryMmPeer::doSelectJoinCategory($criteria, $con);
+			}
+		}
+		$this->lastCategoryMmCriteria = $criteria;
+
+		return $this->collCategoryMms;
+	}
+
+	/**
+	 * Temporary storage of collCategoryMmTimeframes to save a possible db hit in
+	 * the event objects are add to the collection, but the
+	 * complete collection is never requested.
+	 * @return     void
+	 */
+	public function initCategoryMmTimeframes()
+	{
+		if ($this->collCategoryMmTimeframes === null) {
+			$this->collCategoryMmTimeframes = array();
+		}
+	}
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Mm has previously
+	 * been saved, it will retrieve related CategoryMmTimeframes from storage.
+	 * If this Mm is new, it will return
+	 * an empty collection or the current collection, the criteria
+	 * is ignored on a new object.
+	 *
+	 * @param      Connection $con
+	 * @param      Criteria $criteria
+	 * @throws     PropelException
+	 */
+	public function getCategoryMmTimeframes($criteria = null, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseCategoryMmTimeframePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCategoryMmTimeframes === null) {
+			if ($this->isNew()) {
+			   $this->collCategoryMmTimeframes = array();
+			} else {
+
+				$criteria->add(CategoryMmTimeframePeer::MM_ID, $this->getId());
+
+				CategoryMmTimeframePeer::addSelectColumns($criteria);
+				$this->collCategoryMmTimeframes = CategoryMmTimeframePeer::doSelect($criteria, $con);
+			}
+		} else {
+			// criteria has no effect for a new object
+			if (!$this->isNew()) {
+				// the following code is to determine if a new query is
+				// called for.  If the criteria is the same as the last
+				// one, just return the collection.
+
+
+				$criteria->add(CategoryMmTimeframePeer::MM_ID, $this->getId());
+
+				CategoryMmTimeframePeer::addSelectColumns($criteria);
+				if (!isset($this->lastCategoryMmTimeframeCriteria) || !$this->lastCategoryMmTimeframeCriteria->equals($criteria)) {
+					$this->collCategoryMmTimeframes = CategoryMmTimeframePeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCategoryMmTimeframeCriteria = $criteria;
+		return $this->collCategoryMmTimeframes;
+	}
+
+	/**
+	 * Returns the number of related CategoryMmTimeframes.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      Connection $con
+	 * @throws     PropelException
+	 */
+	public function countCategoryMmTimeframes($criteria = null, $distinct = false, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseCategoryMmTimeframePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CategoryMmTimeframePeer::MM_ID, $this->getId());
+
+		return CategoryMmTimeframePeer::doCount($criteria, $distinct, $con);
+	}
+
+	/**
+	 * Method called to associate a CategoryMmTimeframe object to this object
+	 * through the CategoryMmTimeframe foreign key attribute
+	 *
+	 * @param      CategoryMmTimeframe $l CategoryMmTimeframe
+	 * @return     void
+	 * @throws     PropelException
+	 */
+	public function addCategoryMmTimeframe(CategoryMmTimeframe $l)
+	{
+		$this->collCategoryMmTimeframes[] = $l;
+		$l->setMm($this);
+	}
+
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Mm is new, it will return
+	 * an empty collection; or if this Mm has previously
+	 * been saved, it will retrieve related CategoryMmTimeframes from storage.
+	 *
+	 * This method is protected by default in order to keep the public
+	 * api reasonable.  You can provide public methods for those you
+	 * actually need in Mm.
+	 */
+	public function getCategoryMmTimeframesJoinCategory($criteria = null, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseCategoryMmTimeframePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCategoryMmTimeframes === null) {
+			if ($this->isNew()) {
+				$this->collCategoryMmTimeframes = array();
+			} else {
+
+				$criteria->add(CategoryMmTimeframePeer::MM_ID, $this->getId());
+
+				$this->collCategoryMmTimeframes = CategoryMmTimeframePeer::doSelectJoinCategory($criteria, $con);
+			}
+		} else {
+			// the following code is to determine if a new query is
+			// called for.  If the criteria is the same as the last
+			// one, just return the collection.
+
+			$criteria->add(CategoryMmTimeframePeer::MM_ID, $this->getId());
+
+			if (!isset($this->lastCategoryMmTimeframeCriteria) || !$this->lastCategoryMmTimeframeCriteria->equals($criteria)) {
+				$this->collCategoryMmTimeframes = CategoryMmTimeframePeer::doSelectJoinCategory($criteria, $con);
+			}
+		}
+		$this->lastCategoryMmTimeframeCriteria = $criteria;
+
+		return $this->collCategoryMmTimeframes;
+	}
+
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collMmI18ns) {
+				foreach ((array) $this->collMmI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collFiles) {
+				foreach ((array) $this->collFiles as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collLinks) {
+				foreach ((array) $this->collLinks as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMmPersons) {
+				foreach ((array) $this->collMmPersons as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPicMms) {
+				foreach ((array) $this->collPicMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collGroundMms) {
+				foreach ((array) $this->collGroundMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMaterials) {
+				foreach ((array) $this->collMaterials as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collLogTranscodings) {
+				foreach ((array) $this->collLogTranscodings as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collTranscodings) {
+				foreach ((array) $this->collTranscodings as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPubChannelMms) {
+				foreach ((array) $this->collPubChannelMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collAnnounceChannelMms) {
+				foreach ((array) $this->collAnnounceChannelMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMmMatterhorns) {
+				foreach ((array) $this->collMmMatterhorns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collCategoryMms) {
+				foreach ((array) $this->collCategoryMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collCategoryMmTimeframes) {
+				foreach ((array) $this->collCategoryMmTimeframes as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collMmI18ns = null;
+		$this->collFiles = null;
+		$this->collLinks = null;
+		$this->collMmPersons = null;
+		$this->collPicMms = null;
+		$this->collGroundMms = null;
+		$this->collMaterials = null;
+		$this->collLogTranscodings = null;
+		$this->collTranscodings = null;
+		$this->collPubChannelMms = null;
+		$this->collAnnounceChannelMms = null;
+		$this->collMmMatterhorns = null;
+		$this->collCategoryMms = null;
+		$this->collCategoryMmTimeframes = null;
+		$this->aSerial = null;
+		$this->aPrecinct = null;
+		$this->aGenre = null;
+		$this->aBroadcast = null;
 	}
 
   public function getCulture()

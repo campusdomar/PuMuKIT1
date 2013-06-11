@@ -2477,6 +2477,66 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 		$l->setSerial($this);
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collSerialI18ns) {
+				foreach ((array) $this->collSerialI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collSerialItuness) {
+				foreach ((array) $this->collSerialItuness as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMms) {
+				foreach ((array) $this->collMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMmTemplates) {
+				foreach ((array) $this->collMmTemplates as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPicSerials) {
+				foreach ((array) $this->collPicSerials as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collSerialMatterhorns) {
+				foreach ((array) $this->collSerialMatterhorns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collSerialHashs) {
+				foreach ((array) $this->collSerialHashs as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collSerialI18ns = null;
+		$this->collSerialItuness = null;
+		$this->collMms = null;
+		$this->collMmTemplates = null;
+		$this->collPicSerials = null;
+		$this->collSerialMatterhorns = null;
+		$this->collSerialHashs = null;
+		$this->aSerialType = null;
+		$this->aSerialTemplate = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

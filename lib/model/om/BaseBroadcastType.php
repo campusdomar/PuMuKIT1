@@ -1105,6 +1105,40 @@ abstract class BaseBroadcastType extends BaseObject  implements Persistent {
 		$l->setBroadcastType($this);
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collBroadcasts) {
+				foreach ((array) $this->collBroadcasts as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collPubChannels) {
+				foreach ((array) $this->collPubChannels as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collAnnounceChannels) {
+				foreach ((array) $this->collAnnounceChannels as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collBroadcasts = null;
+		$this->collPubChannels = null;
+		$this->collAnnounceChannels = null;
+	}
+
 
   public function __call($method, $arguments)
   {

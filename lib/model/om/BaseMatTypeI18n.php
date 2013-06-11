@@ -756,6 +756,23 @@ abstract class BaseMatTypeI18n extends BaseObject  implements Persistent {
 		return $this->aMatType;
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+		} // if ($deep)
+
+		$this->aMatType = null;
+	}
+
 
   public function __call($method, $arguments)
   {

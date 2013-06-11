@@ -93,6 +93,12 @@ class MmMapBuilder {
 
 		$tMap->addColumn('EDITORIAL3', 'Editorial3', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
+		$tMap->addColumn('AUDIO', 'Audio', 'boolean', CreoleTypes::BOOLEAN, true, null);
+
+		$tMap->addColumn('DURATION', 'Duration', 'int', CreoleTypes::INTEGER, true, null);
+
+		$tMap->addColumn('NUM_VIEW', 'NumView', 'int', CreoleTypes::INTEGER, true, null);
+
 	} // doBuild()
 
 } // MmMapBuilder

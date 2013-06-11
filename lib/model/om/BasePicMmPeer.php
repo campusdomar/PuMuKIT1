@@ -276,7 +276,8 @@ abstract class BasePicMmPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        $criteria->addAscendingOrderByColumn(self::RANK);
+        if(count($criteria->getOrderByColumns()) == 0)
+            $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.

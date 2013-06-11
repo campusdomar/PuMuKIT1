@@ -179,6 +179,13 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 	 */
 	protected $display = true;
 
+
+	/**
+	 * The value for the download field.
+	 * @var        boolean
+	 */
+	protected $download = false;
+
 	/**
 	 * @var        Mm
 	 */
@@ -521,6 +528,17 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 	{
 
 		return $this->display;
+	}
+
+	/**
+	 * Get the [download] column value.
+	 * 
+	 * @return     boolean
+	 */
+	public function getDownload()
+	{
+
+		return $this->download;
 	}
 
 	/**
@@ -1046,6 +1064,22 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 	} // setDisplay()
 
 	/**
+	 * Set the value of [download] column.
+	 * 
+	 * @param      boolean $v new value
+	 * @return     void
+	 */
+	public function setDownload($v)
+	{
+
+		if ($this->download !== $v || $v === false) {
+			$this->download = $v;
+			$this->modifiedColumns[] = FilePeer::DOWNLOAD;
+		}
+
+	} // setDownload()
+
+	/**
 	 * Hydrates (populates) the object variables with values from the database resultset.
 	 *
 	 * An offset (1-based "start column") is specified so that objects can be hydrated
@@ -1108,13 +1142,15 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 
 			$this->display = $rs->getBoolean($startcol + 22);
 
+			$this->download = $rs->getBoolean($startcol + 23);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 			$this->setCulture(sfContext::getInstance()->getUser()->getCulture());
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 23; // 23 = FilePeer::NUM_COLUMNS - FilePeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 24; // 24 = FilePeer::NUM_COLUMNS - FilePeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating File object", $e);
@@ -1572,6 +1608,9 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 			case 22:
 				return $this->getDisplay();
 				break;
+			case 23:
+				return $this->getDownload();
+				break;
 			default:
 				return null;
 				break;
@@ -1615,6 +1654,7 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 			$keys[20] => $this->getResolutionHor(),
 			$keys[21] => $this->getResolutionVer(),
 			$keys[22] => $this->getDisplay(),
+			$keys[23] => $this->getDownload(),
 		);
 		return $result;
 	}
@@ -1715,6 +1755,9 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 			case 22:
 				$this->setDisplay($value);
 				break;
+			case 23:
+				$this->setDownload($value);
+				break;
 		} // switch()
 	}
 
@@ -1761,6 +1804,7 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[20], $arr)) $this->setResolutionHor($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setResolutionVer($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setDisplay($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setDownload($arr[$keys[23]]);
 	}
 
 	/**
@@ -1795,6 +1839,7 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FilePeer::RESOLUTION_HOR)) $criteria->add(FilePeer::RESOLUTION_HOR, $this->resolution_hor);
 		if ($this->isColumnModified(FilePeer::RESOLUTION_VER)) $criteria->add(FilePeer::RESOLUTION_VER, $this->resolution_ver);
 		if ($this->isColumnModified(FilePeer::DISPLAY)) $criteria->add(FilePeer::DISPLAY, $this->display);
+		if ($this->isColumnModified(FilePeer::DOWNLOAD)) $criteria->add(FilePeer::DOWNLOAD, $this->download);
 
 		return $criteria;
 	}
@@ -1892,6 +1937,8 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 		$copyObj->setResolutionVer($this->resolution_ver);
 
 		$copyObj->setDisplay($this->display);
+
+		$copyObj->setDownload($this->download);
 
 
 		if ($deepCopy) {
@@ -2714,6 +2761,47 @@ abstract class BaseFile extends BaseObject  implements Persistent {
 	{
 		$this->collTickets[] = $l;
 		$l->setFile($this);
+	}
+
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collFileI18ns) {
+				foreach ((array) $this->collFileI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collLogFiles) {
+				foreach ((array) $this->collLogFiles as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collTickets) {
+				foreach ((array) $this->collTickets as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collFileI18ns = null;
+		$this->collLogFiles = null;
+		$this->collTickets = null;
+		$this->aMm = null;
+		$this->aPerfil = null;
+		$this->aLanguage = null;
+		$this->aFormat = null;
+		$this->aCodec = null;
+		$this->aMimeType = null;
+		$this->aResolution = null;
 	}
 
   public function getCulture()

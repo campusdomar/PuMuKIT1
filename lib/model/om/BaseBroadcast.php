@@ -1649,6 +1649,41 @@ abstract class BaseBroadcast extends BaseObject  implements Persistent {
 		return $this->collMmTemplates;
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collBroadcastI18ns) {
+				foreach ((array) $this->collBroadcastI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMms) {
+				foreach ((array) $this->collMms as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collMmTemplates) {
+				foreach ((array) $this->collMmTemplates as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collBroadcastI18ns = null;
+		$this->collMms = null;
+		$this->collMmTemplates = null;
+		$this->aBroadcastType = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

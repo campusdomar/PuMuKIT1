@@ -281,7 +281,8 @@ abstract class BaseLinkPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        $criteria->addAscendingOrderByColumn(self::RANK);
+        if(count($criteria->getOrderByColumns()) == 0)
+            $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -545,7 +546,7 @@ abstract class BaseLinkPeer {
     $c->addJoin(LinkPeer::ID, LinkI18nPeer::ID);
     $c->add(LinkI18nPeer::CULTURE, $culture);
 
-    $c->addAscendingOrderByColumn(self::RANK);
+    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();

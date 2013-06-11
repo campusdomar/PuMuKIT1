@@ -107,6 +107,8 @@ class FileMapBuilder {
 
 		$tMap->addColumn('DISPLAY', 'Display', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
+		$tMap->addColumn('DOWNLOAD', 'Download', 'boolean', CreoleTypes::BOOLEAN, true, null);
+
 	} // doBuild()
 
 } // FileMapBuilder

@@ -1576,6 +1576,53 @@ abstract class BaseWidget extends BaseObject  implements Persistent {
 		$l->setWidget($this);
 	}
 
+	/**
+	 * Resets all collections of referencing foreign keys.
+	 *
+	 * This method is a user-space workaround for PHP's inability to garbage collect objects
+	 * with circular references.  This is currently necessary when using Propel in certain
+	 * daemon or large-volumne/high-memory operations.
+	 *
+	 * @param      boolean $deep Whether to also clear the references on all associated objects.
+	 */
+	public function clearAllReferences($deep = false)
+	{
+		if ($deep) {
+			if ($this->collWidgetI18ns) {
+				foreach ((array) $this->collWidgetI18ns as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collElementWidgets) {
+				foreach ((array) $this->collElementWidgets as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collWidgetTemplates) {
+				foreach ((array) $this->collWidgetTemplates as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collWidgetConstants) {
+				foreach ((array) $this->collWidgetConstants as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+			if ($this->collWidgetModules) {
+				foreach ((array) $this->collWidgetModules as $o) {
+					$o->clearAllReferences($deep);
+				}
+			}
+		} // if ($deep)
+
+		$this->collWidgetI18ns = null;
+		$this->collElementWidgets = null;
+		$this->collWidgetTemplates = null;
+		$this->collWidgetConstants = null;
+		$this->collWidgetModules = null;
+		$this->aWidgetType = null;
+	}
+
   public function getCulture()
   {
     return $this->culture;

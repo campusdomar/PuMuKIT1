@@ -499,6 +499,18 @@ propel:
       type: boolean
       required: true
       default: 0
+    audio: 
+      type: boolean
+      required: true
+      default: 0
+    duration: 
+      type: integer
+      required: true
+      default: 0
+    num_view: 
+      type: integer
+      required: true
+      default: 0
   mm_i18n:
     title: 
       type: varchar
@@ -662,6 +674,10 @@ propel:
       type: boolean
       required: true
       default: 1
+    download: 
+      type: boolean
+      required: true
+      default: 0
   file_i18n: 
     description: 
       type: varchar
@@ -874,6 +890,10 @@ propel:
       type: boolean
       required: true
       default: 1
+    size:
+      type: integer
+      required: true
+      default: 0
   material_i18n: 
     name: 
       type: varchar
@@ -1063,7 +1083,7 @@ propel:
     id:
     name:
       type: char
-      size: 8
+      size: 250
 
 
   widget:
@@ -1215,6 +1235,10 @@ propel:
       type: boolean
       required: true
       default: 1
+    master: 
+      type: boolean
+      required: true
+      default: 0
     format: 
       type: varchar
       size: 35
@@ -1224,6 +1248,9 @@ propel:
     mime_type: 
       type: varchar
       size: 35
+    accepted_mime_type: 
+      type: varchar
+      size: 100
     extension: 
       type: varchar
       size: 6
@@ -1632,3 +1659,124 @@ propel:
       type: varchar
       size: 100
       required: true
+  category: 
+    id:
+    cod: 
+      type: varchar
+      size: 25
+      required: true
+      index: unique
+    tree_left: 
+      type: integer
+      required: false
+    tree_right: 
+      type: integer
+      required: false
+    tree_parent: 
+      type: integer
+      required: false
+    scope: 
+      type: integer
+      required: false
+    metacategory:
+      type: boolean
+      required: true
+      default: 0
+    display: 
+      type: boolean
+      required: true
+      default: 1
+    required:
+      type: boolean
+      required: true
+      default: 0
+    num_mm:
+      type: integer
+      required: true
+      default: 0
+  category_i18n: 
+    name: 
+      type: varchar
+      size: 100
+      required: true
+
+  relation_category:
+    one_id:
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: category 
+      foreignReference: id
+      onDelete: cascade
+    two_id:
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: category
+      foreignReference: id
+      onDelete: cascade
+    recommended:
+      type: boolean
+      required: true
+      default: 1
+
+  category_mm:
+    category_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: category
+      foreignReference: id
+      onDelete: cascade
+    mm_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+
+  category_mm_template:
+    category_id: 
+      type: integer 
+      required: true
+      primaryKey: true
+      foreignTable: category
+      foreignReference: id
+      onDelete: cascade
+    mm_template_id: 
+      type: integer
+      required: true
+      primaryKey: true
+      foreignTable: mm_template
+      foreignReference: id
+      onDelete: cascade
+
+# Gestionar decisiones editoriales temporizada
+  category_mm_timeframe:
+    id:
+    category_id: 
+      type: integer 
+      required: true
+      primaryKey: false;
+      foreignTable: category
+      foreignReference: id
+      onDelete: cascade
+    mm_id: 
+      type: integer
+      required: true
+      primaryKey: false;
+      foreignTable: mm
+      foreignReference: id
+      onDelete: cascade
+    timestart: 
+      type: timestamp
+      required: true
+    timeend: 
+      type: timestamp
+      required: true
+    description:
+      type: longvarchar
+    created_at:
+    updated_at:
+
