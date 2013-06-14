@@ -727,6 +727,9 @@ CREATE TABLE `mm`
 	`editorial1` INTEGER default 0 NOT NULL,
 	`editorial2` INTEGER default 0 NOT NULL,
 	`editorial3` INTEGER default 0 NOT NULL,
+	`audio` INTEGER default 0 NOT NULL,
+	`duration` INTEGER default 0 NOT NULL,
+	`num_view` INTEGER default 0 NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `mm_FI_1` (`serial_id`),
 	CONSTRAINT `mm_FK_1`
@@ -869,6 +872,7 @@ CREATE TABLE `file`
 	`resolution_hor` INTEGER default 0 NOT NULL,
 	`resolution_ver` INTEGER default 0 NOT NULL,
 	`display` INTEGER default 1 NOT NULL,
+	`download` INTEGER default 0 NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `file_FI_1` (`mm_id`),
 	CONSTRAINT `file_FK_1`
@@ -1169,6 +1173,7 @@ CREATE TABLE `material`
 	`rank` INTEGER default 1 NOT NULL,
 	`mat_type_id` INTEGER,
 	`display` INTEGER default 1 NOT NULL,
+	`size` INTEGER default 0 NOT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `material_FI_1` (`mm_id`),
 	CONSTRAINT `material_FK_1`
@@ -1373,7 +1378,7 @@ DROP TABLE IF EXISTS `direct_type`;
 CREATE TABLE `direct_type`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
-	`name` CHAR(8),
+	`name` CHAR(250),
 	PRIMARY KEY (`id`)
 )Engine=MyISAM;
 
@@ -1640,9 +1645,11 @@ CREATE TABLE `perfil`
 	`rank` INTEGER default 1 NOT NULL,
 	`display` INTEGER default 1 NOT NULL,
 	`wizard` INTEGER default 1 NOT NULL,
+	`master` INTEGER default 0 NOT NULL,
 	`format` VARCHAR(35),
 	`codec` VARCHAR(35),
 	`mime_type` VARCHAR(35),
+	`accepted_mime_type` VARCHAR(100),
 	`extension` VARCHAR(6)  NOT NULL,
 	`resolution_hor` INTEGER default 0 NOT NULL,
 	`resolution_ver` INTEGER default 0 NOT NULL,
@@ -2068,6 +2075,148 @@ CREATE TABLE `serial_hash`
 	CONSTRAINT `serial_hash_FK_1`
 		FOREIGN KEY (`serial_id`)
 		REFERENCES `serial` (`id`)
+)Engine=MyISAM;
+
+#-----------------------------------------------------------------------------
+#-- category
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `category`;
+
+
+CREATE TABLE `category`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`cod` VARCHAR(25)  NOT NULL,
+	`tree_left` INTEGER,
+	`tree_right` INTEGER,
+	`tree_parent` INTEGER,
+	`scope` INTEGER,
+	`metacategory` INTEGER default 0 NOT NULL,
+	`display` INTEGER default 1 NOT NULL,
+	`required` INTEGER default 0 NOT NULL,
+	`num_mm` INTEGER default 0 NOT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `category_cod_unique` (`cod`)
+)Engine=MyISAM;
+
+#-----------------------------------------------------------------------------
+#-- category_i18n
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `category_i18n`;
+
+
+CREATE TABLE `category_i18n`
+(
+	`name` VARCHAR(100)  NOT NULL,
+	`id` INTEGER  NOT NULL,
+	`culture` VARCHAR(7)  NOT NULL,
+	PRIMARY KEY (`id`,`culture`),
+	CONSTRAINT `category_i18n_FK_1`
+		FOREIGN KEY (`id`)
+		REFERENCES `category` (`id`)
+		ON DELETE CASCADE
+)Engine=MyISAM;
+
+#-----------------------------------------------------------------------------
+#-- relation_category
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `relation_category`;
+
+
+CREATE TABLE `relation_category`
+(
+	`one_id` INTEGER  NOT NULL,
+	`two_id` INTEGER  NOT NULL,
+	`recommended` INTEGER default 1 NOT NULL,
+	PRIMARY KEY (`one_id`,`two_id`),
+	CONSTRAINT `relation_category_FK_1`
+		FOREIGN KEY (`one_id`)
+		REFERENCES `category` (`id`)
+		ON DELETE CASCADE,
+	INDEX `relation_category_FI_2` (`two_id`),
+	CONSTRAINT `relation_category_FK_2`
+		FOREIGN KEY (`two_id`)
+		REFERENCES `category` (`id`)
+		ON DELETE CASCADE
+)Engine=MyISAM;
+
+#-----------------------------------------------------------------------------
+#-- category_mm
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `category_mm`;
+
+
+CREATE TABLE `category_mm`
+(
+	`category_id` INTEGER  NOT NULL,
+	`mm_id` INTEGER  NOT NULL,
+	PRIMARY KEY (`category_id`,`mm_id`),
+	CONSTRAINT `category_mm_FK_1`
+		FOREIGN KEY (`category_id`)
+		REFERENCES `category` (`id`)
+		ON DELETE CASCADE,
+	INDEX `category_mm_FI_2` (`mm_id`),
+	CONSTRAINT `category_mm_FK_2`
+		FOREIGN KEY (`mm_id`)
+		REFERENCES `mm` (`id`)
+		ON DELETE CASCADE
+)Engine=MyISAM;
+
+#-----------------------------------------------------------------------------
+#-- category_mm_template
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `category_mm_template`;
+
+
+CREATE TABLE `category_mm_template`
+(
+	`category_id` INTEGER  NOT NULL,
+	`mm_template_id` INTEGER  NOT NULL,
+	PRIMARY KEY (`category_id`,`mm_template_id`),
+	CONSTRAINT `category_mm_template_FK_1`
+		FOREIGN KEY (`category_id`)
+		REFERENCES `category` (`id`)
+		ON DELETE CASCADE,
+	INDEX `category_mm_template_FI_2` (`mm_template_id`),
+	CONSTRAINT `category_mm_template_FK_2`
+		FOREIGN KEY (`mm_template_id`)
+		REFERENCES `mm_template` (`id`)
+		ON DELETE CASCADE
+)Engine=MyISAM;
+
+#-----------------------------------------------------------------------------
+#-- category_mm_timeframe
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `category_mm_timeframe`;
+
+
+CREATE TABLE `category_mm_timeframe`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`category_id` INTEGER  NOT NULL,
+	`mm_id` INTEGER  NOT NULL,
+	`timestart` DATETIME  NOT NULL,
+	`timeend` DATETIME  NOT NULL,
+	`description` TEXT,
+	`created_at` DATETIME,
+	`updated_at` DATETIME,
+	PRIMARY KEY (`id`),
+	INDEX `category_mm_timeframe_FI_1` (`category_id`),
+	CONSTRAINT `category_mm_timeframe_FK_1`
+		FOREIGN KEY (`category_id`)
+		REFERENCES `category` (`id`)
+		ON DELETE CASCADE,
+	INDEX `category_mm_timeframe_FI_2` (`mm_id`),
+	CONSTRAINT `category_mm_timeframe_FK_2`
+		FOREIGN KEY (`mm_id`)
+		REFERENCES `mm` (`id`)
+		ON DELETE CASCADE
 )Engine=MyISAM;
 
 # This restores the fkey checks, after having unset them earlier

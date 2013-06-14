@@ -1,19 +1,25 @@
 <?php
 /**
- * importa un csv y puebla la tabla category
- * creando el árbol unesco.
+ * Imports a csv and populates the category table with unesco tree.
+ * Esisting entries are not updated, only new entries are added.
  *
- * El csv estará ordenado por directamente por códigos unesco
- * en vez de por niveles. Ej. de líneas del csv:
- * U010000 (primer nivel)
- * U010100 (segundo nivel)
- * U010101 (tercer nivel)
- * U020000 (primer nivel)
+ * CSV file has to be sorted by UNESCO codes (category.cod)
+ * rather than hierarchy levels.
+ * Example:  
+ * U010000 (first level unesco)
+ * U010100 (second level unesco)
+ * U010101 (third level unesco)
+ * U020000 (first level unesco)
+ *
+ * The first data entry (apart form header columns) has to be
+ * UNESCO subtree container, with parent id = 0 to link it with root category.
+ *
+ * csv structure: 'id'; 'cod';'tree_parent_id'; 'metacategory'; 'display'; 'name'
  *
  * @package    pumukit
  * @subpackage batch
  * @author     Andres Perez <aperez@teltek.es>
- * @version    0.1
+ * @version    0.4
  * @copyright  Teltek 2013
  */
 define('SF_ROOT_DIR',    realpath(dirname(__file__).'/../..'));
@@ -31,14 +37,15 @@ $databaseManager->initialize();
 ob_implicit_flush(true);
 ob_end_flush();
 
-borraTablasAPelo(array("category", "category_i18n"));
+// borraTablasAPelo(array("category", "category_i18n"));
 $filename = 'prueba_unescos.csv';
 
 // ----------------------------- Script starts here -------------------
 
-
-
 importCsvFile($filename);
+
+echo "\nDebug - showing category tree:\n\n";
+printCategoryTree();
 
 // ----------------------------- Script ends here -------------------
 
@@ -70,28 +77,31 @@ function retrieveOrCreateRoot($name = 'root')
     return $cat_root;
 }
 
-function importCsvFile($filename)
+function importCsvFile($filename, $num_rows = null)
 {
-    $cat_root          = retrieveOrCreateRoot();  
-    $array_imported_id_category = array(0 => $cat_root);
+    $cat_root = retrieveOrCreateRoot();
+    // Initialize the equivalences array - Important: the csv file
+    // is assumed to begin with UNESCO row and its parent id = 0.
+    $imported_id_category_id = array(0 => $cat_root->getId());
 
     $row      = 1;
     if (($file = fopen($filename, "r")) !== FALSE) {
-        while (($current_row = fgetcsv($file, 300, ";")) !== FALSE) {
+        while ( ($current_row = fgetcsv($file, 300, ";")) !== FALSE)  {
             $number = count($current_row);
             if ($number == 6 ){
                 if (trim($current_row[0]) == "id") { // header row
                     continue;
                 }
 
-                if (!isset($array_imported_id_category[$current_row[2]])){
+                if (!isset($imported_id_category_id[$current_row[2]])){
                     echo "\n\nCurrent csv row: " . $row . "\n";
                     print_r($current_row);
                     throw new Exception ("Parent category not defined");
                 }
 
-                $category = createCategoryFromCsvArray($current_row, $array_imported_id_category[$current_row[2]]);
-                $array_imported_id_category[$current_row[0]] = $category;
+                $parent_cat = CategoryPeer::retrieveByPk($imported_id_category_id[$current_row[2]]);
+                $category   = createCategoryFromCsvArray($current_row, $parent_cat);
+                $imported_id_category_id[$current_row[0]] = $category->getId();
         
             } else {
                 echo "\n Last valid row = \n". print_r($previous_content) . "\n";
@@ -101,6 +111,8 @@ function importCsvFile($filename)
             if ($row % 100 == 0 ) echo "Row " . $row . "\n";
             $previous_content = $current_row;
             
+            if ($num_rows == $row) break;
+
             $row++;        
         } // end while
         fclose($file);
@@ -126,7 +138,7 @@ function createCategoryFromCsvArray($csv_array, $cat_parent)
         echo "Category persisted - new id: " . $category->getId() . " cod: " . $category->getCod() . " name: " . $category->getName() . "\n";
 
     } else {
-        echo "\tCategory retrieved from DB id: " . $category->getId() . " cod: " . $category_getCod . " name: " . $category->getName() . "\n";
+        echo "\tNothing done - Category retrieved from DB id: " . $category->getId() . " cod: " . $category->getCod() . " name: " . $category->getName() . "\n";
         // ¿Update with csv_array?
         // ¿Check parent?
     }
@@ -150,4 +162,19 @@ function borraTablasAPelo($tables)
         $connection->executeUpdate('TRUNCATE TABLE '.$table);       
     }
     echo "\n\n";
+}
+
+function printCategoryTree($category = null, $indent = 0)
+{
+    if (!$category) $category = CategoryPeer::doSelectRoot();
+
+    $padding = str_repeat("\t", $indent);
+    echo $padding . $category->getCod() . 
+        sprintf(' id:% 4d - parent:% 4d - lft:% 4d - rgt:% 4d - ',
+            $category->getId(), $category->getTreeParent(),
+            $category->getTreeLeft(), $category->getTreeRight()) .
+        $category->getName() . "\n";
+    foreach ($category->getChildren() as $child_cat){
+        printCategoryTree($child_cat, $indent+1);
+    }
 }
