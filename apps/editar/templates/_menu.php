@@ -18,6 +18,12 @@
 
 <!-- menu -->
 <div id="editar_menu">
+
+  <div class="cab_up_down" style="float:right; font-weight:bolder; font-size: 22px">
+    <div style="" 
+       href="#" onclick="this.toggleClassName('inv'); Effect.toggle('editar_cab', 'blind'); return false">&nbsp;&nbsp;</div>
+  </div>
+
   <ul id="nav">
     <li class="level0 <?php echo sfConfig::get('dashboard_menu') ?>">
       <a href="<?php echo url_for('dashboard/index')?>" title="Dashboard" class="<?php echo sfConfig::get('dashboard_menu') ?>">
@@ -139,12 +145,37 @@
       </a>
                                        
       <ul>
-        <li class="level1">
+        <li class="level1 last">
           <a href="<?php echo url_for('persons/index')?>" title="Persons" class="">
             <span>Personas</span>
           </a>
         </li>
-<!--        <li class="level1">
+      </ul>    
+    </li>
+
+<?php if($sf_user->getAttribute('user_type_id', 1) == 0) /* A los publicadores no les aparece el menú de administración de usuarios.*/:?>
+    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('config_menu') ?>">
+      <a href="#" title="Administraci&oacute;n" onclick="return false" class="<?php echo sfConfig::get('config_menu') ?>">
+        <span>Administraci&oacute;n</span>
+      </a>
+      <ul>
+        <li class="level1">
+          <a href="<?php echo url_for('users/index')?>" title="Users" class="">
+            <span>Usuarios admin</span>
+          </a>
+        </li>
+        <!-- <li class="level1">
+          <a href="#" title="Export" class="">
+            <span>Export</span>
+          </a>
+        </li> 
+        <li class="last level1">
+          <a href="#" title="Backup" class="">
+            <span>Backup</span>
+          </a>
+        </li> -->
+
+        <!--        <li class="level1">
           <a href="<?php echo url_for('places/index')?>" title="Places" class="">
             <span>Lugares y recintos</span>
           </a>
@@ -154,6 +185,11 @@
             <span>Channels</span>
           </a>
         </li> -->
+        <li class="level1">
+          <a href="<?php echo url_for('categories/index')?>"  class="">
+            <span>Categorias</span>
+          </a>
+        </li>
         <li class="level1">
           <a href="<?php echo url_for('grounds/index')?>" title="Ground" class="">
             <span>Lugares y &Aacute;reas de conocimiento</span>
@@ -207,30 +243,8 @@
             <span>Roles</span>
           </a>
         </li>
-      </ul>    
-    </li>
 
-<?php if($sf_user->getAttribute('user_type_id', 1) == 0) /* A los publicadores no les aparece el menú de administración de usuarios.*/:?>
-    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('config_menu') ?>">
-      <a href="#" title="Administraci&oacute;n" onclick="return false" class="<?php echo sfConfig::get('config_menu') ?>">
-        <span>Administraci&oacute;n</span>
-      </a>
-      <ul>
-        <li class="level1 last">
-          <a href="<?php echo url_for('users/index')?>" title="Users" class="">
-            <span>Usuarios admin</span>
-          </a>
-        </li>
-        <!-- <li class="level1">
-          <a href="#" title="Export" class="">
-            <span>Export</span>
-          </a>
-        </li> 
-        <li class="last level1">
-          <a href="#" title="Backup" class="">
-            <span>Backup</span>
-          </a>
-        </li> -->
+
       </ul>
     </li>  
 <?php endif ?>
