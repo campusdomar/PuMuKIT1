@@ -118,4 +118,52 @@ class MmTemplate extends BaseMmTemplate
   }
 
 
+  /**
+   * Devuelve la lista de Objetos categoría
+   * que identifican el video (ResulSet of Category)
+   * Si se indica padre, devuelve sólo las hijas.
+   *
+   * @access public
+   * @parameter Category $parent
+   * @return ResulSet of Categorys.
+   */
+  public function getCategorys($parent = null)
+  {
+    $c = new Criteria();
+
+    $c->addJoin(CategoryPeer::ID, CategoryMmTemplatePeer::CATEGORY_ID);
+    $c->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $this->getId());
+    $c->addAscendingOrderByColumn(CategoryPeer::COD);
+    if($parent) {
+      $c->addAnd(CategoryPeer::TREE_LEFT, $parent->getLeftValue(), Criteria::GREATER_THAN);
+      $c->addAnd(CategoryPeer::TREE_RIGHT, $parent->getRightValue(), Criteria::LESS_THAN);
+      $c->addAnd(CategoryPeer::SCOPE, $parent->getScopeIdValue(), Criteria::EQUAL);
+
+    }
+
+    return CategoryPeer::doSelect($c);
+  }
+
+  public function getCategories($parent = null)
+  {
+    return $this->getCategorys($parent);
+  }
+  
+  /**
+   * Devuelve true si el Objeto contiene a la categoría
+   * 
+   * @access public
+   * @parameter integer $id
+   * @return Boolean.
+   */
+  public function hasCategoryId($id)
+  {
+    $c = new Criteria();
+
+    $c->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $this->getId());
+    $c->add(CategoryMmTemplatePeer::CATEGORY_ID, $id);
+    $c->addAscendingOrderByColumn(CategoryPeer::COD);
+
+    return count(CategoryPeer::doSelect($c))>0;
+  }
 }

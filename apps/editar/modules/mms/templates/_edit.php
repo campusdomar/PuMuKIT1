@@ -8,8 +8,8 @@
     <li id="metaMm"   class="noSel" >
       <a href="#" onclick="menuTab.select('metaMm'); update_file.stop(); return false;" >Metadatos</a>
     </li>
-    <li id="groundMm" class="noSel" >
-      <a href="#" onclick="menuTab.select('groundMm'); update_file.stop(); return false;" >Areas de conocimento</a>
+    <li id="categoryMm" class="noSel" >
+      <a href="#" onclick="menuTab.select('categoryMm'); update_file.stop(); return false;" >Categorias</a>
     </li>
     <li id="personMm" class="noSel" >
       <a href="#" onclick="menuTab.select('personMm'); update_file.stop(); return false;" >Personas</a>
@@ -24,15 +24,19 @@
   </div>
   
   <div id="pubMmDiv"  style="display:none;">
-    <?php include_partial('edit_pub', array('mm' => $mm, 'langs' => $langs)) ?>
+    <?php include_partial('edit_pub', array('mm' => $mm, 'langs' => $langs, 
+                                            'timeframe1' => $timeframe1,
+                                            'interval1cmp' => $interval1cmp,
+                                            'timeframe2' => $timeframe2,
+                                            'interval2cmp' => $interval2cmp)) ?>
   </div>  
 
   <div id="metaMmDiv"  style="display:none;">
     <?php include_partial('edit_meta', array('mm' => $mm, 'langs' => $langs)) ?>
   </div>
   
-  <div id="groundMmDiv"  style="display:none;">
-    <?php include_partial('edit_ground', array('mm' => $mm, 'langs' => $langs, 'grounds' => $grounds , 'grounds_sel' => $grounds_sel, 'groundtypes' => $groundtypes)) ?>
+  <div id="categoryMmDiv" class="virtual_edit"  style="display:none;">
+    <?php include_partial('edit_category', array('mm' => $mm, 'langs' => $langs)) ?>
   </div>
   
   <div id="personMmDiv" style="display:none;">

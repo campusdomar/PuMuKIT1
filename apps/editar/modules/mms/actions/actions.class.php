@@ -32,6 +32,31 @@ class mmsActions extends sfActions
    
     $this->getUser()->setAttribute('serial', $this->getRequestParameter('serial'));
 
+    //Petición de objeto multimedia por id en la URL
+    if ($this->hasRequestParameter('mm_id')) {
+      $this->getUser()->setAttribute('search_id', $this->getRequestParameter('mm_id'), 'tv_admin/mm/searchs');
+      $this->getUser()->setAttribute('id', 0, 'tv_admin/mm');
+      $this->getUser()->setAttribute('page', 1, 'tv_admin/mm');
+      
+      //TODO redirect con la primera serie de la base de datos
+      return $this->redirect('mms/index?serial=' . $this->serial->getId());
+    }
+
+    //Buscador facetado
+    if(!$this->getUser()->hasAttribute('type', 'tv_admin/mm/searchs'))
+        $this->getUser()->setAttribute('type', 'all', 'tv_admin/mm/searchs');
+    if(!$this->getUser()->hasAttribute('duration', 'tv_admin/mm/searchs'))
+        $this->getUser()->setAttribute('duration', 'all', 'tv_admin/mm/searchs');
+    if(!$this->getUser()->hasAttribute('year', 'tv_admin/mm/searchs'))
+        $this->getUser()->setAttribute('year', 'all', 'tv_admin/mm/searchs');
+    if(!$this->getUser()->hasAttribute('search', 'tv_admin/mm/searchs'))
+        $this->getUser()->setAttribute('search', '', 'tv_admin/mm/searchs');
+    if(!$this->getUser()->hasAttribute('search_id', 'tv_admin/mm/searchs'))
+        $this->getUser()->setAttribute('search_id', '', 'tv_admin/mm/searchs');
+    if(!$this->getUser()->hasAttribute('genre', 'tv_admin/mm/searchs'))
+        $this->getUser()->setAttribute('genre', 'all', 'tv_admin/mm/searchs');
+    if(!$this->getUser()->hasAttribute('check', 'tv_admin/mm/searchs'))
+        $this->getUser()->setAttribute('check', 'all', 'tv_admin/mm/searchs');
     //si cambias de serie tienes que cambiar de pagina
     if((!$this->getUser()->hasAttribute('page', 'tv_admin/mm'))||
        (($this->getUser()->getAttribute('serial') != $this->getRequestParameter('serial'))))
@@ -241,6 +266,27 @@ class mmsActions extends sfActions
 
     $mm->save();
 
+    $debug = false; // "Ingenioso" recurso para tener varios entornos de desarrollo a efectos de debug
+    $env = ($debug) ? sfConfig::get('sf_environment') : 'prod';
+    if ('dev' == $env){
+      echo "Debug en actions.clas.php: El total de parámetros retornados por la query al controlador es:<br/>";
+      var_dump($this->getRequest()->getParameterHolder());
+      echo "<br/>";
+    }
+
+// --- Actualiza los timeframes - decisiones editoriales temporizadas ---
+    CategoryMmTimeframePeer::updateTimeframeFromPublishTab(1,
+      $mm->getId(),
+      $this->getRequestParameter('editorial1', 0),
+      $this->getRequestParameter('temporizada1', 0),
+      $this->getRequestParameter('timestart1'),
+      $this->getRequestParameter('timeend1'));
+    CategoryMmTimeframePeer::updateTimeframeFromPublishTab(2,
+      $mm->getId(),
+      $this->getRequestParameter('editorial2', 0),
+      $this->getRequestParameter('temporizada2', 0),
+      $this->getRequestParameter('timestart2'),
+      $this->getRequestParameter('timeend2'));
 
     /*
       Recorro la lista de todos viendo cuales se acaban de selecionar o de quitar 
@@ -341,7 +387,9 @@ class mmsActions extends sfActions
    */
   public function executeCreate()
   {
-    MmPeer::createNew($this->getUser()->getAttribute('serial'));
+    $this->mm_sel = MmPeer::createNew($this->getUser()->getAttribute('serial'));
+    $this->getUser()->setAttribute('id', $this->mm_sel->getId(), 'tv_admin/mm');
+    $this->reloadEditAndPreview = true;
 
     return $this->renderComponent('mms', 'list');
   }
@@ -770,6 +818,139 @@ class mmsActions extends sfActions
 
 
   /**
+   * --  ADDCATEGORY -- /editar.php/mms/addcategory
+   *
+   * Parametros por URL: identificador del objeto mulimedia e identificador del area de con.
+   *
+   */
+  public function executeAddCategory()
+  {
+    $mm = MmPeer::retrieveByPKWithI18n($this->getRequestParameter('id'), $this->getUser()->getCulture());
+    $this->forward404Unless($mm);
+
+    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('category'), $this->getUser()->getCulture());
+    $this->forward404Unless($category);
+
+    $add_cats = array();
+    
+    foreach($category->getPath() as $p){
+      if($p->addMmId($mm->getId())){
+	$add_cats[] = $p;
+      }
+    }
+    if($category->addMmId($mm->getId())){
+      $add_cats[] = $category;
+    }
+
+    
+    foreach($category->getRequiredWithI18n() as $p){
+      if($p->addMmId($mm->getId())){
+	$add_cats[] = $p;
+      }
+    }
+
+    $func = create_function('$a', 'return $a->getId();');
+    $json = array('added' => array(), 'recommended' => array());
+    foreach($add_cats as $n){
+      $json['added'][] = array(
+          'id' => $n->getId(), 
+	  'cod' => $n->getCod(), 
+	  'name' => $n->getName(),
+	  'group' => array_map($func, $n->getPath())
+      );
+    }
+
+    //Add recommended. Si mm no lo tiene.
+
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode($json));
+  }
+
+
+  /**
+   * --  DELCATEGORY -- /editar.php/mms/delcategory
+   *
+   * Parametros por URL: identificador del objeto mulimedia e identificador del area de con.
+   *
+   */
+  public function executeDelCategory()
+  {
+    $mm = MmPeer::retrieveByPKWithI18n($this->getRequestParameter('id'), $this->getUser()->getCulture());
+    $this->forward404Unless($mm);
+
+    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('category'), $this->getUser()->getCulture());
+    $this->forward404Unless($category);
+
+    $mm_categories = $mm->getCategories();
+    $del_cats = array();
+    
+    foreach($category->getPath() as $p){
+
+      //Quito elementos del path si no hay otra categoria en el obj. mm. que comparta dicho path.
+      $continue = false;
+      foreach($mm_categories as $mm_c){
+	if(($mm_c->getId() !== $p->getId()) && ($mm_c->getId() !== $category->getId())&&($mm_c->isDescendantOf($p))) {
+	  $continue = true;
+	  break;
+	}
+      }
+      if ($continue) continue;
+
+      if($p->delMmId($mm->getId())){
+          $del_cats[] = $p;
+      }
+    }
+
+    foreach($category->getRequiredWithI18n() as $p){
+      if($p->delMmId($mm->getId())){
+	$del_cats[] = $p;
+      }
+    }
+
+    if($category->delMmId($mm->getId())){
+      $del_cats[] = $category;
+    }
+
+    $func = create_function('$a', 'return $a->getId();');
+    $json = array('deleted' => array(), 'recommended' => array());
+    foreach($del_cats as $n){
+      $json['deleted'][] = array(
+          'id' => $n->getId(), 
+	  'cod' => $n->getCod(), 
+	  'name' => $n->getName(),
+	  'group' => array_map($func, $n->getPath())
+      );
+    }
+
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode($json));
+  }
+
+  /**
+   * --  SERIALCATEGORY -- /editar.php/mms/serialcategory
+   *
+   * Parametros por URL: identificador de la serie
+   *
+   */
+  public function executeSerialcategory()
+  {
+    $serial = SerialPeer::retrieveByPKWithI18n($this->getRequestParameter('serial_id'), $this->getUser()->getCulture());
+    $this->forward404Unless($serial);
+
+    $mm = MmPeer::retrieveByPKWithI18n($this->getRequestParameter('mm_id'), $this->getUser()->getCulture());
+    $this->forward404Unless($mm);
+    
+    $cat_root = CategoryPeer::doSelectRoot();
+    foreach($cat_root->getChildren() as $cat_base) {
+      if($cat_base->getDisplay()){
+	CategoryPeer::categorizeAllFrom($mm, $serial, $cat_base);
+      }
+    }
+
+    return $this->renderText("OK");
+  }
+
+  /**
    * --  PASTE -- /editar.php/mms/paste
    *
    * Parametros por URL: identificador de la serie donde se pegan
@@ -806,8 +987,53 @@ class mmsActions extends sfActions
     return $this->renderComponent('mms', 'list');
   }
   
+  /**  
+   * --  Inv -- /editar.php/mms/inv
+   *
+   * Parametros por URL: identificador del campo del objeto multimedia
+   * Parametros por POST: array en JSON de identificadores
+   *
+   */
+  public function executeInv()
+  {
+    $field = $this->getRequestParameter('field');
 
+    if($this->hasRequestParameter('ids')){
+      $mms = array_reverse(MmPeer::retrieveByPKs(json_decode($this->getRequestParameter('ids'))));
+
+      foreach($mms as $mm){
+	$save = false;
+	if ($field == "announce") {
+	  $mm->setAnnounce(!$mm->getAnnounce());
+	  $save = true;
+	}else if ($field == "important") {
+	  $mm->setImportant(!$mm->getImportant());
+	  $save = true;
+	}
+	if ($save){
+	  $mm->save();
+	}
 }
 
+    }
+    return $this->renderComponent('mms', 'list');
+  }
 
 
+  /**
+   * --  GETCHILDREN -- /editar.php/mms/getChildren
+   *
+   * Accion por defecto en la aplicacion. Acceso publico. Layout: layout
+   *
+   */
+  public function executeGetchildren()
+  {
+    $this->mm_id = $this->getRequestParameter('mm');
+
+    $this->c = CategoryPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->c);
+
+    $this->block_cat = $this->getRequestParameter('block_cat');
+  }
+
+}
