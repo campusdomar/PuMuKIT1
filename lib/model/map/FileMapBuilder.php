@@ -99,7 +99,7 @@ class FileMapBuilder {
 
 		$tMap->addColumn('PUNT_NUM', 'PuntNum', 'int', CreoleTypes::INTEGER, true, null);
 
-		$tMap->addColumn('SIZE', 'Size', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addColumn('SIZE', 'Size', 'string', CreoleTypes::BIGINT, true, null);
 
 		$tMap->addColumn('RESOLUTION_HOR', 'ResolutionHor', 'int', CreoleTypes::INTEGER, true, null);
 

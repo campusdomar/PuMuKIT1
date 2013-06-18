@@ -207,23 +207,17 @@ PubChannel:
     broadcast_type_id: pub
     rank: 2
     enable: true
-  videositemap:
-    id: videositemap
-    name: GoogleVideoSiteMap
-    broadcast_type_id: cor
-    rank: 3
-    enable: true
   itunesu:
     id: itunesu
     name: iTunesU
     broadcast_type_id: cor
-    rank: 4
+    rank: 3
     enable: false
   youtubeedu:
     id: youtubeedu
     name: YouTubeEDU
     broadcast_type_id: cor
-    rank: 5
+    rank: 4
     enable: false
 
 

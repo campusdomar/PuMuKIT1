@@ -63,9 +63,9 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 
 	/**
 	 * The value for the size field.
-	 * @var        int
+	 * @var        string
 	 */
-	protected $size = 0;
+	protected $size = '0';
 
 	/**
 	 * @var        Mm
@@ -178,7 +178,7 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 	/**
 	 * Get the [size] column value.
 	 * 
-	 * @return     int
+	 * @return     string
 	 */
 	public function getSize()
 	{
@@ -323,19 +323,19 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 	/**
 	 * Set the value of [size] column.
 	 * 
-	 * @param      int $v new value
+	 * @param      string $v new value
 	 * @return     void
 	 */
 	public function setSize($v)
 	{
 
-		// Since the native PHP type for this column is integer,
-		// we will cast the input value to an int (if it is not).
-		if ($v !== null && !is_int($v) && is_numeric($v)) {
-			$v = (int) $v;
+		// Since the native PHP type for this column is string,
+		// we will cast the input to a string (if it is not).
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
 		}
 
-		if ($this->size !== $v || $v === 0) {
+		if ($this->size !== $v || $v === '0') {
 			$this->size = $v;
 			$this->modifiedColumns[] = MaterialPeer::SIZE;
 		}
@@ -371,7 +371,7 @@ abstract class BaseMaterial extends BaseObject  implements Persistent {
 
 			$this->display = $rs->getBoolean($startcol + 5);
 
-			$this->size = $rs->getInt($startcol + 6);
+			$this->size = $rs->getString($startcol + 6);
 
 			$this->resetModified();
 

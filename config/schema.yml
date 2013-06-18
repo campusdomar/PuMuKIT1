@@ -659,7 +659,7 @@ propel:
       required: true
       default: 0
     size:
-      type: integer
+      type: bigint
       required: true
       default: 0
     resolution_hor: 
@@ -891,7 +891,7 @@ propel:
       required: true
       default: 1
     size:
-      type: integer
+      type: bigint
       required: true
       default: 0
   material_i18n: 
@@ -1022,7 +1022,7 @@ propel:
       required: true
       default: 0
     size:
-      type: integer
+      type: bigint
       required: true
       default: 0
     email: 
@@ -1365,7 +1365,7 @@ propel:
       required: true
       default: 0
     size:
-      type: integer
+      type: bigint
       required: true
       default: 0
     email: 
