@@ -43,13 +43,133 @@ class MmPeer extends BaseMmPeer
   }
 
 /**
+   * Devuelve un conjunto de objetos multimedia anunciados
+   *
+   * @access public
+   * @param string $culture, valor por defecto es.
+   * @param integer $limit
+   * @param array credentials 
+   * @return array de Serial y Mm
+   */
+  static public function getAnnounces($culture = 'es', $limit = 0, $credentials = array('pub', 'cor'), $genre = null, $anounce=true){
+    
+    $limitSQL = '';
+    if ($limit != 0) $limitSQL = (' limit ' . $limit);
+
+    $conexion = Propel::getConnection();
+    if($anounce) {
+      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
+	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
+	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+    }else {
+      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
+	."AND mm.broadcast_id = broadcast.id "
+	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+    }
+
+    $credentials = array_map(create_function('$a', 'return "\"" . $a . "\"";'), $credentials);
+    $cr = "(" . implode(", ", $credentials) . ")";
+    $consulta = sprintf($consulta, $cr, $cr);
+
+    $sentencia = $conexion->prepareStatement($consulta);
+    $resultset = $sentencia->executeQuery();
+    
+    $volver = array();
+    
+    while ($resultset->next()){
+      if ($resultset->getString('info') == 'mm'){
+	//hydrate
+	$aux = MmPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+	//$c = new Criteria();
+	//$c->add(MmPeer::ID, $resultset->getInt('id'));
+	//list($aux) = MmPeer::doSelectWithI18n($c, $culture);
+      }
+      $volver[]= $aux;
+    }
+    return $volver;
+  }
+
+
+  /**
+   * Devuelve un conjunto de objetos multimedia anunciados en un rango de un mes
+   *
+   * @access public
+   * @param DateTime $date_new valor del primer dia del rango
+   * @param string $culture, valor por defecto es.
+   * @param array credentials 
+   */
+  static public function getAnnouncesByDate($date_new, $culture = 'es', $credentials = array('pub', 'cor'), $anounce=false){
+
+    $date = $date_new;
+    $aux_date = strtotime($date_new);
+
+    $date_new = date("Y/m/d", $aux_date);
+
+    $next_month = strtotime('+1 month', $aux_date);
+
+    $next_date = date('Y/m/d', $next_month);
+
+
+    $conexion = Propel::getConnection();
+    if($anounce) {
+      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
+	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
+        ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+    }else {
+      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
+	."AND mm.broadcast_id = broadcast.id "
+        ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+    }
+
+
+    $credentials = array_map(create_function('$a', 'return "\"" . $a . "\"";'), $credentials);
+    $cr = "(" . implode(", ", $credentials) . ")";
+    $consulta = sprintf($consulta, $cr, $cr);
+    
+    $sentencia = $conexion->prepareStatement($consulta);
+    $resultset = $sentencia->executeQuery();
+    
+    $volver = array();
+    
+    while ($resultset->next()){
+      if ($resultset->getString('info') == 'mm'){
+        //hydrate
+        $aux = MmPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+        //$c = new Criteria();
+        //$c->add(MmPeer::ID, $resultset->getInt('id'));
+        //list($aux) = MmPeer::doSelectWithI18n($c, $culture);
+      }
+      $volver[]= $aux;
+    }
+    return $volver;
+  }
+  
+  /**
  * Performs a faceted search using a lucene (text-only) query and
  * criteria to limit the list.
  */
-  static public function getFacetedSearch($unesco, $genre, $only, $duration, $year, $query, $limit = 10, $offset = 0)
+  static public function getFacetedSearch($unesco, $genre, $only, $duration, $year, $month, $day, $query, $limit = 10, $offset = 0)
   {
     $out = array();
     $c = new Criteria();
+    self::addBroadcastCriteria($c);
+    self::addPubChannelCriteria($c, 1);
 
     // Add lucene text search hits
     if ($query != '' && $query != null && $query != "\n"){   
@@ -84,13 +204,28 @@ class MmPeer extends BaseMmPeer
       $c->add(self::DURATION, $duration_sec, ($duration < 0)?Criteria::LESS_EQUAL:Criteria::GREATER_EQUAL);
     }
 
-    if (intval($year) != 0){
-      $first_day = $year . '-01-01';
-      $last_day  = ($year + 1) . '-01-01'; // por defecto, h:m:s = 00:00:00
-      $c1 = $c->getNewCriterion(MmPeer::RECORDDATE, $first_day, Criteria::GREATER_EQUAL);
-      $c2 = $c->getNewCriterion(MmPeer::RECORDDATE, $last_day, Criteria::LESS_EQUAL);
-      $c1->addAnd($c2);
-      $c->add($c1);
+    $year_present  = intval($year) != 0;
+    $month_present = intval($month) != 0;
+    $day_present   = intval($day) != 0;
+    if ($year_present || $month_present || $day_present){
+      $date_format_string    = ''; // http://dev.mysql.com/doc/refman/5.6/en/date-and-time-functions.html#function_date-format
+      $date_requested_string = '';
+
+      if ($year_present){
+        $date_format_string    .= '%Y';
+        $date_requested_string .= sprintf('%04d', $year);
+      }
+      if ($month_present){
+        $date_format_string    .= '%m'; // two digit month.
+        $date_requested_string .= sprintf('%02d', $month); // two digit month
+      }
+      if ($day_present){
+        $date_format_string    .= '%d'; // two digit day
+        $date_requested_string .= sprintf('%02d', $day);
+      }
+
+      $custom_criteria =' DATE_FORMAT(mm.RECORDDATE, "' . $date_format_string . '") = "' . $date_requested_string . '"';
+      $c->add(MmPeer::RECORDDATE, $custom_criteria, Criteria::CUSTOM);
     }
 
     $c->setDistinct(true);
@@ -163,6 +298,9 @@ class MmPeer extends BaseMmPeer
     $criteria->addSelectColumn(self::PUBLICDATE );
     $criteria->addSelectColumn(self::RECORDDATE );
     $criteria->addSelectColumn(PubChannelMmPeer::PUB_CHANNEL_ID);
+    $criteria->addSelectColumn(self::DURATION );
+    $criteria->addSelectColumn(self::AUDIO );
+    $criteria->addSelectColumn(self::SERIAL_ID);
     // Agregamos los Joins entre las distintas tablas
     $criteria->addJoin(self::ID, MmI18nPeer::ID, Criteria::LEFT_JOIN );
     $criteria->addJoin(self::ID, PicMmPeer::OTHER_ID, Criteria::LEFT_JOIN );
@@ -183,6 +321,9 @@ class MmPeer extends BaseMmPeer
 	$mm['publicdate']  = date('d/m/Y', strtotime($rs->getTimestamp(6)));
 	$mm['recorddate']  = date('d/m/Y', strtotime($rs->getTimestamp(7)));
         $mm['has_pub_channel']  = (strlen($rs->getString(8) != 0) ? '1' : '');
+        $mm['duration']    = $rs->getInt(9);
+        $mm['audio']       = $rs->getBoolean(10);
+        $mm['mm_id']    = $rs->getInt(11);
 	$mms[] = $mm;
       }
     return $mms;
@@ -231,13 +372,13 @@ class MmPeer extends BaseMmPeer
 
 
   /**
-   * Crea nuevo obeto multimedia 
+   * Crea nuevo obeto multimedia, No se hace save.
    *
    * Observaciones no se comprueba que serial_id exist
    * @access public
    * @return Mm
    */
-  static public function createNewMm($serial_id)
+  static public function createNewMm($serial_id, $title = null)
   {
     $mm_template = MmTemplatePeer::get($serial_id);
 
@@ -247,8 +388,8 @@ class MmPeer extends BaseMmPeer
     $mm->setStatusId(MmPeer::STATUS_BLOQ);
 
     //METADATOS
-    $mm->setPublicdate($mm_template->getPublicdate());
-    $mm->setRecorddate($mm_template->getRecorddate());
+    $mm->setPublicdate(date("Y-m-d H:i", mktime(date("H"), date("i"), 0, date("m"),date("d"),date("Y"))));
+    $mm->setRecorddate(date("Y-m-d H:i", mktime(date("H"), date("i"), 0, date("m"),date("d"),date("Y"))));
     
     $mm->setSubserial($mm_template->getSubserial());
     $mm->setCopyright($mm_template->getCopyright());
@@ -260,7 +401,12 @@ class MmPeer extends BaseMmPeer
     foreach($langs as $lang){
       $mm->setCulture($lang);
       $mm_template->setCulture($lang);
+      if ($title != null) {
+	$mm->setTitle($title);
+      }
+      else {
       $mm->setTitle($mm_template->getTitle());
+      }
       $mm->setSubtitle($mm_template->getSubtitle());
       $mm->setKeyword($mm_template->getKeyword());
       $mm->setDescription($mm_template->getDescription());
@@ -292,6 +438,11 @@ class MmPeer extends BaseMmPeer
       $mm->setGroundId($g->getId());
     }
 
+    //CATEGORIES
+    $categories = $mm_template->getCategories();
+    foreach($categories as $c){
+      $c->addMmId($mm->getId());
+    }
     //PERSONAS
     $roles = RolePeer::doSelect(new Criteria());
     foreach($roles as $r){
@@ -320,19 +471,103 @@ class MmPeer extends BaseMmPeer
    * @return integer
    */
   //UPDATE 15
-  //static public function doCountPublic($dates = null)
-  //{
-  //  $c = new Criteria();
-  //
-  //  if($dates != null){
-  //    $c->add(MmPeer::PUBLICDATE, date("Y-m-01", $dates["end"]), Criteria::LESS_THAN);
-  //    $c->addAnd(MmPeer::PUBLICDATE, date("Y-m-01", $dates["ini"]), Criteria::GREATER_THAN);
-  //  }
-  //  
-  //  $c->add(MmPeer::STATUS_ID, 1, Criteria::GREATER_THAN);
-  //
-  //  return MmPeer::doCount($c, true);
-  //}
+  static public function doCountPublic($pub_channel = false, $broadcast_and_status = true, $dates = null)
+  {
+    $c = new Criteria();
+  
+    if($dates != null){
+      $c->add(MmPeer::PUBLICDATE, date("Y-m-01", $dates["end"]), Criteria::LESS_THAN);
+      $c->addAnd(MmPeer::PUBLICDATE, date("Y-m-01", $dates["ini"]), Criteria::GREATER_THAN);
+    }
+
+    if ($pub_channel){
+      $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+      $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
+      $c->add(PubChannelMmPeer::STATUS_ID, 1);
+    }
+   
+    if ($broadcast_and_status){
+      $c->add(MmPeer::STATUS_ID, 0);
+
+      $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
+      $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
+      $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
+      $c->setDistinct(true);
+    }
+    return MmPeer::doCount($c, true);
+  }
+
+  /**
+   * Cuenta los objetos multimedia publicos, es decir,
+   * con su estado mayor que 1
+   *
+   * @access public
+   * @return integer
+   */
+  //UPDATE 15
+  static public function doCountVideoPublic($pub_channel = false, $broadcast_and_status = true, $dates = null)
+  {
+    $c = new Criteria();
+  
+    if($dates != null){
+      $c->add(MmPeer::PUBLICDATE, date("Y-m-01", $dates["end"]), Criteria::LESS_THAN);
+      $c->addAnd(MmPeer::PUBLICDATE, date("Y-m-01", $dates["ini"]), Criteria::GREATER_THAN);
+    }
+
+    if ($pub_channel){
+      $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+      $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
+      $c->add(PubChannelMmPeer::STATUS_ID, 1);
+    }
+
+    $c->add(self::AUDIO, 0);
+      
+    if ($broadcast_and_status){
+      $c->add(MmPeer::STATUS_ID, 0);
+      
+      $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
+      $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
+      $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
+      $c->setDistinct(true);
+    }
+    return MmPeer::doCount($c, true);
+  }
+
+  /**
+   * Cuenta los objetos multimedia publicos, es decir,
+   * con su estado mayor que 1
+   *
+   * @access public
+   * @return integer
+   */
+  //UPDATE 15
+  static public function doCountAudioPublic($pub_channel = false, $broadcast_and_status = true, $dates = null)
+  {
+    $c = new Criteria();
+  
+    if($dates != null){
+      $c->add(MmPeer::PUBLICDATE, date("Y-m-01", $dates["end"]), Criteria::LESS_THAN);
+      $c->addAnd(MmPeer::PUBLICDATE, date("Y-m-01", $dates["ini"]), Criteria::GREATER_THAN);
+    }
+
+    if ($pub_channel){
+      $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+      $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
+      $c->add(PubChannelMmPeer::STATUS_ID, 1);
+    }
+   
+    $c->add(self::AUDIO, 1);
+
+    if ($broadcast_and_status){
+      $c->add(MmPeer::STATUS_ID, 0);
+
+      $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
+      $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
+      $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
+      $c->setDistinct(true);
+    }
+    return MmPeer::doCount($c, true);
+  }
 
 
   /**
@@ -401,6 +636,21 @@ class MmPeer extends BaseMmPeer
     $c->setDistinct(true);
   }
 
+  /**
+   * Modifica criteria para que realice la busqueda en objetos multimedia no ocultos.
+   *
+   * @access     public
+   * @param      Criteria object.
+   */
+  public static function addPubChannelCriteria(Criteria $c, $pub_channel)
+  {
+    $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+    $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, $pub_channel, is_int($pub_channel)?null:Criteria::IN);
+    $c->add(PubChannelMmPeer::STATUS_ID, 1);
+
+    $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
+    $c->setDistinct(true);
+  }
 
   /**
    * Devuelve un ResulSet de objetos Serial, que no estan ocultos y son publicos.
@@ -433,16 +683,13 @@ class MmPeer extends BaseMmPeer
     return MmPeer::doSelectOne($c);
   }
 
-  /**
-   *
-   */
-  public static function addPubChannelCriteria(Criteria $c, $pub_channel)
-  {
-    $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
-    $c->addJoin(PubChannelMmPeer::PUB_CHANNEL_ID, PubChannelPeer::ID);
-    $c->add(PubChannelPeer::NAME, $pub_channel, is_int($pub_channel)?null:Criteria::IN);
+  public static function getStatusText($status_id){
+    $aux = array(
+		 0 => 'Publicado',
+		 1 => 'Bloqueado', 
+		 2 => 'Oculto',
+    );
 
-    $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
-    $c->setDistinct(true);
+    return $aux[$status_id];
   }
 }

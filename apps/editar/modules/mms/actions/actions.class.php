@@ -49,10 +49,36 @@ class mmsActions extends sfActions
    */
   public function executeList()
   {
+    // reset fields
+    if ($this->hasRequestParameter('search') && $this->getRequestParameter('search') == 'reset...') {
+      $this->getUser()->setAttribute('type', 'all', 'tv_admin/mm/searchs');
+      $this->getUser()->setAttribute('duration', 'all', 'tv_admin/mm/searchs');
+      $this->getUser()->setAttribute('year', 'all', 'tv_admin/mm/searchs');
+      $this->getUser()->setAttribute('search', '', 'tv_admin/mm/searchs');
+      $this->getUser()->setAttribute('search_id', '', 'tv_admin/mm/searchs');
+      $this->getUser()->setAttribute('genre', 'all', 'tv_admin/mm/searchs');
+      $this->getUser()->setAttribute('check', 'all', 'tv_admin/mm/searchs');
+    }
+
+    if ($this->hasRequestParameter('mm_id')) {
+      $this->mm_sel = MmPeer::retrieveByPK($this->getRequestParameter('mm_id'));
+      $this->getUser()->setAttribute('id', $this->mm_sel->getId(), 'tv_admin/mm');
+      $this->reloadEditAndPreview = true;
+    }
     return $this->renderComponent('mms', 'list');
   }
 
 
+  /**
+   * --  INFO -- /editar.php/mms/info
+   *
+   * Parametros por URL: Identificador del archivo multimedia
+   *
+   */
+  public function executeInfo(){
+    $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->mm);
+  }
 
 
   /**
@@ -183,7 +209,23 @@ class mmsActions extends sfActions
     $mm->setEditorial2($this->getRequestParameter('editorial2', 0));
     $mm->setEditorial3($this->getRequestParameter('editorial3', 0));
 
-    $mm->setBroadcastId($this->getRequestParameter('broadcast_id', 0));
+    if ($this->getRequestParameter('broadcast_id', 0) == 2 ) { //Es una OOMM privado
+      if ( $mm->getBroadcastId() ==  1 ) {
+	$broadcast = new Broadcast();
+	$broadcast->setBroadcastTypeId($this->getRequestParameter('broadcast_id', 0));//Guardamos el id del perfil de difusión
+	$broadcast->setName('pri');
+	$broadcast->setPasswd($this->getRequestParameter('pass1', 0));//Guardamos la password
+	$broadcast->save();
+	$mm->setBroadcastId($broadcast->getId());
+      }
+    } else {
+      //Comprobar si antes el OOMM era privado y borrarlo de la tabla BroadcastType
+      $broadcast = BroadcastPeer::retrieveByPk($mm->getBroadcastId());
+      $mm->setBroadcastId(1);//Vuelve a ser publico
+      if ( $broadcast && $broadcast->getId() != 1 ) {
+	$broadcast->delete();
+      }
+    }
     if(($mm->getStatusId() == 0)&&($this->getRequestParameter('status') == 1)){
       // de normal a bloqueado
       $this->enBloq = true;

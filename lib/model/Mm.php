@@ -17,6 +17,79 @@
  */ 
 class Mm extends BaseMm
 {
+  public function updateLuceneIndex()
+  {
+    $index = MmPeer::getLuceneIndex();
+ 
+    // remove existing entries
+    foreach ($index->find('pk:'.$this->getId()) as $hit)
+      {
+	$index->delete($hit->id);
+      }
+ 
+    $doc = new Zend_Search_Lucene_Document();
+ 
+    // store Mm primary key to identify it in the search results
+    $doc->addField(Zend_Search_Lucene_Field::Keyword('pk', $this->getId()));
+
+    // index Mm fields
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('title', $this->getTitle(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('subtitle', $this->getSubtitle(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('keyword', $this->getKeyword(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('description', $this->getDescription(), 'utf-8'));
+
+    $persons = $this->getPersons();
+    $personStr = "";
+
+    foreach($persons as $person){
+      $personStr .= $person->getName();
+    }
+
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('persons', $personStr, 'utf-8'));
+    
+    // add Mm to the index
+    $index->addDocument($doc);
+    $index->commit();
+  }
+
+  public function save($con = null)
+  {
+
+    if (is_null($con)) {
+      $con = Propel::getConnection(MmPeer::DATABASE_NAME);//, Propel::CONNECTION_WRITE);
+    }
+    
+    $con->begin();
+    try {
+      parent::save($con);
+      $this->updateLuceneIndex();
+      $con->commit();
+    }
+    catch (Exception $e) {
+	$con->rollBack();
+	throw $e;
+    }
+  }
+
+
+  /**
+   * Usada para guardar en la BBDD sin actualizar Lucene. Usar con cuidado.
+   */
+  public function saveInDB($con = null)
+  {
+     parent::save($con);
+  }
+
+  public function delete($con = null)
+  {
+    $index = MmPeer::getLuceneIndex();
+    
+    foreach ($index->find('pk:'.$this->getId()) as $hit) {
+      $index->delete($hit->id);
+    }
+    
+    return parent::delete($con);
+  }
   /**
    * Devuelve el los primeros caracteres del titulo
    * Intenta cortar el string en un espacio
@@ -46,7 +119,7 @@ class Mm extends BaseMm
     $c = new Criteria();
     $c->add(FilePeer::MM_ID, $this->getId());
     $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
-    $c->add(PerfilPeer::DISPLAY, false);
+    $c->add(PerfilPeer::MASTER, true);
     $c->addAscendingOrderByColumn(FilePeer::RANK);
     $c->setLimit(1);
 
@@ -72,6 +145,22 @@ class Mm extends BaseMm
     return FilePeer::doSelectOne($c);
   }
 
+  /**
+   * Devuelve el primer archivo multimedia, si no tiene devuelve null
+   *
+   * @access public
+   * @return File
+   */
+  public function getFirstPublicFile()
+  {
+    $c = new Criteria();
+    $c->add(FilePeer::MM_ID, $this->getId());
+    $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
+    $c->add(PerfilPeer::DISPLAY, true);
+    $c->addAscendingOrderByColumn(FilePeer::RANK);
+
+    return FilePeer::doSelectOne($c);
+  }
 
   /**
    * Devuelve el los archivos multimedia que tienen perfil publico.
@@ -512,6 +601,15 @@ class Mm extends BaseMm
       $gv->save();
     }
 
+    foreach ($this->getCategories() as $category){
+      $category->addMmId($mm2->getId());
+      foreach($category->getRequiredWithI18n() as $p){
+        $p->addMmId($mm2->getId());
+      }
+      foreach($category->getPath() as $p){
+	$p->addMmId($mm2->getId());
+      }
+    }
     $roles = RolePeer::doSelectWithI18n(new Criteria(), 'es');
     foreach($roles as $role){
       $persons = $this->getPersons($role->getId());
@@ -650,35 +748,23 @@ class Mm extends BaseMm
  * @param array $extensions - caption formats to search in mat_type.type
  * @return file
  */
-  public function getCaptions($extensions = array ('srt')){
-    if (!is_array($extensions)) $extensions = array($extensions);
+  public function getCaptions($extensions = array ('vtt')){
      
     $c = new Criteria();
     $c->addJoin(MatTypePeer::ID, MaterialPeer::MAT_TYPE_ID);
      
-    foreach ($extensions as $ext){
-      $c->add(MatTypePeer::TYPE, $ext);
-    }
+    $c->add(MatTypePeer::TYPE, $extensions, (is_array($extensions)) ?Criteria::IN : Criteria::EQUAL);
     $c->add(MaterialPeer::MM_ID, $this->getId());
      
-    return MaterialPeer::doSelectOne($c); // jwplayer can handle multiple subtitles if required
+    return MaterialPeer::doSelectOne($c); // TO DO: update logic to allow multiple captions to be returned.
   }
 
 
   /**
    *
    */
-  //OJO15
   public function getStatusText(){
-    $aux = array(
-		 0 => 'Bloquedo',
-		 1 => 'Oculto',
-		 2 => 'Mediateca', 
-		 3 => 'Mediateca y arca', 
-		 4 => 'Mediate, Arca e iTunes', 
-    );
-
-    return $aux[$this->getStatusId()];
+    MmPeer::getStatusText($this->getStatusId());
   }
 
   /**
@@ -709,8 +795,8 @@ class Mm extends BaseMm
     }
     $c = new Criteria();
 
-    //OJO15 Posibilidad de crear funcion con estas dos lienas???
     $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, $pub_channel_id);
+    $c->add(PubChannelMmPeer::STATUS_ID, 1);
 
     return $this->countPubChannelMms($c, true);
   }
@@ -846,8 +932,40 @@ class Mm extends BaseMm
   }
 
 
+public function getSimilarMmsUnesco($cat_code = null){
+    
+    $c = new Criteria();
+    
+    if ($cat_code){
+      //Con el mismo UNESCO
+      $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
+      $c->addJoin(CategoryMmPeer::CATEGORY_ID, CategoryPeer::ID);
+      $c->add(CategoryPeer::COD, $cat_code);
+    } else {
+      //Con la misma categoria.
+      $c->addJoin(CategoryPeer::ID, CategoryMmPeer::CATEGORY_ID);
+      $c->add(CategoryMmPeer::MM_ID, $this->getId());
+    }
+    
+    $c->add(MmPeer::ID, $this->getId(), Criteria::NOT_EQUAL);
+    $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+    $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
+    $c->add(PubChannelMmPeer::STATUS_ID, 1);
+
+    $c->add(MmPeer::STATUS_ID, 0);
+
+    $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
+    $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
+    $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
 
 
+    //Como mucho 20 y aleatorios
+    $c->setLimit(10);
+    $c->setDistinct(true);
+    $c->addAscendingOrderByColumn('RAND()');
+    
+    return MmPeer::doSelect($c);
+  }
 
   /**
    *
@@ -884,14 +1002,107 @@ class Mm extends BaseMm
     return MmPeer::doSelect($c);
   }
 
+  /**
+   * Devuelve la lista de Objetos categoría
+   * que identifican el video (ResulSet of Category)
+   * Si se indica padre, devuelve sólo las hijas.
+   *
+   * @access public
+   * @parameter Category $parent
+   * @return ResulSet of Categorys.
+   */
+  public function getCategorys($parent = null)
+  {
+    $c = new Criteria();
+
+    $c->addJoin(CategoryPeer::ID, CategoryMmPeer::CATEGORY_ID);
+    $c->add(CategoryMmPeer::MM_ID, $this->getId());
+    $c->addAscendingOrderByColumn(CategoryPeer::COD);
+    if($parent) {
+      $c->addAnd(CategoryPeer::TREE_LEFT, $parent->getLeftValue(), Criteria::GREATER_THAN);
+      $c->addAnd(CategoryPeer::TREE_RIGHT, $parent->getRightValue(), Criteria::LESS_THAN);
+      $c->addAnd(CategoryPeer::SCOPE, $parent->getScopeIdValue(), Criteria::EQUAL);
+
+    }
+
+    return CategoryPeer::doSelect($c);
+  }
+
+  public function getCategories($parent = null)
+  {
+    return $this->getCategorys($parent);
+  }
 
 
 
+  /**
+   * Devuelve true si el Objeto contiene a la categoría
+   * 
+   * @access public
+   * @parameter integer $id
+   * @return Boolean.
+   */
+  public function hasCategoryId($id)
+  {
+    $c = new Criteria();
+
+    $c->add(CategoryMmPeer::MM_ID, $this->getId());
+    $c->add(CategoryMmPeer::CATEGORY_ID, $id);
+    $c->addAscendingOrderByColumn(CategoryPeer::COD);
+
+    return count(CategoryPeer::doSelect($c))>0;
+  }
 
 
+  /**
+   * Devuelve los minutos de la duracion del archivo
+   *
+   * @access public
+   * @return integer min
+   */
+  public function getDurationMin()
+  {
+    return floor($this->getDuration() / 60);
+  }
 
+  /**
+   * Devuelve los segundos de la duracion del archivo
+   *
+   * @access public
+   * @return integer seg
+   */
+  public function getDurationSeg()
+  {
+    $aux = $this->getDuration() %60;
+    if ($aux < 10 ) $aux= '0' . $aux;
+    return $aux;
+  }
 
+  /**
+   * Devuelve un texto que representa la duracion del
+   * archivo multimedia, del formato 1' 32''
+   *
+   * @access public
+   * @return integer seg
+   */
+  public function getDurationString()
+  {
+    $min = $this->getDurationMin();
+    if ($min == 0 ) $aux = $this->getDurationSeg() ."''";
+    else $aux = $min . "' ". $this->getDurationSeg() ."''";
+    return $aux;
+  }
 
+  /**
+   * Usado en PicBehavior
+   */
+  public function isSerial(){
+    return false;
+  }
+
+  public function getDefaultPic(){
+    return '/images/sin_foto.jpg';
+  }
   
 }
 

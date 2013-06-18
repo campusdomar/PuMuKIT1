@@ -170,8 +170,24 @@ class File extends BaseFile
     $aux = null;
 
     @mkdir($absCurrentDir, 0777, true);
-    //echo "ffmpeg -i ".$this->getFile()." -f image2 -s ".sfConfig::get('app_thumbnail_hor') ."x". sfConfig::get('app_thumbnail_ver')." -r 1 -ss ".intval($frame/25)." -t 1 ". $absCurrentDir .'/' . $fileName; exit;
-    exec("ffmpeg -ss ".intval($frame/25)." -i \"".$this->getFile()."\" -f image2 -s ".sfConfig::get('app_thumbnail_hor') ."x". sfConfig::get('app_thumbnail_ver')." -r 1 -t 1 \"". $absCurrentDir .'/' . $fileName . "\"");
+    $width = sfConfig::get('app_thumbnail_hor');
+    $height = sfConfig::get('app_thumbnail_ver');
+    $new_height = intval(1.0 * $width / $this->getAspect());
+    if($new_height <= $height) {
+      $new_width = $width;
+    }else{
+      $new_height = $height;
+      $new_width = intval(1.0 * $height * $this->getAspect());
+    }
+    
+    /*
+    echo "/usr/local/bin/ffmpeg -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
+      $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"";
+    exit;
+    */
+
+    exec("/usr/local/bin/ffmpeg -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
+	 $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"");
     if(file_exists($absCurrentDir .'/' . $fileName)){
       $aux = $this->getMm()->setPic('/uploads/pic/' . $currentDir . '/' . $fileName);
     }
@@ -208,7 +224,7 @@ class File extends BaseFile
    */
   public function getAspect(){
     if ($this->getResolutionVer() == 0) return 0;
-    return ($this->getResolutionHor()/$this->getResolutionVer());
+    return (1.0 * $this->getResolutionHor() / $this->getResolutionVer());
   }
   
 
@@ -268,6 +284,63 @@ class File extends BaseFile
     TranscodingPeer::execNext();   
     
     return $trans;
+  }
+  public function isMaster() 
+  {
+    return $this->getPerfil()->getMaster();
+  }
+
+
+  public function save($con = null)
+  {
+    parent::save($con);
+    if($mm = $this->getMm()){
+      if ($this->getDuration() > $mm->getDuration()) {
+	$mm->setDuration($this->getDuration());
+      }
+      if ($this->getNumView() > $mm->getNumView()) {
+	$mm->setNumView($this->getNumView());
+      }
+      if($this->isMaster()) {
+	$mm->setAudio($this->getAudio());
+      }
+      $mm->saveInDB();
+    }
+  }
+
+
+  /**
+   * Usada para guardar en la BBDD sin actualizar Lucene de Mm. Usar con cuidado.
+   */
+  public function saveInDB($con = null)
+  {
+     parent::save($con);
+  }
+
+  /**
+   *
+   */
+  public function getExtension() 
+  {
+    return (substr($this->getFile(), strrpos($this->getFile(), '.') + 1));
+  }
+  
+
+  /**
+   * Genera un la url relativa al video.
+   *
+   * @access public
+   * @return String Url relativa.
+   */
+  public function getInternalUrl($absolute = false)
+  { 
+    //Hack
+    $old = sfConfig::get('sf_no_script_name');
+    sfConfig::set('sf_no_script_name', true);
+    $controller = sfContext::getInstance()->getController();
+    $url = $controller->genUrl(array('module'=> 'file', 'action' => 'index', 'id' => $this->getId() . "." . $this->getExtension()), $absolute);
+    sfConfig::set('sf_no_script_name', $old);
+    return $url;
   }
 }
 

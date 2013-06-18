@@ -22,7 +22,7 @@
 
 
   <div id="tv_admin_content" >
-    <div id="list_mms" name="list_mms" act="/mms/list">
+    <div id="list_mms" name="list_mms" act="/mms/list" style="min-width: 690px;">
       <?php include_component('mms', 'list') ?>
     </div>
 
@@ -30,15 +30,15 @@
       <ul class="tv_admin_actions">
         <!-- Falta -->
         <li>
-         <?php echo link_to_function('Wizard', "Modalbox.show('".url_for("wizard/mm?id=".$serial->getId())."',{width: 800, title:'PASO II: OBJ.MM.'})", 'class=tv_admin_action_next') ?> 
+          <?php echo link_to_function('Wizard', "Modalbox.show('".url_for("mmwizard/index?mod=mms&serial_id=".$serial->getId())."',{width: 800, title:'PASO I'})", 'class=tv_admin_action_next') ?> 
         </li>
         <li>
-          <?php echo link_to_remote('Crear', array('update' => 'list_mms', 'url' => 'mms/create?filter=filter', 'script' => 'true'), array('title' => 'Crear nueva seria', 'class' => 'tv_admin_action_create')) ?>
+          <?php echo link_to_remote('Crear', array('update' => 'list_mms', 'url' => 'mms/create?filter=filter&page=last', 'script' => 'true'), array('title' => 'Crear nueva serie', 'class' => 'tv_admin_action_create')) ?>
         </li>
       </ul>
     </div>
 
-    <select id="options_mms" style="margin: 10px 0px; width: 33%" title="Acciones sobre elementos selecionados" onchange="window.change_select('mm', $('options_mms'))">
+    <select id="options_mms" style="margin: 10px 0px; width: 33%; float: left;" title="Acciones sobre elementos selecionados" onchange="window.change_select('mm', $('options_mms'))">
       <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
       <option disabled="">---</option>
 
@@ -93,4 +93,7 @@ window.onload = function(){
                 }
   });
 };
+window.update_preview = function(id) {
+  new Ajax.Updater('preview_mm', '" . url_for("mms/preview") . "/id/' + id, {asynchronous:true, evalScripts:true});
+}
 ") ?>

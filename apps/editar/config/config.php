@@ -138,4 +138,3 @@ sfPropelBehavior::registerMethods('actasnestedset', array (
   array ('NestedSetBehavior','getPath'),
   array ('NestedSetBehavior','reload'),
 ));
-
