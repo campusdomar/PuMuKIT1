@@ -91,7 +91,7 @@ class SerialPeer extends BaseSerialPeer
     $conexion = Propel::getConnection();
     if($anounce) {
       $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
-	."WHERE mm.serial_id=serial.id AND serial.announce=true AND mm.broadcast_id = broadcast.id AND "
+	."WHERE mm.serial_id=serial.id AND serial.announce=true AND serial.display=true AND mm.broadcast_id = broadcast.id AND "
         ."pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 AND "
@@ -175,7 +175,7 @@ class SerialPeer extends BaseSerialPeer
     $conexion = Propel::getConnection();
     if($anounce) {
       $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
-	."WHERE mm.serial_id=serial.id AND serial.announce=true AND mm.broadcast_id = broadcast.id AND "
+	."WHERE mm.serial_id=serial.id AND serial.announce=true AND serial.display=true AND mm.broadcast_id = broadcast.id AND "
         ."pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 AND "
