@@ -49,7 +49,7 @@
         <?php echo link_to('videos', 'mms/index?serial=' . $serial['id'])?>
       </td>
       <td onclick="click_fila_edit('serial', this, <?php echo $serial['id'] ?>)" ondblclick="dblclick_fila('serial', this, <?php echo $serial['id'] ?>)">
-        <?php echo image_tag($serial['pic_url'], 'class=mini size=30x23')?>
+        <?php echo image_tag($serial['pic_url'], 'class=mini size=23x23')?>
       </td>
       <td onclick="click_fila_edit('serial', this, <?php echo $serial['id'] ?>)" ondblclick="dblclick_fila('serial', this, <?php echo $serial['id'] ?>)">
         <span style="font-weight: bold; "><?php echo $serial['id']?></span>
