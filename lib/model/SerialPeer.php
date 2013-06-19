@@ -64,7 +64,7 @@ class SerialPeer extends BaseSerialPeer
 	$serial['mm_status_max'] = $rs->getInt(3);
 	$serial['announce']      = $rs->getBoolean(4);
 	$serial['mm_announce']   = $rs->getBoolean(5);
-	$serial['pic_url']       = ($rs->getString(6)?$rs->getString(6):'/images/sin_foto.jpg');
+	$serial['pic_url']       = ($rs->getString(6)?$rs->getString(6):'/images/folder.png');
 	$serial['title']         = $rs->getString(7);
 	$serial['publicdate']    = date('d/m/Y', strtotime($rs->getTimestamp(8)));
 	$serial['mm_count']      = $rs->getInt(9);
@@ -83,22 +83,129 @@ class SerialPeer extends BaseSerialPeer
    * @param array credentials 
    * @return array de Serial y Mm
    */
-  //OJO15
-  static public function getAnnounces($culture = 'es', $limit = 0, $credentials = array('pub', 'cor'), $genre = null){
+  static public function getAnnounces($culture = 'es', $limit = 0, $credentials = array('pub', 'cor'), $genre = null, $anounce=true){
     
     $limitSQL = '';
     if ($limit != 0) $limitSQL = (' limit ' . $limit);
 
     $conexion = Propel::getConnection();
-    $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type "
+    if($anounce) {
+      $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
       ."WHERE mm.serial_id=serial.id AND serial.announce=true AND mm.broadcast_id = broadcast.id AND "
+        ."pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 AND "
       ."broadcast.broadcast_type_id=broadcast_type.id "
       .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-      ."AND broadcast_type.name IN %s GROUP BY serial.id HAVING max(mm.status_id)>1) "
-      ."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type WHERE mm.status_id>1 "
+	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
       ."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
       .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-      ."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC" . $limitSQL;
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+    } else {
+      $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
+	."WHERE mm.serial_id=serial.id AND mm.broadcast_id = broadcast.id AND "
+        ."pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 AND "
+	."broadcast.broadcast_type_id=broadcast_type.id "
+	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
+	."AND mm.broadcast_id = broadcast.id "
+	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+    }
+
+    $credentials = array_map(create_function('$a', 'return "\"" . $a . "\"";'), $credentials);
+    $cr = "(" . implode(", ", $credentials) . ")";
+    $consulta = sprintf($consulta, $cr, $cr);
+
+    $sentencia = $conexion->prepareStatement($consulta);
+    $resultset = $sentencia->executeQuery();
+    
+    $volver = array();
+    
+    while ($resultset->next()){
+      if ($resultset->getString('info') == 'serial'){
+	//hydrate
+	$aux = SerialPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+	//$c = new Criteria();
+        //$c->add(SerialPeer::ID, $resultset->getInt('id'));
+	//list($aux) = SerialPeer::doSelectWithI18n($c, $culture);
+      }else{
+	//hydrate
+	$aux = MmPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+	//$c = new Criteria();
+	//$c->add(MmPeer::ID, $resultset->getInt('id'));
+	//list($aux) = MmPeer::doSelectWithI18n($c, $culture);
+      }
+      $volver[]= $aux;
+    }
+    return $volver;
+  }
+
+
+  /**
+   * Devuelve un conjunto de las series y objetos multimedia anunciados en un rango de un mes
+   *
+   * @access public
+   * @param DateTime $date_new valor del primer dia del rango
+   * @param string $culture, valor por defecto es.
+   * @param array credentials 
+   */
+  static public function getAnnouncesByDate($date_new, $culture = 'es', $credentials = array('pub', 'cor'), $anounce=false){
+
+    $date = $date_new;
+    $aux_date = strtotime($date_new);
+
+    $date_new = date("Y/m/d", $aux_date);
+
+    $next_month = strtotime('+1 month', $aux_date);
+
+    $next_date = date('Y/m/d', $next_month);
+
+
+    $conexion = Propel::getConnection();
+    if($anounce) {
+      $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
+	."WHERE mm.serial_id=serial.id AND serial.announce=true AND mm.broadcast_id = broadcast.id AND "
+        ."pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 AND "
+	."broadcast.broadcast_type_id=broadcast_type.id "
+        ."AND serial.publicDate >= '$date' AND serial.publicDate < '$next_date' "
+	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
+	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
+        ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+    }else {
+      $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
+	."WHERE mm.serial_id=serial.id AND mm.broadcast_id = broadcast.id AND "
+        ."pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 AND "
+	."broadcast.broadcast_type_id=broadcast_type.id "
+        ."AND serial.publicDate >= '$date' AND serial.publicDate < '$next_date' "
+	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."AND pub_channel_mm.mm_id=mm.id "
+        ."AND pub_channel_mm.pub_channel_id = 1 "
+        ."AND pub_channel_mm.status_id = 1 "
+	."AND mm.broadcast_id = broadcast.id "
+        ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+    }
 
     $credentials = array_map(create_function('$a', 'return "\"" . $a . "\"";'), $credentials);
     $cr = "(" . implode(", ", $credentials) . ")";
@@ -158,10 +265,10 @@ class SerialPeer extends BaseSerialPeer
    * Crea un serie nueva con los valores por defecto, si se desea se inicializa con un objeto multimedia nuevo vacio.
    *
    * @access public
-   * @param boolean $witch_mm indica si la serie nueva tiene un objeto multimedia nuevo, o esta vacia (def. no vacia)
+   * @param boolean $with_mm indica si la serie nueva tiene un objeto multimedia nuevo, o esta vacia (def. no vacia)
    * @return Serial
    */
-  static public function createNew($witch_mm = true)
+  static public function createNew($with_mm = true, $title = null)
   {
     $serial = new Serial();
     
@@ -174,11 +281,16 @@ class SerialPeer extends BaseSerialPeer
     $langs = sfConfig::get('app_lang_array', array('es'));
     foreach($langs as $lang){
       $serial->setCulture($lang);
+	if ($title != null ) {
+	  $serial->setTitle($title);
+	}
+	else {
       $serial->setTitle('Nuevo');
     }
+      }
     $serial->save();
 
-    if ($witch_mm) MmPeer::createNew($serial->getId());
+      if ($with_mm) MmPeer::createNew($serial->getId());
     return $serial;
   }
 
@@ -191,20 +303,33 @@ class SerialPeer extends BaseSerialPeer
    * @return integer
    */
   //UPDATE 15
-  //static public function doCountPublic($dates = null)
-  //{
-  //  $c = new Criteria();
-  //  
-  //  if($dates != null){
-  //    $c->add(SerialPeer::PUBLICDATE, date("Y-m-01", $dates["end"]), Criteria::LESS_THAN);
-  //    $c->addAnd(SerialPeer::PUBLICDATE, date("Y-m-01", $dates["ini"]), Criteria::GREATER_THAN);
-  //  }
-  //
-  //  $c->add(MmPeer::STATUS_ID, 1, Criteria::GREATER_THAN);
-  //  $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
-  //
-  //  return SerialPeer::doCount($c, true);   
-  //}
+  static public function doCountPublic($pub_channel = false, $broadcast_and_status = true, $dates = null)
+  {
+    $c = new Criteria();
+    
+    if($dates != null){
+      $c->add(SerialPeer::PUBLICDATE, date("Y-m-01", $dates["end"]), Criteria::LESS_THAN);
+      $c->addAnd(SerialPeer::PUBLICDATE, date("Y-m-01", $dates["ini"]), Criteria::GREATER_THAN);
+    }
+  
+    if ($pub_channel){
+      $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+      $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
+      $c->add(PubChannelMmPeer::STATUS_ID, 1);
+    }
+
+    if ($broadcast_and_status){
+      $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
+      $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
+
+      $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
+      $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
+      $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
+      $c->setDistinct(true);
+    }
+  
+    return SerialPeer::doCount($c, true);   
+  }
 
 
   /**
@@ -355,6 +480,29 @@ class SerialPeer extends BaseSerialPeer
     $v = SerialPeer::doSelectWithI18n($criteria, $culture, $con);
 
     return !empty($v) > 0 ? $v[0] : null;
+  }
+
+
+
+  /**
+   * Retrieve a single object by title.
+   *
+   * @param      $title .
+   * @param      Connection $con the connection to use
+   * @return     Serial
+   */
+  public static function retrieveByTitle($title, $con = null)
+  {
+    if ($con === null) {
+      $con = Propel::getConnection(self::DATABASE_NAME);
+    }
+
+    $criteria = new Criteria(SerialPeer::DATABASE_NAME);
+
+    $criteria->addJoin(SerialPeer::ID, SerialI18nPeer::ID);
+    $criteria->add(SerialI18nPeer::TITLE, $title, Criteria::LIKE);
+
+    return SerialPeer::doSelectOne($criteria, $con);
   }
 
 }

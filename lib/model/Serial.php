@@ -24,17 +24,16 @@ class Serial extends BaseSerial
    * @access public
    * @return array
    */
-  //UPDATE_15
-  //public function getMmStatus()
-  //{
-  //  $conexion = Propel::getConnection();
-  //  $consulta = 'SELECT MAX(%s) AS max, MIN(%s) as min FROM %s WHERE %s=%s';
-  //  $consulta = sprintf($consulta, MmPeer::STATUS_ID, MmPeer::STATUS_ID, MmPeer::TABLE_NAME, MmPeer::SERIAL_ID, $this->getId());
-  //  $sentencia = $conexion->prepareStatement($consulta);
-  //  $resultset = $sentencia->executeQuery();
-  //  $resultset->next();
-  //  return array('max' => $resultset->getInt('max'), 'min' => $resultset->getInt('min'));    
-  //}
+  public function getMmStatus()
+  {
+    $conexion = Propel::getConnection();
+    $consulta = 'SELECT MAX(%s) AS max, MIN(%s) as min FROM %s WHERE %s=%s';
+    $consulta = sprintf($consulta, MmPeer::STATUS_ID, MmPeer::STATUS_ID, MmPeer::TABLE_NAME, MmPeer::SERIAL_ID, $this->getId());
+    $sentencia = $conexion->prepareStatement($consulta);
+    $resultset = $sentencia->executeQuery();
+    $resultset->next();
+    return array('max' => $resultset->getInt('max'), 'min' => $resultset->getInt('min'));    
+  }
 
 
   /**
@@ -47,7 +46,7 @@ class Serial extends BaseSerial
   public function isWorking()
   {
     $aux = $this->getMmStatus();
-    return ($aux['max'] < 1);
+    return ($aux['min'] != MmPeer::STATUS_NORMAL);
   }
 
 
@@ -104,6 +103,34 @@ class Serial extends BaseSerial
     $criteria->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);            
     
     return $this->countMms($criteria);
+  }
+
+  /**
+   * Devuelve numero de objetos multimedia que dicha serie tiene publicos
+   * Modificado usando el valor MmPeer::STATUS_NORMAL de pumukit 1.7
+   *
+   * @access public
+   * @return integer
+   */
+  public function countMmsPublicPub()
+  {
+    $c = new Criteria();
+
+    //Pub_channel
+    $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+    $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
+    $c->add(PubChannelMmPeer::STATUS_ID, 1);
+    
+    //Broadcast_status
+    $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
+    $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
+    
+    $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
+    $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
+    $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
+    $c->setDistinct(true);
+
+    return $this->countMms($c);
   }
 
   /**
@@ -525,6 +552,13 @@ class Serial extends BaseSerial
     return $this->getId();
   }
 
+  public function isSerial(){
+    return true;
+  }
+
+  public function getDefaultPic(){
+    return '/images/folder.png';
+  }
   public function getSerial(){
     return $this;
   }
@@ -560,6 +594,7 @@ class Serial extends BaseSerial
     $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
     $c->addJoin(PubChannelMmPeer::PUB_CHANNEL_ID, PubChannelPeer::ID);
     $c->add(PubChannelPeer::NAME, $pub_channel, is_int($pub_channel)?null:Criteria::IN);
+    $c->add(PubChannelMmPeer::STATUS_ID, 1);
     $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
 
     return PubChannelMmPeer::doCount($c, false);
