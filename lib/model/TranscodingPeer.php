@@ -221,7 +221,7 @@ class TranscodingPeer extends BaseTranscodingPeer
       $relEnd = 0;
       if (file_exists($trans->getPathIni())){
         $movie = new ffmpeg_movie($trans->getPathIni(), false);
-        if($movie == null){
+        if(!$movie){
           $complete = false;
         }else{
           $relIni = $movie->getFrameWidth();
@@ -230,7 +230,7 @@ class TranscodingPeer extends BaseTranscodingPeer
 
       if (file_exists($trans->getPathEnd())){
         $movie = new ffmpeg_movie($trans->getPathEnd(), false);
-        if ($movie == null){
+        if (!$movie){
           $complete = false;
         }else{
           $relEnd = $movie->getFrameWidth();

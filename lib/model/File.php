@@ -170,6 +170,7 @@ class File extends BaseFile
     $aux = null;
 
     @mkdir($absCurrentDir, 0777, true);
+
     $width = sfConfig::get('app_thumbnail_hor');
     $height = sfConfig::get('app_thumbnail_ver');
     $new_height = intval(1.0 * $width / $this->getAspect());
@@ -188,11 +189,12 @@ class File extends BaseFile
 
     exec("/usr/local/bin/ffmpeg -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
 	 $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"");
+
     if(file_exists($absCurrentDir .'/' . $fileName)){
       $aux = $this->getMm()->setPic('/uploads/pic/' . $currentDir . '/' . $fileName);
     }
-    return $aux;
 
+    return $aux;
 
     $currentDir = 'Serial/' . $this->getMm()->getSerialId() . '/Video/' . $this->getMmId();  //ciao
     $absCurrentDir = sfConfig::get('sf_upload_dir').'/pic/' . $currentDir;
@@ -285,6 +287,7 @@ class File extends BaseFile
     
     return $trans;
   }
+
   public function isMaster() 
   {
     return $this->getPerfil()->getMaster();
@@ -342,6 +345,7 @@ class File extends BaseFile
     sfConfig::set('sf_no_script_name', $old);
     return $url;
   }
+
 }
 
 

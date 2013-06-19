@@ -96,8 +96,8 @@ class PicBehavior
   public function getFirstUrlPic($object, $absolute = false)
   {
     $pic = $this->getFirstPic($object);
-
-    $nopic = ($absolute)?sfConfig::get('app_info_link').'/images/sin_foto.jpg':'/images/sin_foto.jpg';
+    $nopicfile = $object->getDefaultPic();
+    $nopic = ($absolute)?sfConfig::get('app_info_link').$nopicfile:$nopicfile;
     $url = ($pic)? $pic->getUrl($absolute) : $nopic;
     return $url;
   }
@@ -117,8 +117,8 @@ class PicBehavior
   public function getLastUrlPic($object, $absolute = false)
   {
     $pic = $this->getLastPic($object);
-
-    $nopic = ($absolute)?sfConfig::get('app_info_link').'/images/sin_foto.jpg':'/images/sin_foto.jpg';
+    $nopicfile = $object->getDefaultPic();
+    $nopic = ($absolute)?sfConfig::get('app_info_link').$nopicfile:$nopicfile;
     $url = ($pic)? $pic->getUrl($absolute) : $nopic;
     return $url;
   }
@@ -139,9 +139,8 @@ class PicBehavior
   public function getUrlPics($object, $absolute = false, $num = 0)
   {
     $pics = $this->getPics($object, $num);
-    
-    $url = array('/images/sin_foto.jpg');
-
+    $nopicfile = $object->getDefaultPic();
+    $url = array($nopicfile);
     foreach ($pics as $k => $pic){
       $url[$k] = $pic->getUrl($absolute);
     }

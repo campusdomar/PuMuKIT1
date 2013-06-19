@@ -166,4 +166,5 @@ class MmTemplate extends BaseMmTemplate
 
     return count(CategoryPeer::doSelect($c))>0;
   }
+
 }

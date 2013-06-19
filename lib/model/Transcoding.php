@@ -29,11 +29,28 @@ class Transcoding extends BaseTranscoding
    */
   public function deleteTempFiles()
   {
+    if ($this->getStatusId() !== TranscodingPeer::STATUS_FINALIZADO) {
+      return false;
+    }
+
     $c = new Criteria();
     $c->add(TranscodingPeer::PATH_INI, $this->getPathIni());
-
-    if ((TranscodingPeer::doCount($c) == 1)&&(false !== strpos($this->getPathIni(), sfConfig::get('app_transcoder_path_tmp')))){
+    
+    if (TranscodingPeer::doCount($c) != 1){
       unlink($this->getPathIni());
+    }
+
+    $tmp_path = sfConfig::get('app_transcoder_path_tmp');
+    $inbox_paths = sfConfig::get('app_transcoder_inbox');
+
+    if (false !== strpos($this->getPathIni(), $tmp_path)){
+      unlink($this->getPathIni());
+    }
+    
+    foreach($inbox_paths as $path){
+      if (false !== strpos($this->getPathIni(), $path)){
+	unlink($this->getPathIni());
+      }
     }
   }
 
@@ -69,7 +86,9 @@ class Transcoding extends BaseTranscoding
    */
   public function getFileSizeTemp()
   {
-    return filesize($this->getPathend());
+    if(file_exists($this->getPathend()))
+      return filesize($this->getPathend());
+    return 0;
   }
 
 
@@ -158,78 +177,28 @@ class Transcoding extends BaseTranscoding
     $file->setPerfilId($this->getPerfilId());  
     $file->setLanguageId($this->getLanguageId());
     $file->setDisplay($this->getPerfil()->getDisplay());
-
+    $file->setDownload(!$this->getPerfil()->getMaster());
 
     //ojo Error
     if (strlen($this->getPerfil()->getUrlOut()) !== 0)
       $file->setUrl(str_replace($this->getPerfil()->getDirOut(), $this->getPerfil()->getUrlOut(), $this->getUrl()));
     $file->setFile($this->getUrl());
-
-
-    //OJO AL CREAR NUEVOS PERFILES.
-    switch($this->getPerfilId()){
-    case 1:
-      $file->setFormatId(1);
-      $file->setCodecId(6);
-      $file->setMimeTypeId(2);
-      $file->setResolutionId(3);
-      break;
-    case 2:
-      $file->setFormatId(5);
-      $file->setCodecId(7);
-      $file->setMimeTypeId(2);
-      $file->setResolutionId(4); 
-      break;
-    case 3:
-      $file->setFormatId(2);
-      $file->setCodecId(8);
-      $file->setMimeTypeId(2);
-      $file->setResolutionId(4);
-      break;
-    case 4:
-      $file->setFormatId(2);
-      $file->setCodecId(6);
-      $file->setMimeTypeId(2);
-      $file->setResolutionId(4); 
-      break;
-    case 5:
-      $file->setFormatId(2);
-      $file->setCodecId(6);
-      $file->setMimeTypeId(2);
-      $file->setResolutionId(3); 
-      break;
-    case 6:
-      $file->setFormatId(1);
-      $file->setCodecId(4);
-      $file->setMimeTypeId(1);
-      $file->setResolutionId(3); 
-      break;
-    case 7:
-      $file->setFormatId(1);
-      $file->setCodecId(4);
-      $file->setMimeTypeId(1);
-      $file->setResolutionId(4); 
-      break;
-    case 8:
-      $file->setFormatId(2);
-      $file->setCodecId(6);
-      $file->setMimeTypeId(2);
-      $file->setResolutionId(4);
-      break;
-    default:
-      $file->setFormatId(FormatPeer::getDefaultSelId());
-      $file->setCodecId(CodecPeer::getDefaultSelId());
-      $file->setMimeTypeId(MimeTypePeer::getDefaultSelId());
-      $file->setResolutionId(ResolutionPeer::getDefaultSelId());
-    }
     
+    
+    // Obsolete fields
+    $file->setFormatId(FormatPeer::getDefaultSelId());
+    $file->setCodecId(CodecPeer::getDefaultSelId());
+    $file->setMimeTypeId(MimeTypePeer::getDefaultSelId());
+    $file->setResolutionId(ResolutionPeer::getDefaultSelId());
+    
+
     $file->setBitrate($this->getPerfil()->getBitrate());
     $file->setFramerate($this->getPerfil()->getFramerate());
     $file->setChannels($this->getPerfil()->getChannels());
     $file->setAudio($this->getPerfil()->getAudio());
 
     $movie = new ffmpeg_movie($file->getFile());
-    if (!is_null($movie)){
+    if ($movie){
       $file->setResolutionVer($movie->getFrameHeight());
       $file->setResolutionHor($movie->getFrameWidth());
       $file->setAudio(!$movie->hasVideo());  //MASTER_COPY error in with $file->setAudio($this->getPerfil()->getAudio());
@@ -247,8 +216,12 @@ class Transcoding extends BaseTranscoding
     }
     
     $file->save();
-    if(count($file->getMm()->getPics()) == 0 && $file->getAspect() != 0){
-      $file->createPic();
+    if(count($file->getMm()->getPics()) == 0) {
+      if($file->getAudio()){
+	$file->getMm()->setPic(sfConfig::get('app_info_link')."/images/sound_bn.png");
+      } else{
+	$file->createPic();
+      }
     }
 
     if($this->getMm()->getStatusId() < -40 ){
@@ -312,7 +285,10 @@ class Transcoding extends BaseTranscoding
       throw new sfException("Error en autoEnd");
     }
     
-    $extension = end(explode(".", $this->getPathIni()));
+    $parcial = explode(".", $this->getPathIni());
+    $extension = $parcial[count($parcial)-1];
+    //$extension = end(explode(".", $this->getPathIni()));
+
     $extension_final = (($this->getPerfil()->getExtension() == '???')?($extension):($this->getPerfil()->getExtension()));
 
     $dir_temp = $this->getPerfil()->getDirOut() . '/' . $this->getMm()->getSerialId();

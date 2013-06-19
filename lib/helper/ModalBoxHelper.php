@@ -59,4 +59,5 @@ function m_msg_alert_jquery($msg_alert){
             "$('#div_messages_" . $msg_alert[0] . "').fadeTo('slow', 1);\n".
             "</script>"
 			);
+
 }

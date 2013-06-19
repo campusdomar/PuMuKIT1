@@ -44,4 +44,10 @@ class GroundPeer extends BaseGroundPeer
     return GroundPeer::doSelectWithI18n($c, $culture);
   }
 
+  public static function doSelectYtList()
+  {
+    $c = new Criteria();
+    $c->add(GroundPeer::COD, 'YT%', CRITERIA::LIKE);
+    return GroundPeer::doSelectWithI18n($c);
+  }
 }

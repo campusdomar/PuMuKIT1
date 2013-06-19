@@ -146,7 +146,10 @@ class FilePeer extends BaseFilePeer
    * @return integer duration.
    */
   static public function getDuration($file){
-    if (!file_exists($file)) return 0;
+    if (!file_exists($file)) {
+      return 0;
+    }
+
     //////////////////////////////////////////////
     //GETID3
     //////////////////////////////////////////////
@@ -174,7 +177,6 @@ class FilePeer extends BaseFilePeer
       }
       $duration = intval($getid3->info['playtime_seconds']);
     }
-    
     return($duration);
   }
 

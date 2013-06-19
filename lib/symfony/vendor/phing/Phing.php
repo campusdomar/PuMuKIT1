@@ -1107,7 +1107,7 @@ class Phing {
         // should return memory limit in MB  
         $mem_limit = (int) ini_get('memory_limit');
         if ($mem_limit < 32) {
-            ini_set('memory_limit', '32M'); // nore: this may need to be higher for many projects
+            ini_set('memory_limit', '512M'); // nore: this may need to be higher for many projects
         }        
     }
 

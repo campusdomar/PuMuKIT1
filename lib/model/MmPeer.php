@@ -25,7 +25,7 @@ class MmPeer extends BaseMmPeer
   const STATUS_NORMAL = 0;	
   const STATUS_BLOQ = 1;
   const STATUS_HIDE = 2;
-
+  
   static public function getForLuceneQuery($query, $limit = 100)
   {
     $hits = self::getLuceneIndex()->find($query);
@@ -42,7 +42,7 @@ class MmPeer extends BaseMmPeer
     return self::doSelect(($criteria));
   }
 
-/**
+  /**
    * Devuelve un conjunto de objetos multimedia anunciados
    *
    * @access public
@@ -58,21 +58,21 @@ class MmPeer extends BaseMmPeer
 
     $conexion = Propel::getConnection();
     if($anounce) {
-      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+      $consulta = "(SELECT 'mm' AS info, mm.id, recorddate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
 	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
 	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY recorddate DESC, id DESC" . $limitSQL;
     }else {
-      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+      $consulta = "(SELECT 'mm' AS info, mm.id, recorddate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
 	."AND mm.broadcast_id = broadcast.id "
 	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY recorddate DESC, id DESC" . $limitSQL;
     }
 
     $credentials = array_map(create_function('$a', 'return "\"" . $a . "\"";'), $credentials);
@@ -120,21 +120,21 @@ class MmPeer extends BaseMmPeer
 
     $conexion = Propel::getConnection();
     if($anounce) {
-      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+      $consulta = "(SELECT 'mm' AS info, mm.id, recorddate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
 	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
-        ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+        ."AND mm.recorddate >= '$date' AND mm.recorddate < '$next_date' "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY recorddate DESC, id DESC";
     }else {
-      $consulta = "(SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+      $consulta = "(SELECT 'mm' AS info, mm.id, recorddate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
 	."AND mm.broadcast_id = broadcast.id "
-        ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+        ."AND mm.recorddate >= '$date' AND mm.recorddate < '$next_date' "
+	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY recorddate DESC, id DESC";
     }
 
 
@@ -161,16 +161,17 @@ class MmPeer extends BaseMmPeer
   }
   
   /**
- * Performs a faceted search using a lucene (text-only) query and
- * criteria to limit the list.
- */
+   * Performs a faceted search using a lucene (text-only) query and
+   * criteria to limit the list.
+   */
   static public function getFacetedSearch($unesco, $genre, $only, $duration, $year, $month, $day, $query, $limit = 10, $offset = 0)
   {
     $out = array();
     $c = new Criteria();
+    
     self::addBroadcastCriteria($c);
     self::addPubChannelCriteria($c, 1);
-
+    
     // Add lucene text search hits
     if ($query != '' && $query != null && $query != "\n"){   
       $hits = self::getLuceneIndex()->find($query);
@@ -236,6 +237,7 @@ class MmPeer extends BaseMmPeer
     $c->setLimit($limit);
     $c->setOffset($offset);
     $c->addDescendingOrderByColumn(MmPeer::RECORDDATE);
+    $c->addDescendingOrderByColumn(MmPeer::ID);
 
     $out['mms'] = self::doSelect($c);
     
@@ -274,8 +276,6 @@ class MmPeer extends BaseMmPeer
     return parent::doDeleteAll($con);
   }
 
-
-
   /**
    * Optimizacion de doSect para evitar la hifratacion
    *
@@ -310,11 +310,12 @@ class MmPeer extends BaseMmPeer
     $criteria->addGroupByColumn(MmPeer::ID);
     //Recuperamos los registros y generamos el arreglo de hashes
     $rs = self::doSelectRS($criteria);
+
     while ($rs->next())
       {
         $mm = array();
 	$mm['id']          = $rs->getInt(1);
-	$mm['status']     = $rs->getInt(2);
+	$mm['status']      = $rs->getInt(2);
 	$mm['announce']    = $rs->getBoolean(3);
 	$mm['pic_url']     = ($rs->getString(4)?$rs->getString(4):'/images/sin_foto.jpg');
 	$mm['title']       = $rs->getString(5);
@@ -323,7 +324,7 @@ class MmPeer extends BaseMmPeer
         $mm['has_pub_channel']  = (strlen($rs->getString(8) != 0) ? '1' : '');
         $mm['duration']    = $rs->getInt(9);
         $mm['audio']       = $rs->getBoolean(10);
-        $mm['mm_id']    = $rs->getInt(11);
+        $mm['serial_id']    = $rs->getInt(11);
 	$mms[] = $mm;
       }
     return $mms;
@@ -405,7 +406,7 @@ class MmPeer extends BaseMmPeer
 	$mm->setTitle($title);
       }
       else {
-      $mm->setTitle($mm_template->getTitle());
+	$mm->setTitle($mm_template->getTitle());
       }
       $mm->setSubtitle($mm_template->getSubtitle());
       $mm->setKeyword($mm_template->getKeyword());
@@ -443,6 +444,7 @@ class MmPeer extends BaseMmPeer
     foreach($categories as $c){
       $c->addMmId($mm->getId());
     }
+
     //PERSONAS
     $roles = RolePeer::doSelect(new Criteria());
     foreach($roles as $r){

@@ -22,10 +22,15 @@ class MmMatterhorn extends BaseMmMatterhorn
 
 
   public function getIframeUrl($broadcast_type = 'pub'){
+    if($broadcast_type == 'pub'){
+      $url_player = 'cmarwatch.html';
+    }else{
+      $url_player = 'securitywatch.html';
+    }
 
     $invert = $this->getInvert()?"&display=invert":"";
 
-    return str_replace('%id%', $this->getMhId(), $this->getPlayerUrl()) . $invert;
+    return str_replace(array('%id%', 'watch.html'), array($this->getMhId(), $url_player), $this->getPlayerUrl()) . $invert;
   }
 
 
@@ -86,7 +91,43 @@ class MmMatterhorn extends BaseMmMatterhorn
       return $this->manifest;
     }
 
-    $this->manifest = MmMatterhornPeer::getMediaPackage($this->getMhId());
+    $server = sfConfig::get('app_matterhorn_server');
+    # server_admin and workflow_endpoint are used to retrieve information
+    # from "workflow" instead of "search"
+    # old url example: http://mh-engage.campusdomar.es/search/episode.xml?id=29676
+    # new url example: http://admin.matterhorn.uvigo.es/workflow/instances.xml?mp=29676&state=SUCCEEDED&sort=DATE_CREATED_DESC
+    
+    # "search" returns media package id's but workflow must be queried for 
+    # "?mp=" (media package)
+    
+    $server_admin = sfConfig::get('app_matterhorn_server_admin');
+    $user         = sfConfig::get('app_matterhorn_user');
+    $password     = sfConfig::get('app_matterhorn_password');
+
+    // $search_endpoint   = '/search/episode.json';
+    $workflow_endpoint = '/workflow/instances.json';
+    $workflow_filter   = '&state=SUCCEEDED&sort=DATE_CREATED_DESC';
+    
+    $cookie = MmMatterhornPeer::getCookie($server_admin, $user, $password);
+    $ch = curl_init($server_admin . $workflow_endpoint . "?mp=" . $this->getMhId() . $workflow_filter); 
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    if ($cookie != null) {
+      curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+    }
+ 
+    $var    = curl_exec($ch); 
+    $error  = curl_error($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+    if ($status !== 200) return false;
+    //FIXME capturar si falla.
+    
+    $aux = json_decode(utf8_encode($var), true);
+    
+    // Old manifest parsed from search page
+    // $this->manifest =  $aux['search-results']['result']["mediapackage"];
+
+    $this->manifest =  $aux['workflows']['workflow']["mediapackage"];
     return $this->manifest;
   }
 

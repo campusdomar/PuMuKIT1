@@ -33,10 +33,10 @@ class Mm extends BaseMm
     $doc->addField(Zend_Search_Lucene_Field::Keyword('pk', $this->getId()));
 
     // index Mm fields
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('title', $this->getTitle(), 'utf-8'));
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('subtitle', $this->getSubtitle(), 'utf-8'));
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('keyword', $this->getKeyword(), 'utf-8'));
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('description', $this->getDescription(), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('title', Sanitize::text($this->getTitle()), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('subtitle', Sanitize::text($this->getSubtitle()), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('keyword', Sanitize::text($this->getKeyword()), 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('description', Sanitize::text($this->getDescription()), 'utf-8'));
 
     $persons = $this->getPersons();
     $personStr = "";
@@ -45,7 +45,7 @@ class Mm extends BaseMm
       $personStr .= $person->getName();
     }
 
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('persons', $personStr, 'utf-8'));
+    $doc->addField(Zend_Search_Lucene_Field::UnStored('persons', Sanitize::text($personStr), 'utf-8'));
     
     // add Mm to the index
     $index->addDocument($doc);
@@ -180,6 +180,38 @@ class Mm extends BaseMm
     return FilePeer::doSelectWithI18n($c, $this->getCulture());
   }
 
+  /**
+   * Devuelve el los archivos multimedia que se pueden descargar.
+   *
+   * @access public
+   * @return Array de Files
+   */
+  public function getFilesToDownload()
+  {
+    $c = new Criteria();
+    $c->add(FilePeer::MM_ID, $this->getId());
+    $c->add(FilePeer::DOWNLOAD, true);
+    $c->addAscendingOrderByColumn(FilePeer::RANK);
+
+    return FilePeer::doSelectWithI18n($c, $this->getCulture());
+  }
+
+
+  /** 
+   * Devuelve el los materiales que tienen perfil publico.    
+   * 
+   * @access public 
+   * @return Array de Files   
+   */
+  public function getMaterialsPublic()
+  {
+    $c = new Criteria();
+    $c->add(MaterialPeer::MM_ID, $this->getId());
+    $c->add(MaterialPeer::DISPLAY, true);
+    $c->addAscendingOrderByColumn(MaterialPeer::RANK);
+
+    return MaterialPeer::doSelectWithI18n($c, $this->getCulture());
+  }
   /**
    * Devuelve los ficheros de video de un determiando perfil.
    *
@@ -454,7 +486,8 @@ class Mm extends BaseMm
     $old = sfConfig::get('sf_no_script_name');
     sfConfig::set('sf_no_script_name', true);
     $controller = sfContext::getInstance()->getController();
-    $url = $controller->genUrl(array('module'=> 'video', 'action' => 'index', 'id' => $this->getId()), $absolute);
+    //$url = $controller->genUrl(array('module'=> 'video', 'action' => 'index', 'id' => $this->getId()), $absolute);
+    $url = $controller->genUrl(array('module'=> 'mmobj', 'action' => 'index', 'id' => $this->getId()), $absolute);
     sfConfig::set('sf_no_script_name', $old);
     return $url;
   }
@@ -643,10 +676,7 @@ class Mm extends BaseMm
    */
   public function getNumber()
   {
-    //error
-    $ff = $this->getFirstFile();
-    if ($ff) $aux = $ff->getDurationString();
-    else $aux = "0'";
+    $aux = $this->getDurationString();
     
     return ('Duracion :' . $aux );
   }
@@ -777,9 +807,9 @@ class Mm extends BaseMm
     }
     $c = new Criteria();
 
-    //OJO15 Posibilidad de crear funcion con estas dos lienas???
     $c->addJoin(PubChannelMmPeer::PUB_CHANNEL_ID, PubChannelPeer::ID);
     $c->add(PubChannelPeer::NAME, $pub_channel, is_int($pub_channel)?null:Criteria::IN);
+    $c->add(PubChannelMmPeer::STATUS_ID, 1);
 
     return $this->countPubChannelMms($c, true);
   }

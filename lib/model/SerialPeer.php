@@ -91,19 +91,19 @@ class SerialPeer extends BaseSerialPeer
     $conexion = Propel::getConnection();
     if($anounce) {
       $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
-      ."WHERE mm.serial_id=serial.id AND serial.announce=true AND mm.broadcast_id = broadcast.id AND "
+	."WHERE mm.serial_id=serial.id AND serial.announce=true AND mm.broadcast_id = broadcast.id AND "
         ."pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 AND "
-      ."broadcast.broadcast_type_id=broadcast_type.id "
-      .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+	."broadcast.broadcast_type_id=broadcast_type.id "
+	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
 	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
 	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
-      ."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
-      .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
+	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
 	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
     } else {
       $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
@@ -207,6 +207,7 @@ class SerialPeer extends BaseSerialPeer
 	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
     }
 
+
     $credentials = array_map(create_function('$a', 'return "\"" . $a . "\"";'), $credentials);
     $cr = "(" . implode(", ", $credentials) . ")";
     $consulta = sprintf($consulta, $cr, $cr);
@@ -218,17 +219,17 @@ class SerialPeer extends BaseSerialPeer
     
     while ($resultset->next()){
       if ($resultset->getString('info') == 'serial'){
-	//hydrate
-	$aux = SerialPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
-	//$c = new Criteria();
+        //hydrate
+        $aux = SerialPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+        //$c = new Criteria();
         //$c->add(SerialPeer::ID, $resultset->getInt('id'));
-	//list($aux) = SerialPeer::doSelectWithI18n($c, $culture);
+        //list($aux) = SerialPeer::doSelectWithI18n($c, $culture);
       }else{
-	//hydrate
-	$aux = MmPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
-	//$c = new Criteria();
-	//$c->add(MmPeer::ID, $resultset->getInt('id'));
-	//list($aux) = MmPeer::doSelectWithI18n($c, $culture);
+        //hydrate
+        $aux = MmPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+        //$c = new Criteria();
+        //$c->add(MmPeer::ID, $resultset->getInt('id'));
+        //list($aux) = MmPeer::doSelectWithI18n($c, $culture);
       }
       $volver[]= $aux;
     }
@@ -269,30 +270,30 @@ class SerialPeer extends BaseSerialPeer
    * @return Serial
    */
   static public function createNew($with_mm = true, $title = null)
-  {
-    $serial = new Serial();
-    
-    $serial->setCopyright(sfConfig::get('app_info_copyright', 'Universidade de Vigo'));
-    $serial->setSerialTypeId(SerialTypePeer::getDefaultSelId());
-    $serial->setSerialTemplateId(1);
-
-    $serial->setPublicdate('now');
-    
-    $langs = sfConfig::get('app_lang_array', array('es'));
-    foreach($langs as $lang){
-      $serial->setCulture($lang);
+    {
+      $serial = new Serial();
+      
+      $serial->setCopyright(sfConfig::get('app_info_copyright', 'Universidade de Vigo'));
+      $serial->setSerialTypeId(SerialTypePeer::getDefaultSelId());
+      $serial->setSerialTemplateId(1);
+      
+      $serial->setPublicdate('now');
+      
+      $langs = sfConfig::get('app_lang_array', array('es'));
+      foreach($langs as $lang){
+	$serial->setCulture($lang);
 	if ($title != null ) {
 	  $serial->setTitle($title);
 	}
 	else {
-      $serial->setTitle('Nuevo');
-    }
+	  $serial->setTitle('Nuevo');
+	}
       }
-    $serial->save();
-
+      $serial->save();
+      
       if ($with_mm) MmPeer::createNew($serial->getId());
-    return $serial;
-  }
+      return $serial;
+    }
 
 
   /**
