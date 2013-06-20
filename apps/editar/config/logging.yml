@@ -1,6 +1,7 @@
 dev:
   enabled: on
   level:   debug
+
 prod:
   enabled: off
   level:   err

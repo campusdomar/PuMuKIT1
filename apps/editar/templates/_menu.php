@@ -37,6 +37,11 @@
       </a>
     </li>
     
+    <li class="level0 <?php echo sfConfig::get('virtual_serial_menu') ?>">
+      <a href="<?php echo url_for('virtualserial/index?page=' . $sf_user->getAttribute('page', 1, 'tv_admin/virtualserial'))?>" class="<?php echo sfConfig::get('virtual_serial_menu') ?>">
+        <span>Catalogador Unesco</span>
+      </a>
+    </li>
   
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('template_menu') ?>">
       <a href="#" title="Dise&nteilde;o" onclick="return false" class="<?php echo sfConfig::get('template_menu') ?>">
