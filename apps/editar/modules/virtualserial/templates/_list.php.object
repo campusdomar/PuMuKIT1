@@ -1,0 +1,87 @@
+<table cellspacing="0" class="tv_admin_list">
+  <thead>
+    <tr>
+      <th width="1%">
+        <input type="checkbox" onclick="window.click_checkbox_all('mm', this.checked)">
+      </th>
+      <th colspan="7" width="5%"></th>
+      <th width="1%">Img</th>
+      <th width="1%">Id</th>
+      <th>Title</th>
+      <th width="1%">RecordDate</th>
+      <th width="1%">PublicDate</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <?php if (count($mms) == 0):?>
+    <tr>
+      <td colspan="13">
+       No existen video con esos valores.
+      </td>
+    </tr>
+  <?php endif; ?>
+  <?php $t = count($mms) ; for( $i=0; $i<$t; $i++): $mm = $mms[$i]; $odd = fmod($i, 2) ?>
+    <tr onmouseover="Element.addClassName(this,'tv_admin_row_over')" onmouseout="Element.removeClassName(this,'tv_admin_row_over')" class="tv_admin_row_<?php echo $odd ?><?php if($mm->getId() == $sf_user->getAttribute('id', null, 'tv_admin/mm')) echo ' tv_admin_row_this'?>" >
+      <td>
+        <input id="<?php echo $mm->getId()?>" class="mm_checkbox" type="checkbox">
+      </td>
+      <td>
+        <?php echo $mm->getStatusId(); ?>
+      </td>
+      <td>
+        <?php echo ($mm->getAnnounce()?'<span style="color: blue">A</span>':'&nbsp;') ?>
+      </td> 
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>)" ondblclick="dblclick_fila('mm', this, <?php echo $mm->getId() ?>)">
+        <a href="#" onclick="new Effect.ScrollTo('edit_mms');">
+          <?php echo image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar')?>
+        </a>
+      </td>
+
+      <td>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar class=miniTag'), array('update' => 'list_mms', 'url' => 'mms/delete?id='.$mm->getId(), 'script' => 'true', 'confirm' => 'Seguro', 'success' => '$("vista_previa_mm").innerHTML="<h2>select mm</h2>";$("edit_mms").innerHTML="<h2>select mm</h2>"; '));?>
+      </td>
+
+      <td  onclick="click_fila('mm', this, <?php echo $mm->getId() ?>)" ondblclick="dblclick_fila('mm', this, <?php echo $mm->getId() ?>)">
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar class=miniTag'), array('update' => 'list_mms', 'url' => 'mms/copy?id='.$mm->getId(), 'script' => 'true'))?>
+      </td>
+
+
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>);">
+        <?php echo ((($page == 1)&&( $i == 0)) ? '&nbsp;' : (link_to_remote('&#8593;', array('update' => 'list_mms', 'url' => 'mms/up?id='.$mm->getId(), 'script' => 'true'))).(link_to_remote('&#8657;', array('update' => 'list_mms', 'url' => 'mms/top?id='.$mm->getId(), 'script' => 'true'))))   ?>
+      </td>
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>);">
+        <?php echo ((($page == $total)&&( $i == $t-1))? '&nbsp;' : (link_to_remote('&#8595;', array('update' => 'list_mms', 'url' => 'mms/down?id='.$mm->getId(), 'script' => 'true'))).(link_to_remote('&#8659;', array('update' => 'list_mms', 'url' => 'mms/bottom?id='.$mm->getId(), 'script' => 'true')))) ?>
+      </td>
+
+
+
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>)" ondblclick="dblclick_fila('mm', this, <?php echo $mm->getId() ?>)">
+        <?php echo image_tag($mm->getFirstUrlPic(), 'class=mini size=30x23')?>
+      </td>
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>)" ondblclick="dblclick_fila('mm', this, <?php echo $mm->getId() ?>)">
+        <?php echo $mm->getId()?>
+      </td>
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>)" ondblclick="dblclick_fila('mm', this, <?php echo $mm->getId() ?>)">
+        <?php $value = $mm->getTitle(); echo $value ? $value : '&nbsp;'  ?>
+      </td>
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>)" ondblclick="dblclick_fila('mm', this, <?php echo $mm->getId() ?>)">
+        <?php echo $mm->getRecorddate('d/m/Y'); ?>
+      </td>
+      <td onclick="click_fila('mm', this, <?php echo $mm->getId() ?>)" ondblclick="dblclick_fila('mm', this, <?php echo $mm->getId() ?>)">
+        <?php echo $mm->getPublicdate('d/m/Y'); ?>
+      </td>
+    </tr>
+  <?php endfor; ?>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="13">
+        <div class="float-right">
+          <?php include_partial('global/pager_ajax', array('name' => 'mm', 'page' => $page, 'total' => $total)) ?> 
+        </div>
+        <?php echo $total_mm ?>/<?php echo $total_mm_all ?> Multimedia Objects 
+      </th>
+    </tr>
+  </tfood>
+</table>

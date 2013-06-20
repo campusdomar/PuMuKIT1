@@ -24,6 +24,7 @@
   </div>
 </div>
 
+
 <script>
 function toggle_section_cat(id, element) {
   console.log(element);
@@ -38,6 +39,7 @@ function toggle_section_cat(id, element) {
   element.parentElement.toggleClassName("expanded").toggleClassName("collapsed");
 }
 
+
 function cat_relation_change(one_id, two_id, value) {
   new Ajax.Request("/editar.php/categories/changecategory/oneid/" + one_id + "/twoid/" + two_id + "/value/" + value,  {
     asynchronous: true, 
@@ -48,6 +50,8 @@ function cat_relation_change(one_id, two_id, value) {
   });
 }
 </script>
+
+
 
 <br />
 <br />
