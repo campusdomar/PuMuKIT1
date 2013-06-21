@@ -1,3 +1,51 @@
+/* Drag and Drop HTML5 CSS */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.second_node.over{
+  background-color: #a2bae7;  
+}
+
+
+#list_unesco.over {
+  border: 2px dashed #000;
+  background-color: #a2bae7;
+}
+
+
+/* TABLAS UNESCO Y TEMATICAS*/
+.bs-docs-example {
+    position: relative;
+    margin: 15px 0;
+    padding: 25px 10px 15px 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bs-docs-example:after {
+    content: "UNESCO";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    padding: 3px 7px;
+    font-size: 9px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #9da0a4;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
+}
+/* Old CSS */
 div#list_places tr.tv_admin_row_this div.flecha{  
   background-color: #fff;
   height: 15px;
