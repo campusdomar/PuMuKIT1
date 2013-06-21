@@ -62,7 +62,7 @@ window.click_fila_virtualserial = function(tr, id)
   $('search_loading_img').show(); 
   $$('.tv_admin_row_this').invoke('removeClassName', 'tv_admin_row_this');
   if (tr != null) tr.parentNode.addClassName('tv_admin_row_this');
-}
+};
 
 window.create_div_in_table = function(cat, mm_id, idcat_to_add){
   if ( idcat_to_add == " . $cat_raiz_unesco->getId() . " ){
@@ -76,6 +76,7 @@ window.create_div_in_table = function(cat, mm_id, idcat_to_add){
       }
     };
     div.insert(a1);
+  }
   //Add quit logica.
   td.insert(div);
 };
@@ -94,7 +95,7 @@ window.update_tree = function(){
         }
     }
   });
-}
+};
 
 window.add_tree_several_cat = function (cat_id, mm_id, idcat_to_add) {
   new Ajax.Request('" . url_for('virtualserial/addSeveralCategory') . "',  {
@@ -115,8 +116,8 @@ window.add_tree_several_cat = function (cat_id, mm_id, idcat_to_add) {
         }
         update_tree();
     }
-  });  
-}
+  });
+};
 
 window.del_tree_cat = function(cat_id, mm_id) {
   //console.log('del_tree_cat info_num_mm_' + cat_id);
@@ -124,7 +125,7 @@ window.del_tree_cat = function(cat_id, mm_id) {
   new Ajax.Request('" . url_for('virtualserial/delCategory') . "', {
     method: 'post',
     parameters: {category: cat_id, id: mm_id},
-    asynchronous: true, 
+    asynchronous: true,
     evalScripts: true,
     onSuccess: function(response){
         for (var i=0; i<response.responseJSON.deleted.length; i++) {
@@ -138,11 +139,11 @@ window.del_tree_cat = function(cat_id, mm_id) {
         update_tree();
     }
   });
-}
+};
 
 window.update_preview = function(id) {
   new Ajax.Updater('preview_mm', '" . url_for("virtualserial/preview") . "/id/' + id, {asynchronous:true, evalScripts:true});
-}
+};
 
 //Global var to DnD
 var dragElement = null;
