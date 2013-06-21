@@ -918,6 +918,46 @@ ul#menuTab a:hover { /* settings for hover effect */
    background: #fff; /* set desired hover color */
 }
 
+/* VIRTUAL */
+ul#menuTab_virtual { 
+   text-align: left; /* set to left, right or center */
+   margin: 1em 0 0 0; /* set margins as desired */
+   border-bottom: 1px solid #8EB0BC; /* set border COLOR as desired */
+   list-style-type: none;
+   padding: 3px 10px 3px 10px; /* THIRD number must change with respect to padding-top (X) below */
+}
+
+ul#menuTab_virtual li { 
+   display: inline;
+}
+
+ul#menuTab_virtual li.siSel, ul#menuTab_virtual li.siSelMmTemplate { 
+/* settings for selected tab */
+   border-bottom: 1px solid #8EB0BC; /* set border color to page background color */
+}
+
+ul#menuTab_virtual li.siSel a, ul#menuTab_virtual li.siSelMmTemplate a { 
+/* settings for selected tab link */
+   background-color: #8EB0BC; /* set selected tab background color as desired */
+   color: #000; /* set selected tab link color as desired */
+   position: relative;
+   top: 1px;
+   padding-top: 4px; /* must change with respect to padding (X) above and below */
+}
+
+ul#menuTab_virtual li a { /* settings for all tab links */
+   padding: 3px 4px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+   border: 1px solid rgb(105, 151, 167); /* set border COLOR as desired; usually matches border color specified in #menuTab_virtual */
+   background-color: #c9d7f1; /*#a2bae7; *//* set unselected tab background color as desired */
+   color: #666; /* set unselected tab link color as desired */
+   margin-right: 0px; /* set additional spacing between tabs as desired */
+   text-decoration: none;
+   border-bottom: none;
+}
+
+ul#menuTab_virtual a:hover { /* settings for hover effect */
+   background: #fff; /* set desired hover color */
+}
 /*
  Ajax Autocompletar Person
 */
