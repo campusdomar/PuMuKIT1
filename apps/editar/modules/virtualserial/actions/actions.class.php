@@ -99,7 +99,6 @@ class virtualserialActions extends sfActions
     if(!$this->getUser()->hasAttribute('broadcast_advanced', 'tv_admin/virtualserial/searchs'))
           $this->getUser()->setAttribute('broadcast_advanced', -1, 'tv_admin/virtualserial/searchs');
 
-
     $this->cat_raiz_unesco = DataBaseProxy::getUnesco();
   }
 

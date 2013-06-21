@@ -973,8 +973,11 @@ public function getSimilarMmsUnesco($cat_code = null){
       $c->add(CategoryPeer::COD, $cat_code);
     } else {
       //Con la misma categoria.
-      $c->addJoin(CategoryPeer::ID, CategoryMmPeer::CATEGORY_ID);
-      $c->add(CategoryMmPeer::MM_ID, $this->getId());
+      $catsId = $this->getCategoriesId(CategoryPeer::retrieveByCod("UNESCO"));
+      $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
+      $c->add(CategoryMmPeer::CATEGORY_ID, $catsId, Criteria::IN);
+      $c->addGroupByColumn(MmPeer::ID);
+      $c->addDescendingOrderByColumn('count(' . CategoryMmPeer::CATEGORY_ID . ')');
     }
     
     $c->add(MmPeer::ID, $this->getId(), Criteria::NOT_EQUAL);
@@ -1063,7 +1066,11 @@ public function getSimilarMmsUnesco($cat_code = null){
     return $this->getCategorys($parent);
   }
 
-
+  public function getCategoriesId($parent = null) {
+    $categories = $this->getCategorys($parent);
+    $f = create_function('$a', 'return $a->getId();');
+    return array_map($f, $categories);
+  }
 
   /**
    * Devuelve true si el Objeto contiene a la categoría

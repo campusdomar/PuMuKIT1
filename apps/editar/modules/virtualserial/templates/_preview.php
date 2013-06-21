@@ -92,7 +92,7 @@ function previewHandleDrop(e) {
   //console.log('PREVIEW drop');
   this.classList.remove('over');
   if (dragElement == 'tree') {
-    console.log('#########-> Drop tree con id: ', e.dataTransfer.getData('id'));
+    //console.log('#########-> Drop tree con id: ', e.dataTransfer.getData('id'));
     add_tree_several_cat(e.dataTransfer.getData('id')," . $sf_user->getAttribute('id', null, 'tv_admin/virtualserial')  .", " . $cat_raiz_unesco->getId() . ");
     //add_tree_cat(dragSrcEl.children[0].id," . $sf_user->getAttribute('id', null, 'tv_admin/virtualserial')  .", " . $cat_raiz_unesco->getId() . ");
   }
