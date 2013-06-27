@@ -640,6 +640,7 @@ CREATE TABLE `serial`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`announce` INTEGER default 0 NOT NULL,
+	`display` INTEGER default 1 NOT NULL,
 	`mail` INTEGER default 0 NOT NULL,
 	`copyright` VARCHAR(30) default 'Uvigo-Tv' NOT NULL,
 	`serial_type_id` INTEGER,

@@ -393,6 +393,10 @@ propel:
       type: boolean
       required: true
       default: 0
+    display: 
+      type: boolean
+      required: true
+      default: 1
     mail: 
       type: boolean
       required: true

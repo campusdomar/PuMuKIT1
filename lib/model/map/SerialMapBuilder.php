@@ -65,6 +65,8 @@ class SerialMapBuilder {
 
 		$tMap->addColumn('ANNOUNCE', 'Announce', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
+		$tMap->addColumn('DISPLAY', 'Display', 'boolean', CreoleTypes::BOOLEAN, true, null);
+
 		$tMap->addColumn('MAIL', 'Mail', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
 		$tMap->addColumn('COPYRIGHT', 'Copyright', 'string', CreoleTypes::VARCHAR, true, 30);

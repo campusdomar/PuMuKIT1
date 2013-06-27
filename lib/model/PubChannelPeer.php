@@ -38,7 +38,7 @@ class PubChannelPeer extends BasePubChannelPeer
     $c->add(MmPeer::SERIAL_ID, $serial_id);
     $c->addAscendingOrderByColumn(MmPeer::RANK);
 
-    return MmPeer::doSelect($c);
+    return MmPeer::doSelectWithI18n($c);
   }
 
   public static function getMmsFromSerialByStatus($pub_channel_id, $serial_id, $status)
@@ -58,7 +58,7 @@ class PubChannelPeer extends BasePubChannelPeer
     $c->add(MmPeer::SERIAL_ID, $serial_id);
     $c->addAscendingOrderByColumn(MmPeer::RANK);
 
-    return MmPeer::doSelect($c);
+    return MmPeer::doSelectWithI18n($c);
   }
 
   public static function getFirstMmFromSerial($pub_channel_id, $serial_id)

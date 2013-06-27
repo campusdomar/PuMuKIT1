@@ -40,6 +40,7 @@ class GenrePeer extends BaseGenrePeer
   {
     return sfPropelActAsSortableBehavior::getDefaultSelect(__CLASS__);
   }
+
   /**
    *
    */
@@ -53,5 +54,13 @@ class GenrePeer extends BaseGenrePeer
     $c = new Criteria();
     $c->addAscendingOrderByColumn(GenreI18nPeer::NAME);
     return GenrePeer::doSelectWithI18n($c, $culture);
+  }
+
+  /**
+   *
+   */
+  public static function doSelectByAbcWithI18n2(Criteria $c, $culture = null)
+  {
+    return self::doSelectByAbcWithI18n($culture);
   }
 }

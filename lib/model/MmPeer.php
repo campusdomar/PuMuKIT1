@@ -343,7 +343,6 @@ class MmPeer extends BaseMmPeer
    *
    * @internal falta CULTURE.
    */
-  //UPDATE 15 OJO15 poner mas visto en PubChannelPeer
   static public function masVistos($culture, $dias = 0, $cuantos = 3)
   {
     $c = new Criteria();
@@ -356,7 +355,7 @@ class MmPeer extends BaseMmPeer
     $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
     $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
     $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
-    $c->setDistinct(true);
+    //$c->setDistinct(true);  //Ralentiza la query al comparar campos de i18n
  
     $c->addJOIN(FilePeer::ID, LogFilePeer::FILE_ID);
     $c->addJOIN(FilePeer::MM_ID, MmPeer::ID );

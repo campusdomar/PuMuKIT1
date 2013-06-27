@@ -962,7 +962,7 @@ class Mm extends BaseMm
   }
 
 
-public function getSimilarMmsUnesco($cat_code = null){
+public function getSimilarMmsUnesco($cat_code = null, $exclude_serial=true){
     
     $c = new Criteria();
     
@@ -980,6 +980,9 @@ public function getSimilarMmsUnesco($cat_code = null){
       $c->addDescendingOrderByColumn('count(' . CategoryMmPeer::CATEGORY_ID . ')');
     }
     
+    if ($exclude_serial){
+      $c->add(MmPeer::SERIAL_ID, $this->getSerialId(), Criteria::NOT_EQUAL);
+    }
     $c->add(MmPeer::ID, $this->getId(), Criteria::NOT_EQUAL);
     $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
     $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);

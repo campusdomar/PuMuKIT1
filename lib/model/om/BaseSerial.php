@@ -34,6 +34,13 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 
 
 	/**
+	 * The value for the display field.
+	 * @var        boolean
+	 */
+	protected $display = true;
+
+
+	/**
 	 * The value for the mail field.
 	 * @var        boolean
 	 */
@@ -204,6 +211,17 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 	}
 
 	/**
+	 * Get the [display] column value.
+	 * 
+	 * @return     boolean
+	 */
+	public function getDisplay()
+	{
+
+		return $this->display;
+	}
+
+	/**
 	 * Get the [mail] column value.
 	 * 
 	 * @return     boolean
@@ -315,6 +333,22 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 		}
 
 	} // setAnnounce()
+
+	/**
+	 * Set the value of [display] column.
+	 * 
+	 * @param      boolean $v new value
+	 * @return     void
+	 */
+	public function setDisplay($v)
+	{
+
+		if ($this->display !== $v || $v === true) {
+			$this->display = $v;
+			$this->modifiedColumns[] = SerialPeer::DISPLAY;
+		}
+
+	} // setDisplay()
 
 	/**
 	 * Set the value of [mail] column.
@@ -451,15 +485,17 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 
 			$this->announce = $rs->getBoolean($startcol + 1);
 
-			$this->mail = $rs->getBoolean($startcol + 2);
+			$this->display = $rs->getBoolean($startcol + 2);
 
-			$this->copyright = $rs->getString($startcol + 3);
+			$this->mail = $rs->getBoolean($startcol + 3);
 
-			$this->serial_type_id = $rs->getInt($startcol + 4);
+			$this->copyright = $rs->getString($startcol + 4);
 
-			$this->serial_template_id = $rs->getInt($startcol + 5);
+			$this->serial_type_id = $rs->getInt($startcol + 5);
 
-			$this->publicdate = $rs->getTimestamp($startcol + 6, null);
+			$this->serial_template_id = $rs->getInt($startcol + 6);
+
+			$this->publicdate = $rs->getTimestamp($startcol + 7, null);
 
 			$this->resetModified();
 
@@ -467,7 +503,7 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 			$this->setCulture(sfContext::getInstance()->getUser()->getCulture());
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 7; // 7 = SerialPeer::NUM_COLUMNS - SerialPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 8; // 8 = SerialPeer::NUM_COLUMNS - SerialPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Serial object", $e);
@@ -862,18 +898,21 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 				return $this->getAnnounce();
 				break;
 			case 2:
-				return $this->getMail();
+				return $this->getDisplay();
 				break;
 			case 3:
-				return $this->getCopyright();
+				return $this->getMail();
 				break;
 			case 4:
-				return $this->getSerialTypeId();
+				return $this->getCopyright();
 				break;
 			case 5:
-				return $this->getSerialTemplateId();
+				return $this->getSerialTypeId();
 				break;
 			case 6:
+				return $this->getSerialTemplateId();
+				break;
+			case 7:
 				return $this->getPublicdate();
 				break;
 			default:
@@ -898,11 +937,12 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getId(),
 			$keys[1] => $this->getAnnounce(),
-			$keys[2] => $this->getMail(),
-			$keys[3] => $this->getCopyright(),
-			$keys[4] => $this->getSerialTypeId(),
-			$keys[5] => $this->getSerialTemplateId(),
-			$keys[6] => $this->getPublicdate(),
+			$keys[2] => $this->getDisplay(),
+			$keys[3] => $this->getMail(),
+			$keys[4] => $this->getCopyright(),
+			$keys[5] => $this->getSerialTypeId(),
+			$keys[6] => $this->getSerialTemplateId(),
+			$keys[7] => $this->getPublicdate(),
 		);
 		return $result;
 	}
@@ -941,18 +981,21 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 				$this->setAnnounce($value);
 				break;
 			case 2:
-				$this->setMail($value);
+				$this->setDisplay($value);
 				break;
 			case 3:
-				$this->setCopyright($value);
+				$this->setMail($value);
 				break;
 			case 4:
-				$this->setSerialTypeId($value);
+				$this->setCopyright($value);
 				break;
 			case 5:
-				$this->setSerialTemplateId($value);
+				$this->setSerialTypeId($value);
 				break;
 			case 6:
+				$this->setSerialTemplateId($value);
+				break;
+			case 7:
 				$this->setPublicdate($value);
 				break;
 		} // switch()
@@ -980,11 +1023,12 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setAnnounce($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setMail($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCopyright($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setSerialTypeId($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setSerialTemplateId($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setPublicdate($arr[$keys[6]]);
+		if (array_key_exists($keys[2], $arr)) $this->setDisplay($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setMail($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCopyright($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setSerialTypeId($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setSerialTemplateId($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setPublicdate($arr[$keys[7]]);
 	}
 
 	/**
@@ -998,6 +1042,7 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(SerialPeer::ID)) $criteria->add(SerialPeer::ID, $this->id);
 		if ($this->isColumnModified(SerialPeer::ANNOUNCE)) $criteria->add(SerialPeer::ANNOUNCE, $this->announce);
+		if ($this->isColumnModified(SerialPeer::DISPLAY)) $criteria->add(SerialPeer::DISPLAY, $this->display);
 		if ($this->isColumnModified(SerialPeer::MAIL)) $criteria->add(SerialPeer::MAIL, $this->mail);
 		if ($this->isColumnModified(SerialPeer::COPYRIGHT)) $criteria->add(SerialPeer::COPYRIGHT, $this->copyright);
 		if ($this->isColumnModified(SerialPeer::SERIAL_TYPE_ID)) $criteria->add(SerialPeer::SERIAL_TYPE_ID, $this->serial_type_id);
@@ -1058,6 +1103,8 @@ abstract class BaseSerial extends BaseObject  implements Persistent {
 	{
 
 		$copyObj->setAnnounce($this->announce);
+
+		$copyObj->setDisplay($this->display);
 
 		$copyObj->setMail($this->mail);
 
