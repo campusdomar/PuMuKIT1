@@ -19,7 +19,7 @@ class languagesActions extends sfActions
    */
   public function executeIndex()
   {
-    sfConfig::set('library_menu','active');
+    sfConfig::set('config_menu','active');
     if (!$this->getUser()->setAttribute('page', 'tv_admin/language'))
       $this->getUser()->setAttribute('page', 1, 'tv_admin/language');
   }

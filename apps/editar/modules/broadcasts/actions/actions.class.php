@@ -24,7 +24,7 @@ class broadcastsActions extends sfActions
    */
   public function executeIndex()
   {
-    sfConfig::set('distri_menu','active');
+    sfConfig::set('config_menu','active');
     if (!$this->getUser()->setAttribute('page', 'tv_admin/broadcast'))
       $this->getUser()->setAttribute('page', 1, 'tv_admin/broadcast');
   }
