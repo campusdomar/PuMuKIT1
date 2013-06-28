@@ -4,7 +4,7 @@ all:
     param:
       phptype:            mysql     # Database vendor
       hostspec:           localhost
-      database:           pumukit18
+      database:           pumukit
       username:           pmk_user
       password:           pmk_password
       port:               3306
