@@ -10,8 +10,8 @@
 class CategoryMmTimeframePeer extends BaseCategoryMmTimeframePeer
 {
     // códigos para buscar categories.
-    const DESTACADOS_TV = "Destacados_TV";          // Código para editorial1 temporizada
-    const DESTACADOS_RADIO = "Destacados_Radio";    // Código para editorial2 temporizada
+    const EDITORIAL1 = "Destacados_TV";          // Código para editorial1 temporizada
+    const EDITORIAL2 = "Destacados_Radio";    // Código para editorial2 temporizada
 
     static public function retrieveByCategoryIdMmId($category_id, $mm_id)
     {
@@ -50,10 +50,10 @@ class CategoryMmTimeframePeer extends BaseCategoryMmTimeframePeer
 
         switch ($editorial_id){
             case 1:
-                $cat_destacados_id = CategoryPeer::retrieveByCod(self::DESTACADOS_TV)->getId();
+                $cat_destacados_id = CategoryPeer::retrieveByCod(self::EDITORIAL1)->getId();
                 break;
             case 2:
-                $cat_destacados_id = CategoryPeer::retrieveByCod(self::DESTACADOS_RADIO)->getId();
+                $cat_destacados_id = CategoryPeer::retrieveByCod(self::EDITORIAL2)->getId();
                 break;
             default:
                 echo "<br/>Error: decisión editorial " . $editorial_id . " no implementada - revisar CategoryMmTimeframePeer.php<br/>";
@@ -204,9 +204,9 @@ class CategoryMmTimeframePeer extends BaseCategoryMmTimeframePeer
     private static function getNewCriteriaWithEditorialFromCategoryCod($cod) 
     {
         $c = new Criteria();
-        if (self::DESTACADOS_TV == $cod) {
+        if (self::EDITORIAL1 == $cod) {
             $c->add(MmPeer::EDITORIAL1, 1);
-        } else if (self::DESTACADOS_RADIO == $cod){
+        } else if (self::EDITORIAL2 == $cod){
             $c->add(MmPeer::EDITORIAL2, 1);
         } else {
             // Error: el cod de categoría no se corresponde con una de timeframes.
