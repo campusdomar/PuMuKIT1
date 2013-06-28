@@ -3,6 +3,17 @@ timeline:
   url:   /dashboard/serial_timeline.xml
   param: { module: dashboard, action: serial }
 
+editorial1_timeline:
+  url:   /timeframes/editorial1_timeline.xml
+  param: { module: timeframes, action: editorial1Timeline }
+
+editorial2_timeline:
+  url:   /timeframes/editorial2_timeline.xml
+  param: { module: timeframes, action: editorial2Timeline }
+
+all_editorial_timeline:
+  url:   /timeframes/all_editorial_timeline.xml
+  param: { module: timeframes, action: allEditorialTimeline }
 homepage:
   url:   /
   param: { module: index, action: index }

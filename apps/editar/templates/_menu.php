@@ -43,7 +43,7 @@
       </a>
     </li>
   
-    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('template_menu') ?>">
+    <!--<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('template_menu') ?>">
       <a href="#" title="Dise&nteilde;o" onclick="return false" class="<?php echo sfConfig::get('template_menu') ?>">
         <span>Dise&ntilde;o Portal WebTV</span>
       </a>
@@ -62,7 +62,7 @@
           <a href="<?php echo url_for('navigator/index')?>" title="Navegator" class="">
             <span>FileManager</span>
           </a>
-        <!-- </li>
+        </li>
         <li class="level1">
           <a href="<?php echo url_for('virtualgrounds/index')?>" title="Categorias" class="">
             <span>Categorias</span>
@@ -73,9 +73,9 @@
             <span>Noticias</span>
           </a>
         </li>
-       -->
       </ul>
     </li>
+    -->
   
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('tv_menu') ?>">
       <a href="#" title="TV" onclick="return false" class="<?php echo sfConfig::get('tv_menu') ?>">
@@ -142,7 +142,12 @@
 
    <?php endif ?>
 
-
+    <li class="level0 <?php echo sfConfig::get('timeframes_menu') ?>">
+      <a href="<?php echo url_for('timeframes/indexDash')?>" 
+         class="<?php echo sfConfig::get('timeframes_menu') ?>">
+        <span>Editoriales Temporizadas</span>
+      </a>
+    </li>
 
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('library_menu') ?>">
       <a href="#" title="Tablas" onclick="return false" class="<?php echo sfConfig::get('library_menu') ?>">
@@ -196,12 +201,7 @@
           </a>
         </li>
         <li class="level1">
-          <a href="<?php echo url_for('grounds/index')?>" title="Ground" class="">
-            <span>Lugares y &Aacute;reas de conocimiento</span>
-          </a>
-        </li>
-        <li class="level1">
-          <a href="<?php echo url_for('genres/index')?>" title="Genre" class="">
+          <a href="<?php echo url_for('genres/index')?>" class="">
             <span>G&eacute;neros</span>
           </a>
         </li>
@@ -243,13 +243,38 @@
           </a>
         </li>
         -->
-        <li class="last level1">
+        <li class="level1">
           <a href="<?php echo url_for('roles/index')?>" title="Rol" class="">
             <span>Roles</span>
           </a>
         </li>
+       <li class="level1">
+         <a href="<?php echo url_for('broadcasts/index')?>"  class="">
+           <span>Perfiles Acceso</span>
+          </a>
+        </li>
 
 
+        <li class="level1">
+          <a href="<?php echo url_for('streamservs/index')?>"  class="">
+            <span>Servidores de Distribución</span>
+          </a>
+        </li>  
+        <li class="level1">
+          <a href="<?php echo url_for('templates/index')?>" class="">
+            <span>Plantillas</span>
+          </a>
+        </li>
+        <li class="level1">
+          <a href="<?php echo url_for('navigator/index')?>" class="">
+            <span>Explorador</span>
+          </a>
+        </li>
+        <li class="last level1">
+          <a href="<?php echo url_for('featured/index')?>"  class="">
+            <span>Zona destacados del menú laterial</span>
+          </a>
+        </li>  
       </ul>
     </li>  
 <?php endif ?>
