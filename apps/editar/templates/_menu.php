@@ -43,7 +43,7 @@
       </a>
     </li>
   
-    <!--<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('template_menu') ?>">
+    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('template_menu') ?>">
       <a href="#" title="Dise&nteilde;o" onclick="return false" class="<?php echo sfConfig::get('template_menu') ?>">
         <span>Dise&ntilde;o Portal WebTV</span>
       </a>
@@ -58,7 +58,7 @@
             <span>Plantillas</span>
           </a>
         </li>
-        <li class="last level1">
+        <li class="level1">
           <a href="<?php echo url_for('navigator/index')?>" title="Navegator" class="">
             <span>FileManager</span>
           </a>
@@ -75,7 +75,6 @@
         </li>
       </ul>
     </li>
-    -->
   
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('tv_menu') ?>">
       <a href="#" title="TV" onclick="return false" class="<?php echo sfConfig::get('tv_menu') ?>">
@@ -259,22 +258,7 @@
           <a href="<?php echo url_for('streamservs/index')?>"  class="">
             <span>Servidores de Distribución</span>
           </a>
-        </li>  
-        <li class="level1">
-          <a href="<?php echo url_for('templates/index')?>" class="">
-            <span>Plantillas</span>
-          </a>
-        </li>
-        <li class="level1">
-          <a href="<?php echo url_for('navigator/index')?>" class="">
-            <span>Explorador</span>
-          </a>
-        </li>
-        <li class="last level1">
-          <a href="<?php echo url_for('featured/index')?>"  class="">
-            <span>Zona destacados del menú laterial</span>
-          </a>
-        </li>  
+        </li>   
       </ul>
     </li>  
 <?php endif ?>

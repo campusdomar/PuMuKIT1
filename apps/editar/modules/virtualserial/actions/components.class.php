@@ -82,12 +82,12 @@ class virtualserialComponents extends sfComponents
     foreach ($timeframes as $tf){
       $cat_timeframe = $tf->getCategory();
       switch (($cat_timeframe->getCod())) {
-        case CategoryMmTimeframePeer::DESTACADOS_TV:
+        case CategoryMmTimeframePeer::EDITORIAL1:
           $this->timeframe1 = $tf;
           $this->interval1cmp = $tf->intervalCmp();
           break;
 
-        case CategoryMmTimeframePeer::DESTACADOS_RADIO:
+        case CategoryMmTimeframePeer::EDITORIAL2:
           $this->timeframe2 = $tf;
           $this->interval2cmp = $tf->intervalCmp();
           break;

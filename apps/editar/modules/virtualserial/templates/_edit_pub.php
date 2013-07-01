@@ -225,7 +225,7 @@ muestraPasadoActivoFuturo = function(id){
       <?php echo checkbox_tag('editorial1', 1, ($mm->getEditorial1() || isset($timeframe1)), array (
         'onchange' => "procesaEditorial(1);",
         'style' => 'float:left'
-      ) );?>&nbsp; Destacados TV    
+      ) );?>&nbsp; Decisión editorial 1    
     </span>  
     <span class="temporizada" id="temporizada1" style="float:left;" >
       <span id="radios1" style="margin-top:6px;<?php if (!$mm->getEditorial1() && !isset($timeframe1)) echo "opacity:0.5;" //ojo, necesito algún caracter dentro de este span?>">&nbsp;
@@ -285,7 +285,7 @@ muestraPasadoActivoFuturo = function(id){
       <?php $value = object_checkbox_tag($mm, 'getEditorial2', array (
         'control_name' => 'editorial2',
         'onchange' => "procesaEditorial(2);",
-      )); echo $value ? $value : '&nbsp;' ?>&nbsp; Destacados Radio    
+      )); echo $value ? $value : '&nbsp;' ?>&nbsp; Decisión editorial 2  
       
 
     </span>  

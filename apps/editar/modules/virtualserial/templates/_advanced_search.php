@@ -47,11 +47,11 @@
          <div style="overflow: hidden; margin: 12px;">
            <input type="checkbox" name="searchs[news]" id="news" <?php echo $sf_user->getAttribute('news', null, 'tv_admin/virtualserial/searchs')=='on'?'checked="true"':'';?>>
          </div>
-         <?php echo label_for('editorial1', 'Destacados TV:', array( 'style' => 'position:inherit; margin: 7px 0px 3px;', 'class' => 'required long')) ?>
+         <?php echo label_for('editorial1', 'Decisión editorial 1:', array( 'style' => 'position:inherit; margin: 7px 0px 3px;', 'class' => 'required long')) ?>
          <div style="overflow: hidden; margin: 18px;">
            <input type="checkbox" name="searchs[editorial1]" id="editorial1" <?php echo $sf_user->getAttribute('editorial1', null, 'tv_admin/virtualserial/searchs')=='on'?'checked="true"':'';?>>
          </div>
-         <?php echo label_for('editorial2', 'Destacados Radio:', array( 'style' => 'position:inherit; margin: 7px 0px 3px;', 'class' => 'required long')) ?>
+         <?php echo label_for('editorial2', 'Decisión editorial 2:', array( 'style' => 'position:inherit; margin: 7px 0px 3px;', 'class' => 'required long')) ?>
          <div style="overflow: hidden; margin: 24px;">
            <input type="checkbox" name="searchs[editorial2]" id="editorial2" <?php echo $sf_user->getAttribute('editorial2', null, 'tv_admin/virtualserial/searchs')=='on'?'checked="true"':'';?>>
          </div>
