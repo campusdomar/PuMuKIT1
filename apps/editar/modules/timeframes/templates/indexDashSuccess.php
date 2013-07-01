@@ -1,6 +1,6 @@
 <?php
-$tv_color    = sfConfig::get('mod_timeframes_destacados_tv_color', '#00FF00');
-$radio_color = sfConfig::get('mod_timeframes_destacados_radio_color', '#0000FF');
+$editorial1_color    = sfConfig::get('mod_timeframes_editorial1_color', '#00FF00');
+$editorial2_color = sfConfig::get('mod_timeframes_editorial2_color', '#0000FF');
 if (!isset($destacados)) $destacados = 'all';
 function escogeOrigenXml($destacados){
   switch ($destacados){
@@ -22,14 +22,14 @@ function escogeOrigenXml($destacados){
 <div id="timeframes-dashboard-cabecera" style="overflow:hidden;">
 
   <div id="leyenda" style="float:left;">
-      <div style="color:<?php echo $tv_color?>;width:100px; border-top: 3px solid;">Editorial1</div>
-      <div style="color:<?php echo $radio_color?>;width:100px; border-top: 3px solid;">Editorial2</div>
+      <div style="color:<?php echo $editorial1_color?>;width:100px; border-top: 3px solid;">Editorial1</div>
+      <div style="color:<?php echo $editorial2_color?>;width:100px; border-top: 3px solid;">Editorial2</div>
       <?php //echo "DEBUG -  ". link_to('xml con la lista de eventos a mostrar', escogeOrigenXml($destacados), true);?>
   </div>
   <div id="timeframes-dashboard-select" style="float:left; padding:0 0 0 10px;">
      <form id="form-destacados" name="form-destacados" method="get" action="<?php echo url_for('timeframes/indexDash')?>">
       <div id = "select-destacados" style="width:150px; float:left;">
-        <div style="font-weight:bold;">&nbsp;Editorial <span style="color:<?php echo $tv_color?>">1</span> / <span style="color:<?php echo $radio_color?>">2</span></div>
+        <div style="font-weight:bold;">&nbsp;Editorial <span style="color:<?php echo $editorial1_color?>">1</span> / <span style="color:<?php echo $editorial2_color?>">2</span></div>
         <?php echo select_tag('destacados',
           options_for_select(
             array('all'   => 'Todos',

@@ -1,7 +1,7 @@
 # Valores usados en actions (executeTvTimeline p.ej.) para generar el xml 
 # del timeline y en indexDashSuccess para pintar la leyenda de la página
 all:
-  destacados_tv:
+  editorial1:
     color:          '#50AA50'
-  destacados_radio:
+  editorial2:
     color:          '#0000FF'

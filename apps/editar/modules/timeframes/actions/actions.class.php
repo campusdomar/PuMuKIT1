@@ -191,7 +191,7 @@ class timeframesActions extends sfActions
         $this->incluye_en_proceso = $this->getRequestParameter('incluye_en_proceso', 0);
         $cod_destacados_tv        = CategoryMmTimeframePeer::EDITORIAL1;
         $category_destacados_tv_id = CategoryPeer::retrieveByCod($cod_destacados_tv)->getId();
-        $tv_color =  sfConfig::get('mod_timeframes_destacados_tv_color', '#00FF00');
+        $tv_color =  sfConfig::get('mod_timeframes_editorial1_color', '#00FF00');
         header("Content-Type: application/xml");
         $mm_ids_not_published = $this->getMmIdsNotPublished();
         $mm_ids_not_ready     = $this->getMmIdsNotReady();?>
@@ -222,7 +222,7 @@ class timeframesActions extends sfActions
         $this->incluye_en_proceso = $this->getRequestParameter('incluye_en_proceso', 0);
         $cod_destacados_radio     = CategoryMmTimeframePeer::EDITORIAL2;
         $category_destacados_radio_id = CategoryPeer::retrieveByCod($cod_destacados_radio)->getId();
-        $radio_color = sfConfig::get('mod_timeframes_destacados_radio_color', '#0000FF');
+        $radio_color = sfConfig::get('mod_timeframes_editorial2_color', '#0000FF');
         header("Content-Type: application/xml");
         $mm_ids_not_published = $this->getMmIdsNotPublished();
         $mm_ids_not_ready     = $this->getMmIdsNotReady();?>
@@ -249,11 +249,11 @@ class timeframesActions extends sfActions
         $this->incluye_en_proceso = $this->getRequestParameter('incluye_en_proceso', 0);
         $cod_destacados_tv        = CategoryMmTimeframePeer::EDITORIAL1;
         $category_destacados_tv_id = CategoryPeer::retrieveByCod($cod_destacados_tv)->getId();
-        $tv_color = sfConfig::get('mod_timeframes_destacados_tv_color', '#00FF00');
+        $tv_color = sfConfig::get('mod_timeframes_editorial1_color', '#00FF00');
 
         $cod_destacados_radio = CategoryMmTimeframePeer::EDITORIAL2;
         $category_destacados_radio_id = CategoryPeer::retrieveByCod($cod_destacados_radio)->getId();
-        $radio_color = sfConfig::get('mod_timeframes_destacados_radio_color', '#0000FF');
+        $radio_color = sfConfig::get('mod_timeframes_editorial2_color', '#0000FF');
         header("Content-Type: application/xml");
         $mm_ids_not_published = $this->getMmIdsNotPublished();
         $mm_ids_not_ready     = $this->getMmIdsNotReady();?>
