@@ -49,7 +49,7 @@ function creaCategory($name, $parent, $cod_prefix = '')
         $category = new Category(); 
         $category->insertAsLastChildOf($parent);
         $category->setMetacategory(false);
-        $category->setDisplay(true);
+        $category->setDisplay(0); // Los timeframes no se asignan como categorías normales.
         $category->setRequired(false);
         $category->setCod($cod);
       
