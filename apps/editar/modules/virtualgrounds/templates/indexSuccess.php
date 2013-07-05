@@ -65,7 +65,7 @@
         </ul>
 
         <?php echo javascript_tag("
-        poll_tabsJsTabs = new varienTabs('grounds/previewtype',
+        poll_tabsJsTabs = new varienTabs('virtualgrounds/previewtype',
                                          'poll_tabs', 
 					 'entry-edit', 
 					 'poll_tabs_".$sf_user->getAttribute('id', 1, 'tv_admin/groundtype')."_section'

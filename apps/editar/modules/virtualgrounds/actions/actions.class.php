@@ -221,6 +221,30 @@ class virtualgroundsActions extends sfActions
 
   }
 
+  public function executeTestcategory()
+  {
+
+  }
+
+  public function executeUpdatetestcategory()
+  {
+    // $c = new Criteria();
+    // $c->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getRequestParameter('id'));
+    // VirtualGroundRelationPeer::doDelete($c);
+
+    // $others = $this->getRequestParameter('relations');
+
+    // foreach($others as $k => $v){
+    //   $rel = new VirtualGroundRelation();
+    //   $rel->setVirtualGroundId($this->getRequestParameter('id'));
+    //   $rel->setGroundId($k);
+    //   $rel->save();
+    // }
+
+    $this->type = $this->getUser()->getAttribute('id', 1, 'tv_admin/groundtype');
+    return $this->renderComponent('virtualgrounds', 'grounds');
+  }
+
 
   /**
    * --  COPY -- /editar.php/grounds/copy/id/:id

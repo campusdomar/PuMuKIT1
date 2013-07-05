@@ -76,9 +76,16 @@
        <?php echo m_link_to('configurar', 'virtualgrounds/editground?type=' . $gt->getId() . '&id=' . $vground->getId(), 
        array('title' => 'Configurar Categoria ' . $vground->getName()), array('width' => '800')) ?></td>
    </div>
-
    <?php endforeach?>
 
+   <div class="content">
+     <input type="radio" name="decision" value="prueba_categoria" <?php echo ($vground->getEditorial3()?'checked="checked"':'')?> />
+     &nbsp; prueba categoría - editorial 3 
+       <?php echo m_link_to('configurar', 'virtualgrounds/testcategory', 
+       array('title' => 'Configurar Categoria ' . $vground->getName()), 
+       array('width' => '1200'),
+       array('evalScripts' => 'true')) ?></td>
+   </div>
 </div>
 
 
