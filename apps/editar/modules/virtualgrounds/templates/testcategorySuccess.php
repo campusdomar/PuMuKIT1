@@ -6,17 +6,26 @@
     'script' => 'true',
   )); ?>
 
+<?php // Comprobar función javascript para calcular el vertical offset en vez de números mágicos.
+// No funciona en todos los casos (cat. padre abierta o cerrada, cat. hija, etc.)
+//getVerticalOffsetFromFirstLiText = function (spanElement){
+  // Finds li parent, ul parent, first li and first span to get the real text offset.
+  //return spanElement.parentNode.parentNode.children[0].children[0].positionedOffset()[1];
+//} ?>
+
   <?php echo javascript_tag('
 toggle_tree_cat_mmless = function (element, id, cat_id) {
+  var firstLiTextVerticalOffset = 113; 
   if (element.parentElement.hasClassName("notload")) {
     element.parentElement.removeClassName("notload");
-    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualserial/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/mm/", {
-      onComplete: function(){ $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - 44); }
+    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildrenmmless') . '/id/"  + id + "/block_cat/" + cat_id, {
+      onComplete: function(){ 
+        $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - firstLiTextVerticalOffset); }
     });
   } else {
     $$(".cat_li_parent_" + id).each(function(e){e.toggleClassName("nodisplay")});
     //element.scrollIntoView();
-    $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - 44);
+    $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - firstLiTextVerticalOffset);
   }
   element.parentElement.toggleClassName("expanded").toggleClassName("collapsed");
 }
@@ -220,6 +229,11 @@ window.update_tree = function(){
   });
 };
 
+
+// OJO, CREAR ADD TREE SEVERAL CAT MMLESS
+
+
+f
 window.add_tree_several_cat = function (cat_id, mm_id, idcat_to_add) {
   new Ajax.Request('" . url_for('virtualserial/addSeveralCategory') . "',  {
     method: 'post',

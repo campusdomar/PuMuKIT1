@@ -9,7 +9,7 @@
   
   <li draggable="false" id="cat_li_children_<?php echo $applicable_cat->getId()?>" class="<?php echo $li_class?>">
     <span class="icon" onclick="javascript:toggle_tree_cat_mmless(this, '<?php echo $applicable_cat->getId()?>', <?php echo $block_cat ?>)">&nbsp;</span>
-    <span <?php if(!$applicable_cat->getMetacategory()):?> onclick="$$('.clicked_category_right').invoke('removeClassName', 'clicked_category_right'); this.addClassName('clicked_category_right');" ondblclick="javascript:add_tree_several_cat(<?php echo $applicable_cat->getId()?>, <?php echo $mm_id ?>, <?php echo $block_cat ?>);" <?php endif ?> >
+    <span <?php if(!$applicable_cat->getMetacategory()):?> onclick="$$('.clicked_category_right').invoke('removeClassName', 'clicked_category_right'); this.addClassName('clicked_category_right');" ondblclick="javascript:add_tree_several_cat(<?php echo $applicable_cat->getId()?>, <?php echo $block_cat ?>);" <?php endif ?> >
 
       <?php echo $applicable_cat->getCod() ?> - <?php echo $applicable_cat->getName() ?> 
       <?php if(!$applicable_cat->getMetacategory()):?>(<span id="info_num_mm_<?php echo $applicable_cat->getId() ?>"><?php echo $applicable_cat->getNumMm()?></span>)<?php endif ?>

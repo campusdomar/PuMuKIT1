@@ -221,31 +221,6 @@ class virtualgroundsActions extends sfActions
 
   }
 
-  public function executeTestcategory()
-  {
-
-  }
-
-  public function executeUpdatetestcategory()
-  {
-    // $c = new Criteria();
-    // $c->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getRequestParameter('id'));
-    // VirtualGroundRelationPeer::doDelete($c);
-
-    // $others = $this->getRequestParameter('relations');
-
-    // foreach($others as $k => $v){
-    //   $rel = new VirtualGroundRelation();
-    //   $rel->setVirtualGroundId($this->getRequestParameter('id'));
-    //   $rel->setGroundId($k);
-    //   $rel->save();
-    // }
-
-    $this->type = $this->getUser()->getAttribute('id', 1, 'tv_admin/groundtype');
-    return $this->renderComponent('virtualgrounds', 'grounds');
-  }
-
-
   /**
    * --  COPY -- /editar.php/grounds/copy/id/:id
    *
@@ -376,7 +351,39 @@ class virtualgroundsActions extends sfActions
     $this->rel = $vground->getRelationsId();    
   }
 
+  public function executeTestcategory()
+  {
 
+  }
+
+  public function executeUpdatetestcategory()
+  {
+    // $c = new Criteria();
+    // $c->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getRequestParameter('id'));
+    // VirtualGroundRelationPeer::doDelete($c);
+
+    // $others = $this->getRequestParameter('relations');
+
+    // foreach($others as $k => $v){
+    //   $rel = new VirtualGroundRelation();
+    //   $rel->setVirtualGroundId($this->getRequestParameter('id'));
+    //   $rel->setGroundId($k);
+    //   $rel->save();
+    // }
+
+    $this->type = $this->getUser()->getAttribute('id', 1, 'tv_admin/groundtype');
+    return $this->renderComponent('virtualgrounds', 'grounds');
+  }
+
+  public function executeGetchildrenmmless()
+  {
+    // $this->mm_id = $this->getRequestParameter('mm');
+
+    $this->c = CategoryPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->c);
+
+    $this->block_cat = $this->getRequestParameter('block_cat');
+  }
 
 
   protected function sanitizeDir($dir)
