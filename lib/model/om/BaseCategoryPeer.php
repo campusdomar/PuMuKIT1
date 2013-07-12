@@ -629,6 +629,14 @@ abstract class BaseCategoryPeer {
 		foreach($objects as $obj) {
 
 
+			include_once 'lib/model/VirtualGroundRelation.php';
+
+			// delete related VirtualGroundRelation objects
+			$c = new Criteria();
+			
+			$c->add(VirtualGroundRelationPeer::CATEGORY_ID, $obj->getId());
+			$affectedRows += VirtualGroundRelationPeer::doDelete($c, $con);
+
 			include_once 'lib/model/CategoryI18n.php';
 
 			// delete related CategoryI18n objects

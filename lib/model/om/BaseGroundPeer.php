@@ -821,14 +821,6 @@ abstract class BaseGroundPeer {
 			$c->add(RelationGroundPeer::TWO_ID, $obj->getId());
 			$affectedRows += RelationGroundPeer::doDelete($c, $con);
 
-			include_once 'lib/model/VirtualGroundRelation.php';
-
-			// delete related VirtualGroundRelation objects
-			$c = new Criteria();
-			
-			$c->add(VirtualGroundRelationPeer::GROUND_ID, $obj->getId());
-			$affectedRows += VirtualGroundRelationPeer::doDelete($c, $con);
-
 			include_once 'lib/model/GroundMm.php';
 
 			// delete related GroundMm objects

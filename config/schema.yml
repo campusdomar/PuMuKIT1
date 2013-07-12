@@ -212,10 +212,10 @@ propel:
       foreignTable: virtual_ground
       foreignReference: id
       onDelete: cascade
-    ground_id: 
+    category_id: 
       type: integer
       primaryKey: true
-      foreignTable: ground
+      foreignTable: category
       foreignReference: id
       onDelete: cascade
     enable: 

@@ -366,17 +366,17 @@ DROP TABLE IF EXISTS `virtual_ground_relation`;
 CREATE TABLE `virtual_ground_relation`
 (
 	`virtual_ground_id` INTEGER  NOT NULL,
-	`ground_id` INTEGER  NOT NULL,
+	`category_id` INTEGER  NOT NULL,
 	`enable` INTEGER default 1 NOT NULL,
-	PRIMARY KEY (`virtual_ground_id`,`ground_id`),
+	PRIMARY KEY (`virtual_ground_id`,`category_id`),
 	CONSTRAINT `virtual_ground_relation_FK_1`
 		FOREIGN KEY (`virtual_ground_id`)
 		REFERENCES `virtual_ground` (`id`)
 		ON DELETE CASCADE,
-	INDEX `virtual_ground_relation_FI_2` (`ground_id`),
+	INDEX `virtual_ground_relation_FI_2` (`category_id`),
 	CONSTRAINT `virtual_ground_relation_FK_2`
-		FOREIGN KEY (`ground_id`)
-		REFERENCES `ground` (`id`)
+		FOREIGN KEY (`category_id`)
+		REFERENCES `category` (`id`)
 		ON DELETE CASCADE
 )Engine=MyISAM;
 

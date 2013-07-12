@@ -126,6 +126,25 @@ function inc_num_mm(cat_id, num)
                   </ul>
                 <?php endif?>
               </div>
+
+              <div style="height: 460px; float: left; padding: 220px 5px 0px">
+                <a href="#" onclick="if ( $$('.clicked_category_left')[0] != undefined ) { $$('.clicked_category_left')[0].ondblclick() } return false;">&#8592;</a>
+                <a href="#" onclick="if ( $$('.clicked_category_right')[0] != undefined ) { $$('.clicked_category_right')[0].ondblclick() } return false;">&#8594;</a>
+              </div>
+
+              <div style="width: 50%; height: 460px; border: 1px solid #bbb; float: left;" class="category" id="select_category_<?php echo $c->getId()?>">
+                <ul class="category_tree" id="select_ul_category_<?php echo $c->getId()?>" >
+                   <?php /* foreach($mm->getCategorys($c) as $mmc):?>
+                   <li draggable="false" class="element" id="select_li_<?php echo $mmc->getId() ?>" >
+                      <span class="icon">&nbsp;</span>
+                      <span onclick="$$('.clicked_category_left').invoke('removeClassName', 'clicked_category_left'); this.addClassName('clicked_category');" ondblclick="javascript:del_tree_cat(<?php echo $mmc->getId()?>, <?php echo $mm->getId() ?>);" >
+                      <?php echo $mmc->getCod() ?> - <?php echo $mmc->getName() ?> 
+                      </span>
+                   </li>
+                   <?php endforeach */?>
+                </ul>
+              </div>
+
             </div>
           </div>
         </dd>

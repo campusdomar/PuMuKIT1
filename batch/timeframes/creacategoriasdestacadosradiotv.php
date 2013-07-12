@@ -24,7 +24,11 @@ $databaseManager->initialize();
 echo "\nCreando nuevo árbol de timeframes y categorías para destacados radio y tv\n\n";
 
 
-$cat_root = CategoryPeer::doSelectRoot();
+if (!$cat_root = CategoryPeer::doSelectRoot()){
+    $cat_root = creaRoot();
+} else {
+    echo "Recuperando la categoría root\n";
+}
 $cat_raiz_timeframes = creaCategory("Timeframes", $cat_root, "");
 $cat_tf1 = creaCategory(CategoryMmTimeframePeer::EDITORIAL1, $cat_raiz_timeframes, "");
 $cat_tf2 = creaCategory(CategoryMmTimeframePeer::EDITORIAL2, $cat_raiz_timeframes, "");
@@ -52,9 +56,13 @@ function creaCategory($name, $parent, $cod_prefix = '')
         $category->setDisplay(0); // Los timeframes no se asignan como categorías normales.
         $category->setRequired(false);
         $category->setCod($cod);
-      
-        $category->setCulture('es');
-        $category->setName($name);
+        
+        // $langs = sfConfig::get('app_lang_array', array('es'));
+        $langs = array('es');
+        foreach($langs as $lang){
+            $category->setCulture($lang);
+            $category->setName($name);
+        }
         
         $category->save();
         echo"Creada categoría " . $category->getCod() . " - " . $name . "\n";
@@ -63,4 +71,25 @@ function creaCategory($name, $parent, $cod_prefix = '')
     }
     
     return $category;
+}
+
+function creaRoot($cod = "root", $name = "root"){
+    echo "Creando categoría root\n";
+    $parent = new Category();
+    $parent->makeRoot();
+    $parent->setMetacategory(true);
+    $parent->setDisplay(true);
+    $parent->setRequired(false);
+    $parent->setCod($cod);
+
+    // $langs = sfConfig::get('app_lang_array', array('es'));
+    $langs = array('es');
+    foreach($langs as $lang){
+        $parent->setCulture($lang);
+        $parent->setName($name);
+    }
+
+    $parent->save();
+
+    return $parent;
 }

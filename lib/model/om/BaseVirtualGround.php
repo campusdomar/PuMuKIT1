@@ -1445,7 +1445,7 @@ abstract class BaseVirtualGround extends BaseObject  implements Persistent {
 	 * api reasonable.  You can provide public methods for those you
 	 * actually need in VirtualGround.
 	 */
-	public function getVirtualGroundRelationsJoinGround($criteria = null, $con = null)
+	public function getVirtualGroundRelationsJoinCategory($criteria = null, $con = null)
 	{
 		// include the Peer class
 		include_once 'lib/model/om/BaseVirtualGroundRelationPeer.php';
@@ -1464,7 +1464,7 @@ abstract class BaseVirtualGround extends BaseObject  implements Persistent {
 
 				$criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getId());
 
-				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinGround($criteria, $con);
+				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinCategory($criteria, $con);
 			}
 		} else {
 			// the following code is to determine if a new query is
@@ -1474,7 +1474,7 @@ abstract class BaseVirtualGround extends BaseObject  implements Persistent {
 			$criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getId());
 
 			if (!isset($this->lastVirtualGroundRelationCriteria) || !$this->lastVirtualGroundRelationCriteria->equals($criteria)) {
-				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinGround($criteria, $con);
+				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinCategory($criteria, $con);
 			}
 		}
 		$this->lastVirtualGroundRelationCriteria = $criteria;

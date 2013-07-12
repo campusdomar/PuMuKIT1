@@ -27,10 +27,10 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 
 
 	/**
-	 * The value for the ground_id field.
+	 * The value for the category_id field.
 	 * @var        int
 	 */
-	protected $ground_id;
+	protected $category_id;
 
 
 	/**
@@ -45,9 +45,9 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 	protected $aVirtualGround;
 
 	/**
-	 * @var        Ground
+	 * @var        Category
 	 */
-	protected $aGround;
+	protected $aCategory;
 
 	/**
 	 * Flag to prevent endless save loop, if this object is referenced
@@ -75,14 +75,14 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 	}
 
 	/**
-	 * Get the [ground_id] column value.
+	 * Get the [category_id] column value.
 	 * 
 	 * @return     int
 	 */
-	public function getGroundId()
+	public function getCategoryId()
 	{
 
-		return $this->ground_id;
+		return $this->category_id;
 	}
 
 	/**
@@ -123,12 +123,12 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 	} // setVirtualGroundId()
 
 	/**
-	 * Set the value of [ground_id] column.
+	 * Set the value of [category_id] column.
 	 * 
 	 * @param      int $v new value
 	 * @return     void
 	 */
-	public function setGroundId($v)
+	public function setCategoryId($v)
 	{
 
 		// Since the native PHP type for this column is integer,
@@ -137,16 +137,16 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 			$v = (int) $v;
 		}
 
-		if ($this->ground_id !== $v) {
-			$this->ground_id = $v;
-			$this->modifiedColumns[] = VirtualGroundRelationPeer::GROUND_ID;
+		if ($this->category_id !== $v) {
+			$this->category_id = $v;
+			$this->modifiedColumns[] = VirtualGroundRelationPeer::CATEGORY_ID;
 		}
 
-		if ($this->aGround !== null && $this->aGround->getId() !== $v) {
-			$this->aGround = null;
+		if ($this->aCategory !== null && $this->aCategory->getId() !== $v) {
+			$this->aCategory = null;
 		}
 
-	} // setGroundId()
+	} // setCategoryId()
 
 	/**
 	 * Set the value of [enable] column.
@@ -183,7 +183,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 
 			$this->virtual_ground_id = $rs->getInt($startcol + 0);
 
-			$this->ground_id = $rs->getInt($startcol + 1);
+			$this->category_id = $rs->getInt($startcol + 1);
 
 			$this->enable = $rs->getBoolean($startcol + 2);
 
@@ -323,11 +323,11 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 				$this->setVirtualGround($this->aVirtualGround);
 			}
 
-			if ($this->aGround !== null) {
-				if ($this->aGround->isModified() || $this->aGround->getCurrentGroundI18n()->isModified()) {
-					$affectedRows += $this->aGround->save($con);
+			if ($this->aCategory !== null) {
+				if ($this->aCategory->isModified() || $this->aCategory->getCurrentCategoryI18n()->isModified()) {
+					$affectedRows += $this->aCategory->save($con);
 				}
-				$this->setGround($this->aGround);
+				$this->setCategory($this->aCategory);
 			}
 
 
@@ -422,9 +422,9 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 				}
 			}
 
-			if ($this->aGround !== null) {
-				if (!$this->aGround->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aGround->getValidationFailures());
+			if ($this->aCategory !== null) {
+				if (!$this->aCategory->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCategory->getValidationFailures());
 				}
 			}
 
@@ -470,7 +470,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 				return $this->getVirtualGroundId();
 				break;
 			case 1:
-				return $this->getGroundId();
+				return $this->getCategoryId();
 				break;
 			case 2:
 				return $this->getEnable();
@@ -496,7 +496,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 		$keys = VirtualGroundRelationPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getVirtualGroundId(),
-			$keys[1] => $this->getGroundId(),
+			$keys[1] => $this->getCategoryId(),
 			$keys[2] => $this->getEnable(),
 		);
 		return $result;
@@ -533,7 +533,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 				$this->setVirtualGroundId($value);
 				break;
 			case 1:
-				$this->setGroundId($value);
+				$this->setCategoryId($value);
 				break;
 			case 2:
 				$this->setEnable($value);
@@ -562,7 +562,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 		$keys = VirtualGroundRelationPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setVirtualGroundId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setGroundId($arr[$keys[1]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCategoryId($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setEnable($arr[$keys[2]]);
 	}
 
@@ -576,7 +576,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 		$criteria = new Criteria(VirtualGroundRelationPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID)) $criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->virtual_ground_id);
-		if ($this->isColumnModified(VirtualGroundRelationPeer::GROUND_ID)) $criteria->add(VirtualGroundRelationPeer::GROUND_ID, $this->ground_id);
+		if ($this->isColumnModified(VirtualGroundRelationPeer::CATEGORY_ID)) $criteria->add(VirtualGroundRelationPeer::CATEGORY_ID, $this->category_id);
 		if ($this->isColumnModified(VirtualGroundRelationPeer::ENABLE)) $criteria->add(VirtualGroundRelationPeer::ENABLE, $this->enable);
 
 		return $criteria;
@@ -595,7 +595,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 		$criteria = new Criteria(VirtualGroundRelationPeer::DATABASE_NAME);
 
 		$criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->virtual_ground_id);
-		$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $this->ground_id);
+		$criteria->add(VirtualGroundRelationPeer::CATEGORY_ID, $this->category_id);
 
 		return $criteria;
 	}
@@ -611,7 +611,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 
 		$pks[0] = $this->getVirtualGroundId();
 
-		$pks[1] = $this->getGroundId();
+		$pks[1] = $this->getCategoryId();
 
 		return $pks;
 	}
@@ -627,7 +627,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 
 		$this->setVirtualGroundId($keys[0]);
 
-		$this->setGroundId($keys[1]);
+		$this->setCategoryId($keys[1]);
 
 	}
 
@@ -651,7 +651,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 
 		$copyObj->setVirtualGroundId(NULL); // this is a pkey column, so set to default value
 
-		$copyObj->setGroundId(NULL); // this is a pkey column, so set to default value
+		$copyObj->setCategoryId(NULL); // this is a pkey column, so set to default value
 
 	}
 
@@ -773,41 +773,41 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 	}
 
 	/**
-	 * Declares an association between this object and a Ground object.
+	 * Declares an association between this object and a Category object.
 	 *
-	 * @param      Ground $v
+	 * @param      Category $v
 	 * @return     void
 	 * @throws     PropelException
 	 */
-	public function setGround($v)
+	public function setCategory($v)
 	{
 
 
 		if ($v === null) {
-			$this->setGroundId(NULL);
+			$this->setCategoryId(NULL);
 		} else {
-			$this->setGroundId($v->getId());
+			$this->setCategoryId($v->getId());
 		}
 
 
-		$this->aGround = $v;
+		$this->aCategory = $v;
 	}
 
 
 	/**
-	 * Get the associated Ground object
+	 * Get the associated Category object
 	 *
 	 * @param      Connection Optional Connection object.
-	 * @return     Ground The associated Ground object.
+	 * @return     Category The associated Category object.
 	 * @throws     PropelException
 	 */
-	public function getGround($con = null)
+	public function getCategory($con = null)
 	{
-		if ($this->aGround === null && ($this->ground_id !== null)) {
+		if ($this->aCategory === null && ($this->category_id !== null)) {
 			// include the related Peer class
-			include_once 'lib/model/om/BaseGroundPeer.php';
+			include_once 'lib/model/om/BaseCategoryPeer.php';
 
-			$this->aGround = GroundPeer::retrieveByPK($this->ground_id, $con);
+			$this->aCategory = CategoryPeer::retrieveByPK($this->category_id, $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -815,28 +815,28 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = GroundPeer::retrieveByPK($this->ground_id, $con);
-			   $obj->addGrounds($this);
+			   $obj = CategoryPeer::retrieveByPK($this->category_id, $con);
+			   $obj->addCategorys($this);
 			 */
 		}
-		return $this->aGround;
+		return $this->aCategory;
 	}
 
 
 	/**
-	 * Get the associated Ground object
+	 * Get the associated Category object
 	 *
 	 * @param      Connection Optional Connection object.
-	 * @return     Ground The associated Ground object.
+	 * @return     Category The associated Category object.
 	 * @throws     PropelException
 	 */
-	public function getGroundWithI18n($con = null)
+	public function getCategoryWithI18n($con = null)
 	{
-		if ($this->aGround === null && ($this->ground_id !== null)) {
+		if ($this->aCategory === null && ($this->category_id !== null)) {
 			// include the related Peer class
-			include_once 'lib/model/om/BaseGroundPeer.php';
+			include_once 'lib/model/om/BaseCategoryPeer.php';
 
-			$this->aGround = GroundPeer::retrieveByPKWithI18n($this->ground_id, $this->getCulture(), $con);
+			$this->aCategory = CategoryPeer::retrieveByPKWithI18n($this->category_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -844,11 +844,11 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = GroundPeer::retrieveByPKWithI18n($this->ground_id, $this->getCulture(), $con);
-			   $obj->addGrounds($this);
+			   $obj = CategoryPeer::retrieveByPKWithI18n($this->category_id, $this->getCulture(), $con);
+			   $obj->addCategorys($this);
 			 */
 		}
-		return $this->aGround;
+		return $this->aCategory;
 	}
 
 	/**
@@ -866,7 +866,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 		} // if ($deep)
 
 		$this->aVirtualGround = null;
-		$this->aGround = null;
+		$this->aCategory = null;
 	}
 
 
