@@ -38,7 +38,7 @@ ob_implicit_flush(true);
 ob_end_flush();
 
 // borraTablasAPelo(array("category", "category_i18n"));
-$filename = 'prueba_unescos.csv';
+$filename = realpath(dirname(__file__).'/prueba_unescos.csv');
 
 // ----------------------------- Script starts here -------------------
 
