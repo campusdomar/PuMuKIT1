@@ -24,16 +24,10 @@ class virtualserialComponents extends sfComponents
 
     if ($this->getUser()->hasAttribute('id', 'tv_admin/virtualserial')){
       $this->mm = MmPeer::retrieveByPk($this->getUser()->getAttribute('id', null, 'tv_admin/virtualserial'));
-      $this->file = $this->mm->getFirstFile();
+      $this->file = ($this->mm)? $this->mm->getFirstFile() : null;
     }else{
-      $c = new Criteria;
-      $c->addJoin(MmPeer::ID, CategoryMmPeer::MM_ID);
-      $cat_id = CategoryPeer::retrieveByCode("Medicina y Patologías Humanas")->getId();
-      $this->getUser()->setAttribute('cat_id', $cat_id, 'tv_admin/virtualserial');
-      $c->add(CategoryMmPeer::CATEGORY_ID, $cat_id);
-      $c->addAscendingOrderByColumn(MmPeer::RANK);
-      $this->mm = MmPeer::doSelectOne($c);
-      $this->file = $this->mm->getFirstFile();
+      $this->mm   = null;
+      $this->file = null;
     }
   }
 
