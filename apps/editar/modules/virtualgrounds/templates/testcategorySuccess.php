@@ -30,35 +30,6 @@ toggle_tree_cat_mmless = function (element, id, cat_id) {
   element.parentElement.toggleClassName("expanded").toggleClassName("collapsed");
 }
 
-function toggle_show_all()
-{
-  // SHOW - Quito el punto a los nodos que muestran sus hijos al desocultar
-  $$(".expanded.element, .collapsed.element").each(function(e){
-    e.removeClassName("element");
-  });
-
-  // SHOW & HIDE - Oculto/Muestro elementos finales que no tiene objetos multimedia
-  $$(".nomm.element").each(function(e){
-    e.toggleClassName("nodisplayall");
-  });
-
-  // SHOW & HIDE - Oculto/Muestro elementos todos sus hijos son finales sin objetos multimedia
-  $$(".nomm.expanded, .nomm.collapsed").each(function(e){
-    if (e.getElementsBySelector("li.nomm").length == e.getElementsBySelector("li").length) {
-      e.toggleClassName("nodisplayall");
-    }
-  });
-
-  // HIDE - Pongo el punto a los nodos que se quedan sin hijos al ocultar
-  $$(".nomm").each(function(e){
-    p = e.parentElement.parentElement;
-    if (p.getElementsBySelector("li.nodisplayall").length == p.getElementsBySelector("li").length) {
-      p.addClassName("element");
-    }
-  });
-
-}
-
 function create_li_in_select_mmless(cat, block_cat_id) {
   var $ul = $("select_ul_category_" + block_cat_id);
   var li = new Element("li", {"id": "select_li_" + cat.id, "class": "element"});
@@ -119,7 +90,8 @@ function inc_num_mm(cat_id, num)
               <div style="float: left; height: 460px" class="category" id="all_category_<?php echo $c->getId()?>">
                 <?php if(count($children)):?>
                   <ul class="category_tree">
-                    <?php include_partial('virtualgrounds/list_categories_ajax', array( 
+                    <?php include_partial('virtualgrounds/list_categories_ajax', array(
+                     'vg_id' => $vg_id,
                      'parent'    => 'root', 
                      'block_cat' => $c->getId(),
                      'nodes'     => $children)) ?>
@@ -249,24 +221,22 @@ window.update_tree = function(){
 };
 
 
-// OJO, CREAR ADD TREE SEVERAL CAT MMLESS
+// OJO, CREAR ADD TREE SEVERAL CAT VIRTUALGROUND
 
-
-f
-window.add_tree_several_cat = function (cat_id, mm_id, idcat_to_add) {
-  new Ajax.Request('" . url_for('virtualserial/addSeveralCategory') . "',  {
+window.add_tree_several_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
+  new Ajax.Request('" . url_for('virtualserial/addCategory') . "',  {
     method: 'post',
-    parameters: { category: cat_id, id: Object.toJSON(mm_id) },
+    parameters: { category: cat_id, id: Object.toJSON(vg_id) },
     asynchronous: true, 
     evalScripts: true,
     onSuccess: function(response){
         for (var i=0; i<response.responseJSON.added.length; i++) {
             var c = response.responseJSON.added[i];
             inc_num_mm(c.id, 1);
-            if (c.mm_id == mmSelId && c.group.length!=0 && c.group[1]!=undefined) {
-               create_li_in_select(c, c.group[1], mm_id);
+            if (c.vg_id == mmSelId && c.group.length!=0 && c.group[1]!=undefined) {
+               create_li_in_select(c, c.group[1], vg_id);
                if ( idcat_to_add == " . $cat_raiz_unesco->getId() . " ){ //UNESCO
-                 create_div_in_table(c, mm_id, idcat_to_add);
+                 create_div_in_table(c, vg_id, idcat_to_add);
                }
             }
         }

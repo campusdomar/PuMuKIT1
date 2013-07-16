@@ -68,13 +68,35 @@ class Category extends BaseCategory
     return False;
   }
 
+  /**
+   * Associates a virtualground to the current category. 
+   * Table virtual_ground_relation
+   * @access public
+   * @param integer $vg_id
+   */
+  public function addVirtualgroundId($vg_id)
+  {
+    if(!$this->getMetacategory()){
+      $vgr =  VirtualGroundRelationPeer::retrieveByPK($vg_id, $this->getId());
+      if (!$vgr){
+        $vgr = new VirtualGroundRelationPeer();
+        $vgr->setVirtualGroundId($vg_id);
+        $vgr->setCategoryId($this->getId());
+        $vgr->save();
+
+        return True;
+      }
+    }
+
+    return False;
+  }
+
   /** 
    * Adds the mm to the current category and all parent categories included
    * in the path.
    *
    * @access public
    * @param integer $mm_id
-   *
    */
   public function addMmIdAndUpdateCategoryTree($mm_id)
   {
@@ -91,8 +113,29 @@ class Category extends BaseCategory
 
     return $add_cats;
   }
+  
+  /** 
+   * Adds the virtualground to the current category and all parent 
+   * categories included in the path. 
+   * Uses the virtual_ground_relation table.
+   * @access public
+   * @param integer $vg_id
+   */
+  public function addVirtualgroundIdAndUpdateCategoryTree($vg_id)
+  {
+    $add_cats = array();
+    $category = $this;
+    foreach($category->getPath() as $p){
+      if($p->addVirtualgroundId($vg_id)){
+        $add_cats[] = $p;
+      }
+    }
+    if($category->addVirtualgroundId($vg_id)){
+      $add_cats[] = $category;
+    }
 
-
+    return $add_cats;
+  }
 
 
   /**

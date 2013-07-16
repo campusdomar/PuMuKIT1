@@ -21,6 +21,5 @@ function run_init_categories($task, $args)
         echo "\n---------------------------------------------------\n";
         echo "--- Executing: " . $script . "\n";
         echo shell_exec('php ' . $script);
-        // echo $output;       
     }
 }
