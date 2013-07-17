@@ -353,7 +353,7 @@ class virtualgroundsActions extends sfActions
 
   public function executeTestcategory()
   {
-    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('id'));
+    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
     $this->forward404Unless($vground);
     $this->vg_id = $vground->getId();
   }
@@ -377,12 +377,16 @@ class virtualgroundsActions extends sfActions
     return $this->renderComponent('virtualgrounds', 'grounds');
   }
 
-  public function executeGetchildrenmmless()
+  public function executeGetchildren()
   {
     // $this->mm_id = $this->getRequestParameter('mm');
 
     $this->c = CategoryPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->c);
+
+    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
+    $this->forward404Unless($vground);
+    $this->vg_id = $vground->getId();
 
     $this->block_cat = $this->getRequestParameter('block_cat');
   }

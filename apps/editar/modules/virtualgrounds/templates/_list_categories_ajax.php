@@ -8,7 +8,7 @@
   $li_class .= ($applicable_cat->getNumMm()==0)?' nomm':'';?>
   
   <li draggable="false" id="cat_li_children_<?php echo $applicable_cat->getId()?>" class="<?php echo $li_class?>">
-    <span class="icon" onclick="javascript:toggle_tree_cat_mmless(this, '<?php echo $applicable_cat->getId()?>', <?php echo $block_cat ?>)">&nbsp;</span>
+    <span class="icon" onclick="javascript:toggle_tree_cat_virtualground(this, '<?php echo $applicable_cat->getId()?>', <?php echo $block_cat ?>)">&nbsp;</span>
     <span <?php if(!$applicable_cat->getMetacategory()):?> onclick="$$('.clicked_category_right').invoke('removeClassName', 'clicked_category_right'); this.addClassName('clicked_category_right');" ondblclick="javascript:add_tree_cat_virtualground(<?php echo $applicable_cat->getId()?>, <?php echo $vg_id ?>, <?php echo $block_cat ?>);" <?php endif ?> >
 
       <?php echo $applicable_cat->getCod() ?> - <?php echo $applicable_cat->getName() ?> 

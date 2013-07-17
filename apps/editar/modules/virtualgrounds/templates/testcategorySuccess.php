@@ -1,5 +1,5 @@
 <div id="tv_admin_container">
-
+<?php // el from probablemente no haga falta al pasarlo todo a paneles y ajax ?>
   <?php echo form_remote_tag(array( 
     'update' => 'hidden_div',  //FIXME
     'url' => 'virtualgrounds/updaterelations',
@@ -14,11 +14,11 @@
 //} ?>
 
   <?php echo javascript_tag('
-toggle_tree_cat_mmless = function (element, id, cat_id) {
+toggle_tree_cat_virtualground = function (element, id, cat_id) {
   var firstLiTextVerticalOffset = 113; 
   if (element.parentElement.hasClassName("notload")) {
     element.parentElement.removeClassName("notload");
-    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildrenmmless') . '/id/"  + id + "/block_cat/" + cat_id, {
+    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/vg_id/" + ' . $vg_id . ', {
       onComplete: function(){ 
         $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - firstLiTextVerticalOffset); }
     });
@@ -30,31 +30,15 @@ toggle_tree_cat_mmless = function (element, id, cat_id) {
   element.parentElement.toggleClassName("expanded").toggleClassName("collapsed");
 }
 
-function create_li_in_select_mmless(cat, block_cat_id) {
+function create_li_in_select_virtualground(cat, block_cat_id, vg_id) {
   var $ul = $("select_ul_category_" + block_cat_id);
   var li = new Element("li", {"id": "select_li_" + cat.id, "class": "element"});
   var span1 = new Element("span", {"class": "icon"}).update("&nbsp;");
-  var span2 = new Element("span", {"onclick":"$$(\'.clicked_category_left\').invoke(\'removeClassName\', \'clicked_category_left\'); this.addClassName(\'clicked_category_left\');", "ondblclick": "del_tree_cat(" + cat.id +", " + ")"}).update(cat.cod+ " - " + cat.name);
+  var span2 = new Element("span", {"onclick":"$$(\'.clicked_category_left\').invoke(\'removeClassName\', \'clicked_category_left\'); this.addClassName(\'clicked_category_left\');", "ondblclick": "del_tree_cat_virtualground(" + cat.id +", " + vg_id + ")"}).update(cat.cod+ " - " + cat.name);
   li.insert(span1).insert(span2);
   //Add quit logica.
   $ul.insert(li);
 }
-
-function inc_num_mm(cat_id, num)
-{
-  var aux = $("info_num_mm_" + cat_id);
-  if (aux){
-    var nn = (parseInt(aux.innerHTML) + num);
-    var p = aux.parentElement.parentElement;
-    if (nn == 0){
-      p.addClassName("nomm");
-    } else {
-      p.removeClassName("nomm");
-    }
-    aux.innerHTML = nn;
-  }
-}
-
 ') ?>
 
   <input type="hidden" name="id" id="id" value="<?php echo  $sf_request->getParameter('id')?>" />
@@ -91,7 +75,7 @@ function inc_num_mm(cat_id, num)
                 <?php if(count($children)):?>
                   <ul class="category_tree">
                     <?php include_partial('virtualgrounds/list_categories_ajax', array(
-                     'vg_id' => $vg_id,
+                     'vg_id'     => $vg_id,
                      'parent'    => 'root', 
                      'block_cat' => $c->getId(),
                      'nodes'     => $children)) ?>
@@ -207,7 +191,7 @@ window.create_div_in_table = function(cat, mm_id, idcat_to_add){
 
 window.update_tree = function(){
   //new Ajax.Updater('jstree', '" . url_for('virtualserial/tree') . "', { asynchronous:true, evalScripts:true });
-  new Ajax.Request('" . url_for('virtualserial/treeInfoJSON') . "', {
+  new Ajax.Request('" . url_for('virtualgrounds/treeInfoJSON') . "', {
     method: 'GET',
     asynchronous:true,
     evalScripts:true,
@@ -221,19 +205,18 @@ window.update_tree = function(){
 };
 
 
-// OJO, CREAR ADD TREE SEVERAL CAT VIRTUALGROUND
+// OJO, CREAR ADD TREE CAT VIRTUALGROUND
 
-window.add_tree_several_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
+window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
   new Ajax.Request('" . url_for('virtualserial/addCategory') . "',  {
     method: 'post',
-    parameters: { category: cat_id, id: Object.toJSON(vg_id) },
+    parameters: { category: cat_id, id: vg_id },
     asynchronous: true, 
     evalScripts: true,
     onSuccess: function(response){
         for (var i=0; i<response.responseJSON.added.length; i++) {
             var c = response.responseJSON.added[i];
-            inc_num_mm(c.id, 1);
-            if (c.vg_id == mmSelId && c.group.length!=0 && c.group[1]!=undefined) {
+            if (c.group.length!=0 && c.group[1]!=undefined) {
                create_li_in_select(c, c.group[1], vg_id);
                if ( idcat_to_add == " . $cat_raiz_unesco->getId() . " ){ //UNESCO
                  create_div_in_table(c, vg_id, idcat_to_add);
@@ -245,12 +228,12 @@ window.add_tree_several_cat_virtualground = function (cat_id, vg_id, idcat_to_ad
   });
 };
 
-window.del_tree_cat = function(cat_id, mm_id) {
+window.del_tree_cat_virtualground = function(cat_id, vg_id) {
   //console.log('del_tree_cat info_num_mm_' + cat_id);
 
-  new Ajax.Request('" . url_for('virtualserial/delCategory') . "', {
+  new Ajax.Request('" . url_for('virtualgrounds/delCategory') . "', {
     method: 'post',
-    parameters: {category: cat_id, id: mm_id},
+    parameters: {category: cat_id, id: vg_id},
     asynchronous: true,
     evalScripts: true,
     onSuccess: function(response){
@@ -260,7 +243,6 @@ window.del_tree_cat = function(cat_id, mm_id) {
             var element2 = $('cat-'+c.id);
             if (element)  element.remove();
             if (element2)  element2.remove();
-            inc_num_mm(c.id, -1);
         }
         update_tree();
     }
