@@ -392,50 +392,40 @@ class virtualgroundsActions extends sfActions
   }
 
   public function executeAddCategory()
-  {
-    // TO DO - 
-      // modificar js para que envíe vg_id en vez de mm_id
-      // probablemente no necesite json (sólo uno)
-      // revisar si hace falta el add_several_category o solo uno
-      // usar las nuevas funciones de lib/model/category
-      
+  {       
     $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('category'), $this->getUser()->getCulture());
     $this->forward404Unless($category);
 
-    $json = array('added' => array(), 'recommended' => array());
-    $func = create_function('$a', 'return $a->getId();');
+    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
+    $this->forward404Unless($vground);
+    $this->vg_id = $vground->getId();
 
-    $id = $this->getRequestParameter('id');
-    $mm = MmPeer::retrieveByPKWithI18n($id, $this->getUser()->getCulture());
-    $this->forward404Unless($mm);
+    $json     = array('added' => array(), 'recommended' => array());
+    $func     = create_function('$a', 'return $a->getId();');
+    $add_cats = array();
     
-    $add_cats = $category->addVirtualgroundIdAndUpdateCategoryTree($vg_id);
+    if ($category->addVirtualGroundId($this->vg_id)){
+      $add_cats [] = $category;
+    }
+  
+    foreach($category->getRequiredWithI18n() as $required_cat){
+      if($required_cat->addVirtualGroundId($this->vg_id)){
+        $add_cats[] = $required_cat;
+      }
+    }  
 
-// TO DO    
-    foreach($category->getPath() as $p){
-      if($p->addMmId($mm->getId())){
-        $add_cats[] = $p;
-      }
-    }
-    if($category->addMmId($mm->getId())){
-      $add_cats[] = $category;
-    }
-    
-    
-    foreach($category->getRequiredWithI18n() as $p){
-      if($p->addMmId($mm->getId())){
-        $add_cats[] = $p;
-      }
-    }
     foreach($add_cats as $n){
       $json['added'][] = array(
-                                     'mm_id' => $id,
-             'id' => $n->getId(), 
-             'cod' => $n->getCod(), 
-             'name' => $n->getName(),
+             'vg_id' => $this->vg_id,
+             'id'    => $n->getId(), 
+             'cod'   => $n->getCod(), 
+             'name'  => $n->getName(),
              'group' => array_map($func, $n->getPath())
              );
     }
+
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode($json));
   }
 
 

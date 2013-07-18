@@ -12,7 +12,7 @@
   // Finds li parent, ul parent, first li and first span to get the real text offset.
   //return spanElement.parentNode.parentNode.children[0].children[0].positionedOffset()[1];
 //} ?>
-
+<?php // WARNING - create functions in js - see https://github.com/okonet/modalbox/wiki/using-javascript-in-modalbox ?>
   <?php echo javascript_tag('
 toggle_tree_cat_virtualground = function (element, id, cat_id) {
   var firstLiTextVerticalOffset = 113; 
@@ -28,9 +28,9 @@ toggle_tree_cat_virtualground = function (element, id, cat_id) {
     $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - firstLiTextVerticalOffset);
   }
   element.parentElement.toggleClassName("expanded").toggleClassName("collapsed");
-}
+};
 
-function create_li_in_select_virtualground(cat, block_cat_id, vg_id) {
+create_li_in_select_virtualground = function(cat, block_cat_id, vg_id) {
   var $ul = $("select_ul_category_" + block_cat_id);
   var li = new Element("li", {"id": "select_li_" + cat.id, "class": "element"});
   var span1 = new Element("span", {"class": "icon"}).update("&nbsp;");
@@ -38,7 +38,29 @@ function create_li_in_select_virtualground(cat, block_cat_id, vg_id) {
   li.insert(span1).insert(span2);
   //Add quit logica.
   $ul.insert(li);
-}
+};
+
+window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
+  new Ajax.Request("' . url_for('virtualgrounds/addCategory') . '",  {
+    method: "post",
+    parameters: { category: cat_id, vg_id: vg_id },
+    asynchronous: true, 
+    evalScripts: true,
+    onSuccess: function(response){
+        for (var i=0; i<response.responseJSON.added.length; i++) {
+            var c = response.responseJSON.added[i];
+            if (c.group.length!=0 && c.group[1]!=undefined) {
+               create_li_in_select(c, c.group[1], vg_id);
+               './/if ( idcat_to_add == ' . $cat_raiz_unesco->getId() . ' ){ //UNESCO
+               //  create_div_in_table(c, vg_id, idcat_to_add);
+               //}
+                '
+            }
+        }
+        update_tree();
+    }
+  });
+};
 ') ?>
 
   <input type="hidden" name="id" id="id" value="<?php echo  $sf_request->getParameter('id')?>" />
@@ -207,26 +229,7 @@ window.update_tree = function(){
 
 // OJO, CREAR ADD TREE CAT VIRTUALGROUND
 
-window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
-  new Ajax.Request('" . url_for('virtualserial/addCategory') . "',  {
-    method: 'post',
-    parameters: { category: cat_id, id: vg_id },
-    asynchronous: true, 
-    evalScripts: true,
-    onSuccess: function(response){
-        for (var i=0; i<response.responseJSON.added.length; i++) {
-            var c = response.responseJSON.added[i];
-            if (c.group.length!=0 && c.group[1]!=undefined) {
-               create_li_in_select(c, c.group[1], vg_id);
-               if ( idcat_to_add == " . $cat_raiz_unesco->getId() . " ){ //UNESCO
-                 create_div_in_table(c, vg_id, idcat_to_add);
-               }
-            }
-        }
-        update_tree();
-    }
-  });
-};
+
 
 window.del_tree_cat_virtualground = function(cat_id, vg_id) {
   //console.log('del_tree_cat info_num_mm_' + cat_id);

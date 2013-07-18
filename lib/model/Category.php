@@ -69,17 +69,22 @@ class Category extends BaseCategory
   }
 
   /**
-   * Associates a virtualground to the current category. 
-   * Table virtual_ground_relation
+   * Associates a virtualground to the current category.
+   * Metacategories (usually root) and root's children (ex.: Unesco) can't be added. 
+   * Updates table virtual_ground_relation
    * @access public
    * @param integer $vg_id
    */
   public function addVirtualgroundId($vg_id)
   {
-    if(!$this->getMetacategory()){
+    if($this->getMetacategory() || $this->isRoot() || $this->getParent()->isRoot()){
+      
+      return false;
+
+    } else {
       $vgr =  VirtualGroundRelationPeer::retrieveByPK($vg_id, $this->getId());
       if (!$vgr){
-        $vgr = new VirtualGroundRelationPeer();
+        $vgr = new VirtualGroundRelation();
         $vgr->setVirtualGroundId($vg_id);
         $vgr->setCategoryId($this->getId());
         $vgr->save();
@@ -87,8 +92,6 @@ class Category extends BaseCategory
         return True;
       }
     }
-
-    return False;
   }
 
   /** 
@@ -114,30 +117,6 @@ class Category extends BaseCategory
     return $add_cats;
   }
   
-  /** 
-   * Adds the virtualground to the current category and all parent 
-   * categories included in the path. 
-   * Uses the virtual_ground_relation table.
-   * @access public
-   * @param integer $vg_id
-   */
-  public function addVirtualgroundIdAndUpdateCategoryTree($vg_id)
-  {
-    $add_cats = array();
-    $category = $this;
-    foreach($category->getPath() as $p){
-      if($p->addVirtualgroundId($vg_id)){
-        $add_cats[] = $p;
-      }
-    }
-    if($category->addVirtualgroundId($vg_id)){
-      $add_cats[] = $category;
-    }
-
-    return $add_cats;
-  }
-
-
   /**
    * Asocio el objeto multimedia a dicho category, si no esta asociado antes.
    *
