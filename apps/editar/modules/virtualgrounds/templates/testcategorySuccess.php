@@ -50,7 +50,7 @@ window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
         for (var i=0; i<response.responseJSON.added.length; i++) {
             var c = response.responseJSON.added[i];
             if (c.group.length!=0 && c.group[1]!=undefined) {
-               create_li_in_select(c, c.group[1], vg_id);
+               create_li_in_select_virtualground(c, c.group[1], vg_id);
                './/if ( idcat_to_add == ' . $cat_raiz_unesco->getId() . ' ){ //UNESCO
                //  create_div_in_table(c, vg_id, idcat_to_add);
                //}
@@ -87,25 +87,8 @@ window.del_tree_cat_virtualground = function(cat_id, vg_id) {
   <input type="hidden" name="id" id="id" value="<?php echo  $sf_request->getParameter('id')?>" />
   <fieldset>
     <div class="form-row" style="max-height: 600px; overflow-y: scroll; overflow-x: hidden;">
-    
-      <div style="width:30%; float:left; padding: 1%; min-height: 30px;">
-          <input type="checkbox" 
-                 name="categories[1]" 
-                 checked="checked"> 
-          prueba categoria 1
-      </div>
-
-      <div style="width:30%; float:left; padding: 1%; min-height: 30px;">
-        <input type="checkbox" 
-               name="categories[2]" 
-        > 
-        
-        prueba categoria 2
-      </div>
-
-    <div>div dentro del fieldset antes del clear left </div>
-    <div style="clear:left"></div>
-    <div>div dentro del fieldset después del clear left </div>
+<?php // ¿Vale para algo el fieldset - formrow - etc? ?>    
+   <div style="clear:left"></div>
 
     <?php foreach(CategoryPeer::doSelectParents() as $c): $children = $c->getChildren() ?>
       <?php if(!$c->getDisplay()) continue?>
@@ -126,7 +109,7 @@ window.del_tree_cat_virtualground = function(cat_id, vg_id) {
                 <?php endif?>
               </div>
 
-              <div style="height: 460px; float: left; padding: 220px 5px 0px">
+              <div style="float: left; padding: 220px 5px 0px">
                 <a href="#" onclick="if ( $$('.clicked_category_left')[0] != undefined ) { $$('.clicked_category_left')[0].ondblclick() } return false;">&#8592;</a>
                 <a href="#" onclick="if ( $$('.clicked_category_right')[0] != undefined ) { $$('.clicked_category_right')[0].ondblclick() } return false;">&#8594;</a>
               </div>
@@ -152,9 +135,6 @@ window.del_tree_cat_virtualground = function(cat_id, vg_id) {
     <?php endforeach?>
 
   </fieldset>
-  <div>
-    Así queda un div fuera del fieldset.
-  </div>
   <?php /* TO DO
     
     * Listar las categorías padres 

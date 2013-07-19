@@ -77,21 +77,19 @@ class Category extends BaseCategory
    */
   public function addVirtualgroundId($vg_id)
   {
-    if($this->getMetacategory() || $this->isRoot() || $this->getParent()->isRoot()){
-      
-      return false;
-
-    } else {
+    if(!$this->getMetacategory() && !$this->isRoot() && !$this->getParent()->isRoot()){    
       $vgr =  VirtualGroundRelationPeer::retrieveByPK($vg_id, $this->getId());
       if (!$vgr){
         $vgr = new VirtualGroundRelation();
         $vgr->setVirtualGroundId($vg_id);
         $vgr->setCategoryId($this->getId());
-        $vgr->save();       
-      }
-      
-      return true;
+        $vgr->save(); 
+
+        return true;      
+      }      
     }
+
+    return false;
   }
 
   /**
