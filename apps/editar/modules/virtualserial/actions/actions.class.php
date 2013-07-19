@@ -115,18 +115,18 @@ class virtualserialActions extends sfActions
       if ($this->hasRequestParameter('id'))
       {
         $this->getUser()->setAttribute('cat_id', $this->getRequestParameter('id'), 'tv_admin/virtualserial');
-	$this->getUser()->setAttribute('page', 1, 'tv_admin/virtualserial');
+  $this->getUser()->setAttribute('page', 1, 'tv_admin/virtualserial');
 
-	if ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == 0) {
+  if ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == 0) {
           $name_cat = 'Todos';
-	} elseif ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == -1) {
+  } elseif ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == -1) {
           $name_cat = 'Sin categoria';
-	} else {
-	  $category = CategoryPeer::retrieveByPk($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial')); 
-	  $this->forward404Unless($category);
+  } else {
+    $category = CategoryPeer::retrieveByPk($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial')); 
+    $this->forward404Unless($category);
           $name_cat = $category->getName();
-	}
-	$this->getUser()->setAttribute('name_cat', $name_cat, 'tv_admin/virtualserial');
+  }
+  $this->getUser()->setAttribute('name_cat', $name_cat, 'tv_admin/virtualserial');
       }
 
       if ($this->hasRequestParameter('page'))
@@ -143,7 +143,7 @@ class virtualserialActions extends sfActions
           $this->getUser()->setAttribute('serial', '', 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('genre', 'all', 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('check', 'all', 'tv_admin/virtualserial/searchs');
-	  
+    
           //Advanced Search
           $this->getUser()->setAttribute('selected', 0, 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('title', '', 'tv_admin/virtualserial/searchs');
@@ -159,7 +159,7 @@ class virtualserialActions extends sfActions
           $this->getUser()->setAttribute('news', NULL, 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('editorial1', NULL, 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('editorial2', NULL, 'tv_admin/virtualserial/searchs');
-	  $this->getUser()->setAttribute('person', array(), 'tv_admin/virtualserial/searchs');
+    $this->getUser()->setAttribute('person', array(), 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('broadcast_advanced', -1, 'tv_admin/virtualserial/searchs');
       }
 
@@ -179,18 +179,18 @@ class virtualserialActions extends sfActions
       if ($this->hasRequestParameter('id'))
       {
         $this->getUser()->setAttribute('cat_id', $this->getRequestParameter('id'), 'tv_admin/virtualserial');
-	$this->getUser()->setAttribute('page', 1, 'tv_admin/virtualserial');
+  $this->getUser()->setAttribute('page', 1, 'tv_admin/virtualserial');
 
-	if ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == 0) {
+  if ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == 0) {
           $name_cat = 'Todos';
-	} elseif ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == -1) {
+  } elseif ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == -1) {
           $name_cat = 'Sin categoria';
-	} else {
-	  $category = CategoryPeer::retrieveByPk($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial')); 
-	  $this->forward404Unless($category);
+  } else {
+    $category = CategoryPeer::retrieveByPk($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial')); 
+    $this->forward404Unless($category);
           $name_cat = $category->getName();
-	}
-	$this->getUser()->setAttribute('name_cat', $name_cat, 'tv_admin/virtualserial');
+  }
+  $this->getUser()->setAttribute('name_cat', $name_cat, 'tv_admin/virtualserial');
       }
 
       if ($this->hasRequestParameter('page'))
@@ -209,7 +209,7 @@ class virtualserialActions extends sfActions
           $this->getUser()->setAttribute('genre', 'all', 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('check', 'all', 'tv_admin/virtualserial/searchs');
 
-	  //Advanced Search
+    //Advanced Search
           $this->getUser()->setAttribute('selected', 0, 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('title', '', 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('subtitle', '', 'tv_admin/virtualserial/searchs');
@@ -224,7 +224,7 @@ class virtualserialActions extends sfActions
           $this->getUser()->setAttribute('news', NULL, 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('editorial1', NULL, 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('editorial2', NULL, 'tv_admin/virtualserial/searchs');
-	  $this->getUser()->setAttribute('person', array(), 'tv_admin/virtualserial/searchs');
+    $this->getUser()->setAttribute('person', array(), 'tv_admin/virtualserial/searchs');
           $this->getUser()->setAttribute('broadcast_advanced', -1, 'tv_admin/virtualserial/searchs');
       }
   }
@@ -393,25 +393,25 @@ class virtualserialActions extends sfActions
 
     if ($this->getRequestParameter('broadcast_id', 0) == 2 ) { //Es una OOMM privado
       if ( $mm->getBroadcastId() ==  1 ) {
-	$broadcast = new Broadcast();
-	$broadcast->setBroadcastTypeId($this->getRequestParameter('broadcast_id', 0));//Guardamos el id del perfil de difusión
-	$broadcast->setName('pri');
-	$broadcast->setPasswd($this->getRequestParameter('pass1', 0));//Guardamos la password
-	$broadcast->save();
-	$mm->setBroadcastId($broadcast->getId());
+  $broadcast = new Broadcast();
+  $broadcast->setBroadcastTypeId($this->getRequestParameter('broadcast_id', 0));//Guardamos el id del perfil de difusión
+  $broadcast->setName('pri');
+  $broadcast->setPasswd($this->getRequestParameter('pass1', 0));//Guardamos la password
+  $broadcast->save();
+  $mm->setBroadcastId($broadcast->getId());
       } else {//Cambio de password
-	$broadcast = BroadcastPeer::retrieveByPk($mm->getBroadcastId());
-	if ( $broadcast->getPasswd != $this->getRequestParameter('broadcast_id', 0) ){
-	  $broadcast->setPasswd($this->getRequestParameter('pass1', 0));//Guardamos la password nueva
-	  $broadcast->save();
-	}
+  $broadcast = BroadcastPeer::retrieveByPk($mm->getBroadcastId());
+  if ( $broadcast->getPasswd != $this->getRequestParameter('broadcast_id', 0) ){
+    $broadcast->setPasswd($this->getRequestParameter('pass1', 0));//Guardamos la password nueva
+    $broadcast->save();
+  }
       }
     } else {
       //Comprobar si antes el OOMM era privado y borrarlo de la tabla BroadcastType
       $broadcast = BroadcastPeer::retrieveByPk($mm->getBroadcastId());
       $mm->setBroadcastId(1);//Vuelve a ser publico
       if ( $broadcast && $broadcast->getId() != 1 ) {
-	$broadcast->delete();
+  $broadcast->delete();
       }
     }
 
@@ -426,7 +426,7 @@ class virtualserialActions extends sfActions
       $mm->setStatusId($this->getRequestParameter('status', 0));
     }
     //CAMBIAR CANALES DE PUB Y MIRAR SI SE PUEDE
-    //	
+    //  
 
     $mm->save();
 
@@ -532,7 +532,7 @@ class virtualserialActions extends sfActions
     $this->itunes = $mm->getSerial()->getSerialItuness(); 
     if(!empty($this->itunes)){
       foreach($this->itunes as $hi){
-	itunes::DeleteCourse($hi->getItunesId());
+  itunes::DeleteCourse($hi->getItunesId());
       }
     }
     
@@ -570,30 +570,30 @@ class virtualserialActions extends sfActions
       $mms = array_reverse(MmPeer::retrieveByPKs(json_decode($this->getRequestParameter('ids'))));
       
       foreach($mms as $mm){
-	foreach ($mm->getCategories() as $category){
-	  $category->delMmId($mm->getId());
-	  foreach($category->getRequiredWithI18n() as $p){
-	    $p->delMmId($mm->getId());
-	  }
-	  foreach($category->getPath() as $p){
-	    $p->delMmId($mm->getId());
-	  }
-	}
-	
-	$mm->delete();
+  foreach ($mm->getCategories() as $category){
+    $category->delMmId($mm->getId());
+    foreach($category->getRequiredWithI18n() as $p){
+      $p->delMmId($mm->getId());
+    }
+    foreach($category->getPath() as $p){
+      $p->delMmId($mm->getId());
+    }
+  }
+  
+  $mm->delete();
       }
 
     }elseif($this->hasRequestParameter('id')){
       $mm = MmPeer::retrieveByPk($this->getRequestParameter('id'));
-	foreach ($mm->getCategories() as $category){
-	  $category->delMmId($mm->getId());
-	  foreach($category->getRequiredWithI18n() as $p){
-	    $p->delMmId($mm->getId());
-	  }
-	  foreach($category->getPath() as $p){
-	    $p->delMmId($mm->getId());
-	  }
-	}
+  foreach ($mm->getCategories() as $category){
+    $category->delMmId($mm->getId());
+    foreach($category->getRequiredWithI18n() as $p){
+      $p->delMmId($mm->getId());
+    }
+    foreach($category->getPath() as $p){
+      $p->delMmId($mm->getId());
+    }
+  }
       $mm->delete();
     }
 
@@ -633,8 +633,8 @@ class virtualserialActions extends sfActions
       $mms = MmPeer::retrieveByPKs(json_decode($this->getRequestParameter('ids')));
 
       foreach($mms as $mm){
-	$mm->setAnnounce(!$mm->getAnnounce());
-	$mm->save();
+  $mm->setAnnounce(!$mm->getAnnounce());
+  $mm->save();
       }
 
     }elseif($this->hasRequestParameter('id')){
@@ -665,7 +665,7 @@ class virtualserialActions extends sfActions
     
     foreach($category->getPath() as $p){
       if($p->addMmId($mm->getId())){
-	$add_cats[] = $p;
+  $add_cats[] = $p;
       }
     }
     if($category->addMmId($mm->getId())){
@@ -675,7 +675,7 @@ class virtualserialActions extends sfActions
     
     foreach($category->getRequiredWithI18n() as $p){
       if($p->addMmId($mm->getId())){
-	$add_cats[] = $p;
+  $add_cats[] = $p;
       }
     }
 
@@ -717,67 +717,67 @@ class virtualserialActions extends sfActions
 
     if (gettype($mm_id) == 'array') 
       {
-	foreach ($mm_id as $id){
-	  $mm = MmPeer::retrieveByPKWithI18n($id, $this->getUser()->getCulture());
+  foreach ($mm_id as $id){
+    $mm = MmPeer::retrieveByPKWithI18n($id, $this->getUser()->getCulture());
           $add_cats = array();
-	  if ($mm){    
-	    foreach($category->getPath() as $p){
-	      if($p->addMmId($mm->getId())){
-		$add_cats[] = $p;
-	      }
-	    }
-	    if($category->addMmId($mm->getId())){
-	      $add_cats[] = $category;
-	    }
-	    foreach($category->getRequiredWithI18n() as $p){
-	      if($p->addMmId($mm->getId())){
-		$add_cats[] = $p;
-	      }
-	    }
-	  }
-	  if (count($add_cats) != 0) {
-	    foreach($add_cats as $n){
-	      $json['added'][] = array(
+    if ($mm){    
+      foreach($category->getPath() as $p){
+        if($p->addMmId($mm->getId())){
+    $add_cats[] = $p;
+        }
+      }
+      if($category->addMmId($mm->getId())){
+        $add_cats[] = $category;
+      }
+      foreach($category->getRequiredWithI18n() as $p){
+        if($p->addMmId($mm->getId())){
+    $add_cats[] = $p;
+        }
+      }
+    }
+    if (count($add_cats) != 0) {
+      foreach($add_cats as $n){
+        $json['added'][] = array(
                                        'mm_id' => $id,
-				       'id' => $n->getId(), 
-				       'cod' => $n->getCod(), 
-				       'name' => $n->getName(),
-				       'group' => array_map($func, $n->getPath())
-				       );
-	    }
-	  }
-	}
+               'id' => $n->getId(), 
+               'cod' => $n->getCod(), 
+               'name' => $n->getName(),
+               'group' => array_map($func, $n->getPath())
+               );
+      }
+    }
+  }
       } else {
         $id = $this->getRequestParameter('id');
-	$mm = MmPeer::retrieveByPKWithI18n($id, $this->getUser()->getCulture());
-	$this->forward404Unless($mm);
-	
-	$add_cats = array();
-	
-	foreach($category->getPath() as $p){
-	  if($p->addMmId($mm->getId())){
-	    $add_cats[] = $p;
-	  }
-	}
-	if($category->addMmId($mm->getId())){
-	  $add_cats[] = $category;
-	}
-	
-	
-	foreach($category->getRequiredWithI18n() as $p){
-	  if($p->addMmId($mm->getId())){
-	    $add_cats[] = $p;
-	  }
-	}
-	foreach($add_cats as $n){
-	  $json['added'][] = array(
+  $mm = MmPeer::retrieveByPKWithI18n($id, $this->getUser()->getCulture());
+  $this->forward404Unless($mm);
+  
+  $add_cats = array();
+  
+  foreach($category->getPath() as $p){
+    if($p->addMmId($mm->getId())){
+      $add_cats[] = $p;
+    }
+  }
+  if($category->addMmId($mm->getId())){
+    $add_cats[] = $category;
+  }
+  
+  
+  foreach($category->getRequiredWithI18n() as $p){
+    if($p->addMmId($mm->getId())){
+      $add_cats[] = $p;
+    }
+  }
+  foreach($add_cats as $n){
+    $json['added'][] = array(
                                    'mm_id' => $id,
-				   'id' => $n->getId(), 
-				   'cod' => $n->getCod(), 
-				   'name' => $n->getName(),
-				   'group' => array_map($func, $n->getPath())
-				   );
-	}
+           'id' => $n->getId(), 
+           'cod' => $n->getCod(), 
+           'name' => $n->getName(),
+           'group' => array_map($func, $n->getPath())
+           );
+  }
     }
 
     
@@ -810,10 +810,10 @@ class virtualserialActions extends sfActions
       //Quito elementos del path si no hay otra categoria en el obj. mm. que comparta dicho path.
       $continue = false;
       foreach($mm_categories as $mm_c){
-	if(($mm_c->getId() !== $p->getId()) && ($mm_c->getId() !== $category->getId())&&($mm_c->isDescendantOf($p))) {
-	  $continue = true;
-	  break;
-	}
+        if(($mm_c->getId() !== $p->getId()) && ($mm_c->getId() !== $category->getId())&&($mm_c->isDescendantOf($p))) {
+          $continue = true;
+          break;
+        }
       }
       if ($continue) continue;
 
@@ -898,56 +898,56 @@ class virtualserialActions extends sfActions
 
 
     $json['info'][] = array(
-			    'cat_id' => 'Todos',
-			    'cod' => 'Todos', 
-			    'name' => 'Todos',
-			    'num_mm' => $num_all
-			    );
+          'cat_id' => 'Todos',
+          'cod' => 'Todos', 
+          'name' => 'Todos',
+          'num_mm' => $num_all
+          );
     $json['info'][] = array(
-			    'cat_id' => 'Nocat',
-			    'cod' => 'Nocat', 
-			    'name' => 'Nocat',
-			    'num_mm' => $num_none
-			    );
+          'cat_id' => 'Nocat',
+          'cod' => 'Nocat', 
+          'name' => 'Nocat',
+          'num_mm' => $num_none
+          );
     foreach($salud as $s){
       $json['info'][] = array(
-			      'cat_id' => $s->getId(),
-			      'cod' => $s->getCod(), 
-			      'name' => $s->getName(),
-			      'num_mm' => $s->getNumMm()
-			      );
+            'cat_id' => $s->getId(),
+            'cod' => $s->getCod(), 
+            'name' => $s->getName(),
+            'num_mm' => $s->getNumMm()
+            );
     }
     foreach($tecnologias as $s){
       $json['info'][] = array(
-			      'cat_id' => $s->getId(),
-			      'cod' => $s->getCod(), 
-			      'name' => $s->getName(),
-			      'num_mm' => $s->getNumMm()
-			      );
+            'cat_id' => $s->getId(),
+            'cod' => $s->getCod(), 
+            'name' => $s->getName(),
+            'num_mm' => $s->getNumMm()
+            );
     }
     foreach($ciencias as $s){
       $json['info'][] = array(
-			      'cat_id' => $s->getId(),
-			      'cod' => $s->getCod(), 
-			      'name' => $s->getName(),
-			      'num_mm' => $s->getNumMm()
-			      );
+            'cat_id' => $s->getId(),
+            'cod' => $s->getCod(), 
+            'name' => $s->getName(),
+            'num_mm' => $s->getNumMm()
+            );
     }
     foreach($juridicas as $s){
       $json['info'][] = array(
-			      'cat_id' => $s->getId(),
-			      'cod' => $s->getCod(), 
-			      'name' => $s->getName(),
-			      'num_mm' => $s->getNumMm()
-			      );
+            'cat_id' => $s->getId(),
+            'cod' => $s->getCod(), 
+            'name' => $s->getName(),
+            'num_mm' => $s->getNumMm()
+            );
     }
     foreach($humanidades as $s){
       $json['info'][] = array(
-			      'cat_id' => $s->getId(),
-			      'cod' => $s->getCod(), 
-			      'name' => $s->getName(),
-			      'num_mm' => $s->getNumMm()
-			      );
+            'cat_id' => $s->getId(),
+            'cod' => $s->getCod(), 
+            'name' => $s->getName(),
+            'num_mm' => $s->getNumMm()
+            );
     }
     // Se podría añadir institucional y cultural
     
@@ -972,7 +972,7 @@ class virtualserialActions extends sfActions
 
       $achs = AnnounceChannelPeer::doSelect(new Criteria());
       foreach($achs as $ach){
-	$ach->announceMm($mm);
+  $ach->announceMm($mm);
       }
       
     }else{
@@ -1045,8 +1045,8 @@ class virtualserialActions extends sfActions
 
 
       foreach($mms as $mm){
-	$mm->setStatusId($status);
-	$mm->save();
+  $mm->setStatusId($status);
+  $mm->save();
       }
       
 
@@ -1057,10 +1057,10 @@ class virtualserialActions extends sfActions
 
     }elseif($this->getRequestParameter('all')){
       $mms = MmPeer::doSelect(new Criteria());
-	    
+      
       foreach($mms as $mm){
-	$mm->setStatusId($status);
-	$mm->save();
+  $mm->setStatusId($status);
+  $mm->save();
       }
     }
 
@@ -1215,18 +1215,18 @@ class virtualserialActions extends sfActions
 
     if('incluir' == $this->getRequestParameter('function', 0)){
       foreach($ground_ids as $ground_id){
-	$gv =  GroundMmPeer::retrieveByPK($ground_id, $mm_id);
-	if (!$gv){
-	  $gv = new GroundMm();
-	  $gv->setMmId($mm_id);
-	  $gv->setGroundId($ground_id);
-	  $gv->save();
-	}
+  $gv =  GroundMmPeer::retrieveByPK($ground_id, $mm_id);
+  if (!$gv){
+    $gv = new GroundMm();
+    $gv->setMmId($mm_id);
+    $gv->setGroundId($ground_id);
+    $gv->save();
+  }
       } 
     }elseif('eliminar' == $this->getRequestParameter('function', 0)){
       foreach($ground_ids as $ground_id){
-	$gv = GroundMmPeer::retrieveByPK($ground_id, $mm_id);
-	if (isset($gv)) $gv->delete();
+  $gv = GroundMmPeer::retrieveByPK($ground_id, $mm_id);
+  if (isset($gv)) $gv->delete();
       }
     }
 
@@ -1257,10 +1257,10 @@ class virtualserialActions extends sfActions
     foreach($ground_ids as $ground_id){
       $gv =  GroundMmPeer::retrieveByPK($ground_id, $mm_id);
       if (!$gv){
-	$gv = new GroundMm();
-	$gv->setMmId($mm_id);
-	$gv->setGroundId($ground_id);
-	$gv->save();
+  $gv = new GroundMm();
+  $gv->setMmId($mm_id);
+  $gv->setGroundId($ground_id);
+  $gv->save();
       }
     }
 
@@ -1324,7 +1324,7 @@ class virtualserialActions extends sfActions
     $cat_root = CategoryPeer::doSelectRoot();
     foreach($cat_root->getChildren() as $cat_base) {
       if($cat_base->getDisplay()){
-	CategoryPeer::categorizeAllFrom($mm, $serial, $cat_base);
+  CategoryPeer::categorizeAllFrom($mm, $serial, $cat_base);
       }
     }
 
@@ -1384,17 +1384,17 @@ class virtualserialActions extends sfActions
       $mms = array_reverse(MmPeer::retrieveByPKs(json_decode($this->getRequestParameter('ids'))));
 
       foreach($mms as $mm){
-	$save = false;
-	if ($field == "announce") {
-	  $mm->setAnnounce(!$mm->getAnnounce());
-	  $save = true;
-	}else if ($field == "important") {
-	  $mm->setImportant(!$mm->getImportant());
-	  $save = true;
-	}
-	if ($save){
-	  $mm->save();
-	}
+  $save = false;
+  if ($field == "announce") {
+    $mm->setAnnounce(!$mm->getAnnounce());
+    $save = true;
+  }else if ($field == "important") {
+    $mm->setImportant(!$mm->getImportant());
+    $save = true;
+  }
+  if ($save){
+    $mm->save();
+  }
       }
       
     }

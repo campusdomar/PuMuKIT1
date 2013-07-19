@@ -393,7 +393,7 @@ class virtualgroundsActions extends sfActions
 
   public function executeAddCategory()
   {       
-    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('category'), $this->getUser()->getCulture());
+    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('cat_id'), $this->getUser()->getCulture());
     $this->forward404Unless($category);
 
     $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
@@ -424,6 +424,44 @@ class virtualgroundsActions extends sfActions
              );
     }
 
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode($json));
+  }
+
+  public function executeDelCategory()
+  {
+
+    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('cat_id'), $this->getUser()->getCulture());
+    $this->forward404Unless($category);
+
+    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
+    $this->forward404Unless($vground);
+
+    $json = array('deleted' => array(), 'recommended' => array());
+    $func = create_function('$a', 'return $a->getId();');
+    $del_cats = array();
+
+    $vg_categories = $vground->getCategories();
+    
+    
+    foreach($category->getRequiredWithI18n() as $cat){
+      if($cat->delVirtualgroundId($vground->getId())){
+          $del_cats[] = $cat;
+      }
+    }
+
+    if($category->delVirtualgroundId($vground->getId())){
+        $del_cats[] = $category;
+    }
+    
+    
+    foreach($del_cats as $n){
+        $json['deleted'][] = array('id' => $n->getId(), 
+                                   'cod' => $n->getCod(), 
+                                   'name' => $n->getName(),
+                                   'group' => array_map($func, $n->getPath()));
+    }
+    
     $this->getResponse()->setContentType('application/json');
     return $this->renderText(json_encode($json));
   }

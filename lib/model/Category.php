@@ -90,8 +90,26 @@ class Category extends BaseCategory
         $vgr->save();       
       }
       
-      return True;
+      return true;
     }
+  }
+
+  /**
+   * Deletes the virtual_ground_relation entry that binds $vg_id with this category
+   *
+   * @access public
+   * @parameter integer $vg_id
+   */
+  public function delVirtualgroundId($vg_id)
+  {
+    $vgr = VirtualGroundRelationPeer::retrieveByPK($vg_id, $this->getId());
+    if(!$this->getMetacategory() && $vgr) {
+        $vgr->delete();
+        
+        return true;
+      }
+
+    return false;
   }
 
   /** 

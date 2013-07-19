@@ -2,7 +2,7 @@
 <?php // el from probablemente no haga falta al pasarlo todo a paneles y ajax ?>
   <?php echo form_remote_tag(array( 
     'update' => 'hidden_div',  //FIXME
-    'url' => 'virtualgrounds/updaterelations',
+    'url'    => 'virtualgrounds/updaterelations',
     'script' => 'true',
   )); ?>
 
@@ -43,7 +43,7 @@ create_li_in_select_virtualground = function(cat, block_cat_id, vg_id) {
 window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
   new Ajax.Request("' . url_for('virtualgrounds/addCategory') . '",  {
     method: "post",
-    parameters: { category: cat_id, vg_id: vg_id },
+    parameters: { cat_id: cat_id, vg_id: vg_id },
     asynchronous: true, 
     evalScripts: true,
     onSuccess: function(response){
@@ -56,6 +56,27 @@ window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
                //}
                 '
             }
+        }
+        update_tree();
+    }
+  });
+};
+
+window.del_tree_cat_virtualground = function(cat_id, vg_id) {
+  //console.log("del_tree_cat info_num_mm_" + cat_id);
+
+  new Ajax.Request("' . url_for("virtualgrounds/delCategory") . '", {
+    method: "post",
+    parameters: {cat_id: cat_id, vg_id: vg_id},
+    asynchronous: true,
+    evalScripts: true,
+    onSuccess: function(response){
+        for (var i=0; i<response.responseJSON.deleted.length; i++) {
+            var c = response.responseJSON.deleted[i];
+            var element = $("select_li_" + c.id);
+            var element2 = $("cat-"+c.id);
+            if (element)  element.remove();
+            if (element2)  element2.remove();
         }
         update_tree();
     }
@@ -115,7 +136,7 @@ window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
                    <?php foreach($vg->getCategories($c) as $vg_cat):?>
                    <li draggable="false" class="element" id="select_li_<?php echo $vg_cat->getId() ?>" >
                       <span class="icon">&nbsp;</span>
-                      <span onclick="$$('.clicked_category_left').invoke('removeClassName', 'clicked_category_left'); this.addClassName('clicked_category');" ondblclick="javascript:del_tree_cat(<?php echo $vg_cat->getId()?>, <?php echo $vg->getId() ?>);" >
+                      <span onclick="$$('.clicked_category_left').invoke('removeClassName', 'clicked_category_left'); this.addClassName('clicked_category');" ondblclick="javascript:del_tree_cat_virtualground(<?php echo $vg_cat->getId()?>, <?php echo $vg->getId() ?>);" >
                       <?php echo $vg_cat->getCod() ?> - <?php echo $vg_cat->getName() ?> 
                       </span>
                    </li>
@@ -193,7 +214,7 @@ window.click_fila_virtualserial = function(tr, id)
   if (tr != null) tr.parentNode.addClassName('tv_admin_row_this');
 };
 
-window.create_div_in_table = function(cat, mm_id, idcat_to_add){
+window.create_div_in_table = function(cat, vg_id, idcat_to_add){
   if ( idcat_to_add == " . $cat_raiz_unesco->getId() . " ){
     var td = $('list_unesco');
     var div = new Element('div', {'id': 'cat-' + cat.id, 'class': 'label label-info unesco_element'}).update(cat.name + ' ');
@@ -201,7 +222,7 @@ window.create_div_in_table = function(cat, mm_id, idcat_to_add){
     a1.onclick = function() {
       if (window.confirm('¿Seguro?')){
          $('cat-'+cat.id).remove();
-         del_tree_cat(cat.id, mm_id);
+         del_tree_cat_virtualground(cat.id, vg_id);
       }
     };
     div.insert(a1);
@@ -231,26 +252,7 @@ window.update_tree = function(){
 
 
 
-window.del_tree_cat_virtualground = function(cat_id, vg_id) {
-  //console.log('del_tree_cat info_num_mm_' + cat_id);
 
-  new Ajax.Request('" . url_for('virtualgrounds/delCategory') . "', {
-    method: 'post',
-    parameters: {category: cat_id, id: vg_id},
-    asynchronous: true,
-    evalScripts: true,
-    onSuccess: function(response){
-        for (var i=0; i<response.responseJSON.deleted.length; i++) {
-            var c = response.responseJSON.deleted[i];
-            var element = $('select_li_' + c.id);
-            var element2 = $('cat-'+c.id);
-            if (element)  element.remove();
-            if (element2)  element2.remove();
-        }
-        update_tree();
-    }
-  });
-};
 
 window.update_preview = function(id) {
   new Ajax.Updater('preview_mm', '" . url_for("virtualserial/preview") . "/id/' + id, {asynchronous:true, evalScripts:true});
