@@ -18,7 +18,7 @@ toggle_tree_cat_virtualground = function (element, id, cat_id) {
   var firstLiTextVerticalOffset = 113; 
   if (element.parentElement.hasClassName("notload")) {
     element.parentElement.removeClassName("notload");
-    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/vg_id/" + ' . $vg_id . ', {
+    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/vg_id/" + ' . $vg->getId() . ', {
       onComplete: function(){ 
         $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - firstLiTextVerticalOffset); }
     });
@@ -97,7 +97,7 @@ window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
                 <?php if(count($children)):?>
                   <ul class="category_tree">
                     <?php include_partial('virtualgrounds/list_categories_ajax', array(
-                     'vg_id'     => $vg_id,
+                     'vg_id'     => $vg->getId(),
                      'parent'    => 'root', 
                      'block_cat' => $c->getId(),
                      'nodes'     => $children)) ?>
@@ -112,14 +112,14 @@ window.add_tree_cat_virtualground = function (cat_id, vg_id, idcat_to_add) {
 
               <div style="width: 50%; height: 460px; border: 1px solid #bbb; float: left;" class="category" id="select_category_<?php echo $c->getId()?>">
                 <ul class="category_tree" id="select_ul_category_<?php echo $c->getId()?>" >
-                   <?php /* foreach($mm->getCategorys($c) as $mmc):?>
-                   <li draggable="false" class="element" id="select_li_<?php echo $mmc->getId() ?>" >
+                   <?php foreach($vg->getCategories($c) as $vg_cat):?>
+                   <li draggable="false" class="element" id="select_li_<?php echo $vg_cat->getId() ?>" >
                       <span class="icon">&nbsp;</span>
-                      <span onclick="$$('.clicked_category_left').invoke('removeClassName', 'clicked_category_left'); this.addClassName('clicked_category');" ondblclick="javascript:del_tree_cat(<?php echo $mmc->getId()?>, <?php echo $mm->getId() ?>);" >
-                      <?php echo $mmc->getCod() ?> - <?php echo $mmc->getName() ?> 
+                      <span onclick="$$('.clicked_category_left').invoke('removeClassName', 'clicked_category_left'); this.addClassName('clicked_category');" ondblclick="javascript:del_tree_cat(<?php echo $vg_cat->getId()?>, <?php echo $vg->getId() ?>);" >
+                      <?php echo $vg_cat->getCod() ?> - <?php echo $vg_cat->getName() ?> 
                       </span>
                    </li>
-                   <?php endforeach */?>
+                   <?php endforeach ?>
                 </ul>
               </div>
 

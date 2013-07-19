@@ -355,7 +355,7 @@ class virtualgroundsActions extends sfActions
   {
     $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
     $this->forward404Unless($vground);
-    $this->vg_id = $vground->getId();
+    $this->vg = $vground;
   }
 
   public function executeUpdatetestcategory()

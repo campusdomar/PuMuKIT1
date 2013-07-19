@@ -69,8 +69,6 @@ class VirtualGround extends BaseVirtualGround
     return MmPeer::doCount($c);
   }
 
-
-
   /**
    * 
    * @access public
@@ -91,6 +89,35 @@ class VirtualGround extends BaseVirtualGround
     }
 
     return $ids;
+  }
+
+  /**
+   * Returns a list of category objects assigned to this vg
+   * (ResulSet of Category)
+   * If a parent category is specified, only their children are returned.
+   *
+   * @access public
+   * @parameter Category $parent
+   * @return ResulSet of Categorys.
+   */
+  public function getCategorys($parent = null)
+  {
+    $c = new Criteria();
+    $c->addJoin(CategoryPeer::ID, VirtualGroundRelationPeer::CATEGORY_ID);
+    $c->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getId());
+    $c->addAscendingOrderByColumn(CategoryPeer::COD);
+    if($parent) {
+      $c->addAnd(CategoryPeer::TREE_LEFT, $parent->getLeftValue(), Criteria::GREATER_THAN);
+      $c->addAnd(CategoryPeer::TREE_RIGHT, $parent->getRightValue(), Criteria::LESS_THAN);
+      $c->addAnd(CategoryPeer::SCOPE, $parent->getScopeIdValue(), Criteria::EQUAL);
+    }
+
+    return CategoryPeer::doSelect($c);
+  }
+
+  public function getCategories($parent = null)
+  {
+    return $this->getCategorys($parent);
   }
 }
 

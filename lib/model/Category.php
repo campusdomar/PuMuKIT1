@@ -87,10 +87,10 @@ class Category extends BaseCategory
         $vgr = new VirtualGroundRelation();
         $vgr->setVirtualGroundId($vg_id);
         $vgr->setCategoryId($this->getId());
-        $vgr->save();
-
-        return True;
+        $vgr->save();       
       }
+      
+      return True;
     }
   }
 
