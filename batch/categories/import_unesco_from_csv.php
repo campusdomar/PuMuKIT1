@@ -1,7 +1,7 @@
 <?php
 /**
  * Imports a csv and populates the category table with unesco tree.
- * Esisting entries are not updated, only new entries are added.
+ * Existing entries are not updated, only new entries are added.
  *
  * CSV file has to be sorted by UNESCO codes (category.cod)
  * rather than hierarchy levels.
@@ -15,6 +15,7 @@
  * UNESCO subtree container, with parent id = 0 to link it with root category.
  *
  * csv structure: 'id'; 'cod';'tree_parent_id'; 'metacategory'; 'display'; 'name'
+ * There is an example in pumukit uned /batch/categories/export_unesco_to_csv.php
  *
  * @package    pumukit
  * @subpackage batch
