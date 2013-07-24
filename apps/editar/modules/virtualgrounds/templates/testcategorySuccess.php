@@ -86,7 +86,7 @@ window.del_tree_cat_virtualground = function(cat_id, vg_id) {
 
   <input type="hidden" name="id" id="id" value="<?php echo  $sf_request->getParameter('id')?>" />
   <fieldset>
-    <div class="form-row" style="max-height: 600px; overflow-y: scroll; overflow-x: hidden;">
+    <div class="form-row" style="max-height: 800px; overflow-y: scroll; overflow-x: hidden;">
 <?php // ¿Vale para algo el fieldset - formrow - etc? ?>    
    <div style="clear:left"></div>
 
@@ -130,9 +130,14 @@ window.del_tree_cat_virtualground = function(cat_id, vg_id) {
             </div>
           </div>
         </dd>
-      </div>
-    </div>
+      </div>      
     <?php endforeach?>
+<!-- <div> Este <br/> espacio <br/> debería <br/> ser <br/> accesible <br/> por <br/> el <br/> scroll <br/> </div>
+<div> Este <br/> espacio <br/> debería <br/> ser <br/> accesible <br/> por <br/> el <br/> scroll <br/> </div>
+<div> Este <br/> espacio <br/> debería <br/> ser <br/> accesible <br/> por <br/> el <br/> scroll <br/> </div>
+<div> Este <br/> espacio <br/> debería <br/> ser <br/> accesible <br/> por <br/> el <br/> scroll <br/> </div> -->
+    </div>
+
 
   </fieldset>
   <?php /* TO DO

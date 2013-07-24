@@ -23,7 +23,7 @@
  * @version    0.4
  * @copyright  Teltek 2013
  */
-define('SF_ROOT_DIR',    realpath(dirname(__file__).'/../..'));
+if (!defined('SF_ROOT_DIR')) define('SF_ROOT_DIR',    realpath(dirname(__file__).'/../..'));
 define('SF_APP',         'editar');
 define('SF_ENVIRONMENT', 'dev');
 define('SF_DEBUG',       1);
@@ -39,16 +39,62 @@ ob_implicit_flush(true);
 ob_end_flush();
 
 // borraTablasAPelo(array("category", "category_i18n"));
-$filename = realpath(dirname(__file__).'/prueba_unescos.csv');
 
 // ----------------------------- Script starts here -------------------
 
-importCsvFile($filename);
+checkFilenameArgPresent($argv);
+$filenames = parseFilenames(array_slice($argv, 1));
 
-echo "\nDebug - showing category tree:\n\n";
-printCategoryTree();
+foreach ($filenames as $filename){
+    echo "\n\n Importing file: " . $filename . "\n\n";
+    importCsvFile($filename);    
+}
 
+// Optional
+// echo "\nDebug - showing category tree:\n\n";
+// printCategoryTree();
+exit;
 // ----------------------------- Script ends here -------------------
+
+function checkFilenameArgPresent($argv){
+    if (2 > count($argv)) {
+        echo "\nUsage: php import_categories_from_csv.php file1.csv [file2.csv ...]\n";
+        exit(-1);
+    }
+}
+
+function parseFilenames($filenames){
+    $parsed_filenames = array();
+    foreach ($filenames as $filename){
+        $parsed_filename = getWorkingFilename($filename);
+        if (!$parsed_filename){
+            echo "\nError - filename " . $filename . " not found\n";
+            exit;
+        }
+        $parsed_filenames[] = $parsed_filename;
+    }
+
+    return $parsed_filenames;
+}
+
+function getWorkingFilename($filename){
+    if (!$filename){
+
+        return realpath(dirname(__file__).'/unesco.csv');
+    
+    } else if (file_exists(realpath(dirname(__file__) . '/' . $filename))){
+
+        return realpath(dirname(__file__) . '/' . $filename);
+    
+    } else if (file_exists($filename)){
+
+        return $filename;
+
+    } else {
+
+        return false;
+    }
+}
 
 function retrieveOrCreateRoot($name = 'root')
 {
@@ -89,7 +135,7 @@ function importCsvFile($filename, $num_rows = null)
     if (($file = fopen($filename, "r")) !== FALSE) {
         while ( ($current_row = fgetcsv($file, 300, ";")) !== FALSE)  {
             $number = count($current_row);
-            if ($number == 6 ){
+            if ($number == 6 || $number == 8){
                 if (trim($current_row[0]) == "id") { // header row
                     continue;
                 }
@@ -135,6 +181,15 @@ function createCategoryFromCsvArray($csv_array, $cat_parent)
         $category->setDisplay($csv_array[4]);
         $category->setCulture('es');
         $category->setName($csv_array[5]);
+        // Take care of csv language order!
+        if (!empty($csv_array[6])){
+            $category->setCulture('gl');
+            $category->setName($csv_array[6]);
+        }
+        if (!empty($csv_array[7])){
+            $category->setCulture('en');
+            $category->setName($csv_array[7]);
+        }
         $category->save();
         echo "Category persisted - new id: " . $category->getId() . " cod: " . $category->getCod() . " name: " . $category->getName() . "\n";
 
