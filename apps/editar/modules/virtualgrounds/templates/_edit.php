@@ -67,8 +67,7 @@
      <input type="radio" name="decision" value="editorial3" <?php echo ($vground->getEditorial3()?'checked="checked"':'')?> />
      &nbsp; Decisi&oacute;n Editorial 3
    </div>
-
-   <?php foreach(GroundTypePeer::doSelect(new Criteria) as $gt):?>
+   <?php /* foreach(GroundTypePeer::doSelect(new Criteria) as $gt):?>
    <div class="content">
      <input type="radio" name="decision" value="<?php echo $gt->getId()?>" 
             <?php echo (($vground->getGroundTypeId() == $gt->getId())?'checked="checked"':'')?> />
@@ -76,7 +75,7 @@
        <?php echo m_link_to('configurar', 'virtualgrounds/editground?type=' . $gt->getId() . '&id=' . $vground->getId(), 
        array('title' => 'Configurar Categoria ' . $vground->getName()), array('width' => '800')) ?></td>
    </div>
-   <?php endforeach?>
+   <?php endforeach */?>
 
    <div class="content">
      <input type="radio" name="decision" value="prueba_categoria" <?php echo ($vground->getEditorial3()?'checked="checked"':'')?> />

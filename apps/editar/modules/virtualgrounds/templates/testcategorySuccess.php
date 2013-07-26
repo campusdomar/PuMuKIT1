@@ -15,7 +15,8 @@
 <?php // WARNING - create functions in js - see https://github.com/okonet/modalbox/wiki/using-javascript-in-modalbox ?>
   <?php echo javascript_tag('
 toggle_tree_cat_virtualground = function (element, id, cat_id) {
-  var firstLiTextVerticalOffset = 113; 
+  // var firstLiTextVerticalOffset = 113; // used for 460 px div (21 elements)
+  var firstLiTextVerticalOffset = 50; // used for 330 px div (15 elements). Brought by magic.
   if (element.parentElement.hasClassName("notload")) {
     element.parentElement.removeClassName("notload");
     new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/vg_id/" + ' . $vg->getId() . ', {
@@ -82,22 +83,39 @@ window.del_tree_cat_virtualground = function(cat_id, vg_id) {
     }
   });
 };
-') ?>
+'); 
+
+function paddingTopForArrowsDiv($parent_div_height = 460, $arrows_height = 14)
+{
+  return ceil(($parent_div_height - $arrows_height)/2);
+}
+
+function selectDivHeight($num_elements, $max_elements_displayed = 15)
+{
+  // previous default = 460px, roughly 21 elements
+  $element_height = 22;
+  if ($num_elements >= $max_elements_displayed) $num_elements = $max_elements_displayed;
+
+  return $num_elements * $element_height;
+}
+?>
 
   <input type="hidden" name="id" id="id" value="<?php echo  $sf_request->getParameter('id')?>" />
   <fieldset>
     <div class="form-row" style="max-height: 800px; overflow-y: scroll; overflow-x: hidden;">
-<?php // ¿Vale para algo el fieldset - formrow - etc? ?>    
+<?php // ¿Vale para algo el fieldset - formrow - etc ahora? ?>    
    <div style="clear:left"></div>
 
     <?php foreach(CategoryPeer::doSelectParents() as $c): $children = $c->getChildren() ?>
-      <?php if(!$c->getDisplay()) continue?>
+      <?php if(!$c->getDisplay()) continue;
+      $div_height  = selectDivHeight(count($children));
+      $padding_top = paddingTopForArrowsDiv($div_height);?>
       <div class="form-row">
         <dt><?php echo $c->getName()?>:</dt>
         <dd>
           <div id="category<?php echo $c->getId()?>_mms">
             <div style="overflow:hidden">
-              <div style="float: left; height: 460px" class="category" id="all_category_<?php echo $c->getId()?>">
+              <div style="float: left; height: <?php echo $div_height;?>px" class="category" id="all_category_<?php echo $c->getId()?>">
                 <?php if(count($children)):?>
                   <ul class="category_tree">
                     <?php include_partial('virtualgrounds/list_categories_ajax', array(
@@ -109,12 +127,12 @@ window.del_tree_cat_virtualground = function(cat_id, vg_id) {
                 <?php endif?>
               </div>
 
-              <div style="float: left; padding: 220px 5px 0px">
+              <div style="float: left; padding: <?php echo $padding_top;?>px 5px 0px">
                 <a href="#" onclick="if ( $$('.clicked_category_left')[0] != undefined ) { $$('.clicked_category_left')[0].ondblclick() } return false;">&#8592;</a>
                 <a href="#" onclick="if ( $$('.clicked_category_right')[0] != undefined ) { $$('.clicked_category_right')[0].ondblclick() } return false;">&#8594;</a>
               </div>
 
-              <div style="width: 50%; height: 460px; border: 1px solid #bbb; float: left;" class="category" id="select_category_<?php echo $c->getId()?>">
+              <div style="width: 50%; height: <?php echo $div_height;?>px; border: 1px solid #bbb; float: left;" class="category" id="select_category_<?php echo $c->getId()?>">
                 <ul class="category_tree" id="select_ul_category_<?php echo $c->getId()?>" >
                    <?php foreach($vg->getCategories($c) as $vg_cat):?>
                    <li draggable="false" class="element" id="select_li_<?php echo $vg_cat->getId() ?>" >

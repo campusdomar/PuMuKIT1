@@ -77,6 +77,7 @@ function parseFilenames($filenames){
     return $parsed_filenames;
 }
 
+// Looks for relative or absolute path. Returns absolute path.
 function getWorkingFilename($filename){
     if (!$filename){
 
