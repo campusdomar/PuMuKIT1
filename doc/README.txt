@@ -186,14 +186,19 @@ la configuración por defecto en la BBDD:
 
     $ php /var/www/pumukit/symfony propel-build-all-load editar
 
+15. Ejecutamos la tarea personalizada para importar los árboles de categorías
+en la BBDD:
 
-15. Limpiamos la caché de Pumukit y reiniciamos el servidor de apache:
+    $ php /var/www/pumukit/symfony init-categories
+
+
+16. Limpiamos la caché de Pumukit y reiniciamos el servidor de apache:
 
     $ php /var/www/pumukit/symfony cc
     $ /etc/init.d/apache2 restart
 
 
-16. Probablemente haya que solucionar la falta de permisos del usuario con el
+17. Probablemente haya que solucionar la falta de permisos del usuario con el
 que accede el servidor de apache2 (en nuestro caso "www-data") a las carpetas
 y ficheros de Pumukit.
 Una manera de resolverlo es cambiar el propietario y grupo de los contenidos
