@@ -23,27 +23,27 @@ class categoriesActions extends sfActions
     $this->getUser()->panNivelDos($this->vcat->getName(), 'categories/index?id=' . $this->getRequestParameter('id'));
 
     if ($this->vcat->getOther()){
-      $this->sub_cats = $this->vcat->getGrounds($this->vcat->getGroundTypeId());
-      $this->setTemplate('multidisplay');
-    }else{
+      $this->serials = $this->vcat->getSerials();      
 
+    } else {
+
+// modificar
       $c = $this->getCriteria();
-      if ($this->vcat->getEditorial1())
-	$c->add(MmPeer::EDITORIAL1, 1);
+      if ($this->vcat->getEditorial1()) 
+        $c->add(MmPeer::EDITORIAL1, 1);
       if ($this->vcat->getEditorial2())
-	$c->add(MmPeer::EDITORIAL2, 1);
+        $c->add(MmPeer::EDITORIAL2, 1);
       if ($this->vcat->getEditorial3())
-	$c->add(MmPeer::EDITORIAL3, 1);
-
+        $c->add(MmPeer::EDITORIAL3, 1);
       $c->clearOrderByColumns();
       $c->addAscendingOrderByColumn(SerialI18nPeer::LINE2);
 
       $this->serials = SerialPeer::doSelectWithI18n($c);
-      $this->setTemplate('display');
     }
+
+    $this->serials_by_year = $this->groupSerialsByYear($this->serials);
+    $this->setTemplate('display');
   }
-
-
 
   private function getCriteria(){
     $c = new Criteria();
@@ -61,4 +61,21 @@ class categoriesActions extends sfActions
     return $c;
   }
 
+/**
+ * @param $serials resultset of serials
+ * @return array $serials_by_year [4_digit_year] = array (serials)
+ */
+  private function groupSerialsByYear($serials)
+  {
+    $serials_by_year = array();
+
+    foreach($serials as $serial){
+      if (!array_key_exists($serial->getPublicDate('Y'), $serials_by_year)) {
+        $serials_by_year[$serial->getPublicDate('Y')] = array();
+      }
+      $serials_by_year[$serial->getPublicDate('Y')][] = $serial;
+    }
+
+    return $serials_by_year;
+  }
 }

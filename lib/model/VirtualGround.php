@@ -26,25 +26,36 @@ class VirtualGround extends BaseVirtualGround
     $c = new Criteria();
     //$c->addJoin()
     $c->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getId());
-    $c->addJoin(GroundMmPeer::GROUND_ID, VirtualGroundRelationPeer::GROUND_ID);
-    $c->addJoin(GroundMmPeer::MM_ID, MmPeer::ID);
 
-    $c->addJoin(GroundPeer::ID, GroundMmPeer::GROUND_ID);
-    $c->add(GroundPeer::GROUND_TYPE_ID, WidgetConstantPeer::get(10));
+    $c->addJoin(VirtualGroundRelationPeer::CATEGORY_ID, CategoryMmPeer::CATEGORY_ID);
+    $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
+    $c->addJoin(MmPeer::SERIAL_ID, SerialPeer::ID);
 
-    $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
-    $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
-    $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
-    $c->add(MmPeer::STATUS_ID, 0);
+    self::addBroadcastCriteria($c);
+    self::addPublishedAndReadyWebTvCriteria($c);
+
     $c->addDescendingOrderByColumn(SerialPeer::PUBLICDATE);
-
     $c->setDistinct(true);
-
-    //TODO Solo publicas
 
     return SerialPeer::doSelect($c);
   }
 
+  private function addBroadcastCriteria(&$c)
+  {
+    $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
+    $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
+    $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
+  }
+
+  private function addPublishedAndReadyWebTvCriteria(&$c)
+  {
+    $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL); // 0 norm 1 bloq 2 hid
+    
+    $c->add(PubChannelPeer::NAME, 'WebTV');
+    $c->addJoin(PubChannelPeer::ID, PubChannelMmPeer::PUB_CHANNEL_ID);
+    $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
+    $c->add(PubChannelMmPeer::STATUS_ID, PubChannelMmPeer::STATUS_READY); // 0 unpub 1 ready 2&3 waiting
+  }
 
   public function countMms()
   {
