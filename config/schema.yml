@@ -515,6 +515,8 @@ propel:
       type: integer
       required: true
       default: 0
+    comments: 
+      type: longvarchar
   mm_i18n:
     title: 
       type: varchar
@@ -946,6 +948,9 @@ propel:
       size: 255
       required: true
     created_at:
+      type: timestamp
+      required: true
+      index: true
 
   log_email:
     id:

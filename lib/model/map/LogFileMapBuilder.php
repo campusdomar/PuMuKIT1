@@ -71,7 +71,7 @@ class LogFileMapBuilder {
 
 		$tMap->addColumn('REFERER', 'Referer', 'string', CreoleTypes::VARCHAR, true, 255);
 
-		$tMap->addColumn('CREATED_AT', 'CreatedAt', 'int', CreoleTypes::TIMESTAMP, false, null);
+		$tMap->addColumn('CREATED_AT', 'CreatedAt', 'int', CreoleTypes::TIMESTAMP, true, null);
 
 	} // doBuild()
 

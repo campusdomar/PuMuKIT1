@@ -99,6 +99,8 @@ class MmMapBuilder {
 
 		$tMap->addColumn('NUM_VIEW', 'NumView', 'int', CreoleTypes::INTEGER, true, null);
 
+		$tMap->addColumn('COMMENTS', 'Comments', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 	} // doBuild()
 
 } // MmMapBuilder

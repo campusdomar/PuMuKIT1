@@ -22,7 +22,7 @@ class MmPeer extends BaseMmPeer
    * Diferentes valores para estado
    *
    */
-  const STATUS_NORMAL = 0;	
+  const STATUS_NORMAL = 0;
   const STATUS_BLOQ = 1;
   const STATUS_HIDE = 2;
   

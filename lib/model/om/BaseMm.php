@@ -151,6 +151,13 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 	 */
 	protected $num_view = 0;
 
+
+	/**
+	 * The value for the comments field.
+	 * @var        string
+	 */
+	protected $comments;
+
 	/**
 	 * @var        Serial
 	 */
@@ -609,6 +616,17 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 	}
 
 	/**
+	 * Get the [comments] column value.
+	 * 
+	 * @return     string
+	 */
+	public function getComments()
+	{
+
+		return $this->comments;
+	}
+
+	/**
 	 * Set the value of [id] column.
 	 * 
 	 * @param      int $v new value
@@ -1005,6 +1023,28 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 	} // setNumView()
 
 	/**
+	 * Set the value of [comments] column.
+	 * 
+	 * @param      string $v new value
+	 * @return     void
+	 */
+	public function setComments($v)
+	{
+
+		// Since the native PHP type for this column is string,
+		// we will cast the input to a string (if it is not).
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->comments !== $v) {
+			$this->comments = $v;
+			$this->modifiedColumns[] = MmPeer::COMMENTS;
+		}
+
+	} // setComments()
+
+	/**
 	 * Hydrates (populates) the object variables with values from the database resultset.
 	 *
 	 * An offset (1-based "start column") is specified so that objects can be hydrated
@@ -1059,13 +1099,15 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 
 			$this->num_view = $rs->getInt($startcol + 18);
 
+			$this->comments = $rs->getString($startcol + 19);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 			$this->setCulture(sfContext::getInstance()->getUser()->getCulture());
 
 			// FIXME - using NUM_COLUMNS may be clearer.
-			return $startcol + 19; // 19 = MmPeer::NUM_COLUMNS - MmPeer::NUM_LAZY_LOAD_COLUMNS).
+			return $startcol + 20; // 20 = MmPeer::NUM_COLUMNS - MmPeer::NUM_LAZY_LOAD_COLUMNS).
 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Mm object", $e);
@@ -1648,6 +1690,9 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 			case 18:
 				return $this->getNumView();
 				break;
+			case 19:
+				return $this->getComments();
+				break;
 			default:
 				return null;
 				break;
@@ -1687,6 +1732,7 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 			$keys[16] => $this->getAudio(),
 			$keys[17] => $this->getDuration(),
 			$keys[18] => $this->getNumView(),
+			$keys[19] => $this->getComments(),
 		);
 		return $result;
 	}
@@ -1775,6 +1821,9 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 			case 18:
 				$this->setNumView($value);
 				break;
+			case 19:
+				$this->setComments($value);
+				break;
 		} // switch()
 	}
 
@@ -1817,6 +1866,7 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[16], $arr)) $this->setAudio($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setDuration($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setNumView($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setComments($arr[$keys[19]]);
 	}
 
 	/**
@@ -1847,6 +1897,7 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(MmPeer::AUDIO)) $criteria->add(MmPeer::AUDIO, $this->audio);
 		if ($this->isColumnModified(MmPeer::DURATION)) $criteria->add(MmPeer::DURATION, $this->duration);
 		if ($this->isColumnModified(MmPeer::NUM_VIEW)) $criteria->add(MmPeer::NUM_VIEW, $this->num_view);
+		if ($this->isColumnModified(MmPeer::COMMENTS)) $criteria->add(MmPeer::COMMENTS, $this->comments);
 
 		return $criteria;
 	}
@@ -1936,6 +1987,8 @@ abstract class BaseMm extends BaseObject  implements Persistent {
 		$copyObj->setDuration($this->duration);
 
 		$copyObj->setNumView($this->num_view);
+
+		$copyObj->setComments($this->comments);
 
 
 		if ($deepCopy) {

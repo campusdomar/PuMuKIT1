@@ -731,6 +731,7 @@ CREATE TABLE `mm`
 	`audio` INTEGER default 0 NOT NULL,
 	`duration` INTEGER default 0 NOT NULL,
 	`num_view` INTEGER default 0 NOT NULL,
+	`comments` TEXT,
 	PRIMARY KEY (`id`),
 	INDEX `mm_FI_1` (`serial_id`),
 	CONSTRAINT `mm_FK_1`
@@ -1240,8 +1241,9 @@ CREATE TABLE `log_file`
 	`ip` VARCHAR(15)  NOT NULL,
 	`navigator` VARCHAR(255)  NOT NULL,
 	`referer` VARCHAR(255)  NOT NULL,
-	`created_at` DATETIME,
+	`created_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
+	KEY `log_file_created_at_index`(`created_at`),
 	INDEX `log_file_FI_1` (`file_id`),
 	CONSTRAINT `log_file_FK_1`
 		FOREIGN KEY (`file_id`)
