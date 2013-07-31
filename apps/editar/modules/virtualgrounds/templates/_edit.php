@@ -63,10 +63,6 @@
     &nbsp; Decisi&oacute;n Editorial 2
    </div>
  
-   <div class="content">
-     <input type="radio" name="decision" value="editorial3" <?php echo ($vground->getEditorial3()?'checked="checked"':'')?> />
-     &nbsp; Decisi&oacute;n Editorial 3
-   </div>
    <?php /* foreach(GroundTypePeer::doSelect(new Criteria) as $gt):?>
    <div class="content">
      <input type="radio" name="decision" value="<?php echo $gt->getId()?>" 

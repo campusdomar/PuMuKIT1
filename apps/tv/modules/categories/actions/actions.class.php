@@ -24,58 +24,37 @@ class categoriesActions extends sfActions
 
     if ($this->vcat->getOther()){
       $this->serials = $this->vcat->getSerials();      
+      $this->objects_by_year = $this->groupObjectsByYear($this->serials);
 
     } else {
 
-// modificar
-      $c = $this->getCriteria();
-      if ($this->vcat->getEditorial1()) 
-        $c->add(MmPeer::EDITORIAL1, 1);
-      if ($this->vcat->getEditorial2())
-        $c->add(MmPeer::EDITORIAL2, 1);
-      if ($this->vcat->getEditorial3())
-        $c->add(MmPeer::EDITORIAL3, 1);
-      $c->clearOrderByColumns();
-      $c->addAscendingOrderByColumn(SerialI18nPeer::LINE2);
-
-      $this->serials = SerialPeer::doSelectWithI18n($c);
+      if ($this->vcat->getEditorial1()) $cod = CategoryMmTimeframePeer::EDITORIAL1;
+      if ($this->vcat->getEditorial2()) $cod = CategoryMmTimeframePeer::EDITORIAL2;
+      $this->mms = CategoryMmTimeframePeer::doSelectDestacados($cod, true, null);
+      $this->objects_by_year = $this->groupObjectsByYear($this->mms);
     }
 
-    $this->serials_by_year = $this->groupSerialsByYear($this->serials);
     $this->setTemplate('display');
   }
 
-  private function getCriteria(){
-    $c = new Criteria();
-    $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
-
-    //FIXME Filtar bien
-    SerialPeer::addPubChannelCriteria($c, 1);
-    SerialPeer::addBroadcastCriteria($c, array($this->getRequestParameter('broadcast', 'pub')));
-    if ($this->hasRequestParameter('search')){
-      SerialPeer::addSeachCriteria($c, $this->getRequestParameter('search'), $this->getUser()->getCulture());
-    }
-
-    $c->addDescendingOrderByColumn(MmPeer::RECORDDATE);
-
-    return $c;
-  }
+// getCriteria is no longer needed as "decisiones editoriales" (editorial1 and editorial2)
+// now depend on CategoryMmTimeframePeer logic.
 
 /**
- * @param $serials resultset of serials
- * @return array $serials_by_year [4_digit_year] = array (serials)
+ * @param $objects resultset of serials or mms
+ * @return array $objects_by_year [4_digit_year] = array (serials or mms)
  */
-  private function groupSerialsByYear($serials)
+  private function groupObjectsByYear($objects)
   {
-    $serials_by_year = array();
+    $objects_by_year = array();
 
-    foreach($serials as $serial){
-      if (!array_key_exists($serial->getPublicDate('Y'), $serials_by_year)) {
-        $serials_by_year[$serial->getPublicDate('Y')] = array();
+    foreach($objects as $object){
+      if (!array_key_exists($object->getPublicDate('Y'), $objects_by_year)) {
+        $objects_by_year[$object->getPublicDate('Y')] = array();
       }
-      $serials_by_year[$serial->getPublicDate('Y')][] = $serial;
+      $objects_by_year[$object->getPublicDate('Y')][] = $object;
     }
 
-    return $serials_by_year;
+    return $objects_by_year;
   }
 }

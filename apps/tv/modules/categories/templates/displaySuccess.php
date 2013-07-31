@@ -3,7 +3,7 @@
 </div>
 
 <div style="margin: 5px 0px 15px">
-  <?php foreach ($serials_by_year as $year => $y_serials):?>
+  <?php foreach ($objects_by_year as $year => $y_serials):?>
     <h2 class="nada">
       <span><?php echo $year;?></span>
     </h2>
@@ -21,6 +21,6 @@
   <?php endforeach ?>
 </div>
 
-<?php if(0 == count($serials_by_year)): ?>
+<?php if(0 == count($objects_by_year)): ?>
   <?php echo __('No existen vídeos en esta categoría'); ?>
 <?php endif ?>
