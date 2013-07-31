@@ -29,7 +29,78 @@ function comprobar_form_mm(date1, date2, re_date){
     return true;  
 }
 
+function dmy2ymd(date){
+  var fecha = date.strip(); // prototype trim
+  var separa = fecha.split(" ");
+  var parts = separa[0].split("/");
+  var ymd = parts[2] + '/' + parts[1] + '/'+parts[0];
+  if (separa.length > 1){
+    ymd += ' ' + separa[1];
+  }
+  
+  return ymd;
+}
 
+function comprobar_form_pub(checked1, start1, end1, checked2, start2, end2, re_date){
+    $$('.error').invoke('hide');
+
+    if (checked1){
+        if (comprobar_date(start1, re_date)){
+        $('error_start1').show();
+        new Effect.Opacity('mm_save_error', {duration:3.0, from:1.0, to:0.0});
+        return false;
+        }
+
+        if (comprobar_date(end1, re_date)){
+        $('error_end1').show();
+        new Effect.Opacity('mm_save_error', {duration:3.0, from:1.0, to:0.0});
+        return false;
+        }
+        var dstart1 = new Date(Date.parse(dmy2ymd(start1)));
+        var dend1   = new Date(Date.parse(dmy2ymd(end1)));
+        if (dstart1 > dend1){
+        new Effect.Opacity('mm_save_error', {duration:3.0, from:1.0, to:0.0});
+        return false;  
+        }
+    }
+
+    if (checked2){
+        if (comprobar_date(start2, re_date)){
+        $('error_start2').show();
+        new Effect.Opacity('mm_save_error', {duration:3.0, from:1.0, to:0.0});
+        return false;
+        }
+
+        if (comprobar_date(end2, re_date)){
+        $('error_end2').show();
+        new Effect.Opacity('mm_save_error', {duration:3.0, from:1.0, to:0.0});
+        return false;
+        }
+
+        var dstart2 = new Date(Date.parse(dmy2ymd(start2)));
+        var dend2   = new Date(Date.parse(dmy2ymd(end2)));
+        if (dstart2 > dend2){
+        new Effect.Opacity('mm_save_error', {duration:3.0, from:1.0, to:0.0});
+        return false;  
+        }
+    }
+
+    return true;
+}
+
+function comprobar_form_pass(){
+  var ps1 = $('pass1');
+  var ps2 = $('pass2');
+  if ( $('broadcast_id').value == 2 ) {
+    if ( (ps1.value != ps2.value) || ps1.value == '') {
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    return true;
+  }
+}
 function comprobar_form_person(email, url){
     
     $$('.error').invoke('hide');
