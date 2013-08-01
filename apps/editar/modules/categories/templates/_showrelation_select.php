@@ -1,7 +1,7 @@
 <?php if($mainc->getId() == $c->getId()):?>
 
 <select disabled="disabled">
-   <option>&nbps;</option>
+   <option>&nbsp;</option>
 </select>
 
 <?php elseif($c->getMetacategory()):?>
