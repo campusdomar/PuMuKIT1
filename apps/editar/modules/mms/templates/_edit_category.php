@@ -28,7 +28,7 @@
    <dd>
      <div id="category<?php echo $c->getId()?>_mms">
 
-<div style="overflow:hidden">
+<div style="overflow:hidden;height: 470px"><?php // Altura del espacio para el cajón de categorías?>
 
 <div style="float: left; height: 460px" class="category" id="all_category_<?php echo $c->getId()?>">
    <?php /*if(count($node[CategoryPeer::TREE_ARRAY_CHILDREN])): $children = $node[CategoryPeer::TREE_ARRAY_CHILDREN] */?>
@@ -42,7 +42,7 @@
    <?php endif?>
 </div>
 
-<div style="height: 460px; float: left; padding: 220px 5px 0px">
+<div style="float: left; padding: 220px 5px 0px">
  <a href="#" onclick="if ( $$('.clicked_category_left')[0] != undefined ) { $$('.clicked_category_left')[0].ondblclick() } return false;">&#8592;</a>
  <a href="#" onclick="if ( $$('.clicked_category_right')[0] != undefined ) { $$('.clicked_category_right')[0].ondblclick() } return false;">&#8594;</a>
 </div>
