@@ -17,7 +17,6 @@
   <div class="lib_menu_sort">
     <?php echo __('Ordenar por') ?>:  
     <a href="<?php echo url_for('library/date' . $more) ?>">Fecha</a>,
-    <a href="<?php echo url_for('library/place' . $more) ?>">Lugar</a>,
     <a href="<?php echo url_for('library/abc' . $more) ?>">Alfab&eacute;ticamente</a>,
     <a href="<?php echo url_for('library/channel' . $more) ?>">Categor&iacute;a</a>.
   </div>
