@@ -967,14 +967,14 @@ WidgetModule:
 
 Notice: 
   Notice_1: 
-    date: 2010-02-09
+    date: 2013-09-09
     working: 0
 NoticeI18n: 
   NoticeI18n_1_es: 
     id: Notice_1
     culture: es
-    text: Wellcome to PuMuKIT 1.7!!!
+    text: Welcome to PuMuKIT 1.8!!!
   NoticeI18n_1_gl: 
     id: Notice_1
     culture: gl
-    text: Wellcome to PuMuKIT 1.7!!!
+    text: Welcome to PuMuKIT 1.8!!!
