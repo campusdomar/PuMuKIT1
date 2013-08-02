@@ -47,6 +47,7 @@ class SerialPeer extends BaseSerialPeer
     $criteria->addSelectColumn(SerialI18nPeer::TITLE );
     $criteria->addSelectColumn(self::PUBLICDATE );
     $criteria->addSelectColumn('count(distinct mm.id) as num_videos' );
+    $criteria->addSelectColumn(self::DISPLAY);
     // Agregamos los Joins entre las distintas tablas
     $criteria->addJoin(self::ID, SerialI18nPeer::ID, Criteria::LEFT_JOIN );
     $criteria->addJoin(self::ID, MmPeer::SERIAL_ID, Criteria::LEFT_JOIN );
@@ -68,6 +69,7 @@ class SerialPeer extends BaseSerialPeer
 	$serial['title']         = $rs->getString(7);
 	$serial['publicdate']    = date('d/m/Y', strtotime($rs->getTimestamp(8)));
 	$serial['mm_count']      = $rs->getInt(9);
+	$serial['display']      = $rs->getInt(10);
 	$serials[] = $serial;
       }
     return $serials;
@@ -341,19 +343,13 @@ class SerialPeer extends BaseSerialPeer
    * @param      Criteria object.
    * @parem      String search
    */
-  //UPDATE 15
   public static function addSeachCriteria(Criteria $c, $search, $culture)
   {
     //falta string split.
     $crit0 = $c->getNewCriterion(MmI18nPeer::TITLE, '%' . $search. '%', Criteria::LIKE);
-    $crit0->addOr( $c->getNewCriterion(PersonPeer::NAME,  '%' . $search. '%', Criteria::LIKE));
     $crit0->addOr($c->getNewCriterion(SerialI18nPeer::KEYWORD, '%' . $search. '%', Criteria::LIKE));
     $crit0->addOr($c->getNewCriterion(SerialI18nPeer::TITLE, '%' . $search. '%', Criteria::LIKE));
   
-    $display0 = $c->getNewCriterion(RolePeer::DISPLAY, true);
-    $display0->addOr($c->getNewCriterion(RolePeer::DISPLAY, null, Criteria::ISNULL));
-  
-    $crit0->addAnd($display0);
     $c->add($crit0);
   
     $c->add(MmI18nPeer::CULTURE, $culture);
@@ -361,9 +357,6 @@ class SerialPeer extends BaseSerialPeer
     $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
     $c->addJoin(SerialPeer::ID, SerialI18nPeer::ID);
     $c->addJoin(MmPeer::ID, MmI18nPeer::ID);
-    $c->addJoin(MmPeer::ID, MmPersonPeer::MM_ID, Criteria::LEFT_JOIN);
-    $c->addJoin(MmPersonPeer::PERSON_ID, PersonPeer::ID, Criteria::LEFT_JOIN);
-    $c->addJoin(MmPersonPeer::ROLE_ID, RolePeer::ID, Criteria::LEFT_JOIN);
         
     $c->setDistinct();
   }

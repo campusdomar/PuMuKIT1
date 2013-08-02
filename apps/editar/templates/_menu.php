@@ -44,7 +44,7 @@
     </li>
   
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('template_menu') ?>">
-      <a href="#" title="Dise&nteilde;o" onclick="return false" class="<?php echo sfConfig::get('template_menu') ?>">
+      <a href="#" title="Dise&ntilde;o" onclick="return false" class="<?php echo sfConfig::get('template_menu') ?>">
         <span>Dise&ntilde;o Portal WebTV</span>
       </a>
       <ul>
