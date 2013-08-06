@@ -623,6 +623,17 @@ div.cab_pan ul li a.select{
   color: #000;
 }
 
+/**
+ * searchbox
+ */
+.busca input.box_lupa {
+    background-color: #FFF;
+    border: solid thin #C9C8C6;
+    border-radius: 2px;
+}
+.busca input {
+    background-color: #FFF;
+}
 
 
 /**

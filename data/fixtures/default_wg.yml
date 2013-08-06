@@ -150,6 +150,10 @@ Widget:
     name: announcesv2
     widget_type_id: WidgetType_3
     configurable: 0
+  Widget_32: 
+    name: searchbox
+    widget_type_id: WidgetType_2
+    configurable: 0
 
 
 WidgetTemplate: 
@@ -307,10 +311,14 @@ ElementWidget:
     bar_widget_id: BarWidget_1
     widget_id: Widget_1
     rank: 1
+  ElementWidget_1_32: 
+    bar_widget_id: BarWidget_1
+    widget_id: Widget_32
+    rank: 2
   ElementWidget_1_29: 
     bar_widget_id: BarWidget_1
     widget_id: Widget_29
-    rank: 2
+    rank: 3
   ElementWidget_2_3: 
     bar_widget_id: BarWidget_2
     widget_id: Widget_3
