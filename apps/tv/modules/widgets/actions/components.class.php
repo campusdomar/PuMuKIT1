@@ -30,6 +30,10 @@ class widgetsComponents extends sfComponents
   {
   }
 
+  public function executeSearchbox()
+  {
+  }
+
 
   public function executeFooter()
   {

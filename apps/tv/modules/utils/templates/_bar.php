@@ -3,7 +3,6 @@
     <?php include_component('widgets', $w->getWidget()->getName() ) ?>
   </div>
 <?php endforeach ?>
-
 <?php if($bar == "Footerbar"): ?>
   <div style="clear:both; text-align: right; padding: 10px 0px 0px 10px;">
     <img style="width: 10px;" src="/favicon.ico">

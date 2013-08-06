@@ -14,7 +14,8 @@
   <div id="content" class="container_15">
     <div id="headerbar">
       <?php include_component('utils', 'bar', array('bar' => 'Headerbar')) ?>
-    </div>
+      <?php //include_partial('global/cab_menu')?>
+    </div><!--fin div headerbar-->
     
     <div id="body">  
       <div id="slidebar" class="grid_3">  
