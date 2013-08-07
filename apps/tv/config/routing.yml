@@ -252,6 +252,9 @@ templates:
   param: { module: templates, action: index }
   requirements: { sf_culture: (?:en|es|gl) }
 
+default_index:
+  url:   /:module
+  param: { action: index }
 default:
   url:   /:sf_culture/:module/:action/*
   requirements: { sf_culture: (?:en|es|gl) }

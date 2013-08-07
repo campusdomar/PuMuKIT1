@@ -2,7 +2,7 @@
   <div style="float:left;">
     <div>&nbsp;Palabras clave</div>
       <div >
-        <label accesskey="t" for="busca" class="salto"><?php echo __("Busca")?>:</label>
+        <?php /* <label accesskey="t" for="busca" class="salto"><?php echo __("Busca")?>:</label> */?>
         <input class="box_lupa" style="height:18px; width:100px; padding-right: 20px;" placeholder="<?php echo __("Busca")?>..." 
                name="search" value="<?php echo $sf_request->getParameter('search', '')?>" maxlength="100" type="text" />
         <input type="image" src="/images/1.8/lupa_buscador.png" alt="Enviar parámetros de búsqueda" style="position: relative; top: 1px; right: 22px;" name="startsearch" />
@@ -10,20 +10,20 @@
       <noscript><?php echo submit_tag('go'); ?></noscript>
   </div>
    <?php if ( isset($unescos) ) :?>
-     <div style="width:110px; float:left">
+     <div style="width:92px; float:left">
       <div>&nbsp;Categorías</div>
        <?php $opciones_form_unesco = array('all' => 'Todas') + $sf_data->getRaw('unescos');
              echo select_tag('unesco', 
                                      options_for_select($opciones_form_unesco,
                                                         $sf_request->getParameter('unesco', 'all')), //valor por defecto
-                                                        array('style' => 'width:105px;',
+                                                        array('style' => 'width:85px;',
                                                         'onChange' => 'Javascript:this.form.submit();')) ?>
       
      </div>
   <?php else :?>
      <input name="unesco" id="unesco" type="hidden" value="<?php echo $unesco ?>"/>
   <?php endif;?>
-  <div style="width:92px; float:left; ">
+  <div style="width:82px; float:left; ">
     <div>&nbsp;Vídeo / Audio</div>
     <?php echo select_tag('only',
       options_for_select(
@@ -31,7 +31,7 @@
               'video' => 'Vídeo',
               'audio' => 'Audio'),
               $sf_request->getParameter('only', 'all')),
-      array('style' => 'width:85px;',
+      array('style' => 'width:75px;',
             'onchange' => 'Javascript:this.form.submit();')); ?>
   </div>
   <div style="width:85px; float:left">

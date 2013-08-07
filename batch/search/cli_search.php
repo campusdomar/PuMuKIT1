@@ -28,9 +28,9 @@ if (2 != count($argv)) exit(-1);
 //var_dump($t->getBatAuto());
 
 
-var_dump(utf8_decode($argv[1])); exit;
+// var_dump(utf8_decode($argv[1])); exit;
 
-//MmPeer::getLuceneIndex();
+MmPeer::getLuceneIndex();
 $mms = MmPeer::getForLuceneQuery($argv[1]);
 foreach($mms as $mm){
   echo "ID: ". $mm->getId()."\n";

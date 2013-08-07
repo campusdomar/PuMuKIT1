@@ -18,7 +18,8 @@ class buscadorActions extends PumukitActions
         $this->getUser()->panNivelDos('Buscador', 'buscador/index');
         $this->title = "Resultados de la búsqueda: " . $this->search;
 
-        $maxPerPage = $this->getRequestParameter('numPerPage', 20);
+// FIXME
+        $maxPerPage = $this->getRequestParameter('numPerPage', 10);
 
         $c = $this->getCriteria();
         $mms = array();
@@ -32,6 +33,8 @@ class buscadorActions extends PumukitActions
         $this->genres  = $this->getGenres();
         $this->unescos = $this->getCategories(CategoryPeer::retrieveByCod("UNESCO")); 
         $this->mms     = $this->groupMms($mms);
+// TEST
+        $this->vcat    = 'Resultados de la búsqueda - vcat';
+        $this->objects_by_year = $this->mms;
     }
-
 }
