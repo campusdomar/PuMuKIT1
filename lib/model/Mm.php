@@ -144,6 +144,10 @@ class Mm extends BaseMm
 
     return FilePeer::doSelectOne($c);
   }
+  /**
+   * @var        Genre
+   */
+  protected $aFirstFilePublic;
 
   /**
    * Devuelve el primer archivo multimedia, si no tiene devuelve null
@@ -153,13 +157,19 @@ class Mm extends BaseMm
    */
   public function getFirstPublicFile()
   {
+    if ($this->aFirstFilePublic === null) {
     $c = new Criteria();
     $c->add(FilePeer::MM_ID, $this->getId());
     $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
     $c->add(PerfilPeer::DISPLAY, true);
     $c->addAscendingOrderByColumn(FilePeer::RANK);
 
-    return FilePeer::doSelectOne($c);
+      $this->aFirstFilePublic = FilePeer::doSelectOne($c);
+      if ($this->aFirstFilePublic){
+        $this->aFirstFilePublic->setMm($this);
+      }
+    }
+    return $this->aFirstFilePublic;
   }
 
   /**
@@ -173,7 +183,7 @@ class Mm extends BaseMm
     $c = new Criteria();
     $c->add(FilePeer::MM_ID, $this->getId());
     $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
-    $c->add(PerfilPeer::DISPLAY, true); //OJO BORRAR
+    $c->add(PerfilPeer::DISPLAY, true);
     $c->add(FilePeer::DISPLAY, true);
     $c->addAscendingOrderByColumn(FilePeer::RANK);
 
@@ -487,7 +497,7 @@ class Mm extends BaseMm
     sfConfig::set('sf_no_script_name', true);
     $controller = sfContext::getInstance()->getController();
     //$url = $controller->genUrl(array('module'=> 'video', 'action' => 'index', 'id' => $this->getId()), $absolute);
-    $url = $controller->genUrl(array('module'=> 'mmobj', 'action' => 'index', 'id' => $this->getId()), $absolute);
+    $url = $controller->genUrl(array('module'=> 'video', 'action' => 'index', 'id' => $this->getId()), $absolute);
     sfConfig::set('sf_no_script_name', $old);
     return $url;
   }

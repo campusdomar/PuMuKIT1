@@ -28,8 +28,12 @@ class CategoryPeer extends BaseCategoryPeer
   public static function retrieveByCode($code)
   {
     $c = new Criteria();
+    $c->setLimit(1);
     $c->add(CategoryPeer::COD, $code);
-    return CategoryPeer::doSelectOne($c);
+    //return CategoryPeer::doSelectOne($c);
+    $v = CategoryPeer::doSelectWithI18n($c);
+
+    return !empty($v) > 0 ? $v[0] : null;
   }
 
   public static function retrieveByCod($cod)
@@ -64,7 +68,7 @@ class CategoryPeer extends BaseCategoryPeer
     $c->addJoin(CategoryPeer::ID, CategoryI18nPeer::ID);
     $c->add(CategoryI18nPeer::NAME, $name);
     
-    return CategoryPeer::doSelect($c);
+    return CategoryPeer::doSelectWithI18n($c);
   }
 
   /**

@@ -693,4 +693,25 @@ class MmPeer extends BaseMmPeer
 
     return $aux[$status_id];
   }
+
+  /**
+   * Retrieve a single object by title.
+   *
+   * @param      $title .
+   * @param      Connection $con the connection to use
+   * @return     Mm
+   */
+  public static function retrieveByTitle($title, $con = null)
+  {
+    if ($con === null) {
+      $con = Propel::getConnection(self::DATABASE_NAME);
+    }
+
+    $criteria = new Criteria(MmPeer::DATABASE_NAME);
+
+    $criteria->addJoin(MmPeer::ID, MmI18nPeer::ID);
+    $criteria->add(MmI18nPeer::TITLE, $title, Criteria::LIKE);
+
+    return MmPeer::doSelectOne($criteria, $con);
+  }
 }
