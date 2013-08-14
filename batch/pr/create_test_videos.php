@@ -26,7 +26,7 @@ ob_end_flush();
 // ----------------------------- Script starts here -------------------
 
 // ¿Tocar los virtualgrounds?
-
+define('SERIAL_KEYWORD', "create_test_videos"); // Makes test serials easier to delete
 $perfil_test = getPerfilTest(); // global
 
 if (!checkParentCategoryCodesPresent()) {
@@ -34,12 +34,10 @@ if (!checkParentCategoryCodesPresent()) {
     exit;
 }
 
-// echo "Creando nueva serie con mms y files\n";
-// echo "-----------------------------------\n";
-$serial2 = createSerial("Test serie 2");
-$mm2     = createMmInSerial("test mm 2", $serial2);
-$file2   = createFileInMm(prepareFile(2), $mm2);
-publishMmInWebtv($mm2);
+
+deleteTestSerials(); 
+createSerialsWithDecisionesEditoriales();
+exit;
 
 // ----------------------------- Script ends here -------------------
 
@@ -92,6 +90,7 @@ function createSerial($title = "Test serial")
         $serial->setCulture('es');
         $serial->setPublicdate("now"); // ¿Add date parameter?
         $serial->setTitle($title);
+        $serial->setKeyword(SERIAL_KEYWORD);
         $serial->setDescription(''); // Add description parameter?
         $serial->setHeader('');
         $serial->setFooter('');
@@ -180,6 +179,13 @@ function publishMmInWebtv($mm)
     return $pcmm;
 }
 
+function publishAllMmFromSerial($serial)
+{
+    foreach ($serial->getMms() as $mm){
+        publishMmInWebtv($mm);
+    }
+}
+
 function createFileInMm($file, $mm)
 {
     echo "\tCreando nuevo file con el path [" . $file->getFile() . "] ... ";
@@ -224,7 +230,7 @@ function prepareFile($index)
 
     $path = SF_ROOT_DIR . "/web/testvideos/" . $predefined_filenames[$index];
     $url  = sfConfig::get('app_info_link', "http://pumukit18") . 
-        "/web/testvideos/" . $predefined_filenames[$index];
+        "/testvideos/" . $predefined_filenames[$index];
 
     $ext      = extractExtension($predefined_filenames[$index]);
     $format   = getFormat($ext);
@@ -327,4 +333,153 @@ function getFormat($ext)
     }
 
     return $format;
+}
+
+function deleteTestSerials()
+{
+    $test_serials = doSelectSerialsWithKeyword(SERIAL_KEYWORD);
+    foreach ($test_serials as $serial){
+        $serial->delete();
+    }
+}
+
+function doSelectSerialsWithKeyword($keyword = SERIAL_KEYWORD)
+{
+
+    $c = new Criteria();
+    $c->addJoin(SerialPeer::ID, SerialI18nPeer::ID);
+    $c->add(SerialI18nPeer::KEYWORD, $keyword, Criteria::LIKE);
+    return SerialPeer::doSelectWithI18n($c);
+}
+
+function createTimeframe($category, $mm, $timestart, $timeend, $description = SERIAL_KEYWORD)
+{
+    $category_id = (is_int($category)) ? $category : $category->getId();
+    $mm_id       = (is_int($mm)) ? $mm : $mm->getId();
+    echo "\tCreando el timeframe para cat: " . $category_id . " mm: " . $mm_id .
+        " inicio: " . $timestart . " fin: " . $timeend . " description: " . $description ;
+    
+    $tf = new CategoryMmTimeframe();
+    $tf->setCategoryId($category->getId());
+    $tf->setMmId($mm->getId());
+    $tf->setDescription($description); 
+    $tf->setTimestart($timestart);
+    $tf->setTimeend($timeend);
+    $tf->save();
+    echo " id: " . $tf->getId() . "\n";
+    
+    return $tf;
+}
+
+// ------------------- CREATE TEST SETS -----------------------
+function createSerialsWithDecisionesEditoriales()
+{
+    $hour_before  = date("Y-m-d H:i:s", time() - 3600);
+    $hour_after   = date("Y-m-d H:i:s", time() + 3600);
+    $day_before   = date('Y-m-d H:i:s', strtotime('-1 day'));
+    $day_after    = date('Y-m-d H:i:s', strtotime('+1 day'));
+    $week_before  = date('Y-m-d H:i:s', strtotime('-7 day'));
+    $week_after   = date('Y-m-d H:i:s', strtotime('+7 day'));
+
+    $cat_editorial1 = CategoryPeer::retrieveByCod(CategoryMmTimeframePeer::EDITORIAL1);
+    $cat_editorial2 = CategoryPeer::retrieveByCod(CategoryMmTimeframePeer::EDITORIAL2);
+
+    $serial = createSerial("Test serie con decisiones editoriales fijas y temporizadas publicadas");
+    
+    $mm1    = createMmInSerial("Test mm publicado con editorial1 temporizada pasada ayer", $serial);
+    $file1  = createFileInMm(prepareFile(1), $mm1);
+    createTimeframe($cat_editorial1, $mm1, $week_before, $day_before);
+
+    $mm2    = createMmInSerial("Test mm publicado con editorial2 temporizada pasada ayer", $serial);
+    $file2  = createFileInMm(prepareFile(2), $mm2);
+    createTimeframe($cat_editorial2, $mm2, $week_before, $day_before);
+
+    $mm3    = createMmInSerial("Test mm publicado con editorial1 temporizada 2 horas y editorial2 fija", $serial);
+    $file3  = createFileInMm(prepareFile(3), $mm3);
+    createTimeframe($cat_editorial1, $mm3, $hour_before, $hour_after);
+    $mm3->setEditorial2(1);
+    $mm3->save();
+
+    $mm4    = createMmInSerial("Test mm publicado con editorial2 temporizada 2 días", $serial);
+    $file4  = createFileInMm(prepareFile(1), $mm4);
+    createTimeframe($cat_editorial2, $mm4, $day_before, $day_after);
+
+    $mm5    = createMmInSerial("Test mm publicado con editorial1 temporizada 2 semanas", $serial);
+    $file5  = createFileInMm(prepareFile(2), $mm5);
+    createTimeframe($cat_editorial1, $mm5, $week_before, $week_after);
+
+    $mm6    = createMmInSerial("Test mm publicado con editorial1 temporizada futura 1 semana", $serial);
+    $file6  = createFileInMm(prepareFile(3), $mm6);
+    createTimeframe($cat_editorial1, $mm6, $day_after, $week_after);
+
+    $mm7    = createMmInSerial("Test mm publicado con editorial2 temporizada futura 1 semana", $serial);
+    $file7  = createFileInMm(prepareFile(1), $mm7);
+    createTimeframe($cat_editorial2, $mm7, $day_after, $week_after);
+
+    $mm8    = createMmInSerial("Test mm publicado con editorial1 fija", $serial);
+    $file8  = createFileInMm(prepareFile(2), $mm8);
+    $mm8->setEditorial1(1);
+    $mm8->save();
+
+    $mm9    = createMmInSerial("Test mm publicado con editorial1 fija", $serial);
+    $file9  = createFileInMm(prepareFile(3), $mm9);
+    $mm9->setEditorial2(1);
+    $mm9->save();
+
+    $mm10    = createMmInSerial("Test mm publicado con editorial1 y editorial2 fijas", $serial);
+    $file10  = createFileInMm(prepareFile(1), $mm10);
+    $mm10->setEditorial1(1);
+    $mm10->setEditorial2(1);
+    $mm10->save();
+
+    publishAllMmFromSerial($serial);
+
+    // ------- Sin publicar ----------
+    $serial2 = createSerial("Test serie con decisiones editoriales fijas y temporizadas publicadas");
+    
+    $mm1    = createMmInSerial("Test mm sin publicar con editorial1 temporizada pasada ayer", $serial2);
+    $file1  = createFileInMm(prepareFile(1), $mm1);
+    createTimeframe($cat_editorial1, $mm1, $week_before, $day_before);
+
+    $mm2    = createMmInSerial("Test mm sin publicar con editorial2 temporizada pasada ayer", $serial2);
+    $file2  = createFileInMm(prepareFile(2), $mm2);
+    createTimeframe($cat_editorial2, $mm2, $week_before, $day_before);
+
+    $mm3    = createMmInSerial("Test mm sin publicar con editorial1 temporizada 2 horas y editorial2 fija", $serial2);
+    $file3  = createFileInMm(prepareFile(3), $mm3);
+    createTimeframe($cat_editorial1, $mm3, $hour_before, $hour_after);
+    $mm3->setEditorial2(1);
+    $mm3->save();
+
+    $mm4    = createMmInSerial("Test mm sin publicar con editorial2 temporizada 2 días", $serial2);
+    $file4  = createFileInMm(prepareFile(1), $mm4);
+    createTimeframe($cat_editorial2, $mm4, $day_before, $day_after);
+
+    $mm5    = createMmInSerial("Test mm sin publicar con editorial1 temporizada 2 semanas", $serial2);
+    $file5  = createFileInMm(prepareFile(2), $mm5);
+    createTimeframe($cat_editorial1, $mm5, $week_before, $week_after);
+
+    $mm6    = createMmInSerial("Test mm sin publicar con editorial1 temporizada futura 1 semana", $serial2);
+    $file6  = createFileInMm(prepareFile(3), $mm6);
+    createTimeframe($cat_editorial1, $mm6, $day_after, $week_after);
+
+    $mm7    = createMmInSerial("Test mm sin publicar con editorial2 temporizada futura 1 semana", $serial2);
+    $file7  = createFileInMm(prepareFile(1), $mm7);
+    createTimeframe($cat_editorial2, $mm7, $day_after, $week_after);
+
+    $mm8    = createMmInSerial("Test mm sin publicar con editorial1 fija", $serial2);
+    $file8  = createFileInMm(prepareFile(2), $mm8);
+    $mm8->setEditorial1(1);
+    $mm8->save();
+
+    $mm9    = createMmInSerial("Test mm sin publicar con editorial1 fija", $serial2);
+    $file9  = createFileInMm(prepareFile(3), $mm9);
+    $mm9->setEditorial2(1);
+    $mm9->save();
+
+    $mm10    = createMmInSerial("Test mm sin publicar con editorial1 y editorial2 fijas", $serial2);
+    $file10  = createFileInMm(prepareFile(1), $mm10);
+    $mm10->setEditorial1(1);
+    $mm10->setEditorial2(1);
+    $mm10->save();
 }
