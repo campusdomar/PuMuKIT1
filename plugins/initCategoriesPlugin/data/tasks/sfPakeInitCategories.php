@@ -9,13 +9,14 @@
 pake_desc('initialize root, timeframe and Unesco categories');
 pake_task('init-categories');
 
-define('SF_ROOT_DIR',    realpath(dirname(__file__).'/../../../..'));
+define('PMK_ROOT_DIR',    realpath(dirname(__file__).'/../../../..'));
+
 
 function run_init_categories($task, $args)
 {
     $script_paths = array(
-        SF_ROOT_DIR . "/batch/timeframes/creacategoriasdestacadosradiotv.php",
-        SF_ROOT_DIR . "/batch/categories/import_categories_from_csv.php grounds.csv unesco.csv");
+        PMK_ROOT_DIR . "/batch/timeframes/creacategoriasdestacadosradiotv.php",
+        PMK_ROOT_DIR . "/batch/categories/import_categories_from_csv.php grounds.csv unesco.csv");
     
     foreach ($script_paths as $script){
         echo "\n---------------------------------------------------\n";
