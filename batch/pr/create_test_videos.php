@@ -34,9 +34,11 @@ if (!checkParentCategoryCodesPresent()) {
     exit;
 }
 
-
 deleteTestSerials(); 
 createSerialsWithDecisionesEditoriales();
+createSerialsForAllDirectrices();
+createSerialsForAllLugares();
+createVirtualGrounds();
 exit;
 
 // ----------------------------- Script ends here -------------------
@@ -103,7 +105,7 @@ function createSerial($title = "Test serial")
     return $serial;
 }
 
-function createMmInSerial($title, $serial)
+function createMmInSerial($title, $serial, $date = "now")
 {
     echo "\tCreando nuevo mm con el título [" . $title . "] ...";
 
@@ -124,8 +126,8 @@ function createMmInSerial($title, $serial)
     $mm = new Mm();
     $mm->setSerial($serial);
     $mm->setCulture('es');
-    $mm->setRecordDate("now");
-    $mm->setPublicDate("now");
+    $mm->setRecordDate($date);
+    $mm->setPublicDate($date);
     $mm->setTitle($title);
     $mm->setDescription("");
     
@@ -136,13 +138,23 @@ function createMmInSerial($title, $serial)
     $status = $mm->save();
     echo " OK - status " . $status . " id " . $mm->getId() . "\n";
 
+    $file1  = createFileInMm(prepareFile(rand(0,3)), $mm);
+
+
     return $mm;
 }
 
+function retrievePubchannelByName($name = "WebTV")
+{
+    $c = new Criteria();
+    $c->add(PubChannelPeer::NAME, $name, Criteria::LIKE);
+
+    return PubChannelPeer::doSelectOne($c);
+}
 function publishMmInWebtv($mm)
 {
-    // Quick & dirty - pubchannel.id for webtv should be 1.
-    $web_tv_id = 1;
+    
+    $web_tv_id = retrievePubchannelByName("WebTV")->getId();
     if (!$mm) {
         echo "Error: no se puede publicar mm inexistente\n";
         exit;
@@ -273,7 +285,7 @@ function getLanguage ($cod = "ES")
 function getPerfilTest($name = 'perfil_test')
 {
     $c = new Criteria();
-    $c->add(PerfilPeer::NAME, $name);
+    $c->add(PerfilPeer::NAME, $name, Criteria::LIKE);
     if ($perfil = PerfilPeer::doSelectWithI18n($c, 'es')){
         
         return $perfil[0];
@@ -304,7 +316,7 @@ function getPerfilTest($name = 'perfil_test')
 function getMimetype($ext)
 {
     $c = new Criteria();
-    $c->add(MimeTypePeer::NAME, $ext);
+    $c->add(MimeTypePeer::NAME, $ext, Criteria::LIKE);
     if (!$mt = MimeTypePeer::doSelectOne($c)){
         // creates real or dummy (unknown) mimetype
         $extension_mimetype = array(
@@ -325,7 +337,7 @@ function getMimetype($ext)
 function getFormat($ext)
 {
     $c = new Criteria();
-    $c->add(FormatPeer::NAME, $ext);
+    $c->add(FormatPeer::NAME, $ext, Criteria::LIKE);
     if (!$format = FormatPeer::doSelectOne($c)){
         $format = new Format();
         $format->setName($ext);
@@ -372,6 +384,7 @@ function createTimeframe($category, $mm, $timestart, $timeend, $description = SE
 }
 
 // ------------------- CREATE TEST SETS -----------------------
+
 function createSerialsWithDecisionesEditoriales()
 {
     $hour_before  = date("Y-m-d H:i:s", time() - 3600);
@@ -387,47 +400,37 @@ function createSerialsWithDecisionesEditoriales()
     $serial = createSerial("Test serie con decisiones editoriales fijas y temporizadas publicadas");
     
     $mm1    = createMmInSerial("Test mm publicado con editorial1 temporizada pasada ayer", $serial);
-    $file1  = createFileInMm(prepareFile(1), $mm1);
     createTimeframe($cat_editorial1, $mm1, $week_before, $day_before);
 
     $mm2    = createMmInSerial("Test mm publicado con editorial2 temporizada pasada ayer", $serial);
-    $file2  = createFileInMm(prepareFile(2), $mm2);
     createTimeframe($cat_editorial2, $mm2, $week_before, $day_before);
 
     $mm3    = createMmInSerial("Test mm publicado con editorial1 temporizada 2 horas y editorial2 fija", $serial);
-    $file3  = createFileInMm(prepareFile(3), $mm3);
     createTimeframe($cat_editorial1, $mm3, $hour_before, $hour_after);
     $mm3->setEditorial2(1);
     $mm3->save();
 
     $mm4    = createMmInSerial("Test mm publicado con editorial2 temporizada 2 días", $serial);
-    $file4  = createFileInMm(prepareFile(1), $mm4);
     createTimeframe($cat_editorial2, $mm4, $day_before, $day_after);
 
     $mm5    = createMmInSerial("Test mm publicado con editorial1 temporizada 2 semanas", $serial);
-    $file5  = createFileInMm(prepareFile(2), $mm5);
     createTimeframe($cat_editorial1, $mm5, $week_before, $week_after);
 
     $mm6    = createMmInSerial("Test mm publicado con editorial1 temporizada futura 1 semana", $serial);
-    $file6  = createFileInMm(prepareFile(3), $mm6);
     createTimeframe($cat_editorial1, $mm6, $day_after, $week_after);
 
     $mm7    = createMmInSerial("Test mm publicado con editorial2 temporizada futura 1 semana", $serial);
-    $file7  = createFileInMm(prepareFile(1), $mm7);
     createTimeframe($cat_editorial2, $mm7, $day_after, $week_after);
 
     $mm8    = createMmInSerial("Test mm publicado con editorial1 fija", $serial);
-    $file8  = createFileInMm(prepareFile(2), $mm8);
     $mm8->setEditorial1(1);
     $mm8->save();
 
     $mm9    = createMmInSerial("Test mm publicado con editorial1 fija", $serial);
-    $file9  = createFileInMm(prepareFile(3), $mm9);
     $mm9->setEditorial2(1);
     $mm9->save();
 
     $mm10    = createMmInSerial("Test mm publicado con editorial1 y editorial2 fijas", $serial);
-    $file10  = createFileInMm(prepareFile(1), $mm10);
     $mm10->setEditorial1(1);
     $mm10->setEditorial2(1);
     $mm10->save();
@@ -438,48 +441,159 @@ function createSerialsWithDecisionesEditoriales()
     $serial2 = createSerial("Test serie con decisiones editoriales fijas y temporizadas publicadas");
     
     $mm1    = createMmInSerial("Test mm sin publicar con editorial1 temporizada pasada ayer", $serial2);
-    $file1  = createFileInMm(prepareFile(1), $mm1);
     createTimeframe($cat_editorial1, $mm1, $week_before, $day_before);
 
     $mm2    = createMmInSerial("Test mm sin publicar con editorial2 temporizada pasada ayer", $serial2);
-    $file2  = createFileInMm(prepareFile(2), $mm2);
     createTimeframe($cat_editorial2, $mm2, $week_before, $day_before);
 
     $mm3    = createMmInSerial("Test mm sin publicar con editorial1 temporizada 2 horas y editorial2 fija", $serial2);
-    $file3  = createFileInMm(prepareFile(3), $mm3);
     createTimeframe($cat_editorial1, $mm3, $hour_before, $hour_after);
     $mm3->setEditorial2(1);
     $mm3->save();
 
     $mm4    = createMmInSerial("Test mm sin publicar con editorial2 temporizada 2 días", $serial2);
-    $file4  = createFileInMm(prepareFile(1), $mm4);
     createTimeframe($cat_editorial2, $mm4, $day_before, $day_after);
 
     $mm5    = createMmInSerial("Test mm sin publicar con editorial1 temporizada 2 semanas", $serial2);
-    $file5  = createFileInMm(prepareFile(2), $mm5);
     createTimeframe($cat_editorial1, $mm5, $week_before, $week_after);
 
     $mm6    = createMmInSerial("Test mm sin publicar con editorial1 temporizada futura 1 semana", $serial2);
-    $file6  = createFileInMm(prepareFile(3), $mm6);
     createTimeframe($cat_editorial1, $mm6, $day_after, $week_after);
 
     $mm7    = createMmInSerial("Test mm sin publicar con editorial2 temporizada futura 1 semana", $serial2);
-    $file7  = createFileInMm(prepareFile(1), $mm7);
     createTimeframe($cat_editorial2, $mm7, $day_after, $week_after);
 
     $mm8    = createMmInSerial("Test mm sin publicar con editorial1 fija", $serial2);
-    $file8  = createFileInMm(prepareFile(2), $mm8);
     $mm8->setEditorial1(1);
     $mm8->save();
 
     $mm9    = createMmInSerial("Test mm sin publicar con editorial1 fija", $serial2);
-    $file9  = createFileInMm(prepareFile(3), $mm9);
     $mm9->setEditorial2(1);
     $mm9->save();
 
     $mm10    = createMmInSerial("Test mm sin publicar con editorial1 y editorial2 fijas", $serial2);
-    $file10  = createFileInMm(prepareFile(1), $mm10);
     $mm10->setEditorial1(1);
     $mm10->setEditorial2(1);
     $mm10->save();
 }
+
+function createSerialWithDirectriz($cod = "Dhumanistica")
+{
+    $year_before   = date('Y-m-d H:i:s', strtotime('-1 year'));
+    $cat_directriz = CategoryPeer::retrieveByCod($cod);
+    if (!$cat_directriz) {
+        echo "\nNo se encuentra la categoría directriz con cod=" . $cod . "\n\n";
+        exit;
+    }
+
+    $serial_directriz = createSerial("Test serie con directriz " . $cod);
+
+    $mm1 = createMmInSerial("Test mm con directriz " . $cod . " publicado el año pasado", $serial_directriz, $year_before);
+    $cat_directriz->addMmIdAndUpdateCategoryTree($mm1->getId());
+    
+    $mm2 = createMmInSerial("Test mm con directriz " . $cod . " publicado el año actual", $serial_directriz);
+    $cat_directriz->addMmIdAndUpdateCategoryTree($mm2->getId());
+
+    publishAllMmFromSerial($serial_directriz);
+
+    $mm3 = createMmInSerial("Test mm con directriz " . $cod . " sin publicar el año actual", $serial_directriz);
+    $cat_directriz->addMmIdAndUpdateCategoryTree($mm3->getId());
+}
+
+function createSerialsForAllDirectrices()
+{
+    $tree_directriz = CategoryPeer::retrieveByCod("Directriz");
+    foreach ($tree_directriz->getChildren() as $directriz){
+        createSerialWithDirectriz($directriz->getCod());
+    }
+
+}
+
+function createSerialsForAllLugares()
+{
+    // Como los lugares tienen una cierta agrupación lógica según COD: T2-1 T2-2 ... 
+    // la usaré para reunirlos en series.
+    $year_before   = date('Y-m-d H:i:s', strtotime('-1 year'));
+    $tree_lugares = CategoryPeer::retrieveByCod("Lugares");
+
+    $grouped_cats = groupCategoriesByCod($tree_lugares);
+    foreach ($grouped_cats as $prefix => $cat_group){
+        $serial_lugar = createSerial("Test serie con lugares de tipo " . $prefix . "-X");
+        foreach ($cat_group as $cat){
+            $mm1 = createMmInSerial("Test mm con lugar " . $cat->getname() . " publicado el año pasado", $serial_lugar, $year_before);
+            $cat->addMmIdAndUpdateCategoryTree($mm1->getId());
+            publishMmInWebtv($mm1);
+            
+            $mm2 = createMmInSerial("Test mm con lugar " . $cat->getname() . " publicado el año actual", $serial_lugar);
+            $cat->addMmIdAndUpdateCategoryTree($mm2->getId());
+            publishMmInWebtv($mm2);
+
+            $mm3 = createMmInSerial("Test mm con lugar " . $cat->getname() . " sin publicar el año actual", $serial_lugar);
+            $cat->addMmIdAndUpdateCategoryTree($mm3->getId());   
+        }
+    }
+
+}
+
+function groupCategoriesByCod($cat_parent, $prefix_length = 2)
+{
+    $grouped_categories = array();
+    foreach ($cat_parent->getChildren() as $category){
+        $cod_prefix = substr($category->getCod(), 0, $prefix_length); // T2-1, T2-2 ...
+
+        if (!isset($grouped_categories[$cod_prefix])){
+            $grouped_categories[$cod_prefix] = array();
+        }
+            $grouped_categories[$cod_prefix][] = $category;
+    }
+
+    return $grouped_categories;
+}
+
+function createVirtualGroundWithRank($cod = "Test virtualground", $rank = 2){
+
+    $img = "/uploads/pic/ground/1.jpg";
+
+    if (!$vground = retrieveVirtualGroundByCod($cod)){
+        echo "\n\nCreando VirtualGround: " . $cod . "\n";
+        $vground = new VirtualGround();
+        $vground->setDisplay(true);
+        $vground->setCod($cod);
+        $vground->setImg($img);
+
+        $langs = sfConfig::get('app_lang_array', array('es'));
+        foreach($langs as $lang){
+          $vground->setCulture($lang);
+          $vground->setName($cod);
+        }
+        
+        $vground->save();
+        while ($vground->getRank() > $rank) {
+            $vground->moveUp();
+            $vground->save();
+        }
+    }
+    
+    return $vground;
+}
+
+function createVirtualGrounds()
+{
+    $vg1 = createVirtualGroundWithRank("Test editorial 1", 2);
+    $vg1->setEditorial1(1);
+    $vg1->save();
+
+    $vg2 = createVirtualGroundWithRank("Test editorial 2", 3);
+    $vg2->setEditorial2(1);
+    $vg2->save();
+
+}
+
+function retrieveVirtualGroundByCod($cod)
+{
+    $c = new Criteria();
+    $c->add(VirtualGroundPeer::COD, $cod, Criteria::LIKE);
+
+    return VirtualGroundPeer::doSelectOne($c);
+}
+
