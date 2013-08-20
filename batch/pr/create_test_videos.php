@@ -26,7 +26,7 @@ ob_end_flush();
 // ----------------------------- Script starts here -------------------
 
 // ¿Tocar los virtualgrounds?
-define('SERIAL_KEYWORD', "create_test_videos"); // Makes test serials easier to delete
+define('TEST_KEYWORD', "create_test_videos"); // Makes test serials easier to delete
 $perfil_test = getPerfilTest(); // global
 
 if (!checkParentCategoryCodesPresent()) {
@@ -34,6 +34,7 @@ if (!checkParentCategoryCodesPresent()) {
     exit;
 }
 
+createVirtualGrounds(); exit;
 deleteTestSerials(); 
 createSerialsWithDecisionesEditoriales();
 createSerialsForAllDirectrices();
@@ -92,7 +93,7 @@ function createSerial($title = "Test serial")
         $serial->setCulture('es');
         $serial->setPublicdate("now"); // ¿Add date parameter?
         $serial->setTitle($title);
-        $serial->setKeyword(SERIAL_KEYWORD);
+        $serial->setKeyword(TEST_KEYWORD);
         $serial->setDescription(''); // Add description parameter?
         $serial->setHeader('');
         $serial->setFooter('');
@@ -349,13 +350,13 @@ function getFormat($ext)
 
 function deleteTestSerials()
 {
-    $test_serials = doSelectSerialsWithKeyword(SERIAL_KEYWORD);
+    $test_serials = doSelectSerialsWithKeyword(TEST_KEYWORD);
     foreach ($test_serials as $serial){
         $serial->delete();
     }
 }
 
-function doSelectSerialsWithKeyword($keyword = SERIAL_KEYWORD)
+function doSelectSerialsWithKeyword($keyword = TEST_KEYWORD)
 {
 
     $c = new Criteria();
@@ -364,7 +365,7 @@ function doSelectSerialsWithKeyword($keyword = SERIAL_KEYWORD)
     return SerialPeer::doSelectWithI18n($c);
 }
 
-function createTimeframe($category, $mm, $timestart, $timeend, $description = SERIAL_KEYWORD)
+function createTimeframe($category, $mm, $timestart, $timeend, $description = TEST_KEYWORD)
 {
     $category_id = (is_int($category)) ? $category : $category->getId();
     $mm_id       = (is_int($mm)) ? $mm : $mm->getId();
@@ -550,9 +551,30 @@ function groupCategoriesByCod($cat_parent, $prefix_length = 2)
     return $grouped_categories;
 }
 
-function createVirtualGroundWithRank($cod = "Test virtualground", $rank = 2){
+function createVirtualGrounds()
+{
+    $vg1 = createVirtualGroundWithRank("Test vg editorial 1", 2);
+    $vg1->setEditorial1(1);
+    $vg1->save();
 
-    $img = "/uploads/pic/ground/1.jpg";
+    $vg2 = createVirtualGroundWithRank("Test vg editorial 2", 3);
+    $vg2->setEditorial2(1);
+    $vg2->save();
+
+    $vg3 = createVirtualGroundWithRank("Test vg humanidades", 4);
+    setVirtualgroundCategoriesByNames( $vg3, array("filología", "historia", "Educación", "pedagogia", "lingüística")); // Unesco
+    setVirtualgroundCategoriesByCodes( $vg3, array("Dhumanistica","Djuridicosocial")); // Directriz
+
+    $vg4 = createVirtualGroundWithRank("Test vg ciencias", 5);
+    setVirtualgroundCategoriesByNames( $vg4, array("Física", "Matemáticas", "Química", "Astronomía y astrofísica", "Ciencias de la Tierra y del Cosmos"));// Unesco
+    setVirtualgroundCategoriesByCodes( $vg4, array("Dciencia")); // Directriz
+}
+
+function createVirtualGroundWithRank($cod = "Test virtualground", $rank = 2)
+{
+    // Each picture is tailored to its position with specific dimensions.
+    // This keeps the same layout.
+    $img = "/uploads/pic/ground/" . ($rank - 1) . ".jpg"; 
 
     if (!$vground = retrieveVirtualGroundByCod($cod)){
         echo "\n\nCreando VirtualGround: " . $cod . "\n";
@@ -577,18 +599,6 @@ function createVirtualGroundWithRank($cod = "Test virtualground", $rank = 2){
     return $vground;
 }
 
-function createVirtualGrounds()
-{
-    $vg1 = createVirtualGroundWithRank("Test editorial 1", 2);
-    $vg1->setEditorial1(1);
-    $vg1->save();
-
-    $vg2 = createVirtualGroundWithRank("Test editorial 2", 3);
-    $vg2->setEditorial2(1);
-    $vg2->save();
-
-}
-
 function retrieveVirtualGroundByCod($cod)
 {
     $c = new Criteria();
@@ -597,3 +607,64 @@ function retrieveVirtualGroundByCod($cod)
     return VirtualGroundPeer::doSelectOne($c);
 }
 
+/**
+ * @param Virtualground $vg
+ * @param array $category_names list of category names (categoryi18n.name)
+ * Given the standard db collation, this list is case and accent insensitive.
+ */
+function setVirtualgroundCategoriesByNames($vg, $category_names){
+    if (!$vg){
+        echo "Error: virtualground inexistente, no se pueden añadir categorías\n";
+        exit;
+    }
+    if (!is_array($category_names)){
+        $category_names = array($category_names);
+    }
+
+    $c = new Criteria();
+    $c->addJoin(CategoryPeer::ID, CategoryI18nPeer::ID);
+    $c->add(CategoryI18nPeer::NAME, $category_names, Criteria::IN);
+    $categories = CategoryPeer::doSelectWithI18n($c);
+
+    setVirtualgroundCategories($vg, $categories);
+}
+
+function setVirtualgroundCategoriesByCodes($vg, $category_codes){
+    if (!$vg){
+        echo "Error: virtualground inexistente, no se pueden añadir categorías\n";
+        exit;
+    }
+    if (!is_array($category_codes)){
+        $category_codes = array($category_codes);
+    }
+
+    $c = new Criteria();
+    $c->add(CategoryPeer::COD, $category_codes, Criteria::IN);
+    $categories = CategoryPeer::doSelectWithI18n($c);
+
+    setVirtualgroundCategories($vg, $categories);
+}
+
+/**
+ * @param Virtualground $vg
+ * @param array $categories list of category objects
+ */
+function setVirtualgroundCategories($vg, $categories)
+{
+    $found_category_names = array();
+    foreach ($categories as $cat){
+        $found_category_names[] = $cat->getName();
+    }
+    // echo "\nDebug: se encontraron " . count($categories) . " categorías con los nombres " . implode(",",$category_names) . ":\n";
+    echo "Asignando al vg: [" . $vg->getCod() . "] las categorías: " . implode(", ", $found_category_names) . " ...";
+
+    foreach ($categories as $cat){
+        $cat->addVirtualGroundId($vg->getId());
+    }
+    echo " OK\n";
+
+    if (!$vg->getOther()){
+        $vg->setOther(1);
+        $vg->save();
+    }
+}
