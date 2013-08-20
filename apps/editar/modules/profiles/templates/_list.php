@@ -9,6 +9,7 @@
       <th>Nombre</th>
       <th width="1%">Display</th>
       <th width="1%">Wizard</th>
+      <th width="1%">Master</th>
       <th>CanalPub</th>
       <th>Extensión</th>
       <th>Mime-Type</th>
@@ -20,7 +21,7 @@
   <tbody>
   <?php if (count($profiles) == 0):?>
     <tr>
-      <td colspan="12">
+      <td colspan="15">
        No existen perfiles con esos valores.
       </td>
     </tr>
@@ -51,11 +52,14 @@
       <td onclick="click_fila('profile', this, <?php echo $profile->getId() ?>);">
         <?php echo $profile->getName(); ?>
       </td>
-      <td>
+      <td onclick="click_fila('profile', this, <?php echo $profile->getId() ?>);">
         <?php echo $profile->getDisplay()?"x":""?>
       </td>
-      <td>
+      <td onclick="click_fila('profile', this, <?php echo $profile->getId() ?>);">
         <?php echo $profile->getWizard()?"x":""?>
+      </td>
+      <td onclick="click_fila('profile', this, <?php echo $profile->getId() ?>);">
+        <?php echo $profile->getMaster()?"x":""?>
       </td>
       <td onclick="click_fila('profile', this, <?php echo $profile->getId() ?>);">
         <div>
@@ -93,7 +97,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <th colspan="14">
+      <th colspan="15">
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'profile', 'page' => $page, 'total' => $total)) ?> 
         </div>

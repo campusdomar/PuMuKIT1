@@ -25,14 +25,19 @@
 <div class="form-row">
   <?php echo label_for('Display', 'Variables:', 'class="required" ') ?>
   <div class="content">
-      Publicaci&oacute;n(No master):
+      Publicaci&oacute;n(display):
       <?php $value = object_checkbox_tag($profile, 'getDisplay', array (
       'control_name' => 'display',
     )); echo $value ? $value : '&nbsp;' ?>    
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Producci&oacute;n (En wizard y backend):
+    Activo en backend (wizard):
     <?php $value = object_checkbox_tag($profile, 'getWizard', array (
       'control_name' => 'wizard',
+    )); echo $value ? $value : '&nbsp;' ?>    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    Master:
+    <?php $value = object_checkbox_tag($profile, 'getMaster', array (
+      'control_name' => 'master',
     )); echo $value ? $value : '&nbsp;' ?>    
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     Servidor:

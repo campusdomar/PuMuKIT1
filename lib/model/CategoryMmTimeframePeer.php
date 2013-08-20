@@ -225,8 +225,7 @@ class CategoryMmTimeframePeer extends BaseCategoryMmTimeframePeer
         if ($category = CategoryPeer::retrieveByCod($cod)){
             $category_destacados_id = $category->getId();
         } else {
-        // Si no existe category para destacados radio / tv, ejecutar batch/timeframes/creacategoriasdestacadosradiotv.php
-            return false;
+            throw new sfException("No existe category para destacados radio/tv, ejecutar batch/timeframes/creacategoriasdestacadosradiotv.php");
         }
 
         $c_mms_con_timeframes = new Criteria();

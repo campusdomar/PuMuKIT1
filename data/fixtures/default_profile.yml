@@ -101,6 +101,7 @@ Perfil:
     rank: 1
     display: 0
     wizard: 1
+    master: 1
     format: ???
     codec: ???
     mime_type: ???
@@ -121,6 +122,7 @@ Perfil:
     rank: 2
     display: 1
     wizard: 1
+    master: 0
     format: mp4
     codec: x264
     mime_type: video/mp4
@@ -140,7 +142,8 @@ Perfil:
     name: mp3
     rank: 3
     display: 1
-    wizard: 0 #revisar
+    wizard: 1
+    master: 0
     format: mp3
     codec: mp3
     mime_type: audio/mp3

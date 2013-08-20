@@ -90,6 +90,7 @@ class profilesActions extends sfActions
     $profile->setName($this->getRequestParameter('name', ' '));
     $profile->setDisplay($this->getRequestParameter('display', ' '));
     $profile->setWizard($this->getRequestParameter('wizard', ' '));
+    $profile->setMaster($this->getRequestParameter('master', ' '));
     $profile->setFormat($this->getRequestParameter('format', ' '));
     $profile->setCodec($this->getRequestParameter('codec', ' '));
     $profile->setMimeType($this->getRequestParameter('mimetype', ' '));
@@ -165,6 +166,7 @@ class profilesActions extends sfActions
     foreach($langs as $lang){
       $profile2->setCulture($lang);
       $profile->setCulture($lang);
+      $profile2->setLink($profile->getLink());
       $profile2->setDescription($profile->getDescription());
     }
             

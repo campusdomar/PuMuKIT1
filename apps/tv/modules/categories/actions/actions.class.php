@@ -30,6 +30,12 @@ class categoriesActions extends sfActions
 
       if ($this->vcat->getEditorial1()) $cod = CategoryMmTimeframePeer::EDITORIAL1;
       if ($this->vcat->getEditorial2()) $cod = CategoryMmTimeframePeer::EDITORIAL2;
+      // Virtualgrounds should have: 
+      //    other=1 if they use standard category objects 
+      //    or any editorialx = 1 if they use "Decisión editorial".
+      // otherwise, there is a problem with this virtualground ($vcat)
+      $this->forward404Unless(isset($cod));
+
       $this->mms = CategoryMmTimeframePeer::doSelectDestacados($cod, true, null);
       $this->objects_by_year = $this->groupObjectsByYear($this->mms);
     }
