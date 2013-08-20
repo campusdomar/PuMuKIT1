@@ -128,7 +128,7 @@ class PubChannel extends BasePubChannel
       	//SI SI ESTA TRANSCODIFICANDO NO LO PONGO DENUEVO
       	if(count($mm->getTranscodingsByPerfil($perfil->getId())) == 0){
 
-      	  $master->retranscoding($perfil->getId());
+      	  $master->retranscoding($perfil->getId(), 2, sfContext::getInstance()->getUser()->getAttribute('email', 0));
       	  $perfiles_usados[] = $perfil;
       	}
       }

@@ -188,12 +188,12 @@ class MmMatterhorn extends BaseMmMatterhorn
    * @access public
    * @param integer $perfil_id nuevo perfil
    * @param opt integer $prioridad 
-   * @param opt integer $user_id (0 si se desconoce)
+   * @param opt integer $user_email (0 si se desconoce)
    * @param force boolena para crear otro aunque exista
    * @return la tarea creada o null is error
    */
   //OJO SI YA ESTA TRANSOCODIFICANDO NO LO HAGAS
-  public function retranscoding($priority = 2, $user_id = 0, $force = false){
+  public function retranscoding($priority = 2, $user_email = 0, $force = false){
     
     //TODO.
     $profile = PerfilPeer::retrieveByPK(16);
@@ -223,9 +223,8 @@ class MmMatterhorn extends BaseMmMatterhorn
     
     $trans->setPid(0);
 
-    if($user_id !== 0){
-      $user = UserPeer::retrieveByPK($user_id);
-      $trans->setEmail($user->getEmail());
+    if($user_email !== 0){
+      $trans->setEmail($user_email);
     }
 
     $trans->save();      //Necesario para setPathAuto

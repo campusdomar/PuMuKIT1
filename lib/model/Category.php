@@ -20,6 +20,7 @@ class Category extends BaseCategory
 
   /**
    * Asocio el objeto multimedia a dicho category, si no esta asociado antes.
+   * Ojo, no añade a las categorías padre (addMmIdAndUpdateCategoryTree).
    *
    * @access public
    * @parameter integer $mm_id
@@ -175,8 +176,6 @@ class Category extends BaseCategory
     }
     return False;
   }
-
-
 
   /**
    * 
