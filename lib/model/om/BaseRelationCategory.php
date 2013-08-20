@@ -757,7 +757,7 @@ abstract class BaseRelationCategory extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseCategoryPeer.php';
 
-			$this->aCategoryRelatedByOneId = CategoryPeer::retrieveByPKWithI18n($this->one_id, $this->getCulture(), $con);
+			$this->aCategoryRelatedByOneId = CategoryPeer::retrieveByPKWithI18n($this->one_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -765,7 +765,7 @@ abstract class BaseRelationCategory extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = CategoryPeer::retrieveByPKWithI18n($this->one_id, $this->getCulture(), $con);
+			   $obj = CategoryPeer::retrieveByPKWithI18n($this->one_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addCategorysRelatedByOneId($this);
 			 */
 		}
@@ -836,7 +836,7 @@ abstract class BaseRelationCategory extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseCategoryPeer.php';
 
-			$this->aCategoryRelatedByTwoId = CategoryPeer::retrieveByPKWithI18n($this->two_id, $this->getCulture(), $con);
+			$this->aCategoryRelatedByTwoId = CategoryPeer::retrieveByPKWithI18n($this->two_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -844,7 +844,7 @@ abstract class BaseRelationCategory extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = CategoryPeer::retrieveByPKWithI18n($this->two_id, $this->getCulture(), $con);
+			   $obj = CategoryPeer::retrieveByPKWithI18n($this->two_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addCategorysRelatedByTwoId($this);
 			 */
 		}

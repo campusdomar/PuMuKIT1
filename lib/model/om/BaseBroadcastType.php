@@ -870,7 +870,7 @@ abstract class BaseBroadcastType extends BaseObject  implements Persistent {
 
 				$criteria->add(BroadcastPeer::BROADCAST_TYPE_ID, $this->getId());
 
-				$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+				$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -883,7 +883,7 @@ abstract class BaseBroadcastType extends BaseObject  implements Persistent {
 				$criteria->add(BroadcastPeer::BROADCAST_TYPE_ID, $this->getId());
 
 				if (!isset($this->lastBroadcastCriteria) || !$this->lastBroadcastCriteria->equals($criteria)) {
-					$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+					$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 				}
 			}
 		}

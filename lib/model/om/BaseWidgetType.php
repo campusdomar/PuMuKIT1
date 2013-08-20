@@ -791,7 +791,7 @@ abstract class BaseWidgetType extends BaseObject  implements Persistent {
 
 				$criteria->add(WidgetPeer::WIDGET_TYPE_ID, $this->getId());
 
-				$this->collWidgets = WidgetPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+				$this->collWidgets = WidgetPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -804,7 +804,7 @@ abstract class BaseWidgetType extends BaseObject  implements Persistent {
 				$criteria->add(WidgetPeer::WIDGET_TYPE_ID, $this->getId());
 
 				if (!isset($this->lastWidgetCriteria) || !$this->lastWidgetCriteria->equals($criteria)) {
-					$this->collWidgets = WidgetPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+					$this->collWidgets = WidgetPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 				}
 			}
 		}

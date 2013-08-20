@@ -1108,7 +1108,7 @@ abstract class BaseStreamserver extends BaseObject  implements Persistent {
 
 				$criteria->add(PerfilPeer::STREAMSERVER_ID, $this->getId());
 
-				$this->collPerfils = PerfilPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+				$this->collPerfils = PerfilPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -1121,7 +1121,7 @@ abstract class BaseStreamserver extends BaseObject  implements Persistent {
 				$criteria->add(PerfilPeer::STREAMSERVER_ID, $this->getId());
 
 				if (!isset($this->lastPerfilCriteria) || !$this->lastPerfilCriteria->equals($criteria)) {
-					$this->collPerfils = PerfilPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+					$this->collPerfils = PerfilPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 				}
 			}
 		}

@@ -808,7 +808,7 @@ abstract class BaseDirectType extends BaseObject  implements Persistent {
 
 				$criteria->add(DirectPeer::DIRECT_TYPE_ID, $this->getId());
 
-				$this->collDirects = DirectPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+				$this->collDirects = DirectPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -821,7 +821,7 @@ abstract class BaseDirectType extends BaseObject  implements Persistent {
 				$criteria->add(DirectPeer::DIRECT_TYPE_ID, $this->getId());
 
 				if (!isset($this->lastDirectCriteria) || !$this->lastDirectCriteria->equals($criteria)) {
-					$this->collDirects = DirectPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+					$this->collDirects = DirectPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 				}
 			}
 		}

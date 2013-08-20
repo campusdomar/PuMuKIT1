@@ -207,7 +207,8 @@ class SfPeerBuilder extends PHP5ComplexPeerBuilder
       $tmp = str_replace('$criteria->setDbName(self::DATABASE_NAME);',
 			     "\$criteria->setDbName(self::DATABASE_NAME);\n\n".
 			     "        //ADD DEFAULT ORDER\n".
-                             "        if(count(\$criteria->getOrderByColumns()) == 0)\n".
+                             "        if((count(\$criteria->getOrderByColumns()) == 0) &&\n".
+			     "           (array_diff(\$criteria->getSelectColumns(), array(self::COUNT_DISTINCT, self::COUNT)))) \n".
 			     "            \$criteria->addAscendingOrderByColumn(self::RANK);", $tmp);
     }
 

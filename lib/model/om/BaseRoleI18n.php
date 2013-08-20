@@ -794,7 +794,7 @@ abstract class BaseRoleI18n extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseRolePeer.php';
 
-			$this->aRole = RolePeer::retrieveByPKWithI18n($this->id, $this->getCulture(), $con);
+			$this->aRole = RolePeer::retrieveByPKWithI18n($this->id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -802,7 +802,7 @@ abstract class BaseRoleI18n extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = RolePeer::retrieveByPKWithI18n($this->id, $this->getCulture(), $con);
+			   $obj = RolePeer::retrieveByPKWithI18n($this->id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addRoles($this);
 			 */
 		}

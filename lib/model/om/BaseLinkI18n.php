@@ -741,7 +741,7 @@ abstract class BaseLinkI18n extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseLinkPeer.php';
 
-			$this->aLink = LinkPeer::retrieveByPKWithI18n($this->id, $this->getCulture(), $con);
+			$this->aLink = LinkPeer::retrieveByPKWithI18n($this->id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -749,7 +749,7 @@ abstract class BaseLinkI18n extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = LinkPeer::retrieveByPKWithI18n($this->id, $this->getCulture(), $con);
+			   $obj = LinkPeer::retrieveByPKWithI18n($this->id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addLinks($this);
 			 */
 		}

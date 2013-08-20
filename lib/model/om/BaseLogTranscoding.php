@@ -1764,7 +1764,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseMmPeer.php';
 
-			$this->aMm = MmPeer::retrieveByPKWithI18n($this->mm_id, $this->getCulture(), $con);
+			$this->aMm = MmPeer::retrieveByPKWithI18n($this->mm_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1772,7 +1772,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = MmPeer::retrieveByPKWithI18n($this->mm_id, $this->getCulture(), $con);
+			   $obj = MmPeer::retrieveByPKWithI18n($this->mm_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addMms($this);
 			 */
 		}
@@ -1843,7 +1843,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseLanguagePeer.php';
 
-			$this->aLanguage = LanguagePeer::retrieveByPKWithI18n($this->language_id, $this->getCulture(), $con);
+			$this->aLanguage = LanguagePeer::retrieveByPKWithI18n($this->language_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1851,7 +1851,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = LanguagePeer::retrieveByPKWithI18n($this->language_id, $this->getCulture(), $con);
+			   $obj = LanguagePeer::retrieveByPKWithI18n($this->language_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addLanguages($this);
 			 */
 		}
@@ -1922,7 +1922,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BasePerfilPeer.php';
 
-			$this->aPerfil = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, $this->getCulture(), $con);
+			$this->aPerfil = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1930,7 +1930,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, $this->getCulture(), $con);
+			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addPerfils($this);
 			 */
 		}
@@ -2001,7 +2001,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseCpuPeer.php';
 
-			$this->aCpu = CpuPeer::retrieveByPKWithI18n($this->cpu_id, $this->getCulture(), $con);
+			$this->aCpu = CpuPeer::retrieveByPKWithI18n($this->cpu_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -2009,7 +2009,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = CpuPeer::retrieveByPKWithI18n($this->cpu_id, $this->getCulture(), $con);
+			   $obj = CpuPeer::retrieveByPKWithI18n($this->cpu_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addCpus($this);
 			 */
 		}

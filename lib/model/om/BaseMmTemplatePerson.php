@@ -843,7 +843,7 @@ abstract class BaseMmTemplatePerson extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseMmTemplatePeer.php';
 
-			$this->aMmTemplate = MmTemplatePeer::retrieveByPKWithI18n($this->mm_template_id, $this->getCulture(), $con);
+			$this->aMmTemplate = MmTemplatePeer::retrieveByPKWithI18n($this->mm_template_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -851,7 +851,7 @@ abstract class BaseMmTemplatePerson extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = MmTemplatePeer::retrieveByPKWithI18n($this->mm_template_id, $this->getCulture(), $con);
+			   $obj = MmTemplatePeer::retrieveByPKWithI18n($this->mm_template_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addMmTemplates($this);
 			 */
 		}
@@ -922,7 +922,7 @@ abstract class BaseMmTemplatePerson extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BasePersonPeer.php';
 
-			$this->aPerson = PersonPeer::retrieveByPKWithI18n($this->person_id, $this->getCulture(), $con);
+			$this->aPerson = PersonPeer::retrieveByPKWithI18n($this->person_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -930,7 +930,7 @@ abstract class BaseMmTemplatePerson extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = PersonPeer::retrieveByPKWithI18n($this->person_id, $this->getCulture(), $con);
+			   $obj = PersonPeer::retrieveByPKWithI18n($this->person_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addPersons($this);
 			 */
 		}
@@ -1001,7 +1001,7 @@ abstract class BaseMmTemplatePerson extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseRolePeer.php';
 
-			$this->aRole = RolePeer::retrieveByPKWithI18n($this->role_id, $this->getCulture(), $con);
+			$this->aRole = RolePeer::retrieveByPKWithI18n($this->role_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1009,7 +1009,7 @@ abstract class BaseMmTemplatePerson extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = RolePeer::retrieveByPKWithI18n($this->role_id, $this->getCulture(), $con);
+			   $obj = RolePeer::retrieveByPKWithI18n($this->role_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addRoles($this);
 			 */
 		}

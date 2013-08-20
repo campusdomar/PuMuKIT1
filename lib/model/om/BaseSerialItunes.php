@@ -784,7 +784,7 @@ abstract class BaseSerialItunes extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseSerialPeer.php';
 
-			$this->aSerial = SerialPeer::retrieveByPKWithI18n($this->serial_id, $this->getCulture(), $con);
+			$this->aSerial = SerialPeer::retrieveByPKWithI18n($this->serial_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -792,7 +792,7 @@ abstract class BaseSerialItunes extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = SerialPeer::retrieveByPKWithI18n($this->serial_id, $this->getCulture(), $con);
+			   $obj = SerialPeer::retrieveByPKWithI18n($this->serial_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addSerials($this);
 			 */
 		}

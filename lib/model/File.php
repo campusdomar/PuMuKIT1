@@ -174,6 +174,7 @@ class File extends BaseFile
     $width = sfConfig::get('app_thumbnail_hor');
     $height = sfConfig::get('app_thumbnail_ver');
     $new_height = intval(1.0 * $width / $this->getAspect());
+
     if($new_height <= $height) {
       $new_width = $width;
     }else{
@@ -186,7 +187,6 @@ class File extends BaseFile
       $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"";
     exit;
     */
-
     exec("/usr/local/bin/ffmpeg -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
 	 $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"");
 
@@ -343,6 +343,23 @@ class File extends BaseFile
     $url = $controller->genUrl(array('module'=> 'file', 'action' => 'index', 'id' => $this->getId() . "." . $this->getExtension()), $absolute);
     sfConfig::set('sf_no_script_name', $old);
     return $url;
+  }
+
+  /**
+   * Lógica de editar/modules/files/actions.php para autocompletar resolución, size y duración.
+   *
+   */
+  public function autocomplete()
+  {
+    $this->setDuration(intval(FilePeer::getDuration($this->getUrlMount())));                                                                                                                               
+    $this->setSize(filesize($this->getUrlMount()));                                                                                                                                                        
+                                                                                                                                                                                                           
+    //Autocompletar resolution                                                                                                                                                                              
+    $movie = new ffmpeg_movie($this->getFile());                                                                                                                                                           
+    if (!is_null($movie)){                                                                                                                                                                                 
+      $this->setResolutionVer($movie->getFrameHeight());                                                                                                                                                   
+      $this->setResolutionHor($movie->getFrameWidth());                                                                                                                                                    
+    }
   }
 
 }

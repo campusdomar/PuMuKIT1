@@ -1100,7 +1100,7 @@ abstract class BaseFormat extends BaseObject  implements Persistent {
 
 				$criteria->add(FilePeer::FORMAT_ID, $this->getId());
 
-				$this->collFiles = FilePeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+				$this->collFiles = FilePeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -1113,7 +1113,7 @@ abstract class BaseFormat extends BaseObject  implements Persistent {
 				$criteria->add(FilePeer::FORMAT_ID, $this->getId());
 
 				if (!isset($this->lastFileCriteria) || !$this->lastFileCriteria->equals($criteria)) {
-					$this->collFiles = FilePeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+					$this->collFiles = FilePeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 				}
 			}
 		}

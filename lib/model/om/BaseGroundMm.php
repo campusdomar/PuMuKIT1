@@ -763,7 +763,7 @@ abstract class BaseGroundMm extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseGroundPeer.php';
 
-			$this->aGround = GroundPeer::retrieveByPKWithI18n($this->ground_id, $this->getCulture(), $con);
+			$this->aGround = GroundPeer::retrieveByPKWithI18n($this->ground_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -771,7 +771,7 @@ abstract class BaseGroundMm extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = GroundPeer::retrieveByPKWithI18n($this->ground_id, $this->getCulture(), $con);
+			   $obj = GroundPeer::retrieveByPKWithI18n($this->ground_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addGrounds($this);
 			 */
 		}
@@ -842,7 +842,7 @@ abstract class BaseGroundMm extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseMmPeer.php';
 
-			$this->aMm = MmPeer::retrieveByPKWithI18n($this->mm_id, $this->getCulture(), $con);
+			$this->aMm = MmPeer::retrieveByPKWithI18n($this->mm_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -850,7 +850,7 @@ abstract class BaseGroundMm extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = MmPeer::retrieveByPKWithI18n($this->mm_id, $this->getCulture(), $con);
+			   $obj = MmPeer::retrieveByPKWithI18n($this->mm_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addMms($this);
 			 */
 		}

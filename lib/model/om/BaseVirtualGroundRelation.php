@@ -757,7 +757,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 			// include the related Peer class
 			include_once 'lib/model/om/BaseVirtualGroundPeer.php';
 
-			$this->aVirtualGround = VirtualGroundPeer::retrieveByPKWithI18n($this->virtual_ground_id, $this->getCulture(), $con);
+			$this->aVirtualGround = VirtualGroundPeer::retrieveByPKWithI18n($this->virtual_ground_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -765,7 +765,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = VirtualGroundPeer::retrieveByPKWithI18n($this->virtual_ground_id, $this->getCulture(), $con);
+			   $obj = VirtualGroundPeer::retrieveByPKWithI18n($this->virtual_ground_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addVirtualGrounds($this);
 			 */
 		}
@@ -836,7 +836,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 			// include the related Peer class
 			include_once 'lib/model/om/BaseCategoryPeer.php';
 
-			$this->aCategory = CategoryPeer::retrieveByPKWithI18n($this->category_id, $this->getCulture(), $con);
+			$this->aCategory = CategoryPeer::retrieveByPKWithI18n($this->category_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -844,7 +844,7 @@ abstract class BaseVirtualGroundRelation extends BaseObject  implements Persiste
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = CategoryPeer::retrieveByPKWithI18n($this->category_id, $this->getCulture(), $con);
+			   $obj = CategoryPeer::retrieveByPKWithI18n($this->category_id, sfContext::getInstance()->getUser()->getCulture(), $con);
 			   $obj->addCategorys($this);
 			 */
 		}

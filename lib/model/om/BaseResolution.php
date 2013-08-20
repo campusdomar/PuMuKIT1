@@ -1185,7 +1185,7 @@ abstract class BaseResolution extends BaseObject  implements Persistent {
 
 				$criteria->add(FilePeer::RESOLUTION_ID, $this->getId());
 
-				$this->collFiles = FilePeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+				$this->collFiles = FilePeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -1198,7 +1198,7 @@ abstract class BaseResolution extends BaseObject  implements Persistent {
 				$criteria->add(FilePeer::RESOLUTION_ID, $this->getId());
 
 				if (!isset($this->lastFileCriteria) || !$this->lastFileCriteria->equals($criteria)) {
-					$this->collFiles = FilePeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+					$this->collFiles = FilePeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 				}
 			}
 		}
@@ -1394,7 +1394,7 @@ abstract class BaseResolution extends BaseObject  implements Persistent {
 
 				$criteria->add(DirectPeer::RESOLUTION_ID, $this->getId());
 
-				$this->collDirects = DirectPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+				$this->collDirects = DirectPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -1407,7 +1407,7 @@ abstract class BaseResolution extends BaseObject  implements Persistent {
 				$criteria->add(DirectPeer::RESOLUTION_ID, $this->getId());
 
 				if (!isset($this->lastDirectCriteria) || !$this->lastDirectCriteria->equals($criteria)) {
-					$this->collDirects = DirectPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
+					$this->collDirects = DirectPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
 				}
 			}
 		}

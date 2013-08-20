@@ -108,6 +108,15 @@ require_once \''.$this->getFilePath($this->getStubObjectBuilder()->getPackage().
     }
   }
 
+  protected function getCultureAccessorMethod() 
+  {
+    if ($this->getTable()->getAttribute('isI18N')) {
+      return '$this->getCulture()';
+    } else {
+      return 'sfContext::getInstance()->getUser()->getCulture()';
+    }
+  }
+
   protected function addCultureAccessorMethod(&$script)
   {
     $script .= '
@@ -436,7 +445,7 @@ EOF;
 			include_once '".$fkPeerBuilder->getClassFilePath()."';
 ";
     $script .= "
-			\$this->$varName = ".$fkPeerBuilder->getPeerClassname()."::".$fkPeerBuilder->getRetrieveMethodName()."WithI18n($arglist, \$this->getCulture(), \$con);
+			\$this->$varName = ".$fkPeerBuilder->getPeerClassname()."::".$fkPeerBuilder->getRetrieveMethodName()."WithI18n($arglist, ".$this->getCultureAccessorMethod().", \$con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -444,7 +453,7 @@ EOF;
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   \$obj = ".$fkPeerBuilder->getPeerClassname()."::retrieveByPKWithI18n($arglist, \$this->getCulture(), \$con);
+			   \$obj = ".$fkPeerBuilder->getPeerClassname()."::retrieveByPKWithI18n($arglist, ".$this->getCultureAccessorMethod().", \$con);
 			   \$obj->add$pCollName(\$this);
 			 */
 		}
@@ -539,7 +548,7 @@ EOF;
     } // end foreach ($fk->getForeignColumns()
     
     $script .= "
-				\$this->$collName = ".$fkPeerBuilder->getPeerClassname()."::doSelectWithI18n(\$criteria, \$this->getCulture(), \$con);
+				\$this->$collName = ".$fkPeerBuilder->getPeerClassname()."::doSelectWithI18n(\$criteria, ".$this->getCultureAccessorMethod().", \$con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -560,7 +569,7 @@ EOF;
     } // foreach ($fk->getForeignColumns()
     $script .= "
 				if (!isset(\$this->$lastCriteriaName) || !\$this->".$lastCriteriaName."->equals(\$criteria)) {
-					\$this->$collName = ".$fkPeerBuilder->getPeerClassname()."::doSelectWithI18n(\$criteria, \$this->getCulture(), \$con);
+					\$this->$collName = ".$fkPeerBuilder->getPeerClassname()."::doSelectWithI18n(\$criteria, ".$this->getCultureAccessorMethod().", \$con);
 				}
 			}
 		}
@@ -635,5 +644,9 @@ EOF;
 ";
 	}
 
+
+
+
 }
+
 
