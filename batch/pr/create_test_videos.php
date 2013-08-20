@@ -25,22 +25,32 @@ ob_implicit_flush(true);
 ob_end_flush();
 // ----------------------------- Script starts here -------------------
 
-// ¿Tocar los virtualgrounds?
+// globals
+$predefined_filenames = array(
+        '74638.flv',
+        'Invasiones Biológicas. Mejillón cebra. (Dreissena polymorpha).mp4',
+        'The introduction of cats in islands ecosystems.flv',
+        'What is the Campus do Mar_.webm');
 define('TEST_KEYWORD', "create_test_videos"); // Makes test serials easier to delete
-$perfil_test = getPerfilTest(); // global
+$perfil_test    = getPerfilTest();
+$prepared_files = getPreparedFiles($predefined_filenames, $perfil_test);
+$prepared_pics  = createPreparedPics($predefined_filenames);
 
 if (!checkParentCategoryCodesPresent()) {
     echo "\nCategories not found - try symfony init-categories\n\n";
     exit;
 }
 
-createVirtualGrounds(); exit;
 deleteTestSerials(); 
 createSerialsWithDecisionesEditoriales();
 createSerialsForAllDirectrices();
 createSerialsForAllLugares();
+
+deleteTestVirtualgrounds();
 createVirtualGrounds();
 exit;
+
+// TO DO: crear pic_mm para cada mm
 
 // ----------------------------- Script ends here -------------------
 
@@ -217,6 +227,8 @@ function createFileInMm($file, $mm)
     }
     
     $file->setMmId($mm->getId());
+    $file->setCulture('es');
+    $file->setDescription('TEST_KEYWORD');
     $status = $file->save();
     echo " OK - status " . $status . " id " . $file->getId() . "\n";
 
@@ -229,43 +241,14 @@ function createFileInMm($file, $mm)
  */
 function prepareFile($index)
 {
-    global $perfil_test;
-
-    $predefined_filenames = array(
-        '74638.flv',
-        'Invasiones Biológicas. Mejillón cebra. (Dreissena polymorpha).mp4',
-        'The introduction of cats in islands ecosystems.flv',
-        'What is the Campus do Mar_.webm');
-    if (!isset($predefined_filenames[$index])){
+    global $prepared_files; 
+    if (!isset($prepared_files[$index])){
         echo "Error: el file predefinido " . $index . " no existe\n";
         exit;
     }
 
-    $path = SF_ROOT_DIR . "/web/testvideos/" . $predefined_filenames[$index];
-    $url  = sfConfig::get('app_info_link', "http://pumukit18") . 
-        "/testvideos/" . $predefined_filenames[$index];
-
-    $ext      = extractExtension($predefined_filenames[$index]);
-    $format   = getFormat($ext);
-    $mimetype = getMimetype($ext);
-
-    $file = new File();
-    $file->setLanguage(getLanguage("ES"));
-    
-    $file->setUrl($url);
-    $file->setFile($path);
-    $file->setAudio($perfil_test->getAudio());
-    $file->setPerfilId($perfil_test->getId());
-    $file->setFormatId($format->getId());
-    $file->setMimeTypeId($mimetype->getId());
-
-    $file->setCulture('es');
-    $file->setDescription('');
-
-    return $file;
+    return $prepared_files[$index]->copy();
 }
-
-
 
 function extractExtension($filename){
     return substr(strrchr($filename, '.'), 1);
@@ -277,7 +260,6 @@ function getLanguage ($cod = "ES")
     $c->add(LanguagePeer::COD, $cod);
     return LanguagePeer::doSelectOne($c);
 }
-
 
 /**
  * Finds or creates a minimum test profile for the test files
@@ -312,6 +294,68 @@ function getPerfilTest($name = 'perfil_test')
     }
 
     return $perfil;
+}
+
+/**
+ * Uses $predefined_filenames to build a array of file objects
+ * to be used as "file templates".
+ */
+function getPreparedFiles($predefined_filenames, $perfil_test)
+{
+    $predefined = array();
+    foreach ($predefined_filenames as $predefined_filename){
+        $path = SF_ROOT_DIR . "/web/testvideos/" . $predefined_filename;
+        $url  = sfConfig::get('app_info_link', "http://pumukit18") . 
+            "/testvideos/" . $predefined_filename;
+
+        $ext      = extractExtension($predefined_filename);
+        $format   = getFormat($ext);
+        $mimetype = getMimetype($ext);
+
+        $file = new File();
+        $file->setLanguage(getLanguage("ES"));
+        
+        $file->setUrl($url);
+        $file->setFile($path);
+        $file->setAudio($perfil_test->getAudio());
+        $file->setPerfilId($perfil_test->getId());
+        $file->setFormatId($format->getId());
+        $file->setMimeTypeId($mimetype->getId());
+
+        $file->autocomplete();
+
+        $predefined[] = $file;
+    }
+
+    return $predefined;
+}
+
+function createPreparedPics($predefined_filenames)
+{
+    $predefined_pics = array();
+    foreach ($predefined_filenames as $filename){
+        $url = '/testvideos/' . extractName($filename) . '.jpg';
+        if (!$pic = retrievePicByUrl($url)){
+            $pic = new Pic();
+            $pic->setUrl($url);
+            $pic->save();
+        }
+        $predefined_pics[] = $pic;
+    }
+    
+    return $predefined_pics;
+}
+
+function retrievePicByUrl($url)
+{
+    $c = new Criteria;
+    $c->add(PicPeer::URL, $url, Criteria::LIKE);
+
+    return PicPeer::doSelectOne($c);
+}
+
+function extractName($filename){
+    return substr($filename, 0, strrpos($filename, '.')); 
 }
 
 function getMimetype($ext)
@@ -350,6 +394,7 @@ function getFormat($ext)
 
 function deleteTestSerials()
 {
+    echo "Borrando test serials antiguas\n";
     $test_serials = doSelectSerialsWithKeyword(TEST_KEYWORD);
     foreach ($test_serials as $serial){
         $serial->delete();
@@ -364,6 +409,23 @@ function doSelectSerialsWithKeyword($keyword = TEST_KEYWORD)
     $c->add(SerialI18nPeer::KEYWORD, $keyword, Criteria::LIKE);
     return SerialPeer::doSelectWithI18n($c);
 }
+
+function deleteTestVirtualgrounds()
+{
+    echo "Borrando test virtualgrounds antiguos\n";
+    $test_virtualgrounds = doSelectVirtualgroundsWithDescription(TEST_KEYWORD);
+    foreach ($test_virtualgrounds as $vg){
+        $vg->delete();
+    }
+}
+
+function doSelectVirtualgroundsWithDescription($description = TEST_KEYWORD)
+{
+    $c = new Criteria();
+    $c->add(VirtualGroundPeer::DESCRIPTION, $description, Criteria::LIKE);
+    return VirtualGroundPeer::doSelectWithI18n($c);
+}
+
 
 function createTimeframe($category, $mm, $timestart, $timeend, $description = TEST_KEYWORD)
 {
