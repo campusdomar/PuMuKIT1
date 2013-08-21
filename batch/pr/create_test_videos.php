@@ -50,8 +50,6 @@ deleteTestVirtualgrounds();
 createVirtualGrounds();
 exit;
 
-// TO DO: crear pic_mm para cada mm
-
 // ----------------------------- Script ends here -------------------
 
 /**
@@ -149,8 +147,9 @@ function createMmInSerial($title, $serial, $date = "now")
     $status = $mm->save();
     echo " OK - status " . $status . " id " . $mm->getId() . "\n";
 
-    $file1  = createFileInMm(prepareFile(rand(0,3)), $mm);
-
+    $file_index = rand(0,3);
+    $file1  = createFileInMm(prepareFile($file_index), $mm);
+    assignPreparedPicToMm($file_index, $mm);
 
     return $mm;
 }
@@ -353,6 +352,24 @@ function retrievePicByUrl($url)
 
     return PicPeer::doSelectOne($c);
 }
+
+function assignPreparedPicToMm($pic_index, $mm)
+{
+    global $prepared_pics;
+    if (!isset($prepared_pics[$pic_index])){
+        echo "\nError: no está preparada la pic con índice " . $pic_index . "\n";
+        exit;
+    }
+    $pic_id = $prepared_pics[$pic_index]->getId();
+
+    if (!$pic_mm = PicMmPeer::RetrieveByPk($pic_id, $mm->getId())){
+        $pic_mm = new PicMm();
+        $pic_mm->setPicId($pic_id);
+        $pic_mm->setOtherId($mm->getId());
+        $pic_mm->save();
+    }
+}
+
 
 function extractName($filename){
     return substr($filename, 0, strrpos($filename, '.')); 
