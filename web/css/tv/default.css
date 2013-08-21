@@ -203,6 +203,10 @@ div.announce_element{
        background-color: #f0f0ff;
 }
 
+div.announce_element:hover{ 
+    background-color: #c0c0cf;
+}
+
 div.announce_element_1{ 
        background-color: #ffead6 !important;
 }
@@ -377,6 +381,10 @@ div#serial_body div.serial_date_w{
 
 div#serial_body div.serial_mm{ 
   background-color: #F0F0FF;
+}
+
+div#serial_body div.serial_mm:hover{ 
+  background-color: #C0C0CF;
 }
                                
 
@@ -778,6 +786,11 @@ div.pumukit_mmobjs .pumukit_mmobj{
   width: 100%;
   float: left;
 }
+
+div.pumukit_mmobjs .pumukit_mmobj:hover{
+      background: #c9c9c9;
+}
+
 
 div.pumukit_mmobjs .pumukit_mmobj .info{
   margin-left: 150px;
