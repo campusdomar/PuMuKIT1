@@ -31,7 +31,6 @@
   <?php endforeach?>
 </ul>
 <?php endif?>
-</div>
 <div class="pager" style="padding-bottom:30px; text-align:center; overflow:hidden; margin: 4px 0px 2px;">
    <?php if ($total > 1) include_partial('global/pager', array('page' => $page, 'total' => $total, 'url' => $url)) ?>
 </div>
