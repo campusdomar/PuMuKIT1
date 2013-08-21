@@ -223,11 +223,6 @@ class Transcoding extends BaseTranscoding
 	$file->createPic();
       }
     }
-
-    if($this->getMm()->getStatusId() < -40 ){
-      $this->getMm()->setStatusId($this->getMm()->getStatusId() + 50);
-      $this->getMm()->save();
-    }
   }
 
 
