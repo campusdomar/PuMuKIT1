@@ -25,26 +25,31 @@ ob_implicit_flush(true);
 ob_end_flush();
 // ----------------------------- Script starts here -------------------
 
-// globals
-$predefined_filenames = array(
-        '74638.flv',
-        'Invasiones Biológicas. Mejillón cebra. (Dreissena polymorpha).mp4',
-        'The introduction of cats in islands ecosystems.flv',
-        'What is the Campus do Mar_.webm');
-define('TEST_KEYWORD', "create_test_videos"); // Makes test serials easier to delete
-$perfil_test    = getPerfilTest();
-$prepared_files = getPreparedFiles($predefined_filenames, $perfil_test);
-$prepared_pics  = createPreparedPics($predefined_filenames);
-
 if (!checkParentCategoryCodesPresent()) {
     echo "\nCategories not found - try symfony init-categories\n\n";
     exit;
 }
 
+// globals. Predefined filenames = videos in /web/testvideos/ 
+// There should be a thumbnail with the same name and .jpg extension.
+$predefined_filenames = array(
+        '74638.flv',
+        'Invasiones Biológicas. Mejillón cebra. (Dreissena polymorpha).mp4',
+        'The introduction of cats in islands ecosystems.flv',
+        'What is the Campus do Mar_.webm');
+define('TEST_KEYWORD', "create_test_videos"); // Makes test objects easier to delete
+$perfil_test    = getPerfilTest();
+$prepared_files = getPreparedFiles($predefined_filenames, $perfil_test);
+// $prepared_pics  = createPreparedPics($predefined_filenames);
+
+deleteTestPicMms();
 deleteTestSerials(); 
+$prepared_pics  = createPreparedPics($predefined_filenames);
+
 createSerialsWithDecisionesEditoriales();
 createSerialsForAllDirectrices();
 createSerialsForAllLugares();
+createSerialsWithNovedades();
 
 deleteTestVirtualgrounds();
 createVirtualGrounds();
@@ -409,6 +414,21 @@ function getFormat($ext)
     return $format;
 }
 
+function deleteTestPicMms()
+{
+    // deletes pic_mms without pic
+    $existing_pics = PicPeer::doSelect(new Criteria());
+    $pic_ids       = array();
+    foreach ($existing_pics as $pic) $pic_ids[] = $pic->getId();
+
+    $c = new Criteria();
+    $c->add(PicMmPeer::PIC_ID, $pic_ids, CRITERIA::NOT_IN);
+    $c->setDistinct();
+    $empty_pic_mms = BasePicMmPeer::doDelete($c); // force delete
+
+    if (!empty($empty_pic_mms)) echo "\nBorrados " . count($empty_pic_mms) . " pic_mms que hacían referencia a pics inexistentes\n\n"; // if the array is 
+}
+
 function deleteTestSerials()
 {
     echo "Borrando test serials antiguas\n";
@@ -612,6 +632,43 @@ function createSerialsForAllLugares()
             $cat->addMmIdAndUpdateCategoryTree($mm3->getId());   
         }
     }
+
+}
+
+function createSerialsWithNovedades()
+{
+    $year_before       = date('Y-m-d H:i:s', strtotime('-1 year'));
+    $five_years_before = date('Y-m-d H:i:s', strtotime('-5 year'));
+
+    // Serial marked with novedad
+    $serial_novedad = createSerial("Test serie novedad");
+    $serial_novedad->setAnnounce(1);
+    $serial_novedad->save();
+    
+    $mm1 = createMmInSerial("Test mm publicado el año pasado dentro de una serie seleccionada como novedad", $serial_novedad, $year_before);
+    $mm3 = createMmInSerial("Test mm publicado este año dentro de una serie seleccionada como novedad", $serial_novedad);
+
+    $mm2 = createMmInSerial("Test mm publicado hace 5 años, mm y serie marcados como novedad", $serial_novedad, $five_years_before);
+    $mm2->setAnnounce(1);
+    $mm2->save();
+
+    publishAllMmFromSerial($serial_novedad);
+    $mm4 = createMmInSerial("Test mm sin publicar hace cinco años dentro de una serie seleccionada como novedad", $serial_novedad, $five_years_before);    
+
+    // Serial with some mms marked as novedad and some not.
+    $serial_with_novedades = createSerial("Test serie con algunos mm novedad y otros no");
+    
+    $mm5 = createMmInSerial("Test mm publicado el año pasado como novedad", $serial_with_novedades, $year_before);
+    $mm5->setAnnounce(1);
+    $mm5->save();
+
+    $mm6 = createMmInSerial("Test mm publicado hace 5 años", $serial_with_novedades, $five_years_before);
+    $mm7 = createMmInSerial("Test mm publicado este año como novedad", $serial_with_novedades);
+    $mm7->setAnnounce(1);
+    $mm7->save();
+
+    publishAllMmFromSerial($serial_with_novedades);
+    $mm8 = createMmInSerial("Test mm sin publicar ", $serial_with_novedades); 
 
 }
 
