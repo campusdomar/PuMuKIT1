@@ -74,9 +74,9 @@
    <?php endforeach */?>
 
    <div class="content">
-     <input type="radio" name="decision" value="prueba_categoria" <?php echo ($vground->getEditorial3()?'checked="checked"':'')?> />
+     <input type="radio" name="decision" value="other" <?php echo ($vground->getOther()?'checked="checked"':'')?> />
      &nbsp; Categorías (Unesco, lugares...) 
-       <?php echo m_link_to('configurar', 'virtualgrounds/testcategory?vg_id='. $vground->getId(), 
+       <?php echo m_link_to('configurar', 'virtualgrounds/editcategories?vg_id='. $vground->getId(), 
        array('title' => 'Configurar Categoria ' . $vground->getName()), 
        array('width' => '1200'),
        array('evalScripts' => 'true')) ?></td>

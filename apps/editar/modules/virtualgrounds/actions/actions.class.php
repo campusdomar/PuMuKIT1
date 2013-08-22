@@ -187,8 +187,8 @@ class virtualgroundsActions extends sfActions
       $vground->setEditorial1(true);
     }elseif ($this->getRequestParameter('decision') == 'editorial2'){
       $vground->setEditorial2(true);
-    }elseif ($this->getRequestParameter('decision') == 'editorial3'){
-      $vground->setEditorial3(true);
+    }elseif ($this->getRequestParameter('decision') == 'other'){
+      $vground->setOther(true);
     }elseif (intval($this->getRequestParameter('decision')) != 0){
       $vground->setOther(true);
       $vground->setGroundTypeId($this->getRequestParameter('decision'));
@@ -339,42 +339,12 @@ class virtualgroundsActions extends sfActions
   }
 
 
-
-  public function executeEditground()
-  {
-    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($vground);
-
-    $c = new Criteria();
-    $c->add(GroundPeer::GROUND_TYPE_ID, $this->getRequestParameter('type'));
-    $this->grounds = GroundPeer::doSelectWithI18n($c, $this->getUser()->getCulture());
-    $this->rel = $vground->getRelationsId();    
-  }
-
-  public function executeTestcategory()
+// sustituye al antiguo executeEditGround()
+  public function executeEditcategories()
   {
     $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
     $this->forward404Unless($vground);
     $this->vg = $vground;
-  }
-
-  public function executeUpdatetestcategory()
-  {
-    // $c = new Criteria();
-    // $c->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getRequestParameter('id'));
-    // VirtualGroundRelationPeer::doDelete($c);
-
-    // $others = $this->getRequestParameter('relations');
-
-    // foreach($others as $k => $v){
-    //   $rel = new VirtualGroundRelation();
-    //   $rel->setVirtualGroundId($this->getRequestParameter('id'));
-    //   $rel->setGroundId($k);
-    //   $rel->save();
-    // }
-
-    $this->type = $this->getUser()->getAttribute('id', 1, 'tv_admin/groundtype');
-    return $this->renderComponent('virtualgrounds', 'grounds');
   }
 
   public function executeGetchildren()

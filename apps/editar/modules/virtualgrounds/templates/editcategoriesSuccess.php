@@ -8,6 +8,7 @@
 
 <?php // Comprobar función javascript para calcular el vertical offset en vez de números mágicos.
 // No funciona en todos los casos (cat. padre abierta o cerrada, cat. hija, etc.)
+
 //getVerticalOffsetFromFirstLiText = function (spanElement){
   // Finds li parent, ul parent, first li and first span to get the real text offset.
   //return spanElement.parentNode.parentNode.children[0].children[0].positionedOffset()[1];
