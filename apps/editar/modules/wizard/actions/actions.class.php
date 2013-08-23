@@ -99,7 +99,7 @@ class wizardActions extends sfActions
 
     }
 
-    $this->profiles = PerfilPeer::doSelectToWizard(false);
+    $this->profiles = PerfilPeer::doSelectToWizard(true);
     $this->pub_channels = PubChannelPeer::doSelect(new Criteria());
     $this->langs = $langs;
     $this->div = $div;

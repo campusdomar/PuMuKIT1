@@ -78,7 +78,7 @@
         
           <div class="list_options">
             <ul style="">
-              <?php foreach(PerfilPeer::doSelectToWizard() as $per): ?>
+              <?php foreach(PerfilPeer::doSelectToWizard(false) as $per): ?>
                 <li><?php echo link_to_remote($per->getName(), 
 					      array('update' => 'files_mms', 'url' => 'files/retrans?id='.$file->getId().'&mm='.$file->getMmId().'&profile='.$per->getId(), 'script' => 'true'))?></li>
               <?php endforeach ?>

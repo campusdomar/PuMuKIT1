@@ -35,7 +35,7 @@ class transcodersActions extends sfActions
     $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm'));
     $this->forward404Unless($this->mm);
   
-    $this->profiles = PerfilPeer::doSelectToWizard(false);
+    $this->profiles = PerfilPeer::doSelectToWizard(true);
     $this->langs = sfConfig::get('app_lang_array', array('es'));
   }
 
