@@ -112,18 +112,6 @@
       'size' => 80,
       'control_name' => 'file',
       )); echo $value ? $value : '&nbsp;' ?> &nbsp;
-    <?php if (sfConfig::get('app_videoserv_browser')) echo button_to_function('explorar', "Effect.toggle('explorer_master','blind')" )?>
-    <div id="explorer_master" class="videoserv" style="display:none;">
-      <ul class="videoserv_tree">
-        <?php foreach(array('//172.20.209.52/video_tmp3/MASTERS') as $dir):?>
-        <li class="collapsed">
-          <span onclick="fileServerTree(this, 'file', '<?php echo $dir?>', 0, 'explorer_master')"><?php echo $dir?></span>
-          <ul></ul>
-        </li>
-        <?php endforeach;?>
-      </ul>
-
-    </div>   
   </div>
 </div>
 
@@ -137,18 +125,6 @@
       'size' => 80,
       'control_name' => 'url',
       )); echo $value ? $value : '&nbsp;' ?> &nbsp;
-    <?php if (sfConfig::get('app_videoserv_browser')) echo button_to_function('explorar', "Effect.toggle('explorer_videoserv','blind')" )?>
-    <div id="explorer_videoserv" class="videoserv" style="display:none;">
-      <ul class="videoserv_tree">
-        <?php foreach(sfConfig::get('app_videoserv_url') as $dir):?>
-        <li class="collapsed">
-          <span onclick="fileServerTree(this, 'url', '<?php echo $dir?>', 0, 'explorer_videoserv')"><?php echo $dir?></span>
-          <ul></ul>
-        </li>
-        <?php endforeach;?>
-      </ul>
-
-    </div>   
   </div>
 </div>
 
