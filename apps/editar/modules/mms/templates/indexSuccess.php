@@ -30,7 +30,7 @@
       <ul class="tv_admin_actions">
         <!-- Falta -->
         <li>
-          <?php echo link_to_function('Wizard', "Modalbox.show('".url_for("mmwizard/index?mod=mms&serial_id=".$serial->getId())."',{width: 800, title:'PASO I'})", 'class=tv_admin_action_next') ?> 
+          <?php echo link_to_function('Wizard', "Modalbox.show('".url_for("wizard/mm?id=".$serial->getId())."',{width: 800, title:'PASO II: OBJ.MM.'})", 'class=tv_admin_action_next') ?>
         </li>
         <li>
           <?php echo link_to_remote('Crear', array('update' => 'list_mms', 'url' => 'mms/create?filter=filter&page=last', 'script' => 'true'), array('title' => 'Crear nueva serie', 'class' => 'tv_admin_action_create')) ?>
