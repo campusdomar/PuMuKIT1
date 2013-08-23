@@ -199,4 +199,121 @@ class mmtemplatesActions extends sfActions
   }
 
 
+  /**
+   * --  ADDCATEGORY -- /editar.php/mms/addcategory
+   *
+   * Parametros por URL: identificador del objeto mulimedia e identificador del area de con.
+   *
+   */
+  public function executeAddCategory()
+  {
+    $mm = MmTemplatePeer::retrieveByPKWithI18n($this->getRequestParameter('id'), $this->getUser()->getCulture());
+    $this->forward404Unless($mm);
+
+    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('category'), $this->getUser()->getCulture());
+    $this->forward404Unless($category);
+
+    $add_cats = array();
+    
+    foreach($category->getPath() as $p){
+      if($p->addMmTemplateId($mm->getId())){
+	$add_cats[] = $p;
+      }
+    }
+    if($category->addMmTemplateId($mm->getId())){
+      $add_cats[] = $category;
+    }
+
+    
+    foreach($category->getRequiredWithI18n() as $p){
+      if($p->addMmTemplateId($mm->getId())){
+	$add_cats[] = $p;
+      }
+    }
+
+    $func = create_function('$a', 'return $a->getId();');
+    $json = array('added' => array(), 'recommended' => array());
+    foreach($add_cats as $n){
+      $json['added'][] = array(
+          'id' => $n->getId(), 
+	  'cod' => $n->getCod(), 
+	  'name' => $n->getName(),
+	  'group' => array_map($func, $n->getPath())
+      );
+    }
+
+    //Add recommended. Si mm no lo tiene.
+
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode($json));
+  }
+
+
+  /**
+   * --  DELCATEGORY -- /editar.php/mms/delcategory
+   *
+   * Parametros por URL: identificador del objeto mulimedia e identificador del area de con.
+   *
+   */
+  public function executeDelCategory()
+  {
+    $mm = MmTemplatePeer::retrieveByPKWithI18n($this->getRequestParameter('id'), $this->getUser()->getCulture());
+    $this->forward404Unless($mm);
+
+    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('category'), $this->getUser()->getCulture());
+    $this->forward404Unless($category);
+
+    $del_cats = array();
+    
+    //TODO seria mejor quitar los hijos
+    foreach($category->getPath() as $p){
+      if($p->delMmTemplateId($mm->getId())){
+	$del_cats[] = $p;
+      }
+    }
+
+    foreach($category->getRequiredWithI18n() as $p){
+      if($p->delMmTemplateId($mm->getId())){
+	$del_cats[] = $p;
+      }
+    }
+
+    if($category->delMmTemplateId($mm->getId())){
+      $del_cats[] = $category;
+    }
+
+    $func = create_function('$a', 'return $a->getId();');
+    $json = array('deleted' => array(), 'recommended' => array());
+    foreach($del_cats as $n){
+      $json['deleted'][] = array(
+          'id' => $n->getId(), 
+	  'cod' => $n->getCod(), 
+	  'name' => $n->getName(),
+	  'group' => array_map($func, $n->getPath())
+      );
+    }
+
+    $this->getResponse()->setContentType('application/json');
+    return $this->renderText(json_encode($json));
+  }
+
+
+
+  /**
+   * --  GETCHILDREN -- /editar.php/mmtemplates/getChildren
+   *
+   * Accion por defecto en la aplicacion. Acceso publico. Layout: layout
+   *
+   */
+  public function executeGetchildren()
+  {
+    $this->mm_id = $this->getRequestParameter('mm');
+
+    $this->c = CategoryPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->c);
+
+    $this->block_cat = $this->getRequestParameter('block_cat');
+  }
+
+
 }
