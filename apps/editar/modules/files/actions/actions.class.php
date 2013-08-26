@@ -201,12 +201,8 @@ class filesActions extends sfActions
 
     //-  B)   ***** CON TICKET ln -s file->getUrl web/tickets *****
     // Compruebo que acede desde pumukit.
-    if (strpos($this->getRequest()->getReferer(), 'editar.php/mms/index/serial')){
-      $ticket = TicketPeer::new_web($file);
-      return $this->redirect($ticket->getUrl());
-    }else{
-      return $this->renderText("ERROR -1: Acceda desde PuMuKIT");
-    }
+    $ticket = TicketPeer::new_web($file);
+    return $this->redirect($ticket->getUrl());
   }
 
 
