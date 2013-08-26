@@ -1,7 +1,7 @@
 # default values
 all:
   pumukit:
-    version:    PuMuKIT v1.7
+    version:    PuMuKIT v1.8
   lang:
     array:     [es, gl]
     default:   es
