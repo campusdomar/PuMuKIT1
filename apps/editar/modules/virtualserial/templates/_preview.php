@@ -3,9 +3,9 @@
 
 <!-- --------------------------------- -->
 
-<!-- DATE (falta I18n)-->
+<!-- DATE -->
 <div style="background-color:#006699; color:#FFFFFF; font-weight:bold; margin-bottom:11px; text-align:center;">
-  <?php echo $mm->getRecordDate('%d de %B de %Y')?>
+  <?php echo $mm->getRecordDateText()?>
 </div>
 
 <!-- SUBSERIAL_TITLE-->
