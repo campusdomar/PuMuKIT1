@@ -6,13 +6,6 @@
     'script' => 'true',
   )); ?>
 
-<?php // Comprobar función javascript para calcular el vertical offset en vez de números mágicos.
-// No funciona en todos los casos (cat. padre abierta o cerrada, cat. hija, etc.)
-
-//getVerticalOffsetFromFirstLiText = function (spanElement){
-  // Finds li parent, ul parent, first li and first span to get the real text offset.
-  //return spanElement.parentNode.parentNode.children[0].children[0].positionedOffset()[1];
-//} ?>
 <?php // WARNING - create functions in js - see https://github.com/okonet/modalbox/wiki/using-javascript-in-modalbox ?>
   <?php echo javascript_tag('
 toggle_tree_cat_virtualground = function (element, id, cat_id) {
@@ -20,10 +13,7 @@ toggle_tree_cat_virtualground = function (element, id, cat_id) {
   var firstLiTextVerticalOffset = 50; // used for 330 px div (15 elements). Brought by magic.
   if (element.parentElement.hasClassName("notload")) {
     element.parentElement.removeClassName("notload");
-    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/vg_id/" + ' . $vg->getId() . ', {
-      onComplete: function(){ 
-        $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - firstLiTextVerticalOffset); }
-    });
+    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualgrounds/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/vg_id/" + ' . $vg->getId() . ');
   } else {
     $$(".cat_li_parent_" + id).each(function(e){e.toggleClassName("nodisplay")});
     //element.scrollIntoView();
