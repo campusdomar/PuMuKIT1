@@ -39,7 +39,7 @@ class TicketPeer extends BaseTicketPeer
 
     $ticket->setEnd((1 * 3600) + time()); //UNA HORA DE TICKET
     $ticket->setPath($path_video_tmp);
-    $ticket->setUrl(sfConfig::get('app_ticket_url') . $name_file);
+    $ticket->setUrl(sfConfig::get('app_ticket_url', '../') . $name_file);
     if ($bool) $ticket->save();
     return $ticket;
   }
