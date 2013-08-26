@@ -341,12 +341,13 @@ class PubChannelPeer extends BasePubChannelPeer
     $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm "
       ."WHERE serial.id = mm.serial_id AND mm.status_id = 0 AND serial.announce = true ) "
       ."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, pub_channel_mm WHERE mm.status_id = 0 "
-      ."AND mm.announce = true AND mm.status_id = 0 "
+      ."AND mm.announce = true "
+      ."AND mm.id = pub_channel_mm.mm_id "
       ."AND pub_channel_mm.PUB_CHANNEL_ID=" . $pub_channel_id . " AND pub_channel_mm.STATUS_ID=1) ORDER BY publicDate DESC" . $limitSQL;
     
     $sentencia = $conexion->prepareStatement($consulta);
     $resultset = $sentencia->executeQuery();
-    
+
     $volver = array();
     
     while ($resultset->next()){
