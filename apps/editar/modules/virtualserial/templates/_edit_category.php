@@ -75,9 +75,7 @@
 function toggle_tree_cat(element, id, mm_id, cat_id) {
   if (element.parentElement.hasClassName("notload")) {
     element.parentElement.removeClassName("notload");
-    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualserial/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/mm/" + mm_id, {
-      onComplete: function(){ $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - 44); }
-    });
+    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('virtualserial/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/mm/" + mm_id);
   } else {
     $$(".cat_li_parent_" + id).each(function(e){e.toggleClassName("nodisplay")});
     //element.scrollIntoView();
