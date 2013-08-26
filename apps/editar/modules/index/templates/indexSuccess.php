@@ -1,3 +1,8 @@
+<div id="noResolution" style="text-align: center; display: none;">
+   Su resolución es inferior a la mínima recomendada 1440 x 900. <br />
+   <span style="font-size: 66%">( La resolución óptima recomendada es 1920 x 1080 ). </span>
+</div>
+
 <div id="div_login">
   
   <?php echo form_remote_tag(array(
@@ -23,7 +28,6 @@
       <?php echo sfConfig::get('app_metas_title')?>
     </div>
     <br />
- 
     
     <div id="ok_login">
       <?php if($sf_request->getParameter('error') == 2):?>
@@ -42,6 +46,7 @@
   <?php echo javascript_tag("
     $('login').focus();
     if(/*@cc_on!@*/false) $('noEstandar').show();
+    if (screen.width < 1440 ) $('noResolution').show();
   ") ?>
   
 <div id="js"></div>
