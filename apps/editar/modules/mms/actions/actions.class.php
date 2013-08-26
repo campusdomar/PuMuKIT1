@@ -227,8 +227,6 @@ class mmsActions extends sfActions
     $mm = MmPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($mm);
 
-    $mm->setDescription($this->getRequestParameter('description', 0));
-
     $mm->setAnnounce($this->getRequestParameter('announce', 0));
     $mm->setEditorial1($this->getRequestParameter('editorial1', 0));
     $mm->setEditorial2($this->getRequestParameter('editorial2', 0));
