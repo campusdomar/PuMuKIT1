@@ -41,7 +41,7 @@
    <?php endif?>
 </div>
 
-<div style="height: 460px; float: left; padding: 220px 5px 0px">
+<div style="float: left; padding: 220px 5px 0px">
  <a href="#" onclick="if ( $$('.clicked_category_left')[0] != undefined ) { $$('.clicked_category_left')[0].ondblclick() } return false;">&#8592;</a>
  <a href="#" onclick="if ( $$('.clicked_category_right')[0] != undefined ) { $$('.clicked_category_right')[0].ondblclick() } return false;">&#8594;</a>
 </div>
