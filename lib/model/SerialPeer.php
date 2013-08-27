@@ -60,17 +60,17 @@ class SerialPeer extends BaseSerialPeer
     $rs = self::doSelectRS($criteria);
     while ($rs->next())
       {
-	$serial['id']            = $rs->getInt(1);
-	$serial['mm_status_min'] = $rs->getInt(2);
-	$serial['mm_status_max'] = $rs->getInt(3);
-	$serial['announce']      = $rs->getBoolean(4);
-	$serial['mm_announce']   = $rs->getBoolean(5);
-	$serial['pic_url']       = ($rs->getString(6)?$rs->getString(6):'/images/folder.png');
-	$serial['title']         = $rs->getString(7);
-	$serial['publicdate']    = date('d/m/Y', strtotime($rs->getTimestamp(8)));
-	$serial['mm_count']      = $rs->getInt(9);
-	$serial['display']      = $rs->getInt(10);
-	$serials[] = $serial;
+    $serial['id']            = $rs->getInt(1);
+    $serial['mm_status_min'] = $rs->getInt(2);
+    $serial['mm_status_max'] = $rs->getInt(3);
+    $serial['announce']      = $rs->getBoolean(4);
+    $serial['mm_announce']   = $rs->getBoolean(5);
+    $serial['pic_url']       = ($rs->getString(6)?$rs->getString(6):'/images/folder.png');
+    $serial['title']         = $rs->getString(7);
+    $serial['publicdate']    = date('d/m/Y', strtotime($rs->getTimestamp(8)));
+    $serial['mm_count']      = $rs->getInt(9);
+    $serial['display']      = $rs->getInt(10);
+    $serials[] = $serial;
       }
     return $serials;
   }
@@ -92,37 +92,37 @@ class SerialPeer extends BaseSerialPeer
 
     $conexion = Propel::getConnection();
     if($anounce) {
-      $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
-	."WHERE mm.serial_id=serial.id AND serial.announce=true AND serial.display=true AND mm.broadcast_id = broadcast.id AND "
+        $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
+        ."WHERE mm.serial_id=serial.id AND serial.announce=true AND serial.display=true AND mm.broadcast_id = broadcast.id AND "
         ."pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 AND "
-	."broadcast.broadcast_type_id=broadcast_type.id "
-	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
-	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."broadcast.broadcast_type_id=broadcast_type.id "
+        .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+        ."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+        ."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
-	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
-	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+        ."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
+        .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+        ."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
     } else {
-      $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
-	."WHERE mm.serial_id=serial.id AND mm.broadcast_id = broadcast.id AND "
+        $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
+        ."WHERE mm.serial_id=serial.id AND mm.broadcast_id = broadcast.id AND "
         ."pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 AND "
-	."broadcast.broadcast_type_id=broadcast_type.id "
-	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
-	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+        ."broadcast.broadcast_type_id=broadcast_type.id "
+        .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+        ."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+        ."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
-	."AND mm.broadcast_id = broadcast.id "
-	.($genre == null?"":"AND mm.genre_id = " . $genre) . " "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
+        ."AND mm.broadcast_id = broadcast.id "
+        .($genre == null?"":"AND mm.genre_id = " . $genre) . " "
+        ."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC" . $limitSQL;
     }
 
     $credentials = array_map(create_function('$a', 'return "\"" . $a . "\"";'), $credentials);
@@ -136,17 +136,17 @@ class SerialPeer extends BaseSerialPeer
     
     while ($resultset->next()){
       if ($resultset->getString('info') == 'serial'){
-	//hydrate
-	$aux = SerialPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
-	//$c = new Criteria();
+    //hydrate
+    $aux = SerialPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+    //$c = new Criteria();
         //$c->add(SerialPeer::ID, $resultset->getInt('id'));
-	//list($aux) = SerialPeer::doSelectWithI18n($c, $culture);
+    //list($aux) = SerialPeer::doSelectWithI18n($c, $culture);
       }else{
-	//hydrate
-	$aux = MmPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
-	//$c = new Criteria();
-	//$c->add(MmPeer::ID, $resultset->getInt('id'));
-	//list($aux) = MmPeer::doSelectWithI18n($c, $culture);
+    //hydrate
+    $aux = MmPeer::retrieveByPkWithI18n($resultset->getInt('id'), $culture);
+    //$c = new Criteria();
+    //$c->add(MmPeer::ID, $resultset->getInt('id'));
+    //list($aux) = MmPeer::doSelectWithI18n($c, $culture);
       }
       $volver[]= $aux;
     }
@@ -177,36 +177,36 @@ class SerialPeer extends BaseSerialPeer
     $conexion = Propel::getConnection();
     if($anounce) {
       $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
-	."WHERE mm.serial_id=serial.id AND serial.announce=true AND serial.display=true AND mm.broadcast_id = broadcast.id AND "
+    ."WHERE mm.serial_id=serial.id AND serial.announce=true AND serial.display=true AND mm.broadcast_id = broadcast.id AND "
         ."pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 AND "
-	."broadcast.broadcast_type_id=broadcast_type.id "
+    ."broadcast.broadcast_type_id=broadcast_type.id "
         ."AND serial.publicDate >= '$date' AND serial.publicDate < '$next_date' "
-	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
-	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+    ."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+    ."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
-	."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
+    ."AND mm.announce=true AND mm.broadcast_id = broadcast.id "
         ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+    ."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
     }else {
       $consulta = "(SELECT 'serial' AS info, serial.id as id ,serial.publicDate as publicDate FROM serial, mm, broadcast, broadcast_type, pub_channel_mm "
-	."WHERE mm.serial_id=serial.id AND mm.broadcast_id = broadcast.id AND "
+    ."WHERE mm.serial_id=serial.id AND mm.broadcast_id = broadcast.id AND "
         ."pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 AND "
-	."broadcast.broadcast_type_id=broadcast_type.id "
+    ."broadcast.broadcast_type_id=broadcast_type.id "
         ."AND serial.publicDate >= '$date' AND serial.publicDate < '$next_date' "
-	."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
-	."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
+    ."AND broadcast_type.name IN %s GROUP BY serial.id HAVING min(mm.status_id) = 0) "
+    ."UNION (SELECT 'mm' AS info, mm.id, publicDate FROM mm, broadcast, broadcast_type, pub_channel_mm WHERE mm.status_id = 0 "
         ."AND pub_channel_mm.mm_id=mm.id "
         ."AND pub_channel_mm.pub_channel_id = 1 "
         ."AND pub_channel_mm.status_id = 1 "
-	."AND mm.broadcast_id = broadcast.id "
+    ."AND mm.broadcast_id = broadcast.id "
         ."AND mm.publicDate >= '$date' AND mm.publicDate < '$next_date' "
-	."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
+    ."AND broadcast.broadcast_type_id=broadcast_type.id AND broadcast_type.name IN %s) ORDER BY publicDate DESC, id DESC";
     }
 
 
@@ -283,13 +283,13 @@ class SerialPeer extends BaseSerialPeer
       
       $langs = sfConfig::get('app_lang_array', array('es'));
       foreach($langs as $lang){
-	$serial->setCulture($lang);
-	if ($title != null ) {
-	  $serial->setTitle($title);
-	}
-	else {
-	  $serial->setTitle('Nuevo');
-	}
+    $serial->setCulture($lang);
+    if ($title != null ) {
+      $serial->setTitle($title);
+    }
+    else {
+      $serial->setTitle('Nuevo');
+    }
       }
       $serial->save();
       
@@ -389,7 +389,7 @@ class SerialPeer extends BaseSerialPeer
     $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
     $c->addJoin(MmPeer::ID, PubChannelMmPeer::MM_ID);
     $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, $pub_channel_id);
-
+    $c->add(PubChannelMmPeer::STATUS_ID, PubChannelMmPeer::STATUS_READY); // por defecto 1 = preparado, 
     $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
 
 
