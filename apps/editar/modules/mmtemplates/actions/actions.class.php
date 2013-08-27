@@ -84,8 +84,6 @@ class mmtemplatesActions extends sfActions
     $langs = sfConfig::get('app_lang_array', array('es'));
     foreach($langs as $lang){
       $mm->setCulture($lang);
-      $mm->setTitle($this->getRequestParameter('title_' . $lang, 0));
-      $mm->setSubtitle($this->getRequestParameter('subtitle_' . $lang, 0));
       $mm->setKeyword($this->getRequestParameter('keyword_' . $lang, ' '));
       $mm->setDescription($this->getRequestParameter('description_' . $lang, ' '));
       $mm->setLine2($this->getRequestParameter('line2_' . $lang, ' '));
