@@ -359,3 +359,165 @@ function comprobar_coorgeo(coorgeo){
     return false;
 }
 
+function comprobar_form_mmwizard_several(url){
+
+    $$('.error').invoke('hide');
+
+    if(url.length  > 2 ) {
+      Modalbox.hide();
+      return true;
+    }
+
+    $('error_no_url').show();   
+    return false;
+}
+
+
+function testDates(init, end, re_date) {
+
+ if ((typeof(init) == 'undefined') || (init ==  null) || (init == "")) {
+    return true;
+ }
+
+ if ((typeof(end) == 'undefined') || (end ==  null) || (end == "")) {
+   return true;
+  }
+
+  var partes = init.split(" ");
+  var fecha = partes[0];
+  var hora = partes[1];
+  var partes_fecha = fecha.split("/");
+  if (typeof(hora) != 'undefined' && hora !=  null) {
+      var partes_hora = hora.split(":");	
+      var ini = new Date(partes_fecha[2], partes_fecha[1] - 1, partes_fecha[0], partes_hora[0], partes_hora[1]);
+  }
+  else{
+    var ini = new Date(partes_fecha[2], partes_fecha[1] - 1, partes_fecha[0]);
+  }
+
+  partes = end.split(" ");
+  fecha = partes[0];
+  hora = partes[1];
+  partes_fecha = fecha.split("/");
+  if (typeof(hora) != 'undefined' && hora !=  null) {
+      partes_hora = hora.split(":");
+      var fi = new Date(partes_fecha[2], partes_fecha[1] - 1 , partes_fecha[0], partes_hora[0], partes_hora[1]);
+  }
+  else{
+      var fi = new Date(partes_fecha[2], partes_fecha[1] - 1 , partes_fecha[0]);
+  }
+
+ if (comprobar_date(init, re_date)){
+      alert ("El formato de la fecha de inicio no es el adecuado. Utilice dd/mm/aaaa hh:mm");
+       return false;
+    }
+  
+ if (comprobar_date(end, re_date)){
+      alert ("El formato de fecha de fin no es el adecuado. Utilice dd/mm/aaaa hh:mm");
+       return false;
+    }
+
+  if (ini.getTime() > fi.getTime()) {
+    alert("La fecha inicial es posterior a la fecha final");
+    return false;
+  }
+
+  Modalbox.hide();
+  return true;  
+}
+
+function genpasswd(obj1, obj2) {
+  var passwd = '';
+  var randomchar = '';
+  var numberofdigits = Math.floor((Math.random() * 7) + 6 );
+  $('passwdFail').hide();//Borramos contraseña para currarnos en salud
+
+  for (var count=1; count<=numberofdigits; count++) {
+    var chargroup = Math.floor((Math.random() * 3) + 1 );
+    if ( chargroup == 1 ) {
+      randomchar = Math.floor((Math.random() * 26) + 65);
+    }
+    if ( chargroup == 2 ) {
+      randomchar = Math.floor((Math.random() * 26) + 65);
+    }
+    if ( chargroup == 3 ) {
+      randomchar = Math.floor((Math.random() * 26) + 65);
+    }
+    passwd+=String.fromCharCode(randomchar);
+  }
+
+  obj1.value = passwd;
+  obj2.value = passwd;
+}
+
+change_pass = function(obj)
+{
+  if ( obj.value == 2 ) { 
+     $('broadcast_password').show(); 
+  } else { 
+    $('broadcast_password').hide(); 
+  }
+}
+
+function check_pass(pass1, pass2, control) {
+  if ( pass1.value == '' && control == 2 ) {
+     $('passwdFail').innerHTML = 'La contraseña no puede estar vacía.';
+     $('passwdFail').show();
+     return false;
+  }
+  if ( pass1.value == pass2.value || control == 1 ) {
+     $('passwdFail').hide();
+     return true;
+  }  else {
+     $('passwdFail').innerHTML = 'Las contraseñas deben ser iguales.';//Por si no se recarga la página y ya mostró el error de vacía
+     $('passwdFail').show();
+     return false;
+  }
+}
+
+function replaceType(obj) {
+  var newO=document.createElement('input');
+
+  if (obj.getAttribute('type') == 'password') {
+    newO.setAttribute('type','text');
+  } else {
+    newO.setAttribute('type','password');
+  }
+  newO.setAttribute('id',obj.getAttribute('id'));
+  newO.setAttribute('size',obj.getAttribute('size'));
+  newO.setAttribute('maxlength',obj.getAttribute('maxlength'));
+  newO.setAttribute('name',obj.getAttribute('name'));
+  newO.setAttribute('style',obj.getAttribute('style'));
+  newO.setAttribute('placeholder',obj.getAttribute('placeholder'));
+  newO.setAttribute('value',obj.value);
+  newO.setAttribute('onchange',obj.getAttribute('onchange'));
+  obj.parentNode.replaceChild(newO,obj);
+  if (obj.getAttribute('id') == 'pass1' ){
+    newO.focus();
+  }
+}
+function toggleName(obj) {
+  if ( obj.value == 'Ver contraseña') {
+    obj.value = 'Ocultar contraseña';
+  } else {
+    obj.value = 'Ver contraseña';
+  }
+}
+
+function comprobar_query(query){
+
+if (query.checked) {
+ 
+ $('error_email').hide();
+
+ if (comprobar_email($('emailQuery').value)) {
+     $('error_email').show();
+     return false;
+   }
+   else {
+	return true;	
+    }
+  }
+ 
+  return true;
+}
