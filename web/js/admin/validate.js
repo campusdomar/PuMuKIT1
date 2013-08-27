@@ -110,7 +110,7 @@ function comprobar_form_person(email, url){
 	return false;
     }
 
-    if ((url != "")&&(comprobar_url(url))){
+    if ((url != "")&&(comprobar_url_gen(url))){
 	$('error_url').show();
 	return false;
     }
