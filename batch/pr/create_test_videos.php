@@ -277,7 +277,6 @@ function getPerfilTest($name = 'perfil_test')
         
         return $perfil[0];
     } else{
-        // ¿Crear streamserver?
         $perfil = new Perfil();
         $perfil->setName($name);
         $perfil->setDisplay(1);
@@ -288,7 +287,7 @@ function getPerfilTest($name = 'perfil_test')
         $perfil->setExtension('flv');  
         $perfil->setAudio(0);
         $perfil->setApp('create_test_videos.php');
-        // $perfil->setStreamserverId($streamserver->getId());
+        $perfil->setStreamserverId(1); // won't show on backend if not set. 
         
         $perfil->setCulture('es');
         $perfil->setDescription("Perfil para vídeos de test");
