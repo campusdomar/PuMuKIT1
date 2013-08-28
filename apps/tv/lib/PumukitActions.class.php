@@ -179,9 +179,7 @@ class PumukitActions extends sfActions
     $array_genres = array();
     $genres = GenrePeer::doSelectByAbcWithI18n($this->getUser()->getCulture());
     foreach ($genres as $genre){
-      if ($genre->getId() != 1){
-    $array_genres [$genre->getId()] = $genre->getName();
-      }        
+      $array_genres [$genre->getId()] = $genre->getName();
     }
     return $array_genres;
   }
