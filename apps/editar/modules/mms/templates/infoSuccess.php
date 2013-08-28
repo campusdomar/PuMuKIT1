@@ -5,7 +5,7 @@
 <div class="form-row">
   <?php echo label_for('embed', 'Incrustaci&oacute;n IFRAME:', 'class="required" ') ?>
   <div class="content">
-    <textarea id="embed_code" name="embed_code" readonly="readonly" cols="80" rows="5" onclick="this.select()"><iframe src="<?php echo $sf_request->getUriPrefix() ?>/mmobj/iframe/id/<?php echo $mm->getId() ?>" style="border:0px #FFFFFF none;" scrolling="no" frameborder="1" height="270" width="480" allowfullscreen webkitallowfullscreen></iframe></textarea>
+    <textarea id="embed_code" name="embed_code" readonly="readonly" cols="80" rows="5" onclick="this.select()"><iframe src="<?php echo $sf_request->getUriPrefix() ?>/video/iframe/id/<?php echo $mm->getId() ?>" style="border:0px #FFFFFF none;" scrolling="no" frameborder="1" height="270" width="480" allowfullscreen webkitallowfullscreen></iframe></textarea>
   </div>
 </div>
 

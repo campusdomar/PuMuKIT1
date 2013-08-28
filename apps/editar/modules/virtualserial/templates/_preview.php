@@ -42,7 +42,7 @@
  <?php if($mm->getStatusId() == MmPeer::STATUS_NORMAL):?>
  <!-- TODO Ver si esta publicado..-->
    <div style="padding: 0px 3% 8px">
-    <a target="_black" href="/mmobj/index/id/<?php echo $mm->getId()?>">Ver en webTV</a>
+    <a target="_black" href="/video/index/id/<?php echo $mm->getId()?>">Ver en webTV</a>
    </div>
  <?php endif ?>
 
