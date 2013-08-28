@@ -1,10 +1,6 @@
 <?php use_javascript('/swf/jwplayer6/jwplayer.js') ?>
-
 <video id="player1" controls>
 </video>
-<?php echo "Debug: la url original es: " . $file->getUrl() . "\n<br/>";
-      echo "la url generada con getinternalurl(true) es: " . $file->getInternalUrl(true) . "\n<br/>"; ?>
-    
 <script language="JavaScript" type="text/javascript">
 jwplayer("player1").setup({
   modes: [
