@@ -119,26 +119,6 @@
       </ul>
     </li>
 
-    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('distri_menu') ?>">
-      <a href="#" title="Transcodificador" onclick="return false" class="<?php echo sfConfig::get('distri_menu') ?>">
-        <span>Distribución</span>
-      </a>
-      <ul>
-       <li class="level2">
-         <a href="<?php echo url_for('broadcasts/index')?>" title="Broadcast" class="">
-           <span>Perfiles Difusión</span>
-          </a>
-        </li>
-
-        <li class="last level1">
-          <a href="<?php echo url_for('streamservs/index')?>" title="Streamservs" class="">
-            <span>Servidores de Distribución</span>
-          </a>
-        </li>
-  
-      </ul>
-    </li>
-
    <?php endif ?>
 
     <li class="level0 <?php echo sfConfig::get('timeframes_menu') ?>">
