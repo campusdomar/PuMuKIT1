@@ -11,12 +11,12 @@ jwplayer("player1").setup({
      { type: 'html5', src: '/swf/jwplayer6/jwplayer.html5.js' },
      { type: 'flash', src: '/swf/jwplayer6/jwplayer.flash.js' }
   ],
-        file: '<?php echo $file->getUrl() ?>',
+        file: '<?php echo $file->getInternalUrl() ?>',
         title: '<?php echo $mmobj->getTitle()?>',
           <?php $captions = $mmobj->getCaptions(); 
           if ($captions != null):?>
         tracks: [{ 
-            file: "<?php echo $captions->getInternalUrl(true)?>", 
+            file: "<?php echo $captions->getUrl(true)?>", 
             label: "Subtitulos",
             kind: "captions"
         }],
