@@ -228,6 +228,10 @@ directo_def:
   param: { module: directo, action: index, canal: 1 }
   requirements: { sf_culture: (?:en|es|gl)}
 
+file:
+  url:   /file/:action/*
+  param: { module: file}
+
 homepage:
   url:   /
   param: { module: index, action: index }
