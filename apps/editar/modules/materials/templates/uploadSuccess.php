@@ -15,7 +15,8 @@
   parent.Modalbox.hide();
 
   new parent.Ajax.Updater('materials_mms', '".url_for('materials/list?mm='.$mm, true)."', {asynchronous: true, evalScripts: true});
-  new parent.Ajax.Updater('preview_mm', '".url_for('mms/preview?id='.$mm, true)."', {asynchronous: true, evalScripts: true});
+  //new parent.Ajax.Updater('preview_mm', '".url_for('mms/preview?id='.$mm, true)."', {asynchronous: true, evalScripts: true});
+  window.update_preview(" . $mm . ");
   parent.$('materials_mms').innerHTML= 'Actualize el video para que se muestren las materiales.';
 
   parent.$('div_messages_span_info').innerHTML ='" . $msg_info . "';

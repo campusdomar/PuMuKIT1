@@ -36,7 +36,7 @@
 
 <?php 
 if (($sf_request->getParameter('preview'))||((isset($preview))&&($preview))){
-  echo javascript_tag(remote_function(array('update' => 'preview_'.$que, 'url' => $que.'s/preview?id='. $object_id, 'script' => 'true' )));
+  echo javascript_tag('update_preview(' . $object_id . ');');
 }
 
 if (isset($msg_alert)) echo m_msg_alert($msg_alert) 

@@ -18,7 +18,7 @@
 
 <?php 
 if ($sf_request->getParameter('preview')){
-  echo javascript_tag(remote_function(array('update' => 'preview_mm', 'url' => 'mms/preview?id='. $mm, 'script' => 'true' )));
+  echo javascript_tag("update_preview(" . $mm . ");");
 }
 
 if (isset($msg_alert)) echo m_msg_alert($msg_alert)
