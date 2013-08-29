@@ -26,11 +26,11 @@ class TicketPeer extends BaseTicketPeer
 
     $ext = substr($file->getFile(), -3);
 
-    $path_video_tmp = sfConfig::get('app_ticket_path');
+    $path_video_tmp = sfConfig::get('app_ticket_path', 'tickets/');
     $name_file = preg_replace('/[^a-z0-9_\.-]/i', '_', $file->getMm()->getTitle()) .'.'.$ext;
     $path_video_tmp .= $name_file;
     while (file_exists($path_video_tmp)){
-      $path_video_tmp = sfConfig::get('app_ticket_path');
+      $path_video_tmp = sfConfig::get('app_ticket_path', 'tickets/');
       $name_file = rand().'.'.$ext;
       $path_video_tmp .= $name_file;
     } 
@@ -39,7 +39,7 @@ class TicketPeer extends BaseTicketPeer
 
     $ticket->setEnd((1 * 3600) + time()); //UNA HORA DE TICKET
     $ticket->setPath($path_video_tmp);
-    $ticket->setUrl(sfConfig::get('app_ticket_url', '../') . $name_file);
+    $ticket->setUrl(sfConfig::get('app_ticket_url', '/tickets/') . $name_file);
     if ($bool) $ticket->save();
     return $ticket;
   }
