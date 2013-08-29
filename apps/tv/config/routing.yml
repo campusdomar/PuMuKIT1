@@ -134,21 +134,6 @@ pildoras:
   param: { module: pildoras, action: index }
   requirements: { sf_culture: (?:en|es|gl) }
 
-file0:
-  url:   /file/:file_id
-  param: { module: video, action: index }
-  requirements: { file_id: \d+ }
-
-file:
-  url:   /:sf_culture/file/:file_id.html
-  param: { module: video, action: index }
-  requirements: { sf_culture: (?:en|es|gl), file_id: \d+ }
-
-file2:
-  url:   /:sf_culture/file/:file_id
-  param: { module: video, action: index }
-  requirements: { sf_culture: (?:en|es|gl), file_id: \d+ }
-
 video0:
   url:   /video/:id
   param: { module: video, action: index }

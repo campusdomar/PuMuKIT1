@@ -63,11 +63,10 @@
   
         <div class="objects">
   <!-- FILES -->
-          <?php $files = $mm->getFilesPublic() ?> 
+          <?php $files = $mm->getFilesPublic(); $num_files = count($files) ?> 
           <?php foreach ($files as $file):?>  
             <div class="file <?php echo ($file->getAudio()?'audio':'video')?>">
-               <?php //echo link_to($file->getAudio()?'Audio':'V&iacute;deo', 'video/index?id=' . $mm->getId())?>
-               <?php echo link_to($file->getPerfil()->getLink(), 'video/index?id=' . $mm->getId())?>
+               <?php echo link_to($file->getPerfil()->getLink(), ($num_files==1)?'mmobj/index?id=' . $mm->getId():'mmobj/index?file_id=' . $file->getId())?>
                <?php if ($file->getDescription() !== ""): ?>
                  &nbsp;|&nbsp;&nbsp;<strong><?php echo ( $file->getDescription() ) ?></strong>
                <?php endif ?>
