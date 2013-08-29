@@ -729,16 +729,18 @@ div.share_mmobj{
  *
  */
 div.mm_player .title{
-  font-weight: bold;
-  font-size: 150%;
+  font-weight: normal;
+  font-size: 12px;
 }
 
 div.mm_player .num_view{
   text-align: right;
+  font-size: 14px;
 }
 
 div.mm_player .num_view .num_view_number{
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: lighter;
 }
 
 div.mm_player .date{
@@ -923,4 +925,34 @@ div.pumukit_mmobjs .pumukit_mmobj .date {
   bottom:16px;
   left: 160px;
   position:absolute;
+}
+
+/* nuevas reglas 1.8 */
+/* CSS para las cateorias del player */
+.label-categories {
+    font-size: 10px;
+    padding: 2px 8px;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 14px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    white-space: nowrap;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.label-categories a {
+    color: #FFF;
+}
+.label-info {
+  background-color: #3a87ad;
+}
+.label-success {
+  background-color: #468847;
+}
+/* TAMAÑO DE ARCHIVOS */
+.size {
+  font-size: 10px;
+  float: right;
+  padding-top: 2px;
 }
