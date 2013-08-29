@@ -62,6 +62,7 @@ class Serial extends BaseSerial
     $c = new Criteria();
     $c->addJoin(BroadcastPeer::ID, MmPeer::BROADCAST_ID);
     $c->add(MmPeer::SERIAL_ID, $this->getId());
+    $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
     $c->addDescendingOrderByColumn(BroadcastPeer::BROADCAST_TYPE_ID);
       
     return BroadcastPeer::doSelectOne($c);
