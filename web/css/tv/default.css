@@ -437,7 +437,7 @@ div.serial_mm_info .file{
                           
 
 div.serial_mm_info .material{ 
-  padding-left: 25px;
+  /*padding-left: 25px;*/
   min-height: 18px;
 }
                               
