@@ -97,7 +97,7 @@
     <?php $value = object_select_tag($mm, 'getGenreId', array (
       'related_class' => 'Genre',
       'control_name' => 'genre_id',
-      'peer_method' => 'doSelectWithI18n',
+      'peer_method' => 'doSelectByAbcWithI18n2',
       'include_blank' => false,
       'onchange' => "$('remember_save_mm').show()",
     )); echo $value ? $value : '&nbsp;' ?>
