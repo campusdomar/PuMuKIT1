@@ -51,7 +51,7 @@
         <!-- MATERIAL -->
         <?php $materials = $mm->getMaterialsWithI18n() ?>
         <?php foreach ($materials as $material): if(!$material->getDisplay()) continue;$material->setCulture( $sf_user->getCulture() ) ?>
-          <div id="material" style="height: 30px; margin-left: 5px;" class="<?php echo $material->getMatType()->getType() ?>">
+          <div style="height: 30px; margin-left: 5px;" class="material <?php echo $material->getMatType()->getType() ?>">
             <a style="margin-left: 20px;" title="<?php echo $material->getName()?>" target="_blank" href="<?php echo $material->getUrl() ?>">
               <?php echo str_abbr($material->getName(), 20, "...") ?>
             </a>
@@ -96,24 +96,4 @@
       <?php endif; endforeach; ?>
     </div>
   </div>
-
-  <!-- MATERIAL -->
-        <?php $materials = $mm->getMaterials() ?> 
-    	<?php foreach ($materials as $material): if(!$material->getDisplay()) continue;$material->setCulture( $sf_user->getCulture() ) ?>  
-          <div id="material" class="<?php echo $material->getMatType()->getType() ?>">
-            <a href="<?php echo $material->getUrl() ?>"><?php echo $material->getName() ?></a>
-          </div>
-        <?php endforeach; ?>
-  
-  <!-- LINK -->
-        <?php $links = $mm->getLinks() ?> 
-        <?php foreach ($links as $link): $link->setCulture( $sf_user->getCulture() ) ?>  
-          <div id="link" class="link">
-            <?php echo link_to($link->getName(), $link->getUrl(), array('target' => '_blank') ) ?>
-          </div>
-        <?php endforeach; ?>
-
-
 </div>
-
-

@@ -507,73 +507,77 @@ table#directo_announces tfoot tr{
 
 
 .audio { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/altavoz2.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/altavoz2.gif') no-repeat scroll left top transparent;
 }       
 
 .book { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/book2.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/book2.gif') no-repeat scroll left top transparent;
 }       
         
 .doc { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/doc.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/doc.gif') no-repeat scroll left top transparent;
 }       
        
 .video { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/movie2.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/movie2.gif') no-repeat scroll left top transparent;
 }       
          
 .link { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/url.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/url.gif') no-repeat scroll left top transparent;
 }               
 
 .mp3 { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/mp3.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/mp3.gif') no-repeat scroll left top transparent;
 }       
        
 .pdf { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/pdf.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/pdf.gif') no-repeat scroll left top transparent;
 }       
        
 .pps { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/pps.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/pps.gif') no-repeat scroll left top transparent;
 }       
        
 .ppt { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/ppt.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/ppt.gif') no-repeat scroll left top transparent;
 }       
        
 .url { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/url.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/url.gif') no-repeat scroll left top transparent;
 }       
        
 .txt { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/txt.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/txt.gif') no-repeat scroll left top transparent;
 }       
        
 .swf { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/swf.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/swf.gif') no-repeat scroll left top transparent;
 }       
        
 .xlm { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/swf.xlm') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/swf.xlm') no-repeat scroll left top transparent;
 }       
        
 .zip { 
-  padding-left: 25px;
-  background: url('/images/tv/iconos/zip.gif') left top no-repeat;
+  -moz-background-inline-policy: continuous;
+  background: url('/images/tv/iconos/zip.gif') no-repeat scroll left top transparent;
+}
+.download {
+  -moz-background-inline-policy: continuous;
+  background: url("/images/tv/iconos/url.gif") no-repeat scroll left top transparent;
 }       
 
 
