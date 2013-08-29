@@ -24,6 +24,10 @@
                    'script' => 'true'))?>
 
       </li>
+      <li class="normal">
+      <?php echo m_link_to(image_tag('admin/mbuttons/info_inline.gif', 'alt=info title=info') . " Informacion del objeto multimedia", 'mms/info?id='.$mm['id'], array(
+		   'title' => 'Info Archivo de Mm '.$mm['id']), array('width' => '800')) ?>
+      </li>
 
       <li class="cancel"><a href="#" onclick="return false;">Cancelar...</a></li>
 

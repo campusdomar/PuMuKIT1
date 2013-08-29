@@ -45,17 +45,19 @@
         <input id="<?php echo $mm['id']?>" class="mm_checkbox" type="checkbox">
       </td>
       <td style="padding: 0.2%;">
-								      <?php echo image_tag('admin/bbuttons/mm'.$mm['status'].'_inline.gif', 'alt='.$mm['status'].' title='.MmPeer::getStatusText($mm['status']).' class=miniTag id=table_mms_status_' . $mm['id']) ?>
+	<?php echo image_tag('admin/bbuttons/'.$mm['status'].'_inline.gif', 'alt='.$mm['status'].' title='.MmPeer::getStatusText($mm['status']).' class=miniTag id=table_mms_status_' . $mm['id']) ?>
       </td>
       <td style="padding: 0.2%;">
         <?php echo ($mm['announce']?'<span style="color: blue" title="Novedad">A</span>':'&nbsp;') ?>
-      </td> 
+      </td>
        <td style="padding: 0.2%;">
           <a href="#" onclick="
              if (window.confirm('Seguro que desea borrar el objeto multimedia?')) {
-                new Ajax.Updater('list_mms', '<?php echo url_for("virtualserial/delete") . "/id/" . $mm['id']?>', {
+                $('search_loading_img').show();
+                new Ajax.Updater('mm_mms', '<?php echo url_for("virtualserial/delete") . "/id/" . $mm['id']?>', {
                    asynchronous:true,
                    evalScripts:true,
+                   onComplete: function(){ $('search_loading_img').hide(); },
                    onSuccess:function(request, json){
                       $('vista_previa_mm').innerHTML='';
                       $('edit_mms').innerHTML=''; 
@@ -66,10 +68,9 @@
              <img alt="borrar" title="borrar" class="miniTag" src="/images/admin/mbuttons/delete_inline.gif">
           </a>
       </td>
-      <td style="padding: 0.2%;">
-          <a href="#" onclick="new Ajax.Updater('list_mms', '<?php echo url_for("virtualserial/copy") . "/id/" . $mm['id']?>', {asynchronous:true, evalScripts:true});; update_tree(); return false;"><img alt="copiar" title="copiar" class="miniTag" src="/images/admin/mbuttons/copy_inline.gif">
-          </a>
-      </td>
+      <td>
+        <?php include_partial("virtualserial/edit_menu", array('mm' => $mm))?>
+      </td> 
       <?php if(sfConfig::get('app_mail_use')):?>
       <td style="padding: 0.2%;">
         <?php include_partial("mms/edit_announce", array('mm' => $mm))?>
