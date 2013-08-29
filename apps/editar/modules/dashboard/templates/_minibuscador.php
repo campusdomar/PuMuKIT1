@@ -2,7 +2,7 @@
 <legend style="font-weight: bold">BUSCADOR DE SERIES</legend>
 
 <form method="get" action="#" onsubmit="new Ajax.Updater('mini_buscador_result', '<?php echo url_for('dashboard/buscar')?>', {asynchronous:true, evalScripts:false, parameters:Form.serialize(this)}); return false;">
-  <input type="text" id="text" name="text" value="titulo, persona, fecha..."/>
+  <input type="text" id="text" name="text" value="" placeholder="titulo" />
   <input type="checkbox" id="all" name="all" checked="checked" title="buscar en todo el contenido"/>
   <input type="submit" value="BUSCAR" />
 </form>
