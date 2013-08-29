@@ -138,5 +138,9 @@ function del_tree_cat(cat_id, mm_id) {
   });  
 }
 
+window.update_preview = function(id) {
+  new Ajax.Updater("preview_serial", "' . url_for('serials/preview') . '/id/" + id, {asynchronous:true, evalScripts:true});
+}
 
 ') ?>
+
