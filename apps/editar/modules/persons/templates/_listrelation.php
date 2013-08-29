@@ -18,11 +18,13 @@
 </table>
 
 
-<?php 
-if (($sf_request->getParameter('preview'))||((isset($preview))&&($preview))){
-  echo javascript_tag(remote_function(array('update' => 'preview_mm', 'url' => 'mms/preview?id='. $mm->getId(), 'script' => 'true' )));
-}
+<?php if (($sf_request->getParameter('preview'))||((isset($preview))&&($preview))): ?>
+<script type="text/javascript">
+//<![CDATA[
+window.update_preview(<?php echo $mm->getId()?>);
+//]]>
+</script>
+<?php endif?>
 
-if (isset($msg_alert)) echo m_msg_alert($msg_alert);
-?>
+<?php if (isset($msg_alert)) echo m_msg_alert($msg_alert); ?>
 
