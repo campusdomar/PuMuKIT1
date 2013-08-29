@@ -25,9 +25,9 @@ $databaseManager->initialize();
 $cats = CategoryPeer::doSelect(new Criteria());
 foreach($cats as $c){
   $cr = new Criteria();
-  $cr->add(CategoryMmPeer::MM_ID, $c->getId());
+  $cr->add(CategoryMmPeer::CATEGORY_ID, $c->getId());
   $aux = CategoryMmPeer::doCount($cr);
+  echo $c->getId(), " ", $c->getNumMm(), " -> ", $aux, "\n";
   $c->setNumMm($aux);
   $c->save();
-  echo $c->getId(), " ", $c->getNumMm(), " -> ", $aux, "\n";
 }
