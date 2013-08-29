@@ -52,8 +52,8 @@ class videoActions extends sfActions
     //    $this->forward('mmobj', 'noaccess');
     //}
 
-
-//prueba Matterhorn
+  
+  //prueba Matterhorn
   $this->oc = MmMatterhornPeer::retrieveByPK($this->m->getId());
     if($this->oc){
       //MATTERHORN REDIRECT.
@@ -102,7 +102,7 @@ class videoActions extends sfActions
       elseif (!isset($_SERVER['PHP_AUTH_USER'])){
         $this->passwd();
       }
-    } elseif ($this->m->getBroadcast()->getPasswd() != $_SERVER['PHP_AUTH_PW']) {
+    } elseif (isset($_SERVER['PHP_AUTH_PW']) && $this->m->getBroadcast()->getPasswd() != $_SERVER['PHP_AUTH_PW']) {
       $this->passwd();
     }
 
@@ -114,8 +114,6 @@ class videoActions extends sfActions
 
     //Actulizar log
     LogFilePeer::act( $this->file->getId(), $_SERVER['REMOTE_ADDR'], $_SERVER['HTTP_USER_AGENT'], $this->getRequest()->getUri() );
-
-
   }
     
     protected function passwd()
