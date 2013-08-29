@@ -202,7 +202,8 @@ class filesActions extends sfActions
     //-  B)   ***** CON TICKET ln -s file->getUrl web/tickets *****
     // Compruebo que acede desde pumukit.
     $ticket = TicketPeer::new_web($file);
-    return $this->redirect($ticket->getUrl());
+    $this->getController()->redirect($ticket->getUrl(), 0);
+    throw new sfStopException();
   }
 
 

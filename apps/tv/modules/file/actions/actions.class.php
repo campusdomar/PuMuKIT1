@@ -62,6 +62,7 @@ class fileActions extends sfActions
     }
     
     // REDIRECT
-    return $this->redirect($file->getUrl() . "?" . http_build_query($_GET));
+    $this->getController()->redirect($file->getUrl() . "?" . http_build_query($_GET), 0);
+    throw new sfStopException();
     }
 }
