@@ -66,7 +66,7 @@
           <?php $files = $mm->getFilesPublic(); $num_files = count($files) ?> 
           <?php foreach ($files as $file):?>  
             <div class="file <?php echo ($file->getAudio()?'audio':'video')?>">
-               <?php echo link_to($file->getPerfil()->getLink(), ($num_files==1)?'mmobj/index?id=' . $mm->getId():'mmobj/index?file_id=' . $file->getId())?>
+               <?php echo link_to($file->getPerfil()->getLink(), ($num_files==1)?'video/index?id=' . $mm->getId():'video/index?file_id=' . $file->getId())?>
                <?php if ($file->getDescription() !== ""): ?>
                  &nbsp;|&nbsp;&nbsp;<strong><?php echo ( $file->getDescription() ) ?></strong>
                <?php endif ?>
