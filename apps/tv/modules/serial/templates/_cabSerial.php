@@ -1,4 +1,4 @@
-<div class="<?php echo $serial->getBroadcastMax()->getBroadcastType()->getName()?>"></div>
+<div class="<?php $aux = $serial->getBroadcastMax();echo ($aux)?$aux->getBroadcastType()->getName():''?>"></div>
 
 <div class="cab_serial">
   <!--<h1 class="title">
