@@ -890,7 +890,9 @@ class Mm extends BaseMm
       
       foreach($pub_channels_all as $pub_channel){
 	       $aux = $pub_channel->hasMm($this->getId());
-        	if(($aux == 0)&&(array_key_exists($pub_channel->getId(), $pub_channels_select))){
+        	if(($aux == 0)
+		   &&(array_key_exists($pub_channel->getId(), $pub_channels_select))
+		   &&($pub_channels_select[$pub_channel->getId()] != "off")){
                   if($this->getMaster() == null){
                     $aux = new PubChannelMm();
                     $aux->setMm($this);
