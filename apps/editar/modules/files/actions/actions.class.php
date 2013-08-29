@@ -70,6 +70,16 @@ class filesActions extends sfActions
     $file = FilePeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($file);
     $file->delete();
+
+    $mm = $file->getMm();
+
+    if($mm->getFirstPublicFile() == null){
+      $c = new Criteria();
+      $c->add(PubChannelMmPeer::MM_ID, $mm->getId());
+      $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
+      PubChannelMmPeer::doDelete($c);
+      $this->reload_pub_channel = true;
+    }
     
     return $this->renderComponent('files', 'list');
   }

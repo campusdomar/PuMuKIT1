@@ -152,5 +152,12 @@ if ($sf_request->getParameter('preview')){
   echo javascript_tag(remote_function(array('update' => 'preview_mm', 'url' => 'mms/preview?id='. $mm, 'script' => 'true' )));
 }
 
+if (isset($reload_pub_channel)){
+  echo javascript_tag("
+    new Ajax.Updater('list_pub_" . $mm . "', '" . url_for('mms/updatelistpub?id=' . $mm) . "')
+  "); 
+}
+
+
 if (isset($msg_alert)) echo m_msg_alert($msg_alert);
 ?>
