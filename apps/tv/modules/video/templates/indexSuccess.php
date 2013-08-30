@@ -15,7 +15,6 @@
 					      'mmobjs' => PubChannelPeer::getMmsFromSerial(1, $m->getSerialId())))?>
    <?php include_partial('other', array('texto' => __('También te interesan:'), 
 					      'mmobjs' => $m->getSimilarMms()))?>
-   <?php include_partial('share', array('mmobj' => $m, 'file' => $file))?>
   </div>
 </div>
 <div style="clear:both"></div>
