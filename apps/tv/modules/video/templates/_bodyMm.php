@@ -6,7 +6,7 @@
         <?php foreach ($mm->getCategories(CategoryPeer::retrieveByCode("UNESCO")) as $category) :?>
           <li style="list-style:none; float: left; margin: 5px;">
             <div title="<?php echo $category->getName()?>" class="label-categories label-info">
-              <a style="text-decoration: none" href="<?php echo url_for('educa/allMmsByDate') . '?id='.$category->getId()?>"><?php echo $category->getName()?></a>
+              <a style="text-decoration: none" href="<?php echo url_for('buscador') . '?unesco='.$category->getId()?>"><?php echo $category->getName()?></a>
             </div>
           </li>
         <?php endforeach; ?> 
