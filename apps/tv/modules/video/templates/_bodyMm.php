@@ -40,14 +40,7 @@
       </td>
       <td style="padding: 5px 0 0 10px; width:217px;">
         <?php // el nº mágico width: 217px es para solucionar el descuadre del span del tamaño en mmobj con descripciones cortas. Viene de medir una objeto con layout correcto (cuando tiene descripción de varias líneas). ?>
-        <?php foreach ($mm->getFilesToDownload() as $fileD) : if (!$fileD->getDisplay()) continue; $fileD->setCulture($sf_user->getCulture())?>
-          <div class="download" style="height: 30px; margin-left: 5px;">
-            <a style="margin-left: 20px" href="<?php echo url_for('mmobj/download') . '?id='.$fileD->getId()?>">
-              Descargar este <?php echo ($fileD->getAudio()) ? 'audio' : 'vídeo';?>
-            </a>
-            <span class="size"><?php echo number_format($fileD->getSize()/1048576, 2)?>MB</span>
-          </div>
-        <?php endforeach; ?>
+        <?php // Para añadir enlaces para descargar vídeo: $mm->getFilesToDownload() saca todos los que no sean master.?>
         <!-- MATERIAL -->
         <?php $materials = $mm->getMaterialsWithI18n() ?>
         <?php foreach ($materials as $material): if(!$material->getDisplay()) continue;$material->setCulture( $sf_user->getCulture() ) ?>
