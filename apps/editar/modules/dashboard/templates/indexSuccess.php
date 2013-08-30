@@ -65,6 +65,11 @@ Timeline.DefaultEventSource.Event.prototype.fillInfoBubble = function(elmt, them
     div_time.innerText = start_es;
     elmt.appendChild(div_title);
     elmt.appendChild(div_time);
+    var link_frontend = eventObject._link.replace("/editar.php/mms/index/","/es/");
+    var a_frontend = document.createElement("a");
+    a_frontend.setAttribute('href', link_frontend);
+    a_frontend.innerHTML = "Ver serie en el frontend";
+    elmt.appendChild(a_frontend);
 }
 </script>
 <br />
