@@ -338,6 +338,22 @@ window.change_select = function(elemento, selector)
 	    parameters: 'ids='+$$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id').toJSON()}
 			);
         break;
+    case 'inv_announce_sel':
+        new Ajax.Updater('list_'+elemento+'s', '/editar.php/'+elemento+'s/inv/field/announce', {
+	    asynchronous: true,
+	    evalScripts: true,
+            onSuccess:  selector.selectedIndex = 0,
+	    parameters: 'ids='+$$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id').toJSON()}
+			);
+        break;
+    case 'inv_announce_virtualserial_sel':
+        new Ajax.Updater('list_mms', '/editar.php/virtualserial/inv/field/announce', {
+            asynchronous: true,
+            evalScripts: true,
+            onSuccess:  selector.selectedIndex = 0,
+            parameters: 'ids='+$$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id').toJSON()}
+                        );
+        break;
     }
   selector.selectedIndex = 0;
 
