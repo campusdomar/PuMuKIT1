@@ -45,7 +45,7 @@
         <input id="<?php echo $mm['id']?>" class="mm_checkbox" type="checkbox">
       </td>
       <td style="padding: 0.2%;">
-	<?php echo image_tag('admin/bbuttons/'.$mm['status'].'_inline.gif', 'alt='.$mm['status'].' title='.MmPeer::getStatusText($mm['status']).' class=miniTag id=table_mms_status_' . $mm['id']) ?>
+	<?php echo image_tag('admin/bbuttons/mm'.$mm['status'].'_inline.gif', 'alt='.$mm['status'].' title='.MmPeer::getStatusText($mm['status']).' class=miniTag id=table_mms_status_' . $mm['id']) ?>
       </td>
       <td style="padding: 0.2%;">
         <?php echo ($mm['announce']?'<span style="color: blue" title="Novedad">A</span>':'&nbsp;') ?>
@@ -93,10 +93,6 @@
       <td onclick="click_fila_virtualserial(this, <?php echo $mm['id'] ?>)" style="padding: 0.2%;">
         <?php $value = $mm['title']; echo $value ? $value : '&nbsp;'  ?>
       </td>
-      <!--<td style="padding: 0.2%;">
-         <?php $category_name = $sf_user->getAttribute('name_cat', null, 'tv_admin/virtualserial');?>
-         <abbr title="<?php echo $category_name?>"><?php //echo (strlen($category_name)>10)? substr($category_name, 0, 10):$category_name;?></abbr>
-      </td>-->
       <td style="padding: 0.2%;">
         <?php echo FilePeer::getDurationString($mm['duration']); ?>
       </td>
