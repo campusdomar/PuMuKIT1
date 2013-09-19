@@ -175,58 +175,58 @@ class virtualserialActions extends sfActions
    */
   public function executeListfromtree()
   {
-
-      if ($this->hasRequestParameter('id'))
+    
+    if ($this->hasRequestParameter('id'))
       {
         $this->getUser()->setAttribute('cat_id', $this->getRequestParameter('id'), 'tv_admin/virtualserial');
-  $this->getUser()->setAttribute('page', 1, 'tv_admin/virtualserial');
-
-  if ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == 0) {
+	$this->getUser()->setAttribute('page', 1, 'tv_admin/virtualserial');
+	
+	if ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == 0) {
           $name_cat = 'Todos';
-  } elseif ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == -1) {
+	} elseif ($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial') == -1) {
           $name_cat = 'Sin categoria';
-  } else {
-    $category = CategoryPeer::retrieveByPk($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial')); 
-    $this->forward404Unless($category);
+	} else {
+	  $category = CategoryPeer::retrieveByPk($this->getUser()->getAttribute('cat_id', null, 'tv_admin/virtualserial')); 
+	  $this->forward404Unless($category);
           $name_cat = $category->getName();
-  }
-  $this->getUser()->setAttribute('name_cat', $name_cat, 'tv_admin/virtualserial');
+	}
+	$this->getUser()->setAttribute('name_cat', $name_cat, 'tv_admin/virtualserial');
       }
 
-      if ($this->hasRequestParameter('page'))
+    if ($this->hasRequestParameter('page'))
       {
         $this->getUser()->setAttribute('page', $this->getRequestParameter('page'), 'tv_admin/virtualserial');
       } 
 
-      // reset fields
-      if ($this->hasRequestParameter('search') && $this->getRequestParameter('search') == 'reset...'){
-          $this->getUser()->setAttribute('type', 'all', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('duration', 'all', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('year', 'all', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('search', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('search_id', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('serial', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('genre', 'all', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('check', 'all', 'tv_admin/virtualserial/searchs');
+    // reset fields
+    if ($this->hasRequestParameter('search') && $this->getRequestParameter('search') == 'reset...'){
+      $this->getUser()->setAttribute('type', 'all', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('duration', 'all', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('year', 'all', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('search', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('search_id', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('serial', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('genre', 'all', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('check', 'all', 'tv_admin/virtualserial/searchs');
 
-    //Advanced Search
-          $this->getUser()->setAttribute('selected', 0, 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('title', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('subtitle', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('keyword', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('publicdateAdvancedStart', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('publicdateAdvancedFinish', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('recorddateAdvancedStart', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('recorddateAdvancedFinish', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('description_advanced', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('titular', '', 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('status', -1, 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('news', NULL, 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('editorial1', NULL, 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('editorial2', NULL, 'tv_admin/virtualserial/searchs');
-    $this->getUser()->setAttribute('person', array(), 'tv_admin/virtualserial/searchs');
-          $this->getUser()->setAttribute('broadcast_advanced', -1, 'tv_admin/virtualserial/searchs');
-      }
+      //Advanced Search
+      $this->getUser()->setAttribute('selected', 0, 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('title', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('subtitle', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('keyword', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('publicdateAdvancedStart', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('publicdateAdvancedFinish', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('recorddateAdvancedStart', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('recorddateAdvancedFinish', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('description_advanced', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('titular', '', 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('status', -1, 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('news', NULL, 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('editorial1', NULL, 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('editorial2', NULL, 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('person', array(), 'tv_admin/virtualserial/searchs');
+      $this->getUser()->setAttribute('broadcast_advanced', -1, 'tv_admin/virtualserial/searchs');
+    }
   }
 
   /**
@@ -1004,16 +1004,16 @@ class virtualserialActions extends sfActions
 
     if('rec_asc' == $this->getRequestParameter('type')){
       $c->addAscendingOrderByColumn(MmPeer::RECORDDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo ascendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo ascendente.");
     }elseif('rec_des' == $this->getRequestParameter('type')){
       $c->addDescendingOrderByColumn(MmPeer::RECORDDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo descendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo descendente.");
     }elseif('pub_asc' == $this->getRequestParameter('type')){
       $c->addAscendingOrderByColumn(MmPeer::PUBLICDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo ascendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo ascendente.");
     }elseif('pub_des' == $this->getRequestParameter('type')){
       $c->addDescendingOrderByColumn(MmPeer::PUBLICDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo ascendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo descendente.");
     }
 
     $mms = MmPeer::doSelect($c);
