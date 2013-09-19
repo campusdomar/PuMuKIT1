@@ -50,10 +50,10 @@
       <option disabled=""value="set_status_2_sel">Publicar selecionados</option> 
       <option disabled=""value="set_status_3_sel">Publicar totalmente selecionados</option>
       <option disabled="">---</option>
-      <option value="set_order_pub_des">Ordenar objetos multimedia por fecha de publicacion de forma descendiente</option> 
-      <option value="set_order_pub_asc">Ordenar objetos multimedia por fecha de publicacion de forma ascendiente</option> 
-      <option value="set_order_rec_des">Ordenar objetos multimedia por fecha de grabacion de forma descendiente</option> 
-      <option value="set_order_rec_asc">Ordenar objetos multimedia por fecha de grabacion de forma ascenditente</option> 
+      <option value="set_order_pub_des">Ordenar objetos multimedia por fecha de publicacion de forma descendente</option> 
+      <option value="set_order_pub_asc">Ordenar objetos multimedia por fecha de publicacion de forma ascendente</option> 
+      <option value="set_order_rec_des">Ordenar objetos multimedia por fecha de grabacion de forma descendente</option> 
+      <option value="set_order_rec_asc">Ordenar objetos multimedia por fecha de grabacion de forma ascendente</option> 
       <option disabled="">---</option>
       <option value="cut_mm">Cortar objetos multimedia</option> 
       <?php if($sf_user->hasAttribute('cut_mms')): ?>

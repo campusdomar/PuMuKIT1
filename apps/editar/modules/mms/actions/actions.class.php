@@ -512,16 +512,16 @@ class mmsActions extends sfActions
 
     if('rec_asc' == $this->getRequestParameter('type')){
       $c->addAscendingOrderByColumn(MmPeer::RECORDDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo ascendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo ascendente.");
     }elseif('rec_des' == $this->getRequestParameter('type')){
       $c->addDescendingOrderByColumn(MmPeer::RECORDDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo descendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo descendente.");
     }elseif('pub_asc' == $this->getRequestParameter('type')){
       $c->addAscendingOrderByColumn(MmPeer::PUBLICDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo ascendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo ascendente.");
     }elseif('pub_des' == $this->getRequestParameter('type')){
       $c->addDescendingOrderByColumn(MmPeer::PUBLICDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo ascendiente.");
+      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo descendente.");
     }
 
     $mms = MmPeer::doSelect($c);
