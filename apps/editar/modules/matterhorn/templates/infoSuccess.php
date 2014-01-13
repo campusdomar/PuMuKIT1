@@ -1,6 +1,5 @@
 <div style="text-align:center; padding: 5px 0px 10px;">
   <a href="<?php echo $oc_server?>" target="_blank">
-    <img src="<?php echo $oc_server . $img ?>" alt="logo org OCMH" />
   </a>
 </div>
 

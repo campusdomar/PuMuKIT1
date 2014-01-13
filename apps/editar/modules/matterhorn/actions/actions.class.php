@@ -113,9 +113,11 @@ class matterhornActions extends sfActions
   private function map_mp_all($mp){
     $img = null;
 
-    foreach($mp['attachments']['attachment'] as $attach){
-      if(($attach['type'] == 'presenter/search+preview') && ($attach['mimetype'] == 'image/jpeg')){
-	$img = $attach['url'];
+    if ($mp['attachments'] != "") {
+      foreach($mp['attachments']['attachment'] as $attach){
+	if(($attach['type'] == 'presenter/search+preview') && ($attach['mimetype'] == 'image/jpeg')){
+	  $img = $attach['url'];
+	}
       }
     }
     
@@ -133,7 +135,7 @@ class matterhornActions extends sfActions
 		 'title' => isset($mp['title'])?$mp['title']:null, 
 		 'date' => $date, 
 		 'serial_id' => isset($mp["series"])?$mp["series"]:null,
-		 "duration" => $mp["duration"], 
+		 "duration" => isset($mp["duration"])?$mp["duration"]:null, 
 		 'img' => isset($img)?$img:null,
 		 'mm' => $mm);
   }

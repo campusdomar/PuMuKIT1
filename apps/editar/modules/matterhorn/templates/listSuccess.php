@@ -61,8 +61,8 @@ function app_editar_matterhorn_image($mp)
         <td style="cursor: auto"><img class="mini" src="<?php echo is_null($img) ? '/images/sin_foto.jpg' : $img  ?>" height="23" width="30" /></td> 
         <td style="cursor: auto"><?php echo $mp["id"] ?></td> 
         <td style="cursor: auto"><?php echo $mp["title"] ?></td> 
-        <td style="cursor: auto"><?php echo $mp["seriestitle"] ?></td> 
-        <td style="cursor: auto"><?php echo ($mp["duration"]/1000) ?></td> 
+        <td style="cursor: auto"><?php echo (array_key_exists("seriestitle", $mp))? $mp["seriestitle"] : ""; ?></td> 
+        <td style="cursor: auto"><?php echo (array_key_exists("duration", $mp))? ($mp["duration"]/1000) : "Duration not available"; ?></td> 
         <td style="cursor: auto"><?php echo date("d-m-Y", strtotime($mp["start"])) ?></td> 
         <td style="cursor: auto">
           <?php if($mm === NULL):?>
