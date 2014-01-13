@@ -33,8 +33,10 @@ class PicMmPeer extends BasePicMmPeer
       $mm_pics = PicMmPeer::doSelect($values);
       foreach($mm_pics as $mm_pic){
 	$pic = $mm_pic->getPic();
-	if (($pic->countPicPersons() + $pic->countPicSerials() + $pic->countPicMms()) == 1)
-	  $pic->noCascadeDelete();
+	if ($pic) {
+	  if (($pic->countPicPersons() + $pic->countPicSerials() + $pic->countPicMms()) == 1)
+	    $pic->noCascadeDelete();
+	}
       }
     }
     
