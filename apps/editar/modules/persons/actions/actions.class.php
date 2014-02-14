@@ -333,20 +333,21 @@ class personsActions extends sfActions
   public function executeDeleterelation()
   {
     $person = PersonPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
     $this->role = RolePeer::retrieveByPk($this->getRequestParameter('role'));
     $template = 'listrelation';
 
     if ($this->hasRequestParameter('role')){
       if($this->hasRequestParameter('template')){
-	$mmPerson = MmTemplatePersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
-	$mmPerson->delete();
-	$msg_c = "Persona desasocionada correctamente";
-	$template = 'listrelationtemplate';
+        $this->mm = MmTemplatePeer::retrieveByPk($this->getRequestParameter('mm')); 
+        $mmPerson = MmTemplatePersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
+        $mmPerson->delete();
+        $msg_c = "Persona desasocionada correctamente";
+        $template = 'listrelationtemplate';
       }else{
-	$mmPerson = MmPersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
-	$mmPerson->delete();
-	$msg_c = "Persona desasocionada correctamente";
+        $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
+	    $mmPerson = MmPersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
+        $mmPerson->delete();
+    	$msg_c = "Persona desasocionada correctamente";
       }
     }
 
@@ -515,14 +516,15 @@ class personsActions extends sfActions
    */
   public function executeUp()
   {
-    $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
     $this->role = RolePeer::retrieveByPk($this->getRequestParameter('role'));
     
     if($this->hasRequestParameter('template')){
+      $this->mm = MmTemplatePeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmTemplatePersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelationtemplate';
     }else{
+      $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmPersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelation';      
@@ -544,14 +546,15 @@ class personsActions extends sfActions
    */
   public function executeDown()
   {
-    $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
     $this->role = RolePeer::retrieveByPk($this->getRequestParameter('role'));
     
     if($this->hasRequestParameter('template')){
+      $this->mm = MmTemplatePeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmTemplatePersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelationtemplate';
     }else{
+      $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmPersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelation';      
