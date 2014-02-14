@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<xliff version="1.0">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-14T16:32:12Z">
+    <body>
+    
+<trans-unit id="1">
+<source>Pulse OK para que el cambio tenga efecto</source>
+<target>Click OK for save changes</target>
+</trans-unit>
+
+<trans-unit id="2">
+<source>Filtar</source>
+<target>Filter</target>
+</trans-unit>
+
+<trans-unit id="3">
+<source>&lt;strong&gt;URLs para imagenes:&lt;/strong&gt;</source>
+<target>&lt;strong&gt;Image URLs&lt;/strong&gt;</target>
+</trans-unit>
+
+<trans-unit id="4">
+<source>Crear una categoria:</source>
+<target>Create new category</target>
+</trans-unit>
+
+<trans-unit id="5">
+<source>Create</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="6">
+<source>Por favor, inserte el nombre de la categoria antes</source>
+<target>Please, insert category name first</target>
+</trans-unit>
+
+<trans-unit id="7">
+<source>Basado en:</source>
+<target>Based in:</target>
+</trans-unit>
+
+<trans-unit id="8">
+<source>Sin Selecionar</source>
+<target>Unselected</target>
+</trans-unit>
+
+<trans-unit id="9">
+<source>Id</source>
+<target>Id</target>
+</trans-unit>
+
+<trans-unit id="10">
+<source>Busca</source>
+<target>Search</target>
+</trans-unit>
+
+<trans-unit id="11">
+<source>Pulse OK para que el cambio de publicacion tenga efecto</source>
+<target>Click OK to save publication changes</target>
+</trans-unit>
+
+<trans-unit id="12">
+<source>Mediateca</source>
+<target>Media library</target>
+</trans-unit>
+
+<trans-unit id="13">
+<source>titulo</source>
+<target>tittle</target>
+</trans-unit>
+
+<trans-unit id="14">
+<source>Crear un template:</source>
+<target>Create template:</target>
+</trans-unit>
+
+<trans-unit id="15">
+<source>Please enter a template name first</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="16">
+<source>Crear un tipo de area:</source>
+<target>Create area type:</target>
+</trans-unit>
+
+<trans-unit id="17">
+<source>Por favor, inserte el nombre del tipo antes</source>
+<target>Please, insert type name first</target>
+</trans-unit>
+
+<trans-unit id="18">
+<source>"Duracion 0\n</source>
+<target>"Duration 0\n</target>
+</trans-unit>
+
+<trans-unit id="19">
+<source>Debug en actions.clas.php: El total de par&#xE1;metros retornados por la query al controlador es:\n&lt;br/&gt;</source>
+<target>Debug in actions.class.php: Total parameters returned from query to controller is: \n&lt;br/&gt;</target>
+</trans-unit>
+
+<trans-unit id="20">
+<source>Su b&#xFA;squeda produjo el error: %s\n</source>
+<target>Your search showed this error:</target>
+</trans-unit>
+
+<trans-unit id="21">
+<source>Serie</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="22">
+<source>Media library (%1%)</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="23">
+<source>Add a file:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="24">
+<source>Add</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="25">
+<source>Please choose a file first</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="26">
+<source>Create a dir:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="27">
+<source>Please enter a directory name first</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="28">
+<source>Rename</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="29">
+<source>Cancel</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="30">
+<source>Delete</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="31">
+<source>Are you sure to want to delete this </source>
+<target></target>
+</trans-unit>
+</body>
+  </file>
+</xliff>
