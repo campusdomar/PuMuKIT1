@@ -2,7 +2,7 @@
 <form>
 <fieldset>
 
-<h2><?php echo "<strong>URLs para imagenes:</strong>"; ?></h2>
+   <h2><?php echo __('<strong>URLs para imagenes:</strong>'); ?></h2>
 <div class="form-row">
   <?php echo label_for('embed', 'Presenter:', 'class="required" ') ?>
   <div class="content">

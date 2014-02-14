@@ -433,7 +433,7 @@ class virtualserialActions extends sfActions
     $debug = false; // "Ingenioso" recurso para tener varios entornos de desarrollo a efectos de debug
     $env = ($debug) ? sfConfig::get('sf_environment') : 'prod';
     if ('dev' == $env){
-      echo "Debug en actions.clas.php: El total de parámetros retornados por la query al controlador es:\n<br/>";
+      echo __('Debug en actions.clas.php: El total de parámetros retornados por la query al controlador es:\n<br/>');
       var_dump($this->getRequest()->getParameterHolder());
       echo "<br/>";
     }

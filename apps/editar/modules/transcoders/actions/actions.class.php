@@ -386,7 +386,7 @@ class transcodersActions extends sfActions
       }
 
       if($duration == 0){
-	echo "Duracion 0\n";
+	echo __('"Duracion 0\n');
 	exit;
 	continue;
       }

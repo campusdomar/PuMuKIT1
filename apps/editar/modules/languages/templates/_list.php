@@ -35,7 +35,7 @@
         <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_languages', 'url' => 'languages/copy?id='.$language->getId(), 'script' => 'true'))?>
       </td>
       <td>
-        <input type="radio" name="radio_language" title="Selecrionar este language por defecto"
+        <input type="radio" name="radio_language" title="Seleccionar este idioma por defecto"
                value="language_<?php echo $language->getId()?>" 
                <?php echo $language->getDefaultSel()?'checked="checked"':'' ?>
                onchange="new Ajax.Request('/editar.php/languages/default/id/<?php echo $language->getId() ?>/value/'+ this.checked, {asynchronous:true, evalScripts:true})"

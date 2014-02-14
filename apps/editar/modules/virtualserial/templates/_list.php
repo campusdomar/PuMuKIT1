@@ -138,7 +138,7 @@
 </div>
 </div>
 <?php if ($error != '') :?>
-<div id="error_lucene" style="padding: 10px; background-color: #eef; border-radius: 5px; font-size: 15px; font-weight: bold; position:absolute; top: 200px; left: 650px; z-index: 5; width: 300px;"><?php echo "Su búsqueda produjo el error: " . $error . "\n" ?></div>
+   <div id="error_lucene" style="padding: 10px; background-color: #eef; border-radius: 5px; font-size: 15px; font-weight: bold; position:absolute; top: 200px; left: 650px; z-index: 5; width: 300px;"><?php echo sprintf(__('Su búsqueda produjo el error: %s\n'), $error) ?></div>
 <?php echo javascript_tag("
   Effect.Fade('error_lucene',{duration: 5.0});
 "); ?>
