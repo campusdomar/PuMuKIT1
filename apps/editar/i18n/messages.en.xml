@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-14T16:32:12Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T12:48:25Z">
     <body>
     
 <trans-unit id="1">
@@ -25,7 +25,7 @@
 
 <trans-unit id="5">
 <source>Create</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="6">
@@ -75,7 +75,7 @@
 
 <trans-unit id="15">
 <source>Please enter a template name first</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="16">
@@ -105,57 +105,292 @@
 
 <trans-unit id="21">
 <source>Serie</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="22">
 <source>Media library (%1%)</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="23">
 <source>Add a file:</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="24">
 <source>Add</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="25">
 <source>Please choose a file first</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="26">
 <source>Create a dir:</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="27">
 <source>Please enter a directory name first</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="28">
 <source>Rename</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="29">
 <source>Cancel</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="30">
 <source>Delete</source>
-<target></target>
+<target/>
 </trans-unit>
 
 <trans-unit id="31">
 <source>Are you sure to want to delete this </source>
-<target></target>
+<target/>
+</trans-unit>
+
+<trans-unit id="32">
+<source>Catalogador Unesco</source>
+<target>Unesco cataloger</target>
+</trans-unit>
+
+<trans-unit id="33">
+<source>Dise&amp;ntilde;o Portal WebTV</source>
+<target>WebTV portal design</target>
+</trans-unit>
+
+<trans-unit id="34">
+<source>Dise&#xF1;o</source>
+<target>Design</target>
+</trans-unit>
+
+<trans-unit id="35">
+<source>Plantillas</source>
+<target>Templates</target>
+</trans-unit>
+
+<trans-unit id="36">
+<source>Categorias</source>
+<target>Categories</target>
+</trans-unit>
+
+<trans-unit id="37">
+<source>Noticias</source>
+<target>News</target>
+</trans-unit>
+
+<trans-unit id="38">
+<source>Directos</source>
+<target>Live</target>
+</trans-unit>
+
+<trans-unit id="39">
+<source>Canales en Directo</source>
+<target>Live channels</target>
+</trans-unit>
+
+<trans-unit id="40">
+<source>Anuncios de Directos</source>
+<target>Live events</target>
+</trans-unit>
+
+<trans-unit id="41">
+<source>Perfil de Transcodificaci&#xF3;n</source>
+<target>Transcoder profile</target>
+</trans-unit>
+
+<trans-unit id="42">
+<source>Editoriales Temporizadas</source>
+<target>Timed publishing</target>
+</trans-unit>
+
+<trans-unit id="43">
+<source>Tablas</source>
+<target>Tables</target>
+</trans-unit>
+
+<trans-unit id="44">
+<source>Personas</source>
+<target>People</target>
+</trans-unit>
+
+<trans-unit id="45">
+<source>Administraci&amp;oacute;n</source>
+<target>Administration</target>
+</trans-unit>
+
+<trans-unit id="46">
+<source>Usuarios admin</source>
+<target>Admin users</target>
+</trans-unit>
+
+<trans-unit id="47">
+<source>Lugares y recintos</source>
+<target>Places and precincts</target>
+</trans-unit>
+
+<trans-unit id="48">
+<source>G&amp;eacute;neros</source>
+<target>Genres</target>
+</trans-unit>
+
+<trans-unit id="49">
+<source>Tipos de materiales</source>
+<target>Material types</target>
+</trans-unit>
+
+<trans-unit id="50">
+<source>Tipos de series</source>
+<target>Series types</target>
+</trans-unit>
+
+<trans-unit id="51">
+<source>Idiomas</source>
+<target>Languages</target>
+</trans-unit>
+
+<trans-unit id="52">
+<source>Perfiles</source>
+<target>Profiles</target>
+</trans-unit>
+
+<trans-unit id="53">
+<source>Perfiles Acceso</source>
+<target>Access profile</target>
+</trans-unit>
+
+<trans-unit id="54">
+<source>Ingestador</source>
+<target>Ingester</target>
+</trans-unit>
+
+<trans-unit id="55">
+<source>Ingestador Matterhorn</source>
+<target>Matterhorn ingester</target>
+</trans-unit>
+
+<trans-unit id="56">
+<source>Descripci&#xF3;n:</source>
+<target>Description:</target>
+</trans-unit>
+
+<trans-unit id="57">
+<source> Estado conexi&#xF3;n:</source>
+<target>Connection status:</target>
+</trans-unit>
+
+<trans-unit id="58">
+<source>Selecione o cree alguna CPU.</source>
+<target>Select or create CPU.</target>
+</trans-unit>
+
+<trans-unit id="59">
+<source>Editar timeframe</source>
+<target>Edit timeframe</target>
+</trans-unit>
+
+<trans-unit id="60">
+<source>T&amp;iacute;tulo</source>
+<target>Title</target>
+</trans-unit>
+
+<trans-unit id="61">
+<source>titulo</source>
+<target>tittle</target>
+</trans-unit>
+
+<trans-unit id="62">
+<source>Servidor:</source>
+<target>Server:</target>
+</trans-unit>
+
+<trans-unit id="63">
+<source>Reproducible:</source>
+<target>Playable:</target>
+</trans-unit>
+
+<trans-unit id="64">
+<source>Por defecto:</source>
+<target>By default:</target>
+</trans-unit>
+
+<trans-unit id="65">
+<source>Formato:</source>
+<target>Format:</target>
+</trans-unit>
+
+<trans-unit id="66">
+<source>Extensi&#xF3;n:</source>
+<target>Extension:</target>
+</trans-unit>
+
+<trans-unit id="67">
+<source>Resoluci&#xF3;n:</source>
+<target>Resolution:</target>
+</trans-unit>
+
+<trans-unit id="68">
+<source>Solo audio:</source>
+<target>Audio only:</target>
+</trans-unit>
+
+<trans-unit id="69">
+<source>Tiene script:</source>
+<target>Has script:</target>
+</trans-unit>
+
+<trans-unit id="70">
+<source>Fichero configuraci&#xF3;n:</source>
+<target>Configuration file:</target>
+</trans-unit>
+
+<trans-unit id="71">
+<source>Aplicaci&#xF3;n:</source>
+<target>Application:</target>
+</trans-unit>
+
+<trans-unit id="72">
+<source>Selecione o cree algun perfil.</source>
+<target>Select or create profile.</target>
+</trans-unit>
+
+<trans-unit id="73">
+<source>Subt&#xED;tulo:</source>
+<target>Subtittle:</target>
+</trans-unit>
+
+<trans-unit id="74">
+<source>Introduce una palabra clave...</source>
+<target>Enter keyword...</target>
+</trans-unit>
+
+<trans-unit id="75">
+<source>Fecha de publicaci&#xF3;n</source>
+<target>Publish date</target>
+</trans-unit>
+
+<trans-unit id="76">
+<source>Introduce fecha inicial de b&#xFA;squeda...</source>
+<target>Insert starting date to search...</target>
+</trans-unit>
+
+<trans-unit id="77">
+<source>Introduce fecha final de b&#xFA;squeda...</source>
+<target>Insert ending date to search...</target>
+</trans-unit>
+
+<trans-unit id="78">
+<source>No permitida descarga</source>
+<target>Download not allowed</target>
 </trans-unit>
 </body>
   </file>
