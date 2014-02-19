@@ -19,8 +19,8 @@
 </div>
 
 <ul class="tv_admin_actions" style="width: 100%">
-  <span id="mm_save_error_pub" style="color:red; opacity:0.0; filter: alpha(opacity=0); ZOOM:1">Guardado ERROR</span>
-  <span id="mm_save_ok_pub" style="color:blue; opacity:0.0; filter: alpha(opacity=0); ZOOM:1">Guardado OK</span>
+  <span id="mm_save_error_pub" style="color:red; opacity:0.0; filter: alpha(opacity=0); ZOOM:1"><?php echo __('Guardado ERROR')?></span>
+  <span id="mm_save_ok_pub" style="color:blue; opacity:0.0; filter: alpha(opacity=0); ZOOM:1"><?php echo __('Guardado OK')?></span>
   <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=return procesaOk();');?></li>
   <li><?php echo reset_tag('Cancel','name=reset class=tv_admin_action_delete onclick=procesaReset();'); ?></li>
 </ul> 
@@ -37,9 +37,9 @@
 
 <!-- SELECT -->
 <select style="margin:0px 0px 15px" name="status" id="filters_anounce" onchange="$('remember_save_mm_pub').show()" <?php echo ($sf_user->getAttribute('user_type_id', 1) == 0)?'':'disabled="disabled"' ?> >
-  <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_NORMAL)?'selected="selected"':''); ?>value="0" >Publicado</option>
-  <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_BLOQ)?'selected="selected"':''); ?>value="1" >Bloqueado</option>
-  <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_HIDE)?'selected="selected"':''); ?>value="2" >Oculto</option>
+  <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_NORMAL)?'selected="selected"':''); ?>value="0" ><?php echo __('Publicado')?></option>
+  <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_BLOQ)?'selected="selected"':''); ?>value="1" ><?php echo __('Bloqueado')?></option>
+  <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_HIDE)?'selected="selected"':''); ?>value="2" ><?php echo __('Oculto')?></option>
 </select>
 <!-- END SELECT -->
 
@@ -166,7 +166,7 @@ compruebaIntervaloEditorial = function(id){
   var value  = false;
   var error  = '';
   if ($('timestart'+id).value === '' || $('timeend'+id).value === ''){
-    error = 'Fechas incompletas';
+    error = <?php echo __('Fechas incompletas')?>;
   } else if (dstart > dend){
     error = 'Error: Inicio > Final';
   } else if (dend < today){
@@ -182,19 +182,19 @@ compruebaIntervaloEditorial = function(id){
 
 mensajeIntervalo = function(array_value_error, id){
   value = parseInt(array_value_error[0],10);
-  var span_id = 'intervalo' + id;
+  var span_id =<?php echo __('intervalo')?> + id;
   $(span_id).innerHTML = "";
   if (isNaN(value)){
     mensaje = array_value_error[1];    
     $(span_id).style.color = "red";
   } else if (value == -1){
-    mensaje = 'Evento pasado';
+    mensaje = <?php echo __('Evento pasado')?>;
     $(span_id).style.color = "grey";
   } else if (value == +1){
-    mensaje = 'Evento futuro';
+    mensaje = <?php echo __('Evento futuro')?>;
     $(span_id).style.color = "grey";
   } else if (value == 0){
-    mensaje = 'Evento activo';
+    mensaje = <?php echo __('Evento activo')?>;
     $(span_id).style.color = "green";
   } else {
     mensaje = '';
@@ -211,7 +211,7 @@ muestraPasadoActivoFuturo = function(id){
 </script>
 
 <div class="form-row">
-  <?php echo label_for('announce_label', 'Decisiones Editoriales:', 'class="required long" ') ?>
+  <?php echo label_for('announce_label', __('Decisiones Editoriales:'), 'class="required long" ') ?>
   <div class="content content_long" style="height:18px">
     <?php $value = object_checkbox_tag($mm, 'getAnnounce', array (
       'control_name' => 'announce',
@@ -254,7 +254,7 @@ muestraPasadoActivoFuturo = function(id){
           'size' => 14 //por defecto es 17
             )); echo $value ? $value : '&nbsp;' ?>
 
-        <span id="error_start1" style="display:none" class="error">Formato de fecha no v&aacute;lido</span> 
+        <span id="error_start1" style="display:none" class="error"><?php echo __('Formato de fecha no v&aacute;lido')?></span> 
     
         <?php //echo label_for('timeend1', 'al:', 'class="required long" ') ?>
         <span style="margin-left:5px;" >al: </span>
@@ -271,7 +271,7 @@ muestraPasadoActivoFuturo = function(id){
         <?php if (isset($interval1cmp) && $interval1cmp !== ''):?>
         <script type="text/javascript">mensajeIntervalo ([<?php echo $interval1cmp;?>,''], 1) </script>
         <?php endif?>
-        <span id="error_end1" style="display:none" class="error">Formato de fecha no v&aacute;lido</span>
+        <span id="error_end1" style="display:none" class="error"><?php echo __('Formato de fecha no v&aacute;lido')?></span>
       </span>
       
       
@@ -289,8 +289,8 @@ muestraPasadoActivoFuturo = function(id){
 
     <span class="temporizada" id="temporizada2" style="float:left;" >
       <span id="radios2" style="<?php if (!$mm->getEditorial2() && !isset($timeframe2)) echo "opacity:0.5;"//ojo, necesito algún caracter dentro de este span?>">&nbsp;
-        <?php echo radiobutton_tag('temporizada2', 'permanente', (!isset($timeframe2)), array('style' => 'margin:3px;float:left;', 'onchange' => 'procesaPermanente(2)'));?><label for ="temporizada2_permanente" style="position:relative;padding:3px;margin-right:3px;color:black;width:auto;"> Permanente</label> 
-        <?php echo radiobutton_tag('temporizada2', 'temporizada',    (isset($timeframe2)), array('style' => 'margin:3px;float:left;', 'onchange' => 'procesaTemporizada(2)')); ?><label for ="temporizada2_temporizada" style="position:relative;padding:3px 0 3px 3px;color:black;width:auto;"> Temporizado</label>
+        <?php echo radiobutton_tag('temporizada2', 'permanente', (!isset($timeframe2)), array('style' => 'margin:3px;float:left;', 'onchange' => 'procesaPermanente(2)'));?><label for ="temporizada2_permanente" style="position:relative;padding:3px;margin-right:3px;color:black;width:auto;"><?php echo __(' Permanente')?></label> 
+        <?php echo radiobutton_tag('temporizada2', 'temporizada',    (isset($timeframe2)), array('style' => 'margin:3px;float:left;', 'onchange' => 'procesaTemporizada(2)')); ?><label for ="temporizada2_temporizada" style="position:relative;padding:3px 0 3px 3px;color:black;width:auto;"><?php echo __('Temporizado')?></label>
       </span>
       <span id="calendarios2" style="<?php if (!isset($timeframe2)) echo "opacity:0.5;"?>">
         <span>del: </span>
@@ -308,7 +308,7 @@ muestraPasadoActivoFuturo = function(id){
           'size' => 14 //por defecto es 17
             )); echo $value ? $value : '&nbsp;' ?>
      
-        <span id="error_start2" style="display:none" class="error">Formato de fecha no v&aacute;lido</span> 
+        <span id="error_start2" style="display:none" class="error"><?php echo __('Formato de fecha no v&aacute;lido')?></span> 
         <span style="margin-left:5px;" >al: </span>       
           <?php $value = object_input_date_tag($timeframe2, 'getTimeend', array (
             'rich' => true,
@@ -322,7 +322,7 @@ muestraPasadoActivoFuturo = function(id){
         <?php if (isset($interval2cmp) && $interval2cmp !== ''):?>
         <script type="text/javascript">mensajeIntervalo([<?php echo $interval2cmp;?>,''], 2) </script>
         <?php endif?>
-        <span id="error_end2" style="display:none" class="error">Formato de fecha no v&aacute;lido</span> 
+        <span id="error_end2" style="display:none" class="error"><?php echo __('Formato de fecha no v&aacute;lido')?></span> 
       </span>
     </span> <!-- fin temporizada -->
   </div>
@@ -369,11 +369,11 @@ muestraPasadoActivoFuturo = function(id){
     <?php if(count($mm->getSerial()->getSerialItuness()) == 0):?>
       <a href="#" onclick="
   new Ajax.Updater('itunes_mm_info', '<?php echo url_for('mms/ituneson?id=' . $mm->getId())?>', {asynchronous:true, evalScripts:true}); return false;
-">Publicar en itunes U.</a>
+"><?php echo __('Publicar en itunes U.')?></a>
     <?php else:?>
       <a href="#" onclick="
   new Ajax.Updater('itunes_mm_info', '<?php echo url_for('mms/ituneson?id=' . $mm->getId())?>', {asynchronous:true, evalScripts:true}); return false;
-">Quitar de itunes U.</a>
+"><?php echo __('Quitar de itunes U.')?></a>
     <?php endif?>
 
   </div>

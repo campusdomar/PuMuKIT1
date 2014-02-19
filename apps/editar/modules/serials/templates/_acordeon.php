@@ -5,26 +5,26 @@
     <fieldset>
       <div id="bottom_container" >
     	
-        <h2 class="accordion_toggle">Buscar</h2>
+        <h2 class="accordion_toggle"><?php echo __('Buscar')?></h2>
         <div class="accordion_content" style="overflow: hidden; display: none;">
           <div class="form-row">
-            <label for="title">Titulo:</label>
+            <label for="title"><?php echo __('Titulo:')?></label>
             <div class="content">
               <?php echo input_tag('filters[title]', $sf_user->getAttribute('title', null, 'tv_admin/serial/filters')) ?>
             </div>
             <br />
-            <label for="person">Persona:</label>
+            <label for="person"><?php echo __('Persona:')?></label>
             <div class="content">
               <?php echo input_tag('filters[person]', $sf_user->getAttribute('person', null, 'tv_admin/serial/filters')) ?>
             </div>
           </div>
         </div>
     
-        <h2 class="accordion_toggle">Fechas</h2>
+        <h2 class="accordion_toggle"><?php echo __('Fechas')?></h2>
         <div class="accordion_content" style="overflow: hidden; display: none;">  
 
           <div class="form-row">
-	    <label for="publicdate"><?php echo 'Desde:' ?></label>
+	    <label for="publicdate"><?php echo __('Desde:') ?></label>
             <div class="content">
 
 	    <?php 
@@ -55,11 +55,11 @@ if(isset($filters_date['to']) && $filters_date['to'] != '') {
 
         </div>
 
-        <h2 class="accordion_toggle">Otros</h2>
+        <h2 class="accordion_toggle"><?php echo __('Otros')?></h2>
         <div class="accordion_content" style="overflow: hidden; display: none;">
 
           <div class="form-row">
- 	    <label for="announce">Anunciado:</label>
+ 	    <label for="announce"><?php echo __('Anunciado:')?></label>
             <div class="content">
               <?php $options_filters_announce = array('diff' => 'Indiferente',
                                                       'true' => 'Sí',
@@ -70,7 +70,7 @@ if(isset($filters_date['to']) && $filters_date['to'] != '') {
             </div>
             <br /> 
  
- 	    <label for="status">Oculto:</label>
+ 	    <label for="status"><?php echo __('Oculto:')?></label>
             <div class="content">
 		<?php $options_filters_status = array('all'=>'Todos',
                                                       'false' => 'No',
