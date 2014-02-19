@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T13:26:40Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T14:01:07Z">
     <body>
     
 <trans-unit id="1">
@@ -64,7 +64,7 @@
 </trans-unit>
 
 <trans-unit id="13">
-<source>Título</source>
+<source>T&#xED;tulo</source>
 <target>Tittle</target>
 </trans-unit>
 
@@ -496,6 +496,126 @@
 <trans-unit id="99">
 <source>Estructura:</source>
 <target>Structure:</target>
+</trans-unit>
+
+<trans-unit id="100">
+<source>Guardado ERROR</source>
+<target>Saved ERROR</target>
+</trans-unit>
+
+<trans-unit id="101">
+<source>Guardado OK</source>
+<target>Saved OK</target>
+</trans-unit>
+
+<trans-unit id="102">
+<source>Publicado</source>
+<target>Published</target>
+</trans-unit>
+
+<trans-unit id="103">
+<source>Bloqueado</source>
+<target>Blocked</target>
+</trans-unit>
+
+<trans-unit id="104">
+<source>Oculto</source>
+<target>Hidden</target>
+</trans-unit>
+
+<trans-unit id="105">
+<source>Fechas incompletas</source>
+<target>Incomplete dates</target>
+</trans-unit>
+
+<trans-unit id="106">
+<source>intervalo</source>
+<target>interval</target>
+</trans-unit>
+
+<trans-unit id="107">
+<source>Evento pasado</source>
+<target>Past event</target>
+</trans-unit>
+
+<trans-unit id="108">
+<source>Evento futuro</source>
+<target>Future event</target>
+</trans-unit>
+
+<trans-unit id="109">
+<source>Evento activo</source>
+<target>Active event</target>
+</trans-unit>
+
+<trans-unit id="110">
+<source>Decisiones Editoriales:</source>
+<target>Editorial decisions:</target>
+</trans-unit>
+
+<trans-unit id="111">
+<source>Formato de fecha no v&amp;aacute;lido</source>
+<target>Invalid date format</target>
+</trans-unit>
+
+<trans-unit id="112">
+<source> Permanente</source>
+<target> Permanent</target>
+</trans-unit>
+
+<trans-unit id="113">
+<source>Temporizado</source>
+<target>Timed</target>
+</trans-unit>
+
+<trans-unit id="114">
+<source>Publicar en itunes U.</source>
+<target>Publish on itunes U.</target>
+</trans-unit>
+
+<trans-unit id="115">
+<source>Quitar de itunes U.</source>
+<target>Remove from itunes U.</target>
+</trans-unit>
+
+<trans-unit id="116">
+<source>Buscar</source>
+<target>Search</target>
+</trans-unit>
+
+<trans-unit id="117">
+<source>Titulo:</source>
+<target>Tittle:</target>
+</trans-unit>
+
+<trans-unit id="118">
+<source>Persona:</source>
+<target>Person:</target>
+</trans-unit>
+
+<trans-unit id="119">
+<source>Fechas</source>
+<target>Dates</target>
+</trans-unit>
+
+<trans-unit id="120">
+<source>Desde:</source>
+<target>From:</target>
+</trans-unit>
+
+<trans-unit id="121">
+<source>Otros</source>
+<target>Others</target>
+</trans-unit>
+
+<trans-unit id="122">
+<source>Anunciado:</source>
+<target>Announced:</target>
+</trans-unit>
+
+<trans-unit id="123">
+<source>Oculto:</source>
+<target>Hidden:</target>
 </trans-unit>
 </body>
   </file>
