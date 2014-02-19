@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T12:48:25Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T13:26:40Z">
     <body>
     
 <trans-unit id="1">
@@ -391,6 +391,111 @@
 <trans-unit id="78">
 <source>No permitida descarga</source>
 <target>Download not allowed</target>
+</trans-unit>
+
+<trans-unit id="79">
+<source>Series Multimedia</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="80">
+<source>Transcodificacion</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="81">
+<source>Lista de tareas</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="82">
+<source>Trascodificadores</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="83">
+<source>Servidores de Distribuci&#xF3;n</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="84">
+<source> Canales en directo</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="85">
+<source>Seleciona una acci&amp;oacute;n...</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="86">
+<source>Borrar selecionados</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="87">
+<source>Crear nuevo</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="88">
+<source>Novedad:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="89">
+<source>Subt&amp;iacute;tulo:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="90">
+<source>Canal:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="91">
+<source>Fecha de publicaci&amp;oacute;n:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="92">
+<source>Formato fecha no v&amp;aacute;lido</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="93">
+<source>Descripci&amp;oacute;n:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="94">
+<source>Im&amp;aacute;genes:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="95">
+<source>Mostrar Textos &lt;strong&gt;HTML&lt;/strong&gt; de configuracion.</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="96">
+<source>Texto de Cabecera: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="97">
+<source>Texto de Pie: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="98">
+<source>Titular:</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="99">
+<source>Estructura:</source>
+<target></target>
 </trans-unit>
 </body>
   </file>
