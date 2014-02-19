@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T14:01:07Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T14:28:16Z">
     <body>
     
 <trans-unit id="1">
@@ -616,6 +616,36 @@
 <trans-unit id="123">
 <source>Oculto:</source>
 <target>Hidden:</target>
+</trans-unit>
+
+<trans-unit id="124">
+<source>Hasta:</source>
+<target>To:</target>
+</trans-unit>
+
+<trans-unit id="125">
+<source>Indiferente</source>
+<target>Indiferent</target>
+</trans-unit>
+
+<trans-unit id="126">
+<source>S&#xED;</source>
+<target>Yes</target>
+</trans-unit>
+
+<trans-unit id="127">
+<source>No</source>
+<target>No</target>
+</trans-unit>
+
+<trans-unit id="128">
+<source>Todos</source>
+<target>All</target>
+</trans-unit>
+
+<trans-unit id="129">
+<source>Si</source>
+<target>Yes</target>
 </trans-unit>
 </body>
   </file>
