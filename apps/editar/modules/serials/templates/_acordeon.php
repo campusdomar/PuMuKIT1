@@ -45,7 +45,7 @@ if(isset($filters_date['to']) && $filters_date['to'] != '') {
             </div>
            
             <br />
-	    <label for="publicdate"><?php echo 'Hasta:' ?></label>
+	    <label for="publicdate"><?php echo __('Hasta:') ?></label>
             <div class="content">
 	    <?php echo input_date_tag('filters[date][to]', $to, array ('rich' => true, 'calendar_button_img' => '/images/admin/buttons/date.png' )) ?>
             </div>
@@ -61,9 +61,9 @@ if(isset($filters_date['to']) && $filters_date['to'] != '') {
           <div class="form-row">
  	    <label for="announce"><?php echo __('Anunciado:')?></label>
             <div class="content">
-              <?php $options_filters_announce = array('diff' => 'Indiferente',
-                                                      'true' => 'Sí',
-                                                      'false' => 'No');
+              <?php $options_filters_announce = array('diff' => __('Indiferente'),
+                                                      'true' => __('Sí'),
+                                                      'false' => __('No');
               echo select_tag('filters[announce]',
                 options_for_select( $options_filters_announce,
                   $sf_user->getAttribute('announce', 'diff', 'tv_admin/serial/filters')));?>
@@ -72,9 +72,9 @@ if(isset($filters_date['to']) && $filters_date['to'] != '') {
  
  	    <label for="status"><?php echo __('Oculto:')?></label>
             <div class="content">
-		<?php $options_filters_status = array('all'=>'Todos',
-                                                      'false' => 'No',
-                                                      'true' => 'Si');
+		<?php $options_filters_status = array('all'=>__('Todos'),
+                                                      'false' =>__('No'),
+                                                      'true' => __('Si');
               echo select_tag('filters[status]',
                 options_for_select( $options_filters_status,
                   $sf_user->getAttribute('status', 'all', 'tv_admin/serial/filters')));?>
