@@ -64,8 +64,8 @@
 </trans-unit>
 
 <trans-unit id="13">
-<source>TTulo</source>
-<target>tittle</target>
+<source>Título</source>
+<target>Tittle</target>
 </trans-unit>
 
 <trans-unit id="14">
@@ -395,107 +395,107 @@
 
 <trans-unit id="79">
 <source>Series Multimedia</source>
-<target></target>
+<target>Multimedia series</target>
 </trans-unit>
 
 <trans-unit id="80">
 <source>Transcodificacion</source>
-<target></target>
+<target>Transcoding</target>
 </trans-unit>
 
 <trans-unit id="81">
 <source>Lista de tareas</source>
-<target></target>
+<target>Task list</target>
 </trans-unit>
 
 <trans-unit id="82">
 <source>Trascodificadores</source>
-<target></target>
+<target>Transcoders</target>
 </trans-unit>
 
 <trans-unit id="83">
 <source>Servidores de Distribuci&#xF3;n</source>
-<target></target>
+<target>Distribution servers</target>
 </trans-unit>
 
 <trans-unit id="84">
 <source> Canales en directo</source>
-<target></target>
+<target>Live channels</target>
 </trans-unit>
 
 <trans-unit id="85">
 <source>Seleciona una acci&amp;oacute;n...</source>
-<target></target>
+<target>Select action</target>
 </trans-unit>
 
 <trans-unit id="86">
 <source>Borrar selecionados</source>
-<target></target>
+<target>Delete selected</target>
 </trans-unit>
 
 <trans-unit id="87">
 <source>Crear nuevo</source>
-<target></target>
+<target>Create new</target>
 </trans-unit>
 
 <trans-unit id="88">
 <source>Novedad:</source>
-<target></target>
+<target>New:</target>
 </trans-unit>
 
 <trans-unit id="89">
 <source>Subt&amp;iacute;tulo:</source>
-<target></target>
+<target>Subtittle:</target>
 </trans-unit>
 
 <trans-unit id="90">
 <source>Canal:</source>
-<target></target>
+<target>Channel:</target>
 </trans-unit>
 
 <trans-unit id="91">
 <source>Fecha de publicaci&amp;oacute;n:</source>
-<target></target>
+<target>Publish date:</target>
 </trans-unit>
 
 <trans-unit id="92">
 <source>Formato fecha no v&amp;aacute;lido</source>
-<target></target>
+<target>Invalid date format</target>
 </trans-unit>
 
 <trans-unit id="93">
 <source>Descripci&amp;oacute;n:</source>
-<target></target>
+<target>Description</target>
 </trans-unit>
 
 <trans-unit id="94">
 <source>Im&amp;aacute;genes:</source>
-<target></target>
+<target>Pictures</target>
 </trans-unit>
 
 <trans-unit id="95">
 <source>Mostrar Textos &lt;strong&gt;HTML&lt;/strong&gt; de configuracion.</source>
-<target></target>
+<target>Show HTML config texts</target>
 </trans-unit>
 
 <trans-unit id="96">
 <source>Texto de Cabecera: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
-<target></target>
+<target>Header text:</target>
 </trans-unit>
 
 <trans-unit id="97">
 <source>Texto de Pie: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
-<target></target>
+<target>Footer text:</target>
 </trans-unit>
 
 <trans-unit id="98">
 <source>Titular:</source>
-<target></target>
+<target>Headline:</target>
 </trans-unit>
 
 <trans-unit id="99">
 <source>Estructura:</source>
-<target></target>
+<target>Structure:</target>
 </trans-unit>
 </body>
   </file>
