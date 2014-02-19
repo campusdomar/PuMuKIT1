@@ -339,10 +339,22 @@ muestraPasadoActivoFuturo = function(id){
      </select>  
      <span id="broadcast_password" style="<?php echo (($mm->getBroadcastId() != 1)?'display:inline;':'display:none;'); ?>">
        <?php $broadcast = BroadcastPeer::retrieveByPk($mm->getBroadcastId());?>
+
+
        <input onchange="check_pass($('pass1'), $('pass2'), $('broadcast_id').value); $('remember_save_mm_pub').show()" type="password" placeholder="Introduce una contraseña..." size="25" maxlength="256" style="margin: 5px;" name="pass1" id="pass1" value="<?php echo (($broadcast != NULL)?$broadcast->getPasswd():'');?>" />
-       <input onchange="check_pass($('pass1'), $('pass2'), $('broadcast_id').value); $('remember_save_mm_pub').show()" value="<?php echo (($broadcast != NULL)?$broadcast->getPasswd():'');?>" type="password"  placeholder="Repite la contraseña..." size="25" maxlength="256" name="pass2" id="pass2" />
+      
+ <input onchange="check_pass($('pass1'), $('pass2'), $('broadcast_id').value); $('remember_save_mm_pub').show()" value="<?php echo (($broadcast != NULL)?$broadcast->getPasswd():'');?>" type="password"  placeholder="Repite la contraseña..." size="25" maxlength="256" name="pass2" id="pass2" />
+
+
+ <input type="text" value="" placeholder="Nombre" size="25" maxlength="256" name="pri" id ="pri" />
+
+
+
        <input type="button" style="background-color: #ffc; border-right: 1px solid #ddd !important; padding-left: 20px;" class="tv_admin_action_save" id="view_passwd" onclick="toggleName(this); replaceType(pass1); replaceType(pass2); return false;" value="Ver contraseña" />
        <input type="button" style="background-color: #ffc; border-right: 1px solid #ddd !important; padding-left: 20px;" class="tv_admin_action_save" id="gen_passwd" onclick="genpasswd($('pass1'),$('pass2')); return false;" title="Genera una contraseña aletaoria" value="Generar contraseña" />
+
+
+
        <span id="passwdFail" style="display: none; color: red; margin: 0px 10px;">Las contraseñas deben ser iguales.</span>
      </span>
   </div>

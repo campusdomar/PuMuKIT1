@@ -113,7 +113,6 @@
   </tfoot>
 </table>
 
-
 <?php if (isset($msg_alert)) echo m_msg_alert($msg_alert) ?>
 
 <?php if (isset($reload_pub_channel)): ?>

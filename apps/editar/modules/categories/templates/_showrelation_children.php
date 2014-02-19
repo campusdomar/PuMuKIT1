@@ -10,4 +10,4 @@
                                                          'nodes' => $node[CategoryPeer::TREE_ARRAY_CHILDREN],
                                                          'relations' => $relations)) ?>
   <?php endif?>
-<?endforeach?>
+<?php endforeach?>

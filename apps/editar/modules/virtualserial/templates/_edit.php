@@ -18,7 +18,7 @@
       <a href="#" onclick="menuTab.select('mediaMm'); update_file.start(); return false;" >Multimedia</a>
     </li>
        <?php $title = $mm->getTitle(); while(strlen($title)>67): ?>
-          <?$title = substr($title, 0, strrpos($title, ' '));?>
+          <?php $title = substr($title, 0, strrpos($title, ' '));?>
        <?php endwhile?>
        <li style="font-weight: bold; font-size: 13px; padding-left: 10%"><abbr title="<?php echo $mm->getTitle()?>"><?php echo $mm->getId()?>  -  <?php echo ($mm->getTitle()>$title)? $title.' ...' : $mm->getTitle()?></abbr></li>
   </ul>

@@ -9,7 +9,7 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($timeframe, 'getId') ?>
-<?php echo "Editar timeframe"?>
+<?php echo __('Editar timeframe')?>
   
   <div id="remember_save_mm" style="display: none; position: absolute; color:red; border: 1px solid red; padding: 5px; background-color:#fdc; font-weight:bold;">
     <?php echo __('Pulse OK para que el cambio tenga efecto')?>

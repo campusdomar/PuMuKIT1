@@ -22,7 +22,7 @@
     > 
     (<?php echo $ground->getGroundType()->getName() ?>) <?php echo $ground->getName() ?>
   </div>
-<?endforeach?>
+<?php endforeach?>
 <div style="clear:left"></div>
 
 </fieldset>

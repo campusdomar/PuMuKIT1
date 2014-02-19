@@ -1,3 +1,4 @@
+
 <?php use_helper('Object');?>
 
 <div style="height:41px"></div>
@@ -28,9 +29,9 @@
    <dd>
      <div id="category<?php echo $c->getId()?>_mms">
 
-<div style="overflow:hidden;height: 470px"><?php // Altura del espacio para el cajón de categorías?>
+<div style="overflow:hidden;height: 270px"><?php // Altura del espacio para el cajón de categorías?>
 
-<div style="float: left; height: 460px" class="category" id="all_category_<?php echo $c->getId()?>">
+<div style="width:400px; float: left; height: 260px" class="category" id="all_category_<?php echo $c->getId()?>">
    <?php /*if(count($node[CategoryPeer::TREE_ARRAY_CHILDREN])): $children = $node[CategoryPeer::TREE_ARRAY_CHILDREN] */?>
    <?php if(count($children)):?>
      <ul class="category_tree" >
@@ -47,7 +48,7 @@
  <a href="#" onclick="if ( $$('.clicked_category_right')[0] != undefined ) { $$('.clicked_category_right')[0].ondblclick() } return false;">&#8594;</a>
 </div>
 
-<div style="width:400px; height: 460px; border: 1px solid #bbb; float: left;" class="category" id="select_category_<?php echo $c->getId()?>">
+<div style="width:400px; height:260px; border: 1px solid #bbb; float: left;" class="category" id="select_category_<?php echo $c->getId()?>">
     <ul class="category_tree" id="select_ul_category_<?php echo $c->getId()?>" >
        <?php foreach($mm->getCategorys($c) as $mmc):?>
        <li class="element" id="select_li_<?php echo $mmc->getId() ?>" >
@@ -71,15 +72,17 @@
 </fieldset>
 </div>
 
-<?php echo javascript_tag('
-function toggle_tree_cat(element, id, mm_id, cat_id) {
+<?php echo javascript_tag('function toggle_tree_cat(element, id, mm_id, cat_id) {
   if (element.parentElement.hasClassName("notload")) {
     element.parentElement.removeClassName("notload");
-    new Ajax.Updater("cat_ul_children_" + id, "' . url_for('mms/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/mm/" + mm_id);
-  } else {
+
+  new Ajax.Updater("cat_ul_children_" + id, "' . url_for('mms/getchildren') . '/id/"  + id + "/block_cat/" + cat_id + "/mm/" + mm_id, {
+      onComplete: function(){ $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - 750); }
+    });}
+else {
     $$(".cat_li_parent_" + id).each(function(e){e.toggleClassName("nodisplay")});
     //element.scrollIntoView();
-    $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - 44);
+    $("all_category_" + cat_id).scrollTop = ((element.positionedOffset()[1]) - 750);
   }
   element.parentElement.toggleClassName("expanded").toggleClassName("collapsed");
 }

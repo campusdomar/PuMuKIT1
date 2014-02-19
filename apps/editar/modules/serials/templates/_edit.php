@@ -51,7 +51,7 @@
 
 
   <div class="form-row">
-    <?php echo label_for('title' , 'T&iacute;tulo:', 'class="required long" ') ?>
+    <?php echo label_for('title' , __('T&iacute;tulo').':', 'class="required long" ') ?>
     <div class="content content_long">
       <?php $sep =''; foreach ($langs as $lang): ?>
         <?php $serial->setCulture($lang);  echo $sep ?>  

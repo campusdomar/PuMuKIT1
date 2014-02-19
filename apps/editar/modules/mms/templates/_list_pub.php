@@ -12,12 +12,14 @@
                name="pub_channels[<?php echo $p->getId()?>]" 
                class="pub_channel_input_checkbox"
                <?php echo ($estado !== 0)?'checked="checked"':""?>
-               <?php echo (($estado === 2)||($estado === 3))?'disabled="disabled"':''?>
+               <?php echo (($estado === 2)||($estado === 2))?'disabled="disabled"':''?>
+           
+
         />
-        <?php echo $p->getName()?>
+        <?php echo $p->getName()?>   
         <?php if($estado === 2):?>
           <span style="font-size: 80%; font-style:italic;">(Se  estan codificando los archivos necesarios)</span>
-        <?php elseif($estado === 3):?>
+        <?php elseif($estado === 5):?>
           <span style="font-size: 80%; font-style:italic;">(Esperando master para codificar los archivos necesarios)</span>
         <?php endif ?>
       </div>

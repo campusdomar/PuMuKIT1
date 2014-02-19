@@ -23,7 +23,7 @@ class mmsActions extends sfActions
    * Parametros por URL: identificador de la serie.
    *
    */
-  public function executeIndex()
+  Public function executeIndex()
   {
     $this->serial = SerialPeer::retrieveByPKWithI18n($this->getRequestParameter('serial'), $this->getUser()->getCulture());
     $this->forward404Unless($this->serial);
@@ -236,7 +236,7 @@ class mmsActions extends sfActions
       if ( $mm->getBroadcastId() ==  1 ) {
 	$broadcast = new Broadcast();
 	$broadcast->setBroadcastTypeId($this->getRequestParameter('broadcast_id', 0));//Guardamos el id del perfil de difusión
-	$broadcast->setName('pri');
+	$broadcast->setName($this->getRequestParameter('pri',0));
 	$broadcast->setPasswd($this->getRequestParameter('pass1', 0));//Guardamos la password
 	$broadcast->save();
 	$mm->setBroadcastId($broadcast->getId());

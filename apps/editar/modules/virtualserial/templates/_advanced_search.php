@@ -9,19 +9,19 @@
          <div style="overflow: hidden; margin: 5px;">
               <input placeholder="Introduce un título..." type="text" name="searchs[title]" id="title" size="60" value="<?php echo $sf_user->getAttribute('title', null, 'tv_admin/virtualserial/searchs');?>">
          </div>
-         <label style="position: inherit; margin: 7px 0px 3px;" for="subtitle" class="required long">Subtítulo:</label>	
+         <label style="position: inherit; margin: 7px 0px 3px;" for="subtitle" class="required long"><?php echo __('Subtítulo:')?></label>	
          <div style="overflow: hidden; margin: 5px;">
-              <input placeholder="Introduce un subtítulo..." type="text" name="searchs[subtitle]" id="subtitle" size="60" value="<?php echo $sf_user->getAttribute('subtitle', null, 'tv_admin/virtualserial/searchs');?>">
+              <input placeholder=<?php echo__('Introduce un subtítulo...')?> type="text" name="searchs[subtitle]" id="subtitle" size="60" value="<?php echo $sf_user->getAttribute('subtitle', null, 'tv_admin/virtualserial/searchs');?>">
          </div>
          <label style="position: inherit; margin: 7px 0px 3px;" for="keyword" class="required long">Keyword:</label>	
          <div style="overflow: hidden; margin: 5px;">
-              <input placeholder="Introduce una palabra clave..." type="text" name="searchs[keyword]" id="keyword" size="60" value="<?php echo $sf_user->getAttribute('keyword', null, 'tv_admin/virtualserial/searchs');?>">
+              <input placeholder=<?php echo __('Introduce una palabra clave...')?> type="text" name="searchs[keyword]" id="keyword" size="60" value="<?php echo $sf_user->getAttribute('keyword', null, 'tv_admin/virtualserial/searchs');?>">
          </div>
-         <label style="position: inherit; margin: 7px 0px 3px;" for="publicdateAdvanced" class="required long">Fecha de publicación:</label>	
+         <label style="position: inherit; margin: 7px 0px 3px;" for="publicdateAdvanced" class="required long"><?php echo __('Fecha de publicación')?>:</label>	
          <div style="overflow: hidden; margin: 5px;">
-              <input placeholder="Introduce fecha inicial de búsqueda..." type="text" onchange="compruebaIntervaloFecha('PublicDate');" name="searchs[publicdateAdvancedStart]" id="timestartPublicDate" size="25" value="<?php echo $sf_user->getAttribute('publicdateAdvancedStart', null, 'tv_admin/virtualserial/searchs');?>">
+              <input placeholder=<?php echo __('Introduce fecha inicial de búsqueda...')?> type="text" onchange="compruebaIntervaloFecha('PublicDate');" name="searchs[publicdateAdvancedStart]" id="timestartPublicDate" size="25" value="<?php echo $sf_user->getAttribute('publicdateAdvancedStart', null, 'tv_admin/virtualserial/searchs');?>">
               <img id="trigger_publicdateAdvancedStart" style="cursor: pointer; vertical-align: middle" src="/images/admin/buttons/date.png" alt="DateAdvancedStart">
-              <input placeholder="Introduce fecha final de búsqueda..." type="text" onchange="compruebaIntervaloFecha('PublicDate');" name="searchs[publicdateAdvancedFinish]" id="timeendPublicDate" size="25" value="<?php echo $sf_user->getAttribute('publicdateAdvancedFinish', null, 'tv_admin/virtualserial/searchs');?>">
+              <input placeholder=<?php echo __('Introduce fecha final de búsqueda...')?> type="text" onchange="compruebaIntervaloFecha('PublicDate');" name="searchs[publicdateAdvancedFinish]" id="timeendPublicDate" size="25" value="<?php echo $sf_user->getAttribute('publicdateAdvancedFinish', null, 'tv_admin/virtualserial/searchs');?>">
               <img id="trigger_publicdateAdvancedFinish" style="cursor: pointer; vertical-align: middle" src="/images/admin/buttons/date.png" alt="DateAdvancedFinish">
               <span id="error_PublicDate" style="display:none" class="error"></span> 
          </div>
@@ -61,8 +61,8 @@
            <!-- SELECT -->
            <!--<select style="margin:0px 0px 15px" name="searchs[download]" id="download">
              <option value="" >Todos</option>
-             <option <?php echo $sf_user->getAttribute('download', null, 'tv_admin/virtualserial/searchs') == 1?'selected="selected"':''?>value="1" >No permitida descarga</option>
-             <option <?php echo $sf_user->getAttribute('download', null, 'tv_admin/virtualserial/searchs') == 2?'selected="selected"':''?>value="2" >Permitida Descarga</option>
+             <option <?php echo $sf_user->getAttribute('download', null, 'tv_admin/virtualserial/searchs') == 1?'selected="selected"':''?>value="1" ><?php __('No permitida descarga')?></option>
+             <option <?php echo $sf_user->getAttribute('download', null, 'tv_admin/virtualserial/searchs') == 2?'selected="selected"':''?>value="2" ><?php echo__('Permitida Descarga')?></option>
            </select>
          </div>-->
        </td>
@@ -90,10 +90,10 @@
            <div style="float:left"> </div>
            <!-- SELECT -->
            <select style="margin:0px 0px 15px;" name="searchs[status]" id="status">
-             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == '-1'?'selected="selected"':''?>value="-1" >Todos</option>
-             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == 0?'selected="selected"':''?>value="0" >Publicado</option>
-             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == 1?'selected="selected"':''?>value="1" >Bloqueado</option>
-             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == 2?'selected="selected"':''?>value="2" >Oculto</option>
+             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == '-1'?'selected="selected"':''?>value="-1" ><?php echo__('Todos')?></option>
+             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == 0?'selected="selected"':''?>value="0" ><?php echo__('Publicado')?></option>
+             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == 1?'selected="selected"':''?>value="1" ><?php echo__('Bloqueado')?></option>
+             <option <?php echo $sf_user->getAttribute('status', null, 'tv_admin/virtualserial/searchs') == 2?'selected="selected"':''?>value="2" ><?php echo__('Oculto')?></option>
            </select>
          </div>
        </td>
