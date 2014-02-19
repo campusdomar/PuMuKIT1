@@ -33,7 +33,7 @@
 
     <li class="level0 <?php echo sfConfig::get('serial_menu') ?>">
       <a href="<?php echo url_for('serials/index?page=' . $sf_user->getAttribute('page', 1, 'tv_admin/serial'))?>" title="Series Multimedia" class="<?php echo sfConfig::get('serial_menu') ?>">
-        <span><?php echo__('Series Multimedia')?></span>
+        <span><?php echo __('Series Multimedia')?></span>
       </a>
     </li>
     
@@ -70,7 +70,7 @@
         </li>
         <li class="last level1">
           <a href="<?php echo url_for('notices/index')?>" title="Notices" class="">
-            <span><?php echo __('Noticias')</span>
+            <span><?php echo __('Noticias')?></span>
           </a>
         </li>
       </ul>
@@ -98,7 +98,7 @@
     <?php if(sfConfig::get('app_transcoder_use')):?>
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('transcoder_menu') ?>">
       <a href="#" title="Transcodificador" onclick="return false" class="<?php echo sfConfig::get('transcoder_menu') ?>">
-        <span><?php echo__('Transcodificacion')?></span>
+        <span><?php echo __('Transcodificacion')?></span>
       </a>
       <ul>
         <li class="level1">
@@ -108,12 +108,12 @@
         </li>
         <li class="level1">
           <a href="<?php echo url_for('transcoders/index')?>" title="List" class="">
-            <span>Lista de tareas</span>
+            <span><?php echo __('Lista de tareas')?></span>
           </a>
         </li>
         <li class="last level1">
           <a href="<?php echo url_for('cpus/index')?>" title="Cpus" class="">
-            <span>Trascodificadores</span>
+            <span><?php echo __('Trascodificadores')?></span>
           </a>
         </li>  
       </ul>
@@ -236,7 +236,7 @@
 
         <li class="level1">
           <a href="<?php echo url_for('streamservs/index')?>"  class="">
-            <span><?php echo__('Servidores de Distribución')?></span>
+            <span><?php echo __('Servidores de Distribución')?></span>
           </a>
         </li>   
       </ul>

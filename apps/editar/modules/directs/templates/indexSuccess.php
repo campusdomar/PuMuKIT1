@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/direct_ico.png"/> Canales en directo</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/direct_ico.png"/><?php echo __(' Canales en directo')?></h3>
 
 <div id="tv_admin_container">
   <div id="tv_admin_bar">
@@ -21,10 +21,10 @@
     </div>
 
     <select id="options_directs" style="margin: 10px 0px; width: 33%" title="Acciones sobre elementos selecionados" onchange="window.change_select('direct', $('options_directs'))">
-      <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
+      <option value="default" selected="selected"><?php echo __('Seleciona una acci&oacute;n...')?></option>
       <option disabled="">---</option>
-      <option value="delete_sel">Borrar selecionados</option>
-      <option value="create">Crear nuevo</option>
+      <option value="delete_sel"><?php echo __('Borrar selecionados')?></option>
+      <option value="create"><?php echo __('Crear nuevo')?></option>
     </select>
     
   </div>
