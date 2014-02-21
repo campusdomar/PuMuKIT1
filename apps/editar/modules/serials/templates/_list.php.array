@@ -24,7 +24,7 @@
         <input id="<?php echo $serial['id']?>" class="serial_checkbox" type="checkbox">
       </td>
       <td>
-        <?php echo ($serial['mm_status']==0? image_tag('admin/mbuttons/close_eye.gif', 'alt=oculto title=oculto') :image_tag('admin/mbuttons/open_eye.gif', 'alt=no_oculto title=no_oculto')); ?>
+        <?php echo ($serial['mm_status']==0? image_tag('admin/mbuttons/close_eye.gif', __('alt=oculto title=oculto')) :image_tag('admin/mbuttons/open_eye.gif', 'alt=no_oculto title=no_oculto')); ?>
       </td>
       <td>
         <?php echo ($serial['announce']?'<span style="color: blue">A</span>':'&nbsp;') ?>
@@ -32,7 +32,7 @@
       </td> 
       <td onclick="click_fila('serial', this, <?php echo $serial['id'] ?>)" ondblclick="dblclick_fila('serial', this, <?php echo $serial['id'] ?>)">
         <a href="#" onclick="new Effect.ScrollTo('edit_serials');">
-          <?php echo image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar')?>
+          <?php echo image_tag('admin/mbuttons/edit_inline.gif', __('alt=editar title=editar'))?>
         </a>
       </td>
 

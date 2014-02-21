@@ -20,11 +20,11 @@
 
 <?php if ($sf_user->getAttribute('sort', 'id', 'tv_admin/virtualserial') == 'title'): ?>
   <th>
-  <?php echo link_to_remote('Titulo'.($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? '&nbsp;&#x25BE;' : '&nbsp;&#x25B4;'), array('update' => 'list_mms', 'url' => 'virtualserial/list?sort=title&type='.($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? 'desc' : 'asc'), 'script' => 'true')) ?>
+  <?php echo link_to_remote( __('Titulo').($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? '&nbsp;&#x25BE;' : '&nbsp;&#x25B4;'), array('update' => 'list_mms', 'url' => 'virtualserial/list?sort=title&type='.($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? 'desc' : 'asc'), 'script' => 'true')) ?>
   </th>
 <?php else: ?>
   <th>
-    <?php echo link_to_remote('Titulo', array('update' => 'list_mms', 'url' => 'virtualserial/list?sort=title&type=asc', 'script' => 'true')) ?>
+    <?php echo link_to_remote( __('Titulo'), array('update' => 'list_mms', 'url' => 'virtualserial/list?sort=title&type=asc', 'script' => 'true')) ?>
   </th>
 <?php endif; ?>
 
@@ -32,7 +32,7 @@
 
 <?php if ($sf_user->getAttribute('sort', 'id', 'tv_admin/virtualserial') == 'duration'): ?>
 <th width="1%">
-    <?php echo link_to_remote('Duración'.($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? '&nbsp;&#x25BE;' : '&nbsp;&#x25B4;'), array('update' => 'list_mms', 'url' => 'virtualserial/list?sort=duration&type='.($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? 'desc' : 'asc'), 'script' => 'true')) ?>
+    <?php echo link_to_remote( __('Duración').($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? '&nbsp;&#x25BE;' : '&nbsp;&#x25B4;'), array('update' => 'list_mms', 'url' => 'virtualserial/list?sort=duration&type='.($sf_user->getAttribute('type', 'asc', 'tv_admin/virtualserial') == 'asc' ? 'desc' : 'asc'), 'script' => 'true')) ?>
 </th>
 <?php else: ?>
   <th width="1%">
