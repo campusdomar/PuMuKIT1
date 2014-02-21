@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T10:21:02Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T10:39:51Z">
     <body>
     
 <trans-unit id="1">
@@ -701,6 +701,21 @@
 <trans-unit id="140">
 <source>Siguiente&amp;raquo;</source>
 <target>Next</target>
+</trans-unit>
+
+<trans-unit id="141">
+<source>Titulo</source>
+<target>Tittle</target>
+</trans-unit>
+
+<trans-unit id="142">
+<source>Fecha</source>
+<target>Date</target>
+</trans-unit>
+
+<trans-unit id="143">
+<source>Duraci&#xF3;n</source>
+<target>Duration</target>
 </trans-unit>
 </body>
   </file>
