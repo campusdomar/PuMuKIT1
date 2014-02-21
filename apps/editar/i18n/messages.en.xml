@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T10:39:51Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T11:59:36Z">
     <body>
     
 <trans-unit id="1">
@@ -716,6 +716,16 @@
 <trans-unit id="143">
 <source>Duraci&#xF3;n</source>
 <target>Duration</target>
+</trans-unit>
+
+<trans-unit id="144">
+<source>Espa&amp;ntildeol</source>
+<target>Spanish</target>
+</trans-unit>
+
+<trans-unit id="145">
+<source>Ingl&amp;eacutes</source>
+<target>English</target>
 </trans-unit>
 </body>
   </file>
