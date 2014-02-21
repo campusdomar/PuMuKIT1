@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-19T14:28:16Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T10:21:02Z">
     <body>
     
 <trans-unit id="1">
@@ -646,6 +646,61 @@
 <trans-unit id="129">
 <source>Si</source>
 <target>Yes</target>
+</trans-unit>
+
+<trans-unit id="130">
+<source>Anterior</source>
+<target>Previous</target>
+</trans-unit>
+
+<trans-unit id="131">
+<source>Pag.</source>
+<target>Page</target>
+</trans-unit>
+
+<trans-unit id="132">
+<source>de</source>
+<target>from</target>
+</trans-unit>
+
+<trans-unit id="133">
+<source>Siguiente</source>
+<target>Next</target>
+</trans-unit>
+
+<trans-unit id="134">
+<source>Wizard</source>
+<target>Wizard</target>
+</trans-unit>
+
+<trans-unit id="135">
+<source>Crear</source>
+<target>Create</target>
+</trans-unit>
+
+<trans-unit id="136">
+<source>Crear nueva serie</source>
+<target>Create new serie</target>
+</trans-unit>
+
+<trans-unit id="137">
+<source>Acciones sobre elementos selecionados</source>
+<target>Actions on selected elements</target>
+</trans-unit>
+
+<trans-unit id="138">
+<source>Anunciar/Desanunciar selecionados</source>
+<target>Announce/Unannounced selected</target>
+</trans-unit>
+
+<trans-unit id="139">
+<source>Ocultar/Desocultar selecionados</source>
+<target>Hide/unhide selected</target>
+</trans-unit>
+
+<trans-unit id="140">
+<source>Siguiente&amp;raquo;</source>
+<target>Next</target>
 </trans-unit>
 </body>
   </file>
