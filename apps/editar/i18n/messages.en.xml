@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T11:59:36Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T12:55:31Z">
     <body>
     
 <trans-unit id="1">
@@ -726,6 +726,81 @@
 <trans-unit id="145">
 <source>Ingl&amp;eacutes</source>
 <target>English</target>
+</trans-unit>
+
+<trans-unit id="146">
+<source>&amp;Uacute;LTIMAS SERIES CREADAS</source>
+<target>LAST CREATED SERIES</target>
+</trans-unit>
+
+<trans-unit id="147">
+<source>BUSCADOR DE SERIES</source>
+<target>SEARCH SERIE</target>
+</trans-unit>
+
+<trans-unit id="148">
+<source>buscar en todo el contenido</source>
+<target>Search all content</target>
+</trans-unit>
+
+<trans-unit id="149">
+<source>"BUSCAR</source>
+<target>SEARCH</target>
+</trans-unit>
+
+<trans-unit id="150">
+<source>BUSCAR</source>
+<target>SEARCH</target>
+</trans-unit>
+
+<trans-unit id="151">
+<source>INFO LOS TRANSCODIFICADORES</source>
+<target>TRANSCODER INFO</target>
+</trans-unit>
+
+<trans-unit id="152">
+<source>Pausados:</source>
+<target>Paused:</target>
+</trans-unit>
+
+<trans-unit id="153">
+<source>Esperando:</source>
+<target>Waiting:</target>
+</trans-unit>
+
+<trans-unit id="154">
+<source>Ejecutandose:</source>
+<target>Executing:</target>
+</trans-unit>
+
+<trans-unit id="155">
+<source>Correctos:</source>
+<target>Ok:</target>
+</trans-unit>
+
+<trans-unit id="156">
+<source>Error:</source>
+<target>Error:</target>
+</trans-unit>
+
+<trans-unit id="157">
+<source>&amp;Uacute;LTIMAS SERIES PUBLICADAS</source>
+<target>LAST PUBLISHED SERIES</target>
+</trans-unit>
+
+<trans-unit id="158">
+<source>USO DE DISCO</source>
+<target>DISK USAGE</target>
+</trans-unit>
+
+<trans-unit id="159">
+<source>Introduce un subt&#xED;tulo...</source>
+<target>Insert subtittle...</target>
+</trans-unit>
+
+<trans-unit id="160">
+<source>Permitida Descarga</source>
+<target>Download allowed</target>
 </trans-unit>
 </body>
   </file>
