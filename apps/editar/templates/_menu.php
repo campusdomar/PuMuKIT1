@@ -19,7 +19,7 @@
 <!-- menu -->
 <div id="editar_menu">
 
-  <div class="cab_up_down" style="float:right; font-weight:bolder; font-size: 22px">
+  <div class="cab_up_down" style="float:right; font-weight:bolder; font-size: 22px; max-width:1100px;">
     <div style="" 
        href="#" onclick="this.toggleClassName('inv'); Effect.toggle('editar_cab', 'blind'); return false">&nbsp;&nbsp;</div>
   </div>
@@ -261,3 +261,6 @@
 </div>
 
 
+
+<a href="<?php echo url_for('utils/culture?culture=es') ?>"><?php echo __('Espa&ntildeol')?></a>
+<a href="<?php echo url_for('utils/culture?culture=en') ?>"><?php echo __('Ingl&eacutes')?></a>
