@@ -18,7 +18,7 @@
          </tr>
          <tr>
            <td><span style="text-align: right;">EMBED:</span></td>
-           <td><input type="text" value="&lt;iframe src=&quot;<?php echo url_for('mmobj/iframe?id=' . $mmobj->getId(), true) ?>&quot; style=&quot;border:0px #FFFFFF none;&quot; scrolling=&quot;no&quot; frameborder=&quot;1&quot; height=&quot;270&quot; width=&quot;480&quot; allowfullscreen webkitallowfullscreen&gt;&lt;/iframe&gt;" onclick="this.select()" style="border: 1px solid #ccc; font-size: 12px;" readonly="readonly"/></td>
+           <td><input type="text" value="&lt;iframe src=&quot;<?php echo url_for('video/iframe?id=' . $mmobj->getId(), true) ?>&quot; style=&quot;border:0px #FFFFFF none;&quot; scrolling=&quot;no&quot; frameborder=&quot;1&quot; height=&quot;270&quot; width=&quot;480&quot; allowfullscreen webkitallowfullscreen&gt;&lt;/iframe&gt;" onclick="this.select()" style="border: 1px solid #ccc; font-size: 12px;" readonly="readonly"/></td>
          </tr>
       </table>
    </div>

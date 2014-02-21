@@ -24,7 +24,7 @@
 </trans-unit>
 
 <trans-unit id="5">
-<source>M&#xE1;s Vistos</source>
+<source>M&#xE1;s vistos</source>
 <target>Most viewed</target>
 </trans-unit>
 
@@ -80,7 +80,7 @@
 
 <trans-unit id="16">
 <source>M&#xE1;s vistos</source>
-<target></target>
+<target>Most viewed</target>
 </trans-unit>
 
 <trans-unit id="17">

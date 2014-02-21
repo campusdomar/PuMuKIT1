@@ -1,5 +1,4 @@
 <a name="<?php echo $mm->getId() ?>"></a>
-
 <!-- SUBSERIAL -->
 <?php if (!($mm->getSubserial())): ?>
   <div class="inter_mm"></div>
@@ -12,7 +11,6 @@
     <?php echo $mm->getRecorddateText(); ?>
   </div>
 <?php endif; ?>
-   
 <!-- SUBSERIAL -->
 <?php if((($template == 3) &&((htmlentities($mm->getSubserialTitle()) !== $lastSubserialTitle)||($mm->getRecorddate('dmy') !== $lastDate))) || 
 	 (($template == 4) &&(htmlentities($mm->getSubserialTitle()) !== $lastSubserialTitle))):?>

@@ -63,7 +63,7 @@ if(isset($filters_date['to']) && $filters_date['to'] != '') {
             <div class="content">
               <?php $options_filters_announce = array('diff' => __('Indiferente'),
                                                       'true' => __('Sí'),
-                                                      'false' => __('No');
+                                                      'false' => __('No'));
               echo select_tag('filters[announce]',
                 options_for_select( $options_filters_announce,
                   $sf_user->getAttribute('announce', 'diff', 'tv_admin/serial/filters')));?>
@@ -74,7 +74,7 @@ if(isset($filters_date['to']) && $filters_date['to'] != '') {
             <div class="content">
 		<?php $options_filters_status = array('all'=>__('Todos'),
                                                       'false' =>__('No'),
-                                                      'true' => __('Si');
+                                                      'true' => __('Si'));
               echo select_tag('filters[status]',
                 options_for_select( $options_filters_status,
                   $sf_user->getAttribute('status', 'all', 'tv_admin/serial/filters')));?>

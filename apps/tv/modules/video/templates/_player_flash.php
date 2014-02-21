@@ -5,7 +5,7 @@
 
 <script type='text/javascript' src='/js/swfobject.js'></script>
 <script type='text/javascript'>
-  var s1 = new SWFObject('/swf/player.swf?autostart=false','player','620','465','9');
+  var s1 = new SWFObject('/swf/player.swf?autostart=true','player','620','465','9');
   s1.addParam('allowfullscreen','true');
   s1.addParam('allowscriptaccess','always');
   s1.addParam('flashvars','repeat=list&file=<?php echo $file->getUrl()?>');

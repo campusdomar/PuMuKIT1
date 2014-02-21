@@ -11,7 +11,7 @@
         <div id="handle_<?php echo $name?>" style="display : none; background-color : #f00; width : 12px; height : 18px; cursor : move; background:transparent url(/images/admin/pag/sliderhandle.png) no-repeat scroll center;"> </div>
       </div>
     </div>
-    <div style="float:left; margin:0em .5em;"><?php echo link_to_remote('Siguiente&raquo;', array('update'=> $div, 'url' => $url.'?page='.($page+1), 'script' => 'true'), $ver_siguiente) ?></div>
+    <div style="float:left; margin:0em .5em;"><?php echo link_to_remote( __('Siguiente&raquo;'), array('update'=> $div, 'url' => $url.'?page='.($page+1), 'script' => 'true'), $ver_siguiente) ?></div>
   </div>
 
   <?php //aqui no funciona javascript_tag por no tener type ?>

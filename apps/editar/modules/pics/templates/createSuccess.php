@@ -102,10 +102,10 @@ $ver_anterior = (($page == $total)||($total == 0)? array('style' => 'display : n
 
 <ul class="tv_admin_actions">
   <li>
-    <?php echo m_link_to('Anterior', 'pics/create?'.$que.'=' . $object_id. '&page='. ($page + 1), $ver_anterior, array('width' => '800'))?>
+    <?php echo m_link_to( __('Anterior'), 'pics/create?'.$que.'=' . $object_id. '&page='. ($page + 1), $ver_anterior, array('width' => '800'))?>
   </li>
   <li>
-    <?php echo m_link_to('Siguiente', 'pics/create?'.$que.'=' . $object_id. '&page='. ($page - 1), $ver_siguiente, array('width' => '800'))?>
+    <?php echo m_link_to( __('Siguiente'), 'pics/create?'.$que.'=' . $object_id. '&page='. ($page - 1), $ver_siguiente, array('width' => '800'))?>
   </li>
   <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>

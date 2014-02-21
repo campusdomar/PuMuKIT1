@@ -47,7 +47,7 @@ all:
 #    use_database:           on        # Enable database manager. Set to off if you don't use a database.
 #    use_security:           on        # Enable security features (login and credentials). Set to off for public applications.
 #    use_flash:              on        # Enable flash parameter feature. Set to off if you never use the set_flash() method in actions.
-     i18n:                   on         # Enable interface translation. Set to off if your application should not be translated.
+    i18n:                   on         # Enable interface translation. Set to off if your application should not be translated.
 #    check_symfony_version:  off       # Enable check of symfony version for every request. Set to on to have symfony clear the cache automatically when the framework is upgraded. Set to off if you always clear the cache after an upgrade.
 #    use_process_cache:      on        # Enable symfony optimizations based on PHP accelerators. Set to off for tests or when you have enabled a PHP accelerator in your server but don't want symfony to use it internally.
 #    compressed:             off       # Enable PHP response compression. Set to on to compress the outgoing HTML via the PHP handler.
@@ -73,7 +73,7 @@ all:
 #    etag:                   on        # Enable etag handling
 #
 #    # Logging and debugging settings
-#    web_debug:              off       # Enable the web debug toolbar
+    web_debug:              on       # Enable the web debug toolbar
 #    error_reporting:        341       # Determines which events are logged. The default value is E_PARSE | E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR | E_USER_ERROR = 341
 #
 #    # Assets paths

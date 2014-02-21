@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/serial_ico.png"/> Series Multimedia</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/serial_ico.png"/> <?php echo __('Series Multimedia')?></h3>
 
 <div id="tv_admin_container">
   <div id="tv_admin_bar">
@@ -21,20 +21,20 @@
       <ul class="tv_admin_actions">
         <!-- Falta -->
         <li>
-         <?php echo link_to_function('Wizard', "Modalbox.show('".url_for("wizard/serial")."',{width:800, title:'PASO I: Serie'})", 'class=tv_admin_action_next') ?> 
+         <?php echo link_to_function(__('Wizard'), "Modalbox.show('".url_for("wizard/serial")."',{width:800, title:'PASO I: Serie'})", 'class=tv_admin_action_next') ?> 
         </li>
         <li>
-         <?php echo link_to_remote('Crear', array('before' => '$("filter_serials").reset();', 'update' => 'list_serials', 'url' => 'serials/create?filter=filter', 'script' => 'true'), array('title' => 'Crear nueva seria', 'class' => 'tv_admin_action_create')) ?>
+         <?php echo link_to_remote( __('Crear'), array('before' => '$("filter_serials").reset();', 'update' => 'list_serials', 'url' => 'serials/create?filter=filter', 'script' => 'true'), array('title' => __('Crear nueva serie'), 'class' => 'tv_admin_action_create')) ?>
         </li>
       </ul>
     </div>
 
-    <select id="options_serials" style="margin: 10px 0px; width: 33%" title="Acciones sobre elementos selecionados" onchange="window.change_select('serial', $('options_serials'))">
-      <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
+    <select id="options_serials" style="margin: 10px 0px; width: 33%" title="<?php echo __('Acciones sobre elementos selecionados')?>" onchange="window.change_select('serial', $('options_serials'))">
+      <option value="default" selected="selected"><?php echo __('Seleciona una acci&oacute;n...')?></option>
       <option disabled="">---</option>
-      <option value="delete_sel">Borrar selecionados</option>
-      <!-- <option value="inv_announce_sel">Anunciar/Desanunciar selecionados</option> -->
-      <!-- <option value="inv_working_sel">Ocultar/Desocultar selecionados</option> Ocultarlos todos -->
+      <option value="delete_sel"><?php echo __('Borrar selecionados')?></option>
+      <!-- <option value="inv_announce_sel"><?php echo __('Anunciar/Desanunciar selecionados')?></option> -->
+      <!-- <option value="inv_working_sel"><?php echo __('Ocultar/Desocultar selecionados')?></option> Ocultarlos todos -->
     </select>
     
   </div>
