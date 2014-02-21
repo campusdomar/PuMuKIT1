@@ -1,5 +1,5 @@
 <fieldset style="padding: 5px; border: 1px solid #EEE">
-<legend style="font-weight: bold">&Uacute;LTIMAS SERIES CREADAS</legend>
+<legend style="font-weight: bold"><?php echo __('&Uacute;LTIMAS SERIES CREADAS')?></legend>
 
 <ul style="margin-left: 15px;">
 <?php foreach($serials as $s):?>

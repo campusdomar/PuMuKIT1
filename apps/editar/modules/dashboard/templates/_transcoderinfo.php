@@ -1,13 +1,13 @@
 <fieldset style="padding: 5px; border: 1px solid #EEE">
-<legend style="font-weight: bold">INFO LOS TRANSCODIFICADORES</legend>
+<legend style="font-weight: bold"><?php echo __('INFO LOS TRANSCODIFICADORES')?></legend>
 
 <span style="font-weight: bold">JOBS</span>
 <ul style="margin-left: 15px;">
-  <li>Pausados: <?php echo $t_pausado?></li>
-  <li>Esperando: <?php echo $t_stop?></li>
-  <li>Ejecutandose: <span style="font-weight: bold"><?php echo $t_ejec?></span></li>
-  <li>Correctos: <?php echo $t_fin?></li>
-  <li>Error: <?php echo $t_error?></li>
+  <li><?php echo __('Pausados:')?> <?php echo $t_pausado?></li>
+  <li><?php echo __('Esperando:')?> <?php echo $t_stop?></li>
+  <li><?php echo __('Ejecutandose:')?> <span style="font-weight: bold"><?php echo $t_ejec?></span></li>
+  <li><?php echo __('Correctos:')?> <?php echo $t_fin?></li>
+  <li><?php echo __('Error:')?> <?php echo $t_error?></li>
 </ul>
 
 <br />

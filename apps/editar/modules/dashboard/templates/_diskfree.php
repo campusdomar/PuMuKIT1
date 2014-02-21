@@ -1,5 +1,5 @@
 <fieldset style="padding: 5px; border: 1px solid #EEE">
-<legend style="font-weight: bold">USO DE DISCO</legend>
+<legend style="font-weight: bold"><?php echo __('USO DE DISCO')?></legend>
 
 <?php foreach($disks as $d): $porc = sprintf('%.2f', 100 - ($d[2]*100)/$d[1]) ?>
   <div>
