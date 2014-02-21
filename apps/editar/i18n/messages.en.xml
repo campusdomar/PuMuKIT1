@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T12:55:31Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T13:26:01Z">
     <body>
     
 <trans-unit id="1">
@@ -801,6 +801,56 @@
 <trans-unit id="160">
 <source>Permitida Descarga</source>
 <target>Download allowed</target>
+</trans-unit>
+
+<trans-unit id="161">
+<source> L&#xED;nea de tiempo - Decisiones editoriales temporizables</source>
+<target></target>
+</trans-unit>
+
+<trans-unit id="162">
+<source>Destacados TV</source>
+<target>TV featured</target>
+</trans-unit>
+
+<trans-unit id="163">
+<source>Destacados Radio</source>
+<target>Radio featured</target>
+</trans-unit>
+
+<trans-unit id="164">
+<source>Incluir</source>
+<target>Include</target>
+</trans-unit>
+
+<trans-unit id="165">
+<source>decisiones editoriales fijas</source>
+<target>Fixed editorial decissions</target>
+</trans-unit>
+
+<trans-unit id="166">
+<source>Incluir piezas no publicadas o en proceso</source>
+<target>Include no published or in process items</target>
+</trans-unit>
+
+<trans-unit id="167">
+<source>Centrar hoy</source>
+<target>Center today</target>
+</trans-unit>
+
+<trans-unit id="168">
+<source>Esta p&#xE1;gina usa Javascript para mostrar una l&#xED;nea de tiempo. Active Javascript en su navegador para visualizar correctamente la p&#xE1;gina.</source>
+<target>This webpage uses Javascript to show a timeline. Active Javascript in your browser to show it correctly.</target>
+</trans-unit>
+
+<trans-unit id="169">
+<source>&amp;Uacute;LTIMAS SERIES CREADAS</source>
+<target>Last created series</target>
+</trans-unit>
+
+<trans-unit id="170">
+<source>&amp;Uacute;LTIMAS SERIES PUBLICADAS</source>
+<target>Last published series</target>
 </trans-unit>
 </body>
   </file>
