@@ -261,6 +261,14 @@
 </div>
 
 
-
+<?php if($sf_user->getCulture() == 'es'):?>
+<?php echo __('Espa&ntildeol')?>
+<?php else:?>
 <a href="<?php echo url_for('utils/culture?culture=es') ?>"><?php echo __('Espa&ntildeol')?></a>
+<?php endif?>
+
+<?php if($sf_user->getCulture() == 'en'):?>
+<?php echo __('Ingl&eacutes')?>
+<?php else:?>
 <a href="<?php echo url_for('utils/culture?culture=en') ?>"><?php echo __('Ingl&eacutes')?></a>
+<?php endif?>

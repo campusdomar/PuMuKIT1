@@ -16,7 +16,7 @@ function escogeOrigenXml($destacados){
   }
   return $ruta_xml;
 } ?>
-<h3 class="cab_body_div"><img src="/images/admin/cab/serial_ico.png"/> Línea de tiempo - Decisiones editoriales temporizables</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/serial_ico.png"/><?php echo __(' Línea de tiempo - Decisiones editoriales temporizables')?></h3>
 
 
 <div id="timeframes-dashboard-cabecera" style="overflow:hidden;">
@@ -32,9 +32,9 @@ function escogeOrigenXml($destacados){
         <div style="font-weight:bold;">&nbsp;Editorial <span style="color:<?php echo $editorial1_color?>">1</span> / <span style="color:<?php echo $editorial2_color?>">2</span></div>
         <?php echo select_tag('destacados',
           options_for_select(
-            array('all'   => 'Todos',
-                  'tv'    => 'Destacados TV',
-                  'radio' => 'Destacados Radio'),
+            array('all'   => __('Todos'),
+                  'tv'    => __('Destacados TV'),
+                  'radio' => __('Destacados Radio')),
             $sf_user->getAttribute('destacados', null, 'tv_admin/timeframes')), array('onchange' => 'Javascript:this.form.submit();')); ?>
       </div>
       <div id="contenedor-checkbox-destacados" style="float:left;">
@@ -45,7 +45,7 @@ function escogeOrigenXml($destacados){
           array('style' => 'margin:5px 3px;',
                 'onchange' => "Javascript:this.form.submit();"));?>
         </div>
-        <div style="float:left;font-weight:bold;margin-top:5px;">Incluir <span style="border-top: 3px solid #CFDEEA;">decisiones editoriales fijas</span></div>    
+        <div style="float:left;font-weight:bold;margin-top:5px;"><?php echo __('Incluir')?> <span style="border-top: 3px solid #CFDEEA;"><?php echo __('decisiones editoriales fijas')?></span></div>    
       </div>
       <div id="contenedor-checkbox-publicados" style="float:left;">
         <div>&nbsp;</div>
@@ -55,11 +55,11 @@ function escogeOrigenXml($destacados){
           array('style' => 'margin:5px 3px 5px 20px;',
                 'onchange' => "Javascript:this.form.submit();"));?>
         </div>
-        <div style="float:left;font-weight:bold;margin-top:5px;">Incluir piezas no publicadas o en proceso</div>    
+        <div style="float:left;font-weight:bold;margin-top:5px;"><?php echo __('Incluir piezas no publicadas o en proceso')?></div>    
       </div>
     </form>
   </div>
-  <div style="margin:12px 0 0 48%;"><a href="javascript:centraTimeline();">Centrar hoy</a></div>
+  <div style="margin:12px 0 0 48%;"><a href="javascript:centraTimeline();"><?php echo __('Centrar hoy')?></a></div>
 </div>
 
 <div style="text-align: center">
@@ -68,7 +68,7 @@ function escogeOrigenXml($destacados){
   <br />
   <br />
   <noscript>
-  Esta página usa Javascript para mostrar una línea de tiempo. Active Javascript en su navegador para visualizar correctamente la página.
+	<?php echo __('Esta página usa Javascript para mostrar una línea de tiempo. Active Javascript en su navegador para visualizar correctamente la página.')?>
   </noscript>
 </div>
 <script type="text/javascript">
@@ -115,8 +115,8 @@ function centraTimeline() {
         }
 <?php  // Sobrecargo la función que pinta la burbuja ?>
 var oldFillInfoBubble = Timeline.DefaultEventSource.Event.prototype.fillInfoBubble;
-var weekday = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
-var monthname = new Array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+var weekday = new Array( __('Domingo'), __('Lunes'), __('Martes'), __('Miércoles'), __('Jueves'), __('Viernes'), __('Sábado'));
+var monthname = new Array( __('Enero'), __('Febrero'), __('Marzo'), __('Abril'), __('Mayo'), __('Junio'), __('Julio'), echo __('Agosto') , __('Septiembre'), __('Octubre'), __('Noviembre'), __('Diciembre'));
 Timeline.DefaultEventSource.Event.prototype.fillInfoBubble = function(elmt, theme, labeller) {
     var eventObject = this;
     if (eventObject._end != eventObject._earliestEnd && eventObject._start != eventObject._latestStart){
