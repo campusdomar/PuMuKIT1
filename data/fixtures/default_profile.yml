@@ -172,6 +172,12 @@ PerfilI18n:
     link: Video
     description: >
       Perfil copy master
+  perfilI18n_1_en: 
+    id: perfil_1
+    culture: en
+    link: Video
+    description: >
+      Perfil copy master
   perfilI18n_2_es: 
     id: perfil_2
     culture: es
@@ -184,7 +190,12 @@ PerfilI18n:
     link: Video
     description: >
       Perfil fms
-
+  perfilI18n_2_en: 
+    id: perfil_2
+    culture: en
+    link: Video
+    description: >
+      Perfil fms
   perfilI18n_3_es: 
     id: perfil_3
     culture: es
@@ -197,6 +208,13 @@ PerfilI18n:
     link: Audio
     description: >
       Perfil audio mp3
+  perfilI18n_3_en: 
+    id: perfil_3
+    culture: en
+    link: Audio
+    description: >
+      Perfil audio mp3
+
 PubChannel:
   web:
     id: web
