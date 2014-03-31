@@ -8,6 +8,21 @@
     (<?php $aux = array(0 => "Administrador",1 => "Publicador",2 => "FTP"); echo $aux[$sf_user->getAttribute('user_type_id')] ?>) | 
     <?php echo date('d-m-y')?> | 
     <?php echo link_to('logout', 'index/logout') ?>
+
+<?php if($sf_user->getCulture() == 'es'):?>
+<?php echo __('Espa&ntildeol')?>
+<?php else:?>
+<a href="<?php echo url_for('utils/culture?culture=es') ?>"><?php echo --('Espa&ntildeol')?>
+</a>
+<?php endif?>
+
+<?php if($sf_user->getCulture() == 'en'):?>
+<?php echo __('Ingl&eacutes')?>
+<?php else:?>
+<a href="<?php echo url_for('utils/culture?culture=en') ?>"><?php echo __('Ingl&eacutes')?></a>
+<?php endif?>
+
+
   </div>  
   <div style="position:absolute; right: 10px; top : 25px; color: #fff; font-weight: bold">
     <?php echo sfConfig::get('app_metas_title')?>
@@ -259,16 +274,3 @@
   <?php endif ?>
   </ul>
 </div>
-
-
-<?php if($sf_user->getCulture() == 'es'):?>
-<?php echo __('Espa&ntildeol')?>
-<?php else:?>
-<a href="<?php echo url_for('utils/culture?culture=es') ?>"><?php echo __('Espa&ntildeol')?></a>
-<?php endif?>
-
-<?php if($sf_user->getCulture() == 'en'):?>
-<?php echo __('Ingl&eacutes')?>
-<?php else:?>
-<a href="<?php echo url_for('utils/culture?culture=en') ?>"><?php echo __('Ingl&eacutes')?></a>
-<?php endif?>
