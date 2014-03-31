@@ -12,7 +12,7 @@
 <?php if($sf_user->getCulture() == 'es'):?>
 <?php echo __('Espa&ntildeol')?>
 <?php else:?>
-<a href="<?php echo url_for('utils/culture?culture=es') ?>"><?php echo --('Espa&ntildeol')?>
+<a href="<?php echo url_for('utils/culture?culture=es') ?>"><?php echo __'Espa&ntildeol')?>
 </a>
 <?php endif?>
 
