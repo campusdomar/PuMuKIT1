@@ -22,7 +22,7 @@
 
     <!-- DOS -->
     <div class="section-menu" id="page:left">
-      <h3>Seleccione tipo:</h3>
+      <h3><?php echo __('Seleccione tipo:') ?></h3>
         <ul id="poll_tabs" class="tabs" 
 	    onmouseover="$$('.order_groundtype').invoke('show');" 
 	    onmouseout="$$('.order_groundtype').invoke('hide');"

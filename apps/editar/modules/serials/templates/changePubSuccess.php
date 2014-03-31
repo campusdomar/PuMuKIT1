@@ -51,9 +51,9 @@ if(this.value.length != 0){
 }
                   " id="all_status_change_pub">
                 <option selected="selected" ></option>
-                <option value="0" >Publicado</option>
-                <option value="1" >Bloqueado</option>
-                <option value="2" >Oculto</option>
+                <option value="0" ><?php echo __('Publicado') ?></option>
+                <option value="1" ><?php echo __('Bloqueado') ?></option2D2D>
+                <option value="2" ><?php echo __('Oculto') ?></option>
               </select>
             </td>
             <?php endif ?>
@@ -114,7 +114,7 @@ $('table_mms_change_pub').select('input.pub_channel_change_pub_<?php echo $p->ge
         </tbody>
       </table>
     </div>
-    <div style="text-align: right">Seleccionar: 
+    <div style="text-align: right"><?php echo __('Seleccionar')?>: 
       <a href="#" onclick="$('table_mms_change_pub').select('input.change_pub_mms').each(function(s){s.checked=false});return false">nada</a> 
       <a href="#" onclick="$('table_mms_change_pub').select('input.change_pub_mms').each(function(s){s.checked=true});return false">todo</a>
     </div>

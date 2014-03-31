@@ -845,12 +845,12 @@
 
 <trans-unit id="169">
 <source>&amp;Uacute;LTIMAS SERIES CREADAS</source>
-<target>Last created series</target>
+<target>LAST CREATED SERIES</target>
 </trans-unit>
 
 <trans-unit id="170">
 <source>&amp;Uacute;LTIMAS SERIES PUBLICADAS</source>
-<target>Last published series</target>
+<target>LAST PUBLISHED SERIES</target>
 </trans-unit>
 </body>
   </file>
