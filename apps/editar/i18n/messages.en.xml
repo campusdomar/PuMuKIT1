@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xliff version="1.0">
-  <file orginal="global" source-language="es" datatype="plaintext" date="2014-02-21T13:26:01Z">
+  <file orginal="global" source-language="es" datatype="plaintext" date="2014-03-31T12:02:20Z">
     <body>
     
 <trans-unit id="1">
@@ -805,7 +805,7 @@
 
 <trans-unit id="161">
 <source> L&#xED;nea de tiempo - Decisiones editoriales temporizables</source>
-<target></target>
+<target/>Timeline - Temporal decisions</target>
 </trans-unit>
 
 <trans-unit id="162">
@@ -851,6 +851,21 @@
 <trans-unit id="170">
 <source>&amp;Uacute;LTIMAS SERIES PUBLICADAS</source>
 <target>LAST PUBLISHED SERIES</target>
+</trans-unit>
+
+<trans-unit id="171">
+<source>Seleccionar</source>
+<target>Select</target>
+</trans-unit>
+
+<trans-unit id="172">
+<source>Selecione alguna serie.</source>
+<target>Select any serie.</target>
+</trans-unit>
+
+<trans-unit id="173">
+<source>Seleccione tipo:</source>
+<target>Select type:</target>
 </trans-unit>
 </body>
   </file>
