@@ -219,21 +219,15 @@ class Category extends BaseCategory
   /**
    * Devuelve la lista de Mms de una categoría
    * @access public
-   * @param  Category $parent
    * @return ResulSet of Categorys.
    */
-  public function getMms($parent = null)
+  public function getMms()
   {
     $c = new Criteria();
 
     $c->addJoin(MmPeer::ID, CategoryMmPeer::MM_ID);
     $c->add(CategoryMmPeer::CATEGORY_ID, $this->getId());
     $c->addAscendingOrderByColumn(MmPeer::ID);
-    if($parent) {
-      $c->addAnd(CategoryPeer::TREE_LEFT, $parent->getLeftValue(), Criteria::GREATER_THAN);
-      $c->addAnd(CategoryPeer::TREE_RIGHT, $parent->getRightValue(), Criteria::LESS_THAN);
-      $c->addAnd(CategoryPeer::SCOPE, $parent->getScopeIdValue(), Criteria::EQUAL);
-    }
 
     return MmPeer::doSelect($c);
   }

@@ -30,6 +30,7 @@ if (2 != count($argv)) exit(-1);
 
 // var_dump(utf8_decode($argv[1])); exit;
 
+echo "Buscando \"", $argv[1], "\"\n";
 MmPeer::getLuceneIndex();
 $mms = MmPeer::getForLuceneQuery($argv[1]);
 foreach($mms as $mm){

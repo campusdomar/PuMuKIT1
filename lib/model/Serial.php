@@ -15,7 +15,7 @@
  * @package lib.model
  */ 
 class Serial extends BaseSerial
-{
+  {
 
   /**
    * Devuelve el id de difusion maximo y minimo de los objetos multimedia pertenecientes a la serie.
@@ -64,9 +64,18 @@ class Serial extends BaseSerial
     $c->add(MmPeer::SERIAL_ID, $this->getId());
     $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
     $c->addDescendingOrderByColumn(BroadcastPeer::BROADCAST_TYPE_ID);
-      
     return BroadcastPeer::doSelectOne($c);
   }
+
+    public function getBroadcastMin()
+    {
+      $c = new Criteria();
+      $c->addJoin(BroadcastPeer::ID, MmPeer::BROADCAST_ID);
+      $c->add(MmPeer::SERIAL_ID, $this->getId());
+      $c->add(MmPeer::STATUS_ID, MmPeer::STATUS_NORMAL);
+      $c->addAscendingOrderByColumn(BroadcastPeer::BROADCAST_TYPE_ID);
+      return BroadcastPeer::doSelectOne($c);
+    }
 
 
   /**
@@ -79,7 +88,7 @@ class Serial extends BaseSerial
   //public function countMmsPublic($criteria = null, $distinct = false, $con = null)
   //{
   //  $c = new Criteria();
-  //  $c->add(MmPeer::STATUS_ID, 1, Criteria::GREATER_THAN);
+  //  $c->add(MmPeer::STATUS_ID, 1, Criteria::GREAT_THAN);
   //  /*Ojo broadcast*/
   //  $c->add(MmPeer::SERIAL_ID, $this->getId());
   //  return MmPeer::doCount($c, $distinct, $con);
@@ -142,14 +151,87 @@ class Serial extends BaseSerial
    * @access public
    * @return String Line2
    */
+  //METER AQUI EL CODIGO DE LA FUNCION GETLINE2RICH QUE ESTA
+
+  public function recorrecategorias()
+  {
+    return;
+  }
+
+
   public function getLine2Rich()
   {
     $aux = parent::getLine2();
-    if ($aux == '') {
-      $place = $this->getPlace();
-      if($place) $aux = 'Realizado: '.$place->getName();
-    }
-    return '<strong>' . $aux . '</strong>';
+     if ($aux == '') {
+
+      $lugares=1;
+
+      $categorias=$this->getCategories($aux);
+      $n=0;
+      //foreach($categorias){n++;}
+      $n=count($categorias); 
+      if ($n>1)
+      {
+        $aux= "Realizado: ";
+	$place = $this->getPlace();
+
+	
+	while($n>0)
+          {
+	    $n--;
+            $nombre_categoria= $categorias[$n]->getName();
+	    if ((strcmp($nombre_categoria,"Lugares"))==0){$lugares=1;}
+	    if ((strcmp($nombre_categoria,"UNESCO"))==0){$lugares=0;}
+	    if ((strcmp($nombre_categoria,"Area Directriz"))==0){$lugares=0;}
+
+
+	    if( ($lugares==1) && (strcmp($nombre_categoria,"Lugares")!=0) )
+	      {
+	       if($place) $aux = $aux . $nombre_categoria."<br>";
+	      }
+	       //Cada vez que encuentre "Lugares" llamar a una funcion que lis lista hasta
+               // que encuentre UNESCO
+	       /*	       If  ((strcmp($nombre_categoria,"UNESCO"))==0)
+	        {
+                  $n--;
+		  $nombre_categoria= $categorias[$n]->getName();
+		  while((strcmp($nombre_categoria,"Lugares"))!=0)
+		    {
+		      $n--;
+		      $nombre_categoria= $categorias[$n]->getName();
+		    }
+
+		  if($place) $aux = $aux . $nombre_categoria."<br>";
+
+		  //break;
+	        }*/
+		 		   		 
+	    
+
+	     /* if ((strcmp($nombre_categoria,"UNESCO"))!=0)
+	       {
+		 if($place) $aux = $aux . $nombre_categoria."<br>";
+	       } */
+
+	//$n--; 
+	  }
+	//$aux = (string)$categorias[0];
+      }
+      else
+	$aux= "Lugar no indicado";
+      //Original     $place = $this->getPlace();
+      // PRUEBA SOBRE ORIGINAL $place="facultad de quimica";
+      //ORIGIAL  if($place) $aux = 'RealizAdo: '.'aqui mismo'.$place;//.$place->getName();
+      //PRUEBA SOBE  ORIGINAL $aux= "facultad de quimica";
+    } 
+
+     if (  (strcmp($aux,"Realizado: ")!=0)  &&  (strcmp($aux,"Realizado: Lugares")!=0)  )
+       {
+	 return '<strong>'.$aux.'</strong>';
+       }   
+     if (strcmp($aux,"Realizado: ")==0)  return '<strong>Lugar no indicado</strong>';
+     if(strcmp($aux,"Realizado: Lugares")==0) return '<strong>Lugar no indicado</strong>';
+      
   }
 
 
@@ -256,6 +338,7 @@ class Serial extends BaseSerial
     $c->addJoin(MmPeer::PRECINCT_ID, PrecinctPeer::ID);
     $c->add(MmPeer::SERIAL_ID, $this->getId());
 
+    //return "esto es dentro de getplace()";
     return PlacePeer::doSelectWithI18n($c, $this->getCulture());
   }
 
@@ -302,18 +385,32 @@ class Serial extends BaseSerial
    * @access public
    * @return ResulSet of Ground.
    */
-  public function getGroundsWithI18n($ground_type = 0)
+  public function getCategoriesWithI18n($category_type = 0)
   {
     $c = new Criteria();
     $c->setDistinct(true);
-    $c->addJoin(GroundPeer::ID, GroundMmPeer::GROUND_ID);
+    $c->addJoin(Category::ID, Category::CATEGORY_ID);
+    $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
+    $c->add(MmPeer::SERIAL_ID, $this->getId());
+    $c->addAscendingOrderByColumn(CategoryPeer::COD);
+    if($category_type != 0) $c->add(CategoryPeer::CATEGORY_TYPE_ID, $category_type);
+
+    return CategoryPeer::doSelectWithI18n($c, $this->getCulture());
+  }
+
+  /* public function getGroundWithI18n($ground_type = 0)
+  {
+    $c = new Criteria();
+    $c->setDistinct(true);
+    $c->addJoin(Ground::ID, Ground::GROUND_ID);
     $c->addJoin(GroundMmPeer::MM_ID, MmPeer::ID);
     $c->add(MmPeer::SERIAL_ID, $this->getId());
     $c->addAscendingOrderByColumn(GroundPeer::COD);
     if($ground_type != 0) $c->add(GroundPeer::GROUND_TYPE_ID, $ground_type);
 
     return GroundPeer::doSelectWithI18n($c, $this->getCulture());
-  }
+  } */
+
 
   /**
    * Devuelve la lista de  Objeto area
@@ -323,7 +420,7 @@ class Serial extends BaseSerial
    * @access public
    * @return ResulSet of Grounds.
    */
-  public function getGrounds($ground_type = 0)
+  /* public function getGrounds($ground_type = 0)
   {
     $c = new Criteria();
     $c->setDistinct(true);
@@ -333,7 +430,20 @@ class Serial extends BaseSerial
     $c->addAscendingOrderByColumn(GroundPeer::COD);
     if($ground_type != 0) $c->add(GroundPeer::GROUND_TYPE_ID, $ground_type);
 
-    return GroundPeer::doSelect($c);
+    return CategoryPeer::doSelect($c);
+  }*/
+
+  public function getCategories($category_type = 0)
+  {
+    $c = new Criteria();
+    $c->setDistinct(true);
+    $c->addJoin(CategoryPeer::ID, CategoryMmPeer::CATEGORY_ID);
+    $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
+    $c->add(MmPeer::SERIAL_ID, $this->getId());
+    $c->addAscendingOrderByColumn(CategoryPeer::COD);
+    if($category_type != 0) $c->add(CategoryPeer::CATEGORY_TYPE_ID, $category_type);
+
+    return CategoryPeer::doSelect($c);
   }
 
 

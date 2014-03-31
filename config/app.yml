@@ -3,8 +3,8 @@ all:
   pumukit:
     version:    PuMuKIT v1.8
   lang:
-    array:     [es, gl]
-    default:   es
+    array:     [es, gl, en]
+    default:   en
 
   metas:
     title:        UCies.tv
@@ -14,8 +14,8 @@ all:
   info:
     title:          "Universidad de las Cies Television"
     description:    "Material Audiovisual ofrecido por la Universidad de las Cies"
-    link:           "http://pumukitdev.media.uvigo.es"
-    host:           "pumukitdev.media.uvigo.es"
+    link:           "http://pumukit18.media.uvigo.es"
+    host:           "pumukit18.media.uvigo.es"
     copyright:      "UdN-TV"
     mail:           "tv@udn.es"
     logo:           "http://tv.uvigo.es/uploads/uvigo/logo_tv_60x60.gif"
@@ -37,7 +37,7 @@ all:
   transcoder:
     use:          1
     proveedor:    uvigotv
-    inbox:        ["/tmp/inbox"]
+    inbox:        ["/var/www/pumukit18/web/almacen/tmp"]
     path_tmp:     "/tmp"
     path_unix:    ["/tmp"]
     path_win:     ["//172.20.209.216"]
@@ -74,8 +74,8 @@ all:
     ip:          '127.0.0.1'
 
   matterhorn:
-    use:           0
-    server:        "http://engage.matterhorn.es"
-    server_admin:  "http://admin.matterhorn.es"
+    use:           1
+    server:        "http://engagedev.matterhorn.uvigo.es"
+    server_admin:  "http://admindev.matterhorn.uvigo.es"
     user:          "matterhorn_system_account"
     password:      "CHANGE_ME"

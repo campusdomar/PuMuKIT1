@@ -68,7 +68,8 @@ class MmMatterhornPeer extends BaseMmMatterhornPeer
     if ($user != "") {
       curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
       curl_setopt($ch, CURLOPT_USERPWD, $user . ':' . $password);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Requested-Auth: Digest"));
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Requested-Auth: Digest", 
+						 "X-Opencast-Matterhorn-Authorization: true"));
     }
 
     $sal["var"] = curl_exec($ch);

@@ -103,15 +103,18 @@ function createSerial($title = "Test serial")
         echo " Recuperada de la BD con id " . $serial->getId() . "\n";
     } else {
         $serial = new Serial();
-        $serial->setCulture('es');
         $serial->setPublicdate("now"); // ¿Add date parameter?
-        $serial->setTitle($title);
-        $serial->setKeyword(TEST_KEYWORD);
-        $serial->setDescription(''); // Add description parameter?
-        $serial->setHeader('');
-        $serial->setFooter('');
         $serial->setSerialTypeId(SerialTypePeer::getDefaultSelId());
         $serial->setSerialTemplateId(1); // = ordered by date by default.
+        $langs = sfConfig::get('app_lang_array', array('es'));
+        foreach($langs as $lang){
+	  $serial->setCulture($lang);
+	  $serial->setTitle($title);
+	  $serial->setKeyword(TEST_KEYWORD);
+	  $serial->setDescription(''); // Add description parameter?
+	  $serial->setHeader('');
+	  $serial->setFooter('');
+	}
         $status = $serial->save();
         echo " OK - status " . $status . " id " . $serial->getId() . "\n";
     }
@@ -139,11 +142,14 @@ function createMmInSerial($title, $serial, $date = "now")
 
     $mm = new Mm();
     $mm->setSerial($serial);
-    $mm->setCulture('es');
+    $langs = sfConfig::get('app_lang_array', array('es'));
+    foreach($langs as $lang){
+      $mm->setCulture($lang);
+      $mm->setTitle($title);
+      $mm->setDescription("");
+    }
     $mm->setRecordDate($date);
     $mm->setPublicDate($date);
-    $mm->setTitle($title);
-    $mm->setDescription("");
     
     $mm->setAudio(0);
     $mm->setBroadcastId(BroadcastPeer::getDefaultSelId());
@@ -231,8 +237,11 @@ function createFileInMm($file, $mm)
     }
     
     $file->setMmId($mm->getId());
-    $file->setCulture('es');
-    $file->setDescription('TEST_KEYWORD');
+    $langs = sfConfig::get('app_lang_array', array('es'));
+    foreach($langs as $lang){
+      $file->setCulture($lang);
+      $file->setDescription('TEST_KEYWORD');
+    }
     $status = $file->save();
     echo " OK - status " . $status . " id " . $file->getId() . "\n";
 
@@ -289,9 +298,12 @@ function getPerfilTest($name = 'perfil_test')
         $perfil->setApp('create_test_videos.php');
         $perfil->setStreamserverId(1); // won't show on backend if not set. 
         
-        $perfil->setCulture('es');
-        $perfil->setDescription("Perfil para vídeos de test");
-        $perfil->setLink("Vídeo"); // 'Vídeo' o 'Audio'
+        $langs = sfConfig::get('app_lang_array', array('es'));
+        foreach($langs as $lang){
+	  $perfil->setCulture($lang);
+	  $perfil->setDescription("Perfil para vídeos de test");
+	  $perfil->setLink("Vídeo"); // 'Vídeo' o 'Audio'
+	}
 
         $perfil->save();
     }

@@ -87,7 +87,7 @@ a:hover
 body{  
   overflow : -moz-scrollbars-vertical;
   font-family: "Lucida Grande", Arial,sans-serif;
-  min-width: 1000px;
+  min-width: 1050px;
 }
 
 
@@ -249,7 +249,7 @@ div.background_id
   bottom:0pt;
   max-height:85%;
   */
-  width:92%;
+  width:95%;
   z-index:2000;
 }
 

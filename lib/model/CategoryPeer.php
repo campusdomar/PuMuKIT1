@@ -71,6 +71,15 @@ class CategoryPeer extends BaseCategoryPeer
     return CategoryPeer::doSelectWithI18n($c);
   }
 
+  public static function doSelectByCode($code)
+
+  {
+    $c = new Criteria();
+    $c->addJoin(CategoryPeer::ID, CtegoryI18nPeer::ID);
+    $c->add(CategoryI18nPeer::CODE, $code);
+
+    return CategoryPeer::doSelectWithI18n($c);
+  }
   /**
    * 
    * @access public

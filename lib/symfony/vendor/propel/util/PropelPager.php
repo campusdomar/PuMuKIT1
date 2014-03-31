@@ -1,3 +1,5 @@
+
+
 <?php
 /*
  *  $Id: PropelPager.php 536 2007-01-10 14:30:38Z heltem $
@@ -40,40 +42,40 @@
  * Some template:
  *
  * <p>
- * Total Pages: <?=$pager->getTotalPages()?>  Total Records: <?=$pager->getTotalRecordCount()?>
+ * Total Pages: <?php =$pager->getTotalPages()?>  Total Records: <?php =$pager->getTotalRecordCount()?>
  * </p>
  * <table>
  * <tr>
  * <td>
- * <?if($link = $pager->getFirstPage):?>
- * <a href="somescript?page=<?=$link?>"><?=$link?></a>|
- * <?endif?>
+ * <?php if($link = $pager->getFirstPage):?>
+ * <a href="somescript?page=<?php =$link?>"><?php =$link?></a>|
+ * <?php endif?>
  * </td>
  * <td>
- * <?if($link = $pager->getPrev()):?>
- * <a href="somescript?page=<?=$link?>">Previous</a>|
- * <?endif?>
+ * <?php if($link = $pager->getPrev()):?>
+ * <a href="somescript?page=<?php =$link?>">Previous</a>|
+ * <?php endif?>
  * </td>
  * <td>
- * <?foreach($pager->getPrevLinks() as $link):?>
- * <a href="somescript?page=<?=$link?>"><?=$link?></a>|
- * <?endforeach?>
+ * <?php foreach($pager->getPrevLinks() as $link):?>
+ * <a href="somescript?page=<?php =$link?>"><?php =$link?></a>|
+ * <?php endforeach?>
  * </td>
- * <td><?=$pager->getPage()?></td>
+ * <td><?php =$pager->getPage()?></td>
  * <td>
- * <?foreach($pager->getNextLinks() as $link):?>
- * | <a href="somescript?page=<?=$link?>"><?=$link?></a>
- * <?endforeach?>
- * </td>
- * <td>
- * <?if($link = $pager->getNext()):?>
- * <a href="somescript?page=<?=$link?>">Last</a>|
- * <?endif?>
+ * <?php foreach($pager->getNextLinks() as $link):?>
+ * | <a href="somescript?page=<?php =$link?>"><?php =$link?></a>
+ * <?php endforeach?>
  * </td>
  * <td>
- * <?if($link = $pager->getLastPage()):?>
- * <a href="somescript?page=<?=$link?>"><?=$link?></a>|
- * <?endif?>
+ * <?php if($link = $pager->getNext()):?>
+ * <a href="somescript?page=<?php =$link?>">Last</a>|
+ * <?php endif?>
+ * </td>
+ * <td>
+ * <?php if($link = $pager->getLastPage()):?>
+ * <a href="somescript?page=<?php =$link?>"><?php =$link?></a>|
+ * <?php endif?>
  * </td>
  * </tr>
  * </table>
@@ -84,14 +86,14 @@
  * <th>Date</th>
  * <th>comments</th>
  * </tr>
- * <?foreach($pager->getResult() as $poem):?>
+ * <?phpforeach($pager->getResult() as $poem):?>
  * <tr>
- * <td><?=$poem->getTitle()?></td>
- * <td><?=$poem->getPoemUsers()->getUname()?></td>
- * <td><?=$poem->getTime()?></td>
- * <td><?=$poem->getComments()?></td>
+ * <td><?php=$poem->getTitle()?></td>
+ * <td><?php=$poem->getPoemUsers()->getUname()?></td>
+ * <td><?php=$poem->getTime()?></td>
+ * <td><?php=$poem->getComments()?></td>
  * </tr>
- * <?endforeach?>
+ * <?php endforeach?>
  * </table>
  *
  *
