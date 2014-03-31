@@ -7,7 +7,7 @@
     <b><?php echo $sf_user->getAttribute('login')?> </b>
     (<?php $aux = array(0 => "Administrador",1 => "Publicador",2 => "FTP"); echo $aux[$sf_user->getAttribute('user_type_id')] ?>) | 
     <?php echo date('d-m-y')?> | 
-    <?php echo link_to('logout', 'index/logout') ?>
+    <?php echo link_to('logout', 'index/logout') ?> |
 
 <?php if($sf_user->getCulture() == 'es'):?>
 <?php echo __('Espa&ntildeol')?>
