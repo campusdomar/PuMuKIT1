@@ -148,36 +148,6 @@ class TranscodingPeer extends BaseTranscodingPeer
 
 
 
-
-  /**
-   *
-   *
-   *
-   */
-  private static function obtener_pid($ip, $program){
-    sleep(1);
-    $ch = curl_init('http://' . $ip . '/webserver.php');
-    
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " . base64_encode("pumukit:PUMUKIT")));
-    curl_setopt ($ch, CURLOPT_POST, 1); 
-    curl_setopt ($ch, CURLOPT_POSTFIELDS, "ruta=tasklist"); 
-    
-    $var = curl_exec($ch); 
-    $error = curl_error($ch);
-    
-    $pid_new = 0;
-    
-    //:)
-    $pos_ini = strrpos($var, $program);  
-    $linea = substr($var, $pos_ini, 32);
-    $pd = strtok($linea, ' ');
-    $pid_new = strtok(' ');
-
-    return $pid_new;
-  }
-
-
   /**
    *
    *
