@@ -66,8 +66,8 @@ class Mm extends BaseMm
       $con->commit();
     }
     catch (Exception $e) {
-	$con->rollBack();
-	throw $e;
+      $con->rollBack();
+      throw $e;
     }
   }
 
@@ -77,7 +77,7 @@ class Mm extends BaseMm
    */
   public function saveInDB($con = null)
   {
-     parent::save($con);
+    parent::save($con);
   }
 
   public function delete($con = null)
@@ -158,11 +158,11 @@ class Mm extends BaseMm
   public function getFirstPublicFile()
   {
     if ($this->aFirstFilePublic === null) {
-    $c = new Criteria();
-    $c->add(FilePeer::MM_ID, $this->getId());
-    $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
-    $c->add(PerfilPeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(FilePeer::RANK);
+      $c = new Criteria();
+      $c->add(FilePeer::MM_ID, $this->getId());
+      $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
+      $c->add(PerfilPeer::DISPLAY, true);
+      $c->addAscendingOrderByColumn(FilePeer::RANK);
 
       $this->aFirstFilePublic = FilePeer::doSelectOne($c);
       if ($this->aFirstFilePublic){
@@ -410,11 +410,11 @@ class Mm extends BaseMm
    */
   public function getPlace($con = null)
   {
-      $c = new Criteria();
-      $c->addJoin(PlacePeer::ID, PrecinctPeer::PLACE_ID);
-      $c->add(PrecinctPeer::ID, $this->getPrecinctId());
-      list($resp) = PlacePeer::doSelectWithI18n($c, $this->getCulture());
-      return $resp;
+    $c = new Criteria();
+    $c->addJoin(PlacePeer::ID, PrecinctPeer::PLACE_ID);
+    $c->add(PrecinctPeer::ID, $this->getPrecinctId());
+    list($resp) = PlacePeer::doSelectWithI18n($c, $this->getCulture());
+    return $resp;
   }
 
 
@@ -424,7 +424,7 @@ class Mm extends BaseMm
    */
   public function getPlaceId($con = null)
   {
-      return $this->getPlace()->getId();
+    return $this->getPlace()->getId();
   }
 
 
@@ -781,13 +781,13 @@ class Mm extends BaseMm
     return LanguagePeer::doCount($c);
   }
 
-/**
- * Returns array of mm's materials that match the extensions given (captions)
- *
- * @access public
- * @param array $extensions - caption formats to search in mat_type.type
- * @return file
- */
+  /**
+   * Returns array of mm's materials that match the extensions given (captions)
+   *
+   * @access public
+   * @param array $extensions - caption formats to search in mat_type.type
+   * @return file
+   */
   public function getCaptions($extensions = array ('vtt')){
      
     $c = new Criteria();
@@ -858,26 +858,26 @@ class Mm extends BaseMm
       foreach($pub_channels_all as $pub_channel){
         $aux = $pub_channel->hasMm($this->getId());
 
-         if(($aux == 0)&&(array_key_exists($pub_channel->getId(), $pub_channels_select))){
-           $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
+	if(($aux == 0)&&(array_key_exists($pub_channel->getId(), $pub_channels_select))){
+	  $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
 
-            if(is_null($pubc)){
-              $pubc = new PubChannelMm();
-              $pubc->setMmId($this->getId());
-              $pubc->setPubChannel($pub_channel);
-              $pubc->setStatusId(1);
-              $pubc->save();
-            }else{
-              $pubc->setStatusId(1);
-              $pubc->save();
-            }
+	  if(is_null($pubc)){
+	    $pubc = new PubChannelMm();
+	    $pubc->setMmId($this->getId());
+	    $pubc->setPubChannel($pub_channel);
+	    $pubc->setStatusId(1);
+	    $pubc->save();
+	  }else{
+	    $pubc->setStatusId(1);
+	    $pubc->save();
+	  }
     
-         }elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
-            $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
-            if(!is_null($pubc)){
-              $pubc->delete();
-            }
-         }      
+	}elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
+	  $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
+	  if(!is_null($pubc)){
+	    $pubc->delete();
+	  }
+	}      
       }
       return true;
       //MMOC END
@@ -889,23 +889,23 @@ class Mm extends BaseMm
       if (!is_array($pub_channels_select)) $pub_channels_select = array();
       
       foreach($pub_channels_all as $pub_channel){
-	       $aux = $pub_channel->hasMm($this->getId());
-        	if(($aux == 0)
-		   &&(array_key_exists($pub_channel->getId(), $pub_channels_select))
-		   &&($pub_channels_select[$pub_channel->getId()] != "off")){
-                  if($this->getMaster() == null){
-                    $aux = new PubChannelMm();
-                    $aux->setMm($this);
-                    $aux->setPubChannel($pub_channel);
-                    $aux->setStatusId(3);
-                    $aux->save();
-                  }else{
-                    $perfiles_usados = $pub_channel->startSelectWorkflow($this);
-                  }
+	$aux = $pub_channel->hasMm($this->getId());
+	if(($aux == 0)
+	   &&(array_key_exists($pub_channel->getId(), $pub_channels_select))
+	   &&($pub_channels_select[$pub_channel->getId()] != "off")){
+	  if($this->getMaster() == null){
+	    $aux = new PubChannelMm();
+	    $aux->setMm($this);
+	    $aux->setPubChannel($pub_channel);
+	    $aux->setStatusId(3);
+	    $aux->save();
+	  }else{
+	    $perfiles_usados = $pub_channel->startSelectWorkflow($this);
+	  }
         	  
-        	}elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
-        	  $pub_channel->startDeselectWorkflow($this);
-        	}      
+	}elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
+	  $pub_channel->startDeselectWorkflow($this);
+	}      
       }
     }
     return true;
@@ -930,51 +930,51 @@ class Mm extends BaseMm
       foreach($pub_channels as $pub_channel){
 	$pub_channel->startSelectWorkflow($this);
       }
-    }
 
-    if ($master->getAspect() == 0){
-      $pcps = $perfil->getPubChannelPerfilsRelatedByPerfilAudioId();
-    } else if($master->getAspect() < 1.5){
-      $pcps = $perfil->getPubChannelPerfilsRelatedByPerfil43Id();
-    }else{
-      $pcps = $perfil->getPubChannelPerfilsRelatedByPerfil169Id();
-    }
+      if ($master->getAspect() == 0){
+	$pcps = $perfil->getPubChannelPerfilsRelatedByPerfilAudioId();
+      } else if($master->getAspect() < 1.5){
+	$pcps = $perfil->getPubChannelPerfilsRelatedByPerfil43Id();
+      }else{
+	$pcps = $perfil->getPubChannelPerfilsRelatedByPerfil169Id();
+      }
     
-    foreach($pcps as $pcp){
-      $pub_channel = $pcp->getPubChannel();
-      $has_all_files = true;
+    
+      foreach($pcps as $pcp){
+	$pub_channel = $pcp->getPubChannel();
+	$has_all_files = true;
 
-      foreach($pub_channel->getPubChannelPerfils() as $pcp2){
-        if ($master->getAspect() == 0){
-          $perfil = $pcp2->getPerfilRelatedByPerfilAudioId();
-        } else if($master->getAspect() < 1.5){
-          $perfil = $pcp2->getPerfilRelatedByPerfil43Id();
-        }else{
-          $perfil = $pcp2->getPerfilRelatedByPerfil169Id();
-        }
+	foreach($pub_channel->getPubChannelPerfils() as $pcp2){
+	  if ($master->getAspect() == 0){
+	    $perfil = $pcp2->getPerfilRelatedByPerfilAudioId();
+	  } else if($master->getAspect() < 1.5){
+	    $perfil = $pcp2->getPerfilRelatedByPerfil43Id();
+	  }else{
+	    $perfil = $pcp2->getPerfilRelatedByPerfil169Id();
+	  }
 
 
 	      
-      	if(count($this->getFilesByPerfil($perfil->getId())) == 0){
-                $has_all_files = false;
-      	}
+	  if(count($this->getFilesByPerfil($perfil->getId())) == 0){
+	    $has_all_files = false;
+	  }
 	
-      }
+	}
       
-      if($has_all_files ===  true){
-	$aux = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
-	if(!is_null($aux)){ //MIRA QUE ESTE EN ESTADO 2 Y NO 3
-	  $aux->setStatusId(1);
-	  //execute finish trascoder.
-	  $aux->save();
+	if($has_all_files ===  true){
+	  $aux = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
+	  if(!is_null($aux)){ //MIRA QUE ESTE EN ESTADO 2 Y NO 3
+	    $aux->setStatusId(1);
+	    //execute finish trascoder.
+	    $aux->save();
+	  }
 	}
       }
     }
-
   }
 
 
-public function getSimilarMmsUnesco($cat_code = null, $exclude_serial=true){
+  public function getSimilarMmsUnesco($cat_code = null, $exclude_serial=true){
     
     $c = new Criteria();
     
@@ -1163,4 +1163,4 @@ public function getSimilarMmsUnesco($cat_code = null, $exclude_serial=true){
 sfPropelBehavior::add('Mm', array(
 				  'sortableFk' => array('f_key' => 'serial_id'),
 				  'pic' => array(), 
-				 ) );
+				  ) );
