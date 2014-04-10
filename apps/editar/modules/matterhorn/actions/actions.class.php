@@ -80,17 +80,21 @@ class matterhornActions extends sfActions
     }
     $q = $this->getUser()->getAttribute('q', '', 'tv_admin/matterhorn');
    
-
-    $media_packages = MmMatterhornPeer::getMediaPackages($limit, $startPage, $q);
+    try {
+      $media_packages = MmMatterhornPeer::getMediaPackages($limit, $startPage, $q);
 
     
 
-    $this->total = MmMatterhornPeer::getNumMediaPackages($q);
-    $this->page = $startPage + 1;
-    $this->total_page = ceil($this->total / $limit); 
-    $this->media_packages = $media_packages;
-    $this->mh_server = $this->admin_server;
-    $this->en_server = $this->engage_server;
+      $this->total = MmMatterhornPeer::getNumMediaPackages($q);
+      $this->page = $startPage + 1;
+      $this->total_page = ceil($this->total / $limit); 
+      $this->media_packages = $media_packages;
+      $this->mh_server = $this->admin_server;
+      $this->en_server = $this->engage_server;
+    } catch (Exception $e) {
+      return sfView::ERROR;
+    }
+
   }
 
 
@@ -98,14 +102,14 @@ class matterhornActions extends sfActions
   public function executeImport(){
     $id = $this->getRequestParameter('id');
 
-    $aux = MmMatterhornPeer::getMediaPackage($id);
-    $mp = $this->map_mp_all($aux);
-    $mm = $this->createMm($mp);
-  
-    /*
-      $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
-      return $this->renderText(json_encode($mp));
-    */
+    try {
+      $aux = MmMatterhornPeer::getMediaPackage($id);
+      $mp = $this->map_mp_all($aux);
+      $mm = $this->createMm($mp);
+    } catch (Exception $e) {
+      return sfView::ERROR;
+    }
+    
     return $this->forward('matterhorn', 'list');
   }
 
