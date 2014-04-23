@@ -320,9 +320,9 @@ class serialsActions extends sfActions
       if ($this->getUser()->getAttribute('user_type_id', 1) == 0){
         $mm->setStatusId($d['status']);
       }
-      if(isset($d['pub_channels'])){
-	$mm->updatePubChannels($d['pub_channels']);
-      }
+    
+      $mm->updatePubChannels($d['pub_channels']);
+    
       $mm->save();     
     }
     return $this->renderComponent('serials', 'list');
