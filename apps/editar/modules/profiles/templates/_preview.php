@@ -42,7 +42,7 @@
    <span style="font-weight: bold"><?php echo __('Solo audio:')?></span> 
     <?php echo $profile->getAudio() ? "Sí" : "No" ?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Tiene script:'?></span> 
+   <span style="font-weight: bold"><?php echo __('Tiene script:')?></span> 
     <?php echo strlen($profile->getPrescript()) ? "Sí" : "No" ?>
    <br />
    <span style="font-weight: bold"><?php echo __('Descripción:')?></span> 
