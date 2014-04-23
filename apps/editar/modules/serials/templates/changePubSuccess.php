@@ -60,15 +60,13 @@ if(this.value.length != 0){
             <?php foreach($pubs as $p): ?>
 	      <td style="text-align:center; background: transparent">
                 <input type="checkbox"  
-<?php if($p->getEnable() == 0):?>
-disabled="disabled"
-<?php else: ?>
- onchange="
-var val = this.checked;
-$('table_mms_change_pub').select('input.pub_channel_change_pub_<?php echo $p->getId()?>').each(function(s){s.checked = val});
-                 "
-<?php endif ?>
-              />
+                  <?php if($p->getEnable() == 0):?>
+                      disabled="disabled"
+                  <?php else: ?>
+                      onchange=" var val = this.checked;
+                     $('table_mms_change_pub').select('input.pub_channel_change_pub_<?php echo $p->getId()?>').each(function(s){s.checked = val});"
+                  <?php endif ?>
+                />
               </td>
             <?php endforeach ?>
           </tr>
@@ -103,7 +101,7 @@ $('table_mms_change_pub').select('input.pub_channel_change_pub_<?php echo $p->ge
                            name="data[<?php echo $mm->getId()?>][pub_channels][<?php echo $p->getId()?>]" 
                            class="pub_channel_input_checkbox pub_channel_change_pub_<?php echo $p->getId()?>"
                            <?php echo ($estado !== 0)?'checked="checked"':""?>
-                           <?php echo (($mm->getStatusId() == 1)||($estado === 2)||($estado === 3))?'disabled="disabled"':''?>
+                           <?php echo (($estado === 2)||($estado === 3))?'disabled="disabled"':''?>
                     />
                   </td>
                 <?php endif ?>
