@@ -7,21 +7,18 @@
     <b><?php echo $sf_user->getAttribute('login')?> </b>
     (<?php $aux = array(0 => "Administrador",1 => "Publicador",2 => "FTP"); echo $aux[$sf_user->getAttribute('user_type_id')] ?>) | 
     <?php echo date('d-m-y')?> | 
-    <?php echo link_to('logout', 'index/logout') ?> |
+    <?php echo link_to('logout', 'index/logout') ?>
 
-<?php if($sf_user->getCulture() == 'es'):?>
-<?php echo __('Espa&ntildeol')?>
-<?php else:?>
-<a href="<?php echo url_for('utils/culture?culture=es') ?>"><?php echo __('Espa&ntildeol')?>
-</a>
-<?php endif?>
-
-<?php if($sf_user->getCulture() == 'en'):?>
-<?php echo __('Ingl&eacutes')?>
-<?php else:?>
-<a href="<?php echo url_for('utils/culture?culture=en') ?>"><?php echo __('Ingl&eacutes')?></a>
-<?php endif?>
-
+    <?php $langs = sfConfig::get('app_lang_array', array('es')); ?>
+    <?php if(count($langs) > 1): ?> |
+      <?php foreach($langs as $lang): ?>
+        <?php if($sf_user->getCulture() == $lang):?>
+          <?php echo $lang ?>
+        <?php else:?>
+          <a href="<?php echo url_for('utils/culture?culture=' . $lang) ?>"><?php echo $lang?></a>
+        <?php endif?>
+      <?php endforeach ?>
+    <?php endif?>
 
   </div>  
   <div style="position:absolute; right: 10px; top : 25px; color: #fff; font-weight: bold">
