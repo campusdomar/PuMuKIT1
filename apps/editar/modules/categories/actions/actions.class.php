@@ -39,6 +39,29 @@ class categoriesActions extends sfActions
 
 
   /**
+   * --  CHILDREN -- /editar.php/categories/children
+   *
+   * Accion asincrona. Acceso privado.
+   *
+   */
+  public function executeChildren()
+  {
+    $parent = CategoryPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($parent);
+
+    $this->parent_id = $parent->getId();
+    $this->categories = $parent->getChildren();
+    $this->level = ($this->getRequestParameter('level', 1)) + 1 ; 
+
+    $this->class_name = "d_" .$parent->getId() . " c_".$parent->getId();
+    foreach($parent->getPath() as $p) {
+      $this->class_name .= (" c_" . $p->getId());
+    }
+    
+  }
+
+
+  /**
    * --  CREATE -- /editar.php/categories/create
    *
    * Accion asincrona. Acceso privado.
@@ -54,6 +77,7 @@ class categoriesActions extends sfActions
     $this->category->insertAsLastChildOf($parent);
 
     $this->langs = sfConfig::get('app_lang_array', array('es'));
+    $this->action = ($this->hasRequestParameter("root"))?"create_root":"create";
 
     $this->setTemplate('edit');
   }
@@ -71,6 +95,7 @@ class categoriesActions extends sfActions
     $this->parent_id = $this->category->getParent()->getId();
 
     $this->langs = sfConfig::get('app_lang_array', array('es')); 
+    $this->action = "edit";
   }
 
 
@@ -96,9 +121,14 @@ class categoriesActions extends sfActions
       $this->forward404Unless($category);
     }
 
-    $category->setMetacategory($this->getRequestParameter('metacategory', ' '));
-    $category->setDisplay($this->getRequestParameter('display', ' '));
-    $category->setRequired($this->getRequestParameter('required', ' '));
+    $category->setMetacategory($this->getRequestParameter('metacategory', false));
+    $category->setDisplay($this->getRequestParameter('display', true));
+
+    //
+    //No funciona. Funcion setRequired está mal sobrecargada (ver lib/model/Category.php).
+    //$category->setRequired($this->getRequestParameter('required'));
+    //
+
     $category->setCod($this->getRequestParameter('cod', ' '));
 
     $langs = sfConfig::get('app_lang_array', array('es'));
@@ -106,17 +136,11 @@ class categoriesActions extends sfActions
       $category->setCulture($lang);
       $category->setName($this->getRequestParameter('name_'. $lang, ' '));
     }
-
-    try{
-      $category->save();
-      $this->msg_alert = array('info', "Metadatos de la categoria actualizados.");
-    }catch(Exception $e){
-      $this->msg_alert = array('error', "Error al actualizar.");
-    }
+    $category->save();
       
     $this->getUser()->setAttribute('id', $category->getId(), 'tv_admin/category');
 
-    return $this->renderComponent('categories', 'list');
+    return $this->renderText($category->getCodName());
   }
 
   /**
@@ -131,11 +155,13 @@ class categoriesActions extends sfActions
       $categories = array_reverse(CategoryPeer::retrieveByPKs(json_decode($this->getRequestParameter('ids'))));
 
       foreach($categories as $category){
+	if(0 != count($category->getChildren())) $this->forward404();
 	$category->delete();
       }
 
     }elseif($this->hasRequestParameter('id')){
       $category = CategoryPeer::retrieveByPk($this->getRequestParameter('id'));
+      if(0 != count($category->getChildren())) $this->forward404();
       $category->delete();
     }
 

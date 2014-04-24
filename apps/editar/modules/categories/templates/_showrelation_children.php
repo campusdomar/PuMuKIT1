@@ -9,5 +9,5 @@
     <?php include_partial('showrelation_children', array('mainc'=> $mainc, 
                                                          'nodes' => $node[CategoryPeer::TREE_ARRAY_CHILDREN],
                                                          'relations' => $relations)) ?>
-  <?php endif?>
-<?php endforeach?>
+  <?php endif ?>
+<?php endforeach ?>

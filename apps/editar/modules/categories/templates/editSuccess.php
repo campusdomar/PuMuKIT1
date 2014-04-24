@@ -2,12 +2,22 @@
 
 <div id="tv_admin_container">
 
-<?php echo form_remote_tag(array( 
-  'update' => 'list_categories', 
-  'url' => 'categories/update',
-  'script' => 'true',
-)) ?>
 
+<?php if($action == "edit"):?>
+  <form onsubmit="new Ajax.Request('<?php echo url_for('categories/update')?>', 
+             {asynchronous:true, evalScripts:true, parameters:Form.serialize(this), onFailure: function() {cat_error('Editar')}, onSuccess: function(response) {$('info_cat_<?php echo $category->getId()?>').innerHTML = response.transport.response} }); return false;" 
+        action="<?php echo url_for('categories/update')?>" method="post">
+<?php elseif($action == "create_root"):?>
+  <form onsubmit="new Ajax.Request('<?php echo url_for('categories/update')?>', 
+             {asynchronous:true, evalScripts:true, parameters:Form.serialize(this), onFailure: function() {cat_error('Crear')}, onSuccess: function(response) { new Ajax.Updater('list_categories', '<?php echo url_for('categories/list')?>', {asynchronous:true, evalScripts:true}); } }); return false;" 
+        action="<?php echo url_for('categories/update')?>" method="post"> 
+<?php else:?>
+  <form onsubmit="new Ajax.Request('<?php echo url_for('categories/update')?>', 
+             {asynchronous:true, evalScripts:true, parameters:Form.serialize(this), onFailure: function() {cat_error('Crear')}, onSuccess: function(response) { load_children_cat(<?php echo $parent_id ?>);} }); return false;" 
+        action="<?php echo url_for('categories/update')?>" method="post"> 
+<?php endif ?>
+
+    
 <?php echo object_input_hidden_tag($category, 'getId') ?>
 <?php echo object_input_hidden_tag($category, 'isRoot') ?>
 <input type="hidden" name="parent_id" id="parent_id" value="<?php echo $parent_id ?>">
@@ -41,6 +51,7 @@
     </div>
 </div>
 
+<!--
 <div class="form-row">
   <?php echo label_for('required', 'Required:', 'class="required" ') ?>
   <div class="content">
@@ -48,10 +59,11 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+-->
 
 
 <div class="form-row">
-  <?php echo label_for('cod', 'Codigo:', 'class="required" ') ?>
+  <?php echo label_for('cod', 'C&oacute;digo:', 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($category, 'getCod', array ('size' => 20,  'control_name' => 'cod',
 )); echo $value ? $value : '&nbsp;' ?>

@@ -26,8 +26,7 @@ class categoriesComponents extends sfComponents
 
   public function executeList()
   {
-    $aux = CategoryPeer::buildTreeArray();
-    $this->categories = $aux[0][CategoryPeer::TREE_ARRAY_CHILDREN];
+    $this->categories = CategoryPeer::doSelectParents();
   }
 
 

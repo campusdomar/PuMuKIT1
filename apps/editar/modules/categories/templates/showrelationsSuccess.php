@@ -12,7 +12,7 @@
     No existen categorias en la BBDD.     
   </div>
 <?php endif ?>
-<?php foreach($categories as $node): $c = $node[CategoryPeer::TREE_ARRAY_NODE]; $has_children = count($node[CategoryPeer::TREE_ARRAY_CHILDREN]);?>
+<?php foreach($categories as $node): $c = $node[CategoryPeer::TREE_ARRAY_NODE]; $has_children = count($node[CategoryPeer::TREE_ARRAY_CHILDREN]); ?>
 <div class="form-row" style="overflow: hidden; padding:0px">
   <div style="width:100%; float:left; padding: 5px; padding-left: <?php echo ($node[CategoryPeer::TREE_ARRAY_LEVEL] * 20) ?>px">
    <?php include_partial('showrelation_select', array('mainc'=> $category, 'c' => $c, 'relations' => $relations)) ?>
@@ -23,8 +23,8 @@
    <?php include_partial('showrelation_children', array('mainc'=> $category, 
                                                         'nodes' => $node[CategoryPeer::TREE_ARRAY_CHILDREN], 
                                                         'relations' => $relations)) ?>
-  <?php endif?>
-<?php endforeach?>
+  <?php endif ?>
+<?php endforeach ?>
 </div>
 </fieldset>
 
