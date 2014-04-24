@@ -189,7 +189,7 @@ class mmtemplatesActions extends sfActions
     $c->addAscendingOrderByColumn(GroundTypePeer::RANK);
     $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, 'es'); 
 
-    $this->mm = MmPeer::retrieveByPk($mm_id); 
+    $this->mm = MmTemplate				      Peer::retrieveByPk($mm_id); 
     $this->grounds = GroundPeer::doSelectWithI18n(new Criteria(), 'es');
     $this->grounds_sel = $this->mm->getGrounds();
 
