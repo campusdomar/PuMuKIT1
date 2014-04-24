@@ -166,7 +166,7 @@ compruebaIntervaloEditorial = function(id){
   var value  = false;
   var error  = '';
   if ($('timestart'+id).value === '' || $('timeend'+id).value === ''){
-    error = <?php echo __('Fechas incompletas')?>;
+    error = '<?php echo __('Fechas incompletas')?>';
   } else if (dstart > dend){
     error = 'Error: Inicio > Final';
   } else if (dend < today){
@@ -182,19 +182,19 @@ compruebaIntervaloEditorial = function(id){
 
 mensajeIntervalo = function(array_value_error, id){
   value = parseInt(array_value_error[0],10);
-  var span_id =<?php echo __('intervalo')?> + id;
+  var span_id = 'intervalo' + id;
   $(span_id).innerHTML = "";
   if (isNaN(value)){
     mensaje = array_value_error[1];    
     $(span_id).style.color = "red";
   } else if (value == -1){
-    mensaje = <?php echo __('Evento pasado')?>;
+    mensaje = '<?php echo __('Evento pasado')?>';
     $(span_id).style.color = "grey";
   } else if (value == +1){
-    mensaje = <?php echo __('Evento futuro')?>;
+    mensaje = '<?php echo __('Evento futuro')?>';
     $(span_id).style.color = "grey";
   } else if (value == 0){
-    mensaje = <?php echo __('Evento activo')?>;
+    mensaje = '<?php echo __('Evento activo')?>';
     $(span_id).style.color = "green";
   } else {
     mensaje = '';
