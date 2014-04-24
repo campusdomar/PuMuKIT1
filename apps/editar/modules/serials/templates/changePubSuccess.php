@@ -51,9 +51,9 @@ if(this.value.length != 0){
 }
                   " id="all_status_change_pub">
                 <option selected="selected" ></option>
-                <option value="0" ><?php echo __('Publicado') ?></option>
-                <option value="1" ><?php echo __('Bloqueado') ?></option2D2D>
-                <option value="2" ><?php echo __('Oculto') ?></option>
+                <option value="<?php echo MmPeer::STATUS_NORMAL ?>" ><?php echo __('Publicado') ?></option>
+                <option value="<?php echo MmPeer::STATUS_BLOQ ?>" ><?php echo __('Bloqueado') ?></option>
+                <option value="<?php echo MmPeer::STATUS_HIDE ?>" ><?php echo __('Oculto') ?></option>
               </select>
             </td>
             <?php endif ?>
@@ -80,9 +80,9 @@ if(this.value.length != 0){
             <?php if($sf_user->getAttribute('user_type_id', 1) == 0) :?>
             <td style="background: transparent">
               <select name="data[<?php echo $mm->getId()?>][status]" id="filters_anounce_<?php echo $mm->getId()?>" onchange="" class="status_change_pub">
-                <option <?php echo (($mm->getStatusId() == 0)?'selected="selected"':''); ?>value="0" >Publicado</option>
-                <option <?php echo (($mm->getStatusId() == 1)?'selected="selected"':''); ?>value="1" >Bloqueado</option>
-                <option <?php echo (($mm->getStatusId() == 2)?'selected="selected"':''); ?>value="2" >Oculto</option>
+                <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_NORMAL)?'selected="selected"':''); ?>value="<?php echo MmPeer::STATUS_NORMAL ?>" >Publicado</option>
+                <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_BLOQ)?'selected="selected"':''); ?>value="<?php echo MmPeer::STATUS_BLOQ ?>" >Bloqueado</option>
+                <option <?php echo (($mm->getStatusId() == MmPeer::STATUS_HIDE)?'selected="selected"':''); ?>value="<?php echo MmPeer::STATUS_HIDE ?>" >Oculto</option>
               </select>
             </td>
             <?php endif ?>

@@ -87,7 +87,7 @@
   
   <!-- MATERIAL -->
           <?php $materials = $mm->getMaterials() ?> 
-    	  <?php foreach ($materials as $material): if(!$material->getDisplay()) continue;$material->setCulture( $sf_user->getCulture() ) ?>  
+    	  <?php foreach ($materials as $material): if(!$material->getDisplay()) continue; $material->setCulture( $sf_user->getCulture() ) ?>  
             <div id="material" class="<?php echo $material->getMatType()->getType() ?>">
               <a href="<?php echo $material->getUrl() ?>"><?php echo $material->getName() ?></a>
             </div>
