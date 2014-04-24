@@ -2,871 +2,871 @@
 <xliff version="1.0">
   <file orginal="global" source-language="es" datatype="plaintext" date="2014-03-31T12:02:20Z">
     <body>
-    
-<trans-unit id="1">
-<source>Pulse OK para que el cambio tenga efecto</source>
-<target>Click OK for save changes</target>
-</trans-unit>
-
-<trans-unit id="2">
-<source>Filtar</source>
-<target>Filter</target>
-</trans-unit>
-
-<trans-unit id="3">
-<source>&lt;strong&gt;URLs para imagenes:&lt;/strong&gt;</source>
-<target>&lt;strong&gt;Image URLs&lt;/strong&gt;</target>
-</trans-unit>
-
-<trans-unit id="4">
-<source>Crear una categoria:</source>
-<target>Create new category</target>
-</trans-unit>
-
-<trans-unit id="5">
-<source>Create</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="6">
-<source>Por favor, inserte el nombre de la categoria antes</source>
-<target>Please, insert category name first</target>
-</trans-unit>
-
-<trans-unit id="7">
-<source>Basado en:</source>
-<target>Based in:</target>
-</trans-unit>
-
-<trans-unit id="8">
-<source>Sin Selecionar</source>
-<target>Unselected</target>
-</trans-unit>
-
-<trans-unit id="9">
-<source>Id</source>
-<target>Id</target>
-</trans-unit>
-
-<trans-unit id="10">
-<source>Busca</source>
-<target>Search</target>
-</trans-unit>
-
-<trans-unit id="11">
-<source>Pulse OK para que el cambio de publicacion tenga efecto</source>
-<target>Click OK to save publication changes</target>
-</trans-unit>
-
-<trans-unit id="12">
-<source>Mediateca</source>
-<target>Media library</target>
-</trans-unit>
-
-<trans-unit id="13">
-<source>T&#xED;tulo</source>
-<target>Tittle</target>
-</trans-unit>
-
-<trans-unit id="14">
-<source>Crear un template:</source>
-<target>Create template:</target>
-</trans-unit>
-
-<trans-unit id="15">
-<source>Please enter a template name first</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="16">
-<source>Crear un tipo de area:</source>
-<target>Create area type:</target>
-</trans-unit>
-
-<trans-unit id="17">
-<source>Por favor, inserte el nombre del tipo antes</source>
-<target>Please, insert type name first</target>
-</trans-unit>
-
-<trans-unit id="18">
-<source>"Duracion 0\n</source>
-<target>"Duration 0\n</target>
-</trans-unit>
-
-<trans-unit id="19">
-<source>Debug en actions.clas.php: El total de par&#xE1;metros retornados por la query al controlador es:\n&lt;br/&gt;</source>
-<target>Debug in actions.class.php: Total parameters returned from query to controller is: \n&lt;br/&gt;</target>
-</trans-unit>
-
-<trans-unit id="20">
-<source>Su b&#xFA;squeda produjo el error: %s\n</source>
-<target>Your search showed this error:</target>
-</trans-unit>
-
-<trans-unit id="21">
-<source>Serie</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="22">
-<source>Media library (%1%)</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="23">
-<source>Add a file:</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="24">
-<source>Add</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="25">
-<source>Please choose a file first</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="26">
-<source>Create a dir:</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="27">
-<source>Please enter a directory name first</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="28">
-<source>Rename</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="29">
-<source>Cancel</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="30">
-<source>Delete</source>
-<target/>
-</trans-unit>
-
-<trans-unit id="31">
-<source>Are you sure to want to delete this </source>
-<target/>
-</trans-unit>
-
-<trans-unit id="32">
-<source>Catalogador Unesco</source>
-<target>Unesco cataloger</target>
-</trans-unit>
-
-<trans-unit id="33">
-<source>Dise&amp;ntilde;o Portal WebTV</source>
-<target>WebTV portal design</target>
-</trans-unit>
-
-<trans-unit id="34">
-<source>Dise&#xF1;o</source>
-<target>Design</target>
-</trans-unit>
-
-<trans-unit id="35">
-<source>Plantillas</source>
-<target>Templates</target>
-</trans-unit>
-
-<trans-unit id="36">
-<source>Categorias</source>
-<target>Categories</target>
-</trans-unit>
-
-<trans-unit id="37">
-<source>Noticias</source>
-<target>News</target>
-</trans-unit>
-
-<trans-unit id="38">
-<source>Directos</source>
-<target>Live</target>
-</trans-unit>
-
-<trans-unit id="39">
-<source>Canales en Directo</source>
-<target>Live channels</target>
-</trans-unit>
-
-<trans-unit id="40">
-<source>Anuncios de Directos</source>
-<target>Live events</target>
-</trans-unit>
-
-<trans-unit id="41">
-<source>Perfil de Transcodificaci&#xF3;n</source>
-<target>Transcoder profile</target>
-</trans-unit>
-
-<trans-unit id="42">
-<source>Editoriales Temporizadas</source>
-<target>Timed publishing</target>
-</trans-unit>
-
-<trans-unit id="43">
-<source>Tablas</source>
-<target>Tables</target>
-</trans-unit>
-
-<trans-unit id="44">
-<source>Personas</source>
-<target>People</target>
-</trans-unit>
-
-<trans-unit id="45">
-<source>Administraci&amp;oacute;n</source>
-<target>Administration</target>
-</trans-unit>
-
-<trans-unit id="46">
-<source>Usuarios admin</source>
-<target>Admin users</target>
-</trans-unit>
-
-<trans-unit id="47">
-<source>Lugares y recintos</source>
-<target>Places and precincts</target>
-</trans-unit>
-
-<trans-unit id="48">
-<source>G&amp;eacute;neros</source>
-<target>Genres</target>
-</trans-unit>
-
-<trans-unit id="49">
-<source>Tipos de materiales</source>
-<target>Material types</target>
-</trans-unit>
-
-<trans-unit id="50">
-<source>Tipos de series</source>
-<target>Series types</target>
-</trans-unit>
-
-<trans-unit id="51">
-<source>Idiomas</source>
-<target>Languages</target>
-</trans-unit>
-
-<trans-unit id="52">
-<source>Perfiles</source>
-<target>Profiles</target>
-</trans-unit>
-
-<trans-unit id="53">
-<source>Perfiles Acceso</source>
-<target>Access profile</target>
-</trans-unit>
-
-<trans-unit id="54">
-<source>Ingestador</source>
-<target>Ingester</target>
-</trans-unit>
-
-<trans-unit id="55">
-<source>Ingestador Matterhorn</source>
-<target>Matterhorn ingester</target>
-</trans-unit>
-
-<trans-unit id="56">
-<source>Descripci&#xF3;n:</source>
-<target>Description:</target>
-</trans-unit>
-
-<trans-unit id="57">
-<source> Estado conexi&#xF3;n:</source>
-<target>Connection status:</target>
-</trans-unit>
-
-<trans-unit id="58">
-<source>Selecione o cree alguna CPU.</source>
-<target>Select or create CPU.</target>
-</trans-unit>
-
-<trans-unit id="59">
-<source>Editar timeframe</source>
-<target>Edit timeframe</target>
-</trans-unit>
-
-<trans-unit id="60">
-<source>T&amp;iacute;tulo</source>
-<target>Title</target>
-</trans-unit>
-
-<trans-unit id="61">
-<source>titulo</source>
-<target>tittle</target>
-</trans-unit>
-
-<trans-unit id="62">
-<source>Servidor:</source>
-<target>Server:</target>
-</trans-unit>
-
-<trans-unit id="63">
-<source>Reproducible:</source>
-<target>Playable:</target>
-</trans-unit>
-
-<trans-unit id="64">
-<source>Por defecto:</source>
-<target>By default:</target>
-</trans-unit>
-
-<trans-unit id="65">
-<source>Formato:</source>
-<target>Format:</target>
-</trans-unit>
-
-<trans-unit id="66">
-<source>Extensi&#xF3;n:</source>
-<target>Extension:</target>
-</trans-unit>
-
-<trans-unit id="67">
-<source>Resoluci&#xF3;n:</source>
-<target>Resolution:</target>
-</trans-unit>
-
-<trans-unit id="68">
-<source>Solo audio:</source>
-<target>Audio only:</target>
-</trans-unit>
-
-<trans-unit id="69">
-<source>Tiene script:</source>
-<target>Has script:</target>
-</trans-unit>
-
-<trans-unit id="70">
-<source>Fichero configuraci&#xF3;n:</source>
-<target>Configuration file:</target>
-</trans-unit>
-
-<trans-unit id="71">
-<source>Aplicaci&#xF3;n:</source>
-<target>Application:</target>
-</trans-unit>
-
-<trans-unit id="72">
-<source>Selecione o cree algun perfil.</source>
-<target>Select or create profile.</target>
-</trans-unit>
-
-<trans-unit id="73">
-<source>Subt&#xED;tulo:</source>
-<target>Subtittle:</target>
-</trans-unit>
-
-<trans-unit id="74">
-<source>Introduce una palabra clave...</source>
-<target>Enter keyword...</target>
-</trans-unit>
-
-<trans-unit id="75">
-<source>Fecha de publicaci&#xF3;n</source>
-<target>Publish date</target>
-</trans-unit>
-
-<trans-unit id="76">
-<source>Introduce fecha inicial de b&#xFA;squeda...</source>
-<target>Insert starting date to search...</target>
-</trans-unit>
-
-<trans-unit id="77">
-<source>Introduce fecha final de b&#xFA;squeda...</source>
-<target>Insert ending date to search...</target>
-</trans-unit>
-
-<trans-unit id="78">
-<source>No permitida descarga</source>
-<target>Download not allowed</target>
-</trans-unit>
-
-<trans-unit id="79">
-<source>Series Multimedia</source>
-<target>Multimedia series</target>
-</trans-unit>
-
-<trans-unit id="80">
-<source>Transcodificacion</source>
-<target>Transcoding</target>
-</trans-unit>
-
-<trans-unit id="81">
-<source>Lista de tareas</source>
-<target>Task list</target>
-</trans-unit>
-
-<trans-unit id="82">
-<source>Trascodificadores</source>
-<target>Transcoders</target>
-</trans-unit>
-
-<trans-unit id="83">
-<source>Servidores de Distribuci&#xF3;n</source>
-<target>Distribution servers</target>
-</trans-unit>
-
-<trans-unit id="84">
-<source> Canales en directo</source>
-<target>Live channels</target>
-</trans-unit>
-
-<trans-unit id="85">
-<source>Seleciona una acci&amp;oacute;n...</source>
-<target>Select action</target>
-</trans-unit>
-
-<trans-unit id="86">
-<source>Borrar selecionados</source>
-<target>Delete selected</target>
-</trans-unit>
-
-<trans-unit id="87">
-<source>Crear nuevo</source>
-<target>Create new</target>
-</trans-unit>
-
-<trans-unit id="88">
-<source>Novedad:</source>
-<target>New:</target>
-</trans-unit>
-
-<trans-unit id="89">
-<source>Subt&amp;iacute;tulo:</source>
-<target>Subtittle:</target>
-</trans-unit>
-
-<trans-unit id="90">
-<source>Canal:</source>
-<target>Channel:</target>
-</trans-unit>
-
-<trans-unit id="91">
-<source>Fecha de publicaci&amp;oacute;n:</source>
-<target>Publish date:</target>
-</trans-unit>
-
-<trans-unit id="92">
-<source>Formato fecha no v&amp;aacute;lido</source>
-<target>Invalid date format</target>
-</trans-unit>
-
-<trans-unit id="93">
-<source>Descripci&amp;oacute;n:</source>
-<target>Description</target>
-</trans-unit>
-
-<trans-unit id="94">
-<source>Im&amp;aacute;genes:</source>
-<target>Pictures</target>
-</trans-unit>
-
-<trans-unit id="95">
-<source>Mostrar Textos &lt;strong&gt;HTML&lt;/strong&gt; de configuracion.</source>
-<target>Show HTML config texts</target>
-</trans-unit>
-
-<trans-unit id="96">
-<source>Texto de Cabecera: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
-<target>Header text:</target>
-</trans-unit>
-
-<trans-unit id="97">
-<source>Texto de Pie: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
-<target>Footer text:</target>
-</trans-unit>
-
-<trans-unit id="98">
-<source>Titular:</source>
-<target>Headline:</target>
-</trans-unit>
-
-<trans-unit id="99">
-<source>Estructura:</source>
-<target>Structure:</target>
-</trans-unit>
-
-<trans-unit id="100">
-<source>Guardado ERROR</source>
-<target>Saved ERROR</target>
-</trans-unit>
-
-<trans-unit id="101">
-<source>Guardado OK</source>
-<target>Saved OK</target>
-</trans-unit>
-
-<trans-unit id="102">
-<source>Publicado</source>
-<target>Published</target>
-</trans-unit>
-
-<trans-unit id="103">
-<source>Bloqueado</source>
-<target>Blocked</target>
-</trans-unit>
-
-<trans-unit id="104">
-<source>Oculto</source>
-<target>Hidden</target>
-</trans-unit>
-
-<trans-unit id="105">
-<source>Fechas incompletas</source>
-<target>Incomplete dates</target>
-</trans-unit>
-
-<trans-unit id="106">
-<source>intervalo</source>
-<target>interval</target>
-</trans-unit>
-
-<trans-unit id="107">
-<source>Evento pasado</source>
-<target>Past event</target>
-</trans-unit>
-
-<trans-unit id="108">
-<source>Evento futuro</source>
-<target>Future event</target>
-</trans-unit>
-
-<trans-unit id="109">
-<source>Evento activo</source>
-<target>Active event</target>
-</trans-unit>
-
-<trans-unit id="110">
-<source>Decisiones Editoriales:</source>
-<target>Editorial decisions:</target>
-</trans-unit>
-
-<trans-unit id="111">
-<source>Formato de fecha no v&amp;aacute;lido</source>
-<target>Invalid date format</target>
-</trans-unit>
-
-<trans-unit id="112">
-<source> Permanente</source>
-<target> Permanent</target>
-</trans-unit>
-
-<trans-unit id="113">
-<source>Temporizado</source>
-<target>Timed</target>
-</trans-unit>
-
-<trans-unit id="114">
-<source>Publicar en itunes U.</source>
-<target>Publish on itunes U.</target>
-</trans-unit>
-
-<trans-unit id="115">
-<source>Quitar de itunes U.</source>
-<target>Remove from itunes U.</target>
-</trans-unit>
-
-<trans-unit id="116">
-<source>Buscar</source>
-<target>Search</target>
-</trans-unit>
-
-<trans-unit id="117">
-<source>Titulo:</source>
-<target>Tittle:</target>
-</trans-unit>
-
-<trans-unit id="118">
-<source>Persona:</source>
-<target>Person:</target>
-</trans-unit>
-
-<trans-unit id="119">
-<source>Fechas</source>
-<target>Dates</target>
-</trans-unit>
-
-<trans-unit id="120">
-<source>Desde:</source>
-<target>From:</target>
-</trans-unit>
-
-<trans-unit id="121">
-<source>Otros</source>
-<target>Others</target>
-</trans-unit>
-
-<trans-unit id="122">
-<source>Anunciado:</source>
-<target>Announced:</target>
-</trans-unit>
-
-<trans-unit id="123">
-<source>Oculto:</source>
-<target>Hidden:</target>
-</trans-unit>
-
-<trans-unit id="124">
-<source>Hasta:</source>
-<target>To:</target>
-</trans-unit>
-
-<trans-unit id="125">
-<source>Indiferente</source>
-<target>Indiferent</target>
-</trans-unit>
-
-<trans-unit id="126">
-<source>S&#xED;</source>
-<target>Yes</target>
-</trans-unit>
-
-<trans-unit id="127">
-<source>No</source>
-<target>No</target>
-</trans-unit>
-
-<trans-unit id="128">
-<source>Todos</source>
-<target>All</target>
-</trans-unit>
-
-<trans-unit id="129">
-<source>Si</source>
-<target>Yes</target>
-</trans-unit>
-
-<trans-unit id="130">
-<source>Anterior</source>
-<target>Previous</target>
-</trans-unit>
-
-<trans-unit id="131">
-<source>Pag.</source>
-<target>Page</target>
-</trans-unit>
-
-<trans-unit id="132">
-<source>de</source>
-<target>of</target>
-</trans-unit>
-
-<trans-unit id="133">
-<source>Siguiente</source>
-<target>Next</target>
-</trans-unit>
-
-<trans-unit id="134">
-<source>Wizard</source>
-<target>Wizard</target>
-</trans-unit>
-
-<trans-unit id="135">
-<source>Crear</source>
-<target>Create</target>
-</trans-unit>
-
-<trans-unit id="136">
-<source>Crear nueva serie</source>
-<target>Create new serie</target>
-</trans-unit>
-
-<trans-unit id="137">
-<source>Acciones sobre elementos selecionados</source>
-<target>Actions on selected elements</target>
-</trans-unit>
-
-<trans-unit id="138">
-<source>Anunciar/Desanunciar selecionados</source>
-<target>Announce/Unannounced selected</target>
-</trans-unit>
-
-<trans-unit id="139">
-<source>Ocultar/Desocultar selecionados</source>
-<target>Hide/unhide selected</target>
-</trans-unit>
-
-<trans-unit id="140">
-<source>Siguiente&amp;raquo;</source>
-<target>Next</target>
-</trans-unit>
-
-<trans-unit id="141">
-<source>Titulo</source>
-<target>Tittle</target>
-</trans-unit>
-
-<trans-unit id="142">
-<source>Fecha</source>
-<target>Date</target>
-</trans-unit>
-
-<trans-unit id="143">
-<source>Duraci&#xF3;n</source>
-<target>Duration</target>
-</trans-unit>
-
-<trans-unit id="144">
-<source>Espa&amp;ntildeol</source>
-<target>Spanish</target>
-</trans-unit>
-
-<trans-unit id="145">
-<source>Ingl&amp;eacutes</source>
-<target>English</target>
-</trans-unit>
-
-<trans-unit id="146">
-<source>Uacute;LTIMAS SERIES CREADAS</source>
-<target>LAST CREATED SERIES</target>
-</trans-unit>
-
-<trans-unit id="147">
-<source>BUSCADOR DE SERIES</source>
-<target>SEARCH SERIE</target>
-</trans-unit>
-
-<trans-unit id="148">
-<source>buscar en todo el contenido</source>
-<target>Search all content</target>
-</trans-unit>
-
-<trans-unit id="149">
-<source>"BUSCAR</source>
-<target>SEARCH</target>
-</trans-unit>
-
-<trans-unit id="150">
-<source>BUSCAR</source>
-<target>SEARCH</target>
-</trans-unit>
-
-<trans-unit id="151">
-<source>INFO LOS TRANSCODIFICADORES</source>
-<target>TRANSCODER INFO</target>
-</trans-unit>
-
-<trans-unit id="152">
-<source>Pausados:</source>
-<target>Paused:</target>
-</trans-unit>
-
-<trans-unit id="153">
-<source>Esperando:</source>
-<target>Waiting:</target>
-</trans-unit>
-
-<trans-unit id="154">
-<source>Ejecutandose:</source>
-<target>Executing:</target>
-</trans-unit>
-
-<trans-unit id="155">
-<source>Correctos:</source>
-<target>Ok:</target>
-</trans-unit>
-
-<trans-unit id="156">
-<source>Error:</source>
-<target>Error:</target>
-</trans-unit>
-
-<trans-unit id="157">
-<source>UacuteLTIMAS SERIES PUBLICADAS</source>
-<target>LAST PUBLISHED SERIES</target>
-</trans-unit>
-
-<trans-unit id="158">
-<source>USO DE DISCO</source>
-<target>DISK USAGE</target>
-</trans-unit>
-
-<trans-unit id="159">
-<source>Introduce un subt&#xED;tulo...</source>
-<target>Insert subtittle...</target>
-</trans-unit>
-
-<trans-unit id="160">
-<source>Permitida Descarga</source>
-<target>Download allowed</target>
-</trans-unit>
-
-<trans-unit id="161">
-<source> L&#xED;nea de tiempo - Decisiones editoriales temporizables</source>
-<target/>Timeline - Temporal decisions</target>
-</trans-unit>
-
-<trans-unit id="162">
-<source>Destacados TV</source>
-<target>TV featured</target>
-</trans-unit>
-
-<trans-unit id="163">
-<source>Destacados Radio</source>
-<target>Radio featured</target>
-</trans-unit>
-
-<trans-unit id="164">
-<source>Incluir</source>
-<target>Include</target>
-</trans-unit>
-
-<trans-unit id="165">
-<source>decisiones editoriales fijas</source>
-<target>Fixed editorial decissions</target>
-</trans-unit>
-
-<trans-unit id="166">
-<source>Incluir piezas no publicadas o en proceso</source>
-<target>Include no published or in process items</target>
-</trans-unit>
-
-<trans-unit id="167">
-<source>Centrar hoy</source>
-<target>Center today</target>
-</trans-unit>
-
-<trans-unit id="168">
-<source>Esta p&#xE1;gina usa Javascript para mostrar una l&#xED;nea de tiempo. Active Javascript en su navegador para visualizar correctamente la p&#xE1;gina.</source>
-<target>This webpage uses Javascript to show a timeline. Active Javascript in your browser to show it correctly.</target>
-</trans-unit>
-
-<trans-unit id="169">
-<source>&amp;Uacute;LTIMAS SERIES CREADAS</source>
-<target>LAST CREATED SERIES</target>
-</trans-unit>
-
-<trans-unit id="170">
-<source>&amp;Uacute;LTIMAS SERIES PUBLICADAS</source>
-<target>LAST PUBLISHED SERIES</target>
-</trans-unit>
-
-<trans-unit id="171">
-<source>Seleccionar</source>
-<target>Select</target>
-</trans-unit>
-
-<trans-unit id="172">
-<source>Selecione alguna serie.</source>
-<target>Select any serie.</target>
-</trans-unit>
-
-<trans-unit id="173">
-<source>Seleccione tipo:</source>
-<target>Select type:</target>
-</trans-unit>
-</body>
+      
+      <trans-unit id="1">
+	<source>Pulse OK para que el cambio tenga efecto</source>
+	<target>Click OK for save changes</target>
+      </trans-unit>
+
+      <trans-unit id="2">
+	<source>Filtar</source>
+	<target>Filter</target>
+      </trans-unit>
+
+      <trans-unit id="3">
+	<source>&lt;strong&gt;URLs para imagenes:&lt;/strong&gt;</source>
+	<target>&lt;strong&gt;Image URLs&lt;/strong&gt;</target>
+      </trans-unit>
+
+      <trans-unit id="4">
+	<source>Crear una categoria:</source>
+	<target>Create new category</target>
+      </trans-unit>
+
+      <trans-unit id="5">
+	<source>Create</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="6">
+	<source>Por favor, inserte el nombre de la categoria antes</source>
+	<target>Please, insert category name first</target>
+      </trans-unit>
+
+      <trans-unit id="7">
+	<source>Basado en:</source>
+	<target>Based in:</target>
+      </trans-unit>
+
+      <trans-unit id="8">
+	<source>Sin Selecionar</source>
+	<target>Unselected</target>
+      </trans-unit>
+
+      <trans-unit id="9">
+	<source>Id</source>
+	<target>Id</target>
+      </trans-unit>
+
+      <trans-unit id="10">
+	<source>Busca</source>
+	<target>Search</target>
+      </trans-unit>
+
+      <trans-unit id="11">
+	<source>Pulse OK para que el cambio de publicacion tenga efecto</source>
+	<target>Click OK to save publication changes</target>
+      </trans-unit>
+
+      <trans-unit id="12">
+	<source>Mediateca</source>
+	<target>Media library</target>
+      </trans-unit>
+
+      <trans-unit id="13">
+	<source>T&#xED;tulo</source>
+	<target>Tittle</target>
+      </trans-unit>
+
+      <trans-unit id="14">
+	<source>Crear un template:</source>
+	<target>Create template:</target>
+      </trans-unit>
+
+      <trans-unit id="15">
+	<source>Please enter a template name first</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="16">
+	<source>Crear un tipo de area:</source>
+	<target>Create area type:</target>
+      </trans-unit>
+
+      <trans-unit id="17">
+	<source>Por favor, inserte el nombre del tipo antes</source>
+	<target>Please, insert type name first</target>
+      </trans-unit>
+
+      <trans-unit id="18">
+	<source>"Duracion 0\n</source>
+	<target>"Duration 0\n</target>
+      </trans-unit>
+
+      <trans-unit id="19">
+	<source>Debug en actions.clas.php: El total de par&#xE1;metros retornados por la query al controlador es:\n&lt;br/&gt;</source>
+	<target>Debug in actions.class.php: Total parameters returned from query to controller is: \n&lt;br/&gt;</target>
+      </trans-unit>
+
+      <trans-unit id="20">
+	<source>Su b&#xFA;squeda produjo el error: %s\n</source>
+	<target>Your search showed this error:</target>
+      </trans-unit>
+
+      <trans-unit id="21">
+	<source>Serie</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="22">
+	<source>Media library (%1%)</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="23">
+	<source>Add a file:</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="24">
+	<source>Add</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="25">
+	<source>Please choose a file first</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="26">
+	<source>Create a dir:</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="27">
+	<source>Please enter a directory name first</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="28">
+	<source>Rename</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="29">
+	<source>Cancel</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="30">
+	<source>Delete</source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="31">
+	<source>Are you sure to want to delete this </source>
+	<target/>
+      </trans-unit>
+
+      <trans-unit id="32">
+	<source>Catalogador Unesco</source>
+	<target>Unesco cataloger</target>
+      </trans-unit>
+
+      <trans-unit id="33">
+	<source>Dise&amp;ntilde;o Portal WebTV</source>
+	<target>WebTV portal design</target>
+      </trans-unit>
+
+      <trans-unit id="34">
+	<source>Dise&#xF1;o</source>
+	<target>Design</target>
+      </trans-unit>
+
+      <trans-unit id="35">
+	<source>Plantillas</source>
+	<target>Templates</target>
+      </trans-unit>
+
+      <trans-unit id="36">
+	<source>Categorias</source>
+	<target>Categories</target>
+      </trans-unit>
+
+      <trans-unit id="37">
+	<source>Noticias</source>
+	<target>News</target>
+      </trans-unit>
+
+      <trans-unit id="38">
+	<source>Directos</source>
+	<target>Live</target>
+      </trans-unit>
+
+      <trans-unit id="39">
+	<source>Canales en Directo</source>
+	<target>Live channels</target>
+      </trans-unit>
+
+      <trans-unit id="40">
+	<source>Anuncios de Directos</source>
+	<target>Live events</target>
+      </trans-unit>
+
+      <trans-unit id="41">
+	<source>Perfil de Transcodificaci&#xF3;n</source>
+	<target>Transcoder profile</target>
+      </trans-unit>
+
+      <trans-unit id="42">
+	<source>Editoriales Temporizadas</source>
+	<target>Timed publishing</target>
+      </trans-unit>
+
+      <trans-unit id="43">
+	<source>Tablas</source>
+	<target>Tables</target>
+      </trans-unit>
+
+      <trans-unit id="44">
+	<source>Personas</source>
+	<target>People</target>
+      </trans-unit>
+
+      <trans-unit id="45">
+	<source>Administraci&amp;oacute;n</source>
+	<target>Administration</target>
+      </trans-unit>
+
+      <trans-unit id="46">
+	<source>Usuarios admin</source>
+	<target>Admin users</target>
+      </trans-unit>
+
+      <trans-unit id="47">
+	<source>Lugares y recintos</source>
+	<target>Places and precincts</target>
+      </trans-unit>
+
+      <trans-unit id="48">
+	<source>G&amp;eacute;neros</source>
+	<target>Genres</target>
+      </trans-unit>
+
+      <trans-unit id="49">
+	<source>Tipos de materiales</source>
+	<target>Material types</target>
+      </trans-unit>
+
+      <trans-unit id="50">
+	<source>Tipos de series</source>
+	<target>Series types</target>
+      </trans-unit>
+
+      <trans-unit id="51">
+	<source>Idiomas</source>
+	<target>Languages</target>
+      </trans-unit>
+
+      <trans-unit id="52">
+	<source>Perfiles</source>
+	<target>Profiles</target>
+      </trans-unit>
+
+      <trans-unit id="53">
+	<source>Perfiles Acceso</source>
+	<target>Access profile</target>
+      </trans-unit>
+
+      <trans-unit id="54">
+	<source>Ingestador</source>
+	<target>Ingester</target>
+      </trans-unit>
+
+      <trans-unit id="55">
+	<source>Ingestador Matterhorn</source>
+	<target>Matterhorn ingester</target>
+      </trans-unit>
+
+      <trans-unit id="56">
+	<source>Descripci&#xF3;n:</source>
+	<target>Description:</target>
+      </trans-unit>
+
+      <trans-unit id="57">
+	<source> Estado conexi&#xF3;n:</source>
+	<target>Connection status:</target>
+      </trans-unit>
+
+      <trans-unit id="58">
+	<source>Selecione o cree alguna CPU.</source>
+	<target>Select or create CPU.</target>
+      </trans-unit>
+
+      <trans-unit id="59">
+	<source>Editar timeframe</source>
+	<target>Edit timeframe</target>
+      </trans-unit>
+
+      <trans-unit id="60">
+	<source>T&amp;iacute;tulo</source>
+	<target>Title</target>
+      </trans-unit>
+
+      <trans-unit id="61">
+	<source>titulo</source>
+	<target>tittle</target>
+      </trans-unit>
+
+      <trans-unit id="62">
+	<source>Servidor:</source>
+	<target>Server:</target>
+      </trans-unit>
+
+      <trans-unit id="63">
+	<source>Reproducible:</source>
+	<target>Playable:</target>
+      </trans-unit>
+
+      <trans-unit id="64">
+	<source>Por defecto:</source>
+	<target>By default:</target>
+      </trans-unit>
+
+      <trans-unit id="65">
+	<source>Formato:</source>
+	<target>Format:</target>
+      </trans-unit>
+
+      <trans-unit id="66">
+	<source>Extensi&#xF3;n:</source>
+	<target>Extension:</target>
+      </trans-unit>
+
+      <trans-unit id="67">
+	<source>Resoluci&#xF3;n:</source>
+	<target>Resolution:</target>
+      </trans-unit>
+
+      <trans-unit id="68">
+	<source>Solo audio:</source>
+	<target>Audio only:</target>
+      </trans-unit>
+
+      <trans-unit id="69">
+	<source>Tiene script:</source>
+	<target>Has script:</target>
+      </trans-unit>
+
+      <trans-unit id="70">
+	<source>Fichero configuraci&#xF3;n:</source>
+	<target>Configuration file:</target>
+      </trans-unit>
+
+      <trans-unit id="71">
+	<source>Aplicaci&#xF3;n:</source>
+	<target>Application:</target>
+      </trans-unit>
+
+      <trans-unit id="72">
+	<source>Selecione o cree algun perfil.</source>
+	<target>Select or create profile.</target>
+      </trans-unit>
+
+      <trans-unit id="73">
+	<source>Subt&#xED;tulo:</source>
+	<target>Subtittle:</target>
+      </trans-unit>
+
+      <trans-unit id="74">
+	<source>Introduce una palabra clave...</source>
+	<target>Enter keyword...</target>
+      </trans-unit>
+
+      <trans-unit id="75">
+	<source>Fecha de publicaci&#xF3;n</source>
+	<target>Publish date</target>
+      </trans-unit>
+
+      <trans-unit id="76">
+	<source>Introduce fecha inicial de b&#xFA;squeda...</source>
+	<target>Insert starting date to search...</target>
+      </trans-unit>
+
+      <trans-unit id="77">
+	<source>Introduce fecha final de b&#xFA;squeda...</source>
+	<target>Insert ending date to search...</target>
+      </trans-unit>
+
+      <trans-unit id="78">
+	<source>No permitida descarga</source>
+	<target>Download not allowed</target>
+      </trans-unit>
+
+      <trans-unit id="79">
+	<source>Series Multimedia</source>
+	<target>Multimedia series</target>
+      </trans-unit>
+
+      <trans-unit id="80">
+	<source>Transcodificacion</source>
+	<target>Transcoding</target>
+      </trans-unit>
+
+      <trans-unit id="81">
+	<source>Lista de tareas</source>
+	<target>Task list</target>
+      </trans-unit>
+
+      <trans-unit id="82">
+	<source>Trascodificadores</source>
+	<target>Transcoders</target>
+      </trans-unit>
+
+      <trans-unit id="83">
+	<source>Servidores de Distribuci&#xF3;n</source>
+	<target>Distribution servers</target>
+      </trans-unit>
+
+      <trans-unit id="84">
+	<source> Canales en directo</source>
+	<target>Live channels</target>
+      </trans-unit>
+
+      <trans-unit id="85">
+	<source>Seleciona una acci&amp;oacute;n...</source>
+	<target>Select action</target>
+      </trans-unit>
+
+      <trans-unit id="86">
+	<source>Borrar selecionados</source>
+	<target>Delete selected</target>
+      </trans-unit>
+
+      <trans-unit id="87">
+	<source>Crear nuevo</source>
+	<target>Create new</target>
+      </trans-unit>
+
+      <trans-unit id="88">
+	<source>Novedad:</source>
+	<target>New:</target>
+      </trans-unit>
+
+      <trans-unit id="89">
+	<source>Subt&amp;iacute;tulo:</source>
+	<target>Subtittle:</target>
+      </trans-unit>
+
+      <trans-unit id="90">
+	<source>Canal:</source>
+	<target>Channel:</target>
+      </trans-unit>
+
+      <trans-unit id="91">
+	<source>Fecha de publicaci&amp;oacute;n:</source>
+	<target>Publish date:</target>
+      </trans-unit>
+
+      <trans-unit id="92">
+	<source>Formato fecha no v&amp;aacute;lido</source>
+	<target>Invalid date format</target>
+      </trans-unit>
+
+      <trans-unit id="93">
+	<source>Descripci&amp;oacute;n:</source>
+	<target>Description</target>
+      </trans-unit>
+
+      <trans-unit id="94">
+	<source>Im&amp;aacute;genes:</source>
+	<target>Pictures</target>
+      </trans-unit>
+
+      <trans-unit id="95">
+	<source>Mostrar Textos &lt;strong&gt;HTML&lt;/strong&gt; de configuracion.</source>
+	<target>Show HTML config texts</target>
+      </trans-unit>
+
+      <trans-unit id="96">
+	<source>Texto de Cabecera: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
+	<target>Header text:</target>
+      </trans-unit>
+
+      <trans-unit id="97">
+	<source>Texto de Pie: &lt;br/&gt;&lt;strong&gt;HTML&lt;/strong&gt;</source>
+	<target>Footer text:</target>
+      </trans-unit>
+
+      <trans-unit id="98">
+	<source>Titular:</source>
+	<target>Headline:</target>
+      </trans-unit>
+
+      <trans-unit id="99">
+	<source>Estructura:</source>
+	<target>Structure:</target>
+      </trans-unit>
+
+      <trans-unit id="100">
+	<source>Guardado ERROR</source>
+	<target>Saved ERROR</target>
+      </trans-unit>
+
+      <trans-unit id="101">
+	<source>Guardado OK</source>
+	<target>Saved OK</target>
+      </trans-unit>
+
+      <trans-unit id="102">
+	<source>Publicado</source>
+	<target>Published</target>
+      </trans-unit>
+
+      <trans-unit id="103">
+	<source>Bloqueado</source>
+	<target>Blocked</target>
+      </trans-unit>
+
+      <trans-unit id="104">
+	<source>Oculto</source>
+	<target>Hidden</target>
+      </trans-unit>
+
+      <trans-unit id="105">
+	<source>Fechas incompletas</source>
+	<target>Incomplete dates</target>
+      </trans-unit>
+
+      <trans-unit id="106">
+	<source>intervalo</source>
+	<target>interval</target>
+      </trans-unit>
+
+      <trans-unit id="107">
+	<source>Evento pasado</source>
+	<target>Past event</target>
+      </trans-unit>
+
+      <trans-unit id="108">
+	<source>Evento futuro</source>
+	<target>Future event</target>
+      </trans-unit>
+
+      <trans-unit id="109">
+	<source>Evento activo</source>
+	<target>Active event</target>
+      </trans-unit>
+
+      <trans-unit id="110">
+	<source>Decisiones Editoriales:</source>
+	<target>Editorial decisions:</target>
+      </trans-unit>
+
+      <trans-unit id="111">
+	<source>Formato de fecha no v&amp;aacute;lido</source>
+	<target>Invalid date format</target>
+      </trans-unit>
+
+      <trans-unit id="112">
+	<source> Permanente</source>
+	<target> Permanent</target>
+      </trans-unit>
+
+      <trans-unit id="113">
+	<source>Temporizado</source>
+	<target>Timed</target>
+      </trans-unit>
+
+      <trans-unit id="114">
+	<source>Publicar en itunes U.</source>
+	<target>Publish on itunes U.</target>
+      </trans-unit>
+
+      <trans-unit id="115">
+	<source>Quitar de itunes U.</source>
+	<target>Remove from itunes U.</target>
+      </trans-unit>
+
+      <trans-unit id="116">
+	<source>Buscar</source>
+	<target>Search</target>
+      </trans-unit>
+
+      <trans-unit id="117">
+	<source>Titulo:</source>
+	<target>Tittle:</target>
+      </trans-unit>
+
+      <trans-unit id="118">
+	<source>Persona:</source>
+	<target>Person:</target>
+      </trans-unit>
+
+      <trans-unit id="119">
+	<source>Fechas</source>
+	<target>Dates</target>
+      </trans-unit>
+
+      <trans-unit id="120">
+	<source>Desde:</source>
+	<target>From:</target>
+      </trans-unit>
+
+      <trans-unit id="121">
+	<source>Otros</source>
+	<target>Others</target>
+      </trans-unit>
+
+      <trans-unit id="122">
+	<source>Anunciado:</source>
+	<target>Announced:</target>
+      </trans-unit>
+
+      <trans-unit id="123">
+	<source>Oculto:</source>
+	<target>Hidden:</target>
+      </trans-unit>
+
+      <trans-unit id="124">
+	<source>Hasta:</source>
+	<target>To:</target>
+      </trans-unit>
+
+      <trans-unit id="125">
+	<source>Indiferente</source>
+	<target>Indiferent</target>
+      </trans-unit>
+
+      <trans-unit id="126">
+	<source>S&#xED;</source>
+	<target>Yes</target>
+      </trans-unit>
+
+      <trans-unit id="127">
+	<source>No</source>
+	<target>No</target>
+      </trans-unit>
+
+      <trans-unit id="128">
+	<source>Todos</source>
+	<target>All</target>
+      </trans-unit>
+
+      <trans-unit id="129">
+	<source>Si</source>
+	<target>Yes</target>
+      </trans-unit>
+
+      <trans-unit id="130">
+	<source>Anterior</source>
+	<target>Previous</target>
+      </trans-unit>
+
+      <trans-unit id="131">
+	<source>Pag.</source>
+	<target>Page</target>
+      </trans-unit>
+
+      <trans-unit id="132">
+	<source>de</source>
+	<target>of</target>
+      </trans-unit>
+
+      <trans-unit id="133">
+	<source>Siguiente</source>
+	<target>Next</target>
+      </trans-unit>
+
+      <trans-unit id="134">
+	<source>Wizard</source>
+	<target>Wizard</target>
+      </trans-unit>
+
+      <trans-unit id="135">
+	<source>Crear</source>
+	<target>Create</target>
+      </trans-unit>
+
+      <trans-unit id="136">
+	<source>Crear nueva serie</source>
+	<target>Create new serie</target>
+      </trans-unit>
+
+      <trans-unit id="137">
+	<source>Acciones sobre elementos selecionados</source>
+	<target>Actions on selected elements</target>
+      </trans-unit>
+
+      <trans-unit id="138">
+	<source>Anunciar/Desanunciar selecionados</source>
+	<target>Announce/Unannounced selected</target>
+      </trans-unit>
+
+      <trans-unit id="139">
+	<source>Ocultar/Desocultar selecionados</source>
+	<target>Hide/unhide selected</target>
+      </trans-unit>
+
+      <trans-unit id="140">
+	<source>Siguiente&amp;raquo;</source>
+	<target>Next</target>
+      </trans-unit>
+
+      <trans-unit id="141">
+	<source>Titulo</source>
+	<target>Tittle</target>
+      </trans-unit>
+
+      <trans-unit id="142">
+	<source>Fecha</source>
+	<target>Date</target>
+      </trans-unit>
+
+      <trans-unit id="143">
+	<source>Duraci&#xF3;n</source>
+	<target>Duration</target>
+      </trans-unit>
+
+      <trans-unit id="144">
+	<source>Espa&amp;ntildeol</source>
+	<target>Spanish</target>
+      </trans-unit>
+
+      <trans-unit id="145">
+	<source>Ingl&amp;eacutes</source>
+	<target>English</target>
+      </trans-unit>
+
+      <trans-unit id="146">
+	<source>Uacute;LTIMAS SERIES CREADAS</source>
+	<target>LAST CREATED SERIES</target>
+      </trans-unit>
+
+      <trans-unit id="147">
+	<source>BUSCADOR DE SERIES</source>
+	<target>SEARCH SERIE</target>
+      </trans-unit>
+
+      <trans-unit id="148">
+	<source>buscar en todo el contenido</source>
+	<target>Search all content</target>
+      </trans-unit>
+
+      <trans-unit id="149">
+	<source>"BUSCAR</source>
+	<target>SEARCH</target>
+      </trans-unit>
+
+      <trans-unit id="150">
+	<source>BUSCAR</source>
+	<target>SEARCH</target>
+      </trans-unit>
+
+      <trans-unit id="151">
+	<source>INFO LOS TRANSCODIFICADORES</source>
+	<target>TRANSCODER INFO</target>
+      </trans-unit>
+
+      <trans-unit id="152">
+	<source>Pausados:</source>
+	<target>Paused:</target>
+      </trans-unit>
+
+      <trans-unit id="153">
+	<source>Esperando:</source>
+	<target>Waiting:</target>
+      </trans-unit>
+
+      <trans-unit id="154">
+	<source>Ejecutandose:</source>
+	<target>Executing:</target>
+      </trans-unit>
+
+      <trans-unit id="155">
+	<source>Correctos:</source>
+	<target>Ok:</target>
+      </trans-unit>
+
+      <trans-unit id="156">
+	<source>Error:</source>
+	<target>Error:</target>
+      </trans-unit>
+
+      <trans-unit id="157">
+	<source>UacuteLTIMAS SERIES PUBLICADAS</source>
+	<target>LAST PUBLISHED SERIES</target>
+      </trans-unit>
+
+      <trans-unit id="158">
+	<source>USO DE DISCO</source>
+	<target>DISK USAGE</target>
+      </trans-unit>
+
+      <trans-unit id="159">
+	<source>Introduce un subt&#xED;tulo...</source>
+	<target>Insert subtittle...</target>
+      </trans-unit>
+
+      <trans-unit id="160">
+	<source>Permitida Descarga</source>
+	<target>Download allowed</target>
+      </trans-unit>
+
+      <trans-unit id="161">
+	<source> L&#xED;nea de tiempo - Decisiones editoriales temporizables</source>
+	<target>Timeline - Temporal decisions</target>
+      </trans-unit>
+
+      <trans-unit id="162">
+	<source>Destacados TV</source>
+	<target>TV featured</target>
+      </trans-unit>
+
+      <trans-unit id="163">
+	<source>Destacados Radio</source>
+	<target>Radio featured</target>
+      </trans-unit>
+
+      <trans-unit id="164">
+	<source>Incluir</source>
+	<target>Include</target>
+      </trans-unit>
+
+      <trans-unit id="165">
+	<source>decisiones editoriales fijas</source>
+	<target>Fixed editorial decissions</target>
+      </trans-unit>
+
+      <trans-unit id="166">
+	<source>Incluir piezas no publicadas o en proceso</source>
+	<target>Include no published or in process items</target>
+      </trans-unit>
+
+      <trans-unit id="167">
+	<source>Centrar hoy</source>
+	<target>Center today</target>
+      </trans-unit>
+
+      <trans-unit id="168">
+	<source>Esta p&#xE1;gina usa Javascript para mostrar una l&#xED;nea de tiempo. Active Javascript en su navegador para visualizar correctamente la p&#xE1;gina.</source>
+	<target>This webpage uses Javascript to show a timeline. Active Javascript in your browser to show it correctly.</target>
+      </trans-unit>
+
+      <trans-unit id="169">
+	<source>&amp;Uacute;LTIMAS SERIES CREADAS</source>
+	<target>LAST CREATED SERIES</target>
+      </trans-unit>
+
+      <trans-unit id="170">
+	<source>&amp;Uacute;LTIMAS SERIES PUBLICADAS</source>
+	<target>LAST PUBLISHED SERIES</target>
+      </trans-unit>
+
+      <trans-unit id="171">
+	<source>Seleccionar</source>
+	<target>Select</target>
+      </trans-unit>
+
+      <trans-unit id="172">
+	<source>Selecione alguna serie.</source>
+	<target>Select any serie.</target>
+      </trans-unit>
+
+      <trans-unit id="173">
+	<source>Seleccione tipo:</source>
+	<target>Select type:</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
