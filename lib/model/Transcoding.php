@@ -35,21 +35,22 @@ class Transcoding extends BaseTranscoding
 
     $c = new Criteria();
     $c->add(TranscodingPeer::PATH_INI, $this->getPathIni());
+    $c->add(TranscodingPeer::STATUS_ID, array(TranscodingPeer::STATUS_FINALIZADO), Criteria::NOT_IN);
     
-    if (TranscodingPeer::doCount($c) != 1){
-      unlink($this->getPathIni());
-    }
+    //Si no hay otras tareas ejecutandose con el mismo PATH_INI
+    if (TranscodingPeer::doCount($c) == 0){
 
-    $tmp_path = sfConfig::get('app_transcoder_path_tmp');
-    $inbox_paths = sfConfig::get('app_transcoder_inbox');
-
-    if (false !== strpos($this->getPathIni(), $tmp_path)){
-      unlink($this->getPathIni());
-    }
-    
-    foreach($inbox_paths as $path){
-      if (false !== strpos($this->getPathIni(), $path)){
-	unlink($this->getPathIni());
+      $tmp_path = sfConfig::get('app_transcoder_path_tmp');
+      $inbox_paths = sfConfig::get('app_transcoder_inbox');
+      
+      if (false !== strpos($this->getPathIni(), $tmp_path)){
+        unlink($this->getPathIni());
+      }
+      
+      foreach($inbox_paths as $path){
+        if (false !== strpos($this->getPathIni(), $path)){
+          unlink($this->getPathIni());
+        }
       }
     }
   }
