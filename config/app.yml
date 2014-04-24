@@ -3,7 +3,7 @@ all:
   pumukit:
     version:    PuMuKIT v1.8
   lang:
-    array:     [es, gl, en]
+    array:     [es, en]
     default:   en
 
   metas:
