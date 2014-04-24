@@ -42,7 +42,7 @@ class Mm extends BaseMm
     $personStr = "";
 
     foreach($persons as $person){
-      $personStr .= $person->getName();
+      $personStr .= $person->getName() . " ";
     }
 
     $doc->addField(Zend_Search_Lucene_Field::UnStored('persons', Sanitize::text($personStr), 'utf-8'));
