@@ -67,9 +67,9 @@ function mh_animacion(){
     </div>
   </div>
   <div id="sidebar_content" style="width: 100%">
- <?php include_partial('video/other', array('texto' => __('Vídeos da mesma serie:'), 
+ <?php include_partial('video/other', array('texto' => __('Vídeos de la misma serie:'), 
 					      'mmobjs' => PubChannelPeer::getMmsFromSerial(1, $mm->getSerialId())))?>
-   <?php include_partial('video/other', array('texto' => __('Tamén che interesan:'), 
+   <?php include_partial('video/other', array('texto' => __('Tamén te interesan:'), 
 					      'mmobjs' => $mm->getSimilarMms()))?>
   </div>
  </div>    
