@@ -9,7 +9,7 @@
 <div class="mm_player">
   <div class="date" style="margin-right: 10px;">
   <!-- Fixme falta estilo de esto -->
-    <?php echo __('Data de celebración')?>: <?php echo $mm->getRecordDate('d/m/Y') ?>
+    <?php echo __('Fecha de celebración')?>: <?php echo $mm->getRecordDate('d/m/Y') ?>
   </div>
 </div>
 
