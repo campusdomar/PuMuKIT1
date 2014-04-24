@@ -52,7 +52,7 @@ descomprimimos el archivo y movemos la aplicación para situarla en
 
 
 3. Instalamos las dependencias de pumukit (ver requisitos):
-    $ aptitude install ffmpeg php5-ffmpeg php5-cli apache2 libapache2-mod-php5 mysql-server mysql-client php5-xsl php5-mysql php5-ldap php5-curl
+    $ aptitude install ffmpeg php5-ffmpeg php5-cli apache2 libapache2-mod-php5 mysql-server mysql-client php5-xsl php5-mysql php5-ldap php5-curl libavcodec-extra-53 libavdevice-extra-53 libavfilter-extra-2 libavformat-extra-53 libavutil-extra-51
 
     Puede dar algún aviso, aceptaremos la solución propuesta. Ejemplos:
 
