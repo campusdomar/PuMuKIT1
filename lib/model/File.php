@@ -182,12 +182,14 @@ class File extends BaseFile
       $new_width = intval(1.0 * $height * $this->getAspect());
     }
     
+    $ffmpeg_path = is_executable('/usr/local/bin/ffmpeg')?'/usr/local/bin/ffmpeg':'ffmpeg';
+
     /*
-    echo "/usr/local/bin/ffmpeg -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
+    echo $ffmpeg_path . " -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
       $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"";
     exit;
     */
-    exec("/usr/local/bin/ffmpeg -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
+    exec($ffmpeg_path . " -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
 	 $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"");
 
     if(file_exists($absCurrentDir .'/' . $fileName)){
