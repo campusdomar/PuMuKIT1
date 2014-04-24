@@ -170,12 +170,6 @@ class mmsActions extends sfActions
       $this->forward404Unless($mm);
     }
 
-    
-    /* STATUS */
-    /*if ($this->getUser()->getAttribute('user_type_id', 1) == 0){
-      $mm->setStatusId($this->getRequestParameter('status', 0));
-    }*/
-
     /* DATES */
     if ($this->getRequestParameter('publicdate'))
     {
@@ -189,20 +183,16 @@ class mmsActions extends sfActions
       $mm->setRecorddate($timestamp);
     }
     
-    /* METADATA */
-    //$mm->setAnnounce($this->getRequestParameter('announce', 0));
-    //$mm->setBroadcastId($this->getRequestParameter('broadcast_id', 0));
-
-    $mm->setSubserial($this->getRequestParameter('subserial', 0));
-    $mm->setCopyright($this->getRequestParameter('copyright', 0));
+    $mm->setSubserial($this->getRequestParameter('subserial', ''));
+    $mm->setCopyright($this->getRequestParameter('copyright', ''));
     $mm->setPrecinctId($this->getRequestParameter('precinct_id', 0));
     $mm->setGenreId($this->getRequestParameter('genre_id', 0));
 
     $langs = sfConfig::get('app_lang_array', array('es'));
     foreach($langs as $lang){
       $mm->setCulture($lang);
-      $mm->setTitle($this->getRequestParameter('title_' . $lang, 0));
-      $mm->setSubtitle($this->getRequestParameter('subtitle_' . $lang, 0));
+      $mm->setTitle($this->getRequestParameter('title_' . $lang, ''));
+      $mm->setSubtitle($this->getRequestParameter('subtitle_' . $lang, ''));
       $mm->setKeyword($this->getRequestParameter('keyword_' . $lang, ' '));
       $mm->setDescription($this->getRequestParameter('description_' . $lang, ' '));
       $mm->setLine2($this->getRequestParameter('line2_' . $lang, ' '));
