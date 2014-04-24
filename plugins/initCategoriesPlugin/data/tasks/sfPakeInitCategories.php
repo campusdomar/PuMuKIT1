@@ -16,7 +16,7 @@ function run_init_categories($task, $args)
 {
     $script_paths = array(
         PMK_ROOT_DIR . "/batch/timeframes/creacategoriasdestacadosradiotv.php",
-        PMK_ROOT_DIR . "/batch/categories/import_categories_from_csv.php grounds.csv unesco.csv");
+        PMK_ROOT_DIR . "/batch/categories/import_categories_from_csv.php grounds_i18n.csv unesco_i18n.csv");
     
     foreach ($script_paths as $script){
         echo "\n---------------------------------------------------\n";
