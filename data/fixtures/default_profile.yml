@@ -134,7 +134,7 @@ Perfil:
     channels: 1
     audio: 0
     bat: >
-      ffmpeg -y -strict unofficial -i "%1" -acodec libfaac -ab 128k -ac 2 -vcodec libx264 -crf 22 -threads 0 "%2"  
+      ffmpeg -y -i "%1" -strict experimental -acodec libfaac -ab 128k -ac 2 -vcodec libx264 -crf 22 -threads 0 "%2"  
     file_cfg: 
     streamserver_id: localhost
     app: ffmpeg
