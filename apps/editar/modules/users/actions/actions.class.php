@@ -112,10 +112,12 @@ class usersActions extends sfActions
        ($user->getLogin() !== '') &&
        ($user->getPasswd() !== '')
        ) {
-      $this->msg_alert = array('info', "Usuario\"" . $user->getName() . "\"modificado OK.");
+      $message = sprintf($this->getContext()->getI18N()->__("Usuario\"%s\"modificado OK."), $user->getName());
+      $this->msg_alert = array('info', $message);
       $user->save();
     }else{
-      $this->msg_alert = array('error', "Usuario\"" . $user->getName() . "\" No Guardado por validar el correo electronico");
+      $message = sprintf($this->getContext()->getI18N()->__("Usuario\"%s\" No Guardado por validar el correo electronico"), $user->getName());
+      $this->msg_alert = array('error', $message);
     }
 
     return $this->renderComponent('users', 'list');
@@ -138,12 +140,14 @@ class usersActions extends sfActions
       foreach($users as $user){
 	$user->delete();
       }
-      $this->msg_alert = array('info', "Usuario borrados.");
+
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Usuarios borrados."));
 
     }elseif($this->hasRequestParameter('id')){
       $user = UserPeer::retrieveByPk($this->getRequestParameter('id'));
       $user->delete();
-      $this->msg_alert = array('info', "Usuario\"" . $user->getName() . "\" borrado OK.");
+      $message = sprintf($this->getContext()->getI18N()->__("Usuario \"%s\" borrado OK."), $user->getName());
+      $this->msg_alert = array('info', $message);
     }
 
     return $this->renderComponent('users', 'list');
@@ -153,7 +157,7 @@ class usersActions extends sfActions
   /**
    * --  INDEX -- /editar.php/users/preview/id/?
    * Devuelve codigo XHTML que muestra informacion sobre el usuario. Utilizado para la creacion de vitas previas.
-   * Tambien se utiliza para actualizar la id del usuario selecionado en la sesion.
+   * Tambien se utiliza para actualizar la id del usuario seleccionado en la sesion.
    *
    * Accion asincrona. Acceso privado. Parametros id por URL.
    *

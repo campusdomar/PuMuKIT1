@@ -5,12 +5,12 @@
         <input type="checkbox" onclick="window.click_checkbox_all('user', this.checked)">
       </th>
       <th colspan="2" width="3%"></th>
-      <th width="1%">Id</th>
-      <th>Nombre</th>
-      <th>Login</th>
-      <th>Tipo</th>
-      <th>Email</th>
-      <th width="1%">Root</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Nombre')?></th>
+      <th><?php echo __('Login')?></th>
+      <th><?php echo __('Tipo')?></th>
+      <th><?php echo __('Email')?></th>
+      <th width="1%"><?php echo __('Root')?></th>
     </tr>
   </thead>
   
@@ -18,7 +18,7 @@
   <?php if (count($users) == 0):?>
     <tr>
       <td colspan="9">
-       No existen Useros con esos valores.
+       <?php echo __('No existen usuarios con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -28,10 +28,10 @@
         <input id="<?php echo $user->getId()?>" class="user_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila_np('user', this, <?php echo $user->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'users/edit?id=' . $user->getId(), array('title' => 'Editar Usuario "'.$user->getName() .'"'), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'users/edit?id=' . $user->getId(), array('title' => __('Editar Usuario').' "'.$user->getName() .'"'), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_users', 'url' => 'users/delete?id='.$user->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro que desea borrar el usuario "' . $user->getName() . '"?'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt='  .__('borrar') . ' title=' . __('borrar')), array('update' => 'list_users', 'url' => 'users/delete?id='.$user->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro que desea borrar el usuario').' "' . $user->getName() . '"?'))?>
       </td>
       <td onclick="click_fila_np('user', this, <?php echo $user->getId() ?>);">
         <?php echo $user->getId() ?>
@@ -60,9 +60,9 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'user', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_user ?>/<?php echo $total_user_all ?> Usuarios
+        <?php echo $total_user ?>/<?php echo $total_user_all ?> <?php echo __('Usuarios')?>
         <?php $aux = ($total_user == $total_user_all?'display:none; ':'')?>
-        <?php echo link_to_remote('Cancelar busqueda', array('before' => '$("filter_users").reset();', 'update' => 'list_users', 'url' => 'users/list?filter=filter ', 'script' => 'true'), array('title' => 'Cancelar la busqueda actual', 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
+        <?php echo link_to_remote(__('Cancelar búsqueda'), array('before' => '$("filter_users").reset();', 'update' => 'list_users', 'url' => 'users/list?filter=filter ', 'script' => 'true'), array('title' => __('Cancelar la búsqueda actual'), 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
       </th>
     </tr>
   </tfoot>
