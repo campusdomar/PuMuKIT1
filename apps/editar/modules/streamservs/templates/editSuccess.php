@@ -15,7 +15,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
+  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($streamserv, 'getName', array ('size' => 80,  'control_name' => 'name',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -23,17 +23,17 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('ip', 'IP:', 'class="required" ') ?>
+  <?php echo label_for('ip', __('IP:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($streamserv, 'getIp', array ('size' => 15,  'control_name' => 'ip',
 )); echo $value ? $value : '&nbsp;' ?>
-    <span id="error_ip" style="display:none" class="error">Formato IP no v&aacute;lido</span>
+    <span id="error_ip" style="display:none" class="error"><?php echo __('Formato IP no v&aacute;lido')?></span>
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('type', 'Tipo:', 'class="required" ') ?>
+  <?php echo label_for('type', __('Tipo:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_select_tag($streamserv, 'getStreamserverTypeId', array (
         'related_class' => 'StreamserverType',
@@ -46,7 +46,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('description', 'Descripción:', 'class="required" ') ?>
+  <?php echo label_for('description', __('Descripción:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_textarea_tag($streamserv, 'getDescription', array (
       'size' => '80x4',
@@ -57,7 +57,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('dir_out', 'Path OUT:', 'class="required" ') ?>
+  <?php echo label_for('dir_out', __('Path OUT:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($streamserv, 'getDirOut', array ('size' => 80,  'control_name' => 'dir_out',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -65,7 +65,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('url_out', 'Url OUT:', 'class="required" ') ?>
+  <?php echo label_for('url_out', __('URL OUT:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($streamserv, 'getUrlOut', array ('size' => 80,  'control_name' => 'url_out',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -77,8 +77,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>

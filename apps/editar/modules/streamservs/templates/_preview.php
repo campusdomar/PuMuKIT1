@@ -6,14 +6,14 @@
   </p>
 
   <p style="overflow:hidden; padding:5px; text-align:center; border:solid 1px #DDD; background:#DDD; " >
-    Descripción: 
+    <?php echo __('Descripción')?>: 
       <?php echo $streamserv->getDescription()?>
   </p>
 </div>
 
   <?php else:?>
 <p>
-  Selecione o cree algun servidor de streaming.
+  <?php echo __('Seleccione o cree algún servidor de streaming')?>.
 </p>
 <?php endif?>
 

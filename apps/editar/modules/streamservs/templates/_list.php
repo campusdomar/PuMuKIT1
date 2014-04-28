@@ -5,12 +5,12 @@
         <input type="checkbox" onclick="window.click_checkbox_all('streamserv', this.checked)">
       </th>
       <th colspan="3" width="5%"></th>
-      <th width="1%">Id</th>
-      <th>Tipo</th>
-      <th>Nombre</th>
-      <th>IP</th>
-      <th>PATH OUT</th>
-      <th>Url OUT</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Tipo')?></th>
+      <th><?php echo __('Nombre')?></th>
+      <th><?php echo __('IP')?></th>
+      <th><?php echo __('PATH OUT')?></th>
+      <th><?php echo __('URL OUT')?></th>
     </tr>
   </thead>
   
@@ -18,7 +18,7 @@
   <?php if (count($streamservs) == 0):?>
     <tr>
       <td colspan="10">
-       No existen servidores de streaming con esos valores.
+       <?php echo __('No existen servidores de streaming con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -28,13 +28,13 @@
         <input id="<?php echo $streamserv->getId()?>" class="streamserv_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('streamserv', this, <?php echo $streamserv->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'streamservs/edit?id=' . $streamserv->getId(), array('title' => 'Editar Servidor '.$streamserv->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'streamservs/edit?id=' . $streamserv->getId(), array('title' => __('Editar Servidor ') .$streamserv->getId()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_streamservs', 'url' => 'streamservs/delete?id='.$streamserv->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro? (No se pude si tiene perfiles asociados)'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_streamservs', 'url' => 'streamservs/delete?id='.$streamserv->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro? (No se puede si tiene perfiles asociados)')))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_streamservs', 'url' => 'streamservs/copy?id='.$streamserv->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_streamservs', 'url' => 'streamservs/copy?id='.$streamserv->getId(), 'script' => 'true'))?>
       </td>
       
       <td onclick="click_fila('streamserv', this, <?php echo $streamserv->getId() ?>);">
@@ -64,7 +64,7 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'streamserv', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_streamserv ?>/<?php echo $total_streamserv_all ?> streamserv
+        <?php echo $total_streamserv ?>/<?php echo $total_streamserv_all ?> <?php echo __('streamserv')?>
       </th>
     </tr>
   </tfoot>
