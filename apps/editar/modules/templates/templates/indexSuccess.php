@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"> Templates</h3>
+<h3 class="cab_body_div"><?php echo __('Templates')?></h3>
 
 <div class="container" id="page:container">
   <div class="main">
@@ -26,7 +26,7 @@
 
     <!-- DOS -->
     <div class="section-menu" id="page:left">
-      <h3>Seleccione template:</h3>
+      <h3><?php echo __('Seleccione template:')?></h3>
         <ul id="poll_tabs" class="tabs">
 
           <!-- DOS A -->
@@ -34,13 +34,13 @@
             <li>
               <a href="#" id="poll_tabs_<?php echo $template->getId()?>_section" name="<?php echo $template->getId()?>_section" class="tab-item-link" idElement="<?php echo $template->getId()?>">
                 <span>
-                  <div class="changed" title="The information in this tab has been changed."></div>
-                  <div class="error" title="This tab contains invalid data. Please solve the problem before saving."></div>
+                  <div class="changed" title="<?php echo __('The information in this tab has been changed.')?>"></div>
+                  <div class="error" title="<?php echo __('This tab contains invalid data. Please solve the problem before saving.')?>"></div>
                   <?php if ($template->getUser()): ?>
-                    <img src="/images/admin/mbuttons/delete_inline.gif" class="button" title="borrar" alt="borrar" 
-	              onclick="if (confirm('Seguro')) {window.location.href='<?php echo url_for('templates/delete?id='.$template->getId())?>'};"/> 
+                    <img src="/images/admin/mbuttons/delete_inline.gif" class="button" title="<?php echo __('borrar')?>" alt="<?php echo __('borrar')?>" 
+	              onclick="if (confirm(<?php echo __('Seguro')?>) {window.location.href='<?php echo url_for('templates/delete?id='.$template->getId())?>'};"/> 
                   <?php endif ?>
-                  <img class="button" id="save_<?php echo $template->getId()?>" src="/images/admin/load/spinner.gif" alt="Loading..." height="15" style="display:none;"/>
+                  <img class="button" id="save_<?php echo $template->getId()?>" src="/images/admin/load/spinner.gif" alt="<?php echo __('Loading...')?>" height="15" style="display:none;"/>
                   <div class="tooltip">
                     <?php echo $template->getName()?>
                     <div>(<?php echo $template->getTypeName()?>)<?php echo $template->getDescription()?></div>

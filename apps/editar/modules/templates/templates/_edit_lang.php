@@ -7,7 +7,7 @@
 <br />
 <p>
   <?php echo $template->getDescription()?>
-  (<?php echo $template->getTypeName()?><?php echo ($template->getUser()?' USER':'')?>)
+  (<?php echo $template->getTypeName()?><?php echo ($template->getUser()?__(' USER'):'')?>)
 </p>
 
 <br />
@@ -50,7 +50,7 @@
 
 
 <ul class="tv_admin_actions">
-  <li><img id="loading_<?php echo $template->getId()?>" src="/images/admin/load/spinner.gif" alt="Loading..." height="15" style="display:none; position:absolute"/></li>
+  <li><img id="loading_<?php echo $template->getId()?>" src="/images/admin/load/spinner.gif" alt="<?php echo __('Loading...')?>" height="15" style="display:none; position:absolute"/></li>
   <li><input type="submit" class="tv_admin_action_save" value="OK" name="OK"/></li>
   <li><input type="reset"  class="tv_admin_action_delete" value="Cancel" name="Cancel"/></li>
 </ul>
