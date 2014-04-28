@@ -5,10 +5,10 @@
         <input type="checkbox" onclick="window.click_checkbox_all('resolution', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%">Id</th>
-      <th>Ver</th>
-      <th>Hor</th>
-      <th>Files</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Ver')?></th>
+      <th><?php echo __('Hor')?></th>
+      <th><?php echo __('Files')?></th>
     </tr>
   </thead>
   
@@ -16,7 +16,7 @@
   <?php if (count($resolutions) == 0):?>
     <tr>
       <td colspan="9">
-       No existen noticias con esos valores.
+       <?php echo __('No existen noticias con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -26,16 +26,16 @@
         <input id="<?php echo $resolution->getId()?>" class="resolution_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('resolution', this, <?php echo $resolution->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'resolutions/edit?id=' . $resolution->getId(), array('title' => 'Editar Novedad '.$resolution->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'resolutions/edit?id=' . $resolution->getId(), array('title' => __('Editar Novedad ').$resolution->getId()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_resolutions', 'url' => 'resolutions/delete?id='.$resolution->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro?'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_resolutions', 'url' => 'resolutions/delete?id='.$resolution->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro?')))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_resolutions', 'url' => 'resolutions/copy?id='.$resolution->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_resolutions', 'url' => 'resolutions/copy?id='.$resolution->getId(), 'script' => 'true'))?>
       </td>
       <td>
-        <input type="radio" name="radio_resolution" title="Selecrionar este resolution por defecto"
+        <input type="radio" name="radio_resolution" title="<?php echo __('Seleccionar esta resolución por defecto')?>"
                value="resolution_<?php echo $resolution->getId()?>" 
                <?php echo $resolution->getDefaultSel()?'checked="checked"':'' ?>
                onchange="new Ajax.Request('/editar.php/resolutions/default/id/<?php echo $resolution->getId() ?>/value/'+ this.checked, {asynchronous:true, evalScripts:true})"
@@ -62,7 +62,7 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'resolution', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_resolution ?>/<?php echo $total_resolution_all ?> Resolution
+        <?php echo $total_resolution ?>/<?php echo $total_resolution_all ?> <?php echo __('Resolution')?>
       </th>
     </tr>
   </tfoot>
