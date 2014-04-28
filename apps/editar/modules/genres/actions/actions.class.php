@@ -96,7 +96,7 @@ class genresActions extends sfActions
     }
 
     $genre->save();
-    $this->msg_alert = array('info', "Metadatos del genero actualizados.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del género actualizados."));
     $this->getUser()->setAttribute('id', $genre->getId(), 'tv_admin/genre');
 
     return $this->renderComponent('genres', 'list');
@@ -121,7 +121,7 @@ class genresActions extends sfActions
       $genre = GenrePeer::retrieveByPk($this->getRequestParameter('id'));
       $genre->delete();
     }
-    $this->msg_alert = array('info', "Genero borrado.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Género borrado."));
     return $this->renderComponent('genres', 'list');
   }
 
@@ -147,7 +147,7 @@ class genresActions extends sfActions
     }
       
     $genre2->save();
-    $this->msg_alert = array('info', "Genero clonado.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Género clonado."));
 
     return $this->renderComponent('genres', 'list');
   }
