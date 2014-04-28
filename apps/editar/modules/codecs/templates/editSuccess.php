@@ -14,9 +14,9 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
+  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
   <div class="content">
-  <?php $value = object_input_tag($codec, 'getName', array ('size' => 3,  'control_name' => 'name',
+  <?php $value = object_input_tag($codec, 'getName', array ('size' => 3, 'control_name' => 'name',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -26,9 +26,9 @@
 
 
 <ul class="tv_admin_actions">
-<li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-<li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
-  </ul>
+  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+</ul>
 
 </form>
 </div>

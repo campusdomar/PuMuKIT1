@@ -5,9 +5,9 @@
         <input type="checkbox" onclick="window.click_checkbox_all('codec', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%">Id</th>
-      <th>Name</th>
-      <th>Files</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Name')?></th>
+      <th><?php echo __('Files')?></th>
     </tr>
   </thead>
   
@@ -15,7 +15,7 @@
   <?php if (count($codecs) == 0):?>
     <tr>
       <td colspan="9">
-       No existen noticias con esos valores.
+       <?php echo __('No existen noticias con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -25,19 +25,19 @@
         <input id="<?php echo $codec->getId()?>" class="codec_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('codec', this, <?php echo $codec->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'codecs/edit?id=' . $codec->getId(), array('title' => 'Editar Novedad '.$codec->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'codecs/edit?id=' . $codec->getId(), array('title' => __('Editar Novedad ').$codec->getId()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_codecs', 'url' => 'codecs/delete?id='.$codec->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro?'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_codecs', 'url' => 'codecs/delete?id='.$codec->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro?')))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_codecs', 'url' => 'codecs/copy?id='.$codec->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_codecs', 'url' => 'codecs/copy?id='.$codec->getId(), 'script' => 'true'))?>
       </td>
       <td onclick="click_fila('codec', this, <?php echo $codec->getId() ?>);">
         <?php echo $codec->getId() ?>
       </td>
       <td>
-        <input type="radio" name="radio_codec" title="Selecrionar este codec por defecto"
+        <input type="radio" name="radio_codec" title="<?php echo __('Seleccionar este códec por defecto')?>"
                value="codec_<?php echo $codec->getId()?>" 
                <?php echo $codec->getDefaultSel()?'checked="checked"':'' ?>
                onchange="new Ajax.Request('/editar.php/codecs/default/id/<?php echo $codec->getId() ?>/value/'+ this.checked, {asynchronous:true, evalScripts:true})"
@@ -58,7 +58,7 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'codec', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_codec ?>/<?php echo $total_codec_all ?> Codec
+        <?php echo $total_codec ?>/<?php echo $total_codec_all ?> <?php echo __('Códec')?>
       </th>
     </tr>
   </tfoot>
