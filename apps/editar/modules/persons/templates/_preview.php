@@ -6,10 +6,10 @@
   </p>
 
   <p style="overflow:hidden; padding:5px; border:solid 1px #DDD; background:#DDD" >
-    INFO: 
+    <?php echo __('INFO')?>: 
       <?php echo $person->getOther()?>
       <br />
-    SERIES: 
+    <?php echo __('SERIES')?>: 
       <?php 
         $ss = $person->getSerials(5); 
         foreach($ss as $s) echo $s->getId().' ('.$s->getTitle().'),'; 
@@ -20,7 +20,7 @@
 
   <?php else:?>
 <p>
-  Selecione alguna persona.
+  <?php echo __('Seleccione alguna persona')?>.
 </p>
 <?php endif?>
 

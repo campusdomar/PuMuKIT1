@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/person_ico.png"/> Personas</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/person_ico.png"/> <?php echo __('Personas')?></h3>
 
 <div id="tv_admin_container">
   <div id="tv_admin_bar">
@@ -17,18 +17,18 @@
       <ul class="tv_admin_actions">
         <!-- Falta -->
         <li>
-          <?php echo button_to_function('nuevo', 'Modalbox.show("persons/create", {title:"Editar Nueva Noticia", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?>
+          <?php echo button_to_function(__('nuevo'), 'Modalbox.show("persons/create", {title:"' . __('Editar Nueva Noticia') . '", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?>
         </li>
       </ul>
     </div>
 
-    <select id="options_persons" style="margin: 10px 0px; width: 33%" title="Acciones sobre elementos selecionados" onchange="window.change_select('person', $('options_persons'))">
-      <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
+    <select id="options_persons" style="margin: 10px 0px; width: 33%" title="<?php echo __('Acciones sobre elementos seleccionados')?>" onchange="window.change_select('person', $('options_persons'))">
+      <option value="default" selected="selected"><?php echo __('Selecciona una acci&oacute;n...')?></option>
       <option disabled="">---</option>
-      <option value="delete_sel">Borrar selecionados</option>
-      <option value="create">Crear nuevo</option>
-      <option value="hono_person_sel">Separar honores de selecionados</option>
-      <option value="hono_person_all">Separar honores de todos</option>
+      <option value="delete_sel"><?php echo __('Borrar seleccionados')?></option>
+      <option value="create"><?php echo __('Crear nuevo')?></option>
+      <option value="hono_person_sel"><?php echo __('Separar honores de seleccionados')?></option>
+      <option value="hono_person_all"><?php echo __('Separar honores de todos')?></option>
       <option value="merge_person_sel">Unificar varias personas</option>
     </select>
     

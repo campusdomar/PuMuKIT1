@@ -196,7 +196,7 @@ class personsActions extends sfActions
   {
     $this->update();
 
-    $this->msg_alert = array('info', "Metadatos de la persona actualizados.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos de la persona actualizados."));
     return $this->renderComponent('persons', 'list');
   }
 
@@ -219,11 +219,11 @@ class personsActions extends sfActions
       $aux->setPersonId($this->getRequestParameter('person'));
       try{
 	$aux->save();
-	$this->msg_alert = array('info', 
-			  "Persona asociada correctamente a la plantilla con el rol " . $this->role->getName(). ". ");
+        $message = sprintf($this->getContext()->getI18N()->__("Persona asociada correctamente a la plantilla con el rol \"%s\"."), $this->role->getName());
+        $this->msg_alert = array('info', $message);
       }catch(Exception $e){
-	$this->msg_alert = array('error', 
-			  "Persona ya asociada a la plantilla con el rol " . $this->role->getName(). ". ");
+        $message = sprintf($this->getContext()->getI18N()->__("Persona ya asociada a la plantilla con el rol \"%s\"."), $this->role->getName());
+        $this->msg_alert = array('error', $message);
       } 
       
       return $this->renderComponent('persons', 'listrelationtemplate');
@@ -237,11 +237,11 @@ class personsActions extends sfActions
       $aux->setPersonId($this->getRequestParameter('person'));
       try{
 	$aux->save();
-	$this->msg_alert = array('info', 
-			   "Persona asociada correctamente al objeto multimedia \"" . $this->mm->getTitle()."\" con el rol " . $this->role->getName(). ". ");
+        $message = sprintf($this->getContext()->getI18N()->__("Persona asociada correctamente al objeto multimedia \"%s\" con el rol %s."), $this->mm->getTitle(), $this->role->getName());
+        $this->msg_alert = array('info', $message);
       }catch(Exception $e){
-	$this->msg_alert = array('error', 
-			   "Persona ya asociada al objeto multimedia \"" . $this->mm->getTitle()."\" con el rol " . $this->role->getName(). ". ");
+        $message = sprintf($this->getContext()->getI18N()->__("Persona ya asociada al objeto multimedia \"%s\" con el rol %s."), $this->mm->getTitle(), $this->role->getName());
+        $this->msg_alert = array('error', $message);
       } 
       
       return $this->renderComponent('persons', 'listrelation');
@@ -289,7 +289,9 @@ class personsActions extends sfActions
       $component = 'listrelation';
     }
 
-    $this->msg_alert = array('info', "Persona asociada correctamente al objeto multimedia \"" . $this->mm->getTitle()."\" con el rol " . $this->role->getName(). ". ");
+    $message = sprintf($this->getContext()->getI18N()->__("Persona asociada correctamente al objeto multimedia \"%s\" con el rol %s."), $this->mm->getTitle(), $this->role->getName());
+    $this->msg_alert = array('info', $message);
+
     $this->preview = true;
     return $this->renderComponent('persons', $component);
   }
@@ -311,11 +313,14 @@ class personsActions extends sfActions
       foreach($persons as $person){
 	$person->delete();
       }
-      $this->msg_alert = array('info', "Personas borradas correctamente");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Personas borradas correctamente"));
 
     }elseif($this->hasRequestParameter('id')){
       $person = PersonPeer::retrieveByPk($this->getRequestParameter('id'));
-      $this->msg_alert = array('info', "Personas ".$person->getName(). "borrada");
+
+      $message = sprintf($this->getContext()->getI18N()->__("Persona %s borrada."), $person->getName());
+      $this->msg_alert = array('info', $message);
+
       $person->delete();
     }
 
@@ -341,20 +346,20 @@ class personsActions extends sfActions
         $this->mm = MmTemplatePeer::retrieveByPk($this->getRequestParameter('mm')); 
         $mmPerson = MmTemplatePersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
         $mmPerson->delete();
-        $msg_c = "Persona desasocionada correctamente";
+        $msg_c = $this->getContext()->getI18N()->__("Persona desasocionada correctamente");
         $template = 'listrelationtemplate';
       }else{
         $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
 	    $mmPerson = MmPersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
         $mmPerson->delete();
-    	$msg_c = "Persona desasocionada correctamente";
+        $msg_c = $this->getContext()->getI18N()->__("Persona desasocionada correctamente");
       }
     }
 
     //Solo Borro si no hay mas
     if (($person->countMmPersons() == 0)&&($person->countMmTemplatePersons() == 0)){
       $person->delete();
-      $msg_c = "Persona ademas de desasociarse con el objeto multimedia se borro por no estar relacionada a nada mas";
+      $msg_c = $this->getContext()->getI18N()->__("Persona ademas de desasociarse con el objeto multimedia se borro por no estar relacionada a nada mas");
     }
 
     $this->msg_alert = array('info', $msg_c);
@@ -385,7 +390,7 @@ class personsActions extends sfActions
     }
 
     $person2->save();
-    $this->msg_alert = array('info', "Persona clonada correctamente");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Persona clonada correctamente"));
     return $this->renderComponent('persons', 'list');
   }
 
@@ -421,7 +426,7 @@ class personsActions extends sfActions
       }
     }
 
-    $this->msg_alert = array('info', "Campos honorificos separados correctamente.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Campos honoríficos separados correctamente."));
     return $this->renderComponent('persons', 'list');
   }
 

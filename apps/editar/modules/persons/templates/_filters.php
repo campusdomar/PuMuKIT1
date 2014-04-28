@@ -2,22 +2,22 @@
 <div class="tv_admin_filters">
 <?php echo form_remote_tag(array('update' => 'list_persons', 'url' => 'persons/list', 'script' => 'true', 'before' =>  '$("filters_vowel").value= null' ), 'id=filter_persons') ?>
   <fieldset>
-    <h2>Buscar</h2>
+    <h2><?php echo __('Buscar')?></h2>
 
     <div class="form-row">
-      <label for="name">Nombre:</label>
+      <label for="name"><?php echo __('Nombre:')?></label>
       <div class="content">
         <?php echo input_tag('filters[name]', null) ?>
       </div>
     </div>
     <div class="form-row">
-      <label for="other">Otro:</label>
+      <label for="other"><?php echo __('Otro:')?></label>
       <div class="content">
         <?php echo input_tag('filters[other]', null) ?>
       </div>
     </div>
     <div class="form-row">
-      <label for="vowel">Vocal:</label>
+      <label for="vowel"><?php echo __('Letra:')?></label>
       <div class="content">
         <input id="filters_vowel" type="hidden" value="" name="filters[vowel]"/>
         <a href="#" onclick="window.filter_click_vowel('A')">A</a> 
@@ -53,10 +53,10 @@
 
   <ul class="tv_admin_actions">
     <li>
-      <?php echo button_to_remote('cancelar', array('before' => '$("filter_persons").reset();', 'update' => 'list_persons', 'url' => 'persons/list?filter=filter ', 'script' => 'true'), 'class=tv_admin_action_reset_filter') ?>
+      <?php echo button_to_remote(__('cancelar'), array('before' => '$("filter_persons").reset();', 'update' => 'list_persons', 'url' => 'persons/list?filter=filter ', 'script' => 'true'), 'class=tv_admin_action_reset_filter') ?>
     </li>
     <li>
-      <?php echo submit_tag('filtrar', 'name=filter class=tv_admin_action_filter') ?>
+      <?php echo submit_tag(__('filtrar'), 'name=filter class=tv_admin_action_filter') ?>
     </li>
   </ul>
 </form>

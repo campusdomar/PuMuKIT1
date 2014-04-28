@@ -15,7 +15,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('honorific', 'Honores:', 'class="required" ') ?>
+  <?php echo label_for('honorific', __('Honores:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $person->setCulture($lang);  echo $sep ?>  
@@ -28,7 +28,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
+  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($person, 'getName', array ('size' => 80,  'control_name' => 'name',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -36,7 +36,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('post', 'Puesto:', 'class="required" ') ?>
+  <?php echo label_for('post', __('Puesto:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $person->setCulture($lang);  echo $sep ?>  
@@ -51,7 +51,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('firm', 'Empresa:', 'class="required" ') ?>
+  <?php echo label_for('firm', __('Empresa:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $person->setCulture($lang);  echo $sep ?>  
@@ -66,7 +66,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('bio_' . $lang, 'Bio.:', 'class="required" ') ?>
+  <?php echo label_for('bio_' . $lang, __('Bio.:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $person->setCulture($lang);  echo $sep ?>  
@@ -81,29 +81,29 @@
 
 
 <div class="form-row">
-  <?php echo label_for('email', 'Email:', 'class="required" ') ?>
+  <?php echo label_for('email', __('Email:'), 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($person, 'getEmail', array (
   'size' => 30,
   'control_name' => 'email',
 )); echo $value ? $value : '&nbsp;' ?>
-    <span id="error_email" style="display:none" class="error">Formato email no v&aacute;lido</span>
+    <span id="error_email" style="display:none" class="error"><?php echo __('Formato email no v&aacute;lido')?></span>
     </div>
 </div>
 
 <div class="form-row">
-  <?php echo label_for('web', 'Web:', 'class="required" ') ?>
+  <?php echo label_for('web', __('Web:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($person, 'getWeb', array (
       'size' => 50,
       'control_name' => 'web',
       )); echo $value ? $value : '&nbsp;' ?>
-    <span id="error_url" style="display:none" class="error">Formato URL no v&aacute;lido</span>  
+    <span id="error_url" style="display:none" class="error"><?php echo __('Formato URL no v&aacute;lido')?></span>  
     </div>
 </div>
 
 <div class="form-row">
-  <?php echo label_for('phone', 'Tel&eacute;fono:', 'class="required" ') ?>
+  <?php echo label_for('phone', __('Tel&eacute;fono:'), 'class="required" ') ?>
   <div class="content">
 
   <?php $value = object_input_tag($person, 'getPhone', array (
@@ -118,8 +118,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=return comprobar_form_person($("email").value, $("web").value)'); ?></li>
-  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=return comprobar_form_person($("email").value, $("web").value)'); ?></li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>
