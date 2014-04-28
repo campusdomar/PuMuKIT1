@@ -12,7 +12,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
+  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $material->setCulture($lang);  echo $sep ?>  
@@ -25,7 +25,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('display', 'Visible:', 'class="required" ') ?>
+  <?php echo label_for('display', __('Visible:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_checkbox_tag($material, 'getDisplay', array (
       'control_name' => 'display',
@@ -35,7 +35,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('mat_type_id', 'Tipo:', 'class="required" ') ?>
+  <?php echo label_for('mat_type_id', __('Tipo:'), 'class="required" ') ?>
 
   <div class="content">
     <?php $value = object_select_tag($material, 'getMatTypeId', array (
@@ -50,40 +50,40 @@
 
 <?php if($material->isNew()):?>
   <div class="form-row">
-    <?php echo label_for('file_type', 'Modo:', 'class="required" ') ?>
+    <?php echo label_for('file_type', __('Modo:'), 'class="required" ') ?>
   
     <div class="content">
-      <input type="radio" name="file_type" value="file" <?php if($default_sel == 'file') echo 'checked="checked"' ?> onclick="$('input_material_url').hide();$('input_material_file').show();"/> File 
+      <input type="radio" name="file_type" value="file" <?php if($default_sel == 'file') echo 'checked="checked"' ?> onclick="$('input_material_url').hide();$('input_material_file').show();"/> <?php echo __('File ')?>
       <input type="radio" name="file_type" id="radio_url" value="url" <?php if($default_sel == 'url') echo 'checked="checked"' ?>  onclick="$('input_material_file').hide();$('input_material_url').show();"/> URL 
     </div>
   </div>
   
   
   <div id="input_material_url" class="form-row"  style="<?php if($default_sel == 'file') echo 'display:none' ?>">
-    <?php echo label_for('url', 'Url:', '') ?>
+    <?php echo label_for('url', __('URL:'), '') ?>
   
     <div class="content">
       <?php $value = object_input_tag($material, 'getUrl', array (
         'size' => 60,
         'control_name' => 'url',
         )); echo $value ? $value : '&nbsp;' ?>
-        <span id="error_url" style="display:none" class="error">Formato URL no v&aacute;lido</span>
+        <span id="error_url" style="display:none" class="error"><?php echo __('Formato URL no v&aacute;lido')?></span>
     </div>
   </div>
   
   
   <div id="input_material_file" class="form-row" style="<?php if($default_sel == 'url') echo 'display:none' ?>">
-    <?php echo label_for('file', 'Archivo:', '') ?>
+    <?php echo label_for('file', __('Archivo:'), '') ?>
     
     <div class="content">
       <?php echo input_file_tag('file', 'size=50') ?>
-        <span id="error_file" style="display:none" class="error">Campo file vacio</span>
+        <span id="error_file" style="display:none" class="error"><?php echo __('Campo file vacío')?></span>
     </div>
   </div>
 
 <?php else:?>
   <div id="input_material_url" class="form-row"  style="<?php if($default_sel == 'file') echo 'display:none' ?>">
-    <?php echo label_for('url', 'Url:', '') ?>
+    <?php echo label_for('url', __('URL:'), '') ?>
   
     <div class="content">
       <?php $value = object_input_tag($material, 'getUrl', array (
@@ -101,7 +101,7 @@
 <ul class="tv_admin_actions">
 <?php if($material->isNew()):?>
   <li>
-    <?php echo submit_tag('OK',array('name' => 'OK', 'class' => 'tv_admin_action_save', 
+    <?php echo submit_tag(__('OK'),array('name' => 'OK', 'class' => 'tv_admin_action_save', 
 				     'onclick' => 'if($("radio_url").checked) {
                                                      return comprobar_form_url($("url").value)
                                                    } else {
@@ -110,10 +110,10 @@
 				     )) ?>   
   </li>
 <?php else: ?>
-  <li><?php echo submit_tag('OK',array('name' => 'OK', 'class' => 'tv_admin_action_save')) ?>   </li>
+  <li><?php echo submit_tag(__('OK'),array('name' => 'OK', 'class' => 'tv_admin_action_save')) ?>   </li>
 <?php endif ?>
 
-  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>
