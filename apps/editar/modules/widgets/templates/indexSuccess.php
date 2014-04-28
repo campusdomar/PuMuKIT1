@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/widget_ico.png"/> WebTV Layout</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/widget_ico.png"/> <?php echo __('WebTV Layout')?></h3>
 
 
 <div>
