@@ -277,15 +277,16 @@ class mmsActions extends sfActions
       $this->getRequestParameter('timeend2'));
 
     /*
-      Recorro la lista de todos viendo cuales se acaban de selecionar o de quitar 
+      Recorro la lista de todos viendo cuales se acaban de seleccionar o de quitar 
       para llamar el su clase a la funcion correspondiente para emprezar el workflow.
      */
 
     if($mm->updatePubChannels($this->getRequestParameter('pub_channels'))){
       $this->reload_pub_channel = true;
-      $this->msg_alert = array('info', "Objeto multimedia actualizado.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Objeto multimedia actualizado."));
     }else{
-      $this->msg_alert = array('error', "Objeto multimedia  \"" . $mm->getTitle() . "\" NO tiene master.");
+      $message = sprintf($this->getContext()->getI18N()->__("Objeto multimedia \"%s\" NO tiene master."), $mm->getTitle());
+      $this->msg_alert = array('error', $message);
       $this->reload_pub_channel = true;
     }
     
@@ -311,12 +312,12 @@ class mmsActions extends sfActions
 
     /* Asegurarme que esta en la serie ok */
     if($mm->getStatusId() != 4){
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El estado del objeto multimedia tiene que incluir ItunesU.');
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El estado del objeto multimedia tiene que incluir Itunes U.'));
     }
     
     /* Si estado en mayor que (iTunes) compruebo que esiste podcast_audio** */
     if(($status_id > 3)&&(count($mm->getGrounds(3)) == 0)){
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no esta catalogado en iTunesU');
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no está catalogado en iTunes U'));
     }
 
     /*Ver si la serie esta publicada */
@@ -331,7 +332,7 @@ class mmsActions extends sfActions
     $this->itunes = $mm->getSerial()->getSerialItuness();
     return $this->renderPartial('mms/itunes_list');
     /*FIXME LISTAR ENLACES BIEN*/
-    //return $this->renderText("Publicacion correcta");
+    //return $this->renderText($this->getContext()->getI18N()->__("Publicación correcta"));
   }
 
 
@@ -349,7 +350,7 @@ class mmsActions extends sfActions
 
     /* Asegurarme que esta en la serie ok */
     if($mm->getStatusId() != 4){
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El estado del objeto multimedia tiene que incluir ItunesU.');
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El estado del objeto multimedia tiene que incluir Itunes U.'));
     }
     
     /*Ver si la serie esta publicada */
@@ -361,7 +362,7 @@ class mmsActions extends sfActions
     }
     
 
-    return $this->renderText("Publicacion correcta");
+    return $this->renderText($this->getContext()->getI18N()->__("Publicación correcta"));
   }
 
 
@@ -422,7 +423,7 @@ class mmsActions extends sfActions
     $this->forward404Unless($mm);
 
     $mm2 = $mm->copy();
-    $this->getUser()->setAttribute('mm', $mm2->getId() ); //selecione el nuevo                                                                                                
+    $this->getUser()->setAttribute('mm', $mm2->getId() ); //seleccione el nuevo                                                                                                
     return $this->renderComponent('mms', 'list');
   }
 
@@ -479,7 +480,8 @@ class mmsActions extends sfActions
       $ach->announceMm($mm);
     }
 
-    $this->msg_alert = array('info', "Serie \"" . $mm->getTitle() . "\" anunciada OK.");
+    $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" anunciada OK."), $mm->getTitle());
+    $this->msg_alert = array('info', $message);
     return $this->renderComponent('mms', 'list');    
   }
 
@@ -502,16 +504,20 @@ class mmsActions extends sfActions
 
     if('rec_asc' == $this->getRequestParameter('type')){
       $c->addAscendingOrderByColumn(MmPeer::RECORDDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo ascendente.");
+      $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" reordenada por fecha de grabación de modo ascendente."), $serial->getTitle());
+      $this->msg_alert = array('info', $message);
     }elseif('rec_des' == $this->getRequestParameter('type')){
       $c->addDescendingOrderByColumn(MmPeer::RECORDDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de grabacion de modo descendente.");
+      $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" reordenada por fecha de grabación de modo descendente."), $serial->getTitle());
+      $this->msg_alert = array('info', $message);
     }elseif('pub_asc' == $this->getRequestParameter('type')){
       $c->addAscendingOrderByColumn(MmPeer::PUBLICDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo ascendente.");
+      $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" reordenada por fecha de publicación de modo ascendente."), $serial->getTitle());
+      $this->msg_alert = array('info', $message);
     }elseif('pub_des' == $this->getRequestParameter('type')){
       $c->addDescendingOrderByColumn(MmPeer::PUBLICDATE);
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" reordenada por fecha de publicacion de modo descendente.");
+      $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" reordenada por fecha de publicación de modo descendente."), $serial->getTitle());
+      $this->msg_alert = array('info', $message);
     }
 
     $mms = MmPeer::doSelect($c);
@@ -541,13 +547,11 @@ class mmsActions extends sfActions
     if($this->hasRequestParameter('ids')){
       $mms = MmPeer::retrieveByPKs(json_decode($this->getRequestParameter('ids')));
 
-
       foreach($mms as $mm){
-	$mm->setStatusId($status);
-	$mm->save();
+    	$mm->setStatusId($status);
+	    $mm->save();
       }
       
-
     }elseif($this->hasRequestParameter('id')){
       $mm = MmPeer::retrieveByPk($this->getRequestParameter('id'));
       $mm->setStatusId($status);
@@ -557,8 +561,8 @@ class mmsActions extends sfActions
       $mms = MmPeer::doSelect(new Criteria());
 	    
       foreach($mms as $mm){
-	$mm->setStatusId($status);
-	$mm->save();
+    	$mm->setStatusId($status);
+	    $mm->save();
       }
     }
 
@@ -655,12 +659,12 @@ class mmsActions extends sfActions
 
     $c = new Criteria();
     $c->add(GroundTypePeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(GroundTypePeer::RANK);
-    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, 'es'); 
+    $c->addDescendingOrderByColumn(GroundTypePeer::RANK);
+    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, $this->getUser()->getCulture()); 
 
 
     $cg = new Criteria();
-    $cg->addAscendingOrderByColumn(GroundI18nPeer::NAME);
+    $cg->addAscendingOrderByColumn(GroundPeer::COD);
     $this->grounds = GroundPeer::doSelectWithI18n($cg, $this->getUser()->getCulture());
 
     $this->grounds_sel = $this->mm->getGrounds();
@@ -686,12 +690,15 @@ class mmsActions extends sfActions
     
     $c = new Criteria();
     $c->add(GroundTypePeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(GroundTypePeer::RANK);
-    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, 'es'); 
+    $c->addDescendingOrderByColumn(GroundTypePeer::RANK);
+    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, $this->getUser()->getCulture()); 
 
     $this->mm = MmPeer::retrieveByPk($mm_id); 
     $this->grounds_sel = $this->mm->getGrounds();
-    $this->grounds = GroundPeer::doSelectWithI18n(new Criteria(), 'es');
+
+    $cg = new Criteria();
+    $cg->addAscendingOrderByColumn(GroundPeer::COD);
+    $this->grounds = GroundPeer::doSelectWithI18n($cg, $this->getUser()->getCulture());
 
     return $this->renderPartial('edit_ground');
   }
@@ -730,11 +737,14 @@ class mmsActions extends sfActions
 
     $c = new Criteria();
     $c->add(GroundTypePeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(GroundTypePeer::RANK);
-    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, 'es'); 
+    $c->addDescendingOrderByColumn(GroundTypePeer::RANK);
+    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, $this->getUser()->getCulture()); 
 
     $this->mm = MmPeer::retrieveByPk($mm_id); 
-    $this->grounds = GroundPeer::doSelectWithI18n(new Criteria(), 'es');
+
+    $cg = new Criteria();
+    $cg->addAscendingOrderByColumn(GroundPeer::COD);
+    $this->grounds = GroundPeer::doSelectWithI18n($cg, $this->getUser()->getCulture());
     $this->grounds_sel = $this->mm->getGrounds();
 
     return $this->renderPartial('edit_ground');    
@@ -764,11 +774,13 @@ class mmsActions extends sfActions
 
     $c = new Criteria();
     $c->add(GroundTypePeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(GroundTypePeer::RANK);
-    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, 'es'); 
+    $c->addDescendingOrderByColumn(GroundTypePeer::RANK);
+    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, $this->getUser()->getCulture()); 
 
     $this->mm = MmPeer::retrieveByPk($mm_id); 
-    $this->grounds = GroundPeer::doSelectWithI18n(new Criteria(), 'es');
+    $cg = new Criteria();
+    $cg->addAscendingOrderByColumn(GroundPeer::COD);
+    $this->grounds = GroundPeer::doSelectWithI18n($cg, $this->getUser()->getCulture());
     $this->grounds_sel = $this->mm->getGrounds();
 
     return $this->renderPartial('edit_ground');
@@ -794,12 +806,14 @@ class mmsActions extends sfActions
     
     $c = new Criteria();
     $c->add(GroundTypePeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(GroundTypePeer::RANK);
-    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, 'es'); 
+    $c->addDescendingOrderByColumn(GroundTypePeer::RANK);
+    $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, $this->getUser()->getCulture()); 
 
     $this->mm = MmPeer::retrieveByPk($mm_id); 
     $this->grounds_sel = $this->mm->getGrounds();
-    $this->grounds = GroundPeer::doSelectWithI18n(new Criteria(), 'es');
+    $cg = new Criteria();
+    $cg->addAscendingOrderByColumn(GroundPeer::COD);
+    $this->grounds = GroundPeer::doSelectWithI18n($cg, $this->getUser()->getCulture());
 
     return $this->renderPartial('edit_ground');
   }
@@ -955,8 +969,7 @@ class mmsActions extends sfActions
       $mm->setRank($serial->countMms() + 1);
       $mm->save();
     }
-      
-    $this->msg_alert = array('info', "Objetos multimedia pegados en la serie.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Objetos multimedia pegados en la serie."));
 
     return $this->renderComponent('mms', 'list');
   }
@@ -970,7 +983,7 @@ class mmsActions extends sfActions
   public function executeCut()
   {
     $this->getUser()->setAttribute('cut_mms', json_decode($this->getRequestParameter('ids')));
-    $this->msg_alert = array('info', "Objetos multimedia cortados, péguelos en las serie que desee.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Objetos multimedia cortados. Péguelos en las serie que desee."));
 
     return $this->renderComponent('mms', 'list');
   }

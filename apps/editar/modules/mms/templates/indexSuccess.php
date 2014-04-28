@@ -1,11 +1,11 @@
 <h3 class="cab_body_div">
  <button onclick="location.href='<?php echo url_for('serials/index') ?>'" class="btn_atras_mms" type="button">
     <span class="span_atras_mms">
-      Volver a la serie
+      <?php echo __('Volver a la serie')?>
     </span>
   </button>
 
-  <img src="/images/admin/cab/serial_ico.png"/> Objetos multimedia
+  <img src="/images/admin/cab/serial_ico.png"/> <?php echo __('Objetos multimedia')?>
   <span style="font-size:72%">(<?php echo ($serial->getId())?>-<?php echo ($serial->getTitle());?>)</span>
   <input type="hidden" name="serial_id" id="mms_serial_id" value="<?php echo ($serial->getId())?>" />
 </h3>
@@ -30,40 +30,40 @@
       <ul class="tv_admin_actions">
         <!-- Falta -->
         <li>
-          <?php echo link_to_function('Wizard', "Modalbox.show('".url_for("wizard/mm?id=".$serial->getId())."',{width: 800, title:'PASO II: OBJ.MM.'})", 'class=tv_admin_action_next') ?>
+         <?php echo link_to_function(__('Wizard'), "Modalbox.show('".url_for("wizard/mm?id=".$serial->getId())."',{width: 800, title:'" . __('PASO II: OBJ.MM.') . "'})", 'class=tv_admin_action_next') ?> 
         </li>
         <li>
-          <?php echo link_to_remote('Crear', array('update' => 'list_mms', 'url' => 'mms/create?filter=filter&page=last', 'script' => 'true'), array('title' => 'Crear nueva serie', 'class' => 'tv_admin_action_create')) ?>
+          <?php echo link_to_remote(__('Crear'), array('update' => 'list_mms', 'url' => 'mms/create?filter=filter&page=last', 'script' => 'true'), array('title' => __('Crear nueva serie'), 'class' => 'tv_admin_action_create')) ?>
         </li>
       </ul>
     </div>
 
-    <select id="options_mms" style="margin: 10px 0px; width: 33%; float: left;" title="Acciones sobre elementos selecionados" onchange="window.change_select('mm', $('options_mms'))">
-      <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
+    <select id="options_mms" style="margin: 10px 0px; width: 33%; float: left" title="<?php echo __('Acciones sobre elementos seleccionados')?>" onchange="window.change_select('mm', $('options_mms'))">
+      <option value="default" selected="selected"><?php echo __('Selecciona una acci&oacute;n...')?></option>
       <option disabled="">---</option>
 
-      <option value="delete_sel">Borrar selecionados</option>
-      <option value="inv_announce_sel">Anunciar/Desanunciar selecionados</option>
+      <option value="delete_sel"><?php echo __('Borrar seleccionados')?></option>
+      <option value="inv_announce_sel"><?php echo __('Anunciar/Desanunciar seleccionados')?></option>
       <option disabled="">---</option>
-      <option disabled=""value="set_status_0_sel">Bloquear selecionados</option> 
-      <option disabled=""value="set_status_1_sel">Ocultar selecionados</option> 
-      <option disabled=""value="set_status_2_sel">Publicar selecionados</option> 
-      <option disabled=""value="set_status_3_sel">Publicar totalmente selecionados</option>
+      <option disabled=""value="set_status_0_sel"><?php echo __('Bloquear seleccionados')?></option> 
+      <option disabled=""value="set_status_1_sel"><?php echo __('Ocultar seleccionados')?></option> 
+      <option disabled=""value="set_status_2_sel"><?php echo __('Publicar seleccionados')?></option> 
+      <option disabled=""value="set_status_3_sel"><?php echo __('Publicar totalmente seleccionados')?></option>
       <option disabled="">---</option>
-      <option value="set_order_pub_des">Ordenar objetos multimedia por fecha de publicacion de forma descendente</option> 
-      <option value="set_order_pub_asc">Ordenar objetos multimedia por fecha de publicacion de forma ascendente</option> 
-      <option value="set_order_rec_des">Ordenar objetos multimedia por fecha de grabacion de forma descendente</option> 
-      <option value="set_order_rec_asc">Ordenar objetos multimedia por fecha de grabacion de forma ascendente</option> 
+      <option value="set_order_pub_des"><?php echo __('Ordenar objetos multimedia por fecha de publicación de forma descendente')?></option> 
+      <option value="set_order_pub_asc"><?php echo __('Ordenar objetos multimedia por fecha de publicación de forma ascendente')?></option> 
+      <option value="set_order_rec_des"><?php echo __('Ordenar objetos multimedia por fecha de grabación de forma descendente')?></option> 
+      <option value="set_order_rec_asc"><?php echo __('Ordenar objetos multimedia por fecha de grabación de forma ascendente')?></option> 
       <option disabled="">---</option>
-      <option value="cut_mm">Cortar objetos multimedia</option> 
+      <option value="cut_mm"><?php echo __('Cortar objetos multimedia')?></option> 
       <?php if($sf_user->hasAttribute('cut_mms')): ?>
         <option value="paste_mm">
-          Pegar objetos multimedia (<?php echo implode(',', $sf_user->getAttribute('cut_mms')->getRawValue())?>)
+          <?php echo __('Pegar objetos multimedia')?> (<?php echo implode(',', $sf_user->getAttribute('cut_mms')->getRawValue())?>)
         </option>
       <?php endif ?>
       <option disabled="">---</option>
-      <option value="serial_preview">Vista Previa de la serie</option> 
-      <!-- <option value="serial_master">Crear obj. mm. con brutos de camara</option>  -->
+      <option value="serial_preview"><?php echo __('Vista Previa de la serie')?></option> 
+      <!-- <option value="serial_master"><?php echo __('Crear obj. mm. con brutos de cámara')?></option>  -->
     </select>
     
   </div>

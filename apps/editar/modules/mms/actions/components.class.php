@@ -76,12 +76,12 @@ class mmsComponents extends sfComponents
     $this->langs = sfConfig::get('app_lang_array', array('es'));
     $this->grounds_sel = $this->mm->getGrounds();
     $cg = new Criteria();
-    $cg->addAscendingOrderByColumn(GroundI18nPeer::NAME);
+    $cg->addAscendingOrderByColumn(GroundPeer::COD);
     $this->grounds = GroundPeer::doSelectWithI18n($cg, $this->getUser()->getCulture());
     
     $c = new Criteria();
     $c->add(GroundTypePeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(GroundTypePeer::RANK);
+    $c->addDescendingOrderByColumn(GroundTypePeer::RANK);
     $this->groundtypes = GroundTypePeer::doSelectWithI18n($c, 'es'); 
 
     $c = new Criteria();

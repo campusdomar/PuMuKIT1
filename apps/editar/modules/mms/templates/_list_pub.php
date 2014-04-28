@@ -18,9 +18,9 @@
         />
         <?php echo $p->getName()?>   
         <?php if($estado === 2):?>
-          <span style="font-size: 80%; font-style:italic;">(Se  estan codificando los archivos necesarios)</span>
+          <span style="font-size: 80%; font-style:italic;"><?php echo __('(Se  estan codificando los archivos necesarios)')?></span>
         <?php elseif($estado === 5):?>
-          <span style="font-size: 80%; font-style:italic;">(Esperando master para codificar los archivos necesarios)</span>
+          <span style="font-size: 80%; font-style:italic;"><?php echo __('(Esperando máster para codificar los archivos necesarios)')?></span>
         <?php endif ?>
       </div>
     <?php endif ?>

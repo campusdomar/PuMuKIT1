@@ -15,7 +15,7 @@
 <?php echo object_input_hidden_tag($mm, 'getSerialId') ?>
 
 <div id="remember_save_mm_pub" style="display: none; position: absolute; color:red; border: 1px solid red; padding: 5px; background-color:#fdc; font-weight:bold;">
-  <?php echo __('Pulse OK para que el cambio de publicacion tenga efecto')?>
+  <?php echo __('Pulse OK para que el cambio de publicación tenga efecto')?>
 </div>
 
 <ul class="tv_admin_actions" style="width: 100%">
@@ -30,7 +30,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('status', 'Estado:', 'class="required long" ') ?>
+  <?php echo label_for('status', __('Estado:'), 'class="required long" ') ?>
   <div class="content content_long">
     <div style="float:right"> </div>
 
@@ -59,7 +59,7 @@
 
 <!-- Si no tiene master podia no poder cambiar pub_channels -->
 <div class="form-row" id="list_pub_channel" <?php echo ($mm->getStatusId() == 1)?'style="background-color: #f2f2f2"':'';?>>
-  <?php echo label_for('pub', 'Canales de Publicacion:', 'class="required long" ') ?>
+  <?php echo label_for('pub', __('Canales de Publicación:'), 'class="required long" ') ?>
   <div id="list_pub_<?php echo $mm->getId()?>" class="content content_long">
     <?php include_partial('list_pub', array('mm' => $mm)) ?>
   </div>
@@ -156,7 +156,6 @@ dmy2ymd = function(date){
   if (separa.length > 1){
     ymd += ' ' + separa[1];
   }
-
   return ymd;
 }
 compruebaIntervaloEditorial = function(id){
@@ -216,7 +215,7 @@ muestraPasadoActivoFuturo = function(id){
     <?php $value = object_checkbox_tag($mm, 'getAnnounce', array (
       'control_name' => 'announce',
       'onchange' => "$('remember_save_mm_pub').show()",
-    )); echo $value ? $value : '&nbsp;' ?>&nbsp; Novedad
+    )); echo $value ? $value : '&nbsp;' ?>&nbsp; <?php echo __('Novedad') ?>
   </div>
 
 <?php // Fila para decision editorial 1?>
@@ -326,7 +325,6 @@ muestraPasadoActivoFuturo = function(id){
       </span>
     </span> <!-- fin temporizada -->
   </div>
-
 </div>
 
 
@@ -361,10 +359,9 @@ muestraPasadoActivoFuturo = function(id){
 </div>
 
 
-
 <!--
 <div class="form-row">
-  <?php echo label_for('itunesu', 'iTunes U:', 'class="required long" ') ?> 
+  <?php echo label_for('itunesu', __('iTunes U:'), 'class="required long" ') ?> 
   <div class="content content_long">
     <?php if(count($mm->getSerial()->getSerialItuness()) == 0):?>
       <a href="#" onclick="

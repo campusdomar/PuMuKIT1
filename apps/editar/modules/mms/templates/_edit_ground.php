@@ -6,7 +6,7 @@
 
 
 <?php include_component('grounds', 'recomendationlist', array('mm' => $mm, 'url' => 'mms/relationgrounds', 'div' => 'groundMmDiv',
-							      'ground_id' => $sf_request->getParameter('ground', 0))); ?>
+	 'ground_id' => $sf_request->getParameter('ground', 0))); ?>
 
   <dl style="margin: 0px">
 
@@ -20,7 +20,7 @@
 
 
 <div style="margin-bottom: 5px; padding-left: 232px">
-    <?php echo __('Filtar')?>:
+    <?php echo __('Filtrar')?>:
     <input type="input" id="input_filter_<?php echo $groundtype->getId()?>" size="40" onkeypress="filtrar<?php echo $groundtype->getId()?>(this.value)" />
 </div>
 
@@ -62,6 +62,7 @@ function filtrar".$groundtype->getId()."(que)
 
 
 <?php
+    /*
   echo select_tag('grounds'.$groundtype->getId().'_select', 
 		  objects_for_select(array_filter($grounds->getRawValue(), $function), 'getId', 'getName'), 
 		  array('size' => 20, 
@@ -71,8 +72,43 @@ function filtrar".$groundtype->getId()."(que)
                                                           {asynchronous:true, evalScripts:true});"
 			)
 		  );
-?>
-        
+    */ ?>
+
+
+
+
+   <select name = "<?php echo 'grounds'.$groundtype->getId().'_select' ?>" id = "<?php echo 'grounds'.$groundtype->getId().'_select' ?>" size = "20" style = "width:400px; height: 160px" 
+           ondblclick = "if(this.value != '') new Ajax.Updater('groundMmDiv', 
+                                                               '/editar.php/mms/addGround/ground/' + this.value +'/id/259', 
+                                                                {asynchronous:true, evalScripts:true});" >
+
+
+    <?php $is_1=false; $is_2=false; 
+           foreach (array_filter($grounds->getRawValue(), $function) as $ground) : ?>
+      <?php if (substr($ground->getCod(), -4) == "0000"): ?>
+        <?php if($is_1) :?>
+          </optgroup>
+        <?php endif ?>
+        <optgroup label="<?php echo $ground->getName() ?>">
+      <?php $is_1 = true ?>
+      <?php elseif (substr($ground->getCod(), -2) == "00"): ?>
+        <?php if($is_2) :?>
+          </optgroup>
+        <?php endif ?>
+        <optgroup label="&nbsp;&nbsp;&nbsp;<?php echo $ground->getName() ?>">
+      <?php $is_2 = true ?>
+      <?php else: ?>
+        <option value="<?php echo $ground->getId() ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $ground->getName() ?></option>
+      <?php endif ?>
+    <?php endforeach ?>
+    <?php if($is_2) :?>
+      </optgroup>
+    <?php endif ?>
+    <?php if($is_1) :?>
+      </optgroup>
+    <?php endif ?>
+   </select>
+
         </div>
       </dd>
     </div>

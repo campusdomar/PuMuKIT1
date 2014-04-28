@@ -5,7 +5,7 @@
 
 <!-- DATE -->
 <div style="background-color:#006699; color:#FFFFFF; font-weight:bold; margin-bottom:11px; text-align:center;">
-  <?php echo $mm->getRecordDateText()?>
+   <?php echo $mm->getRecordDate('%d %B %Y')?>
 </div>
 
 <!-- SUBSERIAL_TITLE-->
@@ -38,7 +38,7 @@
   
   <!-- TITLE & SUBTITLE -->
   
-        <?php if ($mm->getTitle() !== ''):?>
+        <?php if ($mm->getTitle() !== '' && $mm->getTitle() != NULL):?>
           <div id="title" style="font-size:13px; font-weight:bold">"<?php echo $mm->getTitle()?>"</div>
         <?php endif ?>
         <?php if ($mm->getSubtitle() !== ''):?>
@@ -50,14 +50,14 @@
           <?php $files = $mm->getFiles() ?> 
           <?php foreach ($files as $file): if(!$file->getPerfil()->getDisplay()) continue;?>  
             <div id="file" class="<?php echo ($file->getAudio()?'audio':'mm')?>">
-               <a title="reproducir" href="#" onclick=" Shadowbox.open({
-                  title:      'Vista Previa',
+               <a title="<?php echo __('reproducir')?>" href="#" onclick=" Shadowbox.open({
+                  title:      '<?php echo __('Vista Previa')?>',
                   content:    '<?php echo $file->getUrl()?>',
                   type:       'wmp',
                   height:     <?php echo $file->getPerfil()->getResolutionVer()?>,
                   width:      <?php echo $file->getPerfil()->getResolutionHor()?>
                  }); return false;">
-                 <?php echo $file->getAudio()?'Audio':'V&iacute;deo'?>
+                 <?php echo $file->getAudio()?__('Audio'):__('V&iacute;deo')?>
                </a>
                <?php if ($file->getDescription() !== ""): ?>
                  &nbsp;|&nbsp;&nbsp;<strong><?php echo ( $file->getDescription() ) ?></strong>
@@ -65,7 +65,7 @@
                &nbsp;|&nbsp;&nbsp;<span id="language"><?php echo $file->getLanguage()->getName() ?></span>
 
                &nbsp;(<?php echo $file->getDurationString() ?>)
-               &nbsp;|&nbsp;Visto: <span id="numView"><?php echo $file->getNumView()?></span><?php echo (($file->getNumView() == 1)?' vez':' veces')?>
+               &nbsp;|&nbsp;<?php echo __('Visto:')?> <span id="numView"><?php echo $file->getNumView()?></span><?php echo (($file->getNumView() == 1)?' vez':' veces')?>
                <?php //include_partial('global/voteMm', array('file' => $file)) ?></span>
             </div>
 
@@ -121,6 +121,6 @@
 
 <?php else:?>
 <p>
-  Selecione algun objeto multimedia.
+  <?php echo __('Seleccione algún objeto multimedia.')?>
 </p>
 <?php endif?>  

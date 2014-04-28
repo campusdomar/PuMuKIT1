@@ -12,20 +12,20 @@
       <?php if(sfConfig::get('app_mail_use')):?>
       <th width="2%"></th>
       <?php endif?>
-      <th width="1%">Audio/Video</th>
-      <th width="1%">Img</th>
-      <th width="1%">Id</th>
-      <th>T&iacute;tulo</th>
-      <th width="1%">Duración</th>
-      <th width="1%">FechaRec</th>
-      <th width="1%">FechaPub</th>
+      <th width="1%"><?php echo __('Audio/Video')?></th>
+      <th width="1%"><?php echo __('Img')?></th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('T&iacute;tulo')?></th>
+      <th width="1%"><?php echo __('Duraci&oacute;n')?></th>
+      <th width="1%"><?php echo __('FechaRec')?></th>
+      <th width="1%"><?php echo __('FechaPub')?></th>
     </tr>
   </thead>
 
   <tbody>
   <?php if (count($mms) == 0):?>
     <div style="position: absolute; top: 310px; left: 30%; font-size: 20px; width: 30%; font-weight: bold;">
-       <p>No existen objetos multimedia con esos valores.</p>
+       <?php echo __('No existen objetos multimedia con esos valores.')?>
     </div>
   <?php endif; ?>
   <?php $t = count($mms) ; for( $i=0; $i<$t; $i++): $mm = $mms[$i]; $odd = fmod($i, 2) ?>
@@ -34,13 +34,13 @@
         <input id="<?php echo $mm['id']?>" class="mm_checkbox" type="checkbox">
       </td>
       <td>
-        <?php echo image_tag('admin/bbuttons/mm'.$mm['status'].'_inline.gif', 'alt='.$mm['status'].' title=estado class=miniTag id=table_mms_status_' . $mm['id']) ?>
+        <?php echo image_tag('admin/bbuttons/mm'.$mm['status'].'_inline.gif', 'alt='.$mm['status'].' title=' . __('estado') . ' class=miniTag id=table_mms_status_' . $mm['id']) ?>
       </td>
       <td>
         <?php echo ($mm['announce']?'<span style="color: blue" title="Novedad">A</span>':'&nbsp;') ?>
       </td> 
        <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar class=miniTag'), array('update' => 'list_mms', 'url'=> 'mms/delete?id='.$mm['id'], 'script' => 'true', 'confirm' => 'Seguro que desea borrar el objeto multimedia?', 'success' => '$("vista_previa_mm").innerHTML=""; $("edit_mms").innerHTML="" '));?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar') . ' class=miniTag'), array('update' => 'list_mms', 'url'=> 'mms/delete?id='.$mm['id'], 'script' => 'true', 'confirm' => __('¿Seguro que desea borrar el objeto multimedia?'), 'success' => '$("vista_previa_mm").innerHTML=""; $("edit_mms").innerHTML="" '));?>
       </td>
 
       <td>
@@ -107,7 +107,7 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'mm', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_mm ?> Obj. Mm.
+        <?php echo $total_mm ?> <?php echo __('Obj. Mm.')?>
       </th>
     </tr>
   </tfoot>

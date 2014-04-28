@@ -5,7 +5,7 @@
 <fieldset id="tv_fieldset_none" class="">
   <dl style="margin: 0px">
     <div class="form-row">
-      <dt>Im&aacute;genes:</dt>
+      <dt><?php echo __('Im&aacute;genes:')?></dt>
       <dd>  
         <div id="pic_mms">
           <?php include_component('pics', 'list', array('mm' => $mm->getId())) ?> 
@@ -14,7 +14,7 @@
     </div>
 
     <div class="form-row">
-      <dt>Archivos de V&iacute;deo:</dt>
+      <dt><?php echo __('Archivos de V&iacute;deo:')?></dt>
       <dd>  
         <div id="files_mms">
           <?php include_component('files', 'list', array('mm' => $mm->getId())) ?>
@@ -33,7 +33,7 @@
 
 
     <div class="form-row">
-      <dt>Materiales:</dt>
+      <dt><?php echo __('Materiales:')?></dt>
       <dd>  
         <div id="materials_mms">
           <?php include_component('materials', 'list', array('mm' => $mm->getId())) ?>              
@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-row">
-      <dt>Links:</dt>
+      <dt><?php echo __('Links:')?></dt>
       <dd>  
         <div id="links_mms">
           <?php include_component('links', 'list', array('mm' => $mm->getId())) ?>              
