@@ -95,7 +95,7 @@ class serialtypesActions extends sfActions
     }
 
     $serialtype->save();
-    $this->msg_alert = array('info', "Metadatos del tipo de serie actualizados.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del tipo de serie actualizados."));
 
     $this->getUser()->setAttribute('id', $serialtype->getId(), 'tv_admin/serialtype');
 
@@ -123,7 +123,7 @@ class serialtypesActions extends sfActions
       $serialtype->delete();
     }
 
-    $this->msg_alert = array('info', "Tipo de serie borrada.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Tipo de serie borrada."));
     return $this->renderComponent('serialtypes', 'list');
   }
 
@@ -148,7 +148,7 @@ class serialtypesActions extends sfActions
     }
       
     $serialtype2->save();
-    $this->msg_alert = array('info', "Tipo de serie clonada.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Tipo de serie clonada."));
 
     return $this->renderComponent('serialtypes', 'list');
   }

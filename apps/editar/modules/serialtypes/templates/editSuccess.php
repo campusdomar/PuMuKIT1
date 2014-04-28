@@ -17,7 +17,7 @@
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $serialtype->setCulture($lang);  echo $sep ?>  
     
-      <?php echo label_for('name_' . $lang, 'Nombre:', 'class="required" ') ?>
+      <?php echo label_for('name_' . $lang, __('Nombre:'), 'class="required" ') ?>
       <div class="content">
         <?php $value = object_input_tag($serialtype, 'getName', array ('size' => 80,  'control_name' => 'name_' . $lang,
         )); echo $value ? $value.'<span class="lang">'.$lang.'</span>' : '&nbsp;' ?>

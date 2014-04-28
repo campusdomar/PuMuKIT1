@@ -5,9 +5,9 @@
         <input type="checkbox" onclick="window.click_checkbox_all('serialtype', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%">Id</th>
-      <th>Nombre</th>
-      <th>Series</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Nombre')?></th>
+      <th><?php echo __('Series')?></th>
     </tr>
   </thead>
   
@@ -15,7 +15,7 @@
   <?php if (count($serialtypes) == 0):?>
     <tr>
       <td colspan="8">
-       No existen tipos de series con esos valores.
+       <?php echo __('No existen tipos de series con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -25,16 +25,16 @@
         <input id="<?php echo $serialtype->getId()?>" class="serialtype_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('serialtype', this, <?php echo $serialtype->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'serialtypes/edit?id=' . $serialtype->getId(), array('title' => 'Editar tipo de serie '.$serialtype->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'serialtypes/edit?id=' . $serialtype->getId(), array('title' => __('Editar tipo de serie ').$serialtype->getId()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_serialtypes', 'url' => 'serialtypes/delete?id='.$serialtype->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro que desea borrar este tipo?'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_serialtypes', 'url' => 'serialtypes/delete?id='.$serialtype->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro que desea borrar este tipo?')))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_serialtypes', 'url' => 'serialtypes/copy?id='.$serialtype->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_serialtypes', 'url' => 'serialtypes/copy?id='.$serialtype->getId(), 'script' => 'true'))?>
       </td>
       <td>
-        <input type="radio" name="radio_serialtype" title="Selecrionar este serialtype por defecto"
+        <input type="radio" name="radio_serialtype" title="<?php echo __('Seleccionar este tipo de serie por defecto')?>"
                value="serialtype_<?php echo $serialtype->getId()?>" 
                <?php echo $serialtype->getDefaultSel()?'checked="checked"':'' ?>
                onchange="new Ajax.Request('/editar.php/serialtypes/default/id/<?php echo $serialtype->getId() ?>/value/'+ this.checked, {asynchronous:true, evalScripts:true})"
@@ -60,11 +60,10 @@
         </div>
         <?php echo $total_serialtype ?>/<?php echo $total_serialtype_all ?> Tipos
         <?php $aux = ($total_serialtype==$total_serialtype_all?'display:none; ':'')?>
-        <?php echo link_to_remote('Cancelar busqueda', array('before' => '$("filter_serialtypes").reset();', 'update' => 'list_serialtypes', 'url' => 'serialtypes/list?filter=filter ', 'script' => 'true'), array('title' => 'Cancelar la busqueda actual', 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
+        <?php echo link_to_remote(__('Cancelar búsqueda'), array('before' => '$("filter_serialtypes").reset();', 'update' => 'list_serialtypes', 'url' => 'serialtypes/list?filter=filter ', 'script' => 'true'), array('title' => 'Cancelar la búsqueda actual', 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
       </th>
     </tr>
   </tfoot>
 </table>
-
 
 <?php if (isset($msg_alert)) echo m_msg_alert($msg_alert) ?>
