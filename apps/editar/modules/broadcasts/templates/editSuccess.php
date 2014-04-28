@@ -13,7 +13,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
+  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($broadcast, 'getName', array ('size' => 3,  'control_name' => 'name',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('type', 'Tipo:', 'class="required" ') ?>
+  <?php echo label_for('type', __('Tipo:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_select_tag($broadcast, 'getBroadcastTypeId', array (
         'related_class' => 'BroadcastType',
@@ -33,7 +33,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('passwd', 'Passwd:', 'class="required" ') ?>
+  <?php echo label_for('passwd', __('Passwd:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($broadcast, 'getPasswd', array ('size' => 12,  'control_name' => 'passwd', 'maxlength' => 12, 
 )); echo $value ? $value : '&nbsp;' ?>
@@ -42,7 +42,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('description', 'Descripci&oacute;n:', 'class="required" ') ?>
+  <?php echo label_for('description', __('Descripci&oacute;n:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $broadcast->setCulture($lang);  echo $sep ?>  
@@ -61,8 +61,8 @@
 
 
 <ul class="tv_admin_actions">
-<li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-<li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+<li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+<li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
   </ul>
 
 </form>

@@ -110,7 +110,7 @@ class broadcastsActions extends sfActions
     }
 
     $broadcast->save();
-    $this->msg_alert = array('info', "Metadatos de la difusion actualizados.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos de la difusion actualizados."));
     $this->getUser()->setAttribute('id', $broadcast->getId(), 'tv_admin/broadcast');
 
     return $this->renderComponent('broadcasts', 'list');
@@ -133,12 +133,12 @@ class broadcastsActions extends sfActions
       foreach($broadcasts as $broadcast){
 	$broadcast->delete();
       }
-      $this->msg_alert = array('info', "Difusiones borradas correctamente.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Difusiones borradas correctamente."));
 
     }elseif($this->hasRequestParameter('id')){
       $broadcast = BroadcastPeer::retrieveByPk($this->getRequestParameter('id'));
       $broadcast->delete();
-      $this->msg_alert = array('info', "Difusion borrada correctamente.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Difusión borrada correctamente."));
     }
 
     return $this->renderComponent('broadcasts', 'list');
@@ -167,7 +167,7 @@ class broadcastsActions extends sfActions
     }
       
     $broadcast2->save();
-    $this->msg_alert = array('info', "Difusion clonada..");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Difusión clonada."));
 
     return $this->renderComponent('broadcasts', 'list');
   }

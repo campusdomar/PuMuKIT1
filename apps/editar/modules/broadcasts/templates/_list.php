@@ -5,11 +5,11 @@
         <input type="checkbox" onclick="window.click_checkbox_all('broadcast', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%">Id</th>
-      <th width="5%">Type</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Serials</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th width="5%"><?php echo __('Type')?></th>
+      <th><?php echo __('Name')?></th>
+      <th><?php echo __('Description')?></th>
+      <th><?php echo __('Serials')?></th>
     </tr>
   </thead>
   
@@ -17,7 +17,7 @@
   <?php if (count($broadcasts) == 0):?>
     <tr>
       <td colspan="10">
-       No existen difusiones con esos valores.
+       <?php echo __('No existen difusiones con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -27,16 +27,16 @@
         <input id="<?php echo $broadcast->getId()?>" class="broadcast_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('broadcast', this, <?php echo $broadcast->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'broadcasts/edit?id=' . $broadcast->getId(), array('title' => 'Editar Difusion '.$broadcast->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'broadcasts/edit?id=' . $broadcast->getId(), array('title' => __('Editar Difusión ').$broadcast->getId()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_broadcasts', 'url' => 'broadcasts/delete?id='.$broadcast->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro que desea borrar esta difusion?'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_broadcasts', 'url' => 'broadcasts/delete?id='.$broadcast->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro que desea borrar esta difusión?')))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_broadcasts', 'url' => 'broadcasts/copy?id='.$broadcast->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_broadcasts', 'url' => 'broadcasts/copy?id='.$broadcast->getId(), 'script' => 'true'))?>
       </td>
       <td>
-        <input type="radio" name="radio_broadcast" title="Selecrionar este broadcast por defecto"
+        <input type="radio" name="radio_broadcast" title="<?php echo __('Seleccionar esta difusión por defecto')?>"
                value="broadcast_<?php echo $broadcast->getId()?>" 
                <?php echo $broadcast->getDefaultSel()?'checked="checked"':'' ?>
                onchange="new Ajax.Request('/editar.php/broadcasts/default/id/<?php echo $broadcast->getId() ?>/value/'+ this.checked, {asynchronous:true, evalScripts:true})"
@@ -66,9 +66,9 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'broadcast', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_broadcast ?>/<?php echo $total_broadcast_all ?> Difusiones
+        <?php echo $total_broadcast ?>/<?php echo $total_broadcast_all ?> <?php echo __('Difusiones')?>
         <?php $aux = ($total_broadcast==$total_broadcast_all?'display:none; ':'')?>
-        <?php echo link_to_remote('Cancelar busqueda', array('before' => '$("filter_broadcasts").reset();', 'update' => 'list_broadcasts', 'url' => 'broadcasts/list?filter=filter ', 'script' => 'true'), array('title' => 'Cancelar la busqueda actual', 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
+        <?php echo link_to_remote('Cancelar búsqueda', array('before' => '$("filter_broadcasts").reset();', 'update' => 'list_broadcasts', 'url' => 'broadcasts/list?filter=filter ', 'script' => 'true'), array('title' => __('Cancelar la búsqueda actual'), 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
       </th>
     </tr>
   </tfoot>
