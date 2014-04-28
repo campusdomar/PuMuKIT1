@@ -113,10 +113,9 @@ Event.observe(window, 'load', function() {
 function centraTimeline() {
             tl.getBand(0).scrollToCenter(new Date());
         }
-<?php  // Sobrecargo la función que pinta la burbuja ?>
 var oldFillInfoBubble = Timeline.DefaultEventSource.Event.prototype.fillInfoBubble;
-var weekday = new Array( __('Domingo'), __('Lunes'), __('Martes'), __('Miércoles'), __('Jueves'), __('Viernes'), __('Sábado'));
-var monthname = new Array( __('Enero'), __('Febrero'), __('Marzo'), __('Abril'), __('Mayo'), __('Junio'), __('Julio'), echo __('Agosto') , __('Septiembre'), __('Octubre'), __('Noviembre'), __('Diciembre'));
+var weekday = new Array( '<?php echo __('Domingo')?>', '<?php echo __('Lunes')?>', '<?php echo __('Martes')?>', '<?php echo __('Miércoles')?>', '<?php echo __('Jueves')?>', '<?php echo __('Viernes')?>', '<?php echo __('Sábado')?>');
+var monthname = new Array( '<?php echo __('Enero')?>', '<?php echo __('Febrero')?>', '<?php echo __('Marzo')?>', '<?php echo __('Abril')?>', '<?php echo __('Mayo')?>', '<?php echo __('Junio')?>', '<?php echo __('Julio')?>', '<?php echo  __('Agosto')?>' , '<?php echo __('Septiembre')?>', '<?php echo __('Octubre')?>', '<?php echo __('Noviembre')?>', '<?php echo __('Diciembre')?>');
 Timeline.DefaultEventSource.Event.prototype.fillInfoBubble = function(elmt, theme, labeller) {
     var eventObject = this;
     if (eventObject._end != eventObject._earliestEnd && eventObject._start != eventObject._latestStart){
