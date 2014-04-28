@@ -83,7 +83,7 @@ class picsActions extends sfActions
     }
 
     $this->preview = true;
-    $this->msg_alert = array('info', "Nueva imagen insertada.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Nueva imagen insertada."));
     return $this->renderComponent('pics', 'list');
   }
 
@@ -147,7 +147,7 @@ class picsActions extends sfActions
       $pic_object->save();
     }
 
-    $this->msg_alert = array('info', "Nueva imagen insertada.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Nueva imagen insertada."));
   }
 
   /**
@@ -168,7 +168,7 @@ class picsActions extends sfActions
     $pic_relation->delete();
 
     $this->preview = true;
-    $this->msg_alert = array('info', "Imagen borrada.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Imagen borrada."));
     return $this->renderComponent('pics', 'list');
   }
 

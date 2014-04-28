@@ -15,8 +15,8 @@
   parent.Modalbox.hide();
 
   new parent.Ajax.Updater('".$upload."', '".url_for($sf_data->getRaw('url'), true)."', {asynchronous: true, evalScripts: true});
-  parent.$('".$upload."').innerHTML= 'Actualize el video para que se muestren las imagenes.';
+  parent.$('".$upload."').innerHTML= '" . __('Actualice el vídeo para que se muestren las imágenes.') . "';
 
-  parent.$('div_messages_span_info').innerHTML ='Nueva imagen subida e insertada.';
+  parent.$('div_messages_span_info').innerHTML ='" . __('Nueva imagen subida e insertada.') . "';
   new parent.Effect.Opacity('div_messages_info', {duration:7.0, from:1.0, to:0.0});
 "); ?>
