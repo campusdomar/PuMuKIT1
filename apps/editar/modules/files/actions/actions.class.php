@@ -149,7 +149,7 @@ class filesActions extends sfActions
     if ($file == null) return $this->renderText('K0');
 
     if(!file_exists($file->getUrlMount())){
-      $this->msg_alert = array('error', "Error en autocompletado los datos del archivo multimedia.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Error en autocompletado de los datos del archivo multimedia."));
       return $this->renderComponent('files', 'list');
     }
 
@@ -166,7 +166,7 @@ class filesActions extends sfActions
     if (file_exists($file->getUrlMount())) $file->setFile($file->getUrlMount());
     $file->save();
 
-    $this->msg_alert = array('info', "Autocompletados los datos del archivo multimedia.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Autocompletados los datos del archivo multimedia."));
     return $this->renderComponent('files', 'list');
   }
 
@@ -229,7 +229,7 @@ class filesActions extends sfActions
     if ($file == null) return $this->renderText('K0');
 
     if(!file_exists($file->getUrlMount())){
-      $this->msg_alert = array('error', "Error en autocompletado los datos del archivo multimedia.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Error en autocompletado de los datos del archivo multimedia."));
       return $this->renderComponent('pics', 'list');
     }
 
@@ -245,8 +245,9 @@ class filesActions extends sfActions
 	    //$num = count($file->getMm()->getPics());
 	    //$num = $this->getRequestParameter('numframe', 125 * ($num +1));
     $file->createPic($num);
+    $message = sprintf($this->getContext()->getI18N()->__("Capturado el FRAME \"%s\" como imagen."), $num);
+    $this->msg_alert = array('info', $message);
 
-    $this->msg_alert = array('info', "Capturado el FRAME " .  $num. " como imagen.");
     return $this->renderComponent('pics', 'list');
   }
 
@@ -303,7 +304,7 @@ class filesActions extends sfActions
     //retranscodifico creando uno nuevo si es necesario.
     $file->retranscoding($profile->getId(), $this->getRequestParameter('prioridad', 2), $this->getUser()->getAttribute('user_id'), true);
 
-    $this->msg_alert = array('info', "Creada nueva tarea para retranscodificar al nuevo formato.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Creada nueva tarea para retranscodificar al nuevo formato."));
     return $this->renderComponent('files', 'list');
   }
 
