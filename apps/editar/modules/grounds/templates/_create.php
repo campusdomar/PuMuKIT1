@@ -2,7 +2,7 @@
   <?php echo form_tag('grounds/createtype', 'class=float-left id=sf_asset_mkdir_form name=sf_asset_mkdir_form') ?>
     <fieldset>
       <div class="form-row">
-        <?php echo label_for('dir', __('Crear un tipo de area:'), '') ?>
+        <?php echo label_for('dir', __('Crear un tipo de área:'), '') ?>
         <div class="content">
           <?php echo input_tag('name', null, 'size=15 id=dir') ?>
         </div>

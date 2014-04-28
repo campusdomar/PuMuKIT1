@@ -5,10 +5,10 @@
         <input type="checkbox" onclick="window.click_checkbox_all('ground', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%">Id</th>
-      <th>Cod</th>
-      <th>Nombre</th>
-      <th>Obj. MM.</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Cod')?></th>
+      <th><?php echo __('Nombre')?></th>
+      <th><?php echo __('Obj. MM.')?></th>
     </tr>
   </thead>
   
@@ -16,7 +16,7 @@
   <?php if (count($grounds) == 0):?>
     <tr>
       <td colspan="9">
-       No existen areas con esos valores.
+       <?php echo __('No existen áreas con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -26,16 +26,16 @@
         <input id="<?php echo $ground->getId()?>" class="ground_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('ground', this, <?php echo $ground->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'grounds/edit?id=' . $ground->getId(), array('title' => 'Editar area de conocimiento "'.$ground->getName() . '"'), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'grounds/edit?id=' . $ground->getId(), array('title' => __('Editar área de conocimiento ').$ground->getName()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_grounds', 'url' => 'grounds/delete?id='.$ground->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro que desea borrar este area?'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_grounds', 'url' => 'grounds/delete?id='.$ground->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro que desea borrar esta área?')))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_grounds', 'url' => 'grounds/copy?id='.$ground->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_grounds', 'url' => 'grounds/copy?id='.$ground->getId(), 'script' => 'true'))?>
       </td>
       <td>
-        <?php echo m_link_to(image_tag('admin/mbuttons/relation_inline.gif', 'alt=editar title=editar'), 'grounds/showrelations?id=' . $ground->getId(), array('title' => 'Editar relaciones del area "'.$ground->getName(). '"'), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/relation_inline.gif', 'alt=' . __('editar') . ' title='  . __('editar')), 'grounds/showrelations?id=' . $ground->getId(), array('title' => __('Editar relaciones del área ') . $ground->getName()), array('width' => '800')) ?>
       </td>
       <td onclick="click_fila('ground', this, <?php echo $ground->getId() ?>);">
         <?php echo $ground->getId() ?>
@@ -56,9 +56,9 @@
     <tr>
       <th colspan="10">
         <div class="float-right">
-          <?php include_partial('global/pager_ajax', array('name' => 'ground', 'page' => $page, 'total' => $total)) ?> 
+          <?php include_partial('global/pager_ajax', array('name' => 'ground', 'page' => $page, 'total' => $total)) ?>
         </div>
-        <?php echo $total_ground ?>/<?php echo $total_ground_all ?> Areas
+        <?php echo $total_ground ?>/<?php echo $total_ground_all ?> <?php echo __('Áreas')?>
       </th>
     </tr>
   </tfoot>

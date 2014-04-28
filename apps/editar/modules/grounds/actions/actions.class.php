@@ -168,7 +168,7 @@ class groundsActions extends sfActions
     try{
       $ground->save();
     }catch (Exception $e) {
-      $this->msg_alert = array('error', "Actualizacion erronea Codigo repetido.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Actualización errónea. Código repetido."));
     }
     $this->getUser()->setAttribute('id', $ground->getId(), 'tv_admin/ground');
 

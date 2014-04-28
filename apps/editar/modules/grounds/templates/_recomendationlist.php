@@ -1,6 +1,6 @@
 <?php if($function):?>
 <div id="ground_notices">
-   <strong>Se recomienda <?php echo $function?>:</strong><br/>
+   <strong><?php echo __('Se recomienda')?> <?php echo $function?>:</strong><br/>
    <?php echo form_remote_tag(array(
 				    'update'     => $div,
 				    'url'        => $url,
@@ -19,9 +19,9 @@
      </ul>
      <br/>
      <div style="text-align:center">
-       <a href="#" onclick="new Ajax.Updater('<?php echo $div?>', '<?php echo url_for($url)?>', {asynchronous:true, evalScripts:false, parameters:Form.serialize(this.parentNode.parentNode)}); return false;">Aceptar</a>
-       <!-- <a href="#" onclick="this.parentNode.parentNode.reset(); return false">Reset</a> -->
-       <a href="#" onclick="this.parentNode.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode.parentNode); return false">Cancelar</a>
+       <a href="#" onclick="new Ajax.Updater('<?php echo $div?>', '<?php echo url_for($url)?>', {asynchronous:true, evalScripts:false, parameters:Form.serialize(this.parentNode.parentNode)}); return false;"><?php echo __('Aceptar')?></a>
+       <!-- <a href="#" onclick="this.parentNode.parentNode.reset(); return false"><?php echo __('Reset')?></a> -->
+       <a href="#" onclick="this.parentNode.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode.parentNode); return false"><?php echo __('Cancelar')?></a>
 
      </div>
    </form>

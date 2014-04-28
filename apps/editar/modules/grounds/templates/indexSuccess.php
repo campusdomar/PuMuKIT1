@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/config_ico.png"/> &Aacute;reas de conocimiento</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/config_ico.png"/> <?php echo __('&Aacute;reas de conocimiento')?></h3>
 
 <div class="container" id="page:container">
   <div class="main">
@@ -34,7 +34,7 @@
               <a href="#" id="poll_tabs_<?php echo $type->getId()?>_section" name="<?php echo $type->getId()?>_section" class="tab-item-link" idElement="<?php echo $type->getId()?>">
                 <span>
                   <img src="/images/admin/mbuttons/delete_inline.gif" class="button" title="borrar" alt="borrar" 
-	              onclick="if (confirm('Seguro')) {window.location.href='<?php echo url_for('grounds/deletetype?id='.$type->getId())?>'};" />
+	              onclick="if (confirm(<?php echo __('Seguro')?>)) {window.location.href='<?php echo url_for('grounds/deletetype?id='.$type->getId())?>'};" />
                   <div class="order_groundtype" style="float:right; padding-right: 10px; display:none" >
                     <span onclick="window.location.href='<?php echo url_for('grounds/uptype?id='.$type->getId()) ?>'">&#8593;</span>&nbsp;
                     <span onclick="window.location.href='<?php echo url_for('grounds/downtype?id='.$type->getId()) ?>'">&#8595;</span>
