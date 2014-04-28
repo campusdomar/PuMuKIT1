@@ -57,8 +57,7 @@ function creaCategory($name, $parent, $cod_prefix = '')
         $category->setRequired(false);
         $category->setCod($cod);
         
-        // $langs = sfConfig::get('app_lang_array', array('es'));
-        $langs = array('es');
+        $langs = sfConfig::get('app_lang_array', array('es'));
         foreach($langs as $lang){
             $category->setCulture($lang);
             $category->setName($name);
@@ -82,8 +81,7 @@ function creaRoot($cod = "root", $name = "root"){
     $parent->setRequired(false);
     $parent->setCod($cod);
 
-    // $langs = sfConfig::get('app_lang_array', array('es'));
-    $langs = array('es');
+    $langs = sfConfig::get('app_lang_array', array('es'));
     foreach($langs as $lang){
         $parent->setCulture($lang);
         $parent->setName($name);
