@@ -5,18 +5,18 @@
         <input type="checkbox" onclick="window.click_checkbox_all('role', this.checked)">
       </th>
       <th colspan="5" width="7%"></th>
-      <th width="1%">Id</th>
-      <th width="1%">Display</th>
-      <th>Codigo</th>
-      <th>Name</th>
-      <th width="1%">Roles</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th width="1%"><?php echo __('Display')?></th>
+      <th><?php echo __('Código')?></th>
+      <th><?php echo __('Name')?></th>
+      <th width="1%"><?php echo __('Roles')?></th>
     </tr>
   </thead>
   <tbody>
     <?php if (count($roles) == 0):?>
       <tr>
         <td colspan="11">
-         No existen roles con esos valores.
+         <?php echo __('No existen roles con esos valores.')?>
         </td>
       </tr>
     <?php endif; ?>
@@ -26,19 +26,19 @@
           <input id="<?php echo $role->getId()?>" class="role_checkbox" type="checkbox">
         </td>
         <td onclick="click_fila('role', this, <?php echo $role->getId() ?>);">
-          <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'roles/edit?id=' . $role->getId(), array('title' => 'Editar Novedad '.$role->getId()), array('width' => '800')) ?>
+          <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'roles/edit?id=' . $role->getId(), array('title' => __('Editar Novedad ').$role->getId()), array('width' => '800')) ?>
         </td>
         <td onclick="click_fila('role', this, <?php echo $role->getId() ?>);">
           <?php 
   if ($numP ==0 ){
-    echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_roles', 'url' => 'roles/delete?id='.$role->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro?'));
+    echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_roles', 'url' => 'roles/delete?id='.$role->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro?')));
   }else{
-    echo link_to_function(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), "alert('Imposible borrar, con ". $numP ." persons ')");  
+    echo link_to_function(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), "alert('" . __('Imposible borrar, con ') . $numP .' persons ' . "') ");  
   }
      ?>
         </td>
         <td onclick="click_fila('role', this, <?php echo $role->getId() ?>);">
-          <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_roles', 'url' => 'roles/copy?id='.$role->getId(), 'script' => 'true'))?>
+          <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_roles', 'url' => 'roles/copy?id='.$role->getId(), 'script' => 'true'))?>
         </td>
 	<td onclick="click_fila('role', this, <?php echo $role->getId() ?>);">
           <?php echo ((($page == 1)&&( $i == 0)) ? '&nbsp;' : (link_to_remote('&#8593;', array('update' => 'list_roles', 'url' => 'roles/up?id='.$role->getId(), 'script' => 'true'))).(link_to_remote('&#8657;', array('update' => 'list_roles', 'url' => 'roles/top?id='.$role->getId(), 'script' => 'true'))))   ?>
@@ -70,9 +70,9 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'role', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_role ?>/<?php echo $total_role_all ?> Roles
+        <?php echo $total_role ?>/<?php echo $total_role_all ?> <?php echo __('Roles')?>
         <?php $aux = ($total_role==$total_role_all?'display:none; ':'')?>
-        <?php echo link_to_remote('Cancelar busqueda', array('before' => '$("filter_roles").reset();', 'update' => 'list_roles', 'url' => 'roles/list?filter=filter ', 'script' => 'true'), array('title' => 'Cancelar la busqueda actual', 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
+        <?php echo link_to_remote('Cancelar búsqueda', array('before' => '$("filter_roles").reset();', 'update' => 'list_roles', 'url' => 'roles/list?filter=filter ', 'script' => 'true'), array('title' => __('Cancelar la búsqueda actual'), 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
       </th>
     </tr>
   </tfoot>

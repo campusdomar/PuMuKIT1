@@ -14,7 +14,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('display', 'Display:', 'class="required" ') ?>
+  <?php echo label_for('display', __('Display:'), 'class="required" ') ?>
   <div class="content">
   <?php $value = object_checkbox_tag($role, 'getDisplay', array ('control_name' => 'display',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -23,7 +23,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('cod', 'Codigo:', 'class="required" ') ?>
+  <?php echo label_for('cod', __('Código:'), 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($role, 'getCod', array ('size' => 5,  'control_name' => 'cod',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -32,7 +32,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('xml', 'Xml:', 'class="required" ') ?>
+  <?php echo label_for('xml', __('XML:'), 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($role, 'getXml', array ('size' => 10,  'control_name' => 'xml',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -41,7 +41,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
+  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $role->setCulture($lang);  echo $sep ?>  
@@ -56,7 +56,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('text', 'Texto:', 'class="required" ') ?>
+  <?php echo label_for('text', __('Texto:'), 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $role->setCulture($lang);  echo $sep ?>  
@@ -75,8 +75,8 @@
 
 
 <ul class="tv_admin_actions">
-<li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-<li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+<li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+<li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
   </ul>
 
 </form>
