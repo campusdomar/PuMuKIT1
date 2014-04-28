@@ -1,5 +1,5 @@
 <h3 class="cab_body_div"><img src="/images/admin/cab/widget_ico.png"/> 
-  <a href="<?php echo url_for('widgets/index')?>"  style="color: #666E73; font-size: 75%">[ WebTV Layout ]</a> News
+  <a href="<?php echo url_for('widgets/index')?>"  style="color: #666E73; font-size: 75%">[ WebTV Layout ]</a> <?php echo __('News')?>
 </h3>
 
 <div id="tv_admin_container">
@@ -18,17 +18,17 @@
     <div style="float:right; width:50%">
       <ul class="tv_admin_actions">
         <!-- Falta -->
-        <li><?php echo button_to_function('create', 'Modalbox.show("notices/create", {title:"Editar Nueva Noticia", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?></li>
+        <li><?php echo button_to_function(__('create'), 'Modalbox.show("notices/create", {title:"' . __('Editar Nueva Noticia') . '", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?></li>
       </ul>
     </div>
 
-    <select id="options_notices" style="margin: 10px 0px; width: 33%" title="Acciones sobre elementos selecionados" onchange="window.change_select('notice', $('options_notices'))">
-      <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
+    <select id="options_notices" style="margin: 10px 0px; width: 33%" title="<?php echo __('Acciones sobre elementos seleccionados')?>" onchange="window.change_select('notice', $('options_notices'))">
+      <option value="default" selected="selected"><?php echo __('Selecciona una acci&oacute;n...')?></option>
       <option disabled="">---</option>
-      <option value="delete_sel">Borrar selecionados</option>
-      <option value="create">Crear nuevo</option>
-      <option value="inv_working_sel">Ocultar/Desocultar selecionados</option> 
-      <option value="inv_working_all">Ocultar/Desocultar todos</option> 
+      <option value="delete_sel"><?php echo __('Borrar seleccionados')?></option>
+      <option value="create"><?php echo __('Crear nuevo')?></option>
+      <option value="inv_working_sel"><?php echo __('Ocultar/Mostrar seleccionados')?></option> 
+      <option value="inv_working_all"><?php echo __('Ocultar/Mostrar todos')?></option> 
     </select>
     
   </div>

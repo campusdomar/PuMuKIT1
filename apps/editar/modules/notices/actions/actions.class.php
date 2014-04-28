@@ -129,7 +129,7 @@ class noticesActions extends sfActions
     }
 
     $notice->save();
-    $this->msg_alert = array('info', "Noticia almacenada correctamene en la base de datos.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticia almacenada correctamente en la base de datos."));
 
     $this->getUser()->setAttribute('id', $notice->getId(), 'tv_admin/notice');
 
@@ -154,12 +154,12 @@ class noticesActions extends sfActions
       foreach($notices as $notice){
 	$notice->delete();
       }
-      $this->msg_alert = array('info', "Noticias borradas.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticias borradas."));
 
     }elseif($this->hasRequestParameter('id')){
       $notice = NoticePeer::retrieveByPk($this->getRequestParameter('id'));
       $notice->delete();
-      $this->msg_alert = array('info', "Noticia borrada.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticia borrada."));
     }
 
     $this->getUser()->setAttribute('id', null, 'tv_admin/notice'); //delete mejor
@@ -190,7 +190,7 @@ class noticesActions extends sfActions
     }
 
     $notice2->save();
-    $this->msg_alert = array('info', "Noticia clonada.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticia clonada."));
     return $this->renderComponent('notices', 'list');
   }
 
@@ -213,13 +213,13 @@ class noticesActions extends sfActions
 	$notice->setWorking(!$notice->getWorking());
 	$notice->save();
       }
-      $this->msg_alert = array('info', "Noticias ocultadas/desocultadas correctamente.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticias ocultadas/mostradas correctamente."));
 
     }elseif($this->hasRequestParameter('id')){
       $notice = NoticePeer::retrieveByPk($this->getRequestParameter('id'));
       $notice->setWorking(!$notice->getWorking());
       $notice->save();
-      $this->msg_alert = array('info', "Noticia ocultada/desocultada correctamente.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticia ocultada/mostrada correctamente."));
     }
 
     return $this->renderComponent('notices', 'list');

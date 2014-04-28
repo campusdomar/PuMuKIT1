@@ -12,6 +12,6 @@
 
 <?php else:?>
 <p>
-  Selecione alguna noticia.
+  <?php echo __('Seleccione alguna noticia.')?>
 </p>
 <?php endif?>  

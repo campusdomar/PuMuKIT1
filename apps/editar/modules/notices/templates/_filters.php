@@ -2,10 +2,10 @@
 <div class="tv_admin_filters">
 <?php echo form_remote_tag(array('update' => 'list_notices', 'url' => 'notices/list', 'script' => 'true' ), 'id=filter_notices') ?>
   <fieldset>
-    <h2>Buscar</h2>
+    <h2><?php echo __('Buscar')?></h2>
 
     <div class="form-row">
-      <label for="name">Name:</label>
+      <label for="name"><?php echo __('Name:')?></label>
       <div class="content">
         <?php echo input_tag('filters[name]', null) ?>
       </div>
@@ -13,7 +13,7 @@
 
 
     <div class="form-row">
-      <label for="date"><?php echo 'Fecha:' ?></label>
+      <label for="date"><?php echo __('Fecha:') ?></label>
       <div class="content">
         <?php echo input_date_range_tag('filters[date]',  null, array ('rich' => true, 'calendar_button_img' => '/images/admin/buttons/date.png', 'before'=>'Desde:', 'middle'=>' <br />Hasta: ' )) ?>
       </div>
