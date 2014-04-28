@@ -1,4 +1,4 @@
-<div style="background-color: red; padding: 5px; "> Uso de CPUs </div>
+<div style="background-color: red; padding: 5px; "> <?php echo __('Uso de CPUs')?> </div>
 
 <ul>
 <?php foreach($hds as $h): ?>
