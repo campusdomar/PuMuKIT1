@@ -43,7 +43,7 @@ class emailsActions extends sfActions
     }
     $this->logMessage($raw_email, 'debug');
 
-    $this->msg_alert = array('info', "Email enviado con exito.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Email enviado con éxito."));
 
   }
 
