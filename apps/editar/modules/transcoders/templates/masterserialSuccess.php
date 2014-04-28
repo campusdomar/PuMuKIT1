@@ -13,7 +13,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('profile_id','Perfiles:', 'class="required" ') ?>
+  <?php echo label_for('profile_id',__('Perfiles:'), 'class="required" ') ?>
 
   <div class="content" style="overflow: hidden">
     <?php foreach($profiles as $profile): if(!$profile->getWizard()) continue;?>
@@ -26,18 +26,18 @@
 
 
 <div class="form-row">
-  <?php echo label_for('priority','Prioridad:', 'class="required" ') ?>
+  <?php echo label_for('priority',__('Prioridad:'), 'class="required" ') ?>
 
   <div class="content">
-    <input type="radio" value="1" name="prioridad"/>Low-Priority&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" checked="checked" value="2" name="prioridad"/>Normal-Priority&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" value="3" name="prioridad"/>High-Priority&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="1" name="prioridad"/><?php echo __('Low-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" checked="checked" value="2" name="prioridad"/><?php echo __('Normal-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="3" name="prioridad"/><?php echo __('High-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('language_id','Idioma:', 'class="required" ') ?>
+  <?php echo label_for('language_id',__('Idioma:'), 'class="required" ') ?>
 
   <div class="content">
     <?php echo select_tag('idioma', objects_for_select(
@@ -52,7 +52,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('url','URL:', 'class="required" ') ?>
+  <?php echo label_for('url',__('URL:'), 'class="required" ') ?>
   <div class="content">
     <input type="text" size="53" id="url" name="url" /> 
     <?php echo button_to_function('explorar', "Effect.toggle('explorer_videoserv','blind')" )?>
@@ -77,8 +77,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag('OK', 'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag(__('OK'), 'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>

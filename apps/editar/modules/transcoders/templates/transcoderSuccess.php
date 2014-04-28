@@ -1,7 +1,7 @@
 <?php use_helper('Object') ?>
 
 <h3 class="cab_body_div">
-  <img src="/images/admin/cab/process.png"/> Transcoder Video
+  <img src="/images/admin/cab/process.png"/> <?php echo __('Transcoder Video')?>
 </h3>
 
 
@@ -17,7 +17,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('profile_id','Perfiles:', 'class="required" ') ?>
+  <?php echo label_for('profile_id', __('Perfiles:'), 'class="required" ') ?>
 
   <div class="content" style="overflow: hidden">
     <?php foreach($profiles as $profile): ?>
@@ -31,18 +31,18 @@
 
 
 <div class="form-row">
-  <?php echo label_for('priority','Prioridad:', 'class="required" ') ?>
+  <?php echo label_for('priority', __('Prioridad:'), 'class="required" ') ?>
 
   <div class="content">
-    <input type="radio" value="1" name="prioridad"/>Low-Priority&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" checked="checked" value="2" name="prioridad"/>Normal-Priority&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" value="3" name="prioridad"/>High-Priority&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="1" name="prioridad"/><?php echo __('Low-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" checked="checked" value="2" name="prioridad"/><?php echo __('Normal-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="3" name="prioridad"/><?php echo __('High-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('language_id','Idioma:', 'class="required" ') ?>
+  <?php echo label_for('language_id', __('Idioma:'), 'class="required" ') ?>
 
   <div class="content">
     <?php echo select_tag('idioma', objects_for_select(
@@ -57,7 +57,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('url','URL_IN:', 'class="required" ') ?>
+  <?php echo label_for('url', __('URL_IN:'), 'class="required" ') ?>
   <div class="content">
     <input type="text" size="53" id="url" name="url" /> 
     <?php echo button_to_function('explorar', "Effect.toggle('explorer_videoserv','blind')" )?>
@@ -79,7 +79,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('urlout','URL_OUT:', 'class="required" ') ?>
+  <?php echo label_for('urlout', __('URL_OUT:'), 'class="required" ') ?>
   <div class="content">
     <input type="text" size="53" id="urlout" name="urlout" value="\\172.20.209.52\video_tmp3\tmp" /> 
   </div>
@@ -91,8 +91,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag('OK', array('name' => 'OK',  'class' => 'tv_admin_action_save', 'onclick' => "if($('url').value.trim()=='') { alert('Falta URL');return false; }else{Modalbox.hide();}")); ?></li>
-  <li><?php echo reset_tag('Cancel', 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag(__('OK'), array('name' => 'OK',  'class' => 'tv_admin_action_save', 'onclick' => "if($('url').value.trim()=='') { alert('<?php echo __('Falta URL')?>');return false; }else{Modalbox.hide();}")); ?></li>
+  <li><?php echo reset_tag(__('Cancel'), 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>

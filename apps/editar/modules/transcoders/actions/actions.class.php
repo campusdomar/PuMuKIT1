@@ -386,8 +386,8 @@ class transcodersActions extends sfActions
       }
 
       if($duration == 0){
+
 	echo __('"Duracion 0\n');
-	exit;
 	continue;
       }
 
@@ -488,16 +488,16 @@ class transcodersActions extends sfActions
 		       );
 
     if(!count($profiles)){
-      return $this->renderText("Selecione un perfil");
+      return $this->renderText($this->getContext()->getI18N()->__("Seleccione un perfil"));
     }
 
     if(!file_exists($url_in)){
-      return $this->renderText("No existe fiechero de entrada");
+      return $this->renderText($this->getContext()->getI18N()->__("No existe fichero de entrada"));
     }
 
     
     if(file_exists($url_out)){
-      return $this->renderText("Ya existe fichero de salida " . $url_out);
+      return $this->renderText($this->getContext()->getI18N()->__("Ya existe fichero de salida ") . $url_out);
     }
     
     $file_name = basename($url_in);
@@ -509,11 +509,11 @@ class transcodersActions extends sfActions
       $duration = FilePeer::getDuration($path_video_tmp);
     }
     catch (Exception $e) {
-      return $this->renderText("Error al analizar el archivo");
+      return $this->renderText($this->getContext()->getI18N()->__("Error al analizar el archivo"));
     }
 
     if($duration == 0){
-      return $this->renderText("Error al analizar el archivo.");
+      return $this->renderText($this->getContext()->getI18N()->__("Error al analizar el archivo."));
     }
 
     foreach($profiles as $profile){
@@ -530,7 +530,7 @@ class transcodersActions extends sfActions
 	
       foreach($langs as $l){
 	$trans->setCulture($l);
-	$trans->setDescription('Transcodificacion independiente');
+	$trans->setDescription('Transcodificación independiente');
       }
       	
       $trans->save();
@@ -558,7 +558,7 @@ class transcodersActions extends sfActions
       TranscodingPeer::execNext();
       
     } 
-    return $this->renderText("Transcodificacion metida en la cola.");
+    return $this->renderText($this->getContext()->getI18N()->__("Transcodificación metida en la cola."));
   }
 
 
@@ -611,7 +611,8 @@ class transcodersActions extends sfActions
 
     $files = sfFinder::type('file')->maxdepth(0)->prune('.*')->in($aux);
     
-    $this->msg_alert = array('info', "Procesados ".count($files)." ficheros. ");
+    $message = sprintf($this->getContext()->getI18N()->__("Procesados \"%s\" ficheros."), count($files));
+    $this->msg_alert = array('info', $message);
 
     foreach($files as $file){
       //echo "-Process file:" . $file . "\n";
@@ -638,13 +639,13 @@ class transcodersActions extends sfActions
       }
       catch (Exception $e) {
 	//unlink($path_video_tmp);
-	$this->msg_alert = array('error', "Existe algun archivo mal procesado.");
+	$this->msg_alert = array('error', $this->getContext()->getI18N()->__("Existe algún archivo mal procesado."));
 	continue; 
       }
 
       if($duration == 0){
 	//exit;
-	$this->msg_alert = array('error', "Existe algun archivo mal procesado.");
+	$this->msg_alert = array('error', $this->getContext()->getI18N()->__("Existe algún archivo mal procesado."));
 	continue;
       }
 
@@ -669,7 +670,7 @@ class transcodersActions extends sfActions
 	$trans->setName(substr($file_name, 0 , strlen($file_name)- 4));
 	$trans->setLanguage($lang);
 	//$trans->setComment()//varios idiomas
-	//falta duracion
+	//falta duración
 	$trans->setPid(0);
 	$trans->setEmail($this->getUser()->getAttribute('email'));
 	
@@ -702,7 +703,7 @@ class transcodersActions extends sfActions
     $this->forward404Unless($trans);
 
     if($trans->getStatusId() != TranscodingPeer::STATUS_ERROR){
-      $this->msg_alert = array('error', "La tarea no es erronea.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("La tarea es correcta."));
       return $this->renderComponent('files', 'list');
     }
     
@@ -715,7 +716,7 @@ class transcodersActions extends sfActions
     TranscodingPeer::execNext();
     
     //OJO LO QUE TENGO QUE DEVOLVER
-    $this->msg_alert = array('info', "Retranscodificando tarea.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Retranscodificando tarea."));
     return $this->renderComponent('files', 'list');
   }
 
@@ -734,7 +735,7 @@ class transcodersActions extends sfActions
     $this->forward404Unless($trans);
 
     if($trans->getStatusId() != TranscodingPeer::STATUS_ERROR){
-      $this->msg_alert = array('error', "La tarea no es erronea.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("La tarea es correcta."));
       return $this->renderComponent('files', 'list');
     }
     
@@ -742,7 +743,7 @@ class transcodersActions extends sfActions
     $trans->delete();
 
     //OJO LO QUE TENGO QUE DEVOLVER
-    $this->msg_alert = array('info', "Transcodificacion borrada.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Transcodificación borrada."));
     return $this->renderComponent('files', 'list');
   }
 
