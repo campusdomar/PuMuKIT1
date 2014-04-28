@@ -17,7 +17,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('display', 'Visible:', 'class="required" ') ?>
+  <?php echo label_for('display', __('Visible:'), 'class="required" ') ?>
   <div class="content">
     <?php $value = object_checkbox_tag($oc, 'getDisplay', array (
       'control_name' => 'display',
@@ -27,18 +27,18 @@
 
 
 <div class="form-row">
-  <?php echo label_for('invert', 'Orden:', 'class="required" ') ?>
+  <?php echo label_for('invert', __('Orden:'), 'class="required" ') ?>
   <div class="content">
     <select name="invert" id="invert">
-      <option value="0" <?php echo $oc->getInvert() == 0? 'selected="selected"' : '' ?> >Normal</option>
-      <option value="1" <?php echo $oc->getInvert() == 1? 'selected="selected"' : '' ?> >Invertido</option>
+      <option value="0" <?php echo $oc->getInvert() == 0? 'selected="selected"' : '' ?> ><?php echo __('Normal')?></option>
+      <option value="1" <?php echo $oc->getInvert() == 1? 'selected="selected"' : '' ?> ><?php echo __('Invertido')?></option>
     </select>
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('language_id', 'Idioma:', 'class="required" ') ?>
+  <?php echo label_for('language_id', __('Idioma:'), 'class="required" ') ?>
 
   <div class="content">
     <?php $value = object_select_tag($oc, 'getLanguageId', array (
@@ -50,7 +50,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('duration', 'Duracion:', 'class="required" ') ?>
+  <?php echo label_for('duration', __('Duración:'), 'class="required" ') ?>
 
   <div class="content" id="durationFile">
     <?php include_partial('files/duration', array('min' => $oc->getDurationMin(), 'seg' => $oc->getDurationSeg() )) ?>
@@ -62,8 +62,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>

@@ -253,7 +253,7 @@ class matterhornActions extends sfActions
     $mmMatterhorn = new MmMatterhorn();
     $mmMatterhorn->setId($mm->getId());
     $mmMatterhorn->setMhId($mp['id']); 
-    $mmMatterhorn->setLanguageId(4);
+    $mmMatterhorn->setLanguageId(LanguagePeer::getDefaultSelId());
     $mmMatterhorn->setPlayerUrl($this->engage_server . '/engage/ui/watch.html?id=%id%'); 
     $mmMatterhorn->setDuration($mp["duration"]/1000); 
     $mmMatterhorn->save();

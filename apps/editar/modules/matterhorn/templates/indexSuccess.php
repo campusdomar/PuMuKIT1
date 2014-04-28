@@ -1,4 +1,4 @@
-<h3 class="cab_body_div">Opencast-Matterhorn Import</h3>
+<h3 class="cab_body_div"><?php echo __('Opencast-Matterhorn Import')?></h3>
 
 <div id="matterhorn_info"></div>
 
@@ -38,7 +38,6 @@ function matterhorn_info(msg){
 
 //]]>
 </script>
-
 
 <br />
 <br />

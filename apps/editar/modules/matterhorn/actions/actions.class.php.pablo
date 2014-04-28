@@ -1,0 +1,469 @@
+<?php
+/**
+ * MODULO OC-MH ACTIONS. 
+ * Modulo de importacion desde OC-MH
+ *
+ * @package    pumukit
+ * @subpackage matterhorn
+ * @author     Ruben Gonzalez Gonzalez (rubenrua at uvigo dot com)
+ * @version    1.0
+ */
+class matterhornActions extends sfActions
+{
+
+  public $init_endpoint = '/welcome.html';
+  public $search_endpoint = '/search/episode.json';
+  public $server;
+  public $user;
+  public $password;
+  public $anonymous = true;
+  public $cookie;
+  
+  public function preExecute()
+  {
+    $this->server = sfConfig::get('app_matterhorn_server');
+    $this->user = sfConfig::get('app_matterhorn_user');
+    $this->password = sfConfig::get('app_matterhorn_password');
+
+    $this->anonymous = $this->getUser()->getAttribute('anonymous', false, 'tv_admin/matterhorn');
+    $this->cookie = $this->getUser()->getAttribute('cookie','','tv_admin/matterhorn');
+    
+    $this->init_cookie();    
+
+    /*if(!$this->anonymous){
+      $this->init_cookie();
+    }*/
+  }
+
+
+  public function executeIndex()
+  {
+  }
+
+  public function executeInfo()
+  {
+    if(!($info = $this->getInfo())){
+      return sfView::ERROR;
+    }
+
+    $this->conf = $this->anonymous;
+    $this->oc_server = $this->server;
+    $this->username = $info['username'];
+    $this->roles = implode(',', $info['roles']);
+    $this->img = $info['org']['properties']['logo_small'];
+  }
+
+
+  public function executeList()
+  {
+    $limit  = 8;
+    $offset = 0;
+    
+    if ($this->hasRequestParameter('page')){
+      $offset = $this->getRequestParameter('page') - 1;
+    }
+
+    $out = $this->getAll($offset, $limit);
+
+    if(!$out || !isset($out['search-results']['total'])){
+      return sfView::ERROR;
+    }
+
+    try{
+      $total = $out['search-results']['total'];
+    } catch (Exception $e) {
+      return sfView::ERROR;
+    }
+
+    if ($total == 0) {
+      return sfView::ERROR;
+    } elseif ($total == 1) {
+      $media_packages = array();
+      $media_packages[] = $this->map_mp($out['search-results']['result']);
+    } else {
+      $media_packages = array();
+      foreach($out['search-results']['result'] as $mp){
+	$media_packages[] = $this->map_mp($mp);
+      }
+    }
+    
+    $this->total = $total;
+    $this->page = $offset + 1;
+    $this->total_page = ceil($this->total / $limit); 
+    $this->media_packages = $media_packages;
+    $this->mh_server = sfConfig::get('app_matterhorn_server');
+  }
+
+
+  public function executeToggle()
+  {
+    $this->getUser()->setAttribute('anonymous', 
+				   $this->getRequestParameter('value', 'false') == "true", 
+				   'tv_admin/matterhorn');
+    return $this->renderText("Cambio realizado (reload)");
+  }
+
+
+  public function executeImport(){
+    $id = $this->getRequestParameter('id');
+
+    $aux = $this->get($id);
+    $mp = $this->map_mp_all($aux["search-results"]["result"]);
+    $mm = $this->createMm($mp);
+  
+    $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
+    //return $this->renderText(json_encode($mp));
+    return $this->forward('matterhorn', 'list');
+  }
+  
+
+
+  private function map_mp($mp){
+      $img = null;
+      
+      if(isset($mp["mediapackage"]["attachments"]) and isset($mp["mediapackage"]["attachments"]["attachment"])){
+	foreach($mp["mediapackage"]["attachments"]["attachment"] as $attach){
+	  if(($attach['type'] == "presenter/search+preview") && ($attach['mimetype'] == "image/jpeg")){
+	    $img = $attach['url'];
+	  }
+	}
+      }
+
+      /*MIRO SI EXISTE EN LA BBDD */
+      $c = new Criteria();
+      $c->add(MmMatterhornPeer::MH_ID, $mp['id']);
+      $c->addJoin(MmPeer::ID, MmMatterhornPeer::ID);
+      $mm = MmPeer::doSelectOne($c);
+      
+      //Antes $mp["dcCreated"]
+
+      $date = strtotime($mp["mediapackage"]["start"]);
+      
+
+      return array("id" => $mp["id"], 
+		   "title" => $mp["dcTitle"], 
+		   "duration" => $mp["mediapackage"]["duration"], 
+                   'serial_id' => isset($mp["mediapackage"]["series"])?$mp["mediapackage"]["series"]:null,
+		   "date" => $date, 
+		   "img" => $img,
+		   'mm' => $mm);
+  }
+
+
+  private function map_mp_all($mp){
+    $img = null;
+    foreach($mp['mediapackage']['attachments']['attachment'] as $attach){
+      if(($attach['type'] == 'presenter/search+preview') && ($attach['mimetype'] == 'image/jpeg')){
+	$img = $attach['url'];
+      }
+    }
+    
+    /*MIRO SI EXISTE EN LA BBDD */
+    $c = new Criteria();
+    $c->add(MmMatterhornPeer::MH_ID, $mp['id']);
+    $c->addJoin(MmMatterhornPeer::MH_ID, MmPeer::ID);
+    $mm = MmPeer::doSelectOne($c);
+
+    //Antes $mp["dcCreated"]
+    $date = strtotime($mp["mediapackage"]["start"]);
+
+    //FIXME ojo sino viene datos
+    return array('id' => $mp['id'], 
+		 'title' => isset($mp['dcTitle'])?$mp['dcTitle']:null, 
+		 'date' => $date, 
+		 'description' => isset($mp['dcDescription'])?$mp['dcDescription']:null,
+		 'subject' => isset($mp['dcSubject'])?$mp['dcSubject']:null,
+		 'language' => isset($mp['dcLanguage'])?$mp['dcLanguage']:null,
+		 'creator' => isset($mp['dcCreator'])?$mp['dcCreator']:null,
+		 'serial_id' => isset($mp["mediapackage"]["series"])?$mp["mediapackage"]["series"]:null,
+		 "duration" => $mp["mediapackage"]["duration"], 
+		 'img' => isset($img)?$img:null,
+		 'mm' => $mm);
+    
+  }
+
+  private function getAll($offset = 0, $limit = 5)
+  {
+    /*    $ch = curl_init($this->server . $this->search_endpoint . '?limit=' . $limit . '&offset=' . $offset);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_COOKIE, $this->cookie);
+    //FIXME
+           
+    $var = curl_exec($ch); 
+    $error = curl_error($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ($status !== 200) return false;*/
+    
+    $resp = $this->getMatterhorn($this->server . $this->search_endpoint . '?limit=' . $limit . '&offset=' . $offset);
+    if ($resp["status"] !== 200){
+      init_cookie();
+      $resp = getMatterhorn($this->server . $this->search_endpoint . '?limit=' . $limit . '&offset=' . $offset);
+    }
+    if ($resp["status"] !== 200) return false;
+
+
+
+    //FIXME capturar si falla.
+    return json_decode(utf8_encode($resp["var"]), true);
+  }
+
+  private function get($id)
+  {
+    /*
+    $ch = curl_init($this->server . $this->search_endpoint . "?id=" . $id); 
+	
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_COOKIE, $this->cookie);
+    
+    
+    $var = curl_exec($ch); 
+    $error = curl_error($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    */
+
+    $resp = $this->getMatterhorn($this->server . $this->search_endpoint . "?id=" . $id);
+    if ($resp["status"] !== 200){
+      init_cookie();
+      $resp = getMatterhorn();
+    }
+    if ($resp["status"] !== 200) return false;
+
+    //FIXME capturar si falla.
+    return json_decode(utf8_encode($resp["var"]), true);
+  }
+
+  private function getInfo()
+  {
+    /*    $ch = curl_init($this->server . '/info/me.json'); 
+	
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_COOKIE, $this->cookie);
+    
+    $var = curl_exec($ch); 
+    $error = curl_error($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+    if ($status !== 200) return false;*/
+    
+
+    $resp = $this->getMatterhorn($this->server . '/info/me.json');
+    if ($resp["status"] !== 200){
+      init_cookie();
+      $resp = getMatterhorn($this->server . '/info/me.json');
+    }
+    if ($resp["status"] !== 200) return false;
+    
+    //FIXME capturar si falla.
+    return json_decode(utf8_encode($resp["var"]), true);
+  }
+
+
+  private function init_cookie()
+  {
+    
+    $ch = curl_init($this->server . $this->init_endpoint);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+    curl_setopt($ch, CURLOPT_USERPWD, $this->user . ':' . $this->password);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Requested-Auth: Digest"));
+
+    $var = curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    preg_match_all('#Set-Cookie: (.*)#', $var, $matches);
+
+
+
+    if ($status === 200 && is_array($matches[1])){
+      $this->cookie = end($matches[1]);
+      $this->getUser()->setAttribute('cookie', end($matches[1]),'tv_admin/matterhorn');
+
+
+      return true;
+    }else{
+      //FIXME EXception
+      $this->forward404();
+    }   
+  }
+
+
+
+  /**
+   *
+   *
+   */
+  private function getSeries($oc_id = null)
+  {
+    if($oc_id != null){
+      
+      /*MIRO SI EXISTE EN LA BBDD */
+      $c = new Criteria();
+      $c->add(SerialMatterhornPeer::MH_ID, $oc_id);
+      $c->addJoin(SerialMatterhornPeer::ID, SerialPeer::ID);
+      $s = SerialPeer::doSelectOne($c);
+      
+
+      if($s !== null){
+	//FIXME mirar si se tiene que actualizar
+	return $s;
+      }
+
+      /*OBTENGO DATOS
+      $ch = curl_init($this->server . "/series/" . $oc_id. ".json"); 
+      
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_COOKIE, $this->cookie);
+      
+      $var = curl_exec($ch); 
+      $error = curl_error($ch);
+      $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+      
+      if ($status !== 200) return false;*/
+      
+
+      $resp = $this->getMatterhorn($this->server . "/series/" . $oc_id. ".json");
+      if ($resp["status"] !== 200){
+	init_cookie();
+	$resp = getMatterhorn($this->server . "/series/" . $oc_id. ".json");
+      }
+      if ($resp["status"] !== 200) return false;
+      
+      
+      $data = json_decode(utf8_encode($resp["var"]), true);
+
+    
+      /*SI NO EXISTE CREO UNA NUEVA SERIE*/
+      $s = new Serial();
+      $s->setPublicdate("now");
+      $s->setAnnounce(0);
+      $cr = isset($data["http://purl.org/dc/terms/"]["license"][0]['value'])?$data["http://purl.org/dc/terms/"]["license"][0]['value']:"";
+      $s->setCopyright($cr);
+      $s->setSerialTypeId(0);
+      $s->setSerialTemplateId(1);
+      
+      $langs = sfConfig::get('app_lang_array', array('es'));
+      foreach($langs as $lang){
+	$s->setCulture($lang);
+	//FIXME
+	$s->setTitle(isset($data["http://purl.org/dc/terms/"]["title"][0]['value'])?$data["http://purl.org/dc/terms/"]["title"][0]['value']:'');
+	$s->setSubtitle(isset($data["http://purl.org/dc/terms/"]["subject"][0]['value'])?$data["http://purl.org/dc/terms/"]["subject"][0]['value']:'');
+	$s->setKeyword('');
+	$s->setDescription(isset($data["http://purl.org/dc/terms/"]["description"][0]['value'])?$data["http://purl.org/dc/terms/"]["description"][0]['value']:'');
+      }
+      
+      $s->save();
+      
+      
+      $sMatterhorn = new SerialMatterhorn();
+      $sMatterhorn->setId($s->getId());
+      $sMatterhorn->setMhId($oc_id);
+      $sMatterhorn->save();
+    }else{
+    
+      $s = new Serial();
+      $s->setPublicdate("now");
+      $s->setAnnounce(0);
+      $s->setCopyright("");
+      $s->setSerialTypeId(0);
+      $s->setSerialTemplateId(1);
+      
+      $langs = sfConfig::get('app_lang_array', array('es'));
+      foreach($langs as $lang){
+	$s->setCulture($lang);
+	//FIXME
+	$s->setTitle("nuevo from OC-MH");
+      }
+      
+      $s->save();
+    }
+    return $s;
+    
+  }
+
+  private function createMm($mp)
+  {
+    if($mp['mm'] !== null){
+      //FIXME mirar si se tiene que actualizar
+      return $mp['mm'];
+    }
+
+
+    $mm = new Mm();    
+    $mm->setPublicdate("now");
+    $mm->setRecorddate($mp['date']);
+
+    $mm->setSubserial(0);
+    $mm->setCopyright("");
+    $mm->setPrecinctId(1);
+    $mm->setGenreId(22); //Genero matterhorn
+    
+    $mm->setSerial($this->getSeries($mp['serial_id']));
+    $mm->setStatusId(MmPeer::STATUS_BLOQ);
+    $mm->save();
+    $mm->setPic($mp['img']);
+
+
+    $langs = sfConfig::get('app_lang_array', array('es'));
+    foreach($langs as $lang){
+      $mm->setCulture($lang);
+      $mm->setTitle($mp['title']);
+      $mm->setSubtitle($mp['subject']);
+      $mm->setKeyword('');
+      $mm->setDescription($mp['description']);
+    }
+    $mm->save();
+
+    $mmMatterhorn = new MmMatterhorn();
+    $mmMatterhorn->setId($mm->getId());
+    $mmMatterhorn->setMhId($mp['id']); 
+    $mmMatterhorn->setPlayerUrl($this->server . '/engage/ui/watch.html?id=%id%'); 
+    $mmMatterhorn->setDuration($mp["duration"]/1000); 
+    $mmMatterhorn->save();
+
+   
+    return $mm;
+
+  }
+  
+  
+  /**
+   *
+   * Hace una peticion al core de matterhorn
+   *
+   **/
+  private function getMatterhorn($url)
+  {
+    /*
+    $sal = array();
+    $ch = curl_init($url); 
+    
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_COOKIE, $this->cookie);
+    
+    $sal["var"] = curl_exec($ch); 
+    $sal["error"] = curl_error($ch);
+    $sal["status"] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    curl_close($ch);*/
+    
+    $sal = array();
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_DIGEST);
+    curl_setopt($ch, CURLOPT_USERPWD, $this->user . ':' . $this->password);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Requested-Auth: Digest"));
+
+    $sal["var"] = curl_exec($ch); 
+    $sal["error"] = curl_error($ch);
+    $sal["status"] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    curl_close($ch);
+
+    return $sal;
+  }
+}

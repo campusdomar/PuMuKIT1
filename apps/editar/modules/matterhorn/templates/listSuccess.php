@@ -31,12 +31,12 @@ function app_editar_matterhorn_image($mp)
       <th width="1%">
         <input type="checkbox" onclick="">
       </th>
-      <th width="1%">Img</th>
-      <th>Id</th>
-      <th>Nombre</th>
-      <th>Series</th>
-      <th>Duracion</th>
-      <th>Fecha</th>
+      <th width="1%"><?php echo __('Img')?></th>
+      <th><?php echo __('Id')?></th>
+      <th><?php echo __('Nombre')?></th>
+      <th><?php echo __('Series')?></th>
+      <th><?php echo __('Duración')?></th>
+      <th><?php echo __('Fecha')?></th>
       <th></th>
     </tr>
   </thead>
@@ -45,15 +45,15 @@ function app_editar_matterhorn_image($mp)
     <?php if(count($media_packages) == 0):?>
       <tr>
         <td colspan="6">
-          El sistema matterhorn no posee grabaciones.
+          <?php echo __('El sistema Matterhorn no posee grabaciones.')?>
           <?php if (strlen($sf_user->getAttribute('q', '', 'tv_admin/matterhorn')) > 0): ?>
-            <a href="#" onclick="$('filter_matterhorn').reset(); new Ajax.Updater('list_matterhorn', '/editar.php/matterhorn/list/reset/true', {asynchronous:true, evalScripts:true}); return false;">Reset filter</a>
+            <a href="#" onclick="$('filter_matterhorn').reset(); new Ajax.Updater('list_matterhorn', '/editar.php/matterhorn/list/reset/true', {asynchronous:true, evalScripts:true}); return false;"><?php echo __('Reset filter')?></a>
           <?php endif?>
         </td>
       </tr>
     <?php endif?>
 
-  <?php $i = 0; foreach($media_packages as $mp): $i++; $mm = app_editar_matterhorn_list($mp["id"]); $img = app_editar_matterhorn_image($mp); ?>
+    <?php $i = 0; foreach($media_packages as $mp): $i++;  $mm = app_editar_matterhorn_list($mp["id"]); $img = app_editar_matterhorn_image($mp);?>
       <tr class="tv_admin_row_<?php echo $i%2?>" >
         <td style="cursor: auto">
           <input class="profile_checkbox" type="checkbox">
@@ -67,11 +67,11 @@ function app_editar_matterhorn_image($mp)
         <td style="cursor: auto">
           <?php if($mm === NULL):?>
             <a href="#" onclick="new Ajax.Updater('list_matterhorn', '<?php echo url_for('matterhorn/import?id=' . $mp['id']) ?>', {
-               asynchronous:true, evalScripts:true, onSuccess:function(r,j){matterhorn_info('Importacion realizada correctamente')}}); return false;">import</a>
+               asynchronous:true, evalScripts:true, onSuccess:function(r,j){matterhorn_info('<?php echo __('Importación realizada correctamente')?>')}}); return false;"><?php echo __('import')?></a>
           <?php else:?>
-            <a href="<?php echo url_for('mms/index?serial=' . $mm->getSerialId() . '&id=' . $mm->getId()) ?>">YA IMPORTADO</a>
+            <a href="<?php echo url_for('mms/index?serial=' . $mm->getSerialId() . '&id=' . $mm->getId()) ?>"><?php echo __('YA IMPORTADO')?></a>
           <?php endif?> |
-          <a target="_black" href="<?php echo $en_server ?>/engage/ui/watch.html?id=<?php echo $mp['id']?>">play</a>
+          <a target="_black" href="<?php echo $en_server ?>/engage/ui/watch.html?id=<?php echo $mp['id']?>"><?php echo __('play')?></a>
         </td>
       </tr>
     <?php endforeach ?>
@@ -82,7 +82,7 @@ function app_editar_matterhorn_image($mp)
         <div class="float-right">
           <?php include_partial('pager_ajax', array('name' => 'matterhorn', 'page' => $page, 'total' => $total_page)) ?> 
         </div>
-        <?php echo $total ?> grabaciones
+        <?php echo $total ?> <?php echo __('grabaciones')?>
       </th>
     </tr>
   </tfoot>

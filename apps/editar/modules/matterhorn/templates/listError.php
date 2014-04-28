@@ -1,3 +1,3 @@
 <div>
-  <span style="color:red">Error de comunicacion con el servidor OC.</span>
+  <span style="color:red"><?php echo __('Error de comunicación con el servidor OC.')?></span>
 </div>
