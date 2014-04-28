@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/config_ico.png"/> <?php echo __('Resolutions')</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/config_ico.png"/> <?php echo __('Resolutions')?></h3>
 
 <div id="tv_admin_container">
   <div id="tv_admin_bar">

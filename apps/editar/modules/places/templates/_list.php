@@ -24,7 +24,7 @@
         <input id="<?php echo $place->getId()?>" class="place_checkbox" type="checkbox">
       </td>
       <td>
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar'), 'places/edit?id=' . $place->getId(), array('title' => __('Editar Lugar ').$place->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'places/edit?id=' . $place->getId(), array('title' => __('Editar Lugar').' '.$place->getId()), array('width' => '800')) ?>
       </td>
       <td>
         <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_places', 'url' => 'places/delete?id='.$place->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro que desea borrar este lugar?')))?>

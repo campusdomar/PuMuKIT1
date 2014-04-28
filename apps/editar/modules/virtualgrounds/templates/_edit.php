@@ -77,7 +77,7 @@
        <?php echo m_link_to(__('configurar'), 'virtualgrounds/editground?type=' . $gt->getId() . '&id=' . $vground->getId(), 
        array('title' => __('Configurar Categoría ') . $vground->getName()), array('width' => '800')) ?></td>
    </div>
-   <?php endforeach */?>
+   <?php endforeach ?>
 
    <div class="content">
      <input type="radio" name="decision" value="other" <?php echo ($vground->getOther()?'checked="checked"':'')?> />
