@@ -107,7 +107,7 @@ class precinctsActions extends sfActions
     }
     $precinct->save();
 
-    $this->msg_alert = array('info', "Metadatos del recinto actualizados.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del recinto actualizados."));
     $this->getUser()->setAttribute('id', $precinct->getId(), 'tv_admin/precinct');
 
     return $this->renderComponent('precincts', 'list');
@@ -133,7 +133,7 @@ class precinctsActions extends sfActions
       $precinct->delete();
     }
 
-    $this->msg_alert = array('info', "Recinto borrado.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Recinto borrado."));
     return $this->renderComponent('precincts', 'list');
   }
 
