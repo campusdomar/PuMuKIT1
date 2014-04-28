@@ -99,10 +99,10 @@ class languagesActions extends sfActions
     }
     try{
       $language->save();
-      $this->msg_alert = array('info', "Metadatos del idioma actualizados.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del idioma actualizados."));
       $this->getUser()->setAttribute('id', $language->getId(), 'tv_admin/language');
     }catch(Exception $e){
-      $this->msg_alert = array('error', "Codigo de idioma repetido.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Código de idioma repetido."));
     }
 
     return $this->renderComponent('languages', 'list');
@@ -128,7 +128,7 @@ class languagesActions extends sfActions
       $language = LanguagePeer::retrieveByPk($this->getRequestParameter('id'));
       $language->delete();
     }
-    $this->msg_alert = array('info', "Idioma borrado.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Idioma borrado."));
     return $this->renderComponent('languages', 'list');
   }
 
@@ -155,9 +155,9 @@ class languagesActions extends sfActions
     }
     try{
       $language2->save();
-      $this->msg_alert = array('info', "Idioma copiado.");
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Idioma copiado."));
     }catch(Exception $e){
-      $this->msg_alert = array('error', "Codigo de idioma repetido.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Código de idioma repetido."));
     }
 
 
