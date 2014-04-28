@@ -159,7 +159,7 @@ class eventsActions extends sfActions
 
 
     $event->save();
-    //$this->msg_alert = array('info', "Evento almacenada correctamene en la base de datos.");
+    //$this->msg_alert = array('info', $this->getContext()->getI18N()->__("Evento almacenado correctamente en la base de datos."));
 
     $this->getUser()->setAttribute('id', $event->getId(), 'tv_admin/event');
 
@@ -188,12 +188,12 @@ class eventsActions extends sfActions
       foreach($events as $event){
 	$event->delete();
       }
-      //$this->msg_alert = array('info', "Noticias borradas.");
+      //$this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticias borradas."));
 
     }elseif($this->hasRequestParameter('id')){
       $event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
       $event->delete();
-      //$this->msg_alert = array('info', "Noticia borrada.");
+      //$this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticia borrada."));
     }
 
     $this->getUser()->setAttribute('id', null, 'tv_admin/event'); //delete mejor
@@ -260,9 +260,9 @@ class eventsActions extends sfActions
 	
 	$event->save();
       }
-      //$this->msg_alert = array('info', "Aventos creados.");
+      //$this->msg_alert = array('info', $this->getContext()->getI18N()->__("Eventos creados."));
     }else{
-      //$this->msg_alert = array('error', "Error en formato de la hora.");
+      //$this->msg_alert = array('error', $this->getContext()->getI18N()->__("Error en formato de la hora."));
     }
 
 
@@ -288,13 +288,13 @@ class eventsActions extends sfActions
 	$event->setDisplay(!$event->getDisplay());
 	$event->save();
       }
-      //$this->msg_alert = array('info', "Noticias ocultadas/desocultadas correctamente.");
+      //$this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticias ocultadas/mostradas correctamente."));
 
     }elseif($this->hasRequestParameter('id')){
       $event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
       $event->setDisplay(!$event->getDisplay());
       $event->save();
-      //$this->msg_alert = array('info', "Noticia ocultada/desocultada correctamente.");
+      //$this->msg_alert = array('info', $this->getContext()->getI18N()->__("Noticia ocultada/mostrada correctamente."));
     }
 
     if($this->hasRequestParameter("cal")){
