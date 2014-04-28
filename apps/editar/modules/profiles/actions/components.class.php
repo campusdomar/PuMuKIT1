@@ -59,7 +59,7 @@ class profilesComponents extends sfComponents
       $c->setOffset(0);
     }
 
-    $this->profiles = PerfilPeer::doSelectJoinStreamserver($c);
+    $this->profiles = PerfilPeer::doSelect($c);
   }
   
 }

@@ -1,6 +1,6 @@
 <?php
 if (file_exists($_REQUEST['archivo'])){
-  echo "OK";
+  echo __('"OK"');
 }else{
-  echo "KO";
+  echo __('"KO"');
 }

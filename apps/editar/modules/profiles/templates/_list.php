@@ -5,16 +5,16 @@
         <input type="checkbox" onclick="window.click_checkbox_all('profile', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%">Id</th>
-      <th>Nombre</th>
-      <th width="1%">Display</th>
-      <th width="1%">Wizard</th>
-      <th width="1%">Master</th>
-      <th>CanalPub</th>
-      <th>Extensión</th>
-      <th>Mime-Type</th>
-      <th>Servidor</th>
-      <th>Archivos</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Nombre')?></th>
+      <th width="1%"><?php echo __('Display')?></th>
+      <th width="1%"><?php echo __('Wizard')?></th>
+      <th width="1%"><?php echo __('Master')?></th>
+      <th><?php echo __('CanalPub')?></th>
+      <th><?php echo __('Extensión')?></th>
+      <th><?php echo __('MIME type')?></th>
+      <th><?php echo __('Servidor')?></th>
+      <th><?php echo __('Archivos')?></th>
     </tr>
   </thead>
   
@@ -22,7 +22,7 @@
   <?php if (count($profiles) == 0):?>
     <tr>
       <td colspan="15">
-       No existen perfiles con esos valores.
+       <?php echo __('No existen perfiles con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -32,13 +32,13 @@
         <input id="<?php echo $profile->getId()?>" class="profile_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('profile', this, <?php echo $profile->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'profiles/edit?id=' . $profile->getId(), array('title' => 'Editar perfil "'.$profile->getName() . '"'), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'profiles/edit?id=' . $profile->getId(), array('title' => __('Editar perfil "').$profile->getName() . '"'), array('width' => '800')) ?>
       </td>
       <!-- <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_profiles', 'url' => 'profiles/delete?id='.$profile->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro que desea borrar el perfil? (No se puede si tiene archivos asociados)'))?> 
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_profiles', 'url' => 'profiles/delete?id='.$profile->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro que desea borrar el perfil? (No se puede si tiene archivos asociados)')))?> 
       </td> -->
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_profiles', 'url' => 'profiles/copy?id='.$profile->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_profiles', 'url' => 'profiles/copy?id='.$profile->getId(), 'script' => 'true'))?>
       </td>
       <td onclick="click_fila('profile', this, <?php echo $profile->getId() ?>);">
         <?php echo ((($page == 1)&&( $i == 0)) ? '&nbsp;' : (link_to_remote('&#8593;', array('update' => 'list_profiles', 'url' => 'profiles/up?id='.$profile->getId(), 'script' => 'true'))).(link_to_remote('&#8657;', array('update' => 'list_profiles', 'url' => 'profiles/top?id='.$profile->getId(), 'script' => 'true'))))   ?>
@@ -74,7 +74,7 @@
             <?php echo $relObj->getPubChannel()->getName();?>
           <?php endforeach?>
         </div>
-          <span style="font-weight:bold">Audio</span>
+          <span style="font-weight:bold"><?php echo __('Audio')?></span>
           <?php foreach($profile->getPubChannelPerfilsRelatedByPerfilAudioId() as $relObj): ?>
             <?php echo $relObj->getPubChannel()->getName();?>
           <?php endforeach?>
@@ -101,7 +101,7 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'profile', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_profile ?>/<?php echo $total_profile_all ?> perfiles
+        <?php echo $total_profile ?>/<?php echo $total_profile_all ?> <?php echo __('perfiles')?>
       </th>
     </tr>
   </tfoot>

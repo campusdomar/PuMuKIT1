@@ -116,7 +116,7 @@ class profilesActions extends sfActions
     }
     
     $profile->save();
-    $this->msg_alert = array('info', "Metadatos del perfil actualizados.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del perfil actualizados."));
 
     $this->getUser()->setAttribute('id', $profile->getId(), 'tv_admin/profile');
 
@@ -145,7 +145,7 @@ class profilesActions extends sfActions
       if ($profile->countFiles() == 0)
         $profile->delete();
     }
-    $this->msg_alert = array('info', "Perfil borrado.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Perfil borrado."));
     return $this->renderComponent('profiles', 'list');
   }
 
@@ -171,7 +171,7 @@ class profilesActions extends sfActions
     }
             
     $profile2->save();
-    $this->msg_alert = array('info', "Perfil clonado.");
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Perfil clonado."));
 
     return $this->renderComponent('profiles', 'list');
   }

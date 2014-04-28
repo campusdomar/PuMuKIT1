@@ -9,53 +9,53 @@
    <span style="font-weight: bold"><?php echo __('Servidor:')?></span> 
    <?php echo $profile->getStreamserver()->getName()?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Reproducible:')?></span> 
-    <?php echo $profile->getDisplay() ? "Sí" : "No" ?>
+   <span style="font-weight: bold"><?php echo __('Reproducible')?>:</span> 
+    <?php echo $profile->getDisplay() ? "__('Sí')" : "__('No')" ?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Por defecto:')?></span> 
-    <?php echo $profile->getWizard() ? "Sí" : "No" ?>
+   <span style="font-weight: bold"><?php echo __('Por defecto')?>:</span> 
+    <?php echo $profile->getWizard() ? "__('Sí')" : "__('No')" ?>
    <br />
-    <span style="font-weight: bold"><?php echo __('Formato:')?></span> 
+    <span style="font-weight: bold"><?php echo __('Formato')?>:</span> 
     <?php echo $profile->getFormat()?>
    <br />
-   <span style="font-weight: bold">Codec:</span> 
+   <span style="font-weight: bold"><?php echo __('Códec')?>:</span> 
     <?php echo $profile->getCodec()?>
    <br />
-   <span style="font-weight: bold">Mime-Type:</span> 
+   <span style="font-weight: bold"><?php echo __('MIME type')?>:</span> 
     <?php echo $profile->getMimeType()?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Extensión:')?></span> 
+   <span style="font-weight: bold"><?php echo __('Extensión')?>:</span> 
     <?php echo $profile->getExtension()?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Resolución:')?></span> 
+   <span style="font-weight: bold"><?php echo __('Resolución')?>:</span> 
     <?php echo $profile->getResolutionHor()?>x<?php echo $profile->getResolutionVer()?>
    <br />
-   <span style="font-weight: bold">BitRate:</span> 
+   <span style="font-weight: bold"><?php echo __('Bitrate')?>:</span> 
     <?php echo $profile->getBitrate()?>
    <br />
-   <span style="font-weight: bold">FrameRate:</span> 
+   <span style="font-weight: bold"><?php echo __('Framerate')?>:</span> 
     <?php echo $profile->getFramerate()?>
    <br />
-   <span style="font-weight: bold">Channels:</span> 
+   <span style="font-weight: bold"><?php echo __('Channels')?>:</span> 
     <?php echo $profile->getChannels() ?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Solo audio:')?></span> 
-    <?php echo $profile->getAudio() ? "Sí" : "No" ?>
+   <span style="font-weight: bold"><?php echo __('Solo audio')?>:</span> 
+    <?php echo $profile->getAudio() ? "__('Sí')" : "__('No')" ?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Tiene script:')?></span> 
-    <?php echo strlen($profile->getPrescript()) ? "Sí" : "No" ?>
+   <span style="font-weight: bold"><?php echo __('Tiene script')?>:</span> 
+    <?php echo strlen($profile->getPrescript()) ? "__('Sí')" : "__('No')" ?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Descripción:')?></span> 
+   <span style="font-weight: bold"><?php echo __('Descripción')?>:</span> 
     <?php echo $profile->getDescription()?>
    <br />
    <?php if(sfConfig::get('app_transcoder_use')):?>
-   <span style="font-weight: bold">Bat:</span> 
+   <span style="font-weight: bold"><?php echo __('Bat')?>:</span> 
     <?php echo $profile->getBat()?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Fichero configuración:')?></span> 
+   <span style="font-weight: bold"><?php echo __('Fichero configuración')?>:</span> 
    <?php echo $profile->getFileCfg()?>
    <br />
-   <span style="font-weight: bold"><?php echo __('Aplicación:')?></span> 
+   <span style="font-weight: bold"><?php echo __('Aplicación')?>:</span> 
    <?php echo $profile->getApp()?>
    <br />
    <?php endif?>
@@ -65,7 +65,7 @@
 
   <?php else:?>
 <p>
-						 <?php echo __('Selecione o cree algun perfil.')?>
+  <?php echo __('Seleccione o cree algún perfil')?>.
 </p>
 <?php endif?>
 
