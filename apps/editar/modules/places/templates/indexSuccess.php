@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/place_ico.png"/> Lugares &amp; Recinctos</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/place_ico.png"/> <?php echo __('Lugares &amp; Recintos')?></h3>
 
 <div id="tv_admin_container">
   <div id="tv_admin_bar">
@@ -19,16 +19,16 @@
         <ul class="tv_admin_actions">
           <!-- Falta -->
           <li>
-            <?php echo button_to_function('nuevo', 'Modalbox.show("places/create", {title:"Crear nuevo lugar", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?>
+            <?php echo button_to_function(__('nuevo'), 'Modalbox.show("places/create", {title:"' . __('Crear nuevo lugar') . '", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?>
           </li>
         </ul>
       </div>
 
-      <select id="options_places" style="margin: 10px 0px; width: 33%" title="Acciones sobre elementos selecionados" onchange="window.change_select('place', $('options_places'))">
-        <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
+      <select id="options_places" style="margin: 10px 0px; width: 33%" title="<?php echo __('Acciones sobre elementos seleccionados')?>" onchange="window.change_select('place', $('options_places'))">
+        <option value="default" selected="selected"><?php echo __('Selecciona una acci&oacute;n...')?></option>
         <option disabled="">---</option>
-        <option value="delete_sel">Borrar selecionados</option>
-        <option value="create">Crear nuevo</option>
+        <option value="delete_sel"><?php echo __('Borrar seleccionados')?></option>
+        <option value="create"><?php echo __('Crear nuevo')?></option>
       </select>
     </div>
 
@@ -41,16 +41,16 @@
         <ul class="tv_admin_actions">
           <!-- Falta -->
           <li>
-            <?php echo button_to_function('nuevo', 'Modalbox.show("precincts/create", {title:"Crear nuevo recinto en el lugar seleccionado", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?>
+            <?php echo button_to_function(__('nuevo'), 'Modalbox.show("precincts/create", {title:"' . __('Crear nuevo recinto en el lugar seleccionado') . '", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?>
           </li>
         </ul>
       </div>
 
-      <select id="options_precincts" style="margin: 10px 0px; width: 33%" title="Acciones sobre elementos selecionados" onchange="window.change_select('precinct', $('options_precincts'))">
-        <option value="default" selected="selected">Seleciona una acci&oacute;n...</option>
+      <select id="options_precincts" style="margin: 10px 0px; width: 33%" title="<?php echo __('Acciones sobre elementos seleccionados')?>" onchange="window.change_select('precinct', $('options_precincts'))">
+        <option value="default" selected="selected"><?php echo __('Selecciona una acci&oacute;n...')?></option>
         <option disabled="">---</option>
-        <option value="delete_sel">Borrar selecionados</option>
-        <option value="create">Crear nuevo</option>
+        <option value="delete_sel"><?php echo __('Borrar seleccionados')?></option>
+        <option value="create"><?php echo __('Crear nuevo')?></option>
       </select>
     </div>
   </div>

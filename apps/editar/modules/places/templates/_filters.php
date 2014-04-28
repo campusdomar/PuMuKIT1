@@ -3,13 +3,13 @@
   <fieldset>
     <h2>Buscar</h2>
     <div class="form-row">
-      <label for="name">Name:</label>
+      <label for="name"><?php echo __('Name:')?></label>
       <div class="content">
         <?php echo input_tag('filters[name]', null, array ('size' => 15)) ?>
       </div>
     </div>
     <div class="form-row">
-      <label for="name">Address:</label>
+      <label for="name"><?php echo __('Address:')?></label>
       <div class="content">
         <?php echo input_tag('filters[address]', null, array ('size' => 15)) ?>
       </div>
