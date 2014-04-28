@@ -214,7 +214,7 @@ class virtualgroundsActions extends sfActions
     try{
       $vground->save();
     }catch (Exception $e) {
-      $this->msg_alert = array('error', "Actualizacion erronea Codigo repetido.");
+      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Actualizacion errónea. Código repetido"));
     }
 
     $this->vground = $vground;

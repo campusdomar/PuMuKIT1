@@ -1,7 +1,7 @@
 <?php use_helper('Object') ?>
 
 <h3 class="cab_body_div"><img src="/images/admin/cab/widget_ico.png"/> 
-    <a href="<?php echo url_for('widgets/index')?>" style="color: #666E73; font-size: 75%">[ WebTV Layout ]</a> Categorias de navegación
+    <a href="<?php echo url_for('widgets/index')?>" style="color: #666E73; font-size: 75%">[ WebTV Layout ]</a> <?php echo __('Categorías de navegación')?>
 </h3>
 
 <div class="container" id="page:container">
@@ -30,7 +30,7 @@
 
     <!-- DOS -->
     <div class="section-menu" id="page:left">
-      <h3>Categorias:</h3>
+      <h3><?php echo __('Categorías:')?></h3>
         <ul id="poll_tabs" class="tabs" 
 	    onmouseover="$$('.order_groundtype').invoke('show');" 
 	    onmouseout="$$('.order_groundtype').invoke('hide');"
@@ -38,7 +38,7 @@
 
           <!-- DOS A -->
           <?php if(count($vgrounds) == 0):?>
-            <li> No existen categorias, cree una nueva.</li>
+            <li> <?php echo __('No existen categorías, cree una nueva.')?></li>
           <?php else:?>
           <?php foreach($vgrounds as $vground): ?>
             <li>
@@ -46,8 +46,8 @@
                  name="<?php echo $vground->getId()?>_section" class="tab-item-link" 
                  idElement="<?php echo $vground->getId()?>">
                 <span>
-                  <img src="/images/admin/mbuttons/delete_inline.gif" class="button" title="borrar" alt="borrar" 
-	              onclick="if (confirm('Seguro')) {window.location.href='<?php echo url_for('virtualgrounds/delete?id='.$vground->getId())?>'};" />
+                  <img src="/images/admin/mbuttons/delete_inline.gif" class="button" title="<?php echo __('borrar')?>" alt="<?php echo __('borrar')?>" 
+	              onclick="if (confirm('<?php echo __('&iquest;Seguro?')?>')) {window.location.href='<?php echo url_for('virtualgrounds/delete?id='.$vground->getId())?>'};" />
                   <div class="order_groundtype" style="float:right; padding-right: 10px; display:none" >
                     <span onclick="window.location.href='<?php echo url_for('virtualgrounds/up?id='.$vground->getId()) ?>'">&#8593;</span>&nbsp;
                     <span onclick="window.location.href='<?php echo url_for('virtualgrounds/down?id='.$vground->getId()) ?>'">&#8595;</span>
