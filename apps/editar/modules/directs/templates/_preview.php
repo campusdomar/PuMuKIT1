@@ -6,24 +6,24 @@
 
 <div style="overflow:hidden; padding:5px; border:solid 1px #DDD; background:#DDD" >
   <div>
-    URL: <a href="<?php echo sfConfig::get('app_info_link') . "/directo/index/id/" . $direct->getId()?>"> 
+    <?php echo __('URL:')?> <a href="<?php echo sfConfig::get('app_info_link') . "/directo/index/id/" . $direct->getId()?>"> 
            <?php echo sfConfig::get('app_info_link') ?>/directo/index/id/<?php echo $direct->getId()?> 
          </a>
   </div>
   <div>
-    IP fuente: <span style="font-style:italic"> <?php echo $direct->getIpSource()?> </span>
+    <?php echo __('IP fuente:')?> <span style="font-style:italic"> <?php echo $direct->getIpSource()?> </span>
   </div>
   <div>
-    Homapage player: <span style="font-style:italic"><?php echo $direct->getIndexPlay()?'Activo':'Desactivo'?></span>
+    <?php echo __('Mostrar reproductor en página de inicio:')?> <span style="font-style:italic"><?php echo $direct->getIndexPlay()?__('Activado'):__('Desactivado')?></span>
   </div>
   <div>
-    Estado: <span style="font-style:italic"><?php echo ($direct->getBroadcasting() == 0)?'Espera':'Emitiendo en directo'?></span>
+    <?php echo __('Estado:')?> <span style="font-style:italic"><?php echo ($direct->getBroadcasting() == 0)?__('Espera'):__('Emitiendo en directo')?></span>
   </div>
 </div>
 
 
 <br />
-<a href="#" onclick="Effect.toggle('player','appear'); return false">Preview</a>  
+<a href="#" onclick="Effect.toggle('player','appear'); return false"><?php echo __('Preview')?></a>  
 
 
 <div id="player" style="display: none;">  
@@ -44,6 +44,6 @@
 
 <?php else:?>
 <p>
-  Selecione alguna directo.
+  <?php echo __('Seleccione algún directo.')?>
 </p>
 <?php endif?>  

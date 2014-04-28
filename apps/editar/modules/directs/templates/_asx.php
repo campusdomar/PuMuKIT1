@@ -1,6 +1,6 @@
 <object id="mediaplayer"
     classid="CLSID:6BF52A52-394A-11D3-B153-00C04F79FAA6"
-    standby="Loading Microsoft Windows Media Player components..."
+    standby="<?php echo __('Loading Microsoft Windows Media Player components...')?>"
     type="application/x-oleobject" width="<?php echo $hor?>" height="<?php echo $ver?>">
   <param name="url" value="<?php echo $url?>" />
   <param name="AutoStart" value="true" />

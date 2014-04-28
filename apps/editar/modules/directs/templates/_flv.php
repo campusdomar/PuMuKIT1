@@ -1,4 +1,4 @@
-<div style="width:100%; margin:0 auto; text-align:center" style="color:red" id="preview">Necesita instalar el Plugin de Flash</div>
+<div style="width:100%; margin:0 auto; text-align:center" style="color:red" id="preview"><?php echo __('Necesita instalar el Plugin de Flash')?></div>
 
 <script type='text/javascript'>
   var s1 = new SWFObject('/swf/player.swf?autostart=true','player','<?php echo $hor?>','<?php echo $ver?>','9');
