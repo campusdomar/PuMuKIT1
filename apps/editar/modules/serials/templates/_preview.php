@@ -33,6 +33,6 @@
 
 <?php else:?>
 <p>
-<?php __('Selecione alguna serie.')?>
+  <?php echo __('Seleccione alguna serie.')?>
 </p>
 <?php endif?>  

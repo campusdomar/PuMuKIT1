@@ -28,10 +28,10 @@
   </div>
 
   <ul class="tv_admin_actions">
-    <span id="serial_save_error" style="color:red; opacity: 0.0; filter: alpha(opacity=0); ZOOM:1">Guardado ERROR</span>
-    <span id="serial_save_ok" style="color:blue; opacity: 0.0; filter: alpha(opacity=0);ZOOM:1">Guardado OK</span>
-    <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=if(comprobar_form_serial($("publicdate").value, '. get_js_regexp_timedate($sf_user->getCulture()) . ')){$(\'remember_save_serial\').hide();}else{return false}'); ?></li>
-    <li><?php echo reset_tag('Reset','name=reset class=tv_admin_action_delete onclick=$(\'remember_save_serial\').hide()'); ?></li>
+    <span id="serial_save_error" style="color:red; opacity: 0.0; filter: alpha(opacity=0); ZOOM:1"><?php echo __('Guardado ERROR')?></span>
+    <span id="serial_save_ok" style="color:blue; opacity: 0.0; filter: alpha(opacity=0);ZOOM:1"><?php echo __('Guardado OK')?></span>
+    <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=if(comprobar_form_serial($("publicdate").value, '. get_js_regexp_timedate($sf_user->getCulture()) . ')){$(\'remember_save_serial\').hide();}else{return false}'); ?></li>
+    <li><?php echo reset_tag(__('Reset'),'name=reset class=tv_admin_action_delete onclick=$(\'remember_save_serial\').hide()'); ?></li>
     <!-- <li><input type="button" name="add_en" value="Add English" class="tv_admin_action_create" onclick="alert('caca')" /></li>-->
   </ul> 
   
@@ -86,7 +86,7 @@
   
   
   <div class="form-row">
-    <?php echo label_for('keyword_', 'Keywords:', 'class="required long" ') ?>
+    <?php echo label_for('keyword_', __('Keywords:'), 'class="required long" ') ?>
     <div class="content content_long">
       <?php $sep =''; foreach ($langs as $lang): ?>
         <?php $serial->setCulture($lang);  echo $sep ?>  
@@ -102,7 +102,7 @@
   </div>
   
   <div class="form-row">
-    <?php echo label_for('copyright','Copyright:', 'class="required long" ') ?>
+    <?php echo label_for('copyright', __('Copyright:'), 'class="required long" ') ?>
     <div class="content content_long">
       <?php $value = object_input_tag($serial, 'getCopyright', array (
         'size' => 30,
@@ -113,7 +113,7 @@
   </div>
   
   <div class="form-row">
-    <?php echo label_for('serial_type_id',__('Canal:'), 'class="required long"') ?>
+    <?php echo label_for('serial_type_id', __('Canal:'), 'class="required long"') ?>
     <div class="content content_long">
       <?php $value = object_select_tag($serial, 'getSerialTypeId', array (
         'related_class' => 'SerialType',
@@ -247,11 +247,4 @@
   </form>
 <?php endif?>
 </div>
-
-
-
-
-
-
-
 

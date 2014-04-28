@@ -8,7 +8,7 @@
       <?php if(sfConfig::get('app_mail_use')):?>
       <th width="2%"></th>
       <?php endif?>
-      <th width="1%">Img</th>
+      <th width="1%"><?php echo __('Img')?></th>
       <?php include_partial('list_th') ?>
     </tr>
   </thead>
@@ -17,7 +17,7 @@
   <?php if (count($serials) == 0):?>
     <tr>
       <td colspan="13">
-       No existen series con esos valores.
+       <?php echo __('No existen series con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -32,10 +32,10 @@
         <?php echo (($serial['mm_announce'])||($serial['announce'])?'':'&nbsp;') ?>
       </td> 
       <td style="width:12px">
-          <?php echo image_tag('admin/bbuttons/mm'.$serial['mm_status_max'].'_inline.gif', array('alt' => 'estado', 'title'=>'estado', 'id'=>'table_serials_status_' . $serial['id'])) ?>
+          <?php echo image_tag('admin/bbuttons/mm'.$serial['mm_status_max'].'_inline.gif', array('alt' => __('estado'), 'title'=>__('estado'), 'id'=>'table_serials_status_' . $serial['id'])) ?>
       </td> 
       <td  style="width:12px">
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar class=miniTag'), array('update' => 'list_serials', 'url' => 'serials/delete?id='.$serial['id'], 'script' => 'true', 'confirm' => 'Seguro que desea borrar la serie "' . $serial['title'] . '", tiene '.$numV.' objetos multimedia', 'success' => '$("vista_previa_serial").innerHTML="<h2>select serial</h2>";$("edit_serials").innerHTML="<h2>select serial</h2>"; ')); ?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar') . ' class=miniTag'), array('update' => 'list_serials', 'url' => 'serials/delete?id='.$serial['id'], 'script' => 'true', 'confirm' => __('Seguro que desea borrar la serie "') . $serial['title'] . '", ' . __('tiene ') .$numV.__(' objetos multimedia'), 'success' => '$("vista_previa_serial").innerHTML="<h2>select serial</h2>";$("edit_serials").innerHTML="<h2>select serial</h2>"; ')); ?>
       </td>
       <td style="width:12px">              
         <?php include_partial("serials/edit_menu", array('serial' => $serial, 'numV' => $numV))?>
@@ -72,9 +72,9 @@
         <div class="float-right">
           <?php include_partial('global/pager_ajax', array('name' => 'serial', 'page' => $page, 'total' => $total)) ?> 
         </div>
-        <?php echo $total_serial ?>/<?php echo $total_serial_all ?> Series
+        <?php echo $total_serial ?>/<?php echo $total_serial_all ?> <?php echo __('Series')?>
         <?php $aux = ($total_serial==$total_serial_all?'display:none; ':'')?>
-        <?php echo link_to_remote('Cancelar busqueda', array('before' => '$("filter_serials").reset();', 'update' => 'list_serials', 'url' => 'serials/list?filter=filter ', 'script' => 'true'), array('title' => 'Cancelar la busqueda actual', 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
+        <?php echo link_to_remote(__('Cancelar búsqueda'), array('before' => '$("filter_serials").reset();', 'update' => 'list_serials', 'url' => 'serials/list?filter=filter ', 'script' => 'true'), array('title' => __('Cancelar la búsqueda actual'), 'style' => 'color:blue; font-weight:normal;'.$aux)) ?>
       </th>
     </tr>
   </tfoot>

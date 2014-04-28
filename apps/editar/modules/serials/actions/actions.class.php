@@ -122,7 +122,8 @@ class serialsActions extends sfActions
     }
     
     $serial->save();
-    $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" guardada OK.");
+    $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" guardada OK."), $serial->getTitle());
+    $this->msg_alert = array('info', $message);
 
     
 
@@ -144,7 +145,9 @@ class serialsActions extends sfActions
     $this->getUser()->setAttribute('sort', 'publicDate', 'tv_admin/serial');
     $this->getUser()->setAttribute('type', 'desc', 'tv_admin/serial');
 
-    $this->msg_alert = array('info', "Serie de id :" . $serial->getId() . " creada con un objeto multimedia.");
+    $message = sprintf($this->getContext()->getI18N()->__("Serie de id : %s creada con un objeto multimedia."), $serial->getId());
+
+    $this->msg_alert = array('info', $message);
     return $this->renderComponent('serials', 'list');
   }
 
@@ -164,11 +167,14 @@ class serialsActions extends sfActions
       foreach($serials as $serial){
 	$serial->delete();
       }
-      $this->msg_alert = array('info', "Series borradas.");
+
+      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Series borradas."));
 
     }elseif($this->hasRequestParameter('id')){
       $serial = SerialPeer::retrieveByPk($this->getRequestParameter('id'));
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" borrada.");
+
+      $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" borrada."), $serial->getTitle());
+      $this->msg_alert = array('info', $message);
       $serial->delete();
     }
 
@@ -191,7 +197,7 @@ class serialsActions extends sfActions
     $this->forward404Unless($serial);
 
     $serial2 = $serial->copy();
-    $this->getUser()->setAttribute('serial', $serial2->getId() ); //selecione el nuevo                                                                                                
+    $this->getUser()->setAttribute('serial', $serial2->getId() ); //seleccione el nuevo                                                                                                
     return $this->renderComponent('serials', 'list');
   }
 
@@ -211,13 +217,15 @@ class serialsActions extends sfActions
 	$serial->setAnnounce(!$serial->getAnnounce());
 	$serial->save();
       }
-    $this->msg_alert = array('info', "Series anunciadas/desanunciada correctamente.");
+
+    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Series anunciadas/desanunciadas correctamente."));
 
     }elseif($this->hasRequestParameter('id')){
       $serial = SerialPeer::retrieveByPk($this->getRequestParameter('id'));
       $serial->setAnnounce(!$serial->getAnnounce());
       $serial->save();
-      $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" anunciada/desanunciada.");
+      $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" anunciada/desanunciada."), $serial->getTitle());
+      $this->msg_alert = array('info', $message);
     }
 
     return $this->renderComponent('serials', 'list');
@@ -300,7 +308,8 @@ class serialsActions extends sfActions
       $ach->announceSerial($serial);
     }
 
-    $this->msg_alert = array('info', "Serie \"" . $serial->getTitle() . "\" anunciada OK.");
+    $message = sprintf($this->getContext()->getI18N()->__("Serie \"%s\" anunciada OK."), $serial->getTitle());
+    $this->msg_alert = array('info', $message);
     return $this->renderComponent('serials', 'list');    
   }
 
@@ -358,19 +367,19 @@ class serialsActions extends sfActions
 
     switch($error){
     case -1:
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> Error de permisos.'. $return_js);
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> Error de permisos.'). $return_js);
     case -2:
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene master.'. $return_js);
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene máster.'). $return_js);
     case -3:
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene archivos de video. <a href="#mediaMmHash" onclick="menuTab.select(\'mediaMm\'); update_file.stop(); return false;"> Se genera automaticamente</a>'. $return_js);
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene archivos de vídeo.').' <a href="#mediaMmHash" onclick="menuTab.select(\'mediaMm\'); update_file.stop(); return false;"> '.$this->getContext()->getI18N()->__('Se genera automáticamente').'</a>'. $return_js);
     case -4:
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene archivo con perfil <em>podcast_video</em><a href="#mediaMmHash" onclick="menuTab.select(\'mediaMm\'); update_file.stop(); return false;"> Se genera automaticamente</a>'. $return_js);
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene archivo con perfil <em>podcast_video</em>').'<a href="#mediaMmHash" onclick="menuTab.select(\'mediaMm\'); update_file.stop(); return false;"> '.$this->getContext()->getI18N()->__('Se genera automáticamente').'</a>'. $return_js);
     case -5:
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene archivo con perfil <em>podcast_audio.</em><a href="#mediaMmHash" onclick="menuTab.select(\'mediaMm\'); update_file.stop(); return false;"> Se genera automaticamente</a>'. $return_js);
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no tiene archivo con perfil <em>podcast_audio.</em>').'<a href="#mediaMmHash" onclick="menuTab.select(\'mediaMm\'); update_file.stop(); return false;"> '.$this->getContext()->getI18N()->__('Se genera automáticamente').'</a>'. $return_js);
     case -6:
-      return $this->renderText('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no esta catalogado en iTunesU'. $return_js);
+      return $this->renderText($this->getContext()->getI18N()->__('<span style="font-weight:bolder; color:red">Error</span> El Objeto Multimedia no esta catalogado en iTunes U'). $return_js);
     default:
-      return $this->renderText("Estado actualizado" . $return_js);
+      return $this->renderText($this->getContext()->getI18N()->__("Estado actualizado") . $return_js);
     }
   }
 

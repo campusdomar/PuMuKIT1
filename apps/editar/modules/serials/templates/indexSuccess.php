@@ -21,10 +21,10 @@
       <ul class="tv_admin_actions">
         <!-- Falta -->
         <li>
-         <?php echo link_to_function(__('Wizard'), "Modalbox.show('".url_for("wizard/serial")."',{width:800, title:'PASO I: Serie'})", 'class=tv_admin_action_next') ?> 
+         <?php echo link_to_function(__('Wizard'), "Modalbox.show('".url_for("wizard/serial")."',{width:800, title:'" . __('PASO I: Serie') . "'})", 'class=tv_admin_action_next') ?> 
         </li>
         <li>
-         <?php echo link_to_remote( __('Crear'), array('before' => '$("filter_serials").reset();', 'update' => 'list_serials', 'url' => 'serials/create?filter=filter', 'script' => 'true'), array('title' => __('Crear nueva serie'), 'class' => 'tv_admin_action_create')) ?>
+         <?php echo link_to_remote(__('Crear'), array('before' => '$("filter_serials").reset();', 'update' => 'list_serials', 'url' => 'serials/create?filter=filter', 'script' => 'true'), array('title' => __('Crear nueva seria'), 'class' => 'tv_admin_action_create')) ?>
         </li>
       </ul>
     </div>

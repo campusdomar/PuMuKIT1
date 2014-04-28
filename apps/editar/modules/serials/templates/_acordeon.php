@@ -8,7 +8,7 @@
         <h2 class="accordion_toggle"><?php echo __('Buscar')?></h2>
         <div class="accordion_content" style="overflow: hidden; display: none;">
           <div class="form-row">
-            <label for="title"><?php echo __('Titulo:')?></label>
+            <label for="title"><?php echo __('Título:')?></label>
             <div class="content">
               <?php echo input_tag('filters[title]', $sf_user->getAttribute('title', null, 'tv_admin/serial/filters')) ?>
             </div>
@@ -19,8 +19,6 @@
             </div>
           </div>
         </div>
-    
-        <h2 class="accordion_toggle"><?php echo __('Fechas')?></h2>
         <div class="accordion_content" style="overflow: hidden; display: none;">  
 
           <div class="form-row">
