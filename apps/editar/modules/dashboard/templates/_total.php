@@ -1,5 +1,5 @@
 <fieldset style="padding: 5px; border: 1px solid #EEE">
-<legend style="font-weight: bold">INFO</legend>
+<legend style="font-weight: bold"><?php echo __('INFO')?></legend>
 
 <div style="text-align: center; padding-bottom: 15px; background:transparent  url(<?php echo sfConfig::get('app_info_logo') ?>) no-repeat">
   <div><?php echo sfConfig::get('app_info_title') ?></div>
@@ -7,7 +7,7 @@
   <div><?php echo sfConfig::get('app_info_link') ?></div>
 </div>
 
-<h4 style="padding-bottom: 10px">N&uacute;mero de objetos:</h4>
+<h4 style="padding-bottom: 10px"><?php echo __('N&uacute;mero de objetos:')?></h4>
 
 <div id="total_filter_date">
   <div>
@@ -49,8 +49,8 @@
   
   <br />
   <div>
-    <span style="font-weight: bold">Fecha Ini: </span><span id="val_time_ini"><?php echo date('d/m/Y', $time_ini * 86400)?></span> &nbsp;&nbsp;&nbsp;&nbsp;
-    <span style="font-weight: bold">Fecha Fin: </span><span id="val_time_end"><?php echo date('d/m/Y', $time_end * 86400)?></span>
+    <span style="font-weight: bold"><?php echo __('Fecha Ini:')?> </span><span id="val_time_ini"><?php echo date('d/m/Y', $time_ini * 86400)?></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    <span style="font-weight: bold"><?php echo __('Fecha Fin:')?> </span><span id="val_time_end"><?php echo date('d/m/Y', $time_end * 86400)?></span>
   </div>
   <br />
 </div>
@@ -72,11 +72,11 @@
 <!--
 <div style="float:right;">
   <a href="#<?php //echo url_for('dashboard/infopdf') ?>"  target="_blanck">
-    <img src="/images/admin/icons/pdf.jpg" alt="Exportar extadisticas a PDF" style="width: 25px;"/>
+    <img src="/images/admin/icons/pdf.jpg" alt="<?php echo __('Exportar estadísticas a PDF')?>" style="width: 25px;"/>
     <br />
-    Exportar  
+    <?php echo __('Exportar')?>
     <br />
-    estad&iacute;sticas.
+    <?php echo __('estad&iacute;sticas.') ?>
   </a>
 </div>
 -->

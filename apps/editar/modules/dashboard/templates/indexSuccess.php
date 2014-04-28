@@ -1,11 +1,11 @@
-<h3 class="cab_body_div"><img src="/images/admin/cab/serial_ico.png"/> Dashboard</h3>
+<h3 class="cab_body_div"><img src="/images/admin/cab/serial_ico.png"/> <?php echo __('Dashboard')?></h3>
 
 <div style="text-align: center">
   <div id="my-timeline" style="height: 150px; border: 1px solid #aaa"></div>
   <br />
   <br />
   <noscript>
-  This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
+     <?php echo __('This page uses Javascript to show you a Timeline.')?> <?php echo __('Please enable Javascript in your browser to see the full page.')?> <?php echo __('Thank you.')?>
   </noscript>
 
   <?php foreach($blocks as $block): ?>

@@ -1,8 +1,8 @@
-<h1>Estadisticas generadas automaticamente por PuMuKIT</h1>
+<h1><?php echo __('Estadísticas generadas automáticamente por PuMuKIT')?></h1>
 
 
 
-<h3>Numero y duracion de los objetos multimedia por anos y estado</h3>
+<h3><?php echo __('Número y duración de los objetos multimedia por años y estado')?></h3>
 
 <table>
 <thead>
@@ -28,7 +28,7 @@
 </table>
 
 
-<h3>Numero y duracion de los objetos multimedia por anos y genero</h3>
+<h3><?php echo __('Número y duración de los objetos multimedia por años y género')?></h3>
 
 <table>
 <thead>
@@ -56,7 +56,7 @@
 
 
 
-<h3>Numero y duracion de los objetos multimedia por meses y estado</h3>
+<h3><?php echo _('Numero y duración de los objetos multimedia por meses y estado')?></h3>
 
 <table>
 <thead>
