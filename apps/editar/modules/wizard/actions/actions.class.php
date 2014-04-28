@@ -128,7 +128,7 @@ class wizardActions extends sfActions
     
     //TODO: Mirar que el perfil es de master
     if($master == null){
-      return $this->renderText("ERROR- No hay selecionado ningun perfil para master");
+      return $this->renderText($this->getContext()->getI18N()->__("ERROR- No hay seleccionado ningun perfil para master"));
       //return $this->forward($div, 'list');
     }
 
@@ -145,7 +145,7 @@ class wizardActions extends sfActions
       } while (file_exists($path_video_tmp));
       
       if(!$this->getRequest()->moveFile('video', $path_video_tmp)){
-	return $this->renderText("ERROR- [file] error haciendo un move file");
+	return $this->renderText($this->getContext()->getI18N()->__("ERROR- [file] error haciendo un move file"));
 	//return $this->forward($div, 'list');
       }
       $files = array($path_video_tmp);
@@ -156,7 +156,7 @@ class wizardActions extends sfActions
       if(file_exists($aux)){
 	$files = array($aux);
       }else{
-	return $this->renderText("ERROR - [url] No files");
+	return $this->renderText($this->getContext()->getI18N()->__("ERROR - [url] No files"));
 	//return $this->forward($div, 'list');
       }
       break;
@@ -169,14 +169,14 @@ class wizardActions extends sfActions
       $files = sfFinder::type('file')->maxdepth(0)->prune('.*')->in($aux);
       break;
     default:
-      return $this->renderText("ERROR - [default] ");
+      return $this->renderText($this->getContext()->getI18N()->__("ERROR - [default] "));
       //return $this->forward($div, 'list');
     }
 
 
     
     if(!is_array($files)){
-      return $this->renderText("ERROR - files no es un array");
+      return $this->renderText($this->getContext()->getI18N()->__("ERROR - files no es un array"));
       //return $this->forward($div, 'list');
     }
 
@@ -284,7 +284,7 @@ class wizardActions extends sfActions
     
     }
 
-    //return $this->renderText("OK- [END] ");
+    //return $this->renderText($this->getContext()->getI18N()->__("OK- [END] "));
     //return $this->forward($div, 'list');
     $this->div = $div;
   }

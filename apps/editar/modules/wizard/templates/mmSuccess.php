@@ -14,7 +14,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('title' , 'T&iacute;tulo:', 'class="required long" ') ?>
+  <?php echo label_for('title' , __('T&iacute;tulo:'), 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -30,7 +30,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('subtitle', 'Subt&iacute;tulo:', 'class="required long" ') ?>
+  <?php echo label_for('subtitle', __('Subt&iacute;tulo:'), 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -46,7 +46,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('description', 'Descripci&oacute;n:', 'class="required long" ') ?>
+  <?php echo label_for('description', __('Descripci&oacute;n:'), 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -62,7 +62,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('subserial_title', 'T&iacute;tulo de Subserie:', 'class="required long" ') ?>
+  <?php echo label_for('subserial_title', __('T&iacute;tulo de Subserie:'), 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -82,8 +82,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
-  <li><?php echo button_to_function('Next', "Modalbox.show('".url_for("wizard/file")."',{title:'PASO III: FILES.', params:Form.serialize('mm_form_wizard')})", 'class=tv_admin_action_next') ?> </li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo button_to_function(__('Next'), "Modalbox.show('".url_for("wizard/file")."',{title:'" . __('PASO III: ARCHIVOS') . "', params:Form.serialize('mm_form_wizard')})", 'class=tv_admin_action_next') ?> </li>
 </ul>
 
 </form>

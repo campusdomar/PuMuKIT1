@@ -37,7 +37,7 @@
 
 <!-- tendria que ser un radio button -->
 <div class="form-row">
-  <?php echo label_for('profile_id','Master:', 'class="required" ') ?>
+  <?php echo label_for('profile_id',__('Máster:'), 'class="required" ') ?>
   <!-- TODO poner automatico -->
   <div class="content" style="overflow: hidden">
     <?php echo (count($profiles) == 0?"&nbsp;":"") ?>
@@ -51,7 +51,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('pub_channel_id','Canales de Pub.:', 'class="required" ') ?>
+  <?php echo label_for('pub_channel_id',__('Canales de Pub.:'), 'class="required" ') ?>
 
   <div class="content" style="overflow: hidden">
     <?php echo (count($pub_channels) == 0?"&nbsp;":"") ?>
@@ -72,18 +72,18 @@
 
 
 <div class="form-row">
-  <?php echo label_for('priority','Prioridad:', 'class="required" ') ?>
+  <?php echo label_for('priority',__('Prioridad:'), 'class="required" ') ?>
 
   <div class="content">
-    <input type="radio" value="1" name="prioridad"/> Low-Priority&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" checked="checked" value="2" name="prioridad"/> Normal-Priority&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" value="3" name="prioridad"/> High-Priority&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="1" name="prioridad"/> <?php echo __('Low-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" checked="checked" value="2" name="prioridad"/> <?php echo __('Normal-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="3" name="prioridad"/> <?php echo __('High-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('language_id','Idioma:', 'class="required" ') ?>
+  <?php echo label_for('language_id',__('Idioma:'), 'class="required" ') ?>
 
   <div class="content">
     <?php echo select_tag('idioma', objects_for_select(
@@ -97,29 +97,29 @@
 
 
 <div class="form-row">
-  <?php echo label_for('file_type', 'Modo:', 'class="required" ') ?>
+  <?php echo label_for('file_type', __('Modo:'), 'class="required" ') ?>
   
   <div class="content">
-    <input type="radio" name="file_type" value="file" checked="checked" onclick="$('input_trans_file').hide();$('input_trans_dir').hide();$('input_trans_url').show();"/> Archivo Local  
-    <input type="radio" name="file_type" value="url" onclick="$('input_trans_url').hide();$('input_trans_dir').hide();$('input_trans_file').show();"/> Archivo de Servidor
-    <input type="radio" name="file_type" value="dir" onclick="$('input_trans_url').hide();$('input_trans_file').hide();$('input_trans_dir').show();"/> Directorio entero del servidor
+    <input type="radio" name="file_type" value="file" checked="checked" onclick="$('input_trans_file').hide();$('input_trans_dir').hide();$('input_trans_url').show();"/> <?php echo __('Archivo Local')?>  
+    <input type="radio" name="file_type" value="url" onclick="$('input_trans_url').hide();$('input_trans_dir').hide();$('input_trans_file').show();"/> <?php echo __('Archivo de Servidor')?>
+    <input type="radio" name="file_type" value="dir" onclick="$('input_trans_url').hide();$('input_trans_file').hide();$('input_trans_dir').show();"/> <?php echo __('Directorio entero del servidor')?>
   </div>
 </div>
 
 <div class="form-row" id="input_trans_url">
 
-  <?php echo label_for('url', 'Archivo local:', 'class="required" ') ?>
+  <?php echo label_for('url', __('Archivo local:'), 'class="required" ') ?>
 
   <div class="content">
     <?php $value = input_file_tag('video', array ('size' => 65)); echo $value ? $value : '&nbsp;' ?> &nbsp;
-    <span style="color: blue">(Menor 2GB)</span>
-    <span id="file_upload_progress" style="color:blue; display:none;">Progreso...</span>
+    <span style="color: blue"><?php echo __('(Menor 2GB)')?></span>
+    <span id="file_upload_progress" style="color:blue; display:none;"><?php echo __('Progreso...')?></span>
   </div>
 </div>
 
 <div class="form-row" id="input_trans_file" style="display: none">
 
-  <?php echo label_for('file', 'Archivo en el Servidor:', 'class="required" ') ?>
+  <?php echo label_for('file', __('Archivo en el Servidor:'), 'class="required" ') ?>
 
   <div class="content">
     <?php $value = input_tag('file', '//172.20...' ,array ('size' => 80)); echo $value ? $value : '&nbsp;' ?> &nbsp;
@@ -145,7 +145,7 @@
 
 
 <div class="form-row" id="input_trans_dir" style="display:none">
-  <?php echo label_for('url','Directorio en el servidor:', 'class="required" ') ?>
+  <?php echo label_for('url', __('Directorio en el servidor:'), 'class="required" ') ?>
   <div class="content">
     <input type="text" size="80" id="url" name="url" /> 
     <?php echo button_to_function('explorar', "Effect.toggle('explorer_videoserv_dir','blind')" )?>
@@ -169,8 +169,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
-  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save'); ?></li>
+  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save'); ?></li>
 </ul>
 
 </form>
