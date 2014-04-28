@@ -5,9 +5,9 @@
         <input type="checkbox" onclick="window.click_checkbox_all('format', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%">Id</th>
-      <th>Name</th>
-      <th>Files</th>
+      <th width="1%"><?php echo __('Id')?></th>
+      <th><?php echo __('Name')?></th>
+      <th><?php echo __('Files')?></th>
     </tr>
   </thead>
   
@@ -15,7 +15,7 @@
   <?php if (count($formats) == 0):?>
     <tr>
       <td colspan="9">
-       No existen noticias con esos valores.
+       <?php echo __('No existen noticias con esos valores.')?>
       </td>
     </tr>
   <?php endif; ?>
@@ -25,16 +25,16 @@
         <input id="<?php echo $format->getId()?>" class="format_checkbox" type="checkbox">
       </td>
       <td onclick="click_fila('format', this, <?php echo $format->getId() ?>);">
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'formats/edit?id=' . $format->getId(), array('title' => 'Editar Novedad '.$format->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'formats/edit?id=' . $format->getId(), array('title' => __('Editar Novedad ').$format->getId()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_formats', 'url' => 'formats/delete?id='.$format->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro?'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_formats', 'url' => 'formats/delete?id='.$format->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro?')))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_formats', 'url' => 'formats/copy?id='.$format->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_formats', 'url' => 'formats/copy?id='.$format->getId(), 'script' => 'true'))?>
       </td>
       <td>
-        <input type="radio" name="radio_format" title="Selecrionar este format por defecto"
+        <input type="radio" name="radio_format" title="<?php echo __('Seleccionar este formato por defecto')?>"
                value="format_<?php echo $format->getId()?>" 
                <?php echo $format->getDefaultSel()?'checked="checked"':'' ?>
                onchange="new Ajax.Request('/editar.php/formats/default/id/<?php echo $format->getId() ?>/value/'+ this.checked, {asynchronous:true, evalScripts:true})"
@@ -56,9 +56,9 @@
     <tr>
       <th colspan="10">
         <div class="float-right">
-          <?php include_partial('global/pager_ajax', array('name' => 'format', 'page' => $page, 'total' => $total)) ?> 
+          <?php include_partial('global/pager_ajax', array('name' => 'format', 'page' => $page, 'total' => $total)) ?>
         </div>
-        <?php echo $total_format ?>/<?php echo $total_format_all ?> Format
+        <?php echo $total_format ?>/<?php echo $total_format_all ?> <?php echo __('Format')?>
       </th>
     </tr>
   </tfoot>
