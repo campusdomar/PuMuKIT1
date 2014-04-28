@@ -10,7 +10,7 @@
     <div style="float:right; width:50%">
       <ul class="tv_admin_actions">
         <!-- Falta -->
-        <li><?php echo button_to_function('Nuevo', 
+        <li><?php if($root) echo button_to_function('Nuevo', 
                  'Modalbox.show("categories/create?root=true&parent_id=' . $root->getId() .'", {title:"Crear nueva categoria", width:800}); return false;', array ('class' => 'tv_admin_action_create')) ?>
         </li>
       </ul>
