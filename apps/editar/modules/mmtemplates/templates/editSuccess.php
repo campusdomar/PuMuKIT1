@@ -8,18 +8,18 @@
   <!-- actualizar vistaPrevia -->
   <ul id="menuTab">
     <li id="metaMmTemplate"   class="noSelMmTemplate" >
-      <a href="#" onclick="menuTabTemplate.select('metaMmTemplate'); return false;" >Metadatos</a>
+      <a href="#" onclick="menuTabTemplate.select('metaMmTemplate'); return false;" ><?php echo __('Metadatos')?></a>
     </li>
     <li id="categoryMmTemplate" class="noSelMmTemplate" >
-      <a href="#" onclick="menuTabTemplate.select('categoryMmTemplate'); return false;" >Categorias</a>
+      <a href="#" onclick="menuTabTemplate.select('categoryMmTemplate'); return false;" ><?php echo __('Categorias')?></a>
     </li>
     <li id="personMmTemplate" class="noSelMmTemplate" >
-      <a href="#" onclick="menuTabTemplate.select('personMmTemplate'); return false;" >Personas</a>
+      <a href="#" onclick="menuTabTemplate.select('personMmTemplate'); return false;" ><?php echo __('Personas')?></a>
     </li>
   </ul>
   
   <div class="background_id">
-    V. Defecto para la serie <?php echo $mm_template->getSerialId() ?>
+    <?php echo __('V. Defecto para la serie')?> <?php echo $mm_template->getSerialId() ?>
   </div>
   
   
