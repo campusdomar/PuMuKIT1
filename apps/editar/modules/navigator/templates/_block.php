@@ -45,7 +45,7 @@
         'title' => __('Delete', array(), 'navigator'),
         'align' => 'absmiddle',
       )), 'navigator/'.$delete.'?name='.$name.'&current_path='.$current_path, array(
-        'confirm' => __('Are you sure to want to delete this '.$type.'?', array(), 'navigator')
+        'confirm' => __('¿Está seguro que desea borrar este '.$type.'?', array(), 'navigator')
       )) ?>
     </div>
   <?php endif; ?>
