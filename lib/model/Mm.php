@@ -572,25 +572,6 @@ class Mm extends BaseMm
   }
 
   /**
-   * Devuelve la duracion del primer File
-   * 
-   *
-   * @access public
-   * @return Lista de files
-   *
-   *
-   * @internal OJO FALSTA PONER LA CULTURA.
-   */
-  public function getDuration($criteria = null, $con = null)
-  {
-    $aux = $this->getFirstFile();	
-    if ($aux) return $aux->getDuration();
-    else return 0;
-  }
-
-
-
-  /**
    * Devuelve la fecha de grabacion en texto
    *
    * @access public
