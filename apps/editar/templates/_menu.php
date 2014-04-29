@@ -77,7 +77,7 @@
         </li>
         <li class="level1">
           <a href="<?php echo url_for('virtualgrounds/index')?>" title="Categorias" class="">
-            <span><?php echo __('Categorias')?></span>
+            <span><?php echo __('Categorías')?></span>
           </a>
         </li>
         <li class="last level1">
@@ -188,7 +188,7 @@
         </li> -->
         <li class="level1">
           <a href="<?php echo url_for('categories/index')?>"  class="">
-            <span><?php echo __('Categorias')?></span>
+            <span><?php echo __('Categorías')?></span>
           </a>
         </li>
         <li class="level1">
