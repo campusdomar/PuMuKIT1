@@ -56,10 +56,9 @@ The installation process is described for a standard Debian distribution with ad
 
 	Note: Entering this command block, we asked for the root password MySQL we used before.
 
-	>$ mysql -u root -p <<<EOF    
-	>EOF  
+	>$ mysql -u root -p <<EOF   
 	>CREATE DATABASE pumukit DEFAULT CHARACTER SET utf8;  
-	>GRANT ALL PRIVILEGES ON pumukit.* TO "pmkuser"@"localhost" IDENTIFIED BY "pmkpassword";  
+	>GRANT ALL PRIVILEGES ON pumukit.* TO "pmk_user"@"localhost" IDENTIFIED BY "pmk_password";  
 	>FLUSH PRIVILEGES;  
 	>EOF
 
@@ -97,7 +96,7 @@ The installation process is described for a standard Debian distribution with ad
 
 	>$ php /var/www/pumukit/symfony fix
 
-12. Optional: if use a different user recommended in section 7 (pmkuser), database configuration change in Pumukit.
+12. Optional: if use a different user recommended in section 7 (pmk_user), database configuration change in Pumukit.
 
     For example, we can configure it to connect Pumukit user MySQL root.
 
