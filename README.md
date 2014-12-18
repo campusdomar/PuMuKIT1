@@ -9,6 +9,6 @@ PuMuKIT publish the multimedia contents in your data base throwght its public ch
 Documentation
 -------------
 
-* [Read the Installation Guide](https://github.com/campusdomar/pumukit/tree/master/doc/Installation Guide.md) 
-* [Read the User Guide](https://github.com/campusdomar/pumukit/tree/master/doc/User Guide.md) 
-* [Read the Admin Guide](https://github.com/campusdomar/pumukit/tree/master/doc/Admin Guide.md) 
+* [Read the Installation Guide](https://github.com/campusdomar/pumukit/tree/master/doc/InstallationGuide.md) 
+* [Read the User Guide](https://github.com/campusdomar/pumukit/tree/master/doc/UserGuide.md) 
+* [Read the Admin Guide](https://github.com/campusdomar/pumukit/tree/master/doc/AdminGuide.md) 
