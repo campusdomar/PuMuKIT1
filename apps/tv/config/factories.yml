@@ -27,12 +27,6 @@ all:
     class: sfSessionStorage
     param:
       session_name: pumukit
-
-  i18n:
-    class: sfI18n
-    param:
-      default_culture:  es
-      source:                 XLIFF
 #
 #  view_cache:
 #    class: sfFileCache

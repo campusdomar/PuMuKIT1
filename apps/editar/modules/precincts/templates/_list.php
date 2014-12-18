@@ -5,10 +5,10 @@
         <input type="checkbox" onclick="window.click_checkbox_all('precinct', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th><?php echo __('Id')?></th>
-      <th><?php echo __('Nombre')?></th>
-      <th><?php echo __('Equipo')?></th>
-      <th><?php echo __('Vídeos')?></th>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Equipo</th>
+      <th>Videos</th>
     </tr>
   </thead>
   
@@ -16,7 +16,7 @@
   <?php if (count($precincts) == 0):?>
   <tr>
       <td colspan="10">
-       <?php echo __('No existen recintos con esos valores.')?>
+       No existen recintos con esos valores.
       </td>
     </tr>
   <?php endif; ?>
@@ -26,16 +26,16 @@
         <input id="<?php echo $precinct->getId()?>" class="precinct_checkbox" type="checkbox">
       </td>
       <td>
-        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=' . __('editar') . ' title=' . __('editar')), 'precincts/edit?id=' . $precinct->getId(), array('title' => __('Editar recinto ').$precinct->getId()), array('width' => '800')) ?>
+        <?php echo m_link_to(image_tag('admin/mbuttons/edit_inline.gif', 'alt=editar title=editar'), 'precincts/edit?id=' . $precinct->getId(), array('title' => 'Editar recinto '.$precinct->getId()), array('width' => '800')) ?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=' . __('borrar') . ' title=' . __('borrar')), array('update' => 'list_precincts', 'url' => 'precincts/delete?id='.$precinct->getId(), 'script' => 'true', 'confirm' => __('&iquest;Seguro?')))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/delete_inline.gif', 'alt=borrar title=borrar'), array('update' => 'list_precincts', 'url' => 'precincts/delete?id='.$precinct->getId(), 'script' => 'true', 'confirm' => '&iquest;Seguro?'))?>
       </td>
       <td>
-        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=' . __('copiar') . ' title=' . __('copiar')), array('update' => 'list_precincts', 'url' => 'precincts/copy?id='.$precinct->getId(), 'script' => 'true'))?>
+        <?php echo link_to_remote(image_tag('admin/mbuttons/copy_inline.gif', 'alt=copiar title=copiar'), array('update' => 'list_precincts', 'url' => 'precincts/copy?id='.$precinct->getId(), 'script' => 'true'))?>
       </td>
       <td>
-        <input type="radio" name="radio_precinct" title="<?php echo __('Seleccionar este recinto por defecto')?>"
+        <input type="radio" name="radio_precinct" title="Selecrionar este precinct por defecto"
                value="precinct_<?php echo $precinct->getId()?>" 
                <?php echo $precinct->getDefaultSel()?'checked="checked"':'' ?>
                onchange="new Ajax.Request('/editar.php/precincts/default/id/<?php echo $precinct->getId() ?>/value/'+ this.checked, {asynchronous:true, evalScripts:true})"

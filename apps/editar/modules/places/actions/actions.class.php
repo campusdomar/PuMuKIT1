@@ -128,7 +128,7 @@ class placesActions extends sfActions
     }
     $place->save();
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del lugar actualizados."));
+    $this->msg_alert = array('info', "Metadatos del lugar actualizados.");
     $this->getUser()->setAttribute('id', $place->getId(), 'tv_admin/place');
 
     return $this->renderComponent('places', 'list');
@@ -155,7 +155,7 @@ class placesActions extends sfActions
       $place->delete();
     }
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Lugares borrados correctamente."));
+    $this->msg_alert = array('info', "Lugares borrados correctamente.");
     return $this->renderComponent('places', 'list');
   }
 

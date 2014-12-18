@@ -101,7 +101,6 @@ Perfil:
     rank: 1
     display: 0
     wizard: 1
-    master: 1
     format: ???
     codec: ???
     mime_type: ???
@@ -122,7 +121,6 @@ Perfil:
     rank: 2
     display: 1
     wizard: 1
-    master: 0
     format: mp4
     codec: x264
     mime_type: video/mp4
@@ -134,7 +132,7 @@ Perfil:
     channels: 1
     audio: 0
     bat: >
-      ffmpeg -y -i "%1" -strict experimental -acodec libfaac -ab 128k -ac 2 -vcodec libx264 -crf 22 -threads 0 "%2"  
+      ffmpeg -y -strict unofficial -i "%1" -acodec libfaac -ab 128k -ac 2 -vcodec libx264 -crf 22 -threads 0 "%2"  
     file_cfg: 
     streamserver_id: localhost
     app: ffmpeg
@@ -142,8 +140,7 @@ Perfil:
     name: mp3
     rank: 3
     display: 1
-    wizard: 1
-    master: 0
+    wizard: 0 #revisar
     format: mp3
     codec: mp3
     mime_type: audio/mp3
@@ -172,12 +169,6 @@ PerfilI18n:
     link: Video
     description: >
       Perfil copy master
-  perfilI18n_1_en: 
-    id: perfil_1
-    culture: en
-    link: Video
-    description: >
-      Perfil copy master
   perfilI18n_2_es: 
     id: perfil_2
     culture: es
@@ -190,12 +181,7 @@ PerfilI18n:
     link: Video
     description: >
       Perfil fms
-  perfilI18n_2_en: 
-    id: perfil_2
-    culture: en
-    link: Video
-    description: >
-      Perfil fms
+
   perfilI18n_3_es: 
     id: perfil_3
     culture: es
@@ -208,13 +194,6 @@ PerfilI18n:
     link: Audio
     description: >
       Perfil audio mp3
-  perfilI18n_3_en: 
-    id: perfil_3
-    culture: en
-    link: Audio
-    description: >
-      Perfil audio mp3
-
 PubChannel:
   web:
     id: web
@@ -228,17 +207,23 @@ PubChannel:
     broadcast_type_id: pub
     rank: 2
     enable: true
+  videositemap:
+    id: videositemap
+    name: GoogleVideoSiteMap
+    broadcast_type_id: cor
+    rank: 3
+    enable: true
   itunesu:
     id: itunesu
     name: iTunesU
     broadcast_type_id: cor
-    rank: 3
+    rank: 4
     enable: false
   youtubeedu:
     id: youtubeedu
     name: YouTubeEDU
     broadcast_type_id: cor
-    rank: 4
+    rank: 5
     enable: false
 
 

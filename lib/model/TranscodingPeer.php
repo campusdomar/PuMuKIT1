@@ -85,17 +85,13 @@ class TranscodingPeer extends BaseTranscodingPeer
    */
   public static function execNext()
   {
-    //MIRO SI EXISTEN PROCESOS BLOQ
-    //TranscodingPeer::checkBloq();
-
     //MIRO SI HAY CPU LIBRE Y PROCESO EN COLA
     $cpu_free = CpuPeer::getFree();
     $next = TranscodingPeer::getNext();
     if (($cpu_free)&&($next)&&($cpu_free->isActive())){
       //CAMBIO ESTADO Y ASIGNP CPU  (HACER UNA TRANSACION)
       $next->setCpuId($cpu_free->getId());
-      $next->setTimestart('now');
-      $next->setStatusId(TranscodingPeer::STATUS_EJECUTANDOSE);
+      $next->setStatusId(2);
       $next->save();
       
       //EJECUTO
@@ -110,42 +106,35 @@ class TranscodingPeer extends BaseTranscodingPeer
   }
   
   
+
+
   /**
    *
    *
    *
    */
-  public static function checkBloq()
-  {
-    $criteria = new Criteria();
-    $criteria->add(TranscodingPeer::STATUS_ID, TranscodingPeer::STATUS_EJECUTANDOSE);
-    $jobs = TranscodingPeer::doSelect($criteria);
+  private static function obtener_pid($ip, $program){
+    sleep(1);
+    $ch = curl_init('http://' . $ip . '/webserver.php');
+    
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " . base64_encode("pumukit:PUMUKIT")));
+    curl_setopt ($ch, CURLOPT_POST, 1); 
+    curl_setopt ($ch, CURLOPT_POSTFIELDS, "ruta=tasklist"); 
+    
+    $var = curl_exec($ch); 
+    $error = curl_error($ch);
+    
+    $pid_new = 0;
+    
+    //:)
+    $pos_ini = strrpos($var, $program);  
+    $linea = substr($var, $pos_ini, 32);
+    $pd = strtok($linea, ' ');
+    $pid_new = strtok(' ');
 
-    foreach($jobs as $job) {
-      if((time() - $job->getTimestart(null)) > 86400) {  //Mas de 1 dia = 86400;
-	//Mail.
-	$mail = new sfMail();
-	$mail->initialize();
-	$mail->setMailer('sendmail');
-	$mail->setCharset('utf-8');
-	
-	$mail->setSender(sfConfig::get('app_info_mail'), 'Email automatico');
-	$mail->setFrom(sfConfig::get('app_info_mail'), 'Email automatico');
-	
-	$mail->addAddress($trans->getEmail());
-	
-	$mail->setSubject('Tarea Bloqueada [' . $job->getId(). ']');
-	$mail->setBody("Id:" . $job->getId() . "\n Perfil:" . $job->getPerfil()->getName() . "\n");
-	$mail->send();
-
-	//Change State.
-	$job->setStatusId(TranscodingPeer::STATUS_ERROR); 
-	$job->save();
-	TranscodingPeer::execNext();
-      }
-    }
+    return $pid_new;
   }
-
 
 
   /**
@@ -191,7 +180,7 @@ class TranscodingPeer extends BaseTranscodingPeer
       $relEnd = 0;
       if (file_exists($trans->getPathIni())){
         $movie = new ffmpeg_movie($trans->getPathIni(), false);
-        if(!$movie){
+        if($movie == null){
           $complete = false;
         }else{
           $relIni = $movie->getFrameWidth();
@@ -200,7 +189,7 @@ class TranscodingPeer extends BaseTranscodingPeer
 
       if (file_exists($trans->getPathEnd())){
         $movie = new ffmpeg_movie($trans->getPathEnd(), false);
-        if (!$movie){
+        if ($movie == null){
           $complete = false;
         }else{
           $relEnd = $movie->getFrameWidth();

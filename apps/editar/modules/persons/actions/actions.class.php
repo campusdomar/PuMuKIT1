@@ -196,7 +196,7 @@ class personsActions extends sfActions
   {
     $this->update();
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos de la persona actualizados."));
+    $this->msg_alert = array('info', "Metadatos de la persona actualizados.");
     return $this->renderComponent('persons', 'list');
   }
 
@@ -219,11 +219,11 @@ class personsActions extends sfActions
       $aux->setPersonId($this->getRequestParameter('person'));
       try{
 	$aux->save();
-        $message = sprintf($this->getContext()->getI18N()->__("Persona asociada correctamente a la plantilla con el rol \"%s\"."), $this->role->getName());
-        $this->msg_alert = array('info', $message);
+	$this->msg_alert = array('info', 
+			  "Persona asociada correctamente a la plantilla con el rol " . $this->role->getName(). ". ");
       }catch(Exception $e){
-        $message = sprintf($this->getContext()->getI18N()->__("Persona ya asociada a la plantilla con el rol \"%s\"."), $this->role->getName());
-        $this->msg_alert = array('error', $message);
+	$this->msg_alert = array('error', 
+			  "Persona ya asociada a la plantilla con el rol " . $this->role->getName(). ". ");
       } 
       
       return $this->renderComponent('persons', 'listrelationtemplate');
@@ -237,11 +237,11 @@ class personsActions extends sfActions
       $aux->setPersonId($this->getRequestParameter('person'));
       try{
 	$aux->save();
-        $message = sprintf($this->getContext()->getI18N()->__("Persona asociada correctamente al objeto multimedia \"%s\" con el rol %s."), $this->mm->getTitle(), $this->role->getName());
-        $this->msg_alert = array('info', $message);
+	$this->msg_alert = array('info', 
+			   "Persona asociada correctamente al objeto multimedia \"" . $this->mm->getTitle()."\" con el rol " . $this->role->getName(). ". ");
       }catch(Exception $e){
-        $message = sprintf($this->getContext()->getI18N()->__("Persona ya asociada al objeto multimedia \"%s\" con el rol %s."), $this->mm->getTitle(), $this->role->getName());
-        $this->msg_alert = array('error', $message);
+	$this->msg_alert = array('error', 
+			   "Persona ya asociada al objeto multimedia \"" . $this->mm->getTitle()."\" con el rol " . $this->role->getName(). ". ");
       } 
       
       return $this->renderComponent('persons', 'listrelation');
@@ -289,9 +289,7 @@ class personsActions extends sfActions
       $component = 'listrelation';
     }
 
-    $message = sprintf($this->getContext()->getI18N()->__("Persona asociada correctamente al objeto multimedia \"%s\" con el rol %s."), $this->mm->getTitle(), $this->role->getName());
-    $this->msg_alert = array('info', $message);
-
+    $this->msg_alert = array('info', "Persona asociada correctamente al objeto multimedia \"" . $this->mm->getTitle()."\" con el rol " . $this->role->getName(). ". ");
     $this->preview = true;
     return $this->renderComponent('persons', $component);
   }
@@ -313,14 +311,11 @@ class personsActions extends sfActions
       foreach($persons as $person){
 	$person->delete();
       }
-      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Personas borradas correctamente"));
+      $this->msg_alert = array('info', "Personas borradas correctamente");
 
     }elseif($this->hasRequestParameter('id')){
       $person = PersonPeer::retrieveByPk($this->getRequestParameter('id'));
-
-      $message = sprintf($this->getContext()->getI18N()->__("Persona %s borrada."), $person->getName());
-      $this->msg_alert = array('info', $message);
-
+      $this->msg_alert = array('info', "Personas ".$person->getName(). "borrada");
       $person->delete();
     }
 
@@ -338,28 +333,27 @@ class personsActions extends sfActions
   public function executeDeleterelation()
   {
     $person = PersonPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
     $this->role = RolePeer::retrieveByPk($this->getRequestParameter('role'));
     $template = 'listrelation';
 
     if ($this->hasRequestParameter('role')){
       if($this->hasRequestParameter('template')){
-        $this->mm = MmTemplatePeer::retrieveByPk($this->getRequestParameter('mm')); 
-        $mmPerson = MmTemplatePersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
-        $mmPerson->delete();
-        $msg_c = $this->getContext()->getI18N()->__("Persona desasocionada correctamente");
-        $template = 'listrelationtemplate';
+	$mmPerson = MmTemplatePersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
+	$mmPerson->delete();
+	$msg_c = "Persona desasocionada correctamente";
+	$template = 'listrelationtemplate';
       }else{
-        $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
-	    $mmPerson = MmPersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
-        $mmPerson->delete();
-        $msg_c = $this->getContext()->getI18N()->__("Persona desasocionada correctamente");
+	$mmPerson = MmPersonPeer::retrieveByPK( $this->mm->getId(), $person->getId(), $this->role->getId());
+	$mmPerson->delete();
+	$msg_c = "Persona desasocionada correctamente";
       }
     }
 
     //Solo Borro si no hay mas
     if (($person->countMmPersons() == 0)&&($person->countMmTemplatePersons() == 0)){
       $person->delete();
-      $msg_c = $this->getContext()->getI18N()->__("Persona ademas de desasociarse con el objeto multimedia se borro por no estar relacionada a nada mas");
+      $msg_c = "Persona ademas de desasociarse con el objeto multimedia se borro por no estar relacionada a nada mas";
     }
 
     $this->msg_alert = array('info', $msg_c);
@@ -390,7 +384,7 @@ class personsActions extends sfActions
     }
 
     $person2->save();
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Persona clonada correctamente"));
+    $this->msg_alert = array('info', "Persona clonada correctamente");
     return $this->renderComponent('persons', 'list');
   }
 
@@ -426,57 +420,10 @@ class personsActions extends sfActions
       }
     }
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Campos honoríficos separados correctamente."));
+    $this->msg_alert = array('info', "Campos honorificos separados correctamente.");
     return $this->renderComponent('persons', 'list');
   }
 
-  /**
-   * --  MERGE -- /editar.php/merge
-   * Junta 2 o más personas en una (la que tenga más vídeos).
-   * Reasigna todo lo que haya vinculado con las absorbidas.
-   * Accion asincrona. Acceso privado. Parametros id por URL o ids JSON por POST o all por url.
-   *
-   */
-  public function executeMerge()
-  {
-
-    if (!$this->hasRequestParameter('ids')){
-      $this->msg_alert = array('info', "No ha seleccionado ninguna persona");
-  
-      return $this->renderComponent('persons', 'list');
-    } 
-
-    $person_ids = json_decode($this->getRequestParameter('ids'));
-    
-    // Programación defensiva: js.js no debería dejar pasar si hay menos de 2 $person_ids
-    if (1 > count($person_ids)){
-      $this->msg_alert = array('info', "No ha seleccionado ninguna persona");
-  
-      return $this->renderComponent('persons', 'list');
-    }
-    if (1 == count($person_ids)){
-      // $this->msg_alert = array('info', "Autofusión aún no está implementada. Se necesita al menos dos personas para una fusión satisfactoria");
-      $this->msg_alert = array('info', "Número insuficiente de personas para unificar");
-  
-      return $this->renderComponent('persons', 'list');
-    }
-
-    // $this->msg_alert = array('info', "Combinando personas"); 
-  
-    $people        = PersonPeer::retrieveByPks($person_ids);
-    $sorted_people = $this->getPeopleSortedByMmsNumberAndNameLength($people);
-    $merger        = $sorted_people[0];
-    $acquisitions  = array_slice($sorted_people, 1);
-    foreach ($acquisitions as $person){
-      if ($person->getId() != $merger->getId()){
-        $this->mergePerson1IntoPerson2($person, $merger);
-      } 
-    }
-
-    $this->msg_alert = array('info', "Unificando personas"); 
-  
-    return $this->renderComponent('persons', 'list');
-  }
 
   /**
    * --  AUTOCOMPLETE -- /editar.php/persons/autocomplete
@@ -521,15 +468,14 @@ class personsActions extends sfActions
    */
   public function executeUp()
   {
+    $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
     $this->role = RolePeer::retrieveByPk($this->getRequestParameter('role'));
     
     if($this->hasRequestParameter('template')){
-      $this->mm = MmTemplatePeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmTemplatePersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelationtemplate';
     }else{
-      $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmPersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelation';      
@@ -551,15 +497,14 @@ class personsActions extends sfActions
    */
   public function executeDown()
   {
+    $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
     $this->role = RolePeer::retrieveByPk($this->getRequestParameter('role'));
     
     if($this->hasRequestParameter('template')){
-      $this->mm = MmTemplatePeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmTemplatePersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelationtemplate';
     }else{
-      $this->mm = MmPeer::retrieveByPk($this->getRequestParameter('mm')); 
       $mmper = MmPersonPeer::retrieveByPK($this->mm->getId(), $this->getRequestParameter('id'), $this->role->getId());
       $this->forward404Unless($mmper);
       $template = 'listrelation';      
@@ -605,100 +550,6 @@ class personsActions extends sfActions
 
     $this->getUser()->setAttribute('id', $person->getId(), 'tv_admin/person');
     return $person->getId();
-  }
-
-  private function getPeopleSortedByMmsNumberAndNameLength($people)
-  {
-    $id_mms        = array();
-    $id_namelength = array();
-    foreach ($people as $person){
-      $id_mms[$person->getId()] = $person->countMmPersons();
-      $id_namelength[$person->getId()] = strlen(trim($person->getName()));
-    }
-    array_multisort($id_mms, SORT_DESC, $id_namelength, SORT_DESC, $people);
-
-    return $people;
-  }
-
-  private function mergePerson1IntoPerson2($person1, $merger)
-  {
-    if (!$person1 || !$merger){
-      // echo "Error al fusionar personas, ids incorrectos"
-      return false;
-    }
-    $merger_id  = $merger->getId();
-    $person1_id = $person1->getId();
-    // echo "\n<br/>Asignando todo lo relacionado con " . $person1_id . " - " . $person1->getName() . " (" . $person1->countMmPersons() . ") a " . $merger->getId() . " - " . $merger->getName() . " (" . $merger->countMmPersons() . ")\n<br>";
-    
-    $mmps = $person1->getMmPersons();
-    foreach ($mmps as $mmp){
-      $resultado = $this->actualiza_mmp_nuevo_person_id($mmp, $merger_id);
-    }
-
-    $mmtps = $person1->getMmTemplatePersons();   
-    foreach ($mmtps as $mmtp){
-      $resultado = $this->actualiza_mmtp_nuevo_person_id($mmtp, $merger_id);
-    }
-
-    // No probado (de momento no se usa pic_person). Probablemente no deje actualizar y haya que crear nuevos pics.
-    // if (!$merger->getPicPersons() && ($pps = $person1->getPicPersons())){  
-    //   $pic_person = $pps[0];
-    //   $pic_person->setOtherId($merger_id);
-    //   $pic_person->save();
-    // }
-    
-    $person1->delete();
-  }
-  
-// Importante: como no funciona cambiar un valor y guardar el mismo objeto.
-// ej.: $mmtp->setPersonId(nuevo) y $mmtp->save()
-// creo uno nuevo y borro el original.
-
-   /**
-   * @param MmTemplatePerson $mmtp
-   * @param Integer $merger_id
-   * @return Boolean (existía previamente el nuevo objeto || resultado del save())
-   */
-  private function actualiza_mmtp_nuevo_person_id($mmtp, $merger_id){
-    $new_mmtp = new MmTemplatePerson();
-    $new_mmtp->setMmTemplateId($mmtp->getMmTemplateId());
-    $new_mmtp->setRoleId($mmtp->getRoleId());
-    $new_mmtp->setPersonId($merger_id);
-
-    if ($already_present = MmTemplatePersonPeer::retrieveByPk($new_mmtp->getMmTemplateId(), $new_mmtp->getPersonId(), $new_mmtp->getRoleId())){
-      $result = true;
-      $mmtp->delete();
-      // sf rompe si se intenta guardar otro mmtemplate con las mismas claves primarias.
-    } else if ($result = $new_mmtp->save()){
-      $mmtp->delete();
-    } else {
-      // Hay un error imprevisto al crear el mmtp actualizado
-    }
-
-    return $result;
-  }
-  /**
-   * @param MmPerson $mmtp
-   * @param Integer $merger_id
-   * @return Boolean (existía previamente el nuevo objeto || resultado del save())
-   */
-  private function actualiza_mmp_nuevo_person_id($mmp, $merger_id){
-    $new_mmp = new MmPerson();
-    $new_mmp->setMmId($mmp->getMmId());
-    $new_mmp->setRoleId($mmp->getRoleId());
-    $new_mmp->setPersonId($merger_id);
-
-    if ($already_present = MmPersonPeer::retrieveByPk($new_mmp->getMmId(), $new_mmp->getPersonId(), $new_mmp->getRoleId())){
-      $result = true;
-      $mmp->delete();
-      // sf rompe si se intenta guardar otro mm con las mismas claves primarias.
-    } else if ($result = $new_mmp->save()){
-      $mmp->delete();
-    } else {
-      // Hay un error imprevisto al crear el mmp actualizado
-    }
-
-    return $result;
   }
 }
 

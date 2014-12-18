@@ -13,7 +13,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('type', __('Tipo:'), 'class="required" ') ?>
+  <?php echo label_for('type', 'Tipo:', 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($mattype, 'getType', array ('size' => 3,  'maxlength' => 3, 'control_name' => 'type',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -22,7 +22,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('mime_type', __('MIME Type:'), 'class="required" ') ?>
+  <?php echo label_for('mime_type', 'Mime Type:', 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($mattype, 'getMimeType', array ('size' => 25,  'control_name' => 'mimetype',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -34,7 +34,7 @@
   <?php $sep =''; foreach ($langs as $lang): ?>
     <?php $mattype->setCulture($lang);  echo $sep ?>  
   
-    <?php echo label_for('name_' . $lang, __('Nombre:'), 'class="required" ') ?>
+    <?php echo label_for('name_' . $lang, 'Nombre:', 'class="required" ') ?>
     <div class="content">
       <?php $value = object_input_tag($mattype, 'getName', array ('size' => 80,  'control_name' => 'name_' . $lang,
       )); echo $value ? $value.'<span class="lang">'.$lang.'</span>' : '&nbsp;' ?>
@@ -50,8 +50,8 @@
 
 
 <ul class="tv_admin_actions">
-<li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-<li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+<li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+<li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
   </ul>
 
 </form>

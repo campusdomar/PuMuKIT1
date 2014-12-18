@@ -90,7 +90,6 @@ class profilesActions extends sfActions
     $profile->setName($this->getRequestParameter('name', ' '));
     $profile->setDisplay($this->getRequestParameter('display', ' '));
     $profile->setWizard($this->getRequestParameter('wizard', ' '));
-    $profile->setMaster($this->getRequestParameter('master', ' '));
     $profile->setFormat($this->getRequestParameter('format', ' '));
     $profile->setCodec($this->getRequestParameter('codec', ' '));
     $profile->setMimeType($this->getRequestParameter('mimetype', ' '));
@@ -116,7 +115,7 @@ class profilesActions extends sfActions
     }
     
     $profile->save();
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del perfil actualizados."));
+    $this->msg_alert = array('info', "Metadatos del perfil actualizados.");
 
     $this->getUser()->setAttribute('id', $profile->getId(), 'tv_admin/profile');
 
@@ -145,7 +144,7 @@ class profilesActions extends sfActions
       if ($profile->countFiles() == 0)
         $profile->delete();
     }
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Perfil borrado."));
+    $this->msg_alert = array('info', "Perfil borrado.");
     return $this->renderComponent('profiles', 'list');
   }
 
@@ -166,12 +165,11 @@ class profilesActions extends sfActions
     foreach($langs as $lang){
       $profile2->setCulture($lang);
       $profile->setCulture($lang);
-      $profile2->setLink($profile->getLink());
       $profile2->setDescription($profile->getDescription());
     }
             
     $profile2->save();
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Perfil clonado."));
+    $this->msg_alert = array('info', "Perfil clonado.");
 
     return $this->renderComponent('profiles', 'list');
   }

@@ -1100,7 +1100,7 @@ abstract class BaseCodec extends BaseObject  implements Persistent {
 
 				$criteria->add(FilePeer::CODEC_ID, $this->getId());
 
-				$this->collFiles = FilePeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
+				$this->collFiles = FilePeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -1113,34 +1113,12 @@ abstract class BaseCodec extends BaseObject  implements Persistent {
 				$criteria->add(FilePeer::CODEC_ID, $this->getId());
 
 				if (!isset($this->lastFileCriteria) || !$this->lastFileCriteria->equals($criteria)) {
-					$this->collFiles = FilePeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
+					$this->collFiles = FilePeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
 				}
 			}
 		}
 		$this->lastFileCriteria = $criteria;
 		return $this->collFiles;
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collFiles) {
-				foreach ((array) $this->collFiles as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collFiles = null;
 	}
 
 

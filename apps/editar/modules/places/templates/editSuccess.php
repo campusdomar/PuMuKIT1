@@ -13,7 +13,7 @@
 <fieldset id="tv_fieldset_none" class="">
 
 <div class="form-row">
-  <?php echo label_for('cod', __('Siglas:'), 'class="required" ') ?>
+  <?php echo label_for('cod', 'Siglas:', 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($place, 'getCod', array ('size' => 10,
 )); echo $value ? $value : '&nbsp;' ?>
@@ -21,17 +21,17 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('coorgeo', __('Coordenadas geo.:'), 'class="required" ') ?>
+  <?php echo label_for('coorgeo', 'Coordenadas geo.:', 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($place, 'getCoorgeo', array ('size' => 45,
 )); echo $value ? $value : '&nbsp;' ?>
-    <span id="error_coorgeo" style="display:none" class="error"><?php echo __('Formato coordenadas no v&aacute;lido')?></span>  
+    <span id="error_coorgeo" style="display:none" class="error">Formato coordenadas no v&aacute;lido</span>  
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
+  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $place->setCulture($lang);  echo $sep ?>  
@@ -45,7 +45,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('address', __('Dirección:'), 'class="required" ') ?>
+  <?php echo label_for('address', 'Direccion:', 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $place->setCulture($lang);  echo $sep ?>  
@@ -62,8 +62,8 @@
 
 
 <ul class="tv_admin_actions">
-<li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=return comprobar_form_place($("coorgeo").value)'); ?></li>
-<li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+<li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=return comprobar_form_place($("coorgeo").value)'); ?></li>
+<li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
   </ul>
 
 </form>

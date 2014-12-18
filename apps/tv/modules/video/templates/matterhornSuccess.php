@@ -9,7 +9,7 @@
 <div class="mm_player">
   <div class="date" style="margin-right: 10px;">
   <!-- Fixme falta estilo de esto -->
-    <?php echo __('Fecha de celebración')?>: <?php echo $mm->getRecordDate('d/m/Y') ?>
+    <?php echo __('Data de celebración')?>: <?php echo $mm->getRecordDate('d/m/Y') ?>
   </div>
 </div>
 
@@ -67,9 +67,9 @@ function mh_animacion(){
     </div>
   </div>
   <div id="sidebar_content" style="width: 100%">
- <?php include_partial('video/other', array('texto' => __('Vídeos de la misma serie:'), 
+ <?php include_partial('video/other', array('texto' => __('Vídeos da mesma serie:'), 
 					      'mmobjs' => PubChannelPeer::getMmsFromSerial(1, $mm->getSerialId())))?>
-   <?php include_partial('video/other', array('texto' => __('Tamén te interesan:'), 
+   <?php include_partial('video/other', array('texto' => __('Tamén che interesan:'), 
 					      'mmobjs' => $mm->getSimilarMms()))?>
   </div>
  </div>    

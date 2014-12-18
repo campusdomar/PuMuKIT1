@@ -920,7 +920,7 @@ abstract class BasePubChannelPerfil extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BasePerfilPeer.php';
 
-			$this->aPerfilRelatedByPerfil43Id = PerfilPeer::retrieveByPKWithI18n($this->perfil_43_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aPerfilRelatedByPerfil43Id = PerfilPeer::retrieveByPKWithI18n($this->perfil_43_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -928,7 +928,7 @@ abstract class BasePubChannelPerfil extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_43_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_43_id, $this->getCulture(), $con);
 			   $obj->addPerfilsRelatedByPerfil43Id($this);
 			 */
 		}
@@ -999,7 +999,7 @@ abstract class BasePubChannelPerfil extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BasePerfilPeer.php';
 
-			$this->aPerfilRelatedByPerfil169Id = PerfilPeer::retrieveByPKWithI18n($this->perfil_169_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aPerfilRelatedByPerfil169Id = PerfilPeer::retrieveByPKWithI18n($this->perfil_169_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1007,7 +1007,7 @@ abstract class BasePubChannelPerfil extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_169_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_169_id, $this->getCulture(), $con);
 			   $obj->addPerfilsRelatedByPerfil169Id($this);
 			 */
 		}
@@ -1078,7 +1078,7 @@ abstract class BasePubChannelPerfil extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BasePerfilPeer.php';
 
-			$this->aPerfilRelatedByPerfilAudioId = PerfilPeer::retrieveByPKWithI18n($this->perfil_audio_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aPerfilRelatedByPerfilAudioId = PerfilPeer::retrieveByPKWithI18n($this->perfil_audio_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1086,31 +1086,11 @@ abstract class BasePubChannelPerfil extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_audio_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_audio_id, $this->getCulture(), $con);
 			   $obj->addPerfilsRelatedByPerfilAudioId($this);
 			 */
 		}
 		return $this->aPerfilRelatedByPerfilAudioId;
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-		} // if ($deep)
-
-		$this->aPubChannel = null;
-		$this->aPerfilRelatedByPerfil43Id = null;
-		$this->aPerfilRelatedByPerfil169Id = null;
-		$this->aPerfilRelatedByPerfilAudioId = null;
 	}
 
 

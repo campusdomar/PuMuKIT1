@@ -73,8 +73,6 @@ class MaterialMapBuilder {
 
 		$tMap->addColumn('DISPLAY', 'Display', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
-		$tMap->addColumn('SIZE', 'Size', 'string', CreoleTypes::BIGINT, true, null);
-
 	} // doBuild()
 
 } // MaterialMapBuilder

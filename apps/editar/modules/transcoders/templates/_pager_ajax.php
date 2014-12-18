@@ -4,14 +4,14 @@
 ?>
 
   <div id="pager_<?php echo $name?>" style="float:left;">
-    <div style="float:left; margin:0em .5em;"><?php echo link_to_remote(__('&laquo;Anterior'), array('update' => $div, 'url' => $url.'?page='.($page-1), 'script' => 'true'), $ver_anterior)  ?></div>
+    <div style="float:left; margin:0em .5em;"><?php echo link_to_remote('&laquo;Anterior', array('update' => $div, 'url' => $url.'?page='.($page-1), 'script' => 'true'), $ver_anterior)  ?></div>
     <div style="float:left; margin:0em .5em; width:8em">Pag. <span id="num_pag_<?php echo $name?>"><?php echo ($page)?></span> de <?php echo $total ?></div>
     <div style="float:left; margin:0em .5em; background:transparent url(/images/admin/pag/sliderbgleft100.png) no-repeat scroll left center; height:18px;  width:100px; ">
       <div id="track_<?php echo $name?>" style="background-color : #aaa;  height : 18px; background:transparent url(/images/admin/pag/sliderbgright.png) no-repeat scroll right center; ">
         <div id="handle_<?php echo $name?>" style="display : none; background-color : #f00; width : 12px; height : 18px; cursor : move; background:transparent url(/images/admin/pag/sliderhandle.png) no-repeat scroll center;"> </div>
       </div>
     </div>
-    <div style="float:left; margin:0em .5em;"><?php echo link_to_remote(__('Siguiente&raquo;'), array('update'=> $div, 'url' => $url.'?page='.($page+1), 'script' => 'true'), $ver_siguiente) ?></div>
+    <div style="float:left; margin:0em .5em;"><?php echo link_to_remote('Siguiente&raquo;', array('update'=> $div, 'url' => $url.'?page='.($page+1), 'script' => 'true'), $ver_siguiente) ?></div>
   </div>
 
   <?php //aqui no funciona javascript_tag por no tener type ?>
@@ -23,7 +23,7 @@
         values: $R(1,<?php echo $total ?>).toArray(),
         sliderValue: <?php echo $page ?>,
         onSlide: function(v){$("num_pag_<?php echo $name?>").innerHTML= (v);},
-        onChange: function(v){new Ajax.Updater("<?php echo $div ?>", "<?php echo url_for($url)?>/page/"+v, {asynchronous:true, evalScripts:true})}
+        onChange: function(v){new Ajax.Updater("<?php echo $div ?>", "<?php url_for($url)?>/page/"+v, {asynchronous:true, evalScripts:true})}
       } );
     
       $("handle_<?php echo $name?>").show();    <?php  //evito efecto de empezar en cero y ponerse en su posicion ?>

@@ -8,18 +8,18 @@
   <!-- actualizar vistaPrevia -->
   <ul id="menuTab">
     <li id="metaMmTemplate"   class="noSelMmTemplate" >
-      <a href="#" onclick="menuTabTemplate.select('metaMmTemplate'); return false;" ><?php echo __('Metadatos')?></a>
+      <a href="#" onclick="menuTabTemplate.select('metaMmTemplate'); return false;" >Metadatos</a>
     </li>
-    <li id="categoryMmTemplate" class="noSelMmTemplate" >
-      <a href="#" onclick="menuTabTemplate.select('categoryMmTemplate'); return false;" ><?php echo __('Categorias')?></a>
+    <li id="groundMmTemplate" class="noSelMmTemplate" >
+      <a href="#" onclick="menuTabTemplate.select('groundMmTemplate'); return false;" >Areas de conocimento</a>
     </li>
     <li id="personMmTemplate" class="noSelMmTemplate" >
-      <a href="#" onclick="menuTabTemplate.select('personMmTemplate'); return false;" ><?php echo __('Personas')?></a>
+      <a href="#" onclick="menuTabTemplate.select('personMmTemplate'); return false;" >Personas</a>
     </li>
   </ul>
   
   <div class="background_id">
-    <?php echo __('V. Defecto para la serie')?> <?php echo $mm_template->getSerialId() ?>
+    V. Defecto para la serie <?php echo $mm_template->getSerialId() ?>
   </div>
   
   
@@ -27,10 +27,11 @@
     <?php include_partial('edit_meta', array('mm' => $mm_template, 'langs' => $langs)) ?>
   </div>
   
-  <div id="categoryMmTemplateDiv" class="virtual_edit"  style="display:none;">
-    <?php include_partial('edit_category', array('mm' => $mm_template, 'langs' => $langs)) ?>
-  </div>
 
+  <div id="groundMmTemplateDiv"  style="display:none;">
+    <?php include_partial('edit_ground', array('mm' => $mm_template, 'langs' => $langs, 'grounds' => $grounds , 'grounds_sel' => $grounds_sel, 'groundtypes' => $groundtypes)) ?>
+  </div>
+  
   <div id="personMmTemplateDiv" style="display:none;">
     <?php include_partial('edit_person', array('mm' => $mm_template, 'langs' => $langs, 'roles' => $roles)) ?>
   </div>

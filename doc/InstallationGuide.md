@@ -1,19 +1,22 @@
 PuMuKIT Installation Guide
 ====================================
 
-*This page is updated to the 1.8 release* 
+*This page is updated to the 1.7 release* 
 
 Requirements
 -------------------------------------
 
-PuMuKIT is one application LAMP, created with the symfony framework. It uses ffmpeg to analyze the audiovisual data, as well as to transcode them.
+PuMuKIT is a LAMP application, created with the framewirk Symfony. It uses ffmpeg to analyze the audiovisual data, as well as to transcode them.
 
-The requirements for installation are linux, apache, mysql, ffmpeg, php5. You must have installed a version of ffmpeg encoding to h264 and aac. Also the following modules are required php5: php5-ffmpeg, php5-cli, php5-mysql, php5-ldap, php5-curl.
+The install requisites are: linux apache mysql ffmpeg php5. It does not work for versions above 5.2.x.
 
-The script doc/scripts/check_dependences.php checks that meet all dependencies.
+A ffmpeg version with H264 and AAC encoding capabilities is required.
 
-PuMuKIT has been developed and is often installed on Linux Debian but its use is not essential.
+The following PHP5 modules are also needed: php5-ffmpeg (0.5.x version) php5-cli php5-xsl php5-mysql php5-ldap php5-curl.
 
+The script in doc\scripts\check_dependeces.php checks all the dependencies are met for this distribution.
+
+PuMuKIT has been developed (and commonly run) under Linux Debian, but using it is not required.
 
 
 Installation
@@ -23,13 +26,13 @@ The installation process is described for a standard Debian distribution with ad
 
 1. Download the last version of pumukit:
 
-	>[https://github.com/campusdomar/pumukit/archive/1.8.0-RC1.zip](https://github.com/campusdomar/pumukit/archive/1.8.0-RC1.zip)  
-	>$ wget https://github.com/campusdomar/pumukit/archive/1.8.0-RC1.zip
+	>[http://webfiler.media.uvigo.es/webfiler/pumukit/pumukit17.tgz](http://webfiler.media.uvigo.es/webfiler/pumukit/pumukit17.tgz)  
+	>$ wget http://webfiler.media.uvigo.es/webfiler/pumukit/pumukit17.tgz
 
 2. Access a terminal to the directory where you downloaded , unzip file and move the application to place /var/www/
 
-	>$ unzip 1.8.0-RC1.zip  
-	>$ mv pumukit-1.8.0-RC1 /var/www/pumukit
+	>$ tar xzvf pumukit17.tgz
+	>$ mv pumukit-1.7.0 /var/www/pumukit
 
 3. Install dependencies of pumukit (see requirements):
 	
@@ -115,16 +118,12 @@ The installation process is described for a standard Debian distribution with ad
 
 	>$ php /var/www/pumukit/symfony propel-build-all-load editar
 
-14. Execute the custom task ((import category trees in the database)):
-
-	>$ php /var/www/pumukit/symfony init-categories
-
-15. Clean cache of Pumukit and restart the apache server:
+14. Clean cache of Pumukit and restart the apache server:
 
 	>$ php /var/www/pumukit/symfony cc  
 	>$ /etc/init.d/apache2 restart
 
-16. Probably have to address the lack of user permissions with accessing the server apache2 (in this case "www-data") to folders and Pumukit files.
+15. Probably have to address the lack of user permissions with accessing the server apache2 (in this case "www-data") to folders and Pumukit files.
 
     One way to solve it is to change the owner and group of the contents Pumukit folder:
 
@@ -132,87 +131,10 @@ The installation process is described for a standard Debian distribution with ad
 
 
 
-Extra
-------------------------------------------------
-
-Configuring the apache server to install locally with virtualhost Pumukit:
-
-1. Add the following line to /etc/hosts
-
-	>127.0.0.1     pumukit
-
-2. Create or add to the file /etc/apache2/httpd.conf the following lines:  
-
-	```
-	ServerName nombre_del_host_local  
-    NameVirtualHost 127.0.0.1:80  
-    <VirtualHost *:80>  
-    	ServerName pumukit  
-        ServerAlias pumukit www.pumukit  
-        DocumentRoot "/var/www/pumukit/web"  
-        DirectoryIndex index.php  
-        <Directory "/var/www/pumukit/web">  
-        	AllowOverride Allow  
-            All from All  
-        </Directory>  
-    </VirtualHost>
-    ```
-
-3. Restart the apache server:
-	
-	>$ /etc/init.d/apache2 restart
 
 
-Now, restarting the service apache2 and introducing  "pumukit" in any browser, should show the application working correctly.
-
-Introducing "pumukit/editar.php" you can check the backend.
-The default user to the backend is "prueba" and password "123456".
-
-
-Pumukit configuration
+Related Links
 ---------------------------------------------------
 
-The principal configuration of Pumukit is performed in a file format YAML ( http://es.wikipedia.org/wiki/YAML). Following the above instructions will be located at:
-
->/var/www/pumukit/config/app.yml
-
-In some categories there is a key "use:" activate the functionality required if its value is 1 or desactivated with 0.
-
-Strings as URL, username, password, etc, must go enclosed in single or double quotes.
-
-1. Play a introduction video before each video.
-	- Find in app.yml the category "intro".
-	- Change the value of "use:" of 0 to 1 (functionality enable).
-	- Add in the value of "url:" complete URL of the video to show.
-
-	Example:
-
-		intro:
-		  use:	1
-		  url:	"http://servidor.com/ejemplo/video_intro.mp4"
-
-
-2. Enable Matterhorn functionality.
-
-   Matterhorn enables multi-machine install with multiple servers to play the video and to manage the system.
-
-	- Find in app.yml the "matterhorn" category.
-	- Change the value of "use:" of 0 to 1.
-	- Add in the value of "server:" complete URL of the server where you stay Matterhorn player.
-	- Add in the value of "server_admin" complete URL of the server with the administration interface.
-	- Add in the value of "user:" the user account that you will use Pumukit to connect to the server Matterhorn.
-
-		-- Important: You need a user account to authenticate using HTTP digest. A normal user account don't work. Typically, this account configured in the config.properties file in the Matterhorn server.
-
-	- Add in the value of "password:" the password of user for the Matterhorn server.
-
-	<pre><code>
-    matterhorn:
-    use:           1
-    server:        "http://ejemplo-mh-engage-player.dominio.com"
-    server_admin:  "http://ejemplo_interfaz_admin.dominio.com"
-    user:          "usuario_matterhorn"
-    password:      "contraseña_matterhorn"
-    </code></pre>
-
-More information: [http://pumukit.uvigo.es](http://pumukit.uvigo.es)
+* [Install ffmpeg with H264 and AAC support in Ubuntu](http://ubuntuforums.org/showthread.php?t=786095)
+* [Install ffmpeg with H264 and AAC support in Debian/Lenny](http://www.adminsehow.com/2009/07/how-to-install-ffmpeg-on-debian-lenny-from-svn/)

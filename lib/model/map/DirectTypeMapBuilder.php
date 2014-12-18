@@ -63,7 +63,7 @@ class DirectTypeMapBuilder {
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
-		$tMap->addColumn('NAME', 'Name', 'string', CreoleTypes::CHAR, false, 250);
+		$tMap->addColumn('NAME', 'Name', 'string', CreoleTypes::CHAR, false, 8);
 
 	} // doBuild()
 

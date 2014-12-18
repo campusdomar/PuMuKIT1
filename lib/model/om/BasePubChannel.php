@@ -1346,35 +1346,6 @@ abstract class BasePubChannel extends BaseObject  implements Persistent {
 		return $this->collPubChannelPerfils;
 	}
 
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collPubChannelMms) {
-				foreach ((array) $this->collPubChannelMms as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collPubChannelPerfils) {
-				foreach ((array) $this->collPubChannelPerfils as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collPubChannelMms = null;
-		$this->collPubChannelPerfils = null;
-		$this->aBroadcastType = null;
-	}
-
 
   public function __call($method, $arguments)
   {

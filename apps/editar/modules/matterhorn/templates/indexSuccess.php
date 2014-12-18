@@ -1,4 +1,4 @@
-<h3 class="cab_body_div"><?php echo __('Opencast-Matterhorn Import')?></h3>
+<h3 class="cab_body_div">Opencast-Matterhorn Import</h3>
 
 <div id="matterhorn_info"></div>
 
@@ -26,8 +26,8 @@
 <script type="text/javascript"> 
 //<![CDATA[
 
-new Ajax.Updater('list_matterhorn', '<?php echo url_for('matterhorn/list') ?>', {asynchronous:true, evalScripts:true});
-new Ajax.Updater('info_matterhorn', '<?php echo url_for('matterhorn/info') ?>', {asynchronous:true, evalScripts:true});
+new Ajax.Updater('list_matterhorn', '<?php echo url_for('matterhorn/list') ?>');
+new Ajax.Updater('info_matterhorn', '<?php echo url_for('matterhorn/info') ?>');
 
 
 
@@ -38,9 +38,3 @@ function matterhorn_info(msg){
 
 //]]>
 </script>
-
-<br />
-<br />
-<br />
-<br />
-<br />

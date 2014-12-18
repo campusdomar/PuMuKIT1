@@ -291,9 +291,7 @@ abstract class BasePubChannelPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        if((count($criteria->getOrderByColumns()) == 0) &&
-           (array_diff($criteria->getSelectColumns(), array(self::COUNT_DISTINCT, self::COUNT)))) 
-            $criteria->addAscendingOrderByColumn(self::RANK);
+        $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.

@@ -21,17 +21,17 @@
 </div>
 
 <ul class="tv_admin_actions" style="width: 100%">
-  <span id="mm_save_error" style="color:red; opacity:0.0; filter: alpha(opacity=0); ZOOM:1"><?php echo __('Guardado ERROR')?></span>
-  <span id="mm_save_ok" style="color:blue; opacity:0.0; filter: alpha(opacity=0); ZOOM:1"><?php echo __('Guardado OK')?></span>
-  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save  onclick=if(comprobar_form_mm($("publicdate").value, $("recorddate").value, '. get_js_regexp_timedate($sf_user->getCulture()) . ')){$(\'remember_save_mm\').hide();}else{return false}'); ?></li>
-  <li><?php echo reset_tag(__('Reset'),'name=reset class=tv_admin_action_delete onclick=$(\'remember_save_mm\').hide()'); ?></li>
+  <span id="mm_save_error" style="color:red; opacity:0.0; filter: alpha(opacity=0); ZOOM:1">Guardado ERROR</span>
+  <span id="mm_save_ok" style="color:blue; opacity:0.0; filter: alpha(opacity=0); ZOOM:1">Guardado OK</span>
+  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save  onclick=if(comprobar_form_mm($("publicdate").value, $("recorddate").value, '. get_js_regexp_timedate($sf_user->getCulture()) . ')){$(\'remember_save_mm\').hide();}else{return false}'); ?></li>
+  <li><?php echo reset_tag('Reset','name=reset class=tv_admin_action_delete onclick=$(\'remember_save_mm\').hide()'); ?></li>
 </ul> 
 
 <fieldset id="tv_fieldset_none" class="">
 
 <!--
 <div class="form-row">
-  <?php echo label_for('title', __('T&iacute;tulo:'), 'class="required long" ') ?>
+  <?php echo label_for('title', 'T&iacute;tulo:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -49,7 +49,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('subtitle', __('Subt&iacute;tulo:'), 'class="required long" ') ?>
+  <?php echo label_for('subtitle', 'Subt&iacute;tulo:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -67,7 +67,7 @@
 -->
 
 <div class="form-row">
-  <?php echo label_for('keyword', __('Keyword:'), 'class="required long" ') ?>
+  <?php echo label_for('keyword', 'Keyword:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -83,7 +83,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('copyright',__('Copyright:'), 'class="required long" ') ?>
+  <?php echo label_for('copyright','Copyright:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $value = object_input_tag($mm, 'getCopyright', array (
       'size' => 30,
@@ -95,7 +95,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('broadcast_id', __('Difusi&oacute;n:'), 'class="required long"') ?>
+  <?php echo label_for('broadcast_id', 'Difusi&oacute;n:', 'class="required long"') ?>
   <div class="content content_long">
     <?php $value = object_select_tag($mm, 'getBroadcastId', array (
       'related_class' => 'Broadcast',
@@ -107,7 +107,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('genre_id', __('Género:'), 'class="required long"') ?>
+  <?php echo label_for('genre_id', 'Genero:', 'class="required long"') ?>
   <div class="content content_long">
     <?php $value = object_select_tag($mm, 'getGenreId', array (
       'related_class' => 'Genre',
@@ -122,7 +122,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('publicdate', __('Fecha de publicaci&oacute;n:'), 'class="required long" ') ?>
+  <?php echo label_for('publicdate', 'Fecha de publicaci&oacute;n:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $value = object_input_date_tag($mm, 'getPublicdate', array (
       'rich' => true,
@@ -131,13 +131,13 @@
       'control_name' => 'publicdate',
       'onchange' => "$('remember_save_mm').show()",
     )); echo $value ? $value : '&nbsp;' ?>
-    <span id="error_date1" style="display:none" class="error"><?php echo __('Formato fecha no v&aacute;lido')?></span> 
+    <span id="error_date1" style="display:none" class="error">Formato fecha no v&aacute;lido</span> 
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('recorddate', __('Fecha de grabaci&oacute;n:'), 'class="required long" ') ?>
+  <?php echo label_for('recorddate', 'Fecha de grabaci&oacute;n:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $value = object_input_date_tag($mm, 'getRecorddate', array (
       'rich' => true,
@@ -146,13 +146,13 @@
       'control_name' => 'recorddate',
       'onchange' => "$('remember_save_mm').show()",
     )); echo $value ? $value : '&nbsp;' ?>
-    <span id="error_date2" style="display:none" class="error"><?php echo __('Formato fecha no v&aacute;lido')?></span> 
+    <span id="error_date2" style="display:none" class="error">Formato fecha no v&aacute;lido</span> 
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('description', __('Descripci&oacute;n:'), 'class="required long"') ?>
+  <?php echo label_for('description', 'Descripci&oacute;n:', 'class="required long"') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -168,7 +168,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('subserial', __('Subserie:'), 'class="long"') ?>
+  <?php echo label_for('subserial', 'Subserie:', 'class="long"') ?>
   <div class="content content_long">
     <?php $value = object_checkbox_tag($mm, 'getSubserial', array (
       'control_name' => 'subserial',
@@ -178,7 +178,7 @@
 </div>
 <!--
 <div class="form-row">
-  <?php echo label_for('line2', __('Segunda l&iacute;nea:'), 'class="long"') ?>
+  <?php echo label_for('line2', 'Segunda l&iacute;nea:', 'class="long"') ?>
     <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -196,7 +196,7 @@
 -->
 
 <div class="form-row">
-  <?php echo label_for('subserial_title', __('T&iacute;tulo de subserie:'), 'class="long"') ?>
+  <?php echo label_for('subserial_title', 'T&iacute;tulo de subserie:', 'class="long"') ?>
     <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $mm->setCulture($lang);  echo $sep ?>  
@@ -217,4 +217,11 @@
 
 </form>
 </div>
+
+
+
+
+
+
+
 

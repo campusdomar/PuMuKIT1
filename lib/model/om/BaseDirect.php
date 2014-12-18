@@ -1594,36 +1594,6 @@ abstract class BaseDirect extends BaseObject  implements Persistent {
 		$l->setDirect($this);
 	}
 
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collDirectI18ns) {
-				foreach ((array) $this->collDirectI18ns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collEvents) {
-				foreach ((array) $this->collEvents as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collDirectI18ns = null;
-		$this->collEvents = null;
-		$this->aResolution = null;
-		$this->aDirectType = null;
-	}
-
   public function getCulture()
   {
     return $this->culture;

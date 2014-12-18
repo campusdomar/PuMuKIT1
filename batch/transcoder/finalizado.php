@@ -68,14 +68,13 @@ $trans->save();
 $ch = curl_init('http://' . $trans->getCpu()->getIp() . '/webserver.php'); 
 
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " .  base64_encode($trans->getCpu()->getUser().':'.$trans->getCpu()->getPassword())));
+curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic " .  base64_encode("pumukit:PUMUKIT")));
 curl_setopt ($ch, CURLOPT_POST, 1); 
 curl_setopt ($ch, CURLOPT_POSTFIELDS, "ruta=$linea_comandos"); 
 
 $var = curl_exec($ch); 
 $error = curl_error($ch);
 
-Propel::initialize();
 
 //analizo archivo
 try {

@@ -52,12 +52,3 @@ function m_msg_alert($msg_alert){
 			);
 
 }
-
-function m_msg_alert_jquery($msg_alert){
-  return ("<script type='text/javascript'>".
-			"$('#div_messages_span_" . $msg_alert[0] . "').html('". $msg_alert[1]."');\n".
-            "$('#div_messages_" . $msg_alert[0] . "').fadeTo('slow', 1);\n".
-            "</script>"
-			);
-
-}

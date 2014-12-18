@@ -17,79 +17,6 @@
  */ 
 class Mm extends BaseMm
 {
-  public function updateLuceneIndex()
-  {
-    $index = MmPeer::getLuceneIndex();
- 
-    // remove existing entries
-    foreach ($index->find('pk:'.$this->getId()) as $hit)
-      {
-	$index->delete($hit->id);
-      }
- 
-    $doc = new Zend_Search_Lucene_Document();
- 
-    // store Mm primary key to identify it in the search results
-    $doc->addField(Zend_Search_Lucene_Field::Keyword('pk', $this->getId()));
-
-    // index Mm fields
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('title', Sanitize::text($this->getTitle()), 'utf-8'));
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('subtitle', Sanitize::text($this->getSubtitle()), 'utf-8'));
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('keyword', Sanitize::text($this->getKeyword()), 'utf-8'));
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('description', Sanitize::text($this->getDescription()), 'utf-8'));
-
-    $persons = $this->getPersons();
-    $personStr = "";
-
-    foreach($persons as $person){
-      $personStr .= $person->getName() . " ";
-    }
-
-    $doc->addField(Zend_Search_Lucene_Field::UnStored('persons', Sanitize::text($personStr), 'utf-8'));
-    
-    // add Mm to the index
-    $index->addDocument($doc);
-    $index->commit();
-  }
-
-  public function save($con = null)
-  {
-
-    if (is_null($con)) {
-      $con = Propel::getConnection(MmPeer::DATABASE_NAME);//, Propel::CONNECTION_WRITE);
-    }
-    
-    $con->begin();
-    try {
-      parent::save($con);
-      $this->updateLuceneIndex();
-      $con->commit();
-    }
-    catch (Exception $e) {
-      $con->rollBack();
-      throw $e;
-    }
-  }
-
-
-  /**
-   * Usada para guardar en la BBDD sin actualizar Lucene. Usar con cuidado.
-   */
-  public function saveInDB($con = null)
-  {
-    parent::save($con);
-  }
-
-  public function delete($con = null)
-  {
-    $index = MmPeer::getLuceneIndex();
-    
-    foreach ($index->find('pk:'.$this->getId()) as $hit) {
-      $index->delete($hit->id);
-    }
-    
-    return parent::delete($con);
-  }
   /**
    * Devuelve el los primeros caracteres del titulo
    * Intenta cortar el string en un espacio
@@ -119,7 +46,7 @@ class Mm extends BaseMm
     $c = new Criteria();
     $c->add(FilePeer::MM_ID, $this->getId());
     $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
-    $c->add(PerfilPeer::MASTER, true);
+    $c->add(PerfilPeer::DISPLAY, false);
     $c->addAscendingOrderByColumn(FilePeer::RANK);
     $c->setLimit(1);
 
@@ -144,33 +71,7 @@ class Mm extends BaseMm
 
     return FilePeer::doSelectOne($c);
   }
-  /**
-   * @var        Genre
-   */
-  protected $aFirstFilePublic;
 
-  /**
-   * Devuelve el primer archivo multimedia, si no tiene devuelve null
-   *
-   * @access public
-   * @return File
-   */
-  public function getFirstPublicFile()
-  {
-    if ($this->aFirstFilePublic === null) {
-      $c = new Criteria();
-      $c->add(FilePeer::MM_ID, $this->getId());
-      $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
-      $c->add(PerfilPeer::DISPLAY, true);
-      $c->addAscendingOrderByColumn(FilePeer::RANK);
-
-      $this->aFirstFilePublic = FilePeer::doSelectOne($c);
-      if ($this->aFirstFilePublic){
-        $this->aFirstFilePublic->setMm($this);
-      }
-    }
-    return $this->aFirstFilePublic;
-  }
 
   /**
    * Devuelve el los archivos multimedia que tienen perfil publico.
@@ -183,45 +84,13 @@ class Mm extends BaseMm
     $c = new Criteria();
     $c->add(FilePeer::MM_ID, $this->getId());
     $c->addJoin(FilePeer::PERFIL_ID, PerfilPeer::ID);
-    $c->add(PerfilPeer::DISPLAY, true);
+    $c->add(PerfilPeer::DISPLAY, true); //OJO BORRAR
     $c->add(FilePeer::DISPLAY, true);
     $c->addAscendingOrderByColumn(FilePeer::RANK);
 
     return FilePeer::doSelectWithI18n($c, $this->getCulture());
   }
 
-  /**
-   * Devuelve el los archivos multimedia que se pueden descargar.
-   *
-   * @access public
-   * @return Array de Files
-   */
-  public function getFilesToDownload()
-  {
-    $c = new Criteria();
-    $c->add(FilePeer::MM_ID, $this->getId());
-    $c->add(FilePeer::DOWNLOAD, true);
-    $c->addAscendingOrderByColumn(FilePeer::RANK);
-
-    return FilePeer::doSelectWithI18n($c, $this->getCulture());
-  }
-
-
-  /** 
-   * Devuelve el los materiales que tienen perfil publico.    
-   * 
-   * @access public 
-   * @return Array de Files   
-   */
-  public function getMaterialsPublic()
-  {
-    $c = new Criteria();
-    $c->add(MaterialPeer::MM_ID, $this->getId());
-    $c->add(MaterialPeer::DISPLAY, true);
-    $c->addAscendingOrderByColumn(MaterialPeer::RANK);
-
-    return MaterialPeer::doSelectWithI18n($c, $this->getCulture());
-  }
   /**
    * Devuelve los ficheros de video de un determiando perfil.
    *
@@ -410,11 +279,11 @@ class Mm extends BaseMm
    */
   public function getPlace($con = null)
   {
-    $c = new Criteria();
-    $c->addJoin(PlacePeer::ID, PrecinctPeer::PLACE_ID);
-    $c->add(PrecinctPeer::ID, $this->getPrecinctId());
-    list($resp) = PlacePeer::doSelectWithI18n($c, $this->getCulture());
-    return $resp;
+      $c = new Criteria();
+      $c->addJoin(PlacePeer::ID, PrecinctPeer::PLACE_ID);
+      $c->add(PrecinctPeer::ID, $this->getPrecinctId());
+      list($resp) = PlacePeer::doSelectWithI18n($c, $this->getCulture());
+      return $resp;
   }
 
 
@@ -424,7 +293,7 @@ class Mm extends BaseMm
    */
   public function getPlaceId($con = null)
   {
-    return $this->getPlace()->getId();
+      return $this->getPlace()->getId();
   }
 
 
@@ -496,7 +365,6 @@ class Mm extends BaseMm
     $old = sfConfig::get('sf_no_script_name');
     sfConfig::set('sf_no_script_name', true);
     $controller = sfContext::getInstance()->getController();
-    //$url = $controller->genUrl(array('module'=> 'video', 'action' => 'index', 'id' => $this->getId()), $absolute);
     $url = $controller->genUrl(array('module'=> 'video', 'action' => 'index', 'id' => $this->getId()), $absolute);
     sfConfig::set('sf_no_script_name', $old);
     return $url;
@@ -572,6 +440,25 @@ class Mm extends BaseMm
   }
 
   /**
+   * Devuelve la duracion del primer File
+   * 
+   *
+   * @access public
+   * @return Lista de files
+   *
+   *
+   * @internal OJO FALSTA PONER LA CULTURA.
+   */
+  public function getDuration($criteria = null, $con = null)
+  {
+    $aux = $this->getFirstFile();	
+    if ($aux) return $aux->getDuration();
+    else return 0;
+  }
+
+
+
+  /**
    * Devuelve la fecha de grabacion en texto
    *
    * @access public
@@ -625,15 +512,6 @@ class Mm extends BaseMm
       $gv->save();
     }
 
-    foreach ($this->getCategories() as $category){
-      $category->addMmId($mm2->getId());
-      foreach($category->getRequiredWithI18n() as $p){
-        $p->addMmId($mm2->getId());
-      }
-      foreach($category->getPath() as $p){
-	$p->addMmId($mm2->getId());
-      }
-    }
     $roles = RolePeer::doSelectWithI18n(new Criteria(), 'es');
     foreach($roles as $role){
       $persons = $this->getPersons($role->getId());
@@ -667,7 +545,10 @@ class Mm extends BaseMm
    */
   public function getNumber()
   {
-    $aux = $this->getDurationString();
+    //error
+    $ff = $this->getFirstFile();
+    if ($ff) $aux = $ff->getDurationString();
+    else $aux = "0'";
     
     return ('Duracion :' . $aux );
   }
@@ -763,29 +644,19 @@ class Mm extends BaseMm
   }
 
   /**
-   * Returns array of mm's materials that match the extensions given (captions)
-   *
-   * @access public
-   * @param array $extensions - caption formats to search in mat_type.type
-   * @return file
-   */
-  public function getCaptions($extensions = array ('vtt')){
-     
-    $c = new Criteria();
-    $c->addJoin(MatTypePeer::ID, MaterialPeer::MAT_TYPE_ID);
-     
-    $c->add(MatTypePeer::TYPE, $extensions, (is_array($extensions)) ?Criteria::IN : Criteria::EQUAL);
-    $c->add(MaterialPeer::MM_ID, $this->getId());
-     
-    return MaterialPeer::doSelectOne($c); // TO DO: update logic to allow multiple captions to be returned.
-  }
-
-
-  /**
    *
    */
+  //OJO15
   public function getStatusText(){
-    MmPeer::getStatusText($this->getStatusId());
+    $aux = array(
+		 0 => 'Bloquedo',
+		 1 => 'Oculto',
+		 2 => 'Mediateca', 
+		 3 => 'Mediateca y arca', 
+		 4 => 'Mediate, Arca e iTunes', 
+    );
+
+    return $aux[$this->getStatusId()];
   }
 
   /**
@@ -798,9 +669,9 @@ class Mm extends BaseMm
     }
     $c = new Criteria();
 
+    //OJO15 Posibilidad de crear funcion con estas dos lienas???
     $c->addJoin(PubChannelMmPeer::PUB_CHANNEL_ID, PubChannelPeer::ID);
     $c->add(PubChannelPeer::NAME, $pub_channel, is_int($pub_channel)?null:Criteria::IN);
-    $c->add(PubChannelMmPeer::STATUS_ID, 1);
 
     return $this->countPubChannelMms($c, true);
   }
@@ -816,8 +687,8 @@ class Mm extends BaseMm
     }
     $c = new Criteria();
 
+    //OJO15 Posibilidad de crear funcion con estas dos lienas???
     $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, $pub_channel_id);
-    $c->add(PubChannelMmPeer::STATUS_ID, 1);
 
     return $this->countPubChannelMms($c, true);
   }
@@ -839,26 +710,26 @@ class Mm extends BaseMm
       foreach($pub_channels_all as $pub_channel){
         $aux = $pub_channel->hasMm($this->getId());
 
-	if(($aux == 0)&&(array_key_exists($pub_channel->getId(), $pub_channels_select))){
-	  $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
+         if(($aux == 0)&&(array_key_exists($pub_channel->getId(), $pub_channels_select))){
+           $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
 
-	  if(is_null($pubc)){
-	    $pubc = new PubChannelMm();
-	    $pubc->setMmId($this->getId());
-	    $pubc->setPubChannel($pub_channel);
-	    $pubc->setStatusId(1);
-	    $pubc->save();
-	  }else{
-	    $pubc->setStatusId(1);
-	    $pubc->save();
-	  }
+            if(is_null($pubc)){
+              $pubc = new PubChannelMm();
+              $pubc->setMmId($this->getId());
+              $pubc->setPubChannel($pub_channel);
+              $pubc->setStatusId(1);
+              $pubc->save();
+            }else{
+              $pubc->setStatusId(1);
+              $pubc->save();
+            }
     
-	}elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
-	  $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
-	  if(!is_null($pubc)){
-	    $pubc->delete();
-	  }
-	}      
+         }elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
+            $pubc = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
+            if(!is_null($pubc)){
+              $pubc->delete();
+            }
+         }      
       }
       return true;
       //MMOC END
@@ -870,23 +741,21 @@ class Mm extends BaseMm
       if (!is_array($pub_channels_select)) $pub_channels_select = array();
       
       foreach($pub_channels_all as $pub_channel){
-	$aux = $pub_channel->hasMm($this->getId());
-	if(($aux == 0)
-	   &&(array_key_exists($pub_channel->getId(), $pub_channels_select))
-	   &&($pub_channels_select[$pub_channel->getId()] != "off")){
-	  if($this->getMaster() == null){
-	    $aux = new PubChannelMm();
-	    $aux->setMm($this);
-	    $aux->setPubChannel($pub_channel);
-	    $aux->setStatusId(3);
-	    $aux->save();
-	  }else{
-	    $perfiles_usados = $pub_channel->startSelectWorkflow($this);
-	  }
+	       $aux = $pub_channel->hasMm($this->getId());
+        	if(($aux == 0)&&(array_key_exists($pub_channel->getId(), $pub_channels_select))){
+                  if($this->getMaster() == null){
+                    $aux = new PubChannelMm();
+                    $aux->setMm($this);
+                    $aux->setPubChannel($pub_channel);
+                    $aux->setStatusId(3);
+                    $aux->save();
+                  }else{
+                    $perfiles_usados = $pub_channel->startSelectWorkflow($this);
+                  }
         	  
-	}elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
-	  $pub_channel->startDeselectWorkflow($this);
-	}      
+        	}elseif(($aux == 1)&&(!array_key_exists($pub_channel->getId(), $pub_channels_select))){
+        	  $pub_channel->startDeselectWorkflow($this);
+        	}      
       }
     }
     return true;
@@ -911,90 +780,52 @@ class Mm extends BaseMm
       foreach($pub_channels as $pub_channel){
 	$pub_channel->startSelectWorkflow($this);
       }
+    }
 
-      if ($master->getAspect() == 0){
-	$pcps = $perfil->getPubChannelPerfilsRelatedByPerfilAudioId();
-      } else if($master->getAspect() < 1.5){
-	$pcps = $perfil->getPubChannelPerfilsRelatedByPerfil43Id();
-      }else{
-	$pcps = $perfil->getPubChannelPerfilsRelatedByPerfil169Id();
-      }
+    if ($master->getAspect() == 0){
+      $pcps = $perfil->getPubChannelPerfilsRelatedByPerfilAudioId();
+    } else if($master->getAspect() < 1.5){
+      $pcps = $perfil->getPubChannelPerfilsRelatedByPerfil43Id();
+    }else{
+      $pcps = $perfil->getPubChannelPerfilsRelatedByPerfil169Id();
+    }
     
-    
-      foreach($pcps as $pcp){
-	$pub_channel = $pcp->getPubChannel();
-	$has_all_files = true;
+    foreach($pcps as $pcp){
+      $pub_channel = $pcp->getPubChannel();
+      $has_all_files = true;
 
-	foreach($pub_channel->getPubChannelPerfils() as $pcp2){
-	  if ($master->getAspect() == 0){
-	    $perfil = $pcp2->getPerfilRelatedByPerfilAudioId();
-	  } else if($master->getAspect() < 1.5){
-	    $perfil = $pcp2->getPerfilRelatedByPerfil43Id();
-	  }else{
-	    $perfil = $pcp2->getPerfilRelatedByPerfil169Id();
-	  }
+      foreach($pub_channel->getPubChannelPerfils() as $pcp2){
+        if ($master->getAspect() == 0){
+          $perfil = $pcp2->getPerfilRelatedByPerfilAudioId();
+        } else if($master->getAspect() < 1.5){
+          $perfil = $pcp2->getPerfilRelatedByPerfil43Id();
+        }else{
+          $perfil = $pcp2->getPerfilRelatedByPerfil169Id();
+        }
 
 
 	      
-	  if(count($this->getFilesByPerfil($perfil->getId())) == 0){
-	    $has_all_files = false;
-	  }
+      	if(count($this->getFilesByPerfil($perfil->getId())) == 0){
+                $has_all_files = false;
+      	}
 	
-	}
+      }
       
-	if($has_all_files ===  true){
-	  $aux = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
-	  if(!is_null($aux)){ //MIRA QUE ESTE EN ESTADO 2 Y NO 3
-	    $aux->setStatusId(1);
-	    //execute finish trascoder.
-	    $aux->save();
-	  }
+      if($has_all_files ===  true){
+	$aux = PubChannelMmPeer::retrieveByPK($pub_channel->getId(), $this->getId());
+	if(!is_null($aux)){ //MIRA QUE ESTE EN ESTADO 2 Y NO 3
+	  $aux->setStatusId(1);
+	  //execute finish trascoder.
+	  $aux->save();
 	}
       }
     }
+
   }
 
 
-  public function getSimilarMmsUnesco($cat_code = null, $exclude_serial=true){
-    
-    $c = new Criteria();
-    
-    if ($cat_code){
-      //Con el mismo UNESCO
-      $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
-      $c->addJoin(CategoryMmPeer::CATEGORY_ID, CategoryPeer::ID);
-      $c->add(CategoryPeer::COD, $cat_code);
-    } else {
-      //Con la misma categoria.
-      $catsId = $this->getCategoriesId(CategoryPeer::retrieveByCod("UNESCO"));
-      $c->addJoin(CategoryMmPeer::MM_ID, MmPeer::ID);
-      $c->add(CategoryMmPeer::CATEGORY_ID, $catsId, Criteria::IN);
-      $c->addGroupByColumn(MmPeer::ID);
-      $c->addDescendingOrderByColumn('count(' . CategoryMmPeer::CATEGORY_ID . ')');
-    }
-    
-    if ($exclude_serial){
-      $c->add(MmPeer::SERIAL_ID, $this->getSerialId(), Criteria::NOT_EQUAL);
-    }
-    $c->add(MmPeer::ID, $this->getId(), Criteria::NOT_EQUAL);
-    $c->addJoin(PubChannelMmPeer::MM_ID, MmPeer::ID);
-    $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
-    $c->add(PubChannelMmPeer::STATUS_ID, 1);
-
-    $c->add(MmPeer::STATUS_ID, 0);
-
-    $c->addJoin(MmPeer::BROADCAST_ID, BroadcastPeer::ID);
-    $c->addJoin(BroadcastPeer::BROADCAST_TYPE_ID, BroadcastTypePeer::ID);
-    $c->add(BroadcastTypePeer::NAME, array('pub', 'cor'), Criteria::IN);
 
 
-    //Como mucho 20 y aleatorios
-    $c->setLimit(10);
-    $c->setDistinct(true);
-    $c->addAscendingOrderByColumn('RAND()');
-    
-    return MmPeer::doSelect($c);
-  }
 
   /**
    *
@@ -1031,111 +862,14 @@ class Mm extends BaseMm
     return MmPeer::doSelect($c);
   }
 
-  /**
-   * Devuelve la lista de Objetos categoría
-   * que identifican el video (ResulSet of Category)
-   * Si se indica padre, devuelve sólo las hijas.
-   *
-   * @access public
-   * @parameter Category $parent
-   * @return ResulSet of Categorys.
-   */
-  public function getCategorys($parent = null)
-  {
-    $c = new Criteria();
-
-    $c->addJoin(CategoryPeer::ID, CategoryMmPeer::CATEGORY_ID);
-    $c->add(CategoryMmPeer::MM_ID, $this->getId());
-    $c->addAscendingOrderByColumn(CategoryPeer::COD);
-    if($parent) {
-      $c->addAnd(CategoryPeer::TREE_LEFT, $parent->getLeftValue(), Criteria::GREATER_THAN);
-      $c->addAnd(CategoryPeer::TREE_RIGHT, $parent->getRightValue(), Criteria::LESS_THAN);
-      $c->addAnd(CategoryPeer::SCOPE, $parent->getScopeIdValue(), Criteria::EQUAL);
-
-    }
-
-    return CategoryPeer::doSelect($c);
-  }
-
-  public function getCategories($parent = null)
-  {
-    return $this->getCategorys($parent);
-  }
-
-  public function getCategoriesId($parent = null) {
-    $categories = $this->getCategorys($parent);
-    $f = create_function('$a', 'return $a->getId();');
-    return array_map($f, $categories);
-  }
-
-  /**
-   * Devuelve true si el Objeto contiene a la categoría
-   * 
-   * @access public
-   * @parameter integer $id
-   * @return Boolean.
-   */
-  public function hasCategoryId($id)
-  {
-    $c = new Criteria();
-
-    $c->add(CategoryMmPeer::MM_ID, $this->getId());
-    $c->add(CategoryMmPeer::CATEGORY_ID, $id);
-    $c->addAscendingOrderByColumn(CategoryPeer::COD);
-
-    return count(CategoryPeer::doSelect($c))>0;
-  }
 
 
-  /**
-   * Devuelve los minutos de la duracion del archivo
-   *
-   * @access public
-   * @return integer min
-   */
-  public function getDurationMin()
-  {
-    return floor($this->getDuration() / 60);
-  }
 
-  /**
-   * Devuelve los segundos de la duracion del archivo
-   *
-   * @access public
-   * @return integer seg
-   */
-  public function getDurationSeg()
-  {
-    $aux = $this->getDuration() %60;
-    if ($aux < 10 ) $aux= '0' . $aux;
-    return $aux;
-  }
 
-  /**
-   * Devuelve un texto que representa la duracion del
-   * archivo multimedia, del formato 1' 32''
-   *
-   * @access public
-   * @return integer seg
-   */
-  public function getDurationString()
-  {
-    $min = $this->getDurationMin();
-    if ($min == 0 ) $aux = $this->getDurationSeg() ."''";
-    else $aux = $min . "' ". $this->getDurationSeg() ."''";
-    return $aux;
-  }
 
-  /**
-   * Usado en PicBehavior
-   */
-  public function isSerial(){
-    return false;
-  }
 
-  public function getDefaultPic(){
-    return '/images/sin_foto.jpg';
-  }
+
+
   
 }
 
@@ -1144,4 +878,4 @@ class Mm extends BaseMm
 sfPropelBehavior::add('Mm', array(
 				  'sortableFk' => array('f_key' => 'serial_id'),
 				  'pic' => array(), 
-				  ) );
+				 ) );

@@ -120,15 +120,9 @@ class directsActions extends sfActions
 
 
     $calidades = $this->getRequestParameter('calidad');
-    
-    $ress = ResolutionPeer::retrieveByPK($this->getRequestParameter('resolution_id', ' '));
-    
-    //Fixed. This asigns a resolution to direct
-    if ($ress != null){
-      $direct->setResolutionHor($ress->getHor());
-      $direct->setResolutionVer($ress->getVer());
-    }
-    
+    //FIXME.
+    $ress = $this->getRequestParameter('resolutions');
+ 
     $direct->setCalidades(implode("_",array_merge($calidades,$ress)));
 
 
@@ -140,7 +134,7 @@ class directsActions extends sfActions
     }
 
     $direct->save();
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del canal en directo actualizados."));
+    $this->msg_alert = array('info', "Metadatos del canal en directo actualizados.");
     $this->getUser()->setAttribute('id', $direct->getId(), 'tv_admin/direct');
 
     return $this->renderComponent('directs', 'list');
@@ -166,7 +160,7 @@ class directsActions extends sfActions
       $direct = DirectPeer::retrieveByPk($this->getRequestParameter('id'));
       $direct->delete();
     }
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Canal en directo borrado."));
+    $this->msg_alert = array('info', "Canal en directo borrado.");
     return $this->renderComponent('directs', 'list');
   }
 
@@ -190,7 +184,7 @@ class directsActions extends sfActions
       $direct2->setName($direct->getName());
       $direct2->setDescription($direct->getDescription());
     }
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Canal en directo clonado."));
+    $this->msg_alert = array('info', "Canal en directo clonado.");
     $direct2->save();
 
     return $this->renderComponent('directs', 'list');

@@ -50,12 +50,4 @@ class TemplatePeer extends BaseTemplatePeer
   public static function getText($name, $culture = 'es'){
     return self::get($name, $culture)->getText();
   }
-
-  public static function getPageUserTemplates()
-  {
-    $c = new Criteria();
-    $c->add(TemplatePeer::TYPE, self::TYPE_PAGE);
-    $c->add(TemplatePeer::USER, 1);
-    return TemplatePeer::doSelectWithI18n($c);
-  }
 }

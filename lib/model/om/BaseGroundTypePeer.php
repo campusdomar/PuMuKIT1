@@ -281,9 +281,7 @@ abstract class BaseGroundTypePeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        if((count($criteria->getOrderByColumns()) == 0) &&
-           (array_diff($criteria->getSelectColumns(), array(self::COUNT_DISTINCT, self::COUNT)))) 
-            $criteria->addAscendingOrderByColumn(self::RANK);
+        $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -344,7 +342,7 @@ abstract class BaseGroundTypePeer {
     $c->addJoin(GroundTypePeer::ID, GroundTypeI18nPeer::ID);
     $c->add(GroundTypeI18nPeer::CULTURE, $culture);
 
-    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
+    $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();

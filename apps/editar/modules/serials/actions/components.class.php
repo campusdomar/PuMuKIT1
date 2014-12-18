@@ -90,16 +90,8 @@ class serialsComponents extends sfComponents
         $c->add(SerialPeer::ID, intval($filters['title']));
       }else{
         $c->addJoin(SerialPeer::ID, SerialI18nPeer::ID);
+	$c->add(SerialI18nPeer::TITLE, '%' . str_replace(' ', '%', $filters['title']). '%', Criteria::LIKE);
         $c->add(SerialI18nPeer::CULTURE, $this->getUser()->getCulture());
-
-        $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
-	$c->addJoin(MmPeer::ID, MmI18nPeer::ID);
-	$c->add(MmI18nPeer::CULTURE, $this->getUser()->getCulture());
-
-	$c1 = $c->getNewCriterion(MmI18nPeer::TITLE, '%' . str_replace(' ', '%', $filters['title']). '%', Criteria::LIKE);
-	$c2 = $c->getNewCriterion(SerialI18nPeer::TITLE, '%' . str_replace(' ', '%', $filters['title']). '%', Criteria::LIKE);
-	$c1->addOr($c2);
-	$c->add($c1);
       }
     }
 

@@ -17,7 +17,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('description', __('Descripción:'), 'class="required" ') ?>
+  <?php echo label_for('description', 'Descripcion:', 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $file->setCulture($lang);  echo $sep ?>  
@@ -32,7 +32,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('profile', __('Perfil:'), 'class="required" ') ?> 
+  <?php echo label_for('profile', 'Perfil:', 'class="required" ') ?> 
 
   <div class="content">
     <?php $value = object_select_tag($file, 'getPerfilId', array (
@@ -45,7 +45,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('display', __('Visible:'), 'class="required" ') ?>
+  <?php echo label_for('display', 'Visible:', 'class="required" ') ?>
   <div class="content">
     <?php $value = object_checkbox_tag($file, 'getDisplay', array (
       'control_name' => 'display',
@@ -55,7 +55,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('language_id', __('Idioma:'), '') ?>
+  <?php echo label_for('language_id','Idioma:', '') ?>
 
   <div class="content">
     <?php $value = object_select_tag($file, 'getLanguageId', array (
@@ -67,7 +67,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('duration', __('Duración:'), 'class="required" ') ?>
+  <?php echo label_for('duration', 'Duracion:', 'class="required" ') ?>
 
   <div class="content" id="durationFile">
     <?php include_partial('duration', array('min' => $file->getDurationMin(), 'seg' => $file->getDurationSeg() )) ?>
@@ -76,7 +76,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('resolution', __('Resolución:'), 'class="required" ') ?>
+  <?php echo label_for('resolution', 'Resolucion:', 'class="required" ') ?>
 
   <div class="content">
     <?php $value = object_input_tag($file, 'getResolutionHor', array (
@@ -93,7 +93,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('size', __('Tama&ntilde;o:'), 'class="required" ') ?>
+  <?php echo label_for('size', 'Tama&ntilde;o:', 'class="required" ') ?>
 
   <div class="content">
     <?php $value = object_input_tag($file, 'getSize', array (
@@ -106,25 +106,49 @@
 
 
 <div class="form-row">
-  <?php echo label_for('File', __('File:'), 'class="required" ') ?>
+  <?php echo label_for('File', 'File:', 'class="required" ') ?>
   <div class="content">
     <?php $value = object_input_tag($file, 'getFile', array (
       'size' => 80,
       'control_name' => 'file',
       )); echo $value ? $value : '&nbsp;' ?> &nbsp;
+    <?php if (sfConfig::get('app_videoserv_browser')) echo button_to_function('explorar', "Effect.toggle('explorer_master','blind')" )?>
+    <div id="explorer_master" class="videoserv" style="display:none;">
+      <ul class="videoserv_tree">
+        <?php foreach(array('//172.20.209.52/video_tmp3/MASTERS') as $dir):?>
+        <li class="collapsed">
+          <span onclick="fileServerTree(this, 'file', '<?php echo $dir?>', 0, 'explorer_master')"><?php echo $dir?></span>
+          <ul></ul>
+        </li>
+        <?php endforeach;?>
+      </ul>
+
+    </div>   
   </div>
 </div>
 
 
 <div class="form-row">
 
-  <?php echo label_for('url', __('URL:'), 'class="required" ') ?>
+  <?php echo label_for('url', 'Url:', 'class="required" ') ?>
 
   <div class="content">
     <?php $value = object_input_tag($file, 'getUrl', array (
       'size' => 80,
       'control_name' => 'url',
       )); echo $value ? $value : '&nbsp;' ?> &nbsp;
+    <?php if (sfConfig::get('app_videoserv_browser')) echo button_to_function('explorar', "Effect.toggle('explorer_videoserv','blind')" )?>
+    <div id="explorer_videoserv" class="videoserv" style="display:none;">
+      <ul class="videoserv_tree">
+        <?php foreach(sfConfig::get('app_videoserv_url') as $dir):?>
+        <li class="collapsed">
+          <span onclick="fileServerTree(this, 'url', '<?php echo $dir?>', 0, 'explorer_videoserv')"><?php echo $dir?></span>
+          <ul></ul>
+        </li>
+        <?php endforeach;?>
+      </ul>
+
+    </div>   
   </div>
 </div>
 
@@ -135,8 +159,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>

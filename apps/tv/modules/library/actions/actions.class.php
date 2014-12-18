@@ -33,6 +33,35 @@ class libraryActions extends sfActions
 
   
   /**
+   * Place, ordena las series alfabeticamente
+   *
+   */
+  public function executePlace()
+  {
+    $serials_org = $this->getSerials();
+    $places = PlacePeer::doSelectWithI18n(new Criteria(), $this->getUser()->getCulture()); /*Solo lugares con series*/   
+
+    $serials = array();
+
+    //de la A a la Z
+    foreach($places as $p){
+      
+      $f_str = 'return $a->hasPlace(' . $p->getId(). ');';
+      $f = create_function('$a', $f_str);
+      $temp = array_filter($serials_org, $f);
+
+      if (count($temp) != 0) {
+	$serials[$p->getName()] = $temp;
+      }
+    }
+
+    $this->serials = $serials;
+
+    $this->setTemplate('index');    
+  }
+
+
+  /**
    * Channel, ordena las series por canal
    *
    */

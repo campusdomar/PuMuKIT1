@@ -20,7 +20,7 @@
   
   
   <ul class="tv_admin_actions">
-    <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+    <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
   </ul>
   
 </div>

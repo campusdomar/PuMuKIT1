@@ -170,33 +170,13 @@ class File extends BaseFile
     $aux = null;
 
     @mkdir($absCurrentDir, 0777, true);
-
-    $width = sfConfig::get('app_thumbnail_hor');
-    $height = sfConfig::get('app_thumbnail_ver');
-    $new_height = intval(1.0 * $width / $this->getAspect());
-
-    if($new_height <= $height) {
-      $new_width = $width;
-    }else{
-      $new_height = $height;
-      $new_width = intval(1.0 * $height * $this->getAspect());
-    }
-    
-    $ffmpeg_path = is_executable('/usr/local/bin/ffmpeg')?'/usr/local/bin/ffmpeg':'ffmpeg';
-
-    /*
-    echo $ffmpeg_path . " -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
-      $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"";
-    exit;
-    */
-    exec($ffmpeg_path . " -ss ".intval($frame/25)." -y -i \"".$this->getFile()."\" -r 1 -vframes 1 -s ".
-	 $new_width . "x" . $new_height . " -f image2 \"" . $absCurrentDir . '/' . $fileName . "\"");
-
+    //echo "ffmpeg -i ".$this->getFile()." -f image2 -s ".sfConfig::get('app_thumbnail_hor') ."x". sfConfig::get('app_thumbnail_ver')." -r 1 -ss ".intval($frame/25)." -t 1 ". $absCurrentDir .'/' . $fileName; exit;
+    exec("ffmpeg -ss ".intval($frame/25)." -i \"".$this->getFile()."\" -f image2 -s ".sfConfig::get('app_thumbnail_hor') ."x". sfConfig::get('app_thumbnail_ver')." -r 1 -t 1 \"". $absCurrentDir .'/' . $fileName . "\"");
     if(file_exists($absCurrentDir .'/' . $fileName)){
       $aux = $this->getMm()->setPic('/uploads/pic/' . $currentDir . '/' . $fileName);
     }
-
     return $aux;
+
 
     $currentDir = 'Serial/' . $this->getMm()->getSerialId() . '/Video/' . $this->getMmId();  //ciao
     $absCurrentDir = sfConfig::get('sf_upload_dir').'/pic/' . $currentDir;
@@ -228,7 +208,7 @@ class File extends BaseFile
    */
   public function getAspect(){
     if ($this->getResolutionVer() == 0) return 0;
-    return (1.0 * $this->getResolutionHor() / $this->getResolutionVer());
+    return ($this->getResolutionHor()/$this->getResolutionVer());
   }
   
 
@@ -238,12 +218,12 @@ class File extends BaseFile
    * @access public
    * @param integer $perfil_id nuevo perfil
    * @param opt integer $prioridad 
-   * @param opt integer $user_email (0 si se desconoce)
+   * @param opt integer $user_id (0 si se desconoce)
    * @param force boolena para crear otro aunque exista
    * @return la tarea creada o null is error
    */
   //OJO SI YA ESTA TRANSOCODIFICANDO NO LO HAGAS
-  public function retranscoding($perfil_id, $priority = 2, $user_email = 0, $force = false){
+  public function retranscoding($perfil_id, $priority = 2, $user_id = 0, $force = false){
     $trans = TranscodingPeer::getTranscodingsFromMmAndPerfil($this->getMmId(), $perfil_id);
 
     if((!is_null($trans))&&(!$force)){
@@ -273,8 +253,9 @@ class File extends BaseFile
     
     $trans->setPid(0);
 
-    if($user_email !== 0){
-      $trans->setEmail($user_email);
+    if($user_id !== 0){
+      $user = UserPeer::retrieveByPK($user_id);
+      $trans->setEmail($user->getEmail());
     }
 
     $trans->save();      //Necesario para setPathAuto
@@ -288,82 +269,6 @@ class File extends BaseFile
     
     return $trans;
   }
-
-  public function isMaster() 
-  {
-    return $this->getPerfil()->getMaster();
-  }
-
-
-  public function save($con = null)
-  {
-    parent::save($con);
-    if($mm = $this->getMm()){
-      if ($this->getDuration() > $mm->getDuration()) {
-	$mm->setDuration($this->getDuration());
-      }
-      if ($this->getNumView() > $mm->getNumView()) {
-	$mm->setNumView($this->getNumView());
-      }
-      if($this->isMaster()) {
-	$mm->setAudio($this->getAudio());
-      }
-      $mm->saveInDB();
-    }
-  }
-
-
-  /**
-   * Usada para guardar en la BBDD sin actualizar Lucene de Mm. Usar con cuidado.
-   */
-  public function saveInDB($con = null)
-  {
-     parent::save($con);
-  }
-
-  /**
-   *
-   */
-  public function getExtension() 
-  {
-    return (substr($this->getFile(), strrpos($this->getFile(), '.') + 1));
-  }
-  
-
-  /**
-   * Genera un la url relativa al video.
-   *
-   * @access public
-   * @return String Url relativa.
-   */
-  public function getInternalUrl($absolute = false)
-  { 
-    //Hack
-    $old = sfConfig::get('sf_no_script_name');
-    sfConfig::set('sf_no_script_name', true);
-    $controller = sfContext::getInstance()->getController();
-    $url = $controller->genUrl(array('module'=> 'file', 'action' => 'index', 'id' => $this->getId() . "." . $this->getExtension()), $absolute);
-    sfConfig::set('sf_no_script_name', $old);
-    return $url;
-  }
-
-  /**
-   * Lógica de editar/modules/files/actions.php para autocompletar resolución, size y duración.
-   *
-   */
-  public function autocomplete()
-  {
-    $this->setDuration(intval(FilePeer::getDuration($this->getUrlMount())));                                                                                                                               
-    $this->setSize(filesize($this->getUrlMount()));                                                                                                                                                        
-                                                                                                                                                                                                           
-    //Autocompletar resolution                                                                                                                                                                              
-    $movie = new ffmpeg_movie($this->getFile());                                                                                                                                                           
-    if (!is_null($movie)){                                                                                                                                                                                 
-      $this->setResolutionVer($movie->getFrameHeight());                                                                                                                                                   
-      $this->setResolutionHor($movie->getFrameWidth());                                                                                                                                                    
-    }
-  }
-
 }
 
 

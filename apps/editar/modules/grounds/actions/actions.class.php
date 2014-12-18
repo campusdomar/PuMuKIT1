@@ -18,7 +18,7 @@ class groundsActions extends sfActions
    */
   public function executeIndex()
   {
-    sfConfig::set('config_menu','active');
+    sfConfig::set('library_menu','active');
     if (!$this->getUser()->hasAttribute('page', 'tv_admin/ground'))
       $this->getUser()->setAttribute('page', 1, 'tv_admin/ground');
     
@@ -168,7 +168,7 @@ class groundsActions extends sfActions
     try{
       $ground->save();
     }catch (Exception $e) {
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Actualización errónea. Código repetido."));
+      $this->msg_alert = array('error', "Actualizacion erronea Codigo repetido.");
     }
     $this->getUser()->setAttribute('id', $ground->getId(), 'tv_admin/ground');
 

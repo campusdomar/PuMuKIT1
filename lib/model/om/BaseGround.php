@@ -81,6 +81,18 @@ abstract class BaseGround extends BaseObject  implements Persistent {
 	protected $lastRelationGroundRelatedByTwoIdCriteria = null;
 
 	/**
+	 * Collection to store aggregation of collVirtualGroundRelations.
+	 * @var        array
+	 */
+	protected $collVirtualGroundRelations;
+
+	/**
+	 * The criteria used to select the current contents of collVirtualGroundRelations.
+	 * @var        Criteria
+	 */
+	protected $lastVirtualGroundRelationCriteria = null;
+
+	/**
 	 * Collection to store aggregation of collGroundMms.
 	 * @var        array
 	 */
@@ -429,6 +441,14 @@ abstract class BaseGround extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collVirtualGroundRelations !== null) {
+				foreach($this->collVirtualGroundRelations as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			if ($this->collGroundMms !== null) {
 				foreach($this->collGroundMms as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
@@ -545,6 +565,14 @@ abstract class BaseGround extends BaseObject  implements Persistent {
 
 				if ($this->collRelationGroundsRelatedByTwoId !== null) {
 					foreach($this->collRelationGroundsRelatedByTwoId as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collVirtualGroundRelations !== null) {
+					foreach($this->collVirtualGroundRelations as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -785,6 +813,10 @@ abstract class BaseGround extends BaseObject  implements Persistent {
 
 			foreach($this->getRelationGroundsRelatedByTwoId() as $relObj) {
 				$copyObj->addRelationGroundRelatedByTwoId($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getVirtualGroundRelations() as $relObj) {
+				$copyObj->addVirtualGroundRelation($relObj->copy($deepCopy));
 			}
 
 			foreach($this->getGroundMms() as $relObj) {
@@ -1243,6 +1275,162 @@ abstract class BaseGround extends BaseObject  implements Persistent {
 	}
 
 	/**
+	 * Temporary storage of collVirtualGroundRelations to save a possible db hit in
+	 * the event objects are add to the collection, but the
+	 * complete collection is never requested.
+	 * @return     void
+	 */
+	public function initVirtualGroundRelations()
+	{
+		if ($this->collVirtualGroundRelations === null) {
+			$this->collVirtualGroundRelations = array();
+		}
+	}
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Ground has previously
+	 * been saved, it will retrieve related VirtualGroundRelations from storage.
+	 * If this Ground is new, it will return
+	 * an empty collection or the current collection, the criteria
+	 * is ignored on a new object.
+	 *
+	 * @param      Connection $con
+	 * @param      Criteria $criteria
+	 * @throws     PropelException
+	 */
+	public function getVirtualGroundRelations($criteria = null, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseVirtualGroundRelationPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collVirtualGroundRelations === null) {
+			if ($this->isNew()) {
+			   $this->collVirtualGroundRelations = array();
+			} else {
+
+				$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $this->getId());
+
+				VirtualGroundRelationPeer::addSelectColumns($criteria);
+				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelect($criteria, $con);
+			}
+		} else {
+			// criteria has no effect for a new object
+			if (!$this->isNew()) {
+				// the following code is to determine if a new query is
+				// called for.  If the criteria is the same as the last
+				// one, just return the collection.
+
+
+				$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $this->getId());
+
+				VirtualGroundRelationPeer::addSelectColumns($criteria);
+				if (!isset($this->lastVirtualGroundRelationCriteria) || !$this->lastVirtualGroundRelationCriteria->equals($criteria)) {
+					$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastVirtualGroundRelationCriteria = $criteria;
+		return $this->collVirtualGroundRelations;
+	}
+
+	/**
+	 * Returns the number of related VirtualGroundRelations.
+	 *
+	 * @param      Criteria $criteria
+	 * @param      boolean $distinct
+	 * @param      Connection $con
+	 * @throws     PropelException
+	 */
+	public function countVirtualGroundRelations($criteria = null, $distinct = false, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseVirtualGroundRelationPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $this->getId());
+
+		return VirtualGroundRelationPeer::doCount($criteria, $distinct, $con);
+	}
+
+	/**
+	 * Method called to associate a VirtualGroundRelation object to this object
+	 * through the VirtualGroundRelation foreign key attribute
+	 *
+	 * @param      VirtualGroundRelation $l VirtualGroundRelation
+	 * @return     void
+	 * @throws     PropelException
+	 */
+	public function addVirtualGroundRelation(VirtualGroundRelation $l)
+	{
+		$this->collVirtualGroundRelations[] = $l;
+		$l->setGround($this);
+	}
+
+
+	/**
+	 * If this collection has already been initialized with
+	 * an identical criteria, it returns the collection.
+	 * Otherwise if this Ground is new, it will return
+	 * an empty collection; or if this Ground has previously
+	 * been saved, it will retrieve related VirtualGroundRelations from storage.
+	 *
+	 * This method is protected by default in order to keep the public
+	 * api reasonable.  You can provide public methods for those you
+	 * actually need in Ground.
+	 */
+	public function getVirtualGroundRelationsJoinVirtualGround($criteria = null, $con = null)
+	{
+		// include the Peer class
+		include_once 'lib/model/om/BaseVirtualGroundRelationPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collVirtualGroundRelations === null) {
+			if ($this->isNew()) {
+				$this->collVirtualGroundRelations = array();
+			} else {
+
+				$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $this->getId());
+
+				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinVirtualGround($criteria, $con);
+			}
+		} else {
+			// the following code is to determine if a new query is
+			// called for.  If the criteria is the same as the last
+			// one, just return the collection.
+
+			$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $this->getId());
+
+			if (!isset($this->lastVirtualGroundRelationCriteria) || !$this->lastVirtualGroundRelationCriteria->equals($criteria)) {
+				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinVirtualGround($criteria, $con);
+			}
+		}
+		$this->lastVirtualGroundRelationCriteria = $criteria;
+
+		return $this->collVirtualGroundRelations;
+	}
+
+	/**
 	 * Temporary storage of collGroundMms to save a possible db hit in
 	 * the event objects are add to the collection, but the
 	 * complete collection is never requested.
@@ -1552,53 +1740,6 @@ abstract class BaseGround extends BaseObject  implements Persistent {
 		$this->lastGroundMmTemplateCriteria = $criteria;
 
 		return $this->collGroundMmTemplates;
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collGroundI18ns) {
-				foreach ((array) $this->collGroundI18ns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collRelationGroundsRelatedByOneId) {
-				foreach ((array) $this->collRelationGroundsRelatedByOneId as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collRelationGroundsRelatedByTwoId) {
-				foreach ((array) $this->collRelationGroundsRelatedByTwoId as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collGroundMms) {
-				foreach ((array) $this->collGroundMms as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collGroundMmTemplates) {
-				foreach ((array) $this->collGroundMmTemplates as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collGroundI18ns = null;
-		$this->collRelationGroundsRelatedByOneId = null;
-		$this->collRelationGroundsRelatedByTwoId = null;
-		$this->collGroundMms = null;
-		$this->collGroundMmTemplates = null;
-		$this->aGroundType = null;
 	}
 
   public function getCulture()

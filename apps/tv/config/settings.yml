@@ -73,7 +73,7 @@ all:
 #    etag:                   on        # Enable etag handling
 #
 #    # Logging and debugging settings
-    web_debug:              on       # Enable the web debug toolbar
+#    web_debug:              off       # Enable the web debug toolbar
 #    error_reporting:        341       # Determines which events are logged. The default value is E_PARSE | E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR | E_USER_ERROR = 341
 #
 #    # Assets paths
@@ -83,13 +83,13 @@ all:
 #    web_debug_web_dir:      /sf/sf_web_debug
 
     # Helpers included in all templates by default
-    standard_helpers:       [Partial, Cache, Form, Javascript, I18N, ModalBox, Pmk]
+    standard_helpers:       [Partial, Cache, Form, I18N]
 #
 #    # Activated modules from plugins or from the symfony core
     enabled_modules:        [default]
 #
 #    # Charset used for the response
-     charset:                utf-8
+#    charset:                utf-8
 #
 #    # Miscellaneous
 #    strip_comments:         on         # Remove comments in core framework classes as defined in the core_compile.yml

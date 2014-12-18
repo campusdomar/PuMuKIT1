@@ -5,11 +5,9 @@
      <td>
        <div class="album">
         <a href="<?php echo $announce->getUrl() ?>">
-          <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>"></div>
-          <?php if ('serial' == $announce->getTableName()):?>
-          <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>"></div>
-          <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>"></div>
-          <?php endif?>
+         <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>"></div>
+         <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>"></div>
+         <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>"></div>
         </a>
        </div>
      </td>

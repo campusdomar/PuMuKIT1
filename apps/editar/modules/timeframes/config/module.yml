@@ -1,7 +1,0 @@
-# Valores usados en actions (executeTvTimeline p.ej.) para generar el xml 
-# del timeline y en indexDashSuccess para pintar la leyenda de la página
-all:
-  editorial1:
-    color:          '#50AA50'
-  editorial2:
-    color:          '#0000FF'

@@ -70,16 +70,6 @@ class filesActions extends sfActions
     $file = FilePeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($file);
     $file->delete();
-
-    $mm = $file->getMm();
-
-    if($mm->getFirstPublicFile() == null){
-      $c = new Criteria();
-      $c->add(PubChannelMmPeer::MM_ID, $mm->getId());
-      $c->add(PubChannelMmPeer::PUB_CHANNEL_ID, 1);
-      PubChannelMmPeer::doDelete($c);
-      $this->reload_pub_channel = true;
-    }
     
     return $this->renderComponent('files', 'list');
   }
@@ -149,7 +139,7 @@ class filesActions extends sfActions
     if ($file == null) return $this->renderText('K0');
 
     if(!file_exists($file->getUrlMount())){
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Error en autocompletado de los datos del archivo multimedia."));
+      $this->msg_alert = array('error', "Error en autocompletado los datos del archivo multimedia.");
       return $this->renderComponent('files', 'list');
     }
 
@@ -166,7 +156,7 @@ class filesActions extends sfActions
     if (file_exists($file->getUrlMount())) $file->setFile($file->getUrlMount());
     $file->save();
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Autocompletados los datos del archivo multimedia."));
+    $this->msg_alert = array('info', "Autocompletados los datos del archivo multimedia.");
     return $this->renderComponent('files', 'list');
   }
 
@@ -211,9 +201,12 @@ class filesActions extends sfActions
 
     //-  B)   ***** CON TICKET ln -s file->getUrl web/tickets *****
     // Compruebo que acede desde pumukit.
-    $ticket = TicketPeer::new_web($file);
-    $this->getController()->redirect($ticket->getUrl(), 0);
-    throw new sfStopException();
+    if (strpos($this->getRequest()->getReferer(), 'editar.php/mms/index/serial')){
+      $ticket = TicketPeer::new_web($file);
+      return $this->redirect($ticket->getUrl());
+    }else{
+      return $this->renderText("ERROR -1: Acceda desde PuMuKIT");
+    }
   }
 
 
@@ -229,7 +222,7 @@ class filesActions extends sfActions
     if ($file == null) return $this->renderText('K0');
 
     if(!file_exists($file->getUrlMount())){
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Error en autocompletado de los datos del archivo multimedia."));
+      $this->msg_alert = array('error', "Error en autocompletado los datos del archivo multimedia.");
       return $this->renderComponent('pics', 'list');
     }
 
@@ -245,9 +238,8 @@ class filesActions extends sfActions
 	    //$num = count($file->getMm()->getPics());
 	    //$num = $this->getRequestParameter('numframe', 125 * ($num +1));
     $file->createPic($num);
-    $message = sprintf($this->getContext()->getI18N()->__("Capturado el FRAME \"%s\" como imagen."), $num);
-    $this->msg_alert = array('info', $message);
 
+    $this->msg_alert = array('info', "Capturado el FRAME " .  $num. " como imagen.");
     return $this->renderComponent('pics', 'list');
   }
 
@@ -304,7 +296,7 @@ class filesActions extends sfActions
     //retranscodifico creando uno nuevo si es necesario.
     $file->retranscoding($profile->getId(), $this->getRequestParameter('prioridad', 2), $this->getUser()->getAttribute('user_id'), true);
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Creada nueva tarea para retranscodificar al nuevo formato."));
+    $this->msg_alert = array('info', "Creada nueva tarea para retranscodificar al nuevo formato.");
     return $this->renderComponent('files', 'list');
   }
 

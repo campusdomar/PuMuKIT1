@@ -19,7 +19,7 @@ abstract class BaseSerialPeer {
 	const CLASS_DEFAULT = 'lib.model.Serial';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 7;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -30,9 +30,6 @@ abstract class BaseSerialPeer {
 
 	/** the column name for the ANNOUNCE field */
 	const ANNOUNCE = 'serial.ANNOUNCE';
-
-	/** the column name for the DISPLAY field */
-	const DISPLAY = 'serial.DISPLAY';
 
 	/** the column name for the MAIL field */
 	const MAIL = 'serial.MAIL';
@@ -60,10 +57,10 @@ abstract class BaseSerialPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Announce', 'Display', 'Mail', 'Copyright', 'SerialTypeId', 'SerialTemplateId', 'Publicdate', ),
-		BasePeer::TYPE_COLNAME => array (SerialPeer::ID, SerialPeer::ANNOUNCE, SerialPeer::DISPLAY, SerialPeer::MAIL, SerialPeer::COPYRIGHT, SerialPeer::SERIAL_TYPE_ID, SerialPeer::SERIAL_TEMPLATE_ID, SerialPeer::PUBLICDATE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'announce', 'display', 'mail', 'copyright', 'serial_type_id', 'serial_template_id', 'publicDate', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Announce', 'Mail', 'Copyright', 'SerialTypeId', 'SerialTemplateId', 'Publicdate', ),
+		BasePeer::TYPE_COLNAME => array (SerialPeer::ID, SerialPeer::ANNOUNCE, SerialPeer::MAIL, SerialPeer::COPYRIGHT, SerialPeer::SERIAL_TYPE_ID, SerialPeer::SERIAL_TEMPLATE_ID, SerialPeer::PUBLICDATE, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'announce', 'mail', 'copyright', 'serial_type_id', 'serial_template_id', 'publicDate', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	/**
@@ -73,10 +70,10 @@ abstract class BaseSerialPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Announce' => 1, 'Display' => 2, 'Mail' => 3, 'Copyright' => 4, 'SerialTypeId' => 5, 'SerialTemplateId' => 6, 'Publicdate' => 7, ),
-		BasePeer::TYPE_COLNAME => array (SerialPeer::ID => 0, SerialPeer::ANNOUNCE => 1, SerialPeer::DISPLAY => 2, SerialPeer::MAIL => 3, SerialPeer::COPYRIGHT => 4, SerialPeer::SERIAL_TYPE_ID => 5, SerialPeer::SERIAL_TEMPLATE_ID => 6, SerialPeer::PUBLICDATE => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'announce' => 1, 'display' => 2, 'mail' => 3, 'copyright' => 4, 'serial_type_id' => 5, 'serial_template_id' => 6, 'publicDate' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Announce' => 1, 'Mail' => 2, 'Copyright' => 3, 'SerialTypeId' => 4, 'SerialTemplateId' => 5, 'Publicdate' => 6, ),
+		BasePeer::TYPE_COLNAME => array (SerialPeer::ID => 0, SerialPeer::ANNOUNCE => 1, SerialPeer::MAIL => 2, SerialPeer::COPYRIGHT => 3, SerialPeer::SERIAL_TYPE_ID => 4, SerialPeer::SERIAL_TEMPLATE_ID => 5, SerialPeer::PUBLICDATE => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'announce' => 1, 'mail' => 2, 'copyright' => 3, 'serial_type_id' => 4, 'serial_template_id' => 5, 'publicDate' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	/**
@@ -180,8 +177,6 @@ abstract class BaseSerialPeer {
 		$criteria->addSelectColumn(SerialPeer::ID);
 
 		$criteria->addSelectColumn(SerialPeer::ANNOUNCE);
-
-		$criteria->addSelectColumn(SerialPeer::DISPLAY);
 
 		$criteria->addSelectColumn(SerialPeer::MAIL);
 

@@ -8,18 +8,6 @@
     (<?php $aux = array(0 => "Administrador",1 => "Publicador",2 => "FTP"); echo $aux[$sf_user->getAttribute('user_type_id')] ?>) | 
     <?php echo date('d-m-y')?> | 
     <?php echo link_to('logout', 'index/logout') ?>
-
-    <?php $langs = sfConfig::get('app_lang_array', array('es')); ?>
-    <?php if(count($langs) > 1): ?> |
-      <?php foreach($langs as $lang): ?>
-        <?php if($sf_user->getCulture() == $lang):?>
-          <?php echo $lang ?>
-        <?php else:?>
-          <a href="<?php echo url_for('utils/culture?culture=' . $lang) ?>"><?php echo $lang?></a>
-        <?php endif?>
-      <?php endforeach ?>
-    <?php endif?>
-
   </div>  
   <div style="position:absolute; right: 10px; top : 25px; color: #fff; font-weight: bold">
     <?php echo sfConfig::get('app_metas_title')?>
@@ -30,12 +18,6 @@
 
 <!-- menu -->
 <div id="editar_menu">
-
-  <div class="cab_up_down" style="float:right; font-weight:bolder; font-size: 22px; max-width:1100px;">
-    <div style="" 
-       href="#" onclick="this.toggleClassName('inv'); Effect.toggle('editar_cab', 'blind'); return false">&nbsp;&nbsp;</div>
-  </div>
-
   <ul id="nav">
     <li class="level0 <?php echo sfConfig::get('dashboard_menu') ?>">
       <a href="<?php echo url_for('dashboard/index')?>" title="Dashboard" class="<?php echo sfConfig::get('dashboard_menu') ?>">
@@ -45,62 +27,58 @@
 
     <li class="level0 <?php echo sfConfig::get('serial_menu') ?>">
       <a href="<?php echo url_for('serials/index?page=' . $sf_user->getAttribute('page', 1, 'tv_admin/serial'))?>" title="Series Multimedia" class="<?php echo sfConfig::get('serial_menu') ?>">
-        <span><?php echo __('Series Multimedia')?></span>
+        <span>Series Multimedia</span>
       </a>
     </li>
     
-    <li class="level0 <?php echo sfConfig::get('virtual_serial_menu') ?>">
-      <a href="<?php echo url_for('virtualserial/index?page=' . $sf_user->getAttribute('page', 1, 'tv_admin/virtualserial'))?>" class="<?php echo sfConfig::get('virtual_serial_menu') ?>">
-        <span><?php echo __('Catalogador Unesco')?></span>
-      </a>
-    </li>
   
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('template_menu') ?>">
-      <a href="#" title="Dise&ntilde;o" onclick="return false" class="<?php echo sfConfig::get('template_menu') ?>">
-        <span><?php echo __('Dise&ntilde;o Portal WebTV')?></span>
+      <a href="#" title="Dise&nteilde;o" onclick="return false" class="<?php echo sfConfig::get('template_menu') ?>">
+        <span>Dise&ntilde;o Portal WebTV</span>
       </a>
       <ul>
         <li class="level1">
           <a href="<?php echo url_for('widgets/index')?>" title="Widgets" class="">
-            <span><?php echo __('Diseño')?></span>
+            <span>Diseño</span>
           </a>
         </li>
         <li class="level1">
           <a href="<?php echo url_for('templates/index')?>" title="Templates" class="">
-            <span><?php echo __('Plantillas')?></span>
+            <span>Plantillas</span>
           </a>
         </li>
-        <li class="level1">
+        <li class="last level1">
           <a href="<?php echo url_for('navigator/index')?>" title="Navegator" class="">
             <span>FileManager</span>
           </a>
-        </li>
+        <!-- </li>
         <li class="level1">
           <a href="<?php echo url_for('virtualgrounds/index')?>" title="Categorias" class="">
-            <span><?php echo __('Categorías')?></span>
+            <span>Categorias</span>
           </a>
         </li>
         <li class="last level1">
           <a href="<?php echo url_for('notices/index')?>" title="Notices" class="">
-            <span><?php echo __('Noticias')?></span>
+            <span>Noticias</span>
           </a>
         </li>
+       -->
       </ul>
     </li>
   
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('tv_menu') ?>">
       <a href="#" title="TV" onclick="return false" class="<?php echo sfConfig::get('tv_menu') ?>">
-        <span><?php echo __('Directos')?></span>
+        <span>Directos</span>
       </a>
       <ul>
         <li class="level1">
           <a href="<?php echo url_for('directs/index')?>" title="Direct" class="">
-            <span><?php echo __('Canales en Directo')?></span>
+            <span>Canales en Directo</span>
           </a>
         </li>
         <li class="last level1">
           <a href="<?php echo url_for('events/index')?>" title="Direct" class="">
-            <span><?php echo __('Anuncios de Directos')?></span>
+            <span>Anuncios de Directos</span>
           </a>
         </li>
       </ul>
@@ -110,75 +88,65 @@
     <?php if(sfConfig::get('app_transcoder_use')):?>
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('transcoder_menu') ?>">
       <a href="#" title="Transcodificador" onclick="return false" class="<?php echo sfConfig::get('transcoder_menu') ?>">
-        <span><?php echo __('Transcodificacion')?></span>
+        <span>Transcodificacion</span>
       </a>
       <ul>
         <li class="level1">
           <a href="<?php echo url_for('profiles/index')?>" title="Profiles" class="">
-            <span><?php echo __('Perfil de Transcodificación')?></span>
+            <span>Perfile de Transcodificación</span>
           </a>
         </li>
         <li class="level1">
           <a href="<?php echo url_for('transcoders/index')?>" title="List" class="">
-            <span><?php echo __('Lista de tareas')?></span>
+            <span>Lista de tareas</span>
           </a>
         </li>
         <li class="last level1">
           <a href="<?php echo url_for('cpus/index')?>" title="Cpus" class="">
-            <span><?php echo __('Trascodificadores')?></span>
+            <span>Trascodificadores</span>
           </a>
         </li>  
       </ul>
     </li>
 
+    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('distri_menu') ?>">
+      <a href="#" title="Transcodificador" onclick="return false" class="<?php echo sfConfig::get('distri_menu') ?>">
+        <span>Distribución</span>
+      </a>
+      <ul>
+       <li class="level2">
+         <a href="<?php echo url_for('broadcasts/index')?>" title="Broadcast" class="">
+           <span>Perfiles Difusión</span>
+          </a>
+        </li>
+
+        <li class="last level1">
+          <a href="<?php echo url_for('streamservs/index')?>" title="Streamservs" class="">
+            <span>Servidores de Distribución</span>
+          </a>
+        </li>
+  
+      </ul>
+    </li>
+
    <?php endif ?>
 
-    <li class="level0 <?php echo sfConfig::get('timeframes_menu') ?>">
-      <a href="<?php echo url_for('timeframes/indexDash')?>" 
-         class="<?php echo sfConfig::get('timeframes_menu') ?>">
-        <span><?php echo __('Editoriales Temporizadas')?></span>
-      </a>
-    </li>
+
 
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('library_menu') ?>">
       <a href="#" title="Tablas" onclick="return false" class="<?php echo sfConfig::get('library_menu') ?>">
-        <span><?php echo __('Tablas')?></span>
+        <span>Tablas</span>
       </a>
                                        
       <ul>
-        <li class="level1 last">
-          <a href="<?php echo url_for('persons/index')?>" title="Persons" class="">
-            <span><?php echo __('Personas')?></span>
-          </a>
-        </li>
-      </ul>    
-    </li>
-
-<?php if($sf_user->getAttribute('user_type_id', 1) == 0) /* A los publicadores no les aparece el menú de administración de usuarios.*/:?>
-    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('config_menu') ?>">
-      <a href="#" title="Administraci&oacute;n" onclick="return false" class="<?php echo sfConfig::get('config_menu') ?>">
-        <span><?php echo __('Administraci&oacute;n')?></span>
-      </a>
-      <ul>
         <li class="level1">
-          <a href="<?php echo url_for('users/index')?>" title="Users" class="">
-            <span><?php echo __('Usuarios admin')?></span>
+          <a href="<?php echo url_for('persons/index')?>" title="Persons" class="">
+            <span>Personas</span>
           </a>
         </li>
-        <!-- <li class="level1">
-          <a href="#" title="Export" class="">
-            <span>Export</span>
-          </a>
-        </li> 
-        <li class="last level1">
-          <a href="#" title="Backup" class="">
-            <span>Backup</span>
-          </a>
-        </li> -->
-
-        <!--        <li class="level1">
+<!--        <li class="level1">
           <a href="<?php echo url_for('places/index')?>" title="Places" class="">
-            <span><?php echo __('Lugares y recintos')?></span>
+            <span>Lugares y recintos</span>
           </a>
         </li>-->
         <!-- <li class="level1">
@@ -187,28 +155,28 @@
           </a>
         </li> -->
         <li class="level1">
-          <a href="<?php echo url_for('categories/index')?>"  class="">
-            <span><?php echo __('Categorías')?></span>
+          <a href="<?php echo url_for('grounds/index')?>" title="Ground" class="">
+            <span>Lugares y &Aacute;reas de conocimiento</span>
           </a>
         </li>
         <li class="level1">
-          <a href="<?php echo url_for('genres/index')?>" class="">
-            <span><?php echo __('G&eacute;neros')?></span>
+          <a href="<?php echo url_for('genres/index')?>" title="Genre" class="">
+            <span>G&eacute;neros</span>
           </a>
         </li>
         <li class="level1">
           <a href="<?php echo url_for('mattypes/index')?>" title="matType" class="">
-            <span><?php echo __('Tipos de materiales')?></span>
+            <span>Tipos de materiales</span>
           </a>
         </li>
         <li class="level1">
           <a href="<?php echo url_for('serialtypes/index')?>" title="Serial Type" class="">
-            <span><?php echo __('Tipos de series')?></span>
+            <span>Tipos de series</span>
           </a>
         </li>
         <li class="level1">
           <a href="<?php echo url_for('languages/index')?>" title="Language" class="">
-            <span><?php echo __('Idiomas')?></span>
+            <span>Idiomas</span>
           </a>
         </li>
         <!-- depricated
@@ -230,27 +198,39 @@
        
         <li class="level1">
           <a href="<?php echo url_for('profiles/index')?>" title="Profile" class="">
-            <span><?php echo __('Perfiles')?></span>
+            <span>Perfiles</span>
           </a>
         </li>
         -->
-        <li class="level1">
+        <li class="last level1">
           <a href="<?php echo url_for('roles/index')?>" title="Rol" class="">
             <span>Roles</span>
           </a>
         </li>
-       <li class="level1">
-         <a href="<?php echo url_for('broadcasts/index')?>"  class="">
-           <span><?php echo __('Perfiles Acceso')?></span>
+      </ul>    
+    </li>
+
+<?php if($sf_user->getAttribute('user_type_id', 1) == 0) /* A los publicadores no les aparece el menú de administración de usuarios.*/:?>
+    <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('config_menu') ?>">
+      <a href="#" title="Administraci&oacute;n" onclick="return false" class="<?php echo sfConfig::get('config_menu') ?>">
+        <span>Administraci&oacute;n</span>
+      </a>
+      <ul>
+        <li class="level1 last">
+          <a href="<?php echo url_for('users/index')?>" title="Users" class="">
+            <span>Usuarios admin</span>
           </a>
         </li>
-
-
-        <li class="level1">
-          <a href="<?php echo url_for('streamservs/index')?>"  class="">
-            <span><?php echo __('Servidores de Distribución')?></span>
+        <!-- <li class="level1">
+          <a href="#" title="Export" class="">
+            <span>Export</span>
           </a>
-        </li>   
+        </li> 
+        <li class="last level1">
+          <a href="#" title="Backup" class="">
+            <span>Backup</span>
+          </a>
+        </li> -->
       </ul>
     </li>  
 <?php endif ?>
@@ -258,12 +238,12 @@
   <?php if (sfConfig::get('app_matterhorn_use')):?>
     <li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 <?php echo sfConfig::get('ingest_menu') ?>">
       <a href="#" title="Ingestador" onclick="return false" class="<?php echo sfConfig::get('ingest_menu') ?>">
-        <span><?php echo __('Ingestador')?></span>
+        <span>Ingestador</span>
       </a>
       <ul>
         <li class="level1" last>
           <a href="<?php echo url_for('matterhorn/index')?>" title="Matterhorn" class="">
-            <span><?php echo __('Ingestador Matterhorn')?></span>
+            <span>Ingestador Matterhorn</span>
           </a>
         </li>
       </ul>
@@ -271,3 +251,5 @@
   <?php endif ?>
   </ul>
 </div>
+
+

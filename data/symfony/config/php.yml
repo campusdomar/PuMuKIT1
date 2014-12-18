@@ -1,12 +1,11 @@
-# (Andrés): comento líneas que dan errores por php nuevo.
 set:
-#  magic_quotes_runtime:        off
+  magic_quotes_runtime:        off
   log_errors:                  on
   arg_separator.output:        |
     &amp;
 
 warn:
-#  magic_quotes_gpc:            off
-#  register_globals:            off
+  magic_quotes_gpc:            off
+  register_globals:            off
   session.auto_start:          off
 

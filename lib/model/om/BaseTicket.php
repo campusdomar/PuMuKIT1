@@ -934,7 +934,7 @@ abstract class BaseTicket extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseFilePeer.php';
 
-			$this->aFile = FilePeer::retrieveByPKWithI18n($this->file_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aFile = FilePeer::retrieveByPKWithI18n($this->file_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -942,28 +942,11 @@ abstract class BaseTicket extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = FilePeer::retrieveByPKWithI18n($this->file_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = FilePeer::retrieveByPKWithI18n($this->file_id, $this->getCulture(), $con);
 			   $obj->addFiles($this);
 			 */
 		}
 		return $this->aFile;
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-		} // if ($deep)
-
-		$this->aFile = null;
 	}
 
 

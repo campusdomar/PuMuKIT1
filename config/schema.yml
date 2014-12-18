@@ -212,10 +212,10 @@ propel:
       foreignTable: virtual_ground
       foreignReference: id
       onDelete: cascade
-    category_id: 
+    ground_id: 
       type: integer
       primaryKey: true
-      foreignTable: category
+      foreignTable: ground
       foreignReference: id
       onDelete: cascade
     enable: 
@@ -393,10 +393,6 @@ propel:
       type: boolean
       required: true
       default: 0
-    display: 
-      type: boolean
-      required: true
-      default: 1
     mail: 
       type: boolean
       required: true
@@ -503,20 +499,6 @@ propel:
       type: boolean
       required: true
       default: 0
-    audio: 
-      type: boolean
-      required: true
-      default: 0
-    duration: 
-      type: integer
-      required: true
-      default: 0
-    num_view: 
-      type: integer
-      required: true
-      default: 0
-    comments: 
-      type: longvarchar
   mm_i18n:
     title: 
       type: varchar
@@ -665,7 +647,7 @@ propel:
       required: true
       default: 0
     size:
-      type: bigint
+      type: integer
       required: true
       default: 0
     resolution_hor: 
@@ -680,10 +662,6 @@ propel:
       type: boolean
       required: true
       default: 1
-    download: 
-      type: boolean
-      required: true
-      default: 0
   file_i18n: 
     description: 
       type: varchar
@@ -896,10 +874,6 @@ propel:
       type: boolean
       required: true
       default: 1
-    size:
-      type: bigint
-      required: true
-      default: 0
   material_i18n: 
     name: 
       type: varchar
@@ -948,9 +922,6 @@ propel:
       size: 255
       required: true
     created_at:
-      type: timestamp
-      required: true
-      index: true
 
   log_email:
     id:
@@ -1031,7 +1002,7 @@ propel:
       required: true
       default: 0
     size:
-      type: bigint
+      type: integer
       required: true
       default: 0
     email: 
@@ -1092,7 +1063,7 @@ propel:
     id:
     name:
       type: char
-      size: 250
+      size: 8
 
 
   widget:
@@ -1244,10 +1215,6 @@ propel:
       type: boolean
       required: true
       default: 1
-    master: 
-      type: boolean
-      required: true
-      default: 0
     format: 
       type: varchar
       size: 35
@@ -1257,9 +1224,6 @@ propel:
     mime_type: 
       type: varchar
       size: 35
-    accepted_mime_type: 
-      type: varchar
-      size: 100
     extension: 
       type: varchar
       size: 6
@@ -1374,7 +1338,7 @@ propel:
       required: true
       default: 0
     size:
-      type: bigint
+      type: integer
       required: true
       default: 0
     email: 
@@ -1668,124 +1632,3 @@ propel:
       type: varchar
       size: 100
       required: true
-  category: 
-    id:
-    cod: 
-      type: varchar
-      size: 25
-      required: true
-      index: unique
-    tree_left: 
-      type: integer
-      required: false
-    tree_right: 
-      type: integer
-      required: false
-    tree_parent: 
-      type: integer
-      required: false
-    scope: 
-      type: integer
-      required: false
-    metacategory:
-      type: boolean
-      required: true
-      default: 0
-    display: 
-      type: boolean
-      required: true
-      default: 1
-    required:
-      type: boolean
-      required: true
-      default: 0
-    num_mm:
-      type: integer
-      required: true
-      default: 0
-  category_i18n: 
-    name: 
-      type: varchar
-      size: 100
-      required: true
-
-  relation_category:
-    one_id:
-      type: integer
-      required: true
-      primaryKey: true
-      foreignTable: category 
-      foreignReference: id
-      onDelete: cascade
-    two_id:
-      type: integer
-      required: true
-      primaryKey: true
-      foreignTable: category
-      foreignReference: id
-      onDelete: cascade
-    recommended:
-      type: boolean
-      required: true
-      default: 1
-
-  category_mm:
-    category_id: 
-      type: integer 
-      required: true
-      primaryKey: true
-      foreignTable: category
-      foreignReference: id
-      onDelete: cascade
-    mm_id: 
-      type: integer
-      required: true
-      primaryKey: true
-      foreignTable: mm
-      foreignReference: id
-      onDelete: cascade
-
-  category_mm_template:
-    category_id: 
-      type: integer 
-      required: true
-      primaryKey: true
-      foreignTable: category
-      foreignReference: id
-      onDelete: cascade
-    mm_template_id: 
-      type: integer
-      required: true
-      primaryKey: true
-      foreignTable: mm_template
-      foreignReference: id
-      onDelete: cascade
-
-# Gestionar decisiones editoriales temporizada
-  category_mm_timeframe:
-    id:
-    category_id: 
-      type: integer 
-      required: true
-      primaryKey: false;
-      foreignTable: category
-      foreignReference: id
-      onDelete: cascade
-    mm_id: 
-      type: integer
-      required: true
-      primaryKey: false;
-      foreignTable: mm
-      foreignReference: id
-      onDelete: cascade
-    timestart: 
-      type: timestamp
-      required: true
-    timeend: 
-      type: timestamp
-      required: true
-    description:
-      type: longvarchar
-    created_at:
-    updated_at:
-

@@ -26,7 +26,7 @@ class Direct extends BaseDirect
    */
   public function __toString()
   {
-    return $this->getName() . " (" . $this->getUrl() . ")";
+    return $this->getName();
   }
 
  /**

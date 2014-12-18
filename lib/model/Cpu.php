@@ -22,7 +22,7 @@ class Cpu extends BaseCpu
     $ch = curl_init('http://'.$this->getIp().'/webserver.php'); 
     
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic ". base64_encode($this->getUser().':'.$this->getPassword())));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Basic ". base64_encode("pumukit:PUMUKIT")));
     curl_setopt ($ch, CURLOPT_POST, 1); 
     curl_setopt ($ch, CURLOPT_POSTFIELDS, "ruta= " . $cmd); 
     curl_setopt ($ch, CURLOPT_TIMEOUT, 1);

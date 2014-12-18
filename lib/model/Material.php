@@ -58,18 +58,6 @@ class Material extends BaseMaterial
     
     return $url;
   }
-
-
-  /**
-   * 
-   * To init size
-   */
-  public function save($con = null)
-  {
-    $tamano = filesize(sfConfig::get('sf_web_dir') . $this->getUrl());
-    if ($tamano) $this->setSize($tamano);
-    parent::save($con);
-  }
 }
 
 /** Implementa comportamiento sortableFk segun mm_id */

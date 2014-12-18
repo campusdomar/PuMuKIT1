@@ -13,7 +13,7 @@
 <fieldset id="tv_fieldset_none" class="">
 
 <div class="form-row">
-  <?php echo label_for('name', __('Nombre:'), 'class="required" ') ?>
+  <?php echo label_for('name', 'Nombre:', 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $precinct->setCulture($lang);  echo $sep ?>  
@@ -27,7 +27,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('equipment', __('Equipo:'), 'class="required" ') ?>
+  <?php echo label_for('equipment', 'Equipo:', 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $precinct->setCulture($lang);  echo $sep ?>  
@@ -41,7 +41,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('comment', __('Comentario:'), 'class="required" ') ?>
+  <?php echo label_for('comment', 'Comentario:', 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $precinct->setCulture($lang);  echo $sep ?>  
@@ -59,8 +59,8 @@
 
 
 <ul class="tv_admin_actions">
-<li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-<li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+<li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+<li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
   </ul>
 
 </form>

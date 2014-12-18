@@ -1,4 +1,4 @@
-<div style="background-color: red; padding: 5px; "> <?php echo __('Objetos multimedia más vistos')?> </div>
+<div style="background-color: red; padding: 5px; "> Objetos multimedia mas vistos </div>
 
 <ol>
 <?php foreach($mms as $mm): ?>

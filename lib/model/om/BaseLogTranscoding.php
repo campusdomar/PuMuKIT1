@@ -147,9 +147,9 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 
 	/**
 	 * The value for the size field.
-	 * @var        string
+	 * @var        int
 	 */
-	protected $size = '0';
+	protected $size = 0;
 
 
 	/**
@@ -453,7 +453,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 	/**
 	 * Get the [size] column value.
 	 * 
-	 * @return     string
+	 * @return     int
 	 */
 	public function getSize()
 	{
@@ -893,19 +893,19 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 	/**
 	 * Set the value of [size] column.
 	 * 
-	 * @param      string $v new value
+	 * @param      int $v new value
 	 * @return     void
 	 */
 	public function setSize($v)
 	{
 
-		// Since the native PHP type for this column is string,
-		// we will cast the input to a string (if it is not).
-		if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
+		// Since the native PHP type for this column is integer,
+		// we will cast the input value to an int (if it is not).
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
 		}
 
-		if ($this->size !== $v || $v === '0') {
+		if ($this->size !== $v || $v === 0) {
 			$this->size = $v;
 			$this->modifiedColumns[] = LogTranscodingPeer::SIZE;
 		}
@@ -987,7 +987,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 
 			$this->duration = $rs->getInt($startcol + 17);
 
-			$this->size = $rs->getString($startcol + 18);
+			$this->size = $rs->getInt($startcol + 18);
 
 			$this->email = $rs->getString($startcol + 19);
 
@@ -1764,7 +1764,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseMmPeer.php';
 
-			$this->aMm = MmPeer::retrieveByPKWithI18n($this->mm_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aMm = MmPeer::retrieveByPKWithI18n($this->mm_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1772,7 +1772,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = MmPeer::retrieveByPKWithI18n($this->mm_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = MmPeer::retrieveByPKWithI18n($this->mm_id, $this->getCulture(), $con);
 			   $obj->addMms($this);
 			 */
 		}
@@ -1843,7 +1843,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseLanguagePeer.php';
 
-			$this->aLanguage = LanguagePeer::retrieveByPKWithI18n($this->language_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aLanguage = LanguagePeer::retrieveByPKWithI18n($this->language_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1851,7 +1851,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = LanguagePeer::retrieveByPKWithI18n($this->language_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = LanguagePeer::retrieveByPKWithI18n($this->language_id, $this->getCulture(), $con);
 			   $obj->addLanguages($this);
 			 */
 		}
@@ -1922,7 +1922,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BasePerfilPeer.php';
 
-			$this->aPerfil = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aPerfil = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -1930,7 +1930,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = PerfilPeer::retrieveByPKWithI18n($this->perfil_id, $this->getCulture(), $con);
 			   $obj->addPerfils($this);
 			 */
 		}
@@ -2001,7 +2001,7 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			// include the related Peer class
 			include_once 'lib/model/om/BaseCpuPeer.php';
 
-			$this->aCpu = CpuPeer::retrieveByPKWithI18n($this->cpu_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			$this->aCpu = CpuPeer::retrieveByPKWithI18n($this->cpu_id, $this->getCulture(), $con);
 
 			/* The following can be used instead of the line above to
 			   guarantee the related object contains a reference
@@ -2009,31 +2009,11 @@ abstract class BaseLogTranscoding extends BaseObject  implements Persistent {
 			   may be undesirable in many circumstances.
 			   As it can lead to a db query with many results that may
 			   never be used.
-			   $obj = CpuPeer::retrieveByPKWithI18n($this->cpu_id, sfContext::getInstance()->getUser()->getCulture(), $con);
+			   $obj = CpuPeer::retrieveByPKWithI18n($this->cpu_id, $this->getCulture(), $con);
 			   $obj->addCpus($this);
 			 */
 		}
 		return $this->aCpu;
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-		} // if ($deep)
-
-		$this->aMm = null;
-		$this->aLanguage = null;
-		$this->aPerfil = null;
-		$this->aCpu = null;
 	}
 
 

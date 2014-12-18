@@ -29,21 +29,22 @@ class ViewsLog{
   static public function logThisView(sfwebRequest $request)
   {
 
-    $ip        = isset($_SERVER['HTTP_X_FORWARDED_FOR'])?current(explode(",", $_SERVER['HTTP_X_FORWARDED_FOR'])):$_SERVER['REMOTE_ADDR']; // Pasa por proxy, no nos sirve REMOTE_ADDR
+    $ip        = $_SERVER['REMOTE_ADDR']; //Cambiar por HTTP_X_FORWARDED_FOR si se usa un proxy. Procesarla si se usan varios.
     $userid    = "- -";
     // hyphen  = RFC 1413 identity (unreliable);
     // userid: see http://httpd.apache.org/docs/2.2/logs.html#common
     $time      = date("[j/M/Y:G:i:s O]");
-    $request   = "\"".$request->getMethodName()." ".$request->getURI()." ".$_SERVER['SERVER_PROTOCOL']."\"";
-    $status    = isset($_SERVER['REDIRECT_STATUS'])?$_SERVER['REDIRECT_STATUS']:200;// sf getStatusCode method depends on sfWebResponse 
+    $req       = "\"".$request->getMethodName()." ".$request->getURI()." ".$_SERVER['SERVER_PROTOCOL']."\"";
+    $status    = (isset($_SERVER['REDIRECT_STATUS'])) ? $_SERVER['REDIRECT_STATUS'] : "-";
+    // sf getStatusCode method depends on sfWebResponse
     $size      = "-";                        // not implemented.
     // There is a file (pumukit) object with a size value.
-    $referer   = "\"". (isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'')."\"";
+    $referer   = "\"".$_SERVER['HTTP_REFERER']."\"";
     $userAgent = "\"".$_SERVER['HTTP_USER_AGENT']."\"";
     // use the following statement to get all the request information
     // $kk = print_r($request,true)
    
-    $combinedLogFormat = "$ip $userid $time $request $status $size $referer $userAgent";
+    $combinedLogFormat = "$ip $userid $time $req $status $size $referer $userAgent";
     ViewsLog::newLog($combinedLogFormat);
    
   }

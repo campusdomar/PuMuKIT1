@@ -97,7 +97,7 @@ class LogTranscodingMapBuilder {
 
 		$tMap->addColumn('DURATION', 'Duration', 'int', CreoleTypes::INTEGER, true, null);
 
-		$tMap->addColumn('SIZE', 'Size', 'string', CreoleTypes::BIGINT, true, null);
+		$tMap->addColumn('SIZE', 'Size', 'int', CreoleTypes::INTEGER, true, null);
 
 		$tMap->addColumn('EMAIL', 'Email', 'string', CreoleTypes::VARCHAR, false, 30);
 

@@ -23,44 +23,42 @@ class categoriesActions extends sfActions
     $this->getUser()->panNivelDos($this->vcat->getName(), 'categories/index?id=' . $this->getRequestParameter('id'));
 
     if ($this->vcat->getOther()){
-      $this->serials = $this->vcat->getSerials();      
-      $this->objects_by_year = $this->groupObjectsByYear($this->serials);
+      $this->sub_cats = $this->vcat->getGrounds($this->vcat->getGroundTypeId());
+      $this->setTemplate('multidisplay');
+    }else{
 
-    } else {
+      $c = $this->getCriteria();
+      if ($this->vcat->getEditorial1())
+	$c->add(MmPeer::EDITORIAL1, 1);
+      if ($this->vcat->getEditorial2())
+	$c->add(MmPeer::EDITORIAL2, 1);
+      if ($this->vcat->getEditorial3())
+	$c->add(MmPeer::EDITORIAL3, 1);
 
-      if ($this->vcat->getEditorial1()) $cod = CategoryMmTimeframePeer::EDITORIAL1;
-      if ($this->vcat->getEditorial2()) $cod = CategoryMmTimeframePeer::EDITORIAL2;
-      // Virtualgrounds should have: 
-      //    other=1 if they use standard category objects 
-      //    or any editorialx = 1 if they use "Decisión editorial".
-      // otherwise, there is a problem with this virtualground ($vcat)
-      $this->forward404Unless(isset($cod));
+      $c->clearOrderByColumns();
+      $c->addAscendingOrderByColumn(SerialI18nPeer::LINE2);
 
-      $this->mms = CategoryMmTimeframePeer::doSelectDestacados($cod, true, null);
-      $this->objects_by_year = $this->groupObjectsByYear($this->mms);
+      $this->serials = SerialPeer::doSelectWithI18n($c);
+      $this->setTemplate('display');
     }
-
-    $this->setTemplate('display');
   }
 
-// getCriteria is no longer needed as "decisiones editoriales" (editorial1 and editorial2)
-// now depend on CategoryMmTimeframePeer logic.
 
-/**
- * @param $objects resultset of serials or mms
- * @return array $objects_by_year [4_digit_year] = array (serials or mms)
- */
-  private function groupObjectsByYear($objects)
-  {
-    $objects_by_year = array();
 
-    foreach($objects as $object){
-      if (!array_key_exists($object->getPublicDate('Y'), $objects_by_year)) {
-        $objects_by_year[$object->getPublicDate('Y')] = array();
-      }
-      $objects_by_year[$object->getPublicDate('Y')][] = $object;
+  private function getCriteria(){
+    $c = new Criteria();
+    $c->addJoin(SerialPeer::ID, MmPeer::SERIAL_ID);
+
+    //FIXME Filtar bien
+    SerialPeer::addPubChannelCriteria($c, 1);
+    SerialPeer::addBroadcastCriteria($c, array($this->getRequestParameter('broadcast', 'pub')));
+    if ($this->hasRequestParameter('search')){
+      SerialPeer::addSeachCriteria($c, $this->getRequestParameter('search'), $this->getUser()->getCulture());
     }
 
-    return $objects_by_year;
+    $c->addDescendingOrderByColumn(MmPeer::RECORDDATE);
+
+    return $c;
   }
+
 }

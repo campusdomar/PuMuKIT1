@@ -1,4 +1,5 @@
 <a name="<?php echo $mm->getId() ?>"></a>
+
 <!-- SUBSERIAL -->
 <?php if (!($mm->getSubserial())): ?>
   <div class="inter_mm"></div>
@@ -11,6 +12,7 @@
     <?php echo $mm->getRecorddateText(); ?>
   </div>
 <?php endif; ?>
+   
 <!-- SUBSERIAL -->
 <?php if((($template == 3) &&((htmlentities($mm->getSubserialTitle()) !== $lastSubserialTitle)||($mm->getRecorddate('dmy') !== $lastDate))) || 
 	 (($template == 4) &&(htmlentities($mm->getSubserialTitle()) !== $lastSubserialTitle))):?>
@@ -61,10 +63,11 @@
   
         <div class="objects">
   <!-- FILES -->
-          <?php $files = $mm->getFilesPublic(); $num_files = count($files) ?> 
+          <?php $files = $mm->getFilesPublic() ?> 
           <?php foreach ($files as $file):?>  
             <div class="file <?php echo ($file->getAudio()?'audio':'video')?>">
-               <?php echo link_to($file->getPerfil()->getLink(), ($num_files==1)?'video/index?id=' . $mm->getId():'video/index?file_id=' . $file->getId())?>
+               <?php //echo link_to($file->getAudio()?'Audio':'V&iacute;deo', 'video/index?id=' . $mm->getId())?>
+               <?php echo link_to($file->getPerfil()->getLink(), 'video/index?id=' . $mm->getId())?>
                <?php if ($file->getDescription() !== ""): ?>
                  &nbsp;|&nbsp;&nbsp;<strong><?php echo ( $file->getDescription() ) ?></strong>
                <?php endif ?>
@@ -78,7 +81,7 @@
   <!-- MATTERHORN -->
           <?php if($mh = MmMatterhornPeer::retrieveByPK($mm->getId())): ?>
           <div id="material" class="file matterhorn">
-            <a href="<?php echo url_for('video/index?id=' . $mm->getId())?>">Video-MH<?php echo ($mm->getBroadcast()->getBroadcastType() == "pub")?"":" privado"?></a>
+            <a href="<?php echo url_for('video/index?id=' . $mm->getId())?>">Video<?php echo ($mm->getBroadcast()->getBroadcastType() == "pub")?"":" privado"?></a>
         &nbsp;|&nbsp;&nbsp;<span class="language"><?php echo $mh->getLanguage()->getName() ?></span> 
         &nbsp;|&nbsp; <?php echo $mh->getDurationString() ?>
         &nbsp;|&nbsp; <?php echo __('Visto:') ?> <span class="numView"><?php echo $mh->getNumView()?></span><?php echo (($mh->getNumView() == 1)? __(' vez') : __(' veces'))?>
@@ -87,7 +90,7 @@
   
   <!-- MATERIAL -->
           <?php $materials = $mm->getMaterials() ?> 
-    	  <?php foreach ($materials as $material): if(!$material->getDisplay()) continue; $material->setCulture( $sf_user->getCulture() ) ?>  
+    	  <?php foreach ($materials as $material): if(!$material->getDisplay()) continue;$material->setCulture( $sf_user->getCulture() ) ?>  
             <div id="material" class="<?php echo $material->getMatType()->getType() ?>">
               <a href="<?php echo $material->getUrl() ?>"><?php echo $material->getName() ?></a>
             </div>

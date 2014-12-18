@@ -37,7 +37,7 @@ class transcodersComponents extends sfComponents
     $offset = 0;
 
     $c = new Criteria();
-    $c->addDescendingOrderByColumn(TranscodingPeer::TIMEINI);
+    $c->addDescendingOrderByColumn(TranscodingPeer::STATUS_ID);
     $c->addAscendingOrderByColumn(TranscodingPeer::PRIORITY);
     $c->add(TranscodingPeer::STATUS_ID, array(0, 1), Criteria::IN);    
     
@@ -79,7 +79,7 @@ class transcodersComponents extends sfComponents
     $offset = 0;
 
     $c = new Criteria();
-    $c->addDescendingOrderByColumn(TranscodingPeer::TIMEINI);
+    $c->addDescendingOrderByColumn(TranscodingPeer::STATUS_ID);
     $c->addDescendingOrderByColumn(TranscodingPeer::PRIORITY);
     $c->add(TranscodingPeer::STATUS_ID, array(2), Criteria::IN);    
 
@@ -120,7 +120,7 @@ class transcodersComponents extends sfComponents
     $offset = 0;
 
     $c = new Criteria();
-    $c->addDescendingOrderByColumn(TranscodingPeer::TIMEINI);
+    $c->addDescendingOrderByColumn(TranscodingPeer::STATUS_ID);
     $c->addDescendingOrderByColumn(TranscodingPeer::ID);
     $c->add(TranscodingPeer::STATUS_ID, array(3, -1), Criteria::IN);
     

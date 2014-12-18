@@ -1,1 +1,0 @@
-<?php include_partial('virtualserial/listeditpreview')?>

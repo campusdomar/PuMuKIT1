@@ -1572,41 +1572,6 @@ abstract class BasePrecinct extends BaseObject  implements Persistent {
 		return $this->collMmTemplates;
 	}
 
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collPrecinctI18ns) {
-				foreach ((array) $this->collPrecinctI18ns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collMms) {
-				foreach ((array) $this->collMms as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collMmTemplates) {
-				foreach ((array) $this->collMmTemplates as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collPrecinctI18ns = null;
-		$this->collMms = null;
-		$this->collMmTemplates = null;
-		$this->aPlace = null;
-	}
-
   public function getCulture()
   {
     return $this->culture;

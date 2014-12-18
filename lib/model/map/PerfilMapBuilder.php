@@ -71,15 +71,11 @@ class PerfilMapBuilder {
 
 		$tMap->addColumn('WIZARD', 'Wizard', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
-		$tMap->addColumn('MASTER', 'Master', 'boolean', CreoleTypes::BOOLEAN, true, null);
-
 		$tMap->addColumn('FORMAT', 'Format', 'string', CreoleTypes::VARCHAR, false, 35);
 
 		$tMap->addColumn('CODEC', 'Codec', 'string', CreoleTypes::VARCHAR, false, 35);
 
 		$tMap->addColumn('MIME_TYPE', 'MimeType', 'string', CreoleTypes::VARCHAR, false, 35);
-
-		$tMap->addColumn('ACCEPTED_MIME_TYPE', 'AcceptedMimeType', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('EXTENSION', 'Extension', 'string', CreoleTypes::VARCHAR, true, 6);
 

@@ -147,9 +147,9 @@ abstract class BaseTranscoding extends BaseObject  implements Persistent {
 
 	/**
 	 * The value for the size field.
-	 * @var        string
+	 * @var        int
 	 */
-	protected $size = '0';
+	protected $size = 0;
 
 
 	/**
@@ -471,7 +471,7 @@ abstract class BaseTranscoding extends BaseObject  implements Persistent {
 	/**
 	 * Get the [size] column value.
 	 * 
-	 * @return     string
+	 * @return     int
 	 */
 	public function getSize()
 	{
@@ -911,19 +911,19 @@ abstract class BaseTranscoding extends BaseObject  implements Persistent {
 	/**
 	 * Set the value of [size] column.
 	 * 
-	 * @param      string $v new value
+	 * @param      int $v new value
 	 * @return     void
 	 */
 	public function setSize($v)
 	{
 
-		// Since the native PHP type for this column is string,
-		// we will cast the input to a string (if it is not).
-		if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
+		// Since the native PHP type for this column is integer,
+		// we will cast the input value to an int (if it is not).
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
 		}
 
-		if ($this->size !== $v || $v === '0') {
+		if ($this->size !== $v || $v === 0) {
 			$this->size = $v;
 			$this->modifiedColumns[] = TranscodingPeer::SIZE;
 		}
@@ -1005,7 +1005,7 @@ abstract class BaseTranscoding extends BaseObject  implements Persistent {
 
 			$this->duration = $rs->getInt($startcol + 17);
 
-			$this->size = $rs->getString($startcol + 18);
+			$this->size = $rs->getInt($startcol + 18);
 
 			$this->email = $rs->getString($startcol + 19);
 
@@ -2168,32 +2168,6 @@ abstract class BaseTranscoding extends BaseObject  implements Persistent {
 	{
 		$this->collTranscodingI18ns[] = $l;
 		$l->setTranscoding($this);
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collTranscodingI18ns) {
-				foreach ((array) $this->collTranscodingI18ns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collTranscodingI18ns = null;
-		$this->aMm = null;
-		$this->aLanguage = null;
-		$this->aPerfil = null;
-		$this->aCpu = null;
 	}
 
   public function getCulture()

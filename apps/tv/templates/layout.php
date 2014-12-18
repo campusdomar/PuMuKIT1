@@ -4,7 +4,6 @@
 
   <?php include_http_metas() ?>
   <?php include_metas() ?>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
   <?php include_title() ?>
   
@@ -15,8 +14,7 @@
   <div id="content" class="container_15">
     <div id="headerbar">
       <?php include_component('utils', 'bar', array('bar' => 'Headerbar')) ?>
-      <?php //include_partial('global/cab_menu')?>
-    </div><!--fin div headerbar-->
+    </div>
     
     <div id="body">  
       <div id="slidebar" class="grid_3">  

@@ -1,5 +1,0 @@
-all:
-  stylesheets:    [/sf/calendar/calendar-system.css, /sf/calendar/skins/aqua/theme.css, admin/accordion.css, admin/sh/shadowbox.css, admin/tree]
-
-  javascripts:    [tabs.js, /sf/calendar/calendar.js, /sf/calendar/lang/calendar-es.js, /sf/calendar/calendar-setup.js, accordion.js, sh/shadowbox-prototype.js, sh/shadowbox.js, tree]
-

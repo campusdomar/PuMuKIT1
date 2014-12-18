@@ -3,7 +3,7 @@ var menuTabClass = new Class.create();
 menuTabClass.prototype = {
     initialize : function(hash){
         var q = 'metaMm';
-        if ((['#pubMmHash', '#metaMmHash', '#categoryMmHash', '#personMmHash', '#mediaMmHash'].indexOf(hash)) != -1){
+        if ((['#pubMmHash', '#metaMmHash', '#groundMmHash', '#personMmHash', '#mediaMmHash'].indexOf(hash)) != -1){
           q =hash.substring(1, hash.length - 4);
         }
 	this.activo = q;
@@ -198,41 +198,6 @@ window.change_select = function(elemento, selector)
 	    parameters: 'all=1'}
 			);
         break;
-        //unificar varias personas en una
-    case 'merge_person_sel':
-      var ids = $$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id');
-      if (ids.length < 2 ){
-        alert ('No ha seleccionado suficientes personas para unificar');
-        break;
-      }
-      var seleccionados = [];
-      var texto_selecc = '';
-      for (var i = 0; i < ids.length; i++){
-        // seleccionados[ids[i]] = $(ids[i]).parentElement.parentElement.children[5].textContent.strip();
-        var nombre = $(ids[i]).parentElement.parentElement.children[5].textContent.strip();
-        var videos = $(ids[i]).parentElement.parentElement.children[8].textContent.strip();
-        seleccionados[i] = {'nombre' : nombre, 'videos': videos};
-      }
-      seleccionados.sort(function(a,b) {
-        if (parseInt(a.videos,10) == parseInt(b.videos,10)){
-          return a.nombre.length - b.nombre.length;
-        } else {
-          return parseInt(a.videos,10) - parseInt(b.videos,10);
-        }
-      });
-      for (var i = 0; i < ids.length; i++){
-        str_videos = (1 == seleccionados[i].videos) ? ' vídeo)\n' : ' vídeos)\n';
-        texto_selecc += ((ids.length - 1) != i)? '\t\t\t' + seleccionados[i].nombre + '\t(' + seleccionados[i].videos + str_videos : 'dentro de: ' + seleccionados[i].nombre + '\t(' + seleccionados[i].videos + str_videos;
-      }
-      if (confirm('Unificar las personas: \n' + texto_selecc)) {
-        new Ajax.Updater('list_'+elemento+'s', '/editar.php/'+elemento+'s/merge', {
-          asynchronous: true,
-          evalScripts: true,
-          onSuccess:  selector.selectedIndex = 0,
-          parameters: 'ids='+$$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id').toJSON()}
-        );
-      }
-      break;
       //separar honores sel
     case 'inv_working_sel':
         new Ajax.Updater('list_'+elemento+'s', '/editar.php/'+elemento+'s/working', {
@@ -337,22 +302,6 @@ window.change_select = function(elemento, selector)
             onSuccess:  selector.selectedIndex = 0,
 	    parameters: 'ids='+$$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id').toJSON()}
 			);
-        break;
-    case 'inv_announce_sel':
-        new Ajax.Updater('list_'+elemento+'s', '/editar.php/'+elemento+'s/inv/field/announce', {
-	    asynchronous: true,
-	    evalScripts: true,
-            onSuccess:  selector.selectedIndex = 0,
-	    parameters: 'ids='+$$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id').toJSON()}
-			);
-        break;
-    case 'inv_announce_virtualserial_sel':
-        new Ajax.Updater('list_mms', '/editar.php/virtualserial/inv/field/announce', {
-            asynchronous: true,
-            evalScripts: true,
-            onSuccess:  selector.selectedIndex = 0,
-            parameters: 'ids='+$$('.'+elemento+'_checkbox:checked').invoke('getAttribute', 'id').toJSON()}
-                        );
         break;
     }
   selector.selectedIndex = 0;

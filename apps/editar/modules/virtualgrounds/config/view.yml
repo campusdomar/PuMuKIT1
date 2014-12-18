@@ -1,4 +1,4 @@
 all:
-  stylesheets:    [admin/tp/boxes, admin/tp/widgets, admin/tp/tp, admin/tree]
+  stylesheets:    [admin/tp/boxes, admin/tp/widgets, admin/tp/tp]
 
   javascripts:    [tabs]

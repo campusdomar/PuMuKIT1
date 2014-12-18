@@ -1,4 +1,4 @@
-ls/* Clearing */
+/* Clearing */
 ul.tabs-horiz,
 dl.accordion dt,
 .entry-edit fieldset li,
@@ -36,8 +36,7 @@ ul.tabs li,
 	border-top:1px solid #2d444f;
 	border-bottom:1px solid #2d444f;
         background:url(/images/admin/menu/nav1_bg.gif) repeat-x 0 100% #666e73;
-	padding-left:0px;
-	min-width:1070px;
+	padding-left:30px;
 	}
 
 

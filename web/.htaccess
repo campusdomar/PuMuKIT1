@@ -14,7 +14,6 @@ Options +FollowSymLinks +ExecCGI
   RewriteCond %{REQUEST_URI} !\.asx$
   RewriteCond %{REQUEST_URI} !\.xml$
   RewriteCond %{REQUEST_URI} !\.css$
-  RewriteCond %{REQUEST_URI} !/file/
   RewriteRule .* - [L]
 
   # we check if the .html version is here (caching)

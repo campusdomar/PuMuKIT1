@@ -1445,7 +1445,7 @@ abstract class BaseVirtualGround extends BaseObject  implements Persistent {
 	 * api reasonable.  You can provide public methods for those you
 	 * actually need in VirtualGround.
 	 */
-	public function getVirtualGroundRelationsJoinCategory($criteria = null, $con = null)
+	public function getVirtualGroundRelationsJoinGround($criteria = null, $con = null)
 	{
 		// include the Peer class
 		include_once 'lib/model/om/BaseVirtualGroundRelationPeer.php';
@@ -1464,7 +1464,7 @@ abstract class BaseVirtualGround extends BaseObject  implements Persistent {
 
 				$criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getId());
 
-				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinCategory($criteria, $con);
+				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinGround($criteria, $con);
 			}
 		} else {
 			// the following code is to determine if a new query is
@@ -1474,41 +1474,12 @@ abstract class BaseVirtualGround extends BaseObject  implements Persistent {
 			$criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $this->getId());
 
 			if (!isset($this->lastVirtualGroundRelationCriteria) || !$this->lastVirtualGroundRelationCriteria->equals($criteria)) {
-				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinCategory($criteria, $con);
+				$this->collVirtualGroundRelations = VirtualGroundRelationPeer::doSelectJoinGround($criteria, $con);
 			}
 		}
 		$this->lastVirtualGroundRelationCriteria = $criteria;
 
 		return $this->collVirtualGroundRelations;
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collVirtualGroundI18ns) {
-				foreach ((array) $this->collVirtualGroundI18ns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collVirtualGroundRelations) {
-				foreach ((array) $this->collVirtualGroundRelations as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collVirtualGroundI18ns = null;
-		$this->collVirtualGroundRelations = null;
-		$this->aGroundType = null;
 	}
 
   public function getCulture()

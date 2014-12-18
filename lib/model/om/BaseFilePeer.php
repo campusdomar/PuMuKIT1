@@ -19,7 +19,7 @@ abstract class BaseFilePeer {
 	const CLASS_DEFAULT = 'lib.model.File';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 24;
+	const NUM_COLUMNS = 23;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -94,9 +94,6 @@ abstract class BaseFilePeer {
 	/** the column name for the DISPLAY field */
 	const DISPLAY = 'file.DISPLAY';
 
-	/** the column name for the DOWNLOAD field */
-	const DOWNLOAD = 'file.DOWNLOAD';
-
 	/** The PHP to DB Name Mapping */
 	private static $phpNameMap = null;
 
@@ -108,10 +105,10 @@ abstract class BaseFilePeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'MmId', 'PerfilId', 'LanguageId', 'Url', 'File', 'FormatId', 'CodecId', 'MimeTypeId', 'ResolutionId', 'Bitrate', 'Framerate', 'Channels', 'Audio', 'Rank', 'Duration', 'NumView', 'PuntSum', 'PuntNum', 'Size', 'ResolutionHor', 'ResolutionVer', 'Display', 'Download', ),
-		BasePeer::TYPE_COLNAME => array (FilePeer::ID, FilePeer::MM_ID, FilePeer::PERFIL_ID, FilePeer::LANGUAGE_ID, FilePeer::URL, FilePeer::FILE, FilePeer::FORMAT_ID, FilePeer::CODEC_ID, FilePeer::MIME_TYPE_ID, FilePeer::RESOLUTION_ID, FilePeer::BITRATE, FilePeer::FRAMERATE, FilePeer::CHANNELS, FilePeer::AUDIO, FilePeer::RANK, FilePeer::DURATION, FilePeer::NUM_VIEW, FilePeer::PUNT_SUM, FilePeer::PUNT_NUM, FilePeer::SIZE, FilePeer::RESOLUTION_HOR, FilePeer::RESOLUTION_VER, FilePeer::DISPLAY, FilePeer::DOWNLOAD, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'mm_id', 'perfil_id', 'language_id', 'url', 'file', 'format_id', 'codec_id', 'mime_type_id', 'resolution_id', 'bitrate', 'framerate', 'channels', 'audio', 'rank', 'duration', 'num_view', 'punt_sum', 'punt_num', 'size', 'resolution_hor', 'resolution_ver', 'display', 'download', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'MmId', 'PerfilId', 'LanguageId', 'Url', 'File', 'FormatId', 'CodecId', 'MimeTypeId', 'ResolutionId', 'Bitrate', 'Framerate', 'Channels', 'Audio', 'Rank', 'Duration', 'NumView', 'PuntSum', 'PuntNum', 'Size', 'ResolutionHor', 'ResolutionVer', 'Display', ),
+		BasePeer::TYPE_COLNAME => array (FilePeer::ID, FilePeer::MM_ID, FilePeer::PERFIL_ID, FilePeer::LANGUAGE_ID, FilePeer::URL, FilePeer::FILE, FilePeer::FORMAT_ID, FilePeer::CODEC_ID, FilePeer::MIME_TYPE_ID, FilePeer::RESOLUTION_ID, FilePeer::BITRATE, FilePeer::FRAMERATE, FilePeer::CHANNELS, FilePeer::AUDIO, FilePeer::RANK, FilePeer::DURATION, FilePeer::NUM_VIEW, FilePeer::PUNT_SUM, FilePeer::PUNT_NUM, FilePeer::SIZE, FilePeer::RESOLUTION_HOR, FilePeer::RESOLUTION_VER, FilePeer::DISPLAY, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'mm_id', 'perfil_id', 'language_id', 'url', 'file', 'format_id', 'codec_id', 'mime_type_id', 'resolution_id', 'bitrate', 'framerate', 'channels', 'audio', 'rank', 'duration', 'num_view', 'punt_sum', 'punt_num', 'size', 'resolution_hor', 'resolution_ver', 'display', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	/**
@@ -121,10 +118,10 @@ abstract class BaseFilePeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'MmId' => 1, 'PerfilId' => 2, 'LanguageId' => 3, 'Url' => 4, 'File' => 5, 'FormatId' => 6, 'CodecId' => 7, 'MimeTypeId' => 8, 'ResolutionId' => 9, 'Bitrate' => 10, 'Framerate' => 11, 'Channels' => 12, 'Audio' => 13, 'Rank' => 14, 'Duration' => 15, 'NumView' => 16, 'PuntSum' => 17, 'PuntNum' => 18, 'Size' => 19, 'ResolutionHor' => 20, 'ResolutionVer' => 21, 'Display' => 22, 'Download' => 23, ),
-		BasePeer::TYPE_COLNAME => array (FilePeer::ID => 0, FilePeer::MM_ID => 1, FilePeer::PERFIL_ID => 2, FilePeer::LANGUAGE_ID => 3, FilePeer::URL => 4, FilePeer::FILE => 5, FilePeer::FORMAT_ID => 6, FilePeer::CODEC_ID => 7, FilePeer::MIME_TYPE_ID => 8, FilePeer::RESOLUTION_ID => 9, FilePeer::BITRATE => 10, FilePeer::FRAMERATE => 11, FilePeer::CHANNELS => 12, FilePeer::AUDIO => 13, FilePeer::RANK => 14, FilePeer::DURATION => 15, FilePeer::NUM_VIEW => 16, FilePeer::PUNT_SUM => 17, FilePeer::PUNT_NUM => 18, FilePeer::SIZE => 19, FilePeer::RESOLUTION_HOR => 20, FilePeer::RESOLUTION_VER => 21, FilePeer::DISPLAY => 22, FilePeer::DOWNLOAD => 23, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'mm_id' => 1, 'perfil_id' => 2, 'language_id' => 3, 'url' => 4, 'file' => 5, 'format_id' => 6, 'codec_id' => 7, 'mime_type_id' => 8, 'resolution_id' => 9, 'bitrate' => 10, 'framerate' => 11, 'channels' => 12, 'audio' => 13, 'rank' => 14, 'duration' => 15, 'num_view' => 16, 'punt_sum' => 17, 'punt_num' => 18, 'size' => 19, 'resolution_hor' => 20, 'resolution_ver' => 21, 'display' => 22, 'download' => 23, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'MmId' => 1, 'PerfilId' => 2, 'LanguageId' => 3, 'Url' => 4, 'File' => 5, 'FormatId' => 6, 'CodecId' => 7, 'MimeTypeId' => 8, 'ResolutionId' => 9, 'Bitrate' => 10, 'Framerate' => 11, 'Channels' => 12, 'Audio' => 13, 'Rank' => 14, 'Duration' => 15, 'NumView' => 16, 'PuntSum' => 17, 'PuntNum' => 18, 'Size' => 19, 'ResolutionHor' => 20, 'ResolutionVer' => 21, 'Display' => 22, ),
+		BasePeer::TYPE_COLNAME => array (FilePeer::ID => 0, FilePeer::MM_ID => 1, FilePeer::PERFIL_ID => 2, FilePeer::LANGUAGE_ID => 3, FilePeer::URL => 4, FilePeer::FILE => 5, FilePeer::FORMAT_ID => 6, FilePeer::CODEC_ID => 7, FilePeer::MIME_TYPE_ID => 8, FilePeer::RESOLUTION_ID => 9, FilePeer::BITRATE => 10, FilePeer::FRAMERATE => 11, FilePeer::CHANNELS => 12, FilePeer::AUDIO => 13, FilePeer::RANK => 14, FilePeer::DURATION => 15, FilePeer::NUM_VIEW => 16, FilePeer::PUNT_SUM => 17, FilePeer::PUNT_NUM => 18, FilePeer::SIZE => 19, FilePeer::RESOLUTION_HOR => 20, FilePeer::RESOLUTION_VER => 21, FilePeer::DISPLAY => 22, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'mm_id' => 1, 'perfil_id' => 2, 'language_id' => 3, 'url' => 4, 'file' => 5, 'format_id' => 6, 'codec_id' => 7, 'mime_type_id' => 8, 'resolution_id' => 9, 'bitrate' => 10, 'framerate' => 11, 'channels' => 12, 'audio' => 13, 'rank' => 14, 'duration' => 15, 'num_view' => 16, 'punt_sum' => 17, 'punt_num' => 18, 'size' => 19, 'resolution_hor' => 20, 'resolution_ver' => 21, 'display' => 22, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	/**
@@ -271,8 +268,6 @@ abstract class BaseFilePeer {
 
 		$criteria->addSelectColumn(FilePeer::DISPLAY);
 
-		$criteria->addSelectColumn(FilePeer::DOWNLOAD);
-
 	}
 
 	const COUNT = 'COUNT(file.ID)';
@@ -381,9 +376,7 @@ abstract class BaseFilePeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        if((count($criteria->getOrderByColumns()) == 0) &&
-           (array_diff($criteria->getSelectColumns(), array(self::COUNT_DISTINCT, self::COUNT)))) 
-            $criteria->addAscendingOrderByColumn(self::RANK);
+        $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -3219,7 +3212,7 @@ abstract class BaseFilePeer {
     $c->addJoin(FilePeer::ID, FileI18nPeer::ID);
     $c->add(FileI18nPeer::CULTURE, $culture);
 
-    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
+    $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();

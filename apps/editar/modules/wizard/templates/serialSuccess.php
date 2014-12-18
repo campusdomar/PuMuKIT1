@@ -10,7 +10,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('title' , __('T&iacute;tulo:'), 'class="required long" ') ?>
+  <?php echo label_for('title' , 'T&iacute;tulo:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $serial->setCulture($lang);  echo $sep ?>  
@@ -26,7 +26,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('subtitle', __('Subt&iacute;tulo:'), 'class="required long" ') ?>
+  <?php echo label_for('subtitle', 'Subt&iacute;tulo:', 'class="required long" ') ?>
   <div class="content content_long">
     <?php $sep =''; foreach ($langs as $lang): ?>
       <?php $serial->setCulture($lang);  echo $sep ?>  
@@ -45,8 +45,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li> 
-  <li><?php echo button_to_function(__('Next'), "Modalbox.show('".url_for("wizard/mm")."',{title:'" . __('PASO II: OBJ.MM.') . "', params:Form.serialize('serial_form_wizard')})", 'class=tv_admin_action_next') ?> </li>
+  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li> 
+  <li><?php echo button_to_function('Next', "Modalbox.show('".url_for("wizard/mm")."',{title:'PASO II: OBJ.MM.', params:Form.serialize('serial_form_wizard')})", 'class=tv_admin_action_next') ?> </li>
 </ul>
 
 </form>

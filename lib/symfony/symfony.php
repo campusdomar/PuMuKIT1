@@ -129,7 +129,7 @@ try
   sfLoader::loadPluginConfig();
 
   // compress output
-  ob_start(sfConfig::get('sf_compressed') ? 'ob_gzhandler' : null); // (Andrés) Changed '' to null as http://trac.symfony-project.org/ticket/9970 to avoid php 5.4 Notice on CLI commands
+  ob_start(sfConfig::get('sf_compressed') ? 'ob_gzhandler' : '');
 }
 catch (sfException $e)
 {

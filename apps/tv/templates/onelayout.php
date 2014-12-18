@@ -4,7 +4,6 @@
 
   <?php include_http_metas() ?>
   <?php include_metas() ?>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   
   <?php include_title() ?>
   

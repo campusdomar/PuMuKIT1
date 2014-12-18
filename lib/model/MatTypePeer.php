@@ -40,10 +40,4 @@ class MatTypePeer extends BaseMatTypePeer
   {
     return sfPropelActAsSortableBehavior::getDefaultSelect(__CLASS__);
   }
-
-  public static function doSelectOrdered() {
-    $c = new Criteria();
-    $c->addAscendingOrderByColumn(self::TYPE);
-    return self::doSelectWithI18n($c);
-  }
 }

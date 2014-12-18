@@ -5,21 +5,21 @@
         <input type="checkbox" onclick="window.click_checkbox_all('past_transcoder', this.checked)">
       </th>
       <th colspan="4" width="5%"></th>
-      <th width="1%"><?php echo __('P')?></th>
+      <th width="1%">P</th>
       <th width="1%"></th>
-      <th width="1%"><?php echo __('Img')?></th>
-      <th width="1%"><?php echo __('Id')?></th>
-      <th><?php echo __('Path')?></th>
-      <th><?php echo __('Perfil')?></th>
-      <th><?php echo __('Porcentaje')?></th>
-      <th><?php echo __('Fecha')?></th> 
+      <th width="1%">Img</th>
+      <th width="1%">Id</th>
+      <th>Path</th>
+      <th>Perfil</th>
+      <th>Porcentaje</th>
+      <th>Fecha</th> 
     </tr>
   </thead>
   <tbody>
   <?php if (count($transcoders) == 0):?>
     <tr>
       <td colspan="13">
-       <?php echo __('Listado de procesos vacío.')?>
+       Listado de procesos vacío.
       </td>
     </tr>
   <?php endif; ?>
@@ -40,7 +40,7 @@
             'url' => 'transcoders/listpast'
           )) ?> 
         </div>
-        <?php echo $total_transcoder ?>/<?php echo $total_transcoder_all ?> <?php echo __('Transcodificador')?>
+        <?php echo $total_transcoder ?>/<?php echo $total_transcoder_all ?> Transcodificador
       </th>
     </tr>
   </tfoot>

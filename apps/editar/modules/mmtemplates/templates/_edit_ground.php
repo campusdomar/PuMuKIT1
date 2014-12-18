@@ -21,7 +21,7 @@
 
 
 <div style="margin-bottom: 5px; padding-left: 232px">
-    <?php echo __('Filtrar')?>:
+    <?php echo __('Filtar')?>:
     <input type="input" id="input_filter_<?php echo $groundtype->getId()?>" size="40" onkeypress="filtrar<?php echo $groundtype->getId()?>(this.value)" />
 </div>
 

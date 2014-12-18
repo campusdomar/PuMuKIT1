@@ -26,10 +26,6 @@ class indexActions extends sfActions
    */
   public function executeIndex()
   {
-    if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false) {
-      return "BadUserAgent";
-    }
-    
     if ($this->getUser()->isAuthenticated()){
       return $this->redirect($this->defaultAction);
     }

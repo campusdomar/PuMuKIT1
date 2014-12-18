@@ -28,8 +28,8 @@ abstract class BaseVirtualGroundRelationPeer {
 	/** the column name for the VIRTUAL_GROUND_ID field */
 	const VIRTUAL_GROUND_ID = 'virtual_ground_relation.VIRTUAL_GROUND_ID';
 
-	/** the column name for the CATEGORY_ID field */
-	const CATEGORY_ID = 'virtual_ground_relation.CATEGORY_ID';
+	/** the column name for the GROUND_ID field */
+	const GROUND_ID = 'virtual_ground_relation.GROUND_ID';
 
 	/** the column name for the ENABLE field */
 	const ENABLE = 'virtual_ground_relation.ENABLE';
@@ -45,9 +45,9 @@ abstract class BaseVirtualGroundRelationPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('VirtualGroundId', 'CategoryId', 'Enable', ),
-		BasePeer::TYPE_COLNAME => array (VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, VirtualGroundRelationPeer::CATEGORY_ID, VirtualGroundRelationPeer::ENABLE, ),
-		BasePeer::TYPE_FIELDNAME => array ('virtual_ground_id', 'category_id', 'enable', ),
+		BasePeer::TYPE_PHPNAME => array ('VirtualGroundId', 'GroundId', 'Enable', ),
+		BasePeer::TYPE_COLNAME => array (VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, VirtualGroundRelationPeer::GROUND_ID, VirtualGroundRelationPeer::ENABLE, ),
+		BasePeer::TYPE_FIELDNAME => array ('virtual_ground_id', 'ground_id', 'enable', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
@@ -58,9 +58,9 @@ abstract class BaseVirtualGroundRelationPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('VirtualGroundId' => 0, 'CategoryId' => 1, 'Enable' => 2, ),
-		BasePeer::TYPE_COLNAME => array (VirtualGroundRelationPeer::VIRTUAL_GROUND_ID => 0, VirtualGroundRelationPeer::CATEGORY_ID => 1, VirtualGroundRelationPeer::ENABLE => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('virtual_ground_id' => 0, 'category_id' => 1, 'enable' => 2, ),
+		BasePeer::TYPE_PHPNAME => array ('VirtualGroundId' => 0, 'GroundId' => 1, 'Enable' => 2, ),
+		BasePeer::TYPE_COLNAME => array (VirtualGroundRelationPeer::VIRTUAL_GROUND_ID => 0, VirtualGroundRelationPeer::GROUND_ID => 1, VirtualGroundRelationPeer::ENABLE => 2, ),
+		BasePeer::TYPE_FIELDNAME => array ('virtual_ground_id' => 0, 'ground_id' => 1, 'enable' => 2, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
@@ -164,7 +164,7 @@ abstract class BaseVirtualGroundRelationPeer {
 
 		$criteria->addSelectColumn(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID);
 
-		$criteria->addSelectColumn(VirtualGroundRelationPeer::CATEGORY_ID);
+		$criteria->addSelectColumn(VirtualGroundRelationPeer::GROUND_ID);
 
 		$criteria->addSelectColumn(VirtualGroundRelationPeer::ENABLE);
 
@@ -344,14 +344,14 @@ abstract class BaseVirtualGroundRelationPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related Category table
+	 * Returns the number of rows matching criteria, joining the related Ground table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns (You can also set DISTINCT modifier in Criteria).
 	 * @param      Connection $con
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinCategory(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinGround(Criteria $criteria, $distinct = false, $con = null)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -370,7 +370,7 @@ abstract class BaseVirtualGroundRelationPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(VirtualGroundRelationPeer::CATEGORY_ID, CategoryPeer::ID);
+		$criteria->addJoin(VirtualGroundRelationPeer::GROUND_ID, GroundPeer::ID);
 
 		$rs = VirtualGroundRelationPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -441,13 +441,13 @@ abstract class BaseVirtualGroundRelationPeer {
 
 
 	/**
-	 * Selects a collection of VirtualGroundRelation objects pre-filled with their Category objects.
+	 * Selects a collection of VirtualGroundRelation objects pre-filled with their Ground objects.
 	 *
 	 * @return     array Array of VirtualGroundRelation objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinCategory(Criteria $c, $con = null)
+	public static function doSelectJoinGround(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -458,9 +458,9 @@ abstract class BaseVirtualGroundRelationPeer {
 
 		VirtualGroundRelationPeer::addSelectColumns($c);
 		$startcol = (VirtualGroundRelationPeer::NUM_COLUMNS - VirtualGroundRelationPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		CategoryPeer::addSelectColumns($c);
+		GroundPeer::addSelectColumns($c);
 
-		$c->addJoin(VirtualGroundRelationPeer::CATEGORY_ID, CategoryPeer::ID);
+		$c->addJoin(VirtualGroundRelationPeer::GROUND_ID, GroundPeer::ID);
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -472,7 +472,7 @@ abstract class BaseVirtualGroundRelationPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CategoryPeer::getOMClass();
+			$omClass = GroundPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
@@ -480,7 +480,7 @@ abstract class BaseVirtualGroundRelationPeer {
 
 			$newObject = true;
 			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getCategory(); //CHECKME
+				$temp_obj2 = $temp_obj1->getGround(); //CHECKME
 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
 					// e.g. $author->addBookRelatedByBookId()
@@ -526,7 +526,7 @@ abstract class BaseVirtualGroundRelationPeer {
 
 		$criteria->addJoin(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, VirtualGroundPeer::ID);
 
-		$criteria->addJoin(VirtualGroundRelationPeer::CATEGORY_ID, CategoryPeer::ID);
+		$criteria->addJoin(VirtualGroundRelationPeer::GROUND_ID, GroundPeer::ID);
 
 		$rs = VirtualGroundRelationPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -560,12 +560,12 @@ abstract class BaseVirtualGroundRelationPeer {
 		VirtualGroundPeer::addSelectColumns($c);
 		$startcol3 = $startcol2 + VirtualGroundPeer::NUM_COLUMNS;
 
-		CategoryPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + CategoryPeer::NUM_COLUMNS;
+		GroundPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + GroundPeer::NUM_COLUMNS;
 
 		$c->addJoin(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, VirtualGroundPeer::ID);
 
-		$c->addJoin(VirtualGroundRelationPeer::CATEGORY_ID, CategoryPeer::ID);
+		$c->addJoin(VirtualGroundRelationPeer::GROUND_ID, GroundPeer::ID);
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
@@ -606,9 +606,9 @@ abstract class BaseVirtualGroundRelationPeer {
 			}
 
 
-				// Add objects for joined Category rows
+				// Add objects for joined Ground rows
 	
-			$omClass = CategoryPeer::getOMClass();
+			$omClass = GroundPeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -618,7 +618,7 @@ abstract class BaseVirtualGroundRelationPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getCategory(); // CHECKME
+				$temp_obj3 = $temp_obj1->getGround(); // CHECKME
 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj3->addVirtualGroundRelation($obj1); // CHECKME
@@ -664,7 +664,7 @@ abstract class BaseVirtualGroundRelationPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(VirtualGroundRelationPeer::CATEGORY_ID, CategoryPeer::ID);
+		$criteria->addJoin(VirtualGroundRelationPeer::GROUND_ID, GroundPeer::ID);
 
 		$rs = VirtualGroundRelationPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -677,14 +677,14 @@ abstract class BaseVirtualGroundRelationPeer {
 
 
 	/**
-	 * Returns the number of rows matching criteria, joining the related Category table
+	 * Returns the number of rows matching criteria, joining the related Ground table
 	 *
 	 * @param      Criteria $c
 	 * @param      boolean $distinct Whether to select only distinct columns (You can also set DISTINCT modifier in Criteria).
 	 * @param      Connection $con
 	 * @return     int Number of matching rows.
 	 */
-	public static function doCountJoinAllExceptCategory(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinAllExceptGround(Criteria $criteria, $distinct = false, $con = null)
 	{
 		// we're going to modify criteria, so copy it first
 		$criteria = clone $criteria;
@@ -736,10 +736,10 @@ abstract class BaseVirtualGroundRelationPeer {
 		VirtualGroundRelationPeer::addSelectColumns($c);
 		$startcol2 = (VirtualGroundRelationPeer::NUM_COLUMNS - VirtualGroundRelationPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CategoryPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CategoryPeer::NUM_COLUMNS;
+		GroundPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + GroundPeer::NUM_COLUMNS;
 
-		$c->addJoin(VirtualGroundRelationPeer::CATEGORY_ID, CategoryPeer::ID);
+		$c->addJoin(VirtualGroundRelationPeer::GROUND_ID, GroundPeer::ID);
 
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -753,7 +753,7 @@ abstract class BaseVirtualGroundRelationPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CategoryPeer::getOMClass();
+			$omClass = GroundPeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -763,7 +763,7 @@ abstract class BaseVirtualGroundRelationPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCategory(); //CHECKME
+				$temp_obj2 = $temp_obj1->getGround(); //CHECKME
 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj2->addVirtualGroundRelation($obj1);
@@ -783,13 +783,13 @@ abstract class BaseVirtualGroundRelationPeer {
 
 
 	/**
-	 * Selects a collection of VirtualGroundRelation objects pre-filled with all related objects except Category.
+	 * Selects a collection of VirtualGroundRelation objects pre-filled with all related objects except Ground.
 	 *
 	 * @return     array Array of VirtualGroundRelation objects.
 	 * @throws     PropelException Any exceptions caught during processing will be
 	 *		 rethrown wrapped into a PropelException.
 	 */
-	public static function doSelectJoinAllExceptCategory(Criteria $c, $con = null)
+	public static function doSelectJoinAllExceptGround(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -964,8 +964,8 @@ abstract class BaseVirtualGroundRelationPeer {
 			$comparison = $criteria->getComparison(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID);
 			$selectCriteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $criteria->remove(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID), $comparison);
 
-			$comparison = $criteria->getComparison(VirtualGroundRelationPeer::CATEGORY_ID);
-			$selectCriteria->add(VirtualGroundRelationPeer::CATEGORY_ID, $criteria->remove(VirtualGroundRelationPeer::CATEGORY_ID), $comparison);
+			$comparison = $criteria->getComparison(VirtualGroundRelationPeer::GROUND_ID);
+			$selectCriteria->add(VirtualGroundRelationPeer::GROUND_ID, $criteria->remove(VirtualGroundRelationPeer::GROUND_ID), $comparison);
 
 		} else { // $values is VirtualGroundRelation object
 			$criteria = $values->buildCriteria(); // gets full criteria
@@ -1052,7 +1052,7 @@ abstract class BaseVirtualGroundRelationPeer {
 			}
 
 			$criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $vals[0], Criteria::IN);
-			$criteria->add(VirtualGroundRelationPeer::CATEGORY_ID, $vals[1], Criteria::IN);
+			$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $vals[1], Criteria::IN);
 		}
 
 		// Set the correct dbName
@@ -1123,18 +1123,18 @@ abstract class BaseVirtualGroundRelationPeer {
 	/**
 	 * Retrieve object using using composite pkey values.
 	 * @param int $virtual_ground_id
-	   @param int $category_id
+	   @param int $ground_id
 	   
 	 * @param      Connection $con
 	 * @return     VirtualGroundRelation
 	 */
-	public static function retrieveByPK( $virtual_ground_id, $category_id, $con = null) {
+	public static function retrieveByPK( $virtual_ground_id, $ground_id, $con = null) {
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 		$criteria = new Criteria();
 		$criteria->add(VirtualGroundRelationPeer::VIRTUAL_GROUND_ID, $virtual_ground_id);
-		$criteria->add(VirtualGroundRelationPeer::CATEGORY_ID, $category_id);
+		$criteria->add(VirtualGroundRelationPeer::GROUND_ID, $ground_id);
 		$v = VirtualGroundRelationPeer::doSelect($criteria, $con);
 
 		return !empty($v) ? $v[0] : null;

@@ -63,12 +63,12 @@ RoleI18n:
   RoleI18n_3_gl: 
     id: Role_3
     culture: gl
-    name: Postproducción
+    name: Postproducion
     text: 
   RoleI18n_3_es: 
     id: Role_3
     culture: es
-    name: Postproducción
+    name: Postproducion
     text: 
   RoleI18n_3_en: 
     id: Role_3
@@ -478,6 +478,8 @@ GenreI18n:
     name: Matterhorn
 
 
+
+
 MatType:
   xxx:
     id: xxx
@@ -539,11 +541,6 @@ MatType:
     type: doc
     default_sel: 0
     mime_type: applicaion/msword
-  srt:
-    id: srt
-    type: srt
-    default_sel: 0
-    mime_type: text/plain
 MatTypeI18n:
   xxx_gl:
     id: xxx
@@ -689,19 +686,6 @@ MatTypeI18n:
     id: doc
     culture: en
     name: Word file
-  srt_gl:
-    id: srt
-    culture: gl
-    name: Texto-subtítulos srt
-  srt_es:
-    id: srt
-    culture: es
-    name: Texto-subtítulos srt
-  srt_en:
-    id: srt
-    culture: en
-    name: Text-captions srt
-
 
 Resolution:
   1:

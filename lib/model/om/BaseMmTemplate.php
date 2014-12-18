@@ -166,18 +166,6 @@ abstract class BaseMmTemplate extends BaseObject  implements Persistent {
 	protected $lastGroundMmTemplateCriteria = null;
 
 	/**
-	 * Collection to store aggregation of collCategoryMmTemplates.
-	 * @var        array
-	 */
-	protected $collCategoryMmTemplates;
-
-	/**
-	 * The criteria used to select the current contents of collCategoryMmTemplates.
-	 * @var        Criteria
-	 */
-	protected $lastCategoryMmTemplateCriteria = null;
-
-	/**
 	 * Flag to prevent endless save loop, if this object is referenced
 	 * by another object which falls in this transaction.
 	 * @var        boolean
@@ -911,14 +899,6 @@ abstract class BaseMmTemplate extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->collCategoryMmTemplates !== null) {
-				foreach($this->collCategoryMmTemplates as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1037,14 +1017,6 @@ abstract class BaseMmTemplate extends BaseObject  implements Persistent {
 
 				if ($this->collGroundMmTemplates !== null) {
 					foreach($this->collGroundMmTemplates as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collCategoryMmTemplates !== null) {
-					foreach($this->collCategoryMmTemplates as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1379,10 +1351,6 @@ abstract class BaseMmTemplate extends BaseObject  implements Persistent {
 
 			foreach($this->getGroundMmTemplates() as $relObj) {
 				$copyObj->addGroundMmTemplate($relObj->copy($deepCopy));
-			}
-
-			foreach($this->getCategoryMmTemplates() as $relObj) {
-				$copyObj->addCategoryMmTemplate($relObj->copy($deepCopy));
 			}
 
 		} // if ($deepCopy)
@@ -2214,206 +2182,6 @@ abstract class BaseMmTemplate extends BaseObject  implements Persistent {
 		$this->lastGroundMmTemplateCriteria = $criteria;
 
 		return $this->collGroundMmTemplates;
-	}
-
-	/**
-	 * Temporary storage of collCategoryMmTemplates to save a possible db hit in
-	 * the event objects are add to the collection, but the
-	 * complete collection is never requested.
-	 * @return     void
-	 */
-	public function initCategoryMmTemplates()
-	{
-		if ($this->collCategoryMmTemplates === null) {
-			$this->collCategoryMmTemplates = array();
-		}
-	}
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this MmTemplate has previously
-	 * been saved, it will retrieve related CategoryMmTemplates from storage.
-	 * If this MmTemplate is new, it will return
-	 * an empty collection or the current collection, the criteria
-	 * is ignored on a new object.
-	 *
-	 * @param      Connection $con
-	 * @param      Criteria $criteria
-	 * @throws     PropelException
-	 */
-	public function getCategoryMmTemplates($criteria = null, $con = null)
-	{
-		// include the Peer class
-		include_once 'lib/model/om/BaseCategoryMmTemplatePeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCategoryMmTemplates === null) {
-			if ($this->isNew()) {
-			   $this->collCategoryMmTemplates = array();
-			} else {
-
-				$criteria->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $this->getId());
-
-				CategoryMmTemplatePeer::addSelectColumns($criteria);
-				$this->collCategoryMmTemplates = CategoryMmTemplatePeer::doSelect($criteria, $con);
-			}
-		} else {
-			// criteria has no effect for a new object
-			if (!$this->isNew()) {
-				// the following code is to determine if a new query is
-				// called for.  If the criteria is the same as the last
-				// one, just return the collection.
-
-
-				$criteria->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $this->getId());
-
-				CategoryMmTemplatePeer::addSelectColumns($criteria);
-				if (!isset($this->lastCategoryMmTemplateCriteria) || !$this->lastCategoryMmTemplateCriteria->equals($criteria)) {
-					$this->collCategoryMmTemplates = CategoryMmTemplatePeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastCategoryMmTemplateCriteria = $criteria;
-		return $this->collCategoryMmTemplates;
-	}
-
-	/**
-	 * Returns the number of related CategoryMmTemplates.
-	 *
-	 * @param      Criteria $criteria
-	 * @param      boolean $distinct
-	 * @param      Connection $con
-	 * @throws     PropelException
-	 */
-	public function countCategoryMmTemplates($criteria = null, $distinct = false, $con = null)
-	{
-		// include the Peer class
-		include_once 'lib/model/om/BaseCategoryMmTemplatePeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $this->getId());
-
-		return CategoryMmTemplatePeer::doCount($criteria, $distinct, $con);
-	}
-
-	/**
-	 * Method called to associate a CategoryMmTemplate object to this object
-	 * through the CategoryMmTemplate foreign key attribute
-	 *
-	 * @param      CategoryMmTemplate $l CategoryMmTemplate
-	 * @return     void
-	 * @throws     PropelException
-	 */
-	public function addCategoryMmTemplate(CategoryMmTemplate $l)
-	{
-		$this->collCategoryMmTemplates[] = $l;
-		$l->setMmTemplate($this);
-	}
-
-
-	/**
-	 * If this collection has already been initialized with
-	 * an identical criteria, it returns the collection.
-	 * Otherwise if this MmTemplate is new, it will return
-	 * an empty collection; or if this MmTemplate has previously
-	 * been saved, it will retrieve related CategoryMmTemplates from storage.
-	 *
-	 * This method is protected by default in order to keep the public
-	 * api reasonable.  You can provide public methods for those you
-	 * actually need in MmTemplate.
-	 */
-	public function getCategoryMmTemplatesJoinCategory($criteria = null, $con = null)
-	{
-		// include the Peer class
-		include_once 'lib/model/om/BaseCategoryMmTemplatePeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collCategoryMmTemplates === null) {
-			if ($this->isNew()) {
-				$this->collCategoryMmTemplates = array();
-			} else {
-
-				$criteria->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $this->getId());
-
-				$this->collCategoryMmTemplates = CategoryMmTemplatePeer::doSelectJoinCategory($criteria, $con);
-			}
-		} else {
-			// the following code is to determine if a new query is
-			// called for.  If the criteria is the same as the last
-			// one, just return the collection.
-
-			$criteria->add(CategoryMmTemplatePeer::MM_TEMPLATE_ID, $this->getId());
-
-			if (!isset($this->lastCategoryMmTemplateCriteria) || !$this->lastCategoryMmTemplateCriteria->equals($criteria)) {
-				$this->collCategoryMmTemplates = CategoryMmTemplatePeer::doSelectJoinCategory($criteria, $con);
-			}
-		}
-		$this->lastCategoryMmTemplateCriteria = $criteria;
-
-		return $this->collCategoryMmTemplates;
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collMmTemplateI18ns) {
-				foreach ((array) $this->collMmTemplateI18ns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collMmTemplatePersons) {
-				foreach ((array) $this->collMmTemplatePersons as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collGroundMmTemplates) {
-				foreach ((array) $this->collGroundMmTemplates as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collCategoryMmTemplates) {
-				foreach ((array) $this->collCategoryMmTemplates as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collMmTemplateI18ns = null;
-		$this->collMmTemplatePersons = null;
-		$this->collGroundMmTemplates = null;
-		$this->collCategoryMmTemplates = null;
-		$this->aSerial = null;
-		$this->aPrecinct = null;
-		$this->aGenre = null;
-		$this->aBroadcast = null;
 	}
 
   public function getCulture()

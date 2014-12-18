@@ -17,7 +17,7 @@
 <fieldset >
 
 <div class="form-row">
-  <?php echo label_for('cod', __('Nombre:'), 'class="required" ') ?>
+  <?php echo label_for('cod', 'Nombre:', 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($vground, 'getCod', array ('size' => 13,  'control_name' => 'cod',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -26,7 +26,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('name' , __('Rótulo:'), 'class="required" ') ?>
+  <?php echo label_for('name' , 'Rótulo:', 'class="required" ') ?>
   <?php $sep =''; foreach (sfConfig::get('app_lang_array', array('es')) as $lang): ?>
     <?php $vground->setCulture($lang);  echo $sep ?>  
   
@@ -41,7 +41,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('description', __('Descripci&oacute;n:'), 'class="required"') ?>
+  <?php echo label_for('description', 'Descripci&oacute;n:', 'class="required"') ?>
   <div class="content">
     <?php $value = object_textarea_tag($vground, 'getDescription', array (
       'size' => '80x3',
@@ -52,21 +52,20 @@
 
 
 <div class="form-row">
-  <?php echo label_for('decision' , __('Categorías:'), 'class="required" ') ?>
+  <?php echo label_for('decision' , 'Categorias:', 'class="required" ') ?>
   <div class="content">
     <input type="radio" name="decision" value="editorial1" <?php echo ($vground->getEditorial1()?'checked="checked"':'')?> />
-    &nbsp; <?php echo __('Decisi&oacute;n Editorial 1')?>
+    &nbsp; Decisi&oacute;n Editorial 1
    </div>
  
    <div class="content">
     <input type="radio" name="decision" value="editorial2" <?php echo ($vground->getEditorial2()?'checked="checked"':'')?> />
-    &nbsp; <?php echo __('Decisi&oacute;n Editorial 2')?>
+    &nbsp; Decisi&oacute;n Editorial 2
    </div>
-
-    <div class="content">
-
+ 
+   <div class="content">
      <input type="radio" name="decision" value="editorial3" <?php echo ($vground->getEditorial3()?'checked="checked"':'')?> />
-     &nbsp; <?php echo __('Decisi&oacute;n Editorial 3')?>
+     &nbsp; Decisi&oacute;n Editorial 3
    </div>
 
    <?php foreach(GroundTypePeer::doSelect(new Criteria) as $gt):?>
@@ -74,27 +73,20 @@
      <input type="radio" name="decision" value="<?php echo $gt->getId()?>" 
             <?php echo (($vground->getGroundTypeId() == $gt->getId())?'checked="checked"':'')?> />
      &nbsp; <?php echo $gt->getName() ?>
-       <?php echo m_link_to(__('configurar'), 'virtualgrounds/editground?type=' . $gt->getId() . '&id=' . $vground->getId(), 
-       array('title' => __('Configurar Categoría ') . $vground->getName()), array('width' => '800')) ?></td>
+       <?php echo m_link_to('configurar', 'virtualgrounds/editground?type=' . $gt->getId() . '&id=' . $vground->getId(), 
+       array('title' => 'Configurar Categoria ' . $vground->getName()), array('width' => '800')) ?></td>
    </div>
-   <?php endforeach ?>
 
-   <div class="content">
-     <input type="radio" name="decision" value="other" <?php echo ($vground->getOther()?'checked="checked"':'')?> />
-     &nbsp; Categorías (Unesco, lugares...) 
-       <?php echo m_link_to('configurar', 'virtualgrounds/editcategories?vg_id='. $vground->getId(), 
-       array('title' => 'Configurar Categoria ' . $vground->getName()), 
-       array('width' => '1200'),
-       array('evalScripts' => 'true')) ?></td>
-   </div>
+   <?php endforeach?>
+
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('img' , __('Imagen:'), 'class="required" ') ?>
+  <?php echo label_for('img' , 'Imagen:', 'class="required" ') ?>
     <div class="content">
       <div>
-        <img id="ground_img_<?php echo $vground->getId()?>"  src="<?php echo $vground->getImg()?>" alt="<?php echo __('No tiene imagen.')?>"/>
+        <img id="ground_img_<?php echo $vground->getId()?>"  src="<?php echo $vground->getImg()?>" alt="No tiene imagen."/>
       </div>
       
       <input type="file" name="ground_imagen" />
@@ -106,8 +98,8 @@
 
 <ul class="tv_admin_actions">
   <span id="info_msg_vground_<?php echo $vground->getId()?>"></span>
-  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save'); ?></li>
-  <li><?php echo reset_tag(__('Cancel'),'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save'); ?></li>
+  <li><?php echo reset_tag('Cancel','class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>

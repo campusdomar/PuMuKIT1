@@ -19,7 +19,7 @@ abstract class BasePerfilPeer {
 	const CLASS_DEFAULT = 'lib.model.Perfil';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 24;
+	const NUM_COLUMNS = 22;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -40,9 +40,6 @@ abstract class BasePerfilPeer {
 	/** the column name for the WIZARD field */
 	const WIZARD = 'perfil.WIZARD';
 
-	/** the column name for the MASTER field */
-	const MASTER = 'perfil.MASTER';
-
 	/** the column name for the FORMAT field */
 	const FORMAT = 'perfil.FORMAT';
 
@@ -51,9 +48,6 @@ abstract class BasePerfilPeer {
 
 	/** the column name for the MIME_TYPE field */
 	const MIME_TYPE = 'perfil.MIME_TYPE';
-
-	/** the column name for the ACCEPTED_MIME_TYPE field */
-	const ACCEPTED_MIME_TYPE = 'perfil.ACCEPTED_MIME_TYPE';
 
 	/** the column name for the EXTENSION field */
 	const EXTENSION = 'perfil.EXTENSION';
@@ -108,10 +102,10 @@ abstract class BasePerfilPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Name', 'Rank', 'Display', 'Wizard', 'Master', 'Format', 'Codec', 'MimeType', 'AcceptedMimeType', 'Extension', 'ResolutionHor', 'ResolutionVer', 'Bitrate', 'Framerate', 'Channels', 'Audio', 'Bat', 'FileCfg', 'StreamserverId', 'App', 'RelDurationSize', 'RelDurationTrans', 'Prescript', ),
-		BasePeer::TYPE_COLNAME => array (PerfilPeer::ID, PerfilPeer::NAME, PerfilPeer::RANK, PerfilPeer::DISPLAY, PerfilPeer::WIZARD, PerfilPeer::MASTER, PerfilPeer::FORMAT, PerfilPeer::CODEC, PerfilPeer::MIME_TYPE, PerfilPeer::ACCEPTED_MIME_TYPE, PerfilPeer::EXTENSION, PerfilPeer::RESOLUTION_HOR, PerfilPeer::RESOLUTION_VER, PerfilPeer::BITRATE, PerfilPeer::FRAMERATE, PerfilPeer::CHANNELS, PerfilPeer::AUDIO, PerfilPeer::BAT, PerfilPeer::FILE_CFG, PerfilPeer::STREAMSERVER_ID, PerfilPeer::APP, PerfilPeer::REL_DURATION_SIZE, PerfilPeer::REL_DURATION_TRANS, PerfilPeer::PRESCRIPT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'name', 'rank', 'display', 'wizard', 'master', 'format', 'codec', 'mime_type', 'accepted_mime_type', 'extension', 'resolution_hor', 'resolution_ver', 'bitrate', 'framerate', 'channels', 'audio', 'bat', 'file_cfg', 'streamserver_id', 'app', 'rel_duration_size', 'rel_duration_trans', 'prescript', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Name', 'Rank', 'Display', 'Wizard', 'Format', 'Codec', 'MimeType', 'Extension', 'ResolutionHor', 'ResolutionVer', 'Bitrate', 'Framerate', 'Channels', 'Audio', 'Bat', 'FileCfg', 'StreamserverId', 'App', 'RelDurationSize', 'RelDurationTrans', 'Prescript', ),
+		BasePeer::TYPE_COLNAME => array (PerfilPeer::ID, PerfilPeer::NAME, PerfilPeer::RANK, PerfilPeer::DISPLAY, PerfilPeer::WIZARD, PerfilPeer::FORMAT, PerfilPeer::CODEC, PerfilPeer::MIME_TYPE, PerfilPeer::EXTENSION, PerfilPeer::RESOLUTION_HOR, PerfilPeer::RESOLUTION_VER, PerfilPeer::BITRATE, PerfilPeer::FRAMERATE, PerfilPeer::CHANNELS, PerfilPeer::AUDIO, PerfilPeer::BAT, PerfilPeer::FILE_CFG, PerfilPeer::STREAMSERVER_ID, PerfilPeer::APP, PerfilPeer::REL_DURATION_SIZE, PerfilPeer::REL_DURATION_TRANS, PerfilPeer::PRESCRIPT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'name', 'rank', 'display', 'wizard', 'format', 'codec', 'mime_type', 'extension', 'resolution_hor', 'resolution_ver', 'bitrate', 'framerate', 'channels', 'audio', 'bat', 'file_cfg', 'streamserver_id', 'app', 'rel_duration_size', 'rel_duration_trans', 'prescript', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	/**
@@ -121,10 +115,10 @@ abstract class BasePerfilPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Name' => 1, 'Rank' => 2, 'Display' => 3, 'Wizard' => 4, 'Master' => 5, 'Format' => 6, 'Codec' => 7, 'MimeType' => 8, 'AcceptedMimeType' => 9, 'Extension' => 10, 'ResolutionHor' => 11, 'ResolutionVer' => 12, 'Bitrate' => 13, 'Framerate' => 14, 'Channels' => 15, 'Audio' => 16, 'Bat' => 17, 'FileCfg' => 18, 'StreamserverId' => 19, 'App' => 20, 'RelDurationSize' => 21, 'RelDurationTrans' => 22, 'Prescript' => 23, ),
-		BasePeer::TYPE_COLNAME => array (PerfilPeer::ID => 0, PerfilPeer::NAME => 1, PerfilPeer::RANK => 2, PerfilPeer::DISPLAY => 3, PerfilPeer::WIZARD => 4, PerfilPeer::MASTER => 5, PerfilPeer::FORMAT => 6, PerfilPeer::CODEC => 7, PerfilPeer::MIME_TYPE => 8, PerfilPeer::ACCEPTED_MIME_TYPE => 9, PerfilPeer::EXTENSION => 10, PerfilPeer::RESOLUTION_HOR => 11, PerfilPeer::RESOLUTION_VER => 12, PerfilPeer::BITRATE => 13, PerfilPeer::FRAMERATE => 14, PerfilPeer::CHANNELS => 15, PerfilPeer::AUDIO => 16, PerfilPeer::BAT => 17, PerfilPeer::FILE_CFG => 18, PerfilPeer::STREAMSERVER_ID => 19, PerfilPeer::APP => 20, PerfilPeer::REL_DURATION_SIZE => 21, PerfilPeer::REL_DURATION_TRANS => 22, PerfilPeer::PRESCRIPT => 23, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'name' => 1, 'rank' => 2, 'display' => 3, 'wizard' => 4, 'master' => 5, 'format' => 6, 'codec' => 7, 'mime_type' => 8, 'accepted_mime_type' => 9, 'extension' => 10, 'resolution_hor' => 11, 'resolution_ver' => 12, 'bitrate' => 13, 'framerate' => 14, 'channels' => 15, 'audio' => 16, 'bat' => 17, 'file_cfg' => 18, 'streamserver_id' => 19, 'app' => 20, 'rel_duration_size' => 21, 'rel_duration_trans' => 22, 'prescript' => 23, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Name' => 1, 'Rank' => 2, 'Display' => 3, 'Wizard' => 4, 'Format' => 5, 'Codec' => 6, 'MimeType' => 7, 'Extension' => 8, 'ResolutionHor' => 9, 'ResolutionVer' => 10, 'Bitrate' => 11, 'Framerate' => 12, 'Channels' => 13, 'Audio' => 14, 'Bat' => 15, 'FileCfg' => 16, 'StreamserverId' => 17, 'App' => 18, 'RelDurationSize' => 19, 'RelDurationTrans' => 20, 'Prescript' => 21, ),
+		BasePeer::TYPE_COLNAME => array (PerfilPeer::ID => 0, PerfilPeer::NAME => 1, PerfilPeer::RANK => 2, PerfilPeer::DISPLAY => 3, PerfilPeer::WIZARD => 4, PerfilPeer::FORMAT => 5, PerfilPeer::CODEC => 6, PerfilPeer::MIME_TYPE => 7, PerfilPeer::EXTENSION => 8, PerfilPeer::RESOLUTION_HOR => 9, PerfilPeer::RESOLUTION_VER => 10, PerfilPeer::BITRATE => 11, PerfilPeer::FRAMERATE => 12, PerfilPeer::CHANNELS => 13, PerfilPeer::AUDIO => 14, PerfilPeer::BAT => 15, PerfilPeer::FILE_CFG => 16, PerfilPeer::STREAMSERVER_ID => 17, PerfilPeer::APP => 18, PerfilPeer::REL_DURATION_SIZE => 19, PerfilPeer::REL_DURATION_TRANS => 20, PerfilPeer::PRESCRIPT => 21, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'name' => 1, 'rank' => 2, 'display' => 3, 'wizard' => 4, 'format' => 5, 'codec' => 6, 'mime_type' => 7, 'extension' => 8, 'resolution_hor' => 9, 'resolution_ver' => 10, 'bitrate' => 11, 'framerate' => 12, 'channels' => 13, 'audio' => 14, 'bat' => 15, 'file_cfg' => 16, 'streamserver_id' => 17, 'app' => 18, 'rel_duration_size' => 19, 'rel_duration_trans' => 20, 'prescript' => 21, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	/**
@@ -235,15 +229,11 @@ abstract class BasePerfilPeer {
 
 		$criteria->addSelectColumn(PerfilPeer::WIZARD);
 
-		$criteria->addSelectColumn(PerfilPeer::MASTER);
-
 		$criteria->addSelectColumn(PerfilPeer::FORMAT);
 
 		$criteria->addSelectColumn(PerfilPeer::CODEC);
 
 		$criteria->addSelectColumn(PerfilPeer::MIME_TYPE);
-
-		$criteria->addSelectColumn(PerfilPeer::ACCEPTED_MIME_TYPE);
 
 		$criteria->addSelectColumn(PerfilPeer::EXTENSION);
 
@@ -381,9 +371,7 @@ abstract class BasePerfilPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        if((count($criteria->getOrderByColumns()) == 0) &&
-           (array_diff($criteria->getSelectColumns(), array(self::COUNT_DISTINCT, self::COUNT)))) 
-            $criteria->addAscendingOrderByColumn(self::RANK);
+        $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -647,7 +635,7 @@ abstract class BasePerfilPeer {
     $c->addJoin(PerfilPeer::ID, PerfilI18nPeer::ID);
     $c->add(PerfilI18nPeer::CULTURE, $culture);
 
-    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
+    $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();

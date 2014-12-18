@@ -187,8 +187,8 @@ class virtualgroundsActions extends sfActions
       $vground->setEditorial1(true);
     }elseif ($this->getRequestParameter('decision') == 'editorial2'){
       $vground->setEditorial2(true);
-    }elseif ($this->getRequestParameter('decision') == 'other'){
-      $vground->setOther(true);
+    }elseif ($this->getRequestParameter('decision') == 'editorial3'){
+      $vground->setEditorial3(true);
     }elseif (intval($this->getRequestParameter('decision')) != 0){
       $vground->setOther(true);
       $vground->setGroundTypeId($this->getRequestParameter('decision'));
@@ -214,12 +214,13 @@ class virtualgroundsActions extends sfActions
     try{
       $vground->save();
     }catch (Exception $e) {
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Actualizacion errónea. Código repetido"));
+      $this->msg_alert = array('error', "Actualizacion erronea Codigo repetido.");
     }
 
     $this->vground = $vground;
 
   }
+
 
   /**
    * --  COPY -- /editar.php/grounds/copy/id/:id
@@ -339,102 +340,19 @@ class virtualgroundsActions extends sfActions
   }
 
 
-// sustituye al antiguo executeEditGround()
-  public function executeEditcategories()
+
+  public function executeEditground()
   {
-    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
-    $this->forward404Unless($vground);
-    $this->vg = $vground;
-  }
-
-  public function executeGetchildren()
-  {
-    // $this->mm_id = $this->getRequestParameter('mm');
-
-    $this->c = CategoryPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->c);
-
-    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
-    $this->forward404Unless($vground);
-    $this->vg_id = $vground->getId();
-
-    $this->block_cat = $this->getRequestParameter('block_cat');
-  }
-
-  public function executeAddCategory()
-  {       
-    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('cat_id'), $this->getUser()->getCulture());
-    $this->forward404Unless($category);
-
-    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
-    $this->forward404Unless($vground);
-    $this->vg_id = $vground->getId();
-
-    $json     = array('added' => array(), 'recommended' => array());
-    $func     = create_function('$a', 'return $a->getId();');
-    $add_cats = array();
-    
-    if ($category->addVirtualGroundId($this->vg_id)){
-      $add_cats [] = $category;
-    }
-  
-    foreach($category->getRequiredWithI18n() as $required_cat){
-      if($required_cat->addVirtualGroundId($this->vg_id)){
-        $add_cats[] = $required_cat;
-      }
-    }  
-
-    foreach($add_cats as $n){
-      $json['added'][] = array(
-             'vg_id' => $this->vg_id,
-             'id'    => $n->getId(), 
-             'cod'   => $n->getCod(), 
-             'name'  => $n->getName(),
-             'group' => array_map($func, $n->getPath())
-             );
-    }
-
-    $this->getResponse()->setContentType('application/json');
-    return $this->renderText(json_encode($json));
-  }
-
-  public function executeDelCategory()
-  {
-
-    $category = CategoryPeer::retrieveByPKWithI18n($this->getRequestParameter('cat_id'), $this->getUser()->getCulture());
-    $this->forward404Unless($category);
-
-    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('vg_id'));
+    $vground = VirtualGroundPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($vground);
 
-    $json = array('deleted' => array(), 'recommended' => array());
-    $func = create_function('$a', 'return $a->getId();');
-    $del_cats = array();
-
-    $vg_categories = $vground->getCategories();
-    
-    
-    foreach($category->getRequiredWithI18n() as $cat){
-      if($cat->delVirtualgroundId($vground->getId())){
-          $del_cats[] = $cat;
-      }
-    }
-
-    if($category->delVirtualgroundId($vground->getId())){
-        $del_cats[] = $category;
-    }
-    
-    
-    foreach($del_cats as $n){
-        $json['deleted'][] = array('id' => $n->getId(), 
-                                   'cod' => $n->getCod(), 
-                                   'name' => $n->getName(),
-                                   'group' => array_map($func, $n->getPath()));
-    }
-    
-    $this->getResponse()->setContentType('application/json');
-    return $this->renderText(json_encode($json));
+    $c = new Criteria();
+    $c->add(GroundPeer::GROUND_TYPE_ID, $this->getRequestParameter('type'));
+    $this->grounds = GroundPeer::doSelectWithI18n($c, $this->getUser()->getCulture());
+    $this->rel = $vground->getRelationsId();    
   }
+
+
 
 
   protected function sanitizeDir($dir)

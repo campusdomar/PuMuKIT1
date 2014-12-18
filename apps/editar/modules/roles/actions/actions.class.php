@@ -21,7 +21,7 @@ class rolesActions extends sfActions
    */
   public function executeIndex()
   {
-    sfConfig::set('config_menu','active');
+    sfConfig::set('library_menu','active');
     if (!$this->getUser()->hasAttribute('page', 'tv_admin/role'))
       $this->getUser()->setAttribute('page', 1, 'tv_admin/role');
   }
@@ -102,9 +102,9 @@ class rolesActions extends sfActions
 
     try{
       $role->save();
-      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del rol actualizados."));
+      $this->msg_alert = array('info', "Metadatos del rol actualizados.");
     }catch(Exception $e){
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Código de rol repetido."));
+      $this->msg_alert = array('error', "Codigo de rol repetido.");
     }
       
     $this->getUser()->setAttribute('id', $role->getId(), 'tv_admin/role');
@@ -132,7 +132,7 @@ class rolesActions extends sfActions
       $role->delete();
     }
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Rol borrado."));
+    $this->msg_alert = array('info', "Rol borrado.");
     return $this->renderComponent('roles', 'list');
   }
 
@@ -163,11 +163,11 @@ class rolesActions extends sfActions
 	$role2->setText($role->getText());
       }
       
-      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Rol copiado"));
+      $this->msg_alert = array('info', "Rol copiado");
       $role2->save();
     }
     catch (Exception $e){
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Código del rol repetido"));
+      $this->msg_alert = array('error', "Codigo del rol repetido");
     };
 
 

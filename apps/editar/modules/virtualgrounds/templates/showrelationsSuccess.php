@@ -22,14 +22,14 @@
     > 
     (<?php echo $ground->getGroundType()->getName() ?>) <?php echo $ground->getName() ?>
   </div>
-<?php endforeach?>
+<?endforeach?>
 <div style="clear:left"></div>
 
 </fieldset>
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
  </ul>
 
 </form>

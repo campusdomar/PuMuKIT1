@@ -73,15 +73,16 @@ class FilePeer extends BaseFilePeer
    * @access public
    * @return integer
    */
+  //UPDATE 1.5
   static public function doCountDurationPublic($dates = null)
   {
     $conexion = Propel::getConnection();
-    $consulta = 'SELECT SUM(%s) AS total FROM %s, %s, %s WHERE %s = %s AND %s = %s AND %s = %s AND %s = %s';
+    $consulta = 'SELECT SUM(%s) AS total FROM %s, %s, %s WHERE %s = %s AND %s  > %s AND %s = %s AND %s = %s';
     $consulta = sprintf($consulta, FilePeer::DURATION, FilePeer::TABLE_NAME, MmPeer::TABLE_NAME, PerfilPeer::TABLE_NAME, FilePeer::MM_ID, MmPeer::ID, MmPeer::STATUS_ID, 0, FilePeer::PERFIL_ID, PerfilPeer::ID, PerfilPeer::DISPLAY , 1);
   
     if ($dates != null){
       $consulta .= ' AND %s > "%s" AND %s < "%s"';
-      $consulta = sprintf($consulta, MmPeer::RECORDDATE, date("Y-m-01", $dates["ini"]), MmPeer::RECORDDATE, date("Y-m-01", $dates["end"]));
+      $consulta = sprintf($consulta, MmPeer::PUBLICDATE, date("Y-m-01", $dates["ini"]), MmPeer::PUBLICDATE, date("Y-m-01", $dates["end"]));
     }
   
     $sentencia = $conexion->prepareStatement($consulta);
@@ -90,28 +91,6 @@ class FilePeer extends BaseFilePeer
     return $resultset->getInt('total')/3600;
   }
 
-  /**
-   * Devuelve el numero de horas que componen la serie
-   *
-   * @access public
-   * @return integer
-   */
-  static public function doCountDuration($dates = null)
-  {
-    $conexion = Propel::getConnection();
-    $consulta = 'SELECT SUM(%s) AS total FROM %s, %s, %s WHERE %s = %s AND %s = %s AND %s = %s';
-    $consulta = sprintf($consulta, FilePeer::DURATION, FilePeer::TABLE_NAME, MmPeer::TABLE_NAME, PerfilPeer::TABLE_NAME, FilePeer::MM_ID, MmPeer::ID, FilePeer::PERFIL_ID, PerfilPeer::ID, PerfilPeer::MASTER , 1);
-  
-    if ($dates != null){
-      $consulta .= ' AND %s > "%s" AND %s < "%s"';
-      $consulta = sprintf($consulta, MmPeer::RECORDDATE, date("Y-m-01", $dates["ini"]), MmPeer::RECORDDATE, date("Y-m-01", $dates["end"]));
-    }
-  
-    $sentencia = $conexion->prepareStatement($consulta);
-    $resultset = $sentencia->executeQuery();
-    $resultset->next();
-    return $resultset->getInt('total')/3600;
-  }
 
 
   /**
@@ -146,10 +125,7 @@ class FilePeer extends BaseFilePeer
    * @return integer duration.
    */
   static public function getDuration($file){
-    if (!file_exists($file)) {
-      return 0;
-    }
-
+    if (!file_exists($file)) return 0;
     //////////////////////////////////////////////
     //GETID3
     //////////////////////////////////////////////
@@ -177,6 +153,7 @@ class FilePeer extends BaseFilePeer
       }
       $duration = intval($getid3->info['playtime_seconds']);
     }
+    
     return($duration);
   }
 
@@ -256,33 +233,5 @@ class FilePeer extends BaseFilePeer
     return $frame->toGDImage();
 
     //imagejpeg($frame->toGDImage(), $absCurrentDir .'/' . $fileName);
-  }
-
-
-  /**
-   *
-   *
-   */
-  static public function getDurationString($duration)
-  {
-    $min =  floor($duration / 60);
-
-    $seg = $duration %60;
-    if ($seg < 10 ) $seg = '0' . $seg;
-    
-    if ($min == 0 ) $aux = $seg . "''";
-    else $aux = $min . "' ". $seg ."''";
-
-    return $aux;
-  }
-
-  /**
-   *
-   * Devuelve false 
-   *
-   */
-  static public function isAudio($path)
-  {
-    return ((strpos(mime_content_type($path),"audio") === false)?false : true);
   }
 }

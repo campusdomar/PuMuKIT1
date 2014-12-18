@@ -63,7 +63,7 @@ class VirtualGroundRelationMapBuilder {
 
 		$tMap->addForeignPrimaryKey('VIRTUAL_GROUND_ID', 'VirtualGroundId', 'int' , CreoleTypes::INTEGER, 'virtual_ground', 'ID', true, null);
 
-		$tMap->addForeignPrimaryKey('CATEGORY_ID', 'CategoryId', 'int' , CreoleTypes::INTEGER, 'category', 'ID', true, null);
+		$tMap->addForeignPrimaryKey('GROUND_ID', 'GroundId', 'int' , CreoleTypes::INTEGER, 'ground', 'ID', true, null);
 
 		$tMap->addColumn('ENABLE', 'Enable', 'boolean', CreoleTypes::BOOLEAN, true, null);
 

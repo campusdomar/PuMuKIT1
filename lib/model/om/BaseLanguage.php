@@ -2080,52 +2080,6 @@ abstract class BaseLanguage extends BaseObject  implements Persistent {
 		return $this->collMmMatterhorns;
 	}
 
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collLanguageI18ns) {
-				foreach ((array) $this->collLanguageI18ns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collFiles) {
-				foreach ((array) $this->collFiles as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collLogTranscodings) {
-				foreach ((array) $this->collLogTranscodings as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collTranscodings) {
-				foreach ((array) $this->collTranscodings as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collMmMatterhorns) {
-				foreach ((array) $this->collMmMatterhorns as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collLanguageI18ns = null;
-		$this->collFiles = null;
-		$this->collLogTranscodings = null;
-		$this->collTranscodings = null;
-		$this->collMmMatterhorns = null;
-	}
-
   public function getCulture()
   {
     return $this->culture;

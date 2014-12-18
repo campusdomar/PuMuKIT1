@@ -7,26 +7,22 @@
    <tbody>
     <tr>
      <td>
-        <div style="position: relative;">
+        <div style="position: relative">
         <?php if($announce->getSerialId() != $announce->getId()): ?>
-	  <div class="thumbnail">
+          <div class="thumbnail">
             <a href="<?php echo $announce->getUrl()?>" >
               <img class="play_icon" alt="" src="/images/tv/iconos/play_icon.png" />
               <img alt="serial_pic" class="serial" src="<?php echo $announce->getFirstUrlPic()?>"/>
             </a>
           </div>
         <?php else: ?>
-	<div class="thumbnail">
-
-
-<div class="album" style="margin:2px 20px 2px 2px;">
-    <!-- <img src="<?php echo $announce->getUrl()?>"/> -->
-    <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>" /></div>
-    <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>" /></div>  
-    <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>" /></div>
-</div>
-
-	</div>
+          <figure class="album" style="margin:2px 20px 2px 2px; ">
+            <a href="<?php echo $announce->getUrl()?>">
+              <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>" /></div>
+              <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>" /></div>
+              <div class="picture"><img src="<?php echo $announce->getFirstUrlPic() ?>" /></div>
+            </a>
+          </figure>
          <?php endif ?>
        </div>
      </td>

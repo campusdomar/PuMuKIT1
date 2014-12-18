@@ -1,6 +1,14 @@
-<div class="<?php $aux =  $serial->getBroadcastMin();echo ($aux)?$aux->getBroadcastType()->getName():''?>"></div>
+<div class="<?php echo $serial->getBroadcastMax()->getBroadcastType()->getName()?>"></div>
+
+<?php if($serial->hasSubtitles()): ?>
+  <img style="float:right" src="/images/tv/iconos/simbolo_manos_40.png" alter="signado" />
+<?php endif ?>
 
 <div class="cab_serial">
+<!--  <h1 class="title">
+    <?php echo $serial->getTitle() ?>
+  </h1>-->
+
 
   <?php if ($serial->getSubtitle() !== ""): ?> 
     <h2 class="subtitle">

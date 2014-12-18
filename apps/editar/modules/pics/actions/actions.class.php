@@ -74,7 +74,7 @@ class picsActions extends sfActions
       $pic_object->save();
     }elseif($this->getRequestParameter('type') == 'pic'){
       $aux = 'Pic'.ucfirst($this->que);
-      if (call_user_func(array($aux . 'Peer', 'retrieveByPk'), $this->getRequestParameter('id'), $this->object_id) == null){
+      if (call_user_func(array($auxPeer, 'retrieveByPk'), $this->getRequestParameter('id'), $this->object_id) == null){
 	$pic_object = new $aux;
 	$pic_object->setPicId($this->getRequestParameter('id'));
 	$pic_object->setOtherId($this->object_id);
@@ -83,7 +83,7 @@ class picsActions extends sfActions
     }
 
     $this->preview = true;
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Nueva imagen insertada."));
+    $this->msg_alert = array('info', "Nueva imagen insertada.");
     return $this->renderComponent('pics', 'list');
   }
 
@@ -147,7 +147,7 @@ class picsActions extends sfActions
       $pic_object->save();
     }
 
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Nueva imagen insertada."));
+    $this->msg_alert = array('info', "Nueva imagen insertada.");
   }
 
   /**
@@ -168,7 +168,7 @@ class picsActions extends sfActions
     $pic_relation->delete();
 
     $this->preview = true;
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Imagen borrada."));
+    $this->msg_alert = array('info', "Imagen borrada.");
     return $this->renderComponent('pics', 'list');
   }
 

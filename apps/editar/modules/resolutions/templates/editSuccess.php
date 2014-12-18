@@ -14,7 +14,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('hor', __('Horizontal:'), 'class="required" ') ?>
+  <?php echo label_for('hor', 'Horizontal:', 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($resolution, 'getHor', array ('size' => 3,  'control_name' => 'hor',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -23,7 +23,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('ver', __('Vertical:'), 'class="required" ') ?>
+  <?php echo label_for('ver', 'Vertical:', 'class="required" ') ?>
   <div class="content">
   <?php $value = object_input_tag($resolution, 'getVer', array ('size' => 3,  'control_name' => 'ver',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -37,8 +37,8 @@
 
 
 <ul class="tv_admin_actions">
-<li><?php echo submit_tag(__('OK'),'name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
-<li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+<li><?php echo submit_tag('OK','name=OK class=tv_admin_action_save onclick=Modalbox.hide()'); ?></li>
+<li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
   </ul>
 
 </form>

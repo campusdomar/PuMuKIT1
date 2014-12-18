@@ -37,15 +37,15 @@ class MmMatterhorn extends BaseMmMatterhorn
   /**
    *
    */
-  public function getMasterUrl(){
-    return $this->getTrackUrlByType("presenter/master");
+  public function getMasterUrl($cookie = null){
+    return $this->getTrackUrlByType("presenter/master", $cookie);
   }
 
   /**
    *
    */
-  public function getTrackUrlByType($trackType){
-    $manifest = $this->getManifest();
+  public function getTrackUrlByType($trackType, $cookie = null){
+    $manifest = $this->getManifest($cookie);
 
     foreach($manifest["media"]["track"] as $track){
       if($track["type"] == $trackType){
@@ -59,16 +59,16 @@ class MmMatterhorn extends BaseMmMatterhorn
   /**
    *
    */
-  public function getMasterFile(){
-    return $this->getTrackFileByType("presenter/master");
+  public function getMasterFile($cookie = null){
+    return $this->getTrackFileByType("presenter/master", $cookie);
   }
 
 
   /**
    *
    */
-  public function getTrackFileByType($trackType){
-    $manifest = $this->getManifest();
+  public function getTrackFileByType($trackType, $cookie = null){
+    $manifest = $this->getManifest($cookie);
     
     foreach($manifest["media"]["track"] as $track){
       if($track["type"] == $trackType){
@@ -84,7 +84,7 @@ class MmMatterhorn extends BaseMmMatterhorn
   /**
    *
    */
-  public function getManifest(){
+  public function getManifest($cookie = null){
     
 
     if ($this->manifest != null){
@@ -108,13 +108,16 @@ class MmMatterhorn extends BaseMmMatterhorn
     $workflow_endpoint = '/workflow/instances.json';
     $workflow_filter   = '&state=SUCCEEDED&sort=DATE_CREATED_DESC';
     
-    $url = $server_admin . $workflow_endpoint . "?mp=" . $this->getMhId() . $workflow_filter;
-    $sal = MmMatterhornPeer::get($user, $password, $url);
-
+    $cookie = MmMatterhornPeer::getCookie($server_admin, $user, $password);
+    $ch = curl_init($server_admin . $workflow_endpoint . "?mp=" . $this->getMhId() . $workflow_filter); 
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    if ($cookie != null) {
+      curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+    }
  
-    $var    = $sal["var"];
-    $error  = $sal["error"];
-    $status = $sal["status"];
+    $var    = curl_exec($ch); 
+    $error  = curl_error($ch);
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     
     if ($status !== 200) return false;
     //FIXME capturar si falla.
@@ -185,12 +188,12 @@ class MmMatterhorn extends BaseMmMatterhorn
    * @access public
    * @param integer $perfil_id nuevo perfil
    * @param opt integer $prioridad 
-   * @param opt integer $user_email (0 si se desconoce)
+   * @param opt integer $user_id (0 si se desconoce)
    * @param force boolena para crear otro aunque exista
    * @return la tarea creada o null is error
    */
   //OJO SI YA ESTA TRANSOCODIFICANDO NO LO HAGAS
-  public function retranscoding($priority = 2, $user_email = 0, $force = false){
+  public function retranscoding($priority = 2, $user_id = 0, $force = false){
     
     //TODO.
     $profile = PerfilPeer::retrieveByPK(16);
@@ -220,8 +223,9 @@ class MmMatterhorn extends BaseMmMatterhorn
     
     $trans->setPid(0);
 
-    if($user_email !== 0){
-      $trans->setEmail($user_email);
+    if($user_id !== 0){
+      $user = UserPeer::retrieveByPK($user_id);
+      $trans->setEmail($user->getEmail());
     }
 
     $trans->save();      //Necesario para setPathAuto

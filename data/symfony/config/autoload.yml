@@ -57,8 +57,3 @@ autoload:
     path:           %SF_APP_DIR%/modules/*/lib
     prefix:         1
     recursive:      on
-
-  Zend:
-    name:           Zend
-    path:           %SF_SYMFONY_LIB_DIR%/vendor/Zend
-    recursive:      on

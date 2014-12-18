@@ -61,13 +61,13 @@ class PerfilPeer extends BasePerfilPeer
   {    
   }
 
-  public static function doSelectToWizard($masters = null)
+  public static function doSelectToWizard($display = null)
   {
     $c = new Criteria();
     $c->add(PerfilPeer::WIZARD, true);
 
-    if (!is_null($masters)) {
-      $c->add(PerfilPeer::MASTER, $masters);
+    if (!is_null($display)) {
+      $c->add(PerfilPeer::DISPLAY, $display);
     }
 
     return PerfilPeer::doSelectWithI18n($c);

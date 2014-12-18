@@ -21,7 +21,7 @@
 <fieldset>
 
 <div class="form-row">
-  <?php echo label_for('description', __('Descripción:'), 'class="required" ') ?>
+  <?php echo label_for('description', 'Descripcion:', 'class="required" ') ?>
   <div class="content">
     <?php $sep =''; foreach ($langs as $lang): echo $sep?>
   
@@ -35,7 +35,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('profile_id', __('Perfil:'), 'class="required" ') ?>
+  <?php echo label_for('profile_id','Perfil:', 'class="required" ') ?>
 
   <div class="content" style="overflow: hidden">
     <?php foreach($profiles as $profile): ?>
@@ -49,18 +49,18 @@
 
 
 <div class="form-row">
-  <?php echo label_for('priority',__('Prioridad:'), 'class="required" ') ?>
+  <?php echo label_for('priority','Prioridad:', 'class="required" ') ?>
 
   <div class="content">
-    <input type="radio" value="1" name="prioridad"/><?php echo __('Low-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" checked="checked" value="2" name="prioridad"/><?php echo __('Normal-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="radio" value="3" name="prioridad"/><?php echo __('High-Priority')?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="1" name="prioridad"/>Low-Priority&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" checked="checked" value="2" name="prioridad"/>Normal-Priority&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" value="3" name="prioridad"/>High-Priority&nbsp;&nbsp;&nbsp;&nbsp;
   </div>
 </div>
 
 
 <div class="form-row">
-  <?php echo label_for('language_id',__('Idioma:'), 'class="required" ') ?>
+  <?php echo label_for('language_id','Idioma:', 'class="required" ') ?>
 
   <div class="content">
     <?php echo select_tag('idioma', objects_for_select(
@@ -74,28 +74,28 @@
 
 
 <div class="form-row">
-  <?php echo label_for('file_type', __('Modo:'), 'class="required" ') ?>
+  <?php echo label_for('file_type', 'Modo:', 'class="required" ') ?>
   
   <div class="content">
     <input type="radio" name="file_type" value="file" onclick="$('input_trans_url').hide();$('input_trans_file').show();"/> Inbox 
-    <input type="radio" name="file_type" value="url" checked="checked" onclick="$('input_trans_file').hide();$('input_trans_url').show();"/> <?php echo __('File')?>
+    <input type="radio" name="file_type" value="url" checked="checked" onclick="$('input_trans_file').hide();$('input_trans_url').show();"/> File
   </div>
 </div>
 
 <div class="form-row" id="input_trans_url">
 
-  <?php echo label_for('url', __('URL:'), 'class="required" ') ?>
+  <?php echo label_for('url', 'Url:', 'class="required" ') ?>
 
   <div class="content">
     <?php $value = input_file_tag('video', array ('size' => 70)); echo $value ? $value : '&nbsp;' ?> &nbsp;
-    <span style="color: blue"><?php echo __('(Menor 2GB)')?></span>
-    <span id="file_upload_progress" style="color:blue; display:none;"><?php echo __('Progreso...')?></span>
+    <span style="color: blue">(Menor 2GB)</span>
+    <span id="file_upload_progress" style="color:blue; display:none;">Progreso...</span>
   </div>
 </div>
 
 <div class="form-row" id="input_trans_file" style="display: none">
 
-  <?php echo label_for('file', __('File:'), 'class="required" ') ?>
+  <?php echo label_for('file', 'File:', 'class="required" ') ?>
 
   <div class="content">
     <?php $value = input_tag('file', '//172.20...' ,array ('size' => 80)); echo $value ? $value : '&nbsp;' ?> &nbsp;
@@ -121,8 +121,8 @@
 
 
 <ul class="tv_admin_actions">
-  <li><?php echo submit_tag(__('OK'),array('name' => 'OK', 'class' => 'tv_admin_action_save',  'onclick' => "$('file_upload_progress').show(); ")) ?></li>
-  <li><?php echo button_to_function(__('Cancel'), "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
+  <li><?php echo submit_tag('OK',array('name' => 'OK', 'class' => 'tv_admin_action_save',  'onclick' => "$('file_upload_progress').show(); ")) ?></li>
+  <li><?php echo button_to_function('Cancel', "Modalbox.hide()", 'class=tv_admin_action_delete') ?> </li>
 </ul>
 
 </form>

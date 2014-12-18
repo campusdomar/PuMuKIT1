@@ -1,4 +1,0 @@
-all:
-  stylesheets:    [admin/tree]
-
-  javascripts:    []

@@ -19,7 +19,7 @@ abstract class BaseMaterialPeer {
 	const CLASS_DEFAULT = 'lib.model.Material';
 
 	/** The total number of columns. */
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 6;
 
 	/** The number of lazy-loaded columns. */
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -43,9 +43,6 @@ abstract class BaseMaterialPeer {
 	/** the column name for the DISPLAY field */
 	const DISPLAY = 'material.DISPLAY';
 
-	/** the column name for the SIZE field */
-	const SIZE = 'material.SIZE';
-
 	/** The PHP to DB Name Mapping */
 	private static $phpNameMap = null;
 
@@ -57,10 +54,10 @@ abstract class BaseMaterialPeer {
 	 * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
 	 */
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'MmId', 'Url', 'Rank', 'MatTypeId', 'Display', 'Size', ),
-		BasePeer::TYPE_COLNAME => array (MaterialPeer::ID, MaterialPeer::MM_ID, MaterialPeer::URL, MaterialPeer::RANK, MaterialPeer::MAT_TYPE_ID, MaterialPeer::DISPLAY, MaterialPeer::SIZE, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'mm_id', 'url', 'rank', 'mat_type_id', 'display', 'size', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'MmId', 'Url', 'Rank', 'MatTypeId', 'Display', ),
+		BasePeer::TYPE_COLNAME => array (MaterialPeer::ID, MaterialPeer::MM_ID, MaterialPeer::URL, MaterialPeer::RANK, MaterialPeer::MAT_TYPE_ID, MaterialPeer::DISPLAY, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'mm_id', 'url', 'rank', 'mat_type_id', 'display', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	/**
@@ -70,10 +67,10 @@ abstract class BaseMaterialPeer {
 	 * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
 	 */
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'MmId' => 1, 'Url' => 2, 'Rank' => 3, 'MatTypeId' => 4, 'Display' => 5, 'Size' => 6, ),
-		BasePeer::TYPE_COLNAME => array (MaterialPeer::ID => 0, MaterialPeer::MM_ID => 1, MaterialPeer::URL => 2, MaterialPeer::RANK => 3, MaterialPeer::MAT_TYPE_ID => 4, MaterialPeer::DISPLAY => 5, MaterialPeer::SIZE => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'mm_id' => 1, 'url' => 2, 'rank' => 3, 'mat_type_id' => 4, 'display' => 5, 'size' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'MmId' => 1, 'Url' => 2, 'Rank' => 3, 'MatTypeId' => 4, 'Display' => 5, ),
+		BasePeer::TYPE_COLNAME => array (MaterialPeer::ID => 0, MaterialPeer::MM_ID => 1, MaterialPeer::URL => 2, MaterialPeer::RANK => 3, MaterialPeer::MAT_TYPE_ID => 4, MaterialPeer::DISPLAY => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'mm_id' => 1, 'url' => 2, 'rank' => 3, 'mat_type_id' => 4, 'display' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	/**
@@ -186,8 +183,6 @@ abstract class BaseMaterialPeer {
 
 		$criteria->addSelectColumn(MaterialPeer::DISPLAY);
 
-		$criteria->addSelectColumn(MaterialPeer::SIZE);
-
 	}
 
 	const COUNT = 'COUNT(material.ID)';
@@ -296,9 +291,7 @@ abstract class BaseMaterialPeer {
 		$criteria->setDbName(self::DATABASE_NAME);
 
         //ADD DEFAULT ORDER
-        if((count($criteria->getOrderByColumns()) == 0) &&
-           (array_diff($criteria->getSelectColumns(), array(self::COUNT_DISTINCT, self::COUNT)))) 
-            $criteria->addAscendingOrderByColumn(self::RANK);
+        $criteria->addAscendingOrderByColumn(self::RANK);
 
 		// BasePeer returns a Creole ResultSet, set to return
 		// rows indexed numerically.
@@ -904,7 +897,7 @@ abstract class BaseMaterialPeer {
     $c->addJoin(MaterialPeer::ID, MaterialI18nPeer::ID);
     $c->add(MaterialI18nPeer::CULTURE, $culture);
 
-    if(count($c->getOrderByColumns()) == 0) $c->addAscendingOrderByColumn(self::RANK);
+    $c->addAscendingOrderByColumn(self::RANK);
 
     $rs = BasePeer::doSelect($c, $con);
     $results = array();

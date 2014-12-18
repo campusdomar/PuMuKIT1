@@ -870,7 +870,7 @@ abstract class BaseBroadcastType extends BaseObject  implements Persistent {
 
 				$criteria->add(BroadcastPeer::BROADCAST_TYPE_ID, $this->getId());
 
-				$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
+				$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
 			}
 		} else {
 			// criteria has no effect for a new object
@@ -883,7 +883,7 @@ abstract class BaseBroadcastType extends BaseObject  implements Persistent {
 				$criteria->add(BroadcastPeer::BROADCAST_TYPE_ID, $this->getId());
 
 				if (!isset($this->lastBroadcastCriteria) || !$this->lastBroadcastCriteria->equals($criteria)) {
-					$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, sfContext::getInstance()->getUser()->getCulture(), $con);
+					$this->collBroadcasts = BroadcastPeer::doSelectWithI18n($criteria, $this->getCulture(), $con);
 				}
 			}
 		}
@@ -1103,40 +1103,6 @@ abstract class BaseBroadcastType extends BaseObject  implements Persistent {
 	{
 		$this->collAnnounceChannels[] = $l;
 		$l->setBroadcastType($this);
-	}
-
-	/**
-	 * Resets all collections of referencing foreign keys.
-	 *
-	 * This method is a user-space workaround for PHP's inability to garbage collect objects
-	 * with circular references.  This is currently necessary when using Propel in certain
-	 * daemon or large-volumne/high-memory operations.
-	 *
-	 * @param      boolean $deep Whether to also clear the references on all associated objects.
-	 */
-	public function clearAllReferences($deep = false)
-	{
-		if ($deep) {
-			if ($this->collBroadcasts) {
-				foreach ((array) $this->collBroadcasts as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collPubChannels) {
-				foreach ((array) $this->collPubChannels as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-			if ($this->collAnnounceChannels) {
-				foreach ((array) $this->collAnnounceChannels as $o) {
-					$o->clearAllReferences($deep);
-				}
-			}
-		} // if ($deep)
-
-		$this->collBroadcasts = null;
-		$this->collPubChannels = null;
-		$this->collAnnounceChannels = null;
 	}
 
 

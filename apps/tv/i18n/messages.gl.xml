@@ -150,10 +150,6 @@
         <source>Vídeos de la misma serie:</source> 
         <target>Vídeos da mesma serie:</target> 
       </trans-unit> 
-      <trans-unit id="37">
-	<source>Fecha de celebraci&#xF3;n</source>
-	<target>Data de celebraci&#xF3;n</target>
-      </trans-unit>
 
     </body> 
   </file> 

@@ -19,7 +19,7 @@ class mattypesActions extends sfActions
    */
   public function executeIndex()
   {
-    sfConfig::set('config_menu','active');
+    sfConfig::set('library_menu','active');
     if (!$this->getUser()->hasAttribute('page', 'tv_admin/mattype'))
       $this->getUser()->setAttribute('page', 1, 'tv_admin/mattype');
   }
@@ -101,10 +101,10 @@ class mattypesActions extends sfActions
     }
     try{
       $mattype->save();
-      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Metadatos del tipo de material actualizados."));
+      $this->msg_alert = array('info', "Metadatos del tipo de matial actualizados.");
       $this->getUser()->setAttribute('id', $mattype->getId(), 'tv_admin/mattype');
     }catch(Exception $e){
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Tipo de material repetido."));
+      $this->msg_alert = array('error', "Typo de material repetido.");
     }
 
     return $this->renderComponent('mattypes', 'list');
@@ -130,7 +130,7 @@ class mattypesActions extends sfActions
       $mattype = MatTypePeer::retrieveByPk($this->getRequestParameter('id'));
       $mattype->delete();
     }
-    $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Tipo de material borrado."));
+    $this->msg_alert = array('info', "Tipo de material borrado.");
     return $this->renderComponent('mattypes', 'list');
   }
 
@@ -159,9 +159,9 @@ class mattypesActions extends sfActions
       
     try{
       $mattype2->save();
-      $this->msg_alert = array('info', $this->getContext()->getI18N()->__("Tipo de material clonado. Modifique su extensión"));
+      $this->msg_alert = array('info', "Tipo de material clonado, modifique su extension");
     }catch(Exception $e){
-      $this->msg_alert = array('error', $this->getContext()->getI18N()->__("Tipo de material repetido."));
+      $this->msg_alert = array('error', "Tipo de material repetido.");
     }
 
     return $this->renderComponent('mattypes', 'list');

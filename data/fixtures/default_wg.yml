@@ -150,10 +150,6 @@ Widget:
     name: announcesv2
     widget_type_id: WidgetType_3
     configurable: 0
-  Widget_32: 
-    name: searchbox
-    widget_type_id: WidgetType_2
-    configurable: 0
 
 
 WidgetTemplate: 
@@ -226,7 +222,7 @@ WidgetTemplateI18n:
     id: WidgetTemplate_2
     culture: es
     text: |
-      <div style="margin-top: 10px; padding: 0px; text-align: center; color: ##333333; background-color: #D8E6F7; height-min: 90px">
+      <div style="margin-top: 10px; padding: 0px; text-align: center; color: ##333333; background-color: #D8E6F7; height-min: 50px">
         <div style="float:left;  padding: 15px;">
           <div>&nbsp;</div>
           <div>Universidad de las Cies</div>
@@ -250,23 +246,20 @@ WidgetTemplateI18n:
     id: WidgetTemplate_2
     culture: en
     text: |
-      <div style="margin-top: 10px; padding: 0px; text-align: center; color: ##333333; background-color: #D8E6F7; height: 90px">
+      <div style="margin-top: 10px; padding: 0px; text-align: center; color: ##333333; background-color: #D8E6F7; height: 50px">
         <div style="float:left; padding: 15px;">
           <div>&nbsp;</div>
-          <div>University of Cies</div>
+          <div>Universidad de las Cies</div>
           <div>Copyright &copy; 2011</div>
         </div>
         <div style="float:right; padding: 15px;">
-          <div>FOLLOW US:</div>
-           <div>
-            <a href="http://facebook.com"><img src="/images/tv/iconos/facebook2.png" alt="facebook" /></a>
-            <a href="http://twitter.com"><img src="/images/tv/iconos/twitter2.png" alt="twitter" /></a>
-            <a href="http://youtube.com"><img src="/images/tv/iconos/youtube2.png" alt="youtube" /></a>
-          </div>
+          <div>SIGUENOS EN:</div>
+          <div>FB - YT - TW</div>
+          <div>&nbsp;</div>
         </div>
         <div>
-          <div><img src="/uploads/UCies/mail.png" alt="e-mail" style="vertical-align: middle" />tv@correo.es</div>
-          <div><img src="/uploads/UCies/telefono.png" alt="telephone" style="vertical-align: middle" />666 66 66 66</div>
+          <div><img src="/uploads/UCies/mail.png" alt="correo" style="vertical-align: middle" />tv@correo.es</div>
+          <div><img src="/uploads/UCies/telefono.png" alt="telefono" style="vertical-align: middle" />666 66 66 66</div>
         </div>      
       </div>
 
@@ -314,14 +307,10 @@ ElementWidget:
     bar_widget_id: BarWidget_1
     widget_id: Widget_1
     rank: 1
-  ElementWidget_1_32: 
-    bar_widget_id: BarWidget_1
-    widget_id: Widget_32
-    rank: 2
   ElementWidget_1_29: 
     bar_widget_id: BarWidget_1
     widget_id: Widget_29
-    rank: 3
+    rank: 2
   ElementWidget_2_3: 
     bar_widget_id: BarWidget_2
     widget_id: Widget_3
@@ -978,14 +967,14 @@ WidgetModule:
 
 Notice: 
   Notice_1: 
-    date: 2013-09-09
+    date: 2010-02-09
     working: 0
 NoticeI18n: 
   NoticeI18n_1_es: 
     id: Notice_1
     culture: es
-    text: Welcome to PuMuKIT 1.8!!!
+    text: Wellcome to PuMuKIT 1.7!!!
   NoticeI18n_1_gl: 
     id: Notice_1
     culture: gl
-    text: Welcome to PuMuKIT 1.8!!!
+    text: Wellcome to PuMuKIT 1.7!!!
