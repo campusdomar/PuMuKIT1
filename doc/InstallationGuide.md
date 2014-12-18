@@ -1,3 +1,8 @@
+PuMuKIT Installation Guide
+====================================
+
+*This page is updated to the 1.8 release* 
+
 Requirements
 -------------------------------------
 
