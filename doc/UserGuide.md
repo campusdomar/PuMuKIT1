@@ -220,7 +220,7 @@ This wizard is composed of three steps:
 
 After completing the wizard, the multimedia object with the specified metadata is created, the file is transcoded, catalogued and when it ends you can see it in the "Multimedia" tab on the block "video Files".
 
-The wizard automatically generates an image to the multimedia object by capturing a frame of the video. It is recommended to do a manual capture to beter describe the multimedia object content. The picture of the series must also be manually selected.(See section 2.2.3)
+The wizard automatically generates an image of the multimedia object by capturing a frame of the video. It is recommended to do a manual capture to beter describe the multimedia object content. The picture of the series must also be manually selected.(See section 2.2.3)
 
 ### <a name="matterhorn">2.1.2. Importing videos from Matterhorn</a>
 
