@@ -228,7 +228,7 @@ Once the video processing has finished in Matterhorn, click on the “Ingester�
 
 ![](images/image8.jpg)
 
-A list of the videos already processed in Matterhorn can be seen, they are sorted by recording date.
+A list of the videos already processed in Matterhorn can be seen, sorted by recording date.
 
 ![](images/image9.jpg)
 
@@ -250,7 +250,7 @@ There is also a searcher that allows us to find videos sorted by any of the Matt
 
 ![](images/image10.jpg)
 
-Once the video is imported there are three options:
+When importing the video, the program will behave differently depending on which of these cases is true:
 
 -   It is the first imported video of the series.
 
@@ -262,17 +262,17 @@ Once the video is imported there are three options:
 
 In this case, a new series will have been created in PuMuKIT associated to the Matterhorn series (from now on all the videos from that Matterhorn series will be imported in this series).
 
-In this case, the data of the series in PuMuKIT and the metadata of the video must be edited. Both the series and the video will keep some of the data they had in Matterhorn: title, description, date... However, other fields must be filled in: person, photo…
+In this case, the data of the series in PuMuKIT and the metadata of the video must be edited. Both the series and the video will keep some of the data they had in Matterhorn: title, description, date... However, other fields must be filled in, like person, photo…
 
 In series with more than one video, it is recommended to edit the default values of the multimedia objects before importing the rest of the videos of the series.
 
-#### <a name="more">2.1.2.2. More videos of the series</a>
+#### <a name="more">2.1.2.2. More videos of the same series</a>
 
 In this case, it is only necessary to edit the metadata of the video (because the series will be already created in PuMuKIT). The generic data of the series will be updated automatically when importing the video and will also keep the data from Matterhorn: title, description, date...
 
 #### <a name="without">2.1.2.3. Videos without a series in Matterhorn</a>
 
-In this case, a new series without any kind of information will be created in PuMuKIT. see more in editing metadata of a series.
+In this case, a new series without any kind of information will be created in PuMuKIT. (See more in editing metadata of a series).
 
 For each video without a series in Matterhorn, you will have a new series in PuMuKIT.
 
@@ -282,37 +282,40 @@ If you wanted to move the video to other series, you would have to select the vi
 
 ### <a name="seriesm">2.2.1. Series metadata edition</a>
 
-The administration of all series is made in their module. This has two utilities:
+The administration of all series is made in their module. This module has two utilities:
 
 -   *Administration*: Creating, deleting and editing the series in which multimedia objects are catalogued in the application.
 
--   *Access*: This utility provides access to the administration module of the multimedia objects of each series. Multimedia objects are not administrated all together at a time, but listed in their series.  
+-   *Access*: This utility provides access to the administration module of the multimedia objects of each series. Multimedia objects are *not* administrated all together at a time. Instead, the series are listed in the administration module. Using this utility, one series can be selected and a list with the objects of that series will be accessed.  
     This means that, in the administration module of multimedia objects, you can only administrate the multimedia objects of a series.
 
-The interface of the administration of the series of multimedia objects is divided into: listing of series in pages, previewing of the selected series, filtering form and administration form of the selected series.  
+The administration interface of the series of multimedia objects is divided into: listing of series in pages, previewing of the selected series, filtering form and administration form of the selected series.  
 In contrast with the other modules, whereas those appeared when it’s necessary in a higher layer in a modal way, in this module and the one of multimedia objects, the form is shown permanently on the bottom of the interface. This enables a faster access.
 
-The listing of series is the main part of the interface and is made up of a table with a row for each entry. It is very easy to use due to the pages, the filtering and the management of data. The listing includes pages to guarantee a good performance of the application, because you can only obtain the data of the rows which are shown. It also allows a good usability because you can manage even list with millions of rows with the help of buttoms to access to next pages and a bar to go quickly to every page.
+The listing of series is the main part of the interface and is made up of a table with a row for each entry. It is very easy to use due to the division in pages used, the filtering and the management of data. The listing includes pages to guarantee a good performance of the application, because you can only obtain the data of the rows shown in the current page. It also allows a good usability because you can manage even a list with millions of rows with the help of the previous/next buttons to access pages one at a time or the bar to move quickly through them.
 
 ![](images/image11.jpg)
 
-The columns which form the header of the table are links that you can use to rearrange the data of the listing, in ascending or descending order of the identifier, the title of the series, the date of publication or the number of multimedia objects it has. To change this order, you simply have to click on the header of the column you want to arrange in ascending order. If it’s already arranged according to this column, data are arranged in a descending order. In each entry of the table, the following columns are detailed, as it’s shown in this image.
+The columns which form the header of the table are links which you can use to rearrange the data in the listing on several ways: in ascending or descending order of the identifier,according to the title of the series, the date of publication or the number of multimedia objects it has. To change this order, you simply have to click on the header of the column you want and the objects will arrange in ascending order. If it was already arranged according to this column, data will be arranged in a descending order. 
+
+In each entry of the table, the following columns are detailed, as it’s shown in this image.
 
 ![](images/image12.jpg)
 
--   *Checkbox* to concurrently delete several series.
+-   *Checkbox* to simultaneously delete several series.
 
--   *Newness indicator*: A blue «A» indicates that the series is announced and a grey «A» that the series has some multimedia object announced.
+-   *Newness indicator*: A blue «A» indicates that the series is announced and a grey «A» that the series has  just some multimedia objects announced.
 
 -   *Broadcasting of the series indicator*. The broadcasting of a series depends on the broadcasting of their multimedia objects.
+-   *Delete button of the series*.
 
 -   *Edition of the series button*.
 
--   *Link to videos*: access to the module of the edition of multimedia objects which belong to a series. If you make double click in the row of a series, you can also have access to the module of the edition of multimedia objects. Thus, the accessibility is increased.
+-   *Link to videos*: access to the edition module of multimedia objects which belong to a series. If you make double click in the row of a series, you can also have access to the edition module of multimedia objects. Thus, the accessibility is increased.
 
 -   *Thumbnail*: represents a series.
 
--   *Id*: Number which identifies in unique way a series and results of the primary key of the database.
+-   *Id*: Number which identifies in an unique way a series.
 
 -   *Title of the series*.
 
@@ -324,13 +327,13 @@ Thanks to the filters, you can see fewer results and obtain quickly what you are
 
 ![](images/image13.jpg)
 
-If you make double click on an item of the list of series, you have access to the module of edition of multimedia objects which belong to a series. With one click, you select the item of the list of the selected series. Inside all the different metadata of the series structure, which you can modify through the form, we can distinguish two types: firstly, the descriptive metadata of content such as title, subtitle and, secondly, the metadata representing the portal as design, header of HTML…
+If you make double click on an item on the list of series, you have access to the edition module of multimedia objects which belong to that series. With one click, you select the item in the list of the selected series. Inside all the different metadata of the series structure, which you can modify through the form, we can distinguish two types: firstly, the descriptive metadata of content such as title, subtitle,etc. And, secondly, the metadata representing the portal as design, header of HTML,…
 
-As it’s shown in the image, the form has as background image the identifier of the series you are modifying. Above this, there are the following fields:
+As it’s shown in the image below, the form has as background image the identifier of the series you are modifying. Above this image, there are the following fields:
 
 ![](images/image14.jpg)
 
--   *Title*: Field of text which can be adapted internationally. It is used to insert the title of a series and it’s mandatory.
+-   *Title*: Field of text which can be adapted internationally. It is used to insert the title of a series and it’s *mandatory*.
 
 -   *Subtitle*: Field of text which can be adapted internationally. It is used to insert the subtitle of a series, if this has one.
 
@@ -354,7 +357,7 @@ As it’s shown in the image, the form has as background image the identifier of
 
 When clicking on the series options icon it will show various options:
 
--   Delete series: Delete the series and all its multimedia objects. If the multimedia objects are Matterhorn videos it wouldn’t delete the video, just its importation to PuMuKIT.
+-   Delete series: Delete the series and all its multimedia objects. If the multimedia objects are Matterhorn videos it won’t delete the video, only its importation to PuMuKIT.
 
 -   Clone series: It creates a copy of the selected series.
 
@@ -364,31 +367,29 @@ Modify defaults of multimedia objects: It allows to set common metadata for ever
 
 ![](images/image15.jpg)
 
-> When creating or importing a multimedia object of the series from Matterhorn, metadata will be assigned to each one of them, except for the “Description” field. When importing a video from Matterhorn, the default “Description” field will be used only if the video “Description” field of Matterhorn is empty, in this case it will keep the metadata.
+> When creating or importing multimedia objects of the series from Matterhorn, metadata will be assigned to each one of them, except for the “Description” field. When importing a video from Matterhorn, the default “Description” field will be used only if the video “Description” field of Matterhorn is empty, in this case it will keep the metadata.
 
--   Series information: It shows the public URL that will have the series and the magic URL. The magic URL is an address that allows to see the page of the series when all its objects are “Hidden” (and in the “Publication” tag is selected “WebTV”).
+-   Series information: It shows the public URL that the series will have and the magic URL. The magic URL is an address that allows to see the page of the series when all its objects are “Hidden” (and when in the “Publication” tag “WebTV” is selected).
 
 ### <a name="objectm">2.2.2. Multimedia object metadata edition</a>
 
-This is a module to administrate multimedia objects of series. You can access through the module of the administration of series and it shows only multimedia objects of series. The title of the series whose objects are administrated is on the interface header. In addition, there is a button which allows you to move back to the module of the administration of series.
+This is a module to administrate multimedia objects of series. You can access through the series administration module and it shows only multimedia objects of series. The title of the series whose objects are administrated is on the interface header. In addition, there is a button which allows you to move back to the series administration module.
 
-The administration interface of multimedia objects is very similar to the administration module of series. The interface is divided into the sequential list of multimedia objects, the previewing and the administrator of the selected multimedia object. The order of multimedia objects inside a series is defined by the cataloguer and consequently the list is shown in that way. This module does not have a form to make the filtering because generally a series do not have many multimedia objects and it is not necessary.
+The administration interface of multimedia objects is very similar to the series administration module. The interface is divided into the sequential list of multimedia objects, the previewing and the administrator of the selected multimedia object. The order of multimedia objects inside a series is defined by the cataloguer and consequently the list is shown in that way. This module does not have a form to make the filtering because generally one series doesn't have many multimedia objects and, making it unnecessary.
 
 In the image you can see in more detail a row of the list of multimedia objects. The following items are included in that:
 
 ![](images/image16.jpg)
 
--   *Checkbox* to concurrently delete several series.
+-   *Checkbox* to simultaneously delete several series.
 
 -   *Indicator of the multimedia object broadcasting*.
 
 -   *Newness indicator*: A blue «A» indicates that the multimedia object is announced.
 
--   *Edition button* of the multimedia object.
+-   *Delete button* of the multimedia object*.* After confirming the elimination, a recursive elimination is performed, deleting all video files, materials and images to which the object is related.
 
--   *Delete button* of the multimedia object*.* After confirmation the elimination, a recursive elimination is performed, deleting all video files, materials and images to which the object is related.
-
--   *Button of cloning multimedia objects.* An intelligent cloning is performed and the same images and people are linked. Multimedia files are not copied because it makes no sense that two multimedia objects have the same videos or audios.
+-   *Edition button* of the multimedia object. . This includes two options: delete and clone. The cloning option performs an intelligent cloning, which clones all the metadata to a new object, except for the linked media (images, audio and video of the object)
 
 -   *Buttons to move up* the multimedia object a position or place it the first. It is used to modify the order of multimedia objects of series.
 
@@ -404,9 +405,9 @@ In the image you can see in more detail a row of the list of multimedia objects.
 
 -   *Recording date* of the multimedia object.
 
-Below this list, there is a button to create new multimedia objects inside the series you are administrating and a button to execute the wizard inside the series. There is also a list of rapid-access that allows you to delete, modify the state of several multimedia objects at a time and rearrange multimedia objects of series.
+Below this list, there is a button to create new multimedia objects inside the series you are administrating and a button to execute the wizard inside the series. There is also a rapid-access list that allows you to delete, modify the state of several multimedia objects at a time and rearrange multimedia objects of series.
 
-When you click on an item of the multimedia objects’ list, this is selected, updating the previewing and the administration section with the contents of this multimedia object. The previewing has a similar design as the block shown in the public web portal when the items of a series are listed. Since the multimedia object is the core part of the database, the administration section now is very big. Therefore, it is divided into five tabs and as background image there is the identifier of the multimedia object. The tabs are: publication metadata, descriptive metadata, knowledge areas, people and technical metadata.
+When you click on an item of the multimedia objects’ list, this item is selected, updating the previewing and the administration section with the contents of this multimedia object. The previewing has a similar design as the block shown in the public web portal when the items of a series are listed. Since the multimedia object is the core part of the database, the administration section now is very big. Therefore, it is divided into five tabs and as background image the identifier of the multimedia object is used. The tabs are: publication metadata, descriptive metadata, knowledge areas, people and technical metadata.
 
 ![](images/image17.jpg)
 
@@ -414,13 +415,13 @@ When you click on an item of the multimedia objects’ list, this is selected, u
 
 Tag with metadata related to the publication of a multimedia object:
 
--   *State*: It indicates the state of a multimedia object. The states are “Published”, "Blocked" or “Hidden”. See 2.3 content publication.
+-   *State*: It indicates the state of a multimedia object. The states are “Published”, "Blocked" or “Hidden”. (See 2.3 content publication).
 
 -   *Revised checkbox*: Used for multimedia objects automatically imported. This checkbox is activated in those multimedia objects whose documentation has been reviewed by the personal of CEMAV.
 
--   *Editorial decisions*: Set of selectors that allow to catalogue the multimedia object for globalizing it into one category as the frontend of the website are displayed
+-   *Editorial decisions*: Set of selectors that allow to catalogue the multimedia object by globalizing it into one category as the frontend of the website is displayed
 
--   *Publication channels*: a set of selector which allow you to publish a multimedia object in the different channels. See 2.3 content publication.
+-   *Publication channels*: a set of options which allow you to publish a multimedia object in the different channels. (See 2.3 content publication).
 
 -   *Broadcast profile*: With this, you indicate the ACLs of the video.
 
@@ -432,7 +433,7 @@ The tag of descriptive and style metadata which is shown in the next image is ma
 
 -   *Title*: Field of text which can be adapted internationally. It’s used to insert the title of a multimedia object and it’s mandatory.
 
--   *Subtitle*: Field of text which can be adapted internationally. It’s used to insert the title of a multimedia object, if this has one.
+-   *Subtitle*: Field of text which can be adapted internationally. It’s used to insert the title of a multimedia object, if it has one.
 
 -   *Keywords*: Field of text which can be adapted internationally and include keywords separated by semicolons. It’s used to improve the efficiency of the searches.
 
@@ -442,7 +443,7 @@ The tag of descriptive and style metadata which is shown in the next image is ma
 
 -   *Publication date*: Publication date of multimedia objects. It is initialized on the date of the creation of the series. It’s easy to modify due to a calendar. Its structure is validated.
 
--   *Recording date*: Recording date of the multimedia object. It is initialized with date of the creation of the multimedia object. It’s easy to modify due to a calendar. You have to make sure this date is not bigger than the publication date and it has a valid format.
+-   *Recording date*: Recording date of the multimedia object. It is initialized with the multimedia object’s creation date. It’s easy to modify thanks to a calendar. You have to make sure that the date is not more recent than the publication date and that it has a valid format.
 
 -   *Description*: Text area which can be adapted internationally and describes briefly the multimedia object.
 
@@ -450,7 +451,7 @@ The tag of descriptive and style metadata which is shown in the next image is ma
 
 #### <a name="categories">2.2.2.3. Categories</a>
 
-The areas of knowledge tag allows you to catalogue multimedia objects depending on the defined categories. You can add, edit and delete categories at any time through this module. Knowledge areas are divided in domains. A multimedia object can be catalogued in more that one knowledge area at the same time.
+The "areas of knowledge" tag allows you to catalogue multimedia objects depending on the defined categories. You can add, edit and delete categories at any time through this module. Knowledge areas are divided in domains. A multimedia object can be catalogued in more that one knowledge area at the same time.
 
 In the interface, where you can observe an entry for each type of area, there are two lists; the second one with all knowledge areas of this type and the first one with the areas in which the multimedia object is catalogued. If you want to catalogue a multimedia object in a specific area, you just have to select it in the second list and click on the arrow which points to the first list. If you want to change the catalogue of a multimedia object, you have to do the opposite. To
 increase the speed of cataloguing, the previous process can be simplified in making double click in the area.
@@ -465,13 +466,13 @@ In the right up corner you can see: "Update series areas of knowledge with the v
 
 #### <a name="people">2.2.2.4. People</a>
 
-As the areas of knowledge tag, the area to catalogue people is divided in blocks, corresponding each block to each of the roles that a person can have inside a video. There is an entry for each role and inside that there is a list of people related to the multimedia object. You can modify the order of the people listed in each role with the arrows in the list. You can also edit the attributes of the people, without using the people module. In addition, you can decouple a person from the multimedia object. If you decouple a person which is not related to another multimedia object, you delete him/her from the database. In the
+As the "areas of knowledge" tag, the area to catalogue people is divided in blocks, corresponding each block to each of the roles that a person can have inside a video. There is an entry for each role and inside that there is a list of people related to the multimedia object. You can modify the order of the people listed in each role with the arrows in the list. You can also edit the attributes of the people, without using the people module (directly from the multimedia objects administrator). In addition, you can decouple a person from the multimedia object. If the decoupled person is not related to another multimedia object, it gets deleted from the database. In the
 “new” button, you can insert a new person or an existing person in the object.
 
 ![](images/image21.jpg)
 
-If you click on the “new” button, you access to a form where you can write the name of people you wish to add; while you are typing the name, you can see a list with catalogued people with this name in the database. For example, after typing “ruben” you will see listed all “Rubén” in the database and after typing «ruben go» you will only see listed those people with a surname which starts with “go” as González or Gómez. After typing the full name, if the person is already in the database, he or she will be listed. After selecting him/her and press the “use” button, he/she will be linked to the multimedia object. If he
-or she is not in the database, after typing you will not see a list and you would click on the “new” buttom to finish filling the data of the person and linking him/her to the multimedia object. You have to be careful with the position you give to the people because it’s not the same Rubén González González as a student or as a programmer.
+If you click on the “new” button, you access to a form where you can write the name of people you wish to add; while you are typing the name, you can see a list with catalogued people with this name in the database. For example, after typing “ruben” you will see listed all “Rubén” in the database and after typing «ruben go» you will only see listed those people with a surname which starts with “go” such as González or Gómez. After typing the full name, if the person is already in the database, he or she will be listed. After selecting him/her and press the “use” button, he/she will be linked to the multimedia object. If he
+or she is not in the database, after typing you will not see a list and you would click on the “new” buttom to finish filling the data of the person and linking him/her to the multimedia object. You have to be careful with the position you give to people because it’s not the same a Rubén González González as a student or as a programmer.
 
 The next image illustrate this process:
 
