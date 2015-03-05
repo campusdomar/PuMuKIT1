@@ -88,6 +88,15 @@ The installation process is described for a standard Debian distribution with ad
 
 	>$ php /var/www/pumukit/symfony cc
 
+	NOTE: If there's no <b>cache</b> folder in <b>/var/www/pumukit</b> , this command will fail and output:<br><br>
+		<b>[Exception]</b>                    
+  		<b>Cache directory does not exist.</b><br><br>
+  	In that case, create a cache directory: 
+  	>$ mkdir /var/www/pumukit/cache
+  	
+  	If the folders <b>log</b> or <b>web/tickets</b> don't exist either, add them as well:
+  	>$ mkdir /var/www/pumukit/log /var/www/pumukit/web/tickets
+
 11. We permissions to files Pumukit:
 
 	>$ php /var/www/pumukit/symfony fix
