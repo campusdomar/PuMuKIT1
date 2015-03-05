@@ -494,11 +494,11 @@ The last tag of the multimedia object technical metadata is made up of four entr
 
 ##### <a name="down">**2.2.2.5.1. Download a master and publishing copy of a mono-stream video**</a>
 
-For those videos that are not imported from Matterhorn, on this tab you can download a copy of the master and publication file of the recording.
+For those videos that are not imported from Matterhorn, you can download a copy of the master and publication file of the recording on this tab.
 
 ![](images/image24.jpg)
 
-We can see from video files to various icons appear to us before the name and identifier of the video. If you click on the arrow icon down, opens in a new browser tab corresponding video (the master or a copy of issue), to download it, just have to press the right mouse button and select "Save As "and we will have a copy of this video.
+We can see from video files to various icons appear to us before the name and identifier of the video. If you click on the arrow icon down,it opens in a new browser tab the corresponding video (either the master or a copy of issue). To download it, just have to press the right mouse button and select "Save As "and we will have a copy of this video.
 
 This would also be true for SBS generated from imported files from Matterhorn.
 
@@ -507,12 +507,12 @@ This would also be true for SBS generated from imported files from Matterhorn.
 This module is used by the series module and the multimedia object module to list images linked to different multimedia objects or series.
 This also allows you to link new images.
 
-Both series and multimedia objects have a certain number of little representative images assigned, mainly obtained from a frame of the video or the logo of which you record. These images are arranged to configure, as we can see in the Web portal, and to give a greater priority depending on the order.
+Both series and multimedia objects have a certain number of little representative images assigned, mainly obtained from a frame of the video or the logo of which you record. These images can be arranged from the “multimedia” tab in order to change the order in which they appear on the Web portal.
 
 There are three different ways to link new images:
 -   Indicating the URL of the image: This is used to indicate an existing image in another HTTP server.
 
--   Uploading a local image: Uploading a new image of the client server is the most used method. These images are resizing in the server to save space and reduce the bandwidth needed to show the portal.
+-   Uploading a local image: Uploading a new image of the client server is the most used method. These images are resized in the server to save space and reduce the bandwidth needed to show the portal.
 
 -   Using an existing image: The last used images are listed in pages so you could reuse them. You can advance throughout the different pages with the “previous” and “next” buttons.
 
@@ -526,15 +526,15 @@ In the next image, you can see the partial item of the series and multimedia obj
 
 An image can be linked to more than a multimedia object. If an image is decoupled of an item, but it is linked to another one, it is not deleted. If it is only linked to an item, when it is decoupled, it will be deleted.
 
-The management module multimedia objects, pressing the button "new image" modal where you can select the thumbnail will open two different ways:
+At the multimedia objects management module, once you press the “new image” button a modal window will appear where the new thumbnail can be selected in two different ways: :
 
--   If the content of the multimedia object is a video, you can extract thumbnail from the video frames. For this, a player where the frame is selected to extract and pressing the "tomar muestra" button available, the image will be extracted. With the button "tomar colección" may be extracted multiple frames of video, those frames being equally spaced in time. For example, if the video is 50 seconds and 10 frames extract is selected, the frames of the second 5, 10, 15, 20, 25, 30, 35, 40, 45 and 50 will be drawn. The extracted frames will listed at the bottom. It is necessary to select one as miniature multimedia object.
+-   If the content of the multimedia object is a video, you can extract thumbnail from the video frames. For this, a player where the frame is selected to extract and pressing the "tomar muestra" button available, the image will be extracted. With the button "tomar colección" may be extracted multiple frames of video, being those frames equally spaced in time. For example, if the video is 50 seconds and a 10 frames extract is selected, the frames of the second 5, 10, 15, 20, 25, 30, 35, 40, 45 and 50 will be drawn. The extracted frames will listed at the bottom. It is necessary to select one as a miniature multimedia object.
 
--   If the content is not a video or was not generated copy mp4 video will be uploading a new image from client to server. These images are resized on the server to take up less space and reduce the bandwidth needed to display the portal.
+-   If the content is not a video or  the video’s mp4 copy wasn’t generated yet, the image can be uploaded to the server from your computer.. These images are resized on the server to take up less space and reduce the bandwidth needed to display the portal.
 
 ![](images/image27.jpg)
 
-In the next picture element possessing partial forms series and multimedia objects in its fourth tab is displayed. To associate new images by clicking on the link “nueva imagen” also deletes existing images by clicking the delete button and modify your order with dates.
+In the next picture we show the element appearing in the “multimedia” tab (from both the series and the multimedia objects administrators) from which you can order the images (clicking on the arrows below them). To associate new images by clicking on the link “nueva imagen” also deletes existing images by clicking the delete button and modify your order with dates.
 
 > ![](images/image28.jpg)
 
@@ -557,13 +557,13 @@ The administrative application also has other modules to perform less common adm
 
 ### <a name="access">2.4.1. Access module </a>
 
-It is a module to have access to the application of administration. The interface is composed by an access form, which is used to validate the login and the password with the list of users of the server database.
+It is a module to have access to the administration application. The interface is simply an access form, which is used to validate the login and the password with the list of users of the server database.
 
 ![](images/image30.jpg)
 
 ### <a name="dash">2.4.2. Dashboard module</a>
 
-It is a module created with a set of tools that allows you to see a summary of the server state: last published videos, last created videos, portal information, disk usage, transcoding usage…
+It is a module with a set of tools that allows you to see a summary of the server state: last published videos, last created videos, portal information, disk usage, transcoding usage…
 
 ![](images/image31.jpg)
 
@@ -595,23 +595,23 @@ It has a similar appearance as a file manager with icons that represent director
 
 #### <a name="using">2.4.7.1. Using the “File Manager”</a>
 
-You can perform two actions directly from the "File Manager" create a folder or add a file.
+You can perform two actions directly from the "File Manager": create a folder or add a file.
 
-To create a folder, type the name you want to have that folder in the text box under "Create a dir" and click "Create". We can see that a new folder with that name appears. If we want to create a subfolder, we just have to click on the folder where you want to create to access it and once inside write the name and click "Create":
+To create a folder, type the name you want that folder to have in the text box under "Create a dir" and click "Create". We can see that a new folder with that name appears. If we want to create a subfolder, we just have to click on the folder where you want to create it to open it and once inside we write the subfolder’s name and click "Create":
 
 ![](images/image34.jpg)
 
-To add files, select the folder where you want this, pressing on it to access it. Then click on "Seleccionar archivo" and the computer file manager will open to select the file to upload. Once selected, click on "Add" and the file will be uploaded, it shown a miniature of the file at the end of the upload.
+To add files, select the folder where you want this, pressing on it to access it. Then click on "Seleccionar archivo" and the computer file manager will open to select the file to upload. Once selected, click on "Add" and the file will be uploaded, showing a miniature of the file at the end of the upload.
 
 ![](images/image35.jpg)
 
-To view the URL of the uploaded file, we just have to click on that file and we open it  in a new tab or browser window, and in the browser bar will have the URL of the file that will have a format like: _https://pumukit18.url.es/uploads//carpeta/archivo.jpg_
+To view the URL of the uploaded file, we just have to click on that file and we open it  in a new tab or browser window, and in the browser bar we will have the URL of the file, which will have a format like: _https://pumukit18.url.es/uploads//carpeta/archivo.jpg_
 
-To delete a file, we need only click on the delete icon shown under the thumbnail of the same.
+To delete a file, we only need to click on the delete icon shown under the thumbnail of the file.
 
 ### <a name="categ">2.4.8. Categories module inside the WebTV portal Design</a>
 
-It is a module that creates category navigation.
+It is a module that creates navigation categories.
 
 ![](images/image36.jpg)
 
@@ -629,7 +629,7 @@ It is a module that allows you to administrate the next events that will be broa
 
 ### <a name="transco">2.4.12. Transcoder profile module</a>
 
-It is a module that allows you to administrate profiles with which multimedia objects are coded. These profiles indicate the resolution, the format, the codec, the audio characteristics, etc. of multimedia files. These technical characteristics of multimedia files are grouped in profiles because the nature of multimedia files of catalogues is usually the same. Thus, by grouping profiles in this way, cataloguing result in an easier task.
+It is a module that allows you to administrate profiles with which multimedia objects are coded. These profiles indicate the resolution, the format, the codec, the audio characteristics, etc, of multimedia files. These technical characteristics of multimedia files are grouped in profiles because the nature of catalogues of multimedia files is usually the same. Thus, by grouping profiles in this way, cataloguing results in an easier task.
 
 ### <a name="task">2.4.13. Task list module</a>
 
@@ -641,15 +641,15 @@ It is a module to administrate the transcoders (or CPUs) of the system. Each tra
 
 ### <a name="timed">2.4.15. Timed publishing module.</a>
 
-It is a module which displayed the publications timer.
+It is a module which displays the publications timer.
 
 ### <a name="pmod">2.4.16. People module</a>
 
-It is a module to administrate data of people linked to a multimedia object, whether they present a lecture, they are short-film actors or they have a much more tecnichal role as producers, directors… People are linked to the multimedia object through the roles that are administrated in their corresponding module.
+It is a module to administrate data of people linked to a multimedia object, whether they present a lecture, they are short-film actors or they have a much more tecnichal role as producers, directors, etc. People are linked to the multimedia object through the roles that are administrated in their corresponding module.
 
 ![](images/image37.jpg)
 
-This module allows the creation, edition and elimination of information related to people. It also should be noted that the information storage in the database is not linked to the person but to the position. This is to say that a person with two different positions have two different entries, one per position. This is because we want to solve the problem of temporary positions as Chancellor of the University. This person has two entries: one for Chancellor and another for teacher.
+This module allows the creation, edition and elimination of information related to people. It also should be noted that the information storage in the database is not linked to the person but to the position. This is to say that a person with two different positions has two different entries, one per position. This is because we want to solve problems with temporary positions such as Chancellor of the University. This person would have two entries: one for Chancellor and another for teacher.
 
 ### <a name="adminu">2.4.17. Admin users module</a>
 
@@ -670,7 +670,7 @@ It is a module that allows you to administrate genres to characterize multimedia
 
 ### <a name="materialty">2.4.20. Material types module</a>
 
-It is a module that allows you to administrate the type of materials of multimedia objects.
+It is a module that allows you to administrate the type of materials multimedia objects have.
 
 ### <a name="seriestyp">2.4.21. Series types module</a>
 
