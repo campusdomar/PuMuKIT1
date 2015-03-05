@@ -26,8 +26,8 @@ The installation process is described for a standard Debian distribution with ad
 
 1. Download the last version of pumukit:
 
-	>[http://webfiler.media.uvigo.es/webfiler/pumukit/pumukit17.tgz](http://webfiler.media.uvigo.es/webfiler/pumukit/pumukit17.tgz)  
-	>$ wget http://webfiler.media.uvigo.es/webfiler/pumukit/pumukit17.tgz
+	>[https://github.com/campusdomar/pumukit/archive/1.7.0.zip](https://github.com/campusdomar/pumukit/archive/1.7.0.zip)  
+	>$ wget https://github.com/campusdomar/pumukit/archive/1.7.0.zip
 
 2. Access a terminal to the directory where you downloaded , unzip file and move the application to place /var/www/
 
