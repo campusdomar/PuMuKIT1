@@ -68,7 +68,7 @@ In case you have any materials in your old installation, make sure not to overwr
 - the **lib** folder.
 - the **apps** folder.
 
-To update the database structure you must run the **_data/update/from15to16.sql_** script:
+To update the database structure you must run the **_data/update/from16to17.sql_** script:
 
   >$ mysql -u root -p pumukit < data/update/from16to17.sql
   
@@ -97,7 +97,7 @@ In order to update from PuMuKIT 1.7 to 1.8, we just need to replace the old vers
 In case you have any materials in your old installation, make sure not to overwrite the folders where the data is stored. In that case, it is recommended to only overwrite the following folders (with the final version’s content):
 
 - the **lib** folder.  
-- the **app** folder.  
+- the **apps** folder.  
 - the **plugins** folder.  
 - the **batch** folder.  
 - the **web/css** folder.  
@@ -145,13 +145,13 @@ To automate this process, the following commands can be executed on a shell:
 
 >$ mysql -u pmk_user -p pumukit < data/update/from17to18.sql
 
->$ php symfony init-categories
->$ php data/update/from17to18.php
->$ php symfony clear-cache
+>$ php symfony init-categories  
+>$ php data/update/from17to18.php   
+>$ php symfony clear-cache    
 
->$ sudo chown www-data:www-data /var/www/pumukit -R
->$ chmod 777 data/
->$ chmod 777 data/pumukit.index/
+>$ sudo chown www-data:www-data /var/www/pumukit -R  
+>$ chmod 777 data/  
+>$ chmod 777 data/pumukit.index/  
 
 
 
