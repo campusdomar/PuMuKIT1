@@ -1,14 +1,14 @@
-# PuMuKIT Update Guides
+# PuMuKIT Migration Guide
 ## <a name="Contents">Table of contents</a>
-#### 1. <a href="#1.5to1.6">Update Guide from PuMuKIT 1.5 to 1.6 </a>
-#### 2. <a href="#1.5b2to1.5">Update Guide from PuMuKIT 1.5b2 to 1.5</a>
-#### 3. <a href="#1.6to1.7">Update Guide from PuMuKIT 1.6 to 1.7</a>
-#### 4. <a href="#1.7to1.8">Update Guide from PuMuKIT 1.7 to 1.8</a>
+#### 1. <a href="#1.5to1.6">Migration Guide from PuMuKIT 1.5 to 1.6 </a>
+#### 2. <a href="#1.5b2to1.5">Migration Guide from PuMuKIT 1.5b2 to 1.5</a>
+#### 3. <a href="#1.6to1.7">Migration Guide from PuMuKIT 1.6 to 1.7</a>
+#### 4. <a href="#1.7to1.8">Migration Guide from PuMuKIT 1.7 to 1.8</a>
 
 
-## <a name="1.5to1.6">1. Update Guide from PuMuKIT 1.5 to 1.6 </a> <a href="#Contents">(Top)</a>
+## <a name="1.5to1.6">1. Update Migration from PuMuKIT 1.5 to 1.6 </a> <a href="#Contents">(Top)</a>
 
-In order to update from PuMuKIT 1.5 to 1.6, we just need to replace the old version’s code files with the new ones.
+In order to migrate from PuMuKIT 1.5 to 1.6, we just need to replace the old version’s code files with the new ones.
 
 In case you have any materials in your old installation, make sure not to overwrite the folders where the data is stored. In that case, it is recommended to only overwrite the following folders (with the final version’s content):
 
@@ -40,8 +40,8 @@ To automate this process, the following commands can be executed  on a shell:
   >$ mysql -u root -p pumukit < data/update/from15to16.sql  
   
   
-## <a name="1.5b2to1.5">2. Update Guide from PuMuKIT 1.5b2 to 1.5 </a><a href="#Contents">(Top)</a>
-In order to update from PuMuKIT 1.5 beta2 to the 1.5 version, we just need to replace the old version’s code files with the new ones.
+## <a name="1.5b2to1.5">2. Migration Guide from PuMuKIT 1.5b2 to 1.5 </a><a href="#Contents">(Top)</a>
+In order to migrate from PuMuKIT 1.5 beta2 to the 1.5 version, we just need to replace the old version’s code files with the new ones.
 
 In case you have any materials in your old installation, make sure not to overwrite the folders where the data is stored. In that case, it is recommended to only overwrite the following folders (with the final version’s content):
 
@@ -60,8 +60,8 @@ To automate the update process, the following commands can be executed on a shel
 >$ svn export http://pumukit.googlecode.com/svn/trunk/apps  
 >$ svn export http://pumukit.googlecode.com/svn/trunk/web/webserver.php web/webserver.php  
 
-## <a name="1.6to1.7">3. Update Guide from PuMuKIT 1.6 to 1.7 </a><a href="#Contents">(Top)</a>
-In order to update from PuMuKIT 1.6 to 1.7, we just need to replace the old version’s code files with the new ones and update the database.
+## <a name="1.6to1.7">3. Migration Guide from PuMuKIT 1.6 to 1.7 </a><a href="#Contents">(Top)</a>
+In order to migrate from PuMuKIT 1.6 to 1.7, we just need to replace the old version’s code files with the new ones and update the database.
 
 In case you have any materials in your old installation, make sure not to overwrite the folders where the data is stored. In that case, it is recommended to only overwrite the following folders (with the final version’s content):
 
@@ -90,9 +90,9 @@ To automate this process, the following commands can be executed on a shell:
 >$ mysql -u root -p pumukit < data/update/from16to17.sql  
 
 
-## <a name="1.7to1.8">4. Update Guide from PuMuKIT 1.7 to 1.8 </a><a href="#Contents">(Top)</a>
+## <a name="1.7to1.8">4. Migration Guide from PuMuKIT 1.7 to 1.8 </a><a href="#Contents">(Top)</a>
 
-In order to update from PuMuKIT 1.7 to 1.8, we just need to replace the old version’s code files with the new ones and update the database.
+In order to migrate from PuMuKIT 1.7 to 1.8, we just need to replace the old version’s code files with the new ones and update the database.
 
 In case you have any materials in your old installation, make sure not to overwrite the folders where the data is stored. In that case, it is recommended to only overwrite the following folders (with the final version’s content):
 
