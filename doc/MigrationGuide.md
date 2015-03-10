@@ -6,7 +6,7 @@
 #### 4. <a href="#1.7to1.8">Migration Guide from PuMuKIT 1.7 to 1.8</a>
 
 
-## <a name="1.5to1.6">1. Update Migration from PuMuKIT 1.5 to 1.6 </a> <a href="#Contents">(Top)</a>
+## <a name="1.5to1.6">1. Migration from PuMuKIT 1.5 to 1.6 </a> <a href="#Contents">(Top)</a>
 
 In order to migrate from PuMuKIT 1.5 to 1.6, we just need to replace the old version’s code files with the new ones.
 
