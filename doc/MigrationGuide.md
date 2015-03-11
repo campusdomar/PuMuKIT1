@@ -1,12 +1,33 @@
 # PuMuKIT Migration Guide
 ## <a name="Contents">Table of contents</a>
-#### 1. <a href="#1.5to1.6">Migration from PuMuKIT 1.5 to 1.6 </a>
-#### 2. <a href="#1.5b2to1.5">Migration from PuMuKIT 1.5b2 to 1.5</a>
+#### 1. <a href="#1.5b2to1.5">Migration from PuMuKIT 1.5b2 to 1.5</a>
+#### 2. <a href="#1.5to1.6">Migration from PuMuKIT 1.5 to 1.6 </a>
 #### 3. <a href="#1.6to1.7">Migration from PuMuKIT 1.6 to 1.7</a>
 #### 4. <a href="#1.7to1.8">Migration from PuMuKIT 1.7 to 1.8</a>
 
 
-## <a name="1.5to1.6">1. Migration from PuMuKIT 1.5 to 1.6 </a> <a href="#Contents">(Top)</a>
+## <a name="1.5b2to1.5">1. Migration from PuMuKIT 1.5b2 to 1.5 </a><a href="#Contents">(Top)</a>
+In order to migrate from PuMuKIT 1.5 beta2 to the 1.5 version, we just need to replace the old version’s code files with the new ones.
+
+In case you have any materials in your old installation, make sure not to overwrite the folders where the data is stored. In that case, it is recommended to only overwrite the following folders (with the final version’s content):
+
+- the **lib** folder.
+- the **apps** folder.
+- the **web/webserver.php** file.
+
+The database structure remains the same, so it is not necessary to make any changes to it.
+To automate the update process, the following commands can be executed on a shell:
+
+>$ cd {pumukit-dir}  
+>$ rm -rf lib/  
+>$ rm -rf apps/    
+>$ rm -rf web/webserver.php  
+>$ svn export http://pumukit.googlecode.com/svn/trunk/lib  
+>$ svn export http://pumukit.googlecode.com/svn/trunk/apps  
+>$ svn export http://pumukit.googlecode.com/svn/trunk/web/webserver.php web/webserver.php  
+
+
+## <a name="1.5to1.6">2. Migration from PuMuKIT 1.5 to 1.6 </a> <a href="#Contents">(Top)</a>
 
 In order to migrate from PuMuKIT 1.5 to 1.6, we just need to replace the old version’s code files with the new ones.
 
@@ -39,26 +60,6 @@ To automate this process, the following commands can be executed  on a shell:
   >$ svn export http://pumukit.googlecode.com/svn/trunk/web/webserver.php web/webserver.php  
   >$ mysql -u root -p pumukit < data/update/from15to16.sql  
   
-  
-## <a name="1.5b2to1.5">2. Migration from PuMuKIT 1.5b2 to 1.5 </a><a href="#Contents">(Top)</a>
-In order to migrate from PuMuKIT 1.5 beta2 to the 1.5 version, we just need to replace the old version’s code files with the new ones.
-
-In case you have any materials in your old installation, make sure not to overwrite the folders where the data is stored. In that case, it is recommended to only overwrite the following folders (with the final version’s content):
-
-- the **lib** folder.
-- the **apps** folder.
-- the **web/webserver.php** file.
-
-The database structure remains the same, so it is not necessary to make any changes to it.
-To automate the update process, the following commands can be executed on a shell:
-
->$ cd {pumukit-dir}  
->$ rm -rf lib/  
->$ rm -rf apps/    
->$ rm -rf web/webserver.php  
->$ svn export http://pumukit.googlecode.com/svn/trunk/lib  
->$ svn export http://pumukit.googlecode.com/svn/trunk/apps  
->$ svn export http://pumukit.googlecode.com/svn/trunk/web/webserver.php web/webserver.php  
 
 ## <a name="1.6to1.7">3. Migration from PuMuKIT 1.6 to 1.7 </a><a href="#Contents">(Top)</a>
 In order to migrate from PuMuKIT 1.6 to 1.7, we just need to replace the old version’s code files with the new ones and update the database.
