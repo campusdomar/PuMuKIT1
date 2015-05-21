@@ -135,7 +135,7 @@ class File extends BaseFile
   public function getUrlLink($absolute = false)
   {
     $host = ($absolute)?sfConfig::get('app_info_link'):''; 
-    return ($host . '/es/video/' . $this->getId() . '.html');
+    return ($host . '/es/video/' . $this->getMm()->getId() . '.html');
   }
 
 
