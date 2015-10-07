@@ -90,7 +90,7 @@
   <br />
   <?php echo label_for('embed', __('Serie:'), 'class="required" ') ?>
   <div class="content">
-    <input type="text" onclick="this.select()" size="80" value="<?php echo $file->getMm()->getUrl(true) ?>" />   
+    <input type="text" onclick="this.select()" size="80" value="<?php echo $file->getMm()->getSerial()->getUrl(true) ?>" />   
   </div>
 </div>
 
